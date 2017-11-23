@@ -5,7 +5,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace {
-  
+
   TEST(NumericalFormatTest, F0_SByte) {
     ASSERT_EQ("0", String::Format("{0:F0}", SByte(0)));
     ASSERT_EQ("65", String::Format("{0:F0}", SByte(65)));
@@ -455,17 +455,17 @@ namespace {
   
   TEST(NumericalFormatTest, F99_Int64) {
     ASSERT_EQ("0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              String::Format("{0:F99}", Int64(0)));
+      String::Format("{0:F99}", Int64(0)));
     ASSERT_EQ("17321.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              String::Format("{0:F99}", Int64(17321)));
+      String::Format("{0:F99}", Int64(17321)));
     ASSERT_EQ("1086541.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              String::Format("{0:F99}", Int64(1086541)));
+      String::Format("{0:F99}", Int64(1086541)));
     ASSERT_EQ("9223372036854775807.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              String::Format("{0:F99}", Int64::MaxValue));
+      String::Format("{0:F99}", Int64::MaxValue));
     ASSERT_EQ("-1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              String::Format("{0:F99}", Int64(-1)));
+      String::Format("{0:F99}", Int64(-1)));
     ASSERT_EQ("-9223372036854775808.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              String::Format("{0:F99}", Int64::MinValue));
+      String::Format("{0:F99}", Int64::MinValue));
   }
   
 }
@@ -490,14 +490,14 @@ class Program
       }
       Console.WriteLine();
     }
-      
+
     int a = 74;
   }
 
   static void MAKE<T>(String format, IFormattable value) {
     String[] split = value.GetType().ToString().Split('.');
     String type = split[split.Length-1];
-      
+
     Console.WriteLine("  ASSERT_EQ(\"{0}\", String::Format(\"{{0:{1}}}\", {3}({2}))); ", value.ToString(format,null), format, value, type);
   }
 }

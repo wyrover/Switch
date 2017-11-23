@@ -28,7 +28,7 @@ class AddFlagOperators<System::ConsoleModifiers> : public TrueType {};
 template<>
 class EnumToStrings<System::ConsoleModifiers> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::ConsoleModifiers::Alt, "Alt"}, {(int64)System::ConsoleModifiers::Shift, "Shift"}, {(int64)System::ConsoleModifiers::Control, "Control"}};
     flags = true;
   }

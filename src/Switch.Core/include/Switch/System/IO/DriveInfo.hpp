@@ -19,7 +19,7 @@ namespace Switch {
       public:
         /// @brief Provides access to information on drive.
         DriveInfo() { }
-
+        
         /// @cond
         DriveInfo(const DriveInfo& driveInfo) : driveName(driveInfo.driveName) { }
         DriveInfo& operator=(const DriveInfo& driveInfo) {
@@ -27,67 +27,67 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-
+        
         /// @brief Provides access to information on the specified drive.
         /// @param driveName A valid drive path or drive letter. This can be either uppercase or lowercase, 'a' to 'z'. A null value is not valid.
         /// @exception ArgumentNullException driveName is null
         /// @exception ArgumentException The first letter of driveName is not an uppercase or lowercase letter from 'a' to 'z'.
         /// -or- driveName does not refer to a valid drive.
         DriveInfo(const String& driveName);
-
+        
         /// @brief Indicates the amount of available free space on a drive.
         /// @return The amount of free space available on the drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         _property<int64, _readonly> AvailableFreeSpace {
           _get {return this->GetAvailableFreeSpace();}
         };
-
+        
         /// @brief Gets the name of the file system, such as NTFS or FAT32.
         /// @return The name of the file system on the specified drive.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         _property<string, _readonly> DriveFormat {
           _get {return this->GetDriveFormat();}
         };
-
+        
         /// @brief Gets the drive type.
         /// @return One of the System::IO::DriveType values.
         /// @exception IO::IOException An I/O error occurred.
         _property<System::IO::DriveType, _readonly> DriveType {
           _get {return this->GetDriveType();}
         };
-
+        
         /// @brief Gets a value indicating whether a drive is ready.
         /// @return true if the drive is ready; false if the drive is not ready.
         _property<bool, _readonly> IsReady {
           _get {return this->GetIsReady();}
         };
-
+        
         /// @brief Gets the name of a drive.
         /// @return The name of the drive.
         _property<String, _readonly> Name {
           _get {return this->GetName();}
         };
-
+        
         /// @brief Gets the root directory of a drive.
         /// @return A System::IO::DirectoryInfo object that contains the root directory of the drive.
         _property<DirectoryInfo, _readonly> RootDirectory {
           _get {return this->GetRootDirectory();}
         };
-
+        
         /// @brief Gets the total amount of free space available on a drive.
         /// @return The total free space available on a drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         _property<int64, _readonly> TotalFreeSpace {
           _get {return this->GetTotalFreeSpace();}
         };
-
+        
         /// @brief Gets the total size of storage space on a drive.
         /// @return The total size of the drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         _property<int64, _readonly> TotalSize {
           _get {return this->GetTotalSize();}
         };
-
+        
         /// @brief Gets or sets the volume label of a drive.
         /// @param volumeLabel the volume label
         /// @return The volume label.
@@ -99,17 +99,17 @@ namespace Switch {
           _get {return this->GetVolumeLabel();},
           _set {this->SetVolumeLabel(value);}
         };
-
+        
         /// @brief Retrieves the drive names of all logical drives on a computer.
         /// @return infos the array filled with the file info
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         /// @exception UnauthorizedAccessException The caller does not have the required permission.
         static Array<DriveInfo> GetDrives();
-
+        
         /// @brief Returns a drive name as a string.
         /// @return The name of the drive.
         virtual String ToString() const;
-
+        
       protected:
         /// @cond
         int64 GetAvailableFreeSpace() const;

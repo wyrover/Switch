@@ -85,22 +85,22 @@ namespace {
   
   TEST(ConvertTest, ToBooleanFrom_byte) {
     ASSERT_FALSE(Convert::ToBoolean(byte(0)));
-    ASSERT_TRUE( Convert::ToBoolean(byte(1)));
-    ASSERT_TRUE( Convert::ToBoolean(byte(173)));
+    ASSERT_TRUE(Convert::ToBoolean(byte(1)));
+    ASSERT_TRUE(Convert::ToBoolean(byte(173)));
     ASSERT_FALSE(Convert::ToBoolean(Byte::MinValue));
-    ASSERT_TRUE( Convert::ToBoolean(Byte::MaxValue));
+    ASSERT_TRUE(Convert::ToBoolean(Byte::MaxValue));
   }
   
   TEST(ConvertTest, ToBooleanFromByte) {
     ASSERT_FALSE(Convert::ToBoolean(Byte(0)));
-    ASSERT_TRUE( Convert::ToBoolean(Byte(1)));
-    ASSERT_TRUE( Convert::ToBoolean(Byte(173)));
+    ASSERT_TRUE(Convert::ToBoolean(Byte(1)));
+    ASSERT_TRUE(Convert::ToBoolean(Byte(173)));
     ASSERT_FALSE(Convert::ToBoolean(Byte(Byte::MinValue)));
-    ASSERT_TRUE( Convert::ToBoolean(Byte(Byte::MaxValue)));
+    ASSERT_TRUE(Convert::ToBoolean(Byte(Byte::MaxValue)));
   }
   
   TEST(ConvertTest, ToBooleanFrom_char32) {
-    ASSERT_THROW( Convert::ToBoolean(char32('T')), InvalidCastException);
+    ASSERT_THROW(Convert::ToBoolean(char32('T')), InvalidCastException);
   }
   
   TEST(ConvertTest, ToBooleanFromChar) {
@@ -121,10 +121,10 @@ namespace {
   
   TEST(ConvertTest, ToBooleanFromDouble) {
     ASSERT_FALSE(Convert::ToBoolean(Double(0)));
-    ASSERT_TRUE( Convert::ToBoolean(Double(1)));
-    ASSERT_TRUE( Convert::ToBoolean(Double(2364.877964)));
-    ASSERT_TRUE( Convert::ToBoolean(Double(Double::MinValue)));
-    ASSERT_TRUE( Convert::ToBoolean(Double(Double::MaxValue)));
+    ASSERT_TRUE(Convert::ToBoolean(Double(1)));
+    ASSERT_TRUE(Convert::ToBoolean(Double(2364.877964)));
+    ASSERT_TRUE(Convert::ToBoolean(Double(Double::MinValue)));
+    ASSERT_TRUE(Convert::ToBoolean(Double(Double::MaxValue)));
   }
   
   TEST(ConvertTest, ToBooleanFrom_int16) {
@@ -153,10 +153,10 @@ namespace {
   
   TEST(ConvertTest, ToBooleanFromInt32) {
     ASSERT_FALSE(Convert::ToBoolean(Int32(0)));
-    ASSERT_TRUE( Convert::ToBoolean(Int32(1)));
-    ASSERT_TRUE( Convert::ToBoolean(Int32(2364)));
-    ASSERT_TRUE( Convert::ToBoolean(Int32(Int32::MinValue)));
-    ASSERT_TRUE( Convert::ToBoolean(Int32(Int32::MaxValue)));
+    ASSERT_TRUE(Convert::ToBoolean(Int32(1)));
+    ASSERT_TRUE(Convert::ToBoolean(Int32(2364)));
+    ASSERT_TRUE(Convert::ToBoolean(Int32(Int32::MinValue)));
+    ASSERT_TRUE(Convert::ToBoolean(Int32(Int32::MaxValue)));
   }
   
   TEST(ConvertTest, ToBooleanFrom_int64) {
@@ -504,7 +504,7 @@ namespace {
    ASSERT_THROW(Convert::ToChar(Int64::MinValue), OverflowException);
    ASSERT_THROW(Convert::ToChar(Int64::MaxValue), OverflowException);
    }
-   
+  
    TEST(ConvertTest, ToCharFromSByte)
    {
    ASSERT_EQ(0, Convert::ToChar((sbyte)0));
@@ -513,7 +513,7 @@ namespace {
    ASSERT_THROW(Convert::ToChar(SByte::MinValue), OverflowException);
    ASSERT_EQ(SByte::MaxValue(), Convert::ToChar(SByte::MaxValue));
    }
-   
+  
    TEST(ConvertTest, ToCharFromSingle)
    {
    ASSERT_EQ(0, Convert::ToChar((float)0));
@@ -522,30 +522,30 @@ namespace {
    ASSERT_THROW(Convert::ToChar(Single::MinValue), OverflowException);
    ASSERT_THROW(Convert::ToChar(Single::MaxValue), OverflowException);
    }
-   
+  
    TEST(ConvertTest, ToCharFromString)
    {
    ASSERT_EQ(0, Convert::ToChar("0"_S));
    ASSERT_EQ(1, Convert::ToChar("1"_S));
    ASSERT_EQ(121, Convert::ToChar("121"_S));
    ASSERT_EQ(255, Convert::ToChar("255"_S));
-   
+  
    ASSERT_THROW(Convert::ToChar("256"_S), OverflowException);
    }
-   
+  
    TEST(ConvertTest, ToCharFromConstChar)
    {
    ASSERT_EQ(0, Convert::ToChar("0"));
    ASSERT_EQ(1, Convert::ToChar("1"));
    ASSERT_EQ(121, Convert::ToChar("121"));
    ASSERT_EQ(255, Convert::ToChar("255"));
-   
+  
    ASSERT_THROW(Convert::ToChar("256"), OverflowException);
-   
+  
    const char* nullStr = null;
    ASSERT_THROW(Convert::ToChar(nullStr), ArgumentNullException);
    }
-   
+  
    TEST(ConvertTest, ToCharFromUInt16)
    {
    ASSERT_EQ(0, Convert::ToChar((uint16)0));
@@ -554,7 +554,7 @@ namespace {
    ASSERT_EQ(UInt16::MinValue, Convert::ToChar(UInt16::MinValue));
    ASSERT_THROW(Convert::ToChar(UInt16::MaxValue), OverflowException);
    }
-   
+  
    TEST(ConvertTest, ToCharFromUInt32)
    {
    ASSERT_EQ(0, Convert::ToChar((uint32)0));
@@ -563,7 +563,7 @@ namespace {
    ASSERT_EQ(UInt32::MinValue, Convert::ToChar(UInt32::MinValue));
    ASSERT_THROW(Convert::ToChar(UInt32::MaxValue), OverflowException);
    }
-   
+  
    TEST(ConvertTest, ToCharFromUInt64)
    {
    ASSERT_EQ(0, Convert::ToChar((uint64)0));
@@ -575,7 +575,7 @@ namespace {
    */
   
   TEST(ConvertTest, PrimitiveTypes) {
-    
+  
     byte  valueU8 = 123;
     uint16 valueU16 = 12345;
     uint32 valueU32 = 123456789;
@@ -590,17 +590,17 @@ namespace {
     
     KeyValuePair< string, string > keyPair("My name is Bond", "James Bond");
     
-    ASSERT_EQ(Convert::ToString(valueU8),"123");
-    ASSERT_EQ(Convert::ToString(valueU16),"12345");
-    ASSERT_EQ(Convert::ToString(valueU32),"123456789");
-    ASSERT_EQ(Convert::ToString(valueU64),"12345678910");
-    ASSERT_EQ(Convert::ToString(valueS8),"-123");
-    ASSERT_EQ(Convert::ToString(valueS16),"-12345");
-    ASSERT_EQ(Convert::ToString(valueS32),"-123456789");
-    ASSERT_EQ(Convert::ToString(valueS64),"-12345678910");
-    ASSERT_EQ(Convert::ToString(valueB),"False");
-    ASSERT_EQ(Convert::ToString(valueS),"0.1");
-    ASSERT_EQ(Convert::ToDouble(Convert::ToString(valueD)),valueD);
+    ASSERT_EQ(Convert::ToString(valueU8), "123");
+    ASSERT_EQ(Convert::ToString(valueU16), "12345");
+    ASSERT_EQ(Convert::ToString(valueU32), "123456789");
+    ASSERT_EQ(Convert::ToString(valueU64), "12345678910");
+    ASSERT_EQ(Convert::ToString(valueS8), "-123");
+    ASSERT_EQ(Convert::ToString(valueS16), "-12345");
+    ASSERT_EQ(Convert::ToString(valueS32), "-123456789");
+    ASSERT_EQ(Convert::ToString(valueS64), "-12345678910");
+    ASSERT_EQ(Convert::ToString(valueB), "False");
+    ASSERT_EQ(Convert::ToString(valueS), "0.1");
+    ASSERT_EQ(Convert::ToDouble(Convert::ToString(valueD)), valueD);
     
     ASSERT_EQ("[My name is Bond, James Bond]", Convert::ToString(keyPair));
   }

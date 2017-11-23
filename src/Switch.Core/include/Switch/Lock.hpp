@@ -62,7 +62,7 @@ namespace Switch {
   /// The following sample uses threads and _lock. As long as the lock statement is present, the statement block is a critical section and balance will never become a negative number.
   /// @include Lock.cpp
   /// @ingroup Keywords
-  #define _lock(object)\
+#define _lock(object)\
   _using (__opaque_lock_guard__ __switch_lock_guard__(object))
 }
 

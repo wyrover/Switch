@@ -29,21 +29,21 @@ UTF8Encoding::Decoder& UTF8Encoding::Decoder::operator =(const UTF8Encoding::Dec
 
 void UTF8Encoding::Decoder::Add(byte b) {
   // first, if we are in a multibyte situation, check that we receive a valid continuation byte
-  if (finished || (count > 0 && Native::UnicodeEncodingsApi::UTF8::GetFormat(b) != 0))
+  if(finished || (count > 0 && Native::UnicodeEncodingsApi::UTF8::GetFormat(b) != 0))
     Reset();
   Encoding::Decoder::Add(b);
-  if (count == 1) {
+  if(count == 1) {
     format = Native::UnicodeEncodingsApi::UTF8::GetFormat(b);
-    if (format == 0xFF || format == 0) {
+    if(format == 0xFF || format == 0) {
       Reset();
       return;
     }
   }
-  if (format == count) {
-    codePoint = Native::UnicodeEncodingsApi::UTF8::GetCode(bytes,static_cast<byte>(count));
+  if(format == count) {
+    codePoint = Native::UnicodeEncodingsApi::UTF8::GetCode(bytes, static_cast<byte>(count));
     finished = true;
   } else {
-    if (count == 4) Reset();
+    if(count == 4) Reset();
   }
 }
 
@@ -57,17 +57,17 @@ String UTF8Encoding::Decoder::ToString() const {
 }
 
 UTF8Encoding::UTF8Encoding()
-: Encoding(65001) {
+  : Encoding(65001) {
   this->shouldEmitPreamble = false;
 }
 
 UTF8Encoding::UTF8Encoding(bool shouldEmitPreamble)
-: Encoding(65001) {
+  : Encoding(65001) {
   this->shouldEmitPreamble = shouldEmitPreamble;
 }
 
 UTF8Encoding::UTF8Encoding(const UTF8Encoding& encoding)
-: Encoding(encoding) {
+  : Encoding(encoding) {
   this->shouldEmitPreamble = encoding.shouldEmitPreamble;
 }
 
@@ -90,28 +90,28 @@ int32 UTF8Encoding::GetByteCount(char32 c) const {
 }
 
 int32 UTF8Encoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
+  if(bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
   ValidateGCC(bytesSize, index, count);
   
   std::string s;
-  for ( int32 i = 0 ; i < count ; i += 1 )
+  for(int32 i = 0 ; i < count ; i += 1)
     s.push_back(bytes[index + i]);
-  
+    
   return Native::UnicodeEncodingsApi::UTF8::GetLength(s);
 }
 
 int32 UTF8Encoding::GetMaxByteCount(int32 charCount) const {
-  if (charCount < 0 || charCount > Int32::MaxValue / 4 ) throw ArgumentOutOfRangeException(_caller);
+  if(charCount < 0 || charCount > Int32::MaxValue / 4) throw ArgumentOutOfRangeException(_caller);
   return 4 * charCount;
 }
 
 int32 UTF8Encoding::GetMaxCharCount(int32 byteCount) const {
-  if (byteCount < 0) throw ArgumentOutOfRangeException(_caller);
+  if(byteCount < 0) throw ArgumentOutOfRangeException(_caller);
   return byteCount;
 }
 
 Array<byte> UTF8Encoding::GetPreamble() const {
-  if (this->shouldEmitPreamble)
+  if(this->shouldEmitPreamble)
     return {239, 187, 191};
   else
     return {};
@@ -119,18 +119,18 @@ Array<byte> UTF8Encoding::GetPreamble() const {
 
 bool UTF8Encoding::Equals(const object& obj) const {
   const UTF8Encoding* utf8 = dynamic_cast<const UTF8Encoding*>(&obj);
-  if (utf8 == null)
+  if(utf8 == null)
     return false;
-  
+    
   return this->shouldEmitPreamble == utf8->shouldEmitPreamble;
 }
 
 int32 UTF8Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if (index < 0) throw ArgumentOutOfRangeException(_caller);
+  if(bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
+  if(index < 0) throw ArgumentOutOfRangeException(_caller);
   
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if(index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);

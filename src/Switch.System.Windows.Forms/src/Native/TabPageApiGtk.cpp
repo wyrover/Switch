@@ -17,19 +17,19 @@ namespace Native {
       this->RegisterEvent();
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
-
+      
       this->signal_show().connect(_delegate {
         this->scrolledWindow.show();
         this->fixed.show();
       });
     }
-
+    
     const Gtk::Container& Container() const override {return this->fixed;}
-
+    
     Gtk::Container& Container() override {return this->fixed;}
-
+    
     void Text(const string& text) override {}
-
+    
   private:
     Gtk::ScrolledWindow scrolledWindow;
     Gtk::Fixed fixed;
@@ -41,6 +41,6 @@ intptr Native::TabPageApi::Create(const System::Windows::Forms::TabPage& tabPage
   handle->Text(tabPage.Text);
   handle->show();
   return (intptr)handle;
- }
+}
 
 #endif

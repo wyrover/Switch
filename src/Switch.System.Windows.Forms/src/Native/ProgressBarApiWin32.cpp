@@ -19,7 +19,7 @@ intptr Native::ProgressBarApi::Create(const System::Windows::Forms::ProgressBar&
   icc.dwICC = ICC_PROGRESS_CLASS;
   InitCommonControlsEx(&icc);
   int style = WS_CHILD;
-  switch (progressBar.Style) {
+  switch(progressBar.Style) {
   case ProgressBarStyle::Continuous: style |= PBS_SMOOTH; break;
   case ProgressBarStyle::Marquee: style |= PBS_MARQUEE; break;
   }

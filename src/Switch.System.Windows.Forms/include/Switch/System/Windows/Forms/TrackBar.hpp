@@ -29,42 +29,42 @@ namespace Switch {
           /// @cond
           TrackBar(const TrackBar& trackBar) : Control(trackBar), largeChange(trackBar.largeChange), maximum(trackBar.maximum), minimum(trackBar.minimum), smallChange(trackBar.smallChange), style(trackBar.style), tickFrequency(trackBar.tickFrequency), value(trackBar.value) {}
           /// @endcond
-
+          
           _property<int32> LargeChange {
             _get{ return this->largeChange; },
             _set{ this->SetLargeChange(value); },
           };
-
+          
           _property<Forms::Orientation> Orientation {
             _get{ return this->orientation; },
             _set{ this->SetOrientation(value); },
           };
-
+          
           _property<int32> Maximum {
             _get{ return this->maximum; },
             _set{ this->SetMaximum(value); },
           };
-
+          
           _property<int32> Minimum {
             _get{ return this->minimum; },
             _set{ this->SetMinimum(value); },
           };
-
+          
           _property<int32> SmallChange{
             _get{ return this->smallChange; },
             _set{ this->SetSmallChange(value); },
           };
-
+          
           _property<TickStyle> Style {
             _get{ return this->style; },
             _set{ this->SetTickStyle(value); },
           };
-
+          
           _property<int32> TickFrequency {
             _get{ return this->tickFrequency; },
             _set{ this->SetTickFrequency(value); },
           };
-
+          
           _property<int32> Value {
             _get {
               this->value = this->GetValue();
@@ -72,19 +72,19 @@ namespace Switch {
             },
             _set{ this->SetValue(value); },
           };
-
+          
           EventHandler Scroll;
           EventHandler ValueChanged;
-
+          
           void WndProc(Message& message) override;
-
+          
         protected:
           void OnScroll(const EventArgs& e) { this->Scroll(*this, e); }
           void OnValueChanged(const EventArgs& e) { this->ValueChanged(*this, e); }
-
+          
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override {
-            if (this->orientation == Forms::Orientation::Horizontal)
+            if(this->orientation == Forms::Orientation::Horizontal)
               return System::Drawing::Size(104, 45);
             return System::Drawing::Size(45, 104);
           }
@@ -97,7 +97,7 @@ namespace Switch {
           void SetTickStyle(Forms::TickStyle style);
           int32 GetValue() const;
           void SetValue(int32 value);
-
+          
           /// @cond
           int32 largeChange = 5;
           int32 maximum = 10;

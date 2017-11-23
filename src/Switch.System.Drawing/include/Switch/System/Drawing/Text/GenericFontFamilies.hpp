@@ -33,7 +33,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Drawing::Text::GenericFontFamilies> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Drawing::Text::GenericFontFamilies::Serif, "Serif"}, {(int64)System::Drawing::Text::GenericFontFamilies::SansSerif, "SansSerif"}, {(int64)System::Drawing::Text::GenericFontFamilies::Monospace, "Monospace"},};
     flags = false;
   }

@@ -14,8 +14,8 @@ namespace Native {
     Label() {
       //LIGN_START);
       //this->set_justify(Gtk::JUSTIFY_LEFT);
-      gtk_label_set_xalign (this->gobj(), textAlignLeft);
-      gtk_label_set_yalign (this->gobj(), textAlignTop);
+      gtk_label_set_xalign(this->gobj(), textAlignLeft);
+      gtk_label_set_yalign(this->gobj(), textAlignTop);
       this->RegisterEvent();
     }
     void Text(const string& text) override {this->set_label(text.c_str());}

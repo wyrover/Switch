@@ -70,20 +70,20 @@ namespace Switch {
         /// @brief Checks for a condition; if the condition is false, displays a message box that shows the call stack.
         /// @param condition The conditional expression to evaluate. If the condition is true, a failure message is not sent and the message box is not displayed.
         static void Assert(bool condition) {
-#if defined(TRACE)
+          #if defined(TRACE)
           Assert(condition, "");
-#endif
+          #endif
         }
         
         /// @brief Checks for a condition; if the condition is false, displays a message box that shows the call stack.
         /// @param condition The conditional expression to evaluate. If the condition is true, a failure message is not sent and the message box is not displayed.
         /// @param message The message to send to the Listeners collection.
         static void Assert(bool condition, const string& message) {
-#if defined(TRACE)
+          #if defined(TRACE)
           assert(condition);
-          if (!condition)
+          if(!condition)
             Fail(message);
-#endif
+          #endif
         }
         
         /// @brief Flushes the output buffer, and then closes the Listeners.
@@ -91,7 +91,7 @@ namespace Switch {
         /// @remarks Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or Close. Setting AutoFlush to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.
         static void Close() {
           TraceEventCache eventCache;
-          for (auto& listener : Listeners()) {
+          for(auto& listener : Listeners()) {
             listener.Flush();
             listener.Close();
           }
@@ -101,18 +101,18 @@ namespace Switch {
         /// @brief message A message to emit.
         /// @remarks The default behavior for the default trace listener is to output the message parameter to a message box when the application runs in user-interface mode, and to the TraceListener instances in the Listeners collection.
         static void Fail(const string& message) {
-#if defined(TRACE)
+          #if defined(TRACE)
           TraceEventCache eventCache;
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Fail(message);
             } else
               listener.Fail(message);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Emits an error message, and a detailed error message.
@@ -120,35 +120,35 @@ namespace Switch {
         /// @param detailMessage A detailed message to emit.
         /// @remarks The default behavior is for the default trace listener to output the message parameter and the detailedMessage parameter to a message box when the application runs in user-interface mode, and to the TraceListener instances in the Listeners collection.
         static void Fail(const string& message, const string& detailMessage) {
-#if defined(TRACE)
+          #if defined(TRACE)
           TraceEventCache eventCache;
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Fail(message, detailMessage);
             } else
               listener.Fail(message, detailMessage);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Flushes the output buffer, and causes buffered data to be written to the Listeners.
         /// @remarks Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or Close. Setting AutoFlush to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.
         static void Flush() {
-#if defined(TRACE)
+          #if defined(TRACE)
           TraceEventCache eventCache;
-          for (auto& listener : Listeners())
+          for(auto& listener : Listeners())
             listener.Flush();
-#endif
+          #endif
         }
         
         /// @brief Increases the current IndentLevel by one.
         static void Indent() {
-          if (IndentLevel < Int32::MaxValue) {
+          if(IndentLevel < Int32::MaxValue) {
             IndentLevel += 1;
-            for (auto& listener : listeners)
+            for(auto& listener : listeners)
               listener.IndentLevel = IndentLevel();
           }
         }
@@ -167,7 +167,7 @@ namespace Switch {
         /// @param args An object array containing zero or more objects to format.
         /// @remarks TraceError calls the TraceEvent methods in the trace listeners with the trace event type Error, passing the message content as an object array with formatting information. See the Format method for more information about the format and args parameters.
         template<typename ...Objects>
-        static void TraceError(const string& format, const Objects&... args) {TraceEvent(TraceEventType::Error, string::Format(format, args...));}
+        static void TraceError(const string& format, const Objects& ... args) {TraceEvent(TraceEventType::Error, string::Format(format, args...));}
         
         /// @brief Writes an informational message to the trace listeners in the Listeners collection using the specified message.
         /// @param message The informative message to write.
@@ -179,7 +179,7 @@ namespace Switch {
         /// @param args An object array containing zero or more objects to format.
         /// @remarks TraceInformation calls the TraceEvent methods in the trace listeners with the trace event type Information, passing the message content as an object array with formatting information. See the Format method for more information about the format and args parameters.
         template<typename ...Objects>
-        static void TraceInformation(const string& format, const Objects&... args) {TraceEvent(TraceEventType::Information, string::Format(format, args...));}
+        static void TraceInformation(const string& format, const Objects& ... args) {TraceEvent(TraceEventType::Information, string::Format(format, args...));}
         
         /// @brief Writes a warning message to the trace listeners in the Listeners collection using the specified message.
         /// @param message The informative message to write.
@@ -191,13 +191,13 @@ namespace Switch {
         /// @param args An object array containing zero or more objects to format.
         /// @remarks TraceWarning calls the TraceEvent methods in the trace listeners with the trace event type Warning, passing the message content as an object array with formatting information. See the Format method for more information about the format and args parameters.
         template<typename ...Objects>
-        static void TraceWarning(const string& format, const Objects&... args) {TraceEvent(TraceEventType::Warning, string::Format(format, args...));}
+        static void TraceWarning(const string& format, const Objects& ... args) {TraceEvent(TraceEventType::Warning, string::Format(format, args...));}
         
         /// @brief Decreases the current IndentLevel by one.
         static void Unindent() {
-          if (IndentLevel > 0) {
+          if(IndentLevel > 0) {
             IndentLevel -= 1;
-            for (auto& listener : listeners)
+            for(auto& listener : listeners)
               listener.IndentLevel = IndentLevel();
           }
         }
@@ -207,16 +207,16 @@ namespace Switch {
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
         /// @remarks This method calls the Write method of the trace listener.
         static void Write(const object& value) {
-#if defined(TRACE)
-          for (auto& listener : Listeners())
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          #if defined(TRACE)
+          for(auto& listener : Listeners())
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Write(value);
             } else
               listener.Write(value);
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Writes a category name and the value of the object's ToString method to the trace listeners in the Listeners collection.
@@ -226,17 +226,17 @@ namespace Switch {
         /// @remarks The category parameter can be used to group output messages.
         /// @remarks This method calls the Write method of the trace listener.
         static void Write(const object& value, const string& category) {
-#if defined(TRACE)
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          #if defined(TRACE)
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Write(value, category);
             } else
               listener.Write(value, category);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Writes a message to the trace listeners in the Listeners collection.
@@ -244,17 +244,17 @@ namespace Switch {
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
         /// @remarks This method calls the Write method of the trace listener.
         static void Write(const string& message) {
-#if defined(TRACE)
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          #if defined(TRACE)
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Write(message);
             } else
               listener.Write(message);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Writes a category name and the value of the object's ToString method to the listener you create when you implement the TraceListener class.
@@ -264,17 +264,17 @@ namespace Switch {
         /// @remarks The category parameter can be used to group output messages.
         /// @remarks This method calls the Write method of the trace listener.
         static void Write(const string& message, const string& category) {
-#if defined(TRACE)
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          #if defined(TRACE)
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Write(message, category);
             } else
               listener.Write(message, category);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Writes the value of the object's ToString method to the trace listeners in the Listeners collection.
@@ -282,17 +282,17 @@ namespace Switch {
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLine(const object& value) {
-#if defined(TRACE)
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          #if defined(TRACE)
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.WriteLine(value);
             } else
               listener.WriteLine(value);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Writes a category name and the value of the object's ToString method to the trace listeners in the Listeners collection.
@@ -302,17 +302,17 @@ namespace Switch {
         /// @remarks The category parameter can be used to group output messages.
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLine(const object& value, const string& category) {
-#if defined(TRACE)
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          #if defined(TRACE)
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.WriteLine(value, category);
             } else
               listener.WriteLine(value, category);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Writes a message to the trace listeners in the Listeners collection.
@@ -320,17 +320,17 @@ namespace Switch {
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLine(const string& message) {
-#if defined(TRACE)
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          #if defined(TRACE)
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.WriteLine(message);
             } else
               listener.WriteLine(message);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Writes a category name and message to the trace listeners in the Listeners collection.
@@ -340,17 +340,17 @@ namespace Switch {
         /// @remarks The category parameter can be used to group output messages.
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLine(const string& message, const string& category) {
-#if defined(TRACE)
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          #if defined(TRACE)
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.WriteLine(message, category);
             } else
               listener.WriteLine(message, category);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         /// @brief Writes the value of the object's ToString method to the trace listeners in the Listeners collection if a condition is true.
@@ -359,10 +359,10 @@ namespace Switch {
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLineIf(bool condition, const object& value) {
-#if defined(TRACE)
-          if (condition)
+          #if defined(TRACE)
+          if(condition)
             WriteLine(value);
-#endif
+          #endif
         }
         
         /// @brief Writes a category name and the value of the object's ToString method to the trace listeners in the Listeners collection if a condition is true.
@@ -373,10 +373,10 @@ namespace Switch {
         /// @remarks The category parameter can be used to group output messages.
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLineIf(bool condition, const object& value, const string& category) {
-#if defined(TRACE)
-          if (condition)
+          #if defined(TRACE)
+          if(condition)
             WriteLine(value, category);
-#endif
+          #endif
         }
         
         /// @brief Writes a message to the trace listeners in the Listeners collection if a condition is true.
@@ -385,10 +385,10 @@ namespace Switch {
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLineIf(bool condition, const string& message) {
-#if defined(TRACE)
-          if (condition)
+          #if defined(TRACE)
+          if(condition)
             WriteLine(message);
-#endif
+          #endif
         }
         
         /// @brief Writes a category name and message to the trace listeners in the Listeners collection if a condition is true.
@@ -399,12 +399,12 @@ namespace Switch {
         /// @remarks The category parameter can be used to group output messages.
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLineIf(bool condition, const string& message, const string& category) {
-#if defined(TRACE)
-          if (condition)
+          #if defined(TRACE)
+          if(condition)
             WriteLine(message, category);
-#endif
+          #endif
         }
-
+        
         /// @cond
         static TraceListenerCollection& __get_listeners__() {return listeners;}
         /// @endcond
@@ -412,19 +412,19 @@ namespace Switch {
       private:
         friend class Debug;
         static void TraceEvent(const TraceEventType& traceEventType, const string& message) {
-#if defined(TRACE)
+          #if defined(TRACE)
           TraceEventCache eventCache;
           static string sourceName = System::IO::Path::GetFileName(Environment::GetCommandLineArgs()[0]);
-          for (auto& listener : Listeners()) {
-            if (!listener.IsThreadSafe && UseGlobalLock) {
+          for(auto& listener : Listeners()) {
+            if(!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.TraceEvent(eventCache, sourceName, traceEventType, 0, message);
             } else
               listener.TraceEvent(eventCache, sourceName, traceEventType, 0, message);
           }
-          if (AutoFlush)
+          if(AutoFlush)
             Flush();
-#endif
+          #endif
         }
         
         static TraceListenerCollection listeners;

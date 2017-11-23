@@ -18,7 +18,7 @@ namespace Switch {
         class _export TabControl : public ContainerControl {
         public:
           using TabPageCollection = ControlCollection;
-
+          
           TabControl() {
             this->SetStyle(ControlStyles::UserPaint, false);
           }
@@ -26,21 +26,21 @@ namespace Switch {
           /// @cond
           TabControl(const TabControl& tabControl) : ContainerControl(tabControl), alignment(tabControl.alignment) {}
           /// @endcond
-
+          
           _property<TabAlignment> Alignment{
             _get {return this->alignment;},
             _set {this->SetAlignment(value);}
           };
-
+          
           _property<TabPageCollection&, _readonly> TabPages{
             _get->TabPageCollection& {return this->Controls();}
           };
-
+          
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(200, 100); }
           void SetAlignment(TabAlignment alignment);
-
+          
           /// @cond
           TabAlignment alignment = TabAlignment::Top;
           /// @endcond

@@ -46,7 +46,7 @@ namespace Switch {
       _property<TimeSpan, _readonly> BaseUtcOffset {
         _get {return TimeSpan::FromTicks(this->baseUtcOffset);}
       };
-
+      
       /// @brief Gets the display name for the current time zone's daylight saving time.
       /// @return string The display name for the time zone's daylight saving time.
       /// @remarks The display name is localized based on the culture installed with the Windows operating system.
@@ -56,7 +56,7 @@ namespace Switch {
       _property<const String&, _readonly> DaylightName {
         _get->const String& {return this->daylightName;}
       };
-
+      
       /// @brief Gets the general display name that represents the time zone.
       /// @return string The time zone's general display name.
       /// @remarks The display name is localized based on the culture installed with the Windows operating system.
@@ -70,7 +70,7 @@ namespace Switch {
       _property<const String&, _readonly> DisplayName {
         _get->const String& {return this->displayName;}
       };
-
+      
       /// @brief Gets the display name for the time zone's standard time.
       /// @brief Gets the time zone identifier.
       /// @return string The time zone identifier.
@@ -90,14 +90,14 @@ namespace Switch {
       _property<const String&, _readonly> StandardName {
         _get->const String& {return this->standardName;}
       };
-
+      
       /// @brief Gets a value indicating whether the time zone has any daylight saving time rules.*
       /// @return bool true if the time zone supports daylight saving time; otherwise, false.
       /// @remarks The value of the SupportsDaylightSavingTime property for the local time zone returned by the TimeZoneInfo.Local property reflects the setting of the Control Panel Date and Time application's checkbox that defines whether the system automatically adjusts for daylight saving time. If it is unchecked, or if no checkbox is displayed for a time zone, the value of this property is false.
       _property<bool, _readonly> SupportsDaylightSavingTime {
         _get {return this->supportsDaylightSavingTime;}
       };
-
+      
       /// @brief Gets a TimeZoneInfo object that represents the Coordinated Universal Time (UTC) zone.
       /// @return TimeZoneInfo An object that represents the Coordinated Universal Time (UTC) zone.
       static const TimeZoneInfo& Utc();
@@ -108,16 +108,16 @@ namespace Switch {
       /// @exception ArgumentNullException dateTime is null.
       /// @exception ArgumentException TimeZoneInfo::Local().IsInvalidDateTime(dateTime) returns true.
       static DateTime ConvertTimeToUtc(const DateTime& dateTime) {
-        if (dateTime.Kind() == DateTimeKind::Utc)
+        if(dateTime.Kind() == DateTimeKind::Utc)
           return dateTime;
-        
+          
         return DateTime::SpecifyKind(dateTime.ToUniversalTime(), DateTimeKind::Utc);
       }
       
       /// @brief Returns a sorted collection of all the time zones about which information is available on the local system.
       /// @return An read-only Array of TimeZoneInfo objects.
       static const Collections::Generic::List<TimeZoneInfo>& GetSystemTimeZones();
-
+      
       /// @brief Compares the current instance with another TimeZoneInfo.
       /// @param tzi A TimeZoneInfo to compare with this instance.
       /// @return int32 A 32-bit signed integer that indicates the relative order of the objects being compared.
@@ -130,7 +130,7 @@ namespace Switch {
       int32 CompareTo(const TimeZoneInfo& tzi) const {
         return this->id.CompareTo(tzi.id);
       }
-
+      
       /// @brief Compares the current instance with another object of the same type.
       /// @param obj An object to compare with this instance.
       /// @return int32 A 32-bit signed integer that indicates the relative order of the objects being compared.
@@ -143,14 +143,14 @@ namespace Switch {
       int32 CompareTo(const IComparable& obj) const override {
         return is<TimeZoneInfo>(obj) && CompareTo(static_cast<const TimeZoneInfo&>(obj));
       }
-
+      
       /// @brief Retrieves a TimeZoneInfo object from the registry based on its identifier.
       /// @param id The time zone identifier, which corresponds to the Id property.
       /// @return An object whose identifier is the value of the id parameter.
       /// @exception ArgumentNullException The id parameter is null.
       /// @exception TimeZoneNotFoundException The time zone identifier specified by id was not found. This means that a registry key whose name matches id does not exist, or that the key exists but does not contain any time zone data.
       static const TimeZoneInfo& TimeFindSystemTimeZoneById(const String& id);
-
+      
     private:
       String id;
       int64 baseUtcOffset = 0;

@@ -20,7 +20,7 @@ intptr Native::TabControlApi::Create(const System::Windows::Forms::TabControl& t
   WindowProcedure::DefWindowProcs[(intptr)handle] = (WNDPROC)SetWindowLongPtr(handle, GWLP_WNDPROC, (LONG_PTR)WindowProcedure::WndProc);
   /// @todo to remove after create SetFont method...
   PostMessage(handle, WM_SETFONT, WPARAM((HFONT)GetStockObject(DEFAULT_GUI_FONT)), TRUE);
-
+  
   /*
   static TCITEM item1;
   item1.mask = TCIF_TEXT | TCIF_IMAGE;
@@ -35,7 +35,7 @@ intptr Native::TabControlApi::Create(const System::Windows::Forms::TabControl& t
   //TabCtrl_InsertItem(handle, 0, &item2);
   PostMessage(handle, TCM_INSERTITEM, (WPARAM)1, (LPARAM)&item2);
   */
-
+  
   return (intptr)handle;
 }
 

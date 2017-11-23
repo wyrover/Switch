@@ -30,21 +30,21 @@ namespace Switch {
       public:
         /// @brief Represents an invalid native operating system handle. This field is constant.
         static intptr InvalidHandle() {return IntPtr::Zero;}
-
+        
         /// @brief Indicates that a System::Threading::WaitHandle::WaitAny(const System::Threading::WaitHandle[], int32, bool)
         /// operation timed out before any of the wait handles were signaled. This field is constant.
         static constexpr int32 WaitTimeout = -1; // 258 in .Net
-
+        
         /// @brief Initializes a new instance of the System::IO::WaitHandle class.
         WaitHandle() {}
-
+        
         /// @brief Destroy instance of the class WaitHandle
         ~WaitHandle() { Close(); }
-
-
+        
+        
         /// @brief When overridden in a derived class, releases all resources held by the current System::Threading::WaitHandle.
         virtual void Close() {}
-
+        
         /// @brief Signals one WaitHandle and waits on another.
         /// @param toSignal The WaitHandle to signal.
         /// @param toWait The WaitHandle to wait on.
@@ -80,7 +80,7 @@ namespace Switch {
         /// @exception ObjectDisposedException the handle is invalid
         /// @exception ArgumentException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         virtual bool WaitOne(int32 millisecondsTimeOut) {
-          if (millisecondsTimeOut < Timeout::Infinite)
+          if(millisecondsTimeOut < Timeout::Infinite)
             throw ArgumentException(_caller);
           return Wait(millisecondsTimeOut);
         }
@@ -102,7 +102,7 @@ namespace Switch {
         /// @exception ArgumentException The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
         static bool WaitAll(Array<ref<WaitHandle>> waitHandles);
-
+        
         /// @brief Waits for all the elements in the specified array to receive a signal, using
         /// an System.Int32 value to measure the time interval.
         /// @param waitHandles A WaitHandle array containing the objects for which the current instance
@@ -132,7 +132,7 @@ namespace Switch {
         /// -or- The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
         static bool WaitAll(Array<ref<WaitHandle>> waitHandles, const TimeSpan& timeOut);
-
+        
         /// @brief Waits for any of the elements in the specified array to receive a signal.
         /// @param waitHandles A WaitHandle array containing the objects for which the current instance
         /// will wait. This array cannot contain multiple references to the same object.
@@ -143,7 +143,7 @@ namespace Switch {
         /// -or-  The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
         static int32 WaitAny(Array<ref<WaitHandle>> waitHandles);
-
+        
         /// @brief Waits for any of the elements in the specified array to receive a signal,
         /// using a 32-bit signed integer to measure the time interval.
         /// @param waitHandles A WaitHandle array containing the objects for which the current instance
@@ -159,7 +159,7 @@ namespace Switch {
         /// -or-  The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
         static int32 WaitAny(Array<ref<WaitHandle>> waitHandles, int32 millisecondsTimeOut);
-
+        
         /// @brief Waits for any of the elements in the specified array to receive a signal,
         /// using a System.TimeSpan to measure the time interval.
         /// @param waitHandles A WaitHandle array containing the objects for which the current instance
@@ -174,13 +174,13 @@ namespace Switch {
         /// an infinite time-out. -or-  The number of objects in waitHandles is greater than the system permits.
         /// @exception AbandonedMutexException The wait completed because a thread exited without releasing a mutex.
         static int32 WaitAny(Array<ref<WaitHandle>> waitHandles, const TimeSpan& timeOut);
-
+        
       protected:
         /// @brief Releases ownership of the specified WaitHandle object.
         /// @return true If the function succeeds, false otherwise.
         /// @remarks Override this function for all derived object
         virtual bool Signal() = 0;
-
+        
         /// @brief Wait ownership of the specified mutex object.
         /// @param handle A valid handle to an open object.
         /// @param millisecondsTimeOut The number of milliseconds to wait, or -1 to wait indefinitely.
@@ -188,7 +188,7 @@ namespace Switch {
         /// @remarks If millisecondsTimeout is zero, the method does not block. It tests the state of the wait handle and returns immediately.
         /// @remarks Override this function for all derived object
         virtual bool Wait(int32 millisecondsTimeOut) = 0;
-
+        
         /// @cond
         bool DoWait(int32 millisecondsTimeOut);
         /// @endcond

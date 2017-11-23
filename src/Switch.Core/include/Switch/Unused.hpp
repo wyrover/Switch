@@ -12,7 +12,7 @@ namespace Switch {
   /// This example sho how to use Unused():
   /// @include Unused.cpp
   template <typename ...Args>
-  void Unused(Args&&... args) {}
+  void Unused(Args&& ... args) {}
 }
 
 using namespace Switch;

@@ -143,22 +143,22 @@ namespace SwitchUnitTests {
     ASSERT_EQ("ABCDE", s);
   }
   
-#if defined(_WIN32)
+  #if defined(_WIN32)
 #pragma warning(push)
 #pragma warning(disable:4566)
-#endif
+  #endif
   TEST(StringTest, StringCreatedByAssignmentWithUnicodeStringLiteral) {
     string s = U"こんにちは世界!";
     ASSERT_EQ(U"こんにちは世界!", s);
   }
-#if defined(_WIN32)
+  #if defined(_WIN32)
 #pragma warning(pop)
-#endif
-
+  #endif
+  
   TEST(StringTest, SubscriptOperatorWithChar) {
     Array<char> chars = {'T', 'e', 's', 't'};
     string s = "Test";
-    for (int i = 0; i < chars.Length; i++)
+    for(int i = 0; i < chars.Length; i++)
       ASSERT_EQ(chars[i], static_cast<char>(s[i]));
   }
   
@@ -166,7 +166,7 @@ namespace SwitchUnitTests {
     Array<char32> chars = {U'こ', U'ん', U'に', U'ち', U'は', U'世', U'界', U'!'};
     string s = U"こんにちは世界!";
     int i = 0;
-    for (char32 c : chars)
+    for(char32 c : chars)
       ASSERT_EQ(c, s[i++]);
     ASSERT_EQ(chars.Length, i);
   }
@@ -384,23 +384,23 @@ namespace SwitchUnitTests {
   }
   
   TEST(StringTest, CompareEmptyStringWithAnyStringWithIgnoreCaseFalse) {
-    ASSERT_TRUE(string::Compare("", "string To Compare",false) < 0);
+    ASSERT_TRUE(string::Compare("", "string To Compare", false) < 0);
   }
   
   TEST(StringTest, CompareAnyStringWithEmptyStringWithIgnoreCaseFalse) {
-    ASSERT_TRUE(string::Compare("string To Compare", "",false) > 0);
+    ASSERT_TRUE(string::Compare("string To Compare", "", false) > 0);
   }
   
   TEST(StringTest, CompareSameStringsWithIgnoreCaseFalse) {
-    ASSERT_TRUE(string::Compare("string To Compare", "string To Compare",false) == 0);
+    ASSERT_TRUE(string::Compare("string To Compare", "string To Compare", false) == 0);
   }
   
   TEST(StringTest, CompareGreaterStringWithIgnoreCaseFalse) {
-    ASSERT_TRUE(string::Compare("string To Compare", "string To Comp",false) > 0);
+    ASSERT_TRUE(string::Compare("string To Compare", "string To Comp", false) > 0);
   }
   
   TEST(StringTest, CompareLessStringWithIgnoreCaseFalse) {
-    ASSERT_TRUE(string::Compare("string To Comp", "string To Compare",false) < 0);
+    ASSERT_TRUE(string::Compare("string To Comp", "string To Compare", false) < 0);
   }
   
   TEST(StringTest, CompareDifferentCaseStringsWithIgnoreCaseFalse) {
@@ -416,17 +416,17 @@ namespace SwitchUnitTests {
   }
   
   TEST(StringTest, CompareIndexIgnoreCase) {
-    ASSERT_TRUE(string::Compare("Char to compare", 4, "string To Compare", 6, 11,true) == 0);
-    ASSERT_TRUE(string::Compare("Char to compare", 4, "string To Compare", 6, 11,true) == 0);
+    ASSERT_TRUE(string::Compare("Char to compare", 4, "string To Compare", 6, 11, true) == 0);
+    ASSERT_TRUE(string::Compare("Char to compare", 4, "string To Compare", 6, 11, true) == 0);
     ASSERT_TRUE(string::Compare("Char to Compare", 4, "string TO Compare", 6, 11, false) > 0);
-    ASSERT_TRUE(string::Compare("Char To Compare", 4, "string To Compare", 6, 11,false) == 0);
+    ASSERT_TRUE(string::Compare("Char To Compare", 4, "string To Compare", 6, 11, false) == 0);
   }
   
   TEST(StringTest, Concat) {
     ASSERT_EQ(Object().ToString(), string::Concat(Object()));
     ASSERT_EQ(Object().ToString() + Object().ToString() + Object().ToString(), string::Concat<>(Array<Object> {Object(), Object(), Object()}));
     ASSERT_EQ(Object().ToString() + Object().ToString(), string::Concat(Object(), Object()));
-    ASSERT_EQ( Object().ToString() + Object().ToString() + Object().ToString(), string::Concat(Object(), Object(), Object()));
+    ASSERT_EQ(Object().ToString() + Object().ToString() + Object().ToString(), string::Concat(Object(), Object(), Object()));
     
     ASSERT_EQ("264", string::Concat(UInt32(264)));
     ASSERT_EQ("True", string::Concat(Boolean(true)));
@@ -482,7 +482,7 @@ namespace SwitchUnitTests {
     string str = "This is a test for enumerator";
     string output;
     System::Collections::Generic::Enumerator<char32> enumerator = str.GetEnumerator();
-    while (enumerator.MoveNext())
+    while(enumerator.MoveNext())
       output += enumerator.Current;
     ASSERT_EQ("This is a test for enumerator", output);
   }
@@ -490,7 +490,7 @@ namespace SwitchUnitTests {
   TEST(StringTest, ForeachOnString) {
     string str = "This is a test for foreach";
     string output;
-    for (char32 item : str)
+    for(char32 item : str)
       output += item;
     ASSERT_EQ("This is a test for foreach", output);
   }
@@ -498,7 +498,7 @@ namespace SwitchUnitTests {
   TEST(StringTest, IteratorOnString) {
     string str = "This is a test for iterator";
     string output;
-    for (string::const_iterator iterator = str.cbegin(); iterator != str.cend(); ++iterator)
+    for(string::const_iterator iterator = str.cbegin(); iterator != str.cend(); ++iterator)
       output += *iterator;
     ASSERT_EQ("This is a test for iterator", output);
   }
@@ -506,14 +506,14 @@ namespace SwitchUnitTests {
   TEST(StringTest, ForOnString) {
     string str = "This is a test for for";
     string output;
-    for (int32 index = 0; index < str.Length; ++index)
+    for(int32 index = 0; index < str.Length; ++index)
       output += str[index];
     ASSERT_EQ("This is a test for for", output);
   }
   
   TEST(StringTest, GetHashCode) {
     ASSERT_NE("A"_S.GetHashCode(), "B"_S.GetHashCode());
-    ASSERT_EQ("ABCD"_S.GetHashCode(),"ABCD"_S.GetHashCode());
+    ASSERT_EQ("ABCD"_S.GetHashCode(), "ABCD"_S.GetHashCode());
     ASSERT_NE("ABCD"_S.GetHashCode(), "ABCE"_S.GetHashCode());
     ASSERT_EQ("ABCDE"_S.GetHashCode(), "ABCDE"_S.GetHashCode());
     ASSERT_NE("My string"_S.GetHashCode(), "My Strinh"_S.GetHashCode());
@@ -523,7 +523,7 @@ namespace SwitchUnitTests {
     refptr<string> clone;
     string testClone("Test Clone");
     clone = as<string>(testClone.Clone());
-    ASSERT_EQ(testClone.GetHashCode(),clone->GetHashCode());
+    ASSERT_EQ(testClone.GetHashCode(), clone->GetHashCode());
   }
   
   TEST(StringTest, IsNullOrEmptyOnEmptyString) {
@@ -555,14 +555,14 @@ namespace SwitchUnitTests {
   
   TEST(StringTest, IndexOfExceptions) {
     ASSERT_THROW("This is the beast of the beast"_S.IndexOf('i', 31), ArgumentOutOfRangeException);
-    ASSERT_THROW("This is the beast of the beast"_S.IndexOf('i', 26,5), ArgumentOutOfRangeException);
+    ASSERT_THROW("This is the beast of the beast"_S.IndexOf('i', 26, 5), ArgumentOutOfRangeException);
     
     ASSERT_THROW("This is the beast of the beast"_S.IndexOf("the", 31), ArgumentOutOfRangeException);
-    ASSERT_THROW("This is the beast of the beast"_S.IndexOf("the", 26,5), ArgumentOutOfRangeException);
+    ASSERT_THROW("This is the beast of the beast"_S.IndexOf("the", 26, 5), ArgumentOutOfRangeException);
   }
   
   TEST(StringTest, IndexOfAny) {
-    Array<char32> separators = {'.', ',', ':','_'};
+    Array<char32> separators = {'.', ',', ':', '_'};
     
     ASSERT_EQ(4,  "This, is : separator."_S.IndexOfAny(separators));
     ASSERT_EQ(9,  "This, is : separator."_S.IndexOfAny(separators, 5));
@@ -579,10 +579,10 @@ namespace SwitchUnitTests {
   }
   
   TEST(StringTest, IndexOfAnyExceptions) {
-    Array<char32> separators = {'.', ',', ':','_'};
+    Array<char32> separators = {'.', ',', ':', '_'};
     
     ASSERT_THROW("This, is : separator."_S.IndexOfAny(separators, 22), ArgumentOutOfRangeException);
-    ASSERT_THROW("This, is : separator."_S.IndexOfAny(separators, 18,5), ArgumentOutOfRangeException);
+    ASSERT_THROW("This, is : separator."_S.IndexOfAny(separators, 18, 5), ArgumentOutOfRangeException);
     
     String xxxx_ = String("xxxx_");
     ASSERT_THROW(xxxx_.IndexOfAny(separators, -1, 3), ArgumentOutOfRangeException);
@@ -609,8 +609,8 @@ namespace SwitchUnitTests {
   TEST(StringTest, JoinNExceptions) {
     string join[] = {"blue", "red", "green", "yellow"};
     ASSERT_THROW(string::Join(", ", null, 4), ArgumentNullException);
-    ASSERT_THROW(string::Join(", ", join, 4,4,2), ArgumentOutOfRangeException);
-    ASSERT_THROW(string::Join(", ", join, 4,1,4), ArgumentOutOfRangeException);
+    ASSERT_THROW(string::Join(", ", join, 4, 4, 2), ArgumentOutOfRangeException);
+    ASSERT_THROW(string::Join(", ", join, 4, 1, 4), ArgumentOutOfRangeException);
   }
   
   TEST(StringTest, LastIndexOf) {
@@ -629,7 +629,7 @@ namespace SwitchUnitTests {
   
   TEST(StringTest, LastIndexOfExceptions) {
     ASSERT_THROW("This is the beast of the beast"_S.LastIndexOf('e', 31), ArgumentOutOfRangeException);
-    ASSERT_THROW("This is the beast of the beast"_S.LastIndexOf('e', 29,2), ArgumentOutOfRangeException);
+    ASSERT_THROW("This is the beast of the beast"_S.LastIndexOf('e', 29, 2), ArgumentOutOfRangeException);
     ASSERT_THROW("This is the beast of the beast"_S.LastIndexOf("the", 31), ArgumentOutOfRangeException);
     ASSERT_THROW("This is the beast of the beast"_S.LastIndexOf("the", 29, 2), ArgumentOutOfRangeException);
   }
@@ -645,7 +645,7 @@ namespace SwitchUnitTests {
   TEST(StringTest, LastIndexOfAnyException) {
     char32 nativeSeparator[] = {'.', ',', ':'};
     ASSERT_THROW("This, is : separator."_S.LastIndexOfAny(Array<char32>(nativeSeparator, 3), 22), ArgumentOutOfRangeException);
-    ASSERT_THROW("This, is : separator."_S.LastIndexOfAny(Array<char32>(nativeSeparator, 3), 18,5), ArgumentOutOfRangeException);
+    ASSERT_THROW("This, is : separator."_S.LastIndexOfAny(Array<char32>(nativeSeparator, 3), 18, 5), ArgumentOutOfRangeException);
   }
   
   TEST(StringTest, PadLeft) {
@@ -678,18 +678,18 @@ namespace SwitchUnitTests {
   
   TEST(StringTest, RemoveExceptions) {
     ASSERT_THROW("abc123ABC"_S.Remove(10), ArgumentOutOfRangeException);
-    ASSERT_THROW("abc123ABC"_S.Remove(8,2), ArgumentOutOfRangeException);
+    ASSERT_THROW("abc123ABC"_S.Remove(8, 2), ArgumentOutOfRangeException);
   }
   
   TEST(StringTest, Insert) {
-    ASSERT_EQ("abc", ""_S.Insert(0,"abc"));
-    ASSERT_EQ("abc123ABC", "abcABC"_S.Insert(3,"123"));
-    ASSERT_EQ("abc123", "abc"_S.Insert(3,"123"));
+    ASSERT_EQ("abc", ""_S.Insert(0, "abc"));
+    ASSERT_EQ("abc123ABC", "abcABC"_S.Insert(3, "123"));
+    ASSERT_EQ("abc123", "abc"_S.Insert(3, "123"));
   }
   TEST(StringTest, InsertExceptions) {
-    ASSERT_THROW("ok"_S.Insert(-1,"abc"), ArgumentOutOfRangeException);
-    ASSERT_THROW(""_S.Insert(1,"abc"), ArgumentOutOfRangeException);
-    ASSERT_THROW("abc"_S.Insert(4,"123"), ArgumentOutOfRangeException);
+    ASSERT_THROW("ok"_S.Insert(-1, "abc"), ArgumentOutOfRangeException);
+    ASSERT_THROW(""_S.Insert(1, "abc"), ArgumentOutOfRangeException);
+    ASSERT_THROW("abc"_S.Insert(4, "123"), ArgumentOutOfRangeException);
   }
   
   TEST(StringTest, Replace) {

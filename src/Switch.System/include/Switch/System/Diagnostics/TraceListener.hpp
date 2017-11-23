@@ -43,7 +43,7 @@ namespace Switch {
         TraceListener(const TraceListener& tl) : data(tl.data) {};
         TraceListener& operator=(const TraceListener& tl) {this->data = tl.data; return *this;};
         /// @endcond
-
+        
         /// @brief Initializes a new instance of the TraceListener class using the specified name as the listener.
         /// @param name The name of the TraceListener.
         TraceListener(const string& name) {this->data->name = name;}
@@ -75,7 +75,7 @@ namespace Switch {
         _property<int32> IndentSize {
           _get {return this->data->indentSize;},
           _set {
-            if (value < 0)
+            if(value < 0)
               throw ArgumentOutOfRangeException(_caller);
             this->data->indentSize = value;
           }
@@ -95,7 +95,7 @@ namespace Switch {
           _get {return this->data->name;},
           _set {this->data->name = value;}
         };
-
+        
         /// @brief Gets or sets the trace output options.
         /// @return TraceOptions A bitwise combination of the enumeration values. The default is None.
         /// @remarks The TraceOutputOptions property determines the optional content of trace output. The property can be set in the configuration file or programmatically during execution to include additional data specifically for a section of code. For example, you can set the TraceOutputOptions property for the console trace listener to TraceOptions.Callstack to add call stack information to the trace output.
@@ -107,7 +107,7 @@ namespace Switch {
           _get {return this->data->traceOutputOptions;},
           _set {this->data->traceOutputOptions = value;}
         };
-
+        
         /// @brief When overridden in a derived class, closes the output stream so it no longer receives tracing or debugging output.
         /// @remarks Use this method when the output is going to a file, such as to the TextWriterTraceListener. After a call to this method, you must reinitialize the object.
         virtual void Close() {this->Flush();}
@@ -122,7 +122,7 @@ namespace Switch {
         /// @param detailMessage A detailed message to emit.
         /// @remarks The default behavior is to display the message and detailed message in a message box when the application is running in a user-interface mode, and to the TraceListener instances in a TraceListenerCollection collection. By default, the TraceListenerCollection collection has an instance of a DefaultTraceListener. You can customize this behavior by adding a TraceListener to or removing one from the collection.
         virtual void Fail(const string& message, const string& detailMessage) {WriteLine(string::Format("Fail: {0} {1}", message, detailMessage));}
-
+        
         /// @brief When overridden in a derived class, flushes the output buffer.
         virtual void Flush() {}
         
@@ -162,7 +162,7 @@ namespace Switch {
         /// @remarks <b>Important</b> This method is not intended to be called directly by application code but by members of the Debug, Trace, and TraceSource classes to write trace data to output.
         /// @remarks The default implementation writes the eventCache, source, eventType and id parameters in the header and footer of the trace. The data parameter is written as the body of the trace message. The ToString method of the data object is used to convert the object to a String.
         template<typename ...Objects>
-        void TraceData(const TraceEventCache& eventCache, const string& source, const TraceEventType& eventType, int32 id, const Objects&... data) {
+        void TraceData(const TraceEventCache& eventCache, const string& source, const TraceEventType& eventType, int32 id, const Objects& ... data) {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, String::Join(", ", {data...})));
           this->WriteEventCache(eventCache);
         }
@@ -191,7 +191,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} {1}: {2}", source, eventType, id));
           this->WriteEventCache(eventCache);
         }
-
+        
         /// @brief Writes trace information, a message, and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -215,7 +215,7 @@ namespace Switch {
         /// @remarks <b>Important</b> This method is not intended to be called directly by application code but by members of the Debug, Trace, and TraceSource classes to write trace data to output.
         /// @remarks The default implementation writes the values of the source, eventType and id parameters as a header. The args object array is converted to a string using the Format method, passing the format string and args array to format the string as the message portion of the trace. The eventCache data is written as a footer, the nature of the output data being dependent on the value of the TraceOutputOptions property.
         template<typename ...Objects>
-        void TraceEvent(const TraceEventCache& eventCache, const string& source, const TraceEventType& eventType, int32 id, const string& format, const Objects&... args) {
+        void TraceEvent(const TraceEventCache& eventCache, const string& source, const TraceEventType& eventType, int32 id, const string& format, const Objects& ... args) {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, string::Format(format, args...)));
           this->WriteEventCache(eventCache);
         }
@@ -246,7 +246,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} Transfert: {1} : {2}, relatedActivityId={3}", source, id, message, relatedActivityId));
           this->WriteEventCache(eventCache);
         }
-
+        
         /// @brief Writes the value of the object's ToString method to the listener you create when you implement the TraceListener class.
         /// @param o An Object whose fully qualified class name you want to write.
         virtual void Write(const Object& o) {Write(o.ToString());}
@@ -255,12 +255,12 @@ namespace Switch {
         /// @param o An Object whose fully qualified class name you want to write.
         /// @param category A category name used to organize the output.
         virtual void Write(const Object& o, const string& category) {Write(o.ToString(), category);}
-
+        
         /// @brief When overridden in a derived class, writes the specified msg to the listener you create in the derived class.
         /// @param message A message to write.
         /// @note <b>to Inheritors:</b> When inheriting from this class, you must implement this method. To support an indentation, you should call WriteIndent if NeedIndent is true. If you need to indent the following line, you must reset NeedIndent to true.
         virtual void Write(const string& message) = 0;
-
+        
         /// @brief Writes a category name and a msg to the listener you create when you implement the TraceListener class.
         /// @param message A message to write.
         /// @param category  A category name used to organize the output.
@@ -302,23 +302,23 @@ namespace Switch {
         /// @remarks This method writes the indent and resets the NeedIndent property to false. Call this method if NeedIndent is true when you are overriding the Write and WriteLine methods. By default, this method uses blank spaces for indentation. The size of the indent is determined by the values of the IndentSize and IndentLevel properties. The IndentLevel property represents the number of times the indent of the size specified by the IndentSize property is applied. This method is called by the DefaultTraceListener and TextWriterTraceListener classes.
         virtual void WriteIndent() {
           this->data->needIndent = false;
-          for (int32 i = 0; i < this->data->indentLevel; ++i)
+          for(int32 i = 0; i < this->data->indentLevel; ++i)
             this->Write(String(' ', this->data->indentSize));
         }
-
+        
       private:
         void WriteEventCache(const TraceEventCache& eventCache) {
-          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::ProcessId))
+          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::ProcessId))
             WriteLine(string::Format("{0}ProcessId={1}", String(' ', this->data->indentSize), eventCache.ProcessdId));
-          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::LogicalOperationStack))
+          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::LogicalOperationStack))
             WriteLine(string::Format("{0}LogicalOperationStack={1}", String(' ', this->data->indentSize), string::Join(", ", eventCache.LogicalOperationStack())));
-          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::ThreadId))
+          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::ThreadId))
             WriteLine(string::Format("{0}ThreadId={1}", String(' ', this->data->indentSize), eventCache.ThreadId));
-          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::DateTime))
+          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::DateTime))
             WriteLine(string::Format("{0}DateTime={1}T{2}.{3:D7}Z", String(' ', this->data->indentSize), eventCache.DateTime().ToShortDateString(), eventCache.DateTime().ToLongTimeString(), eventCache.DateTime().Ticks % 10000000));
-          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::Timestamp))
+          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::Timestamp))
             WriteLine(string::Format("{0}Timestamp={1}", String(' ', this->data->indentSize), eventCache.Timestamp));
-          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::Callstack))
+          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::Callstack))
             WriteLine(string::Format("{0}Callstack={1}", String(' ', this->data->indentSize), eventCache.CallStack));
         }
         
@@ -331,8 +331,8 @@ namespace Switch {
           string name;
           bool needIndent = true;
           TraceOptions traceOutputOptions = TraceOptions::None;
-          };
-
+        };
+        
         refptr<TraceListenerData> data = ref_new<TraceListenerData>();
       };
     }

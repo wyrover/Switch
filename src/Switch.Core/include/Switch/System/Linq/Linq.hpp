@@ -64,7 +64,7 @@ namespace Switch {
   }
   
   template<typename TSource, int32 len>
-  auto concat(const TSource (&second)[len]) {
+  auto concat(const TSource(&second)[len]) {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Concat(second);
   }
   
@@ -75,7 +75,7 @@ namespace Switch {
   }
   
   template<typename TSource, int32 len>
-  auto from(const TSource (&source)[len]) {
+  auto from(const TSource(&source)[len]) {
     __enumerable__.Value = System::Linq::Enumerable::AsEnumerable(source);
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value());
   }
@@ -86,7 +86,7 @@ namespace Switch {
   }
   
   template<typename TSource, int32 len>
-  auto intersect(const TSource (&second)[len]) {
+  auto intersect(const TSource(&second)[len]) {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Intersect(second);
   }
   
@@ -102,14 +102,14 @@ namespace Switch {
   
   template<__order__ order, typename TSource, typename TKey>
   auto orderby(System::Func<const TSource&, TKey> keySelector) {
-    if (order == descending)
+    if(order == descending)
       return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderByDescending(keySelector);
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderBy(keySelector);
   }
   
   template<__order__ order, typename TSource>
   auto orderby(System::Func<const TSource&, TSource> keySelector) {
-    if (order == descending)
+    if(order == descending)
       return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderByDescending(keySelector);
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderBy(keySelector);
   }

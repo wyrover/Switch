@@ -8,13 +8,13 @@ namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {
-        /// @brief This Enumeration represents the styles the ProgressBar can take. Blocks and Continuous.  
+        /// @brief This Enumeration represents the styles the ProgressBar can take. Blocks and Continuous.
         enum class ProgressBarStyle {
-          /// @brief The progress bar displays the progress status as a segmented bar.  
+          /// @brief The progress bar displays the progress status as a segmented bar.
           Blocks,
-          /// @brief The progress bar displays the progress status in a smooth scrolling bar.  
+          /// @brief The progress bar displays the progress status in a smooth scrolling bar.
           Continuous,
-          /// @brief The progress bar displays the progress status in the marquee style.  
+          /// @brief The progress bar displays the progress status in the marquee style.
           Marquee
         };
       }
@@ -26,7 +26,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::ProgressBarStyle> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::ProgressBarStyle::Blocks, "Blocks"}, {(int64)System::Windows::Forms::ProgressBarStyle::Continuous, "Continuous"}, {(int64)System::Windows::Forms::ProgressBarStyle::Marquee, "Marquee"}};
     flags = false;
   }

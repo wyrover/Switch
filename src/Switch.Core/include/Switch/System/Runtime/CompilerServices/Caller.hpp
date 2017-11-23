@@ -47,9 +47,9 @@ namespace Switch {
           };
           
           System::String ToString() const override {
-            if (string::IsNullOrEmpty(this->filePath) && this->lineNumber == 0 && string::IsNullOrEmpty(this->memberNamne))
+            if(string::IsNullOrEmpty(this->filePath) && this->lineNumber == 0 && string::IsNullOrEmpty(this->memberNamne))
               return "{Empty}";
-            if (string::IsNullOrEmpty(this->memberNamne))
+            if(string::IsNullOrEmpty(this->memberNamne))
               return System::String::Format("{{FilePath=\"{0}\", LineNumber={1}}}", this->filePath, this->lineNumber);
             return System::String::Format("{{MemberName=\"{0}\", FilePath=\"{1}\", LineNumber={2}}}", this->memberNamne, this->filePath, this->lineNumber);
           }
@@ -69,7 +69,7 @@ namespace Switch {
   /// The following example shows how to use the #_caller.
   /// @include Caller.cpp
   /// @ingroup Keywords
-  #define _caller \
+#define _caller \
   Switch::System::Runtime::CompilerServices::Caller(__func__, __FILE__, __LINE__)
 }
 

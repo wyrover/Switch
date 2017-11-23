@@ -14,13 +14,13 @@ namespace Switch {
       /// @cond
       class ThreadPool;
       /// @endcond
-
+      
       /// @brief Represents a handle that has been registered when calling RegisterWaitForSingleObject. This class cannot be inherited.
       class _export RegisteredWaitHandle final : public Object {
         /// @cond
         friend class ThreadPool;
         /// @endcond
-
+        
       public:
         /// @brief Cancels a registered wait operation issued by the RegisterWaitForSingleObject method.
         /// waitObject

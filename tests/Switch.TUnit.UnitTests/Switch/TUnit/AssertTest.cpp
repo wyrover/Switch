@@ -267,11 +267,11 @@ namespace SwitchUnitTests {
       System::Array<System::String> array(10);
       Assert::ThrowsAny(_delegate {array[10];}, _caller);
     }
-
+    
     void AnyTest() {
       Assert::AreEqual(10, 10, _caller);
     }
-
+    
   private:
     int32 value;
   };

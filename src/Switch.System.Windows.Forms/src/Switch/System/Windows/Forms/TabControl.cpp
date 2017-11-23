@@ -17,9 +17,9 @@ void TabControl::CreateHandle() {
 }
 
 void TabControl::SetAlignment(TabAlignment alignment) {
-  if (this->alignment != alignment) {
+  if(this->alignment != alignment) {
     this->alignment = alignment;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::TabControlApi::SetAlignment(*this);
   }
 }

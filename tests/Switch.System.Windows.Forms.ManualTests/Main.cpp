@@ -13,14 +13,14 @@ namespace ManualTests {
     static void Main() {
       TabPage tabPage1;
       tabPage1.Text = "tabPage1";
-
+      
       TabPage tabPage2;
       tabPage2.Text = "tabPage2";
-
+      
       TabControl tabControl;
       tabControl.Location = Point(10, 10);
       //tabControl.TabPages().AddRange({tabPage1, tabPage2});
-
+      
       Button button;
       //button.Size = Size(200, 100);
       button.Text = "Button";
@@ -28,7 +28,7 @@ namespace ManualTests {
       
       Form form;
       form.Controls().AddRange({button});
-
+      
       Application::EnableVisualStyles();
       Application::Run(form);
     }

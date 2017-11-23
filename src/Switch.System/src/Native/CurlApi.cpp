@@ -22,7 +22,7 @@ int32 Native::CurlApi::GetContentDownloadLength(intptr request, double& value) {
 int32 Native::CurlApi::GetContentType(intptr request, string& value) {
   char* str;
   int32 result = curl_easy_getinfo((CURL*)request, CURLINFO_CONTENT_TYPE, &str);
-  if (result == 0 && str != null)
+  if(result == 0 && str != null)
     value = str;
   return result;
 }
@@ -67,7 +67,7 @@ int32 Native::CurlApi::SetInFileSize(intptr request, int64 value) {
 
 int32 Native::CurlApi::SetPostFieldSize(intptr request, int64 value) {
   //force using read function to get post data
-  curl_easy_setopt((CURL*)request,CURLOPT_POSTFIELDS, null);
+  curl_easy_setopt((CURL*)request, CURLOPT_POSTFIELDS, null);
   return curl_easy_setopt((CURL*)request, CURLOPT_POSTFIELDSIZE, value);
 }
 
@@ -77,7 +77,7 @@ int32 Native::CurlApi::SetUrl(intptr request, const string& value) {
 
 int32 Native::CurlApi::SetTimeout(intptr request, int32 value) {
   //Convert Infinite timeout -1 to 0 in libcurl
-  return curl_easy_setopt((CURL*)request, CURLOPT_TIMEOUT_MS, (value==-1)?0:value);
+  return curl_easy_setopt((CURL*)request, CURLOPT_TIMEOUT_MS, (value == -1) ? 0 : value);
 }
 
 int32 Native::CurlApi::SetPassword(intptr request, const string& value) {
@@ -88,7 +88,7 @@ int32 Native::CurlApi::SetReadData(intptr request, void* value) {
   return curl_easy_setopt((CURL*)request, CURLOPT_READDATA, value);
 }
 
-int32 Native::CurlApi::SetReadFunction(intptr request, size_t value(void *buffer, size_t size, size_t nmemb, void *stream)) {
+int32 Native::CurlApi::SetReadFunction(intptr request, size_t value(void* buffer, size_t size, size_t nmemb, void* stream)) {
   return curl_easy_setopt((CURL*)request, CURLOPT_READFUNCTION, value);
 }
 
@@ -112,7 +112,7 @@ int32 Native::CurlApi::SetWriteData(intptr request, void* value) {
   return curl_easy_setopt((CURL*)request, CURLOPT_WRITEDATA, value);
 }
 
-int32 Native::CurlApi::SetWriteFunction(intptr request, size_t value(void *buffer, size_t size, size_t nmemb, void *stream)) {
+int32 Native::CurlApi::SetWriteFunction(intptr request, size_t value(void* buffer, size_t size, size_t nmemb, void* stream)) {
   return curl_easy_setopt((CURL*)request, CURLOPT_WRITEFUNCTION, value);
 }
 
@@ -128,12 +128,12 @@ int32 Native::CurlApi::SetHttpPost(intptr request, int32 value) {
   return curl_easy_setopt((CURL*)request,  CURLOPT_POST, value);
 }
 
-intptr Native::CurlApi::AppendToList(intptr list, const string& value){
+intptr Native::CurlApi::AppendToList(intptr list, const string& value) {
   return (intptr)curl_slist_append((curl_slist*)list, value.c_str());
 }
 
 void Native::CurlApi::FreeList(intptr list) {
-  if (list != System::IntPtr::Zero)
+  if(list != System::IntPtr::Zero)
     curl_slist_free_all((curl_slist*)list);
 }
 

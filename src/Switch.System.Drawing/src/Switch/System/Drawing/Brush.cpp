@@ -14,7 +14,7 @@ void Brush::SetNativeBrush(intptr brush) {
 }
 
 void Brush::ReleaseNativeBrush() {
-  if (this->brush != IntPtr::Zero)
+  if(this->brush != IntPtr::Zero)
     Native::BrushApi::DeleteBrush(this->brush);
   this->brush = IntPtr::Zero;
 }

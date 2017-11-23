@@ -11,11 +11,11 @@ constexpr uint32 UInt32::MaxValue;
 constexpr uint32 UInt32::MinValue;
 
 uint32 UInt32::Parse(const string& str) {
-  return Parse(str,10);
+  return Parse(str, 10);
 }
 
 uint32 UInt32::Parse(const string& str, const int32 base) {
-  uint64 value = NumericalParsing::ParseUnsigned(str,base);
+  uint64 value = NumericalParsing::ParseUnsigned(str, base);
   return Convert::ToUInt32(value);
 }
 
@@ -29,7 +29,7 @@ bool UInt32::TryParse(const string& str, UInt32& value) {
 
 bool UInt32::TryParse(const string& str, int32 base, uint32& value) {
   try {
-    value = Parse(str,base);
+    value = Parse(str, base);
   } catch(const Exception&) {
     return false;
   }
@@ -57,27 +57,27 @@ string UInt32::ToString(const string& format, const IFormatProvider&) const {
   int32 precision;
   char32 type = NumericalFormat::GetFormatType(format, precision);
   switch(type) {
-    case 0:   return NumericalFormat::Format_Custom(arg,format);
-    case 'b': return NumericalFormat::Format_B(arg, precision);
-    case 'd': return NumericalFormat::Format_D(arg, precision);
-    case 'e': return NumericalFormat::Format_E(Convert::ToUInt64(this->value), precision == 0 ? 10 : precision, false);
-    case 'E': return NumericalFormat::Format_E(Convert::ToUInt64(this->value), precision == 0 ? 10 : precision, true);
-    case 'f':
-      if (format.Length() == 1) precision = 2;
-      return NumericalFormat::Format_F(arg, precision);
-    case 'g':
-    case 'G': {
-      if (precision == 0) precision = 10;
-      return NumericalFormat::Format_G(arg, precision, type == 'G');
-    }
-    case 'n': 
-      if (format.Length() == 1) precision = 2;
-      return NumericalFormat::Format_N(arg, precision);
-    case 'p': 
-      if (format.Length() == 1) precision = 2;
-      return NumericalFormat::Format_P(arg, precision);
-    case 'x': return NumericalFormat::Format_X(arg, precision, false, 8);
-    case 'X': return NumericalFormat::Format_X(arg, precision, true, 8);
+  case 0:   return NumericalFormat::Format_Custom(arg, format);
+  case 'b': return NumericalFormat::Format_B(arg, precision);
+  case 'd': return NumericalFormat::Format_D(arg, precision);
+  case 'e': return NumericalFormat::Format_E(Convert::ToUInt64(this->value), precision == 0 ? 10 : precision, false);
+  case 'E': return NumericalFormat::Format_E(Convert::ToUInt64(this->value), precision == 0 ? 10 : precision, true);
+  case 'f':
+    if(format.Length() == 1) precision = 2;
+    return NumericalFormat::Format_F(arg, precision);
+  case 'g':
+  case 'G': {
+    if(precision == 0) precision = 10;
+    return NumericalFormat::Format_G(arg, precision, type == 'G');
+  }
+  case 'n':
+    if(format.Length() == 1) precision = 2;
+    return NumericalFormat::Format_N(arg, precision);
+  case 'p':
+    if(format.Length() == 1) precision = 2;
+    return NumericalFormat::Format_P(arg, precision);
+  case 'x': return NumericalFormat::Format_X(arg, precision, false, 8);
+  case 'X': return NumericalFormat::Format_X(arg, precision, true, 8);
   }
   return format;
 }
@@ -87,9 +87,9 @@ int32 UInt32::CompareTo(const UInt32& value) const {
 }
 
 int32 UInt32::CompareTo(const IComparable& obj) const {
-  if (!is<UInt32>(obj))
+  if(!is<UInt32>(obj))
     return 1;
-  
+    
   return CompareTo(static_cast<const UInt32&>(obj));
   
 }
@@ -103,16 +103,16 @@ bool UInt32::ToBoolean(const IFormatProvider&) const {
 }
 
 byte UInt32::ToByte(const IFormatProvider&) const {
-  if (this->value > Byte::MaxValue)
+  if(this->value > Byte::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (sbyte)this->value;
 }
 
 char32 UInt32::ToChar(const IFormatProvider&) const {
-  if (this->value > Char::MaxValue)
+  if(this->value > Char::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (char32)this->value;
 }
 
@@ -125,16 +125,16 @@ double UInt32::ToDouble(const IFormatProvider&) const {
 }
 
 int16 UInt32::ToInt16(const IFormatProvider&) const {
-  if (this->value > (uint32)Int16::MaxValue)
+  if(this->value > (uint32)Int16::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (int16)this->value;
 }
 
 int32 UInt32::ToInt32(const IFormatProvider&) const {
-  if (this->value > (uint32)Int32::MaxValue)
+  if(this->value > (uint32)Int32::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (int32)this->value;
 }
 
@@ -143,9 +143,9 @@ int64 UInt32::ToInt64(const IFormatProvider&) const {
 }
 
 uint16 UInt32::ToUInt16(const IFormatProvider&) const {
-  if (this->value > UInt16::MaxValue)
+  if(this->value > UInt16::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (uint16)this->value;
 }
 
@@ -158,9 +158,9 @@ uint64 UInt32::ToUInt64(const IFormatProvider&) const {
 }
 
 sbyte UInt32::ToSByte(const IFormatProvider&) const {
-  if (this->value > (uint32)SByte::MaxValue)
+  if(this->value > (uint32)SByte::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (sbyte)this->value;
 }
 
@@ -197,44 +197,44 @@ UInt32& UInt32::operator *=(const UInt32& value) {
 }
 
 UInt32& UInt32::operator /=(const UInt32& value) {
-  if (value.value == 0)
+  if(value.value == 0)
     throw DivideByZeroException(_caller);
-
+    
   this->value /= value.value;
   return *this;
 }
 
 UInt32& UInt32::operator %=(const UInt32& value) {
-  if (value.value == 0)
+  if(value.value == 0)
     throw DivideByZeroException(_caller);
-
+    
   this->value %= value;
   return *this;
 }
 
 UInt32& UInt32::operator &=(const UInt32& value) {
-   this->value &= value.value;
-   return *this;
+  this->value &= value.value;
+  return *this;
 }
 
 UInt32& UInt32::operator |=(const UInt32& value) {
-   this->value |= value.value;
-   return *this;
+  this->value |= value.value;
+  return *this;
 }
 
 UInt32& UInt32::operator ^=(const UInt32& value) {
-   this->value ^= value.value;
-   return *this;
+  this->value ^= value.value;
+  return *this;
 }
 
 UInt32& UInt32::operator <<=(const UInt32& value) {
-   this->value <<= value.value;
-   return *this;
+  this->value <<= value.value;
+  return *this;
 }
 
 UInt32& UInt32::operator >>=(const UInt32& value) {
-   this->value >>= value.value;
-   return *this;
+  this->value >>= value.value;
+  return *this;
 }
 
 UInt32& UInt32::operator ++() {
@@ -251,7 +251,7 @@ UInt32& UInt32::operator --() {
   return *this;
 }
 
-const UInt32 UInt32::operator --(int ) {
+const UInt32 UInt32::operator --(int) {
   return this->value--;
 }
 

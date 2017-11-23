@@ -41,7 +41,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Threading::Tasks::TaskStatus> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Threading::Tasks::TaskStatus::Created, "Created"}, {(int64)System::Threading::Tasks::TaskStatus::WaitingForActivation, "WaitingForActivation"}, {(int64)System::Threading::Tasks::TaskStatus::WaitingToRun, "WaitingToRun"}, {(int64)System::Threading::Tasks::TaskStatus::Running, "Running"}, {(int64)System::Threading::Tasks::TaskStatus::WaitingForChildrenToComplete, "WaitingForChildrenToComplete"}, {(int64)System::Threading::Tasks::TaskStatus::RanToCompletion, "RanToCompletion"}, {(int64)System::Threading::Tasks::TaskStatus::Canceled, "Canceled"}, {(int64)System::Threading::Tasks::TaskStatus::Faulted, "Faulted"}};
     flags = false;
   }

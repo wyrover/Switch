@@ -20,7 +20,7 @@ using namespace System::Threading;
 
 int32 WebRequest::pendingRequest = 0;
 
-WebRequest::WebRequest(const string& uri) : uri(uri){
+WebRequest::WebRequest(const string& uri) : uri(uri) {
   InitWebRequest();
 }
 
@@ -29,42 +29,42 @@ WebRequest::WebRequest(const Uri& uri) : uri(uri) {
 }
 
 void WebRequest::InitWebRequest() {
-  if (Native::CurlApi::GetOSSupportsWebOperations() == false || (pendingRequest == 0 && Native::CurlApi::GlobalInit() != 0))
+  if(Native::CurlApi::GetOSSupportsWebOperations() == false || (pendingRequest == 0 && Native::CurlApi::GlobalInit() != 0))
     throw NotSupportedException(_caller);
-  
+    
   Native::CurlApi::Init(this->requestHandle);
   
-  if (this->requestHandle == IntPtr::Zero)
+  if(this->requestHandle == IntPtr::Zero)
     throw NotSupportedException(_caller);
-  
+    
   pendingRequest++;
   Native::CurlApi::SetUrl(this->requestHandle, uri.ToString());
   Native::CurlApi::SetVerbose(this->requestHandle, 0L);
 }
 
 WebRequest::~WebRequest() {
-  if (this->requestHandle != IntPtr::Zero) {
+  if(this->requestHandle != IntPtr::Zero) {
     Native::CurlApi::Cleanup(this->requestHandle);
     pendingRequest--;
     
-    if (pendingRequest == 0)
+    if(pendingRequest == 0)
       Native::CurlApi::GlobalCleanup();
   }
 }
 
 refptr<WebRequest> WebRequest::Create(const Uri& requestUriString) {
-  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
-  
-  if (requestUriString.Scheme == Uri::UriSchemeFtp)
+    
+  if(requestUriString.Scheme == Uri::UriSchemeFtp)
     return new FtpWebRequest(requestUriString);
-  
-  if (requestUriString.Scheme == Uri::UriSchemeHttp)
+    
+  if(requestUriString.Scheme == Uri::UriSchemeHttp)
     return new HttpWebRequest(requestUriString);
-  
-  if (requestUriString.Scheme == Uri::UriSchemeHttps)
+    
+  if(requestUriString.Scheme == Uri::UriSchemeHttps)
     return new HttpWebRequest(requestUriString);
-  
+    
   throw NotSupportedException(_caller);
 }
 
@@ -81,77 +81,76 @@ bool WebRequest::IsResponseStreamNeeded() const {
 }
 
 void WebRequest::SetCredential(const NetworkCredential& credential) {
-  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
-  
-  if (this->requestHandle == IntPtr::Zero)
+    
+  if(this->requestHandle == IntPtr::Zero)
     throw NotSupportedException(_caller);
-  
+    
   Native::CurlApi::SetUserName(this->requestHandle, credential.UserName);
   Native::CurlApi::SetPassword(this->requestHandle, credential.Password);
   this->credential = credential;
 }
 
 void WebRequest::ProccessRequestThread() {
-  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
-  
+    
   try {
     this->internalError = Native::CurlApi::Perform(this->GetRequestHandle());
-    if (this->internalError == 0) {
+    if(this->internalError == 0) {
       double contentLength;
-      if (Native::CurlApi::GetContentDownloadLength(this->GetRequestHandle(), contentLength) == 0)
+      if(Native::CurlApi::GetContentDownloadLength(this->GetRequestHandle(), contentLength) == 0)
         this->GetInternalResponse().contentLength = Convert::ToInt64(Double(contentLength));
-      
+        
       this->internalError = Native::CurlApi::GetContentType(this->GetRequestHandle(), this->GetInternalResponse().contentType);
     }
     this->Finished(this->internalError);
-  } catch (const Exception&) {
+  } catch(const Exception&) {
     this->internalError = this->IsResponseStreamNeeded() ? 19 : 25;
     this->Finished(this->internalError);
   }
 }
 
 void WebRequest::Finished(int32 error) {
-  if (!Native::CurlApi::GetOSSupportsWebOperations())
+  if(!Native::CurlApi::GetOSSupportsWebOperations())
     throw NotSupportedException(_caller);
-  
+    
   //Unlock write thread if finished before sending
   this->requestStream.data->readEvent.Set();
   GetInternalResponse().EndTransfert();
   
-  if (error != 0) {
+  if(error != 0)
     throw System::Net::WebException(_caller);
-  }
 }
 
 void WebRequest::ProccessRequest() {
-  if (!Native::CurlApi::GetOSSupportsWebOperations())
+  if(!Native::CurlApi::GetOSSupportsWebOperations())
     throw NotSupportedException(_caller);
-  
+    
   //Thread already opened by the other stream (response or request)
-  if (this->requestThread.IsAlive())
+  if(this->requestThread.IsAlive())
     return;
-  
+    
   Native::CurlApi::SetTimeout(this->requestHandle, Timeout());
   
-  if (IsResponseStreamNeeded()) {
+  if(IsResponseStreamNeeded()) {
     Native::CurlApi::SetWriteFunction(this->requestHandle, WebResponse::WriteStream);
     Native::CurlApi::SetWriteData(this->requestHandle, &GetInternalResponse().responseStream);
   } else
     Native::CurlApi::SetWriteFunction(this->requestHandle, WebResponse::WriteNullStream);
-  
-  if (IsRequestStreamNeeded()) {
+    
+  if(IsRequestStreamNeeded()) {
     Native::CurlApi::SetReadFunction(this->requestHandle, WebRequest::ReadStream);
     Native::CurlApi::SetReadData(this->requestHandle, &this->requestStream);
     
-    if (GetMethod()==WebRequestMethods::Http::Post) {
+    if(GetMethod() == WebRequestMethods::Http::Post) {
       Native::CurlApi::SetUpload(this->requestHandle, 0L);
-      if (this->contentLength > 0)
+      if(this->contentLength > 0)
         Native::CurlApi::SetPostFieldSize(this->requestHandle, this->contentLength);
     } else {
       Native::CurlApi::SetUpload(this->requestHandle, 1L);
-      if (this->contentLength > 0)
+      if(this->contentLength > 0)
         Native::CurlApi::SetInFileSize(this->requestHandle, this->contentLength);
     }
   }
@@ -162,8 +161,8 @@ void WebRequest::ProccessRequest() {
 size_t WebRequest::ReadStream(void* buffer, size_t size, size_t nmemb, void* stream) {
   try {
     WebRequestStream* webRequestStream = (WebRequestStream*)stream;
-    return webRequestStream->Send(buffer, static_cast<int32>(size*nmemb));
-  } catch (const System::Exception&) {
+    return webRequestStream->Send(buffer, static_cast<int32>(size * nmemb));
+  } catch(const System::Exception&) {
     //Time out occurs during reading abort using CURL_READFUNC_ABORT return code
     return 0x10000000;
   }
@@ -174,41 +173,40 @@ System::Net::WebRequest::WebRequestStream WebRequest::GetRequestStream() {
 }
 
 int64 WebRequest::WebRequestStream::Seek(int64, System::IO::SeekOrigin) {
-  throw NotSupportedException(_caller);	
+  throw NotSupportedException(_caller);
 }
 
 void WebRequest::WebRequestStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
-  if (offset < 0)
+  if(offset < 0)
     throw ArgumentOutOfRangeException(_caller);
-  if (IsClosed())
+  if(IsClosed())
     throw ObjectDisposedException(_caller);
-  if (!CanWrite())
+  if(!CanWrite())
     throw NotSupportedException(_caller);
-
-  if (CanWrite()) {
+    
+  if(CanWrite())
     Write((void*)&buffer.Data()[offset], count);
-  }
 }
 
 void WebRequest::WebRequestStream::Write(const void* handle, int32 count) {
-  if (IsClosed())
+  if(IsClosed())
     throw IO::IOException(_caller);
-  
+    
   //If the request is not started launch the writing thread
-  if (!this->data->started) {
+  if(!this->data->started) {
     this->data->started = true;
     this->data->webRequest->ProccessRequest();
   }
   
-  if (this->data->webRequest->internalError == 0) {
+  if(this->data->webRequest->internalError == 0) {
     this->data->buffer = (void*)handle;
-    this->data->bufferSize =count;
+    this->data->bufferSize = count;
     this->data->bufferOffset = 0;
     //release read
     this->data->writeEvent.Set();
     //Wait read is finished
     
-    if (!this->data->readEvent.WaitOne(this->data->webRequest->Timeout()))
+    if(!this->data->readEvent.WaitOne(this->data->webRequest->Timeout()))
       throw TimeoutException(_caller);
   } else {
     //release read
@@ -220,14 +218,14 @@ void WebRequest::WebRequestStream::Write(const void* handle, int32 count) {
 int32 WebRequest::WebRequestStream::Send(void* handle, int32 count) {
   int32 byteToCopy = 0;
   // Wait data to read
-  if (!this->data->writeEvent.WaitOne(this->data->webRequest->Timeout()))
+  if(!this->data->writeEvent.WaitOne(this->data->webRequest->Timeout()))
     throw TimeoutException(_caller);
-  
-  if (this->data->webRequest->internalError == 0) {
+    
+  if(this->data->webRequest->internalError == 0) {
     byteToCopy = Math::Min(count, (this->data->bufferSize - this->data->bufferOffset));
     Buffer::BlockCopy(this->data->buffer, this->data->bufferSize, this->data->bufferOffset, handle, count, 0, byteToCopy);
     this->data->bufferOffset += byteToCopy;
-    if (this->data->bufferOffset == this->data->bufferSize) {
+    if(this->data->bufferOffset == this->data->bufferSize) {
       // Release write thread if all the data has been read
       this->data->writeEvent.Reset();
       this->data->readEvent.Set();
@@ -236,18 +234,18 @@ int32 WebRequest::WebRequestStream::Send(void* handle, int32 count) {
     this->data->readEvent.Set();
     byteToCopy = 0x10000000 ; //CURL_READFUNC_ABORT  0x10000000
   }
-
+  
   return byteToCopy;
 }
 
 void WebRequest::WebRequestStream::Close() {
-  if (!IsClosed()) {
+  if(!IsClosed()) {
     Stream::Close();
     //Unlock sending thread with an empty buffer
     this->data->bufferSize = 0;
     this->data->bufferOffset = 0;
     this->data->writeEvent.Set();
-    if (this->data->started && !this->data->webRequest->IsResponseStreamNeeded())
+    if(this->data->started && !this->data->webRequest->IsResponseStreamNeeded())
       this->data->webRequest->requestThread.Join();
   }
 }

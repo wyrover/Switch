@@ -36,7 +36,7 @@ namespace Switch {
         Process& operator=(const Process& process) {this->data = process.data; return *this;}
         virtual ~Process();
         /// @endcond
-
+        
         /// @brief Gets the base priority of the associated process.
         /// @exception InvalidOperationException The process has exited.  - or -  The process has not started, so there is no process ID.
         /// @remarks The BasePriority of the process is the starting priority for threads created within the associated process. You can view information about the base priority through the System Monitor's Priority Base counter.

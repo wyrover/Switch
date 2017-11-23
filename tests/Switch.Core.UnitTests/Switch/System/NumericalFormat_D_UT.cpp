@@ -5,7 +5,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace {
-  
+
   TEST(NumericalFormatTest, D99_SByte) {
     ASSERT_EQ("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", String::Format("{0:D99}", SByte(0)));
     ASSERT_EQ("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000013", String::Format("{0:D99}", SByte(13)));
@@ -19,7 +19,7 @@ namespace {
     ASSERT_EQ("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", String::Format("{0:D99}", UInt64(0)));
     ASSERT_EQ("000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000654123", String::Format("{0:D99}", UInt64(654123)));
     ASSERT_EQ("000000000000000000000000000000000000000000000000000000000000000000000000000000018446744073709551615",
-              String::Format("{0:D99}", UInt64(18446744073709551615Lu)));
+      String::Format("{0:D99}", UInt64(18446744073709551615Lu)));
   }
   
   TEST(NumericalFormatTest, D_SByte) {
@@ -382,14 +382,14 @@ class Program {
       }
       Console.WriteLine();
     }
-      
+
     int a = 74;
   }
 
   static void MAKE<T>(String format, IFormattable value) {
     String[] split = value.GetType().ToString().Split('.');
     String type = split[split.Length-1];
-      
+
     Console.WriteLine("  ASSERT_EQ(\"{0}\", String::Format(\"{{0:{1}}}\", {3}({2}))); ", value.ToString(format,null), format, value, type);
   }
 }

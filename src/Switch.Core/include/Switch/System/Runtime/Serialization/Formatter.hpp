@@ -19,8 +19,8 @@ namespace Switch {
         public:
           /// @brief Initializes a new instance of the IFormatter interface.
           Formatter() {}
-
-          virtual void WrtiteBoolean(bool value, const String& name)= 0;
+          
+          virtual void WrtiteBoolean(bool value, const String& name) = 0;
         };
       }
     }

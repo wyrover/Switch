@@ -28,20 +28,20 @@ namespace Switch {
       /// @brief Create a new instance of struct Byte
       /// @remarks Byte is initialized by default to 0.
       Byte() {}
-
+      
       /// @brief Create a new instance of struct Byte
       /// @param value Value for the Byte.
       Byte(byte value) : value(value) {}
       
       /// @cond
       Byte(const Byte& value) : value(value.value) {}
-      operator const byte&() const {return this->value;}
+      operator const byte& () const {return this->value;}
       template<typename T> Byte& operator=(T value) {this->value = value; return *this;}
       template<typename T> Byte& operator+=(T value) {this->value += value.value; return *this;}
       template<typename T> Byte& operator-=(T value) {this->value -= value; return *this;}
       template<typename T> Byte& operator*=(T value) {this->value *= value; return *this;}
-      template<typename T> Byte& operator/=(T value) {if (value.value == 0) throw DivideByZeroException(_caller); this->value /= value.value; return *this;}
-      template<typename T> Byte& operator%=(T value) {if (value.value == 0) throw DivideByZeroException(_caller); this->value %= value.value; return *this;}
+      template<typename T> Byte& operator/=(T value) {if(value.value == 0) throw DivideByZeroException(_caller); this->value /= value.value; return *this;}
+      template<typename T> Byte& operator%=(T value) {if(value.value == 0) throw DivideByZeroException(_caller); this->value %= value.value; return *this;}
       template<typename T> Byte& operator&=(T value) {this->value &= value; return *this;}
       template<typename T> Byte& operator|=(T value) {this->value |= value; return *this;}
       template<typename T> Byte& operator^=(T value) {this->value ^= value; return *this;}
@@ -53,13 +53,13 @@ namespace Switch {
       const Byte operator++(int) {return this->value++;}
       Byte& operator--() {--this->value; return *this;}
       const Byte operator--(int) {return this->value--;}
-
+      
       friend std::ostream& operator<<(std::ostream& output, const Byte& value);
       /// @endcond
-
+      
       /// @brief Represents the largest possible value of an Byte 255 (0xFF). This field is constant.
       static constexpr byte MaxValue = std::numeric_limits<byte>::max();
-
+      
       /// @brief Represents the smallest possible value of Byte 0 (0x00). This field is constant.
       static constexpr byte MinValue = std::numeric_limits<byte>::min();
       
@@ -81,8 +81,8 @@ namespace Switch {
       /// | Less than zero    | This instance is false and obj is true.                                   |
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
-      int32 CompareTo(const IComparable& obj) const override{
-        if (!is<Byte>(obj))
+      int32 CompareTo(const IComparable& obj) const override {
+        if(!is<Byte>(obj))
           return 1;
         return CompareTo(static_cast<const Byte&>(obj));
       }
@@ -92,7 +92,7 @@ namespace Switch {
       /// @param dateTimeB The second DateTime to compare.
       /// @return bool true if the value of dateTimenA is the same as the value of dateTimeB; otherwise, false.
       bool Equals(byte value) const {return this->value == value;}
-
+      
       /// @cond
       bool Equals(const Byte& value) const {return this->value == value;}
       
@@ -108,7 +108,7 @@ namespace Switch {
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
       int32 GetHashCode() const override {return this->value;}
-
+      
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
       TypeCode GetTypeCode() const override {return TypeCode::Byte;}
@@ -117,7 +117,7 @@ namespace Switch {
       /// @param str A String containing the value to convert.
       /// @return A 8-bit unsigned integer equivalent to the number contained in str.
       static byte Parse(const String& str) {return Parse(str, 10);}
-
+      
       /// @brief Converts the specified String representation of a logical value to its 8-bit unsigned integer equivalent.
       /// @param str A String containing the value to convert.
       /// @param base The base of number to parse
@@ -143,7 +143,7 @@ namespace Switch {
       /// @param retValue When this method returns, contains the 8-bit unsigned integer value equivalent to the number contained in str, if the conversion succeeded, or zero if the conversion failed. The conversion fails if the s parameter is null, is not in a format compliant with style, or represents a number less than MinValue or greater than MaxValue. This parameter is passed uninitialized.
       /// @return A Boolean true if str was converted successfully; otherwise, false.
       static bool TryParse(const String& str, byte& retValue) {return TryParse(str, 10, retValue);}
-
+      
       /// @brief Converts the specified String representation of a logical value to its 8-bit unsigned integer equivalent. A return value indicates whether the conversion succeeded.
       /// @param str A String containing the value to convert.
       /// @param base The base of number to parse
@@ -157,7 +157,7 @@ namespace Switch {
           return false;
         }
       }
-
+      
     private:
       friend class Convert;
       bool ToBoolean(const IFormatProvider& provider) const override {return this->value != 0;}
@@ -171,10 +171,10 @@ namespace Switch {
       uint16 ToUInt16(const IFormatProvider& provider) const override {return this->value;}
       uint32 ToUInt32(const IFormatProvider& provider) const override {return this->value;}
       uint64 ToUInt64(const IFormatProvider& provider) const override {return this->value;}
-      sbyte ToSByte(const IFormatProvider& provider) const override {if (this->value > std::numeric_limits<sbyte>::max()) throw OverflowException(_caller); return this->value;}
+      sbyte ToSByte(const IFormatProvider& provider) const override {if(this->value > std::numeric_limits<sbyte>::max()) throw OverflowException(_caller); return this->value;}
       float ToSingle(const IFormatProvider& provider) const override {return this->value;}
       String ToString(const IFormatProvider& provider) const override {return ToString();}
-
+      
       byte value = 0;
     };
   }

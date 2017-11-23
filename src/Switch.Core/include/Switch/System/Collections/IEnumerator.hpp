@@ -13,7 +13,7 @@ namespace Switch {
     namespace Collections {
       /// @brief Supports a simple iteration over a non-generic collection.
       using IEnumerator = System::Collections::Generic::IEnumerator<Any>;
-
+      
       using Enumerator = System::Collections::Generic::Enumerator<Any>;
     }
   }

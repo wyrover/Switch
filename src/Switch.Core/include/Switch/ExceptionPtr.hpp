@@ -119,7 +119,7 @@ namespace Switch {
     static ExceptionPtr Create(T exception) {
       try {
         throw exception;
-      } catch (...) {
+      } catch(...) {
         return std::current_exception();
       }
     }
@@ -129,93 +129,93 @@ namespace Switch {
     /// @return ExceptionPtr The new ExceptinPointer object create
     static ExceptionPtr Create(const System::Exception& exception) {
       using namespace System;
-      if (is<System::Threading::WaitHandleCannotBeOpenedException>(exception)) return ExceptionPtr::Create(as<System::Threading::WaitHandleCannotBeOpenedException>(exception));
+      if(is<System::Threading::WaitHandleCannotBeOpenedException>(exception)) return ExceptionPtr::Create(as<System::Threading::WaitHandleCannotBeOpenedException>(exception));
       
-      if (is<AccessViolationException>(exception)) return ExceptionPtr::Create(as<AccessViolationException>(exception));
-      if (is<AppDomainUnloadedException>(exception)) return ExceptionPtr::Create(as<AppDomainUnloadedException>(exception));
+      if(is<AccessViolationException>(exception)) return ExceptionPtr::Create(as<AccessViolationException>(exception));
+      if(is<AppDomainUnloadedException>(exception)) return ExceptionPtr::Create(as<AppDomainUnloadedException>(exception));
       
-      if (is<ArgumentNullException>(exception)) return ExceptionPtr::Create(as<ArgumentNullException>(exception));
-      if (is<ArgumentOutOfRangeException>(exception)) return ExceptionPtr::Create(as<ArgumentOutOfRangeException>(exception));
-      if (is<DuplicateWaitObjectException>(exception)) return ExceptionPtr::Create(as<DuplicateWaitObjectException>(exception));
-      if (is<ArgumentException>(exception)) return ExceptionPtr::Create(as<ArgumentException>(exception));
+      if(is<ArgumentNullException>(exception)) return ExceptionPtr::Create(as<ArgumentNullException>(exception));
+      if(is<ArgumentOutOfRangeException>(exception)) return ExceptionPtr::Create(as<ArgumentOutOfRangeException>(exception));
+      if(is<DuplicateWaitObjectException>(exception)) return ExceptionPtr::Create(as<DuplicateWaitObjectException>(exception));
+      if(is<ArgumentException>(exception)) return ExceptionPtr::Create(as<ArgumentException>(exception));
       
-      if (is<DivideByZeroException>(exception)) return ExceptionPtr::Create(as<DivideByZeroException>(exception));
-      if (is<NotFiniteNumberException>(exception)) return ExceptionPtr::Create(as<NotFiniteNumberException>(exception));
-      if (is<OverflowException>(exception)) return ExceptionPtr::Create(as<OverflowException>(exception));
-      if (is<ArithmeticException>(exception)) return ExceptionPtr::Create(as<ArithmeticException>(exception));
+      if(is<DivideByZeroException>(exception)) return ExceptionPtr::Create(as<DivideByZeroException>(exception));
+      if(is<NotFiniteNumberException>(exception)) return ExceptionPtr::Create(as<NotFiniteNumberException>(exception));
+      if(is<OverflowException>(exception)) return ExceptionPtr::Create(as<OverflowException>(exception));
+      if(is<ArithmeticException>(exception)) return ExceptionPtr::Create(as<ArithmeticException>(exception));
       
-      if (is<ArrayTypeMismatchException>(exception)) return ExceptionPtr::Create(as<ArrayTypeMismatchException>(exception));
-      if (is<BadImageFormatException>(exception)) return ExceptionPtr::Create(as<BadImageFormatException>(exception));
-      if (is<BadImageFormatException>(exception)) return ExceptionPtr::Create(as<BadImageFormatException>(exception));
-      if (is<System::Collections::Generic::KeyNotFoundException>(exception)) return ExceptionPtr::Create(as<System::Collections::Generic::KeyNotFoundException>(exception));
-      if (is<ContextMarshalException>(exception)) return ExceptionPtr::Create(as<ContextMarshalException>(exception));
-      if (is<ExecutionEngineException>(exception)) return ExceptionPtr::Create(as<ExecutionEngineException>(exception));
-      if (is<DataMisalignedException>(exception)) return ExceptionPtr::Create(as<DataMisalignedException>(exception));
+      if(is<ArrayTypeMismatchException>(exception)) return ExceptionPtr::Create(as<ArrayTypeMismatchException>(exception));
+      if(is<BadImageFormatException>(exception)) return ExceptionPtr::Create(as<BadImageFormatException>(exception));
+      if(is<BadImageFormatException>(exception)) return ExceptionPtr::Create(as<BadImageFormatException>(exception));
+      if(is<System::Collections::Generic::KeyNotFoundException>(exception)) return ExceptionPtr::Create(as<System::Collections::Generic::KeyNotFoundException>(exception));
+      if(is<ContextMarshalException>(exception)) return ExceptionPtr::Create(as<ContextMarshalException>(exception));
+      if(is<ExecutionEngineException>(exception)) return ExceptionPtr::Create(as<ExecutionEngineException>(exception));
+      if(is<DataMisalignedException>(exception)) return ExceptionPtr::Create(as<DataMisalignedException>(exception));
       
-      if (is<System::IO::FileFormatException>(exception)) return ExceptionPtr::Create(as<System::IO::FileFormatException>(exception));
-      if (is<FormatException>(exception)) return ExceptionPtr::Create(as<FormatException>(exception));
+      if(is<System::IO::FileFormatException>(exception)) return ExceptionPtr::Create(as<System::IO::FileFormatException>(exception));
+      if(is<FormatException>(exception)) return ExceptionPtr::Create(as<FormatException>(exception));
       
-      if (is<IndexOutOfRangeException>(exception)) return ExceptionPtr::Create(as<IndexOutOfRangeException>(exception));
-      if (is<InsufficientExecutionStackException>(exception)) return ExceptionPtr::Create(as<InsufficientExecutionStackException>(exception));
-      if (is<InvalidCastException>(exception)) return ExceptionPtr::Create(as<InvalidCastException>(exception));
+      if(is<IndexOutOfRangeException>(exception)) return ExceptionPtr::Create(as<IndexOutOfRangeException>(exception));
+      if(is<InsufficientExecutionStackException>(exception)) return ExceptionPtr::Create(as<InsufficientExecutionStackException>(exception));
+      if(is<InvalidCastException>(exception)) return ExceptionPtr::Create(as<InvalidCastException>(exception));
       
-      if (is<ObjectDisposedException>(exception)) return ExceptionPtr::Create(as<ObjectDisposedException>(exception));
-      if (is<ObjectDisposedException>(exception)) return ExceptionPtr::Create(as<ObjectDisposedException>(exception));
-      if (is<InvalidOperationException>(exception)) return ExceptionPtr::Create(as<InvalidOperationException>(exception));
+      if(is<ObjectDisposedException>(exception)) return ExceptionPtr::Create(as<ObjectDisposedException>(exception));
+      if(is<ObjectDisposedException>(exception)) return ExceptionPtr::Create(as<ObjectDisposedException>(exception));
+      if(is<InvalidOperationException>(exception)) return ExceptionPtr::Create(as<InvalidOperationException>(exception));
       
-      if (is<InvalidProgramException>(exception)) return ExceptionPtr::Create(as<InvalidProgramException>(exception));
-      if (is<System::IO::IOException>(exception)) return ExceptionPtr::Create(as<System::IO::IOException>(exception));
+      if(is<InvalidProgramException>(exception)) return ExceptionPtr::Create(as<InvalidProgramException>(exception));
+      if(is<System::IO::IOException>(exception)) return ExceptionPtr::Create(as<System::IO::IOException>(exception));
       
-      if (is<FieldAccessException>(exception)) return ExceptionPtr::Create(as<FieldAccessException>(exception));
-      if (is<MethodAccessException>(exception)) return ExceptionPtr::Create(as<MethodAccessException>(exception));
-      if (is<MissingFieldException>(exception)) return ExceptionPtr::Create(as<MissingFieldException>(exception));
-      if (is<MissingMethodException>(exception)) return ExceptionPtr::Create(as<MissingMethodException>(exception));
-      if (is<MissingMemberException>(exception)) return ExceptionPtr::Create(as<MissingMemberException>(exception));
-      if (is<MemberAccessException>(exception)) return ExceptionPtr::Create(as<MemberAccessException>(exception));
+      if(is<FieldAccessException>(exception)) return ExceptionPtr::Create(as<FieldAccessException>(exception));
+      if(is<MethodAccessException>(exception)) return ExceptionPtr::Create(as<MethodAccessException>(exception));
+      if(is<MissingFieldException>(exception)) return ExceptionPtr::Create(as<MissingFieldException>(exception));
+      if(is<MissingMethodException>(exception)) return ExceptionPtr::Create(as<MissingMethodException>(exception));
+      if(is<MissingMemberException>(exception)) return ExceptionPtr::Create(as<MissingMemberException>(exception));
+      if(is<MemberAccessException>(exception)) return ExceptionPtr::Create(as<MemberAccessException>(exception));
       
-      if (is<MulticastNotSupportedException>(exception)) return ExceptionPtr::Create(as<MulticastNotSupportedException>(exception));
-      if (is<NotImplementedException>(exception)) return ExceptionPtr::Create(as<NotImplementedException>(exception));
+      if(is<MulticastNotSupportedException>(exception)) return ExceptionPtr::Create(as<MulticastNotSupportedException>(exception));
+      if(is<NotImplementedException>(exception)) return ExceptionPtr::Create(as<NotImplementedException>(exception));
       
-      if (is<PlatformNotSupportedException>(exception)) return ExceptionPtr::Create(as<PlatformNotSupportedException>(exception));
-      if (is<NotSupportedException>(exception)) return ExceptionPtr::Create(as<NotSupportedException>(exception));
+      if(is<PlatformNotSupportedException>(exception)) return ExceptionPtr::Create(as<PlatformNotSupportedException>(exception));
+      if(is<NotSupportedException>(exception)) return ExceptionPtr::Create(as<NotSupportedException>(exception));
       
-      if (is<NullPointerException>(exception)) return ExceptionPtr::Create(as<NullPointerException>(exception));
-      if (is<NullReferenceException>(exception)) return ExceptionPtr::Create(as<NullReferenceException>(exception));
-      if (is<OperationCanceledException>(exception)) return ExceptionPtr::Create(as<OperationCanceledException>(exception));
+      if(is<NullPointerException>(exception)) return ExceptionPtr::Create(as<NullPointerException>(exception));
+      if(is<NullReferenceException>(exception)) return ExceptionPtr::Create(as<NullReferenceException>(exception));
+      if(is<OperationCanceledException>(exception)) return ExceptionPtr::Create(as<OperationCanceledException>(exception));
       
-      if (is<InsufficientMemoryException>(exception)) return ExceptionPtr::Create(as<InsufficientMemoryException>(exception));
-      if (is<OutOfMemoryException>(exception)) return ExceptionPtr::Create(as<OutOfMemoryException>(exception));
+      if(is<InsufficientMemoryException>(exception)) return ExceptionPtr::Create(as<InsufficientMemoryException>(exception));
+      if(is<OutOfMemoryException>(exception)) return ExceptionPtr::Create(as<OutOfMemoryException>(exception));
       
-      if (is<RankException>(exception)) return ExceptionPtr::Create(as<RankException>(exception));
-      if (is<System::Runtime::Serialization::SerializationException>(exception)) return ExceptionPtr::Create(as<System::Runtime::Serialization::SerializationException>(exception));
-      if (is<System::Security::HostProtectionException>(exception)) return ExceptionPtr::Create(as<System::Security::HostProtectionException>(exception));
-      if (is<System::Security::SecurityException>(exception)) return ExceptionPtr::Create(as<System::Security::SecurityException>(exception));
-      if (is<System::Security::VerificationException>(exception)) return ExceptionPtr::Create(as<System::Security::VerificationException>(exception));
-      if (is<System::Security::XmlSyntaxException>(exception)) return ExceptionPtr::Create(as<System::Security::XmlSyntaxException>(exception));
-      if (is<StackOverflowException>(exception)) return ExceptionPtr::Create(as<StackOverflowException>(exception));
-      if (is<System::Threading::AbandonedMutexException>(exception)) return ExceptionPtr::Create(as<System::Threading::AbandonedMutexException>(exception));
-      if (is<System::Threading::SynchronizationLockException>(exception)) return ExceptionPtr::Create(as<System::Threading::SynchronizationLockException>(exception));
-      if (is<System::Threading::ThreadAbortException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadAbortException>(exception));
-      if (is<System::Threading::ThreadInterruptedException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadInterruptedException>(exception));
-      if (is<System::Threading::ThreadStartException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadStartException>(exception));
-      if (is<System::Threading::ThreadStateException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadStateException>(exception));
-      if (is<TimeoutException>(exception)) return ExceptionPtr::Create(as<TimeoutException>(exception));
-      if (is<TimeZoneNotFoundException>(exception)) return ExceptionPtr::Create(as<TimeZoneNotFoundException>(exception));
-      if (is<TypeInitializationException>(exception)) return ExceptionPtr::Create(as<TypeInitializationException>(exception));
+      if(is<RankException>(exception)) return ExceptionPtr::Create(as<RankException>(exception));
+      if(is<System::Runtime::Serialization::SerializationException>(exception)) return ExceptionPtr::Create(as<System::Runtime::Serialization::SerializationException>(exception));
+      if(is<System::Security::HostProtectionException>(exception)) return ExceptionPtr::Create(as<System::Security::HostProtectionException>(exception));
+      if(is<System::Security::SecurityException>(exception)) return ExceptionPtr::Create(as<System::Security::SecurityException>(exception));
+      if(is<System::Security::VerificationException>(exception)) return ExceptionPtr::Create(as<System::Security::VerificationException>(exception));
+      if(is<System::Security::XmlSyntaxException>(exception)) return ExceptionPtr::Create(as<System::Security::XmlSyntaxException>(exception));
+      if(is<StackOverflowException>(exception)) return ExceptionPtr::Create(as<StackOverflowException>(exception));
+      if(is<System::Threading::AbandonedMutexException>(exception)) return ExceptionPtr::Create(as<System::Threading::AbandonedMutexException>(exception));
+      if(is<System::Threading::SynchronizationLockException>(exception)) return ExceptionPtr::Create(as<System::Threading::SynchronizationLockException>(exception));
+      if(is<System::Threading::ThreadAbortException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadAbortException>(exception));
+      if(is<System::Threading::ThreadInterruptedException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadInterruptedException>(exception));
+      if(is<System::Threading::ThreadStartException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadStartException>(exception));
+      if(is<System::Threading::ThreadStateException>(exception)) return ExceptionPtr::Create(as<System::Threading::ThreadStateException>(exception));
+      if(is<TimeoutException>(exception)) return ExceptionPtr::Create(as<TimeoutException>(exception));
+      if(is<TimeZoneNotFoundException>(exception)) return ExceptionPtr::Create(as<TimeZoneNotFoundException>(exception));
+      if(is<TypeInitializationException>(exception)) return ExceptionPtr::Create(as<TypeInitializationException>(exception));
       
-      if (is<DllNotFoundException>(exception)) return ExceptionPtr::Create(as<DllNotFoundException>(exception));
-      if (is<EntryPointNotFoundException>(exception)) return ExceptionPtr::Create(as<EntryPointNotFoundException>(exception));
-      if (is<TypeAccessException>(exception)) return ExceptionPtr::Create(as<TypeAccessException>(exception));
-      if (is<TypeLoadException>(exception)) return ExceptionPtr::Create(as<TypeLoadException>(exception));
+      if(is<DllNotFoundException>(exception)) return ExceptionPtr::Create(as<DllNotFoundException>(exception));
+      if(is<EntryPointNotFoundException>(exception)) return ExceptionPtr::Create(as<EntryPointNotFoundException>(exception));
+      if(is<TypeAccessException>(exception)) return ExceptionPtr::Create(as<TypeAccessException>(exception));
+      if(is<TypeLoadException>(exception)) return ExceptionPtr::Create(as<TypeLoadException>(exception));
       
-      if (is<TypeUnloadedException>(exception)) return ExceptionPtr::Create(as<TypeUnloadedException>(exception));
-      if (is<UnauthorizedAccessException>(exception)) return ExceptionPtr::Create(as<UnauthorizedAccessException>(exception));
+      if(is<TypeUnloadedException>(exception)) return ExceptionPtr::Create(as<TypeUnloadedException>(exception));
+      if(is<UnauthorizedAccessException>(exception)) return ExceptionPtr::Create(as<UnauthorizedAccessException>(exception));
       
       //if (is<AggregateException>(exception)) return ExceptionPtr::Create(as<AggregateException>(exception));
-      if (is<ApplicationException>(exception)) return ExceptionPtr::Create(as<ApplicationException>(exception));
-      if (is<InvalidTimeZoneException>(exception)) return ExceptionPtr::Create(as<InvalidTimeZoneException>(exception));
-      if (is<SystemException>(exception)) return ExceptionPtr::Create(as<SystemException>(exception));
-      if (is<System::Threading::LockRecursionException>(exception)) return ExceptionPtr::Create(as<System::Threading::LockRecursionException>(exception));
+      if(is<ApplicationException>(exception)) return ExceptionPtr::Create(as<ApplicationException>(exception));
+      if(is<InvalidTimeZoneException>(exception)) return ExceptionPtr::Create(as<InvalidTimeZoneException>(exception));
+      if(is<SystemException>(exception)) return ExceptionPtr::Create(as<SystemException>(exception));
+      if(is<System::Threading::LockRecursionException>(exception)) return ExceptionPtr::Create(as<System::Threading::LockRecursionException>(exception));
       
       return ExceptionPtr::Create(as<Exception>(exception));
     }
@@ -223,7 +223,7 @@ namespace Switch {
     /// @brief Throw the current ExceptionPtr.
     /// @remarks If is null, it throws nothing.
     void Rethrow() const {
-      if (this->exception)
+      if(this->exception)
         std::rethrow_exception(this->exception);
     }
     

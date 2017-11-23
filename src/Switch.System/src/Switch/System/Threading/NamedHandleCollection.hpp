@@ -19,7 +19,7 @@ namespace {
       std::lock_guard<std::recursive_mutex> lock(this->guard);
       typename std::map<string, NamedHandleCountPair>::iterator iterator = this->handles.find(name);
       createNew = iterator == this->handles.end();
-      if (createNew)
+      if(createNew)
         this->handles[name] = NamedHandleCountPair();
       else
         this->handles[name].count++;
@@ -29,9 +29,9 @@ namespace {
     bool Remove(const string& name) {
       std::lock_guard<std::recursive_mutex> lock(this->guard);
       typename std::map<string, NamedHandleCountPair>::iterator iterator = this->handles.find(name);
-      if (iterator == this->handles.end())
+      if(iterator == this->handles.end())
         return false;
-      if (--this->handles[name].count != 0)
+      if(--this->handles[name].count != 0)
         return false;
       this->handles.erase(name);
       return true;

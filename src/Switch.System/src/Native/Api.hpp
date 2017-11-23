@@ -34,13 +34,13 @@ namespace Native {
     static int32 SetUserName(intptr request, const string& value);
     static int32 SetPassword(intptr request, const string& value);
     static int32 SetReadData(intptr request, void* value);
-    static int32 SetReadFunction(intptr request, size_t value(void *buffer, size_t size, size_t nmemb, void *stream));
+    static int32 SetReadFunction(intptr request, size_t value(void* buffer, size_t size, size_t nmemb, void* stream));
     static int32 SetTransfertText(intptr request, int32 value);
     static int32 SetTimeout(intptr request, int32 value);
     static int32 SetUpload(intptr request, int32 value);
     static int32 SetVerbose(intptr request, int32 value);
     static int32 SetWriteData(intptr request, void* value);
-    static int32 SetWriteFunction(intptr request, size_t value(void *buffer, size_t size, size_t nmemb, void *stream));
+    static int32 SetWriteFunction(intptr request, size_t value(void* buffer, size_t size, size_t nmemb, void* stream));
     static int32 SetAllowRedirection(intptr request, int32 value);
     static int32 SetHttpPut(intptr request, int32 value);
     static int32 SetHttpPost(intptr request, int32 value);
@@ -48,7 +48,7 @@ namespace Native {
     static void FreeList(intptr list);
     static int32 SetHttpHeader(intptr request, intptr list);
   };
-
+  
   struct DebuggerApi _static {
   public:
     static void Log(int32 level, const string& category, const string& message);
@@ -88,7 +88,7 @@ namespace Native {
     static string ToUnsecureString(const System::Security::SecureString& secureString);
     static string ToUnsecureString(const string& secureString);
   };
-
+  
   class SocketApi _static {
   public:
     static int32 AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily);

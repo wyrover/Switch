@@ -16,14 +16,14 @@
 namespace {
   std::mutex mutex;
   using Hostent = hostent;
-#if defined(_WIN32)
+  #if defined(_WIN32)
   void sethostent(int) {}
   void endhostent() {}
-#endif
+  #endif
 }
 
 void Native::DnsApi::Destroy(intptr host) {
-  delete (Hostent*)host;
+  delete(Hostent*)host;
 }
 
 void Native::DnsApi::EndHostent() {
@@ -35,7 +35,7 @@ intptr Native::DnsApi::GetHostByAddress(const string& hostAddress, System::Net::
   int64 internetAddress;
   inet_pton((int)hostAddressType, hostAddress.Data(), &internetAddress);
   Hostent* host = gethostbyaddr((char*)&internetAddress, hostAddressType == System::Net::Sockets::AddressFamily::InterNetwork ? 4 : 16, (int)hostAddressType);
-  if (host == null)
+  if(host == null)
     return 0;
   return (intptr)new Hostent(*host);
 }
@@ -43,7 +43,7 @@ intptr Native::DnsApi::GetHostByAddress(const string& hostAddress, System::Net::
 intptr Native::DnsApi::GetHostByName(const string& hostName) {
   std::lock_guard<std::mutex> lock(mutex);
   Hostent* host = gethostbyname(hostName.Data());
-  if (host == null)
+  if(host == null)
     return 0;
   return (intptr)new Hostent(*host);
 }
@@ -51,7 +51,7 @@ intptr Native::DnsApi::GetHostByName(const string& hostName) {
 System::Array<string> Native::DnsApi::GetAliases(intptr host) {
   int32 index = 0;
   System::Collections::Generic::List<string> aliases;
-  while (((Hostent*)host)->h_aliases[index] != null)
+  while(((Hostent*)host)->h_aliases[index] != null)
     aliases.Add(((Hostent*)host)->h_aliases[index++]);
   return aliases.ToArray();
 }
@@ -59,8 +59,8 @@ System::Array<string> Native::DnsApi::GetAliases(intptr host) {
 System::Array<System::Net::IPAddress> Native::DnsApi::GetAddresses(intptr host) {
   int32 index = 0;
   System::Collections::Generic::List<System::Net::IPAddress> addresses;
-  while (((Hostent*)host)->h_addr_list[index] != null)
-    addresses.Add(System::Net::IPAddress(System::Array<byte>((const byte*)((Hostent*)host)->h_addr_list[index++],  (System::Net::Sockets::AddressFamily)((Hostent*)host)->h_addrtype == System::Net::Sockets::AddressFamily::InterNetwork ? 4 : 16)));
+  while(((Hostent*)host)->h_addr_list[index] != null)
+    addresses.Add(System::Net::IPAddress(System::Array<byte>((const byte*)((Hostent*)host)->h_addr_list[index++], (System::Net::Sockets::AddressFamily)((Hostent*)host)->h_addrtype == System::Net::Sockets::AddressFamily::InterNetwork ? 4 : 16)));
   return addresses.ToArray();
 }
 

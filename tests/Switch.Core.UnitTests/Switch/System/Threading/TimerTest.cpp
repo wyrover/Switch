@@ -12,7 +12,7 @@ namespace {
     
     void Run(object& State) {
       this->State = &State;
-      if (++this->Number == 10)
+      if(++this->Number == 10)
         this->Event.Set();
     }
     
@@ -20,7 +20,7 @@ namespace {
     AutoResetEvent Event;
     object* State;
   };
-
+  
   TEST(TimerTest, CreateTimerWithoutDueTimeAndWithoutPeriod) {
     TimerCtrlTest test;
     _using(Timer timer(TimerCallback(test, &TimerCtrlTest::Run))) {

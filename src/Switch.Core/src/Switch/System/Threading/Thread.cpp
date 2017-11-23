@@ -10,29 +10,29 @@ std::recursive_mutex Thread::mutex;
 
 void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam) {
   this->SetNameThreadForDebugger();
-  if (Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background) && this->thread.joinable()) {
-    if (this->thread.joinable() && this->detachedThreadId != this->thread.get_id()) {
+  if(Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background) && this->thread.joinable()) {
+    if(this->thread.joinable() && this->detachedThreadId != this->thread.get_id()) {
       this->detachedThreadId = this->thread.get_id();
       this->thread.detach();
     }
   }
-  if (this->priority != ThreadPriority::Normal)
+  if(this->priority != ThreadPriority::Normal)
     SetPriority();
-  if (withParam)
+  if(withParam)
     this->parameterizedThreadStart(*obj);
   else
     this->threadStart();
-  
+    
   this->state |= System::Threading::ThreadState::Stopped;
   this->endThreadEvent.Set();
-  if (Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background)) {
-    if (this->thread.joinable() && this->detachedThreadId != this->thread.get_id()) {
+  if(Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background)) {
+    if(this->thread.joinable() && this->detachedThreadId != this->thread.get_id()) {
       this->detachedThreadId = this->thread.get_id();
       this->thread.detach();
     }
     std::lock_guard<std::recursive_mutex> lock(mutex);
-    for (int i = 0; i < threads.Count; i++) {
-      if (threads[i].data->managedThreadId == this->managedThreadId) {
+    for(int i = 0; i < threads.Count; i++) {
+      if(threads[i].data->managedThreadId == this->managedThreadId) {
         threads.RemoveAt(i);
         break;
       }
@@ -55,8 +55,8 @@ bool Thread::ThreadItem::SetPriority(Thread::NativeHandle handle, ThreadPriority
 Thread& Thread::CurrentThread() {
   ThreadId id = std::this_thread::get_id();
   std::lock_guard<std::recursive_mutex> lock(mutex);
-  for (auto& item : threads) {
-    if (item.data->thread.get_id() == id || item.data->detachedThreadId == id || item.data->mainThreadId == id)
+  for(auto& item : threads) {
+    if(item.data->thread.get_id() == id || item.data->detachedThreadId == id || item.data->mainThreadId == id)
       return item;
   }
   
@@ -67,18 +67,18 @@ Thread& Thread::CurrentThread() {
 }
 
 void Thread::Abort() {
-  if (this->data->managedThreadId == NoneManagedThreadId)
+  if(this->data->managedThreadId == NoneManagedThreadId)
     throw InvalidOperationException(_caller);
-  
-  if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) || Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Suspended))
+    
+  if(Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) || Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Suspended))
     throw ThreadStateException(_caller);
-  
+    
   this->data->state |= System::Threading::ThreadState::AbortRequested;
   
-  if (this->data->managedThreadId == MainManagedThreadId && CurrentThread().MainManagedThreadId == MainManagedThreadId)
+  if(this->data->managedThreadId == MainManagedThreadId && CurrentThread().MainManagedThreadId == MainManagedThreadId)
     Environment::Exit(0);
-  
-  if (Cancel() == true) {
+    
+  if(Cancel() == true) {
     this->data->state |= System::Threading::ThreadState::Aborted;
     this->data->state &= ~System::Threading::ThreadState::AbortRequested;
     this->data->endThreadEvent.Set();
@@ -91,18 +91,18 @@ bool Thread::Cancel() {
 }
 
 void Thread::Close() {
-  if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background)) {
-    if (this->data->thread.joinable() && this->data->detachedThreadId != this->data->thread.get_id()) {
+  if(Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background)) {
+    if(this->data->thread.joinable() && this->data->detachedThreadId != this->data->thread.get_id()) {
       this->data->detachedThreadId = this->data->thread.get_id();
       this->data->thread.detach();
     }
-  } else if (this->data->managedThreadId != NoneManagedThreadId && this->data->managedThreadId != MainManagedThreadId && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && this->data.GetUseCount() == 2) {
+  } else if(this->data->managedThreadId != NoneManagedThreadId && this->data->managedThreadId != MainManagedThreadId && !Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && this->data.GetUseCount() == 2) {
     int32 managedThreadId = this->data->managedThreadId;
     this->Join();
     this->data.Reset();
     std::lock_guard<std::recursive_mutex> lock(mutex);
-    for (int i = 0; i < threads.Count; i++) {
-      if (threads[i].data->managedThreadId == managedThreadId) {
+    for(int i = 0; i < threads.Count; i++) {
+      if(threads[i].data->managedThreadId == managedThreadId) {
         threads.RemoveAt(i);
         break;
       }
@@ -111,11 +111,11 @@ void Thread::Close() {
 }
 
 bool Thread::DoWait(WaitHandle& waitHandle, int32 millisecondsTimeOut) {
-  if (millisecondsTimeOut < -1)
+  if(millisecondsTimeOut < -1)
     throw ArgumentException(_caller);
-  
+    
   CurrentThread().data->state |= System::Threading::ThreadState::WaitSleepJoin;
-  if (CurrentThread().data->interrupted)
+  if(CurrentThread().data->interrupted)
     CurrentThread().Interrupt();
   bool result = false;
   try {
@@ -130,13 +130,13 @@ bool Thread::DoWait(WaitHandle& waitHandle, int32 millisecondsTimeOut) {
 }
 
 void Thread::Interrupt() {
-  if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
+  if(this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
     throw InvalidOperationException(_caller);
-  
-  if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
+    
+  if(Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
     throw ThreadStateException(_caller);
-  
-  if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::WaitSleepJoin) && Cancel() == true) {
+    
+  if(Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::WaitSleepJoin) && Cancel() == true) {
     this->data->state &= ~System::Threading::ThreadState::WaitSleepJoin;
     this->data->interrupted = false;
     this->data->endThreadEvent.Set();
@@ -147,45 +147,45 @@ void Thread::Interrupt() {
 }
 
 void Thread::Resume() {
-  if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
+  if(this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
     throw InvalidOperationException(_caller);
-  if (!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Suspended))
+  if(!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Suspended))
     throw ThreadStateException(_caller);
-  
+    
   Native::ThreadApi::Resume((intptr)this->data->thread.native_handle());
   this->data->state &= ~System::Threading::ThreadState::Suspended;
 }
 
-void Thread::SetName(const string &name) {
-  if (!string::IsNullOrEmpty(this->data->name))
+void Thread::SetName(const string& name) {
+  if(!string::IsNullOrEmpty(this->data->name))
     throw InvalidOperationException(_caller);
-  
+    
   this->data->name = name;
-  if (this->data->managedThreadId == CurrentThread().ManagedThreadId)
+  if(this->data->managedThreadId == CurrentThread().ManagedThreadId)
     this->data->SetNameThreadForDebugger();
 }
 
 void Thread::SetPriority(ThreadPriority priority) {
-  if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Aborted) || Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Stopped))
+  if(Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Aborted) || Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Stopped))
     throw ThreadStateException(_caller);
-  
+    
   this->data->priority = priority;
-  if (this->data->managedThreadId == MainManagedThreadId && CurrentThread().ManagedThreadId == MainManagedThreadId) {
-    if (ThreadItem::SetPriority((Thread::NativeHandle)Native::ThreadApi::GetCurrent(), priority) != true)
+  if(this->data->managedThreadId == MainManagedThreadId && CurrentThread().ManagedThreadId == MainManagedThreadId) {
+    if(ThreadItem::SetPriority((Thread::NativeHandle)Native::ThreadApi::GetCurrent(), priority) != true)
       throw ThreadStateException(_caller);
     return;
   }
   
-  if (!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && this->data->SetPriority() != true)
+  if(!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && this->data->SetPriority() != true)
     throw ThreadStateException(_caller);
 }
 
 void Thread::Suspend() {
-  if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
+  if(this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
     throw InvalidOperationException(_caller);
-  if (!this->IsAlive())
+  if(!this->IsAlive())
     throw ThreadStateException(_caller);
-  
+    
   this->data->state |= System::Threading::ThreadState::SuspendRequested;
   Native::ThreadApi::Suspend((intptr)this->data->thread.native_handle());
   this->data->state |= System::Threading::ThreadState::Suspended;

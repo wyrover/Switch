@@ -23,12 +23,12 @@ namespace Switch {
         /// @brief Initializes a new instance of the Component class.
         Component() {}
         Component(const Component& component) = default;
-
+        
         /// @brief Determines if events can be raised on the control.
         /// @return true if the control is hosted as an ActiveX control whose events are not frozen; otherwise, false.
         /// @remarks If this control is being hosted as an ActiveX control, this property will return false if the ActiveX control has its events frozen.
         virtual bool CanRaiseEvent() const {return true;}
-
+        
         virtual void Close() {}
       };
     }

@@ -37,7 +37,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::Ports::SerialPinChange> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::Ports::SerialPinChange::CtsChanged, "CtsChanged"}, {(int64)System::IO::Ports::SerialPinChange::DsrChanged, "DsrChanged"}, {(int64)System::IO::Ports::SerialPinChange::CDChanged, "CDChanged"}, {(int64)System::IO::Ports::SerialPinChange::Break, "Break"}, {(int64)System::IO::Ports::SerialPinChange::Ring, "Ring"}};
     flags = false;
   }

@@ -28,32 +28,32 @@ namespace Switch {
           /// @cond
           ProgressBar(const ProgressBar& progressBar) : Control(progressBar), marqueeAnimationSpeed(progressBar.marqueeAnimationSpeed), maximum(progressBar.maximum), minimum(progressBar.minimum), style(progressBar.style), value(progressBar.value) {}
           /// @endcond
-
+          
           _property<int32> MarqueeAnimationSpeed {
             _get{ return this->marqueeAnimationSpeed; },
             _set{ this->SetMarqueeAnimationSpeed(value); },
           };
-
+          
           _property<int32> Maximum{
             _get{ return this->maximum; },
             _set{ this->SetMaximum(value); },
           };
-
+          
           _property<int32> Minimum{
             _get{ return this->minimum; },
             _set{ this->SetMinimum(value); },
           };
-
+          
           _property<ProgressBarStyle> Style{
             _get{ return this->style; },
             _set{ this->SetProgressStyle(value); },
           };
-
+          
           _property<int32> Value{
             _get{ return this->value; },
             _set{ this->SetValue(value); },
           };
-
+          
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(100, System::Environment::OSVersion().Platform == System::PlatformID::MacOSX ? 20 : 23); }
@@ -62,7 +62,7 @@ namespace Switch {
           void SetMinimum(int32 minimum);
           void SetProgressStyle(ProgressBarStyle style);
           void SetValue(int32 value);
-
+          
           /// @cond
           int32 marqueeAnimationSpeed = 100;
           int32 maximum = 100;

@@ -54,7 +54,7 @@ class AddFlagOperators<System::IO::FileAttributes> : public TrueType {};
 template<>
 class EnumToStrings<System::IO::FileAttributes> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::FileAttributes::ReadOnly, "ReadOnly"}, {(int64)System::IO::FileAttributes::Hidden, "Hidden"}, {(int64)System::IO::FileAttributes::System, "System"}, {(int64)System::IO::FileAttributes::Directory, "Directory"}, {(int64)System::IO::FileAttributes::Archive, "Archive"}, {(int64)System::IO::FileAttributes::Device, "Device"}, {(int64)System::IO::FileAttributes::Normal, "Normal"}, {(int64)System::IO::FileAttributes::Temporary, "Temporary"}, {(int64)System::IO::FileAttributes::SparseFile, "SparseFile"}, {(int64)System::IO::FileAttributes::ReparsePoint, "ReparsePoint"}, {(int64)System::IO::FileAttributes::Compressed, "Compressed"}, {(int64)System::IO::FileAttributes::Offline, "Offline"}, {(int64)System::IO::FileAttributes::NotContentIndexed, "NotContentIndexed"}, {(int64)System::IO::FileAttributes::Encrypted, "Encrypted"}};
     flags = true;
   }

@@ -3,7 +3,7 @@
 #include <cxxabi.h>
 #include "Api.hpp"
 
-string Native::TypeApi::Demangle(const string &name) {
+string Native::TypeApi::Demangle(const string& name) {
   struct AutoDeleteCharPointer {
     AutoDeleteCharPointer(char* value) : value(value) {}
     ~AutoDeleteCharPointer() {delete value;}

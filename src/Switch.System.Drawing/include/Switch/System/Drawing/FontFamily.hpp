@@ -20,28 +20,28 @@ namespace Switch {
       public:
         FontFamily(const string& name);
         FontFamily(System::Drawing::Text::GenericFontFamilies genericFamily);
-
+        
         /// @cond
         FontFamily() {}
         FontFamily(const FontFamily& fontFamily) : data(fontFamily.data) {}
         FontFamily(intptr handle) { this->data().handle = handle; }
         ~FontFamily();
         /// @endcond
-
+        
         /// @brief Returns an array that contains all the FontFamily objects associated with the current graphics context.
         /// @return Array<FontFamily> An array of FontFamily objects associated with the current graphics context.
         static _property<Array<FontFamily>, _readonly> Families;
-
+        
         static _property<FontFamily, _readonly> GenericMonospace;
-
+        
         static _property<FontFamily, _readonly> GenericSansSerif;
-
+        
         static _property<FontFamily, _readonly> GenericSerif;
-
+        
         _property<string, _readonly> Name{
           _get {return this->GetName();}
         };
-
+        
         bool IsStyleAvailable(FontStyle style) const;
         
       private:

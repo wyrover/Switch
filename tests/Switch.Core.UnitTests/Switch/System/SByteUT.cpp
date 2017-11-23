@@ -47,13 +47,13 @@ namespace {
   }
   
   TEST(SByteTest, Parse_Spaces) {
-    ASSERT_EQ(5,SByte::Parse(" 5"));
-    ASSERT_EQ(5,SByte::Parse("     5"));
-    ASSERT_EQ(5,SByte::Parse("5 "));
-    ASSERT_EQ(51,SByte::Parse("51     "));
-    ASSERT_EQ(5,SByte::Parse(" 5      "));
-    ASSERT_EQ(52,SByte::Parse("        +52 "));
-    ASSERT_EQ(-52,SByte::Parse("        -52 "));
+    ASSERT_EQ(5, SByte::Parse(" 5"));
+    ASSERT_EQ(5, SByte::Parse("     5"));
+    ASSERT_EQ(5, SByte::Parse("5 "));
+    ASSERT_EQ(51, SByte::Parse("51     "));
+    ASSERT_EQ(5, SByte::Parse(" 5      "));
+    ASSERT_EQ(52, SByte::Parse("        +52 "));
+    ASSERT_EQ(-52, SByte::Parse("        -52 "));
   }
   
   TEST(SByteTest, Parse_FormatException) {
@@ -80,14 +80,14 @@ namespace {
   }
   
   TEST(SByteTest, Parse_Binary) {
-    ASSERT_EQ(0, SByte::Parse("0",2));
-    ASSERT_EQ(1, SByte::Parse("1",2));
-    ASSERT_EQ(2, SByte::Parse("10",2));
-    ASSERT_EQ(3, SByte::Parse("11",2));
-    ASSERT_EQ(6, SByte::Parse("110",2));
-    ASSERT_EQ(-1, SByte::Parse("-1",2));
-    ASSERT_EQ(-4, SByte::Parse("-100",2));
-    ASSERT_EQ(-15, SByte::Parse("-1111",2));
+    ASSERT_EQ(0, SByte::Parse("0", 2));
+    ASSERT_EQ(1, SByte::Parse("1", 2));
+    ASSERT_EQ(2, SByte::Parse("10", 2));
+    ASSERT_EQ(3, SByte::Parse("11", 2));
+    ASSERT_EQ(6, SByte::Parse("110", 2));
+    ASSERT_EQ(-1, SByte::Parse("-1", 2));
+    ASSERT_EQ(-4, SByte::Parse("-100", 2));
+    ASSERT_EQ(-15, SByte::Parse("-1111", 2));
   }
   
   TEST(SByteTest, Parse_Binary_Complement) {
@@ -103,48 +103,48 @@ namespace {
   
   
   TEST(SByteTest, Parse_Binary_Exceptions) {
-    ASSERT_THROW(SByte::Parse("",2), FormatException);
-    ASSERT_THROW(SByte::Parse("2",2), FormatException);
-    ASSERT_THROW(SByte::Parse("103",2), FormatException);
-    ASSERT_THROW(SByte::Parse("++0",2), FormatException);
-    ASSERT_THROW(SByte::Parse("+",2), FormatException);
-    ASSERT_THROW(SByte::Parse("-",2), FormatException);
-    ASSERT_THROW(SByte::Parse("--1",2), FormatException);
-    ASSERT_THROW(SByte::Parse("0x53",2), FormatException);
-    ASSERT_THROW(SByte::Parse("100a",2), FormatException);
-    ASSERT_THROW(SByte::Parse("10u",2), FormatException);
+    ASSERT_THROW(SByte::Parse("", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("2", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("103", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("++0", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("+", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("-", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("--1", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("0x53", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("100a", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("10u", 2), FormatException);
   }
   
   TEST(SByteTest, Parse_Binary_Suffix) {
-    ASSERT_EQ(0, SByte::Parse("0b",2));
-    ASSERT_EQ(1, SByte::Parse("1B",2));
-    ASSERT_EQ(2, SByte::Parse("10b",2));
-    ASSERT_EQ(3, SByte::Parse("11B",2));
-    ASSERT_EQ(6, SByte::Parse("110b",2));
-    ASSERT_EQ(-1, SByte::Parse("-1b",2));
-    ASSERT_EQ(-4, SByte::Parse("-100b",2));
-    ASSERT_EQ(-15, SByte::Parse("-1111B",2));
+    ASSERT_EQ(0, SByte::Parse("0b", 2));
+    ASSERT_EQ(1, SByte::Parse("1B", 2));
+    ASSERT_EQ(2, SByte::Parse("10b", 2));
+    ASSERT_EQ(3, SByte::Parse("11B", 2));
+    ASSERT_EQ(6, SByte::Parse("110b", 2));
+    ASSERT_EQ(-1, SByte::Parse("-1b", 2));
+    ASSERT_EQ(-4, SByte::Parse("-100b", 2));
+    ASSERT_EQ(-15, SByte::Parse("-1111B", 2));
   }
   
   TEST(SByteTest, Parse_Binary_Suffix_Exceptions) {
-    ASSERT_THROW(SByte::Parse("0 b",2), FormatException);
-    ASSERT_THROW(SByte::Parse("0x1",2), FormatException);
-    ASSERT_THROW(SByte::Parse("10bb",2), FormatException);
-    ASSERT_THROW(SByte::Parse("11b0",2), FormatException);
-    ASSERT_THROW(SByte::Parse("b",2), FormatException);
-    ASSERT_THROW(SByte::Parse("-b",2), FormatException);
-    ASSERT_THROW(SByte::Parse("-100a",2), FormatException);
-    ASSERT_THROW(SByte::Parse("-11110x",2), FormatException);
+    ASSERT_THROW(SByte::Parse("0 b", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("0x1", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("10bb", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("11b0", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("b", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("-b", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("-100a", 2), FormatException);
+    ASSERT_THROW(SByte::Parse("-11110x", 2), FormatException);
   }
   
   TEST(SByteTest, Parse_Octal) {
-    ASSERT_EQ(0, SByte::Parse("0",8));
-    ASSERT_EQ(1, SByte::Parse("1",8));
-    ASSERT_EQ(12, SByte::Parse("14",8));
-    ASSERT_EQ(56, SByte::Parse("70",8));
-    ASSERT_EQ(-1, SByte::Parse("-1",8));
-    ASSERT_EQ(-4, SByte::Parse("-4",8));
-    ASSERT_EQ(-15, SByte::Parse("-17",8));
+    ASSERT_EQ(0, SByte::Parse("0", 8));
+    ASSERT_EQ(1, SByte::Parse("1", 8));
+    ASSERT_EQ(12, SByte::Parse("14", 8));
+    ASSERT_EQ(56, SByte::Parse("70", 8));
+    ASSERT_EQ(-1, SByte::Parse("-1", 8));
+    ASSERT_EQ(-4, SByte::Parse("-4", 8));
+    ASSERT_EQ(-15, SByte::Parse("-17", 8));
   }
   
   TEST(SByteTest, Parse_Hexadecimal) {
@@ -172,23 +172,23 @@ namespace {
     ASSERT_EQ(0xC, SByte::Parse("0xC", 16));
     ASSERT_EQ(0x3C, SByte::Parse("0X3c", 16));
     ASSERT_EQ(-0x4A, SByte::Parse("-0x4A", 16));
-    ASSERT_EQ(0x1B, SByte::Parse("1b",16));
-    ASSERT_EQ(0x1B, SByte::Parse("1B",16));
-    ASSERT_EQ(0x1B, SByte::Parse("0x1b",16));
+    ASSERT_EQ(0x1B, SByte::Parse("1b", 16));
+    ASSERT_EQ(0x1B, SByte::Parse("1B", 16));
+    ASSERT_EQ(0x1B, SByte::Parse("0x1b", 16));
   }
   
   TEST(SByteTest, Parse_Hexadecimal_Prefix_Exceptions) {
-    ASSERT_THROW(SByte::Parse("- 0xFF",16), FormatException);
-    ASSERT_THROW(SByte::Parse("xFF",16), FormatException);
-    ASSERT_THROW(SByte::Parse("0 xFF",16), FormatException);
-    ASSERT_THROW(SByte::Parse("xxFF",16), FormatException);
-    ASSERT_THROW(SByte::Parse("0xxFF",16), FormatException);
-    ASSERT_THROW(SByte::Parse("0x FF",16), FormatException);
-    ASSERT_THROW(SByte::Parse("x",16), FormatException);
-    ASSERT_THROW(SByte::Parse("0zFF",16), FormatException);
-    ASSERT_THROW(SByte::Parse("0GFF",16), FormatException);
-    ASSERT_THROW(SByte::Parse("0x",16), FormatException);
-    ASSERT_THROW(SByte::Parse("00xFF",16), FormatException);
+    ASSERT_THROW(SByte::Parse("- 0xFF", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("xFF", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("0 xFF", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("xxFF", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("0xxFF", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("0x FF", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("x", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("0zFF", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("0GFF", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("0x", 16), FormatException);
+    ASSERT_THROW(SByte::Parse("00xFF", 16), FormatException);
   }
   
   TEST(SByteTest, TryParse) {
@@ -716,7 +716,7 @@ namespace Natives {
       try {
         MethodInfo method = _typeof(T).GetMethod("Parse", new Type[] {_typeof(String)});
         T value = (T)method.Invoke(prototype, new object[] {s});
-        Console.WriteLine("ASSERT_EQ({0}{3}, {1}::Parse(\"{2}\"));", 
+        Console.WriteLine("ASSERT_EQ({0}{3}, {1}::Parse(\"{2}\"));",
           (value as IFormattable).ToString(fmt, System::Globalization::CultureInfo.CreateSpecificCulture("en-US")), type, s, suffix);
       } catch (System::FormatException) {
         Console.WriteLine("ASSERT_THROW({0}::Parse(\"{1}\"), FormatException);", type, s);

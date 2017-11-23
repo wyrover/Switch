@@ -37,7 +37,7 @@ class AddFlagOperators<System::Net::Sockets::SocketShutdown> : public TrueType {
 template<>
 class EnumToStrings<System::Net::Sockets::SocketShutdown> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Net::Sockets::SocketShutdown::Receive, "Receive"}, {(int64)System::Net::Sockets::SocketShutdown::Send, "Send"}, {(int64)System::Net::Sockets::SocketShutdown::Both, "Both"}};
     flags = false;
   }

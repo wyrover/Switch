@@ -14,16 +14,16 @@ System::Drawing::FontFamily::FontFamily(const string& name) {
 }
 
 System::Drawing::FontFamily::FontFamily(System::Drawing::Text::GenericFontFamilies genericFamily) {
-  if (genericFamily == System::Drawing::Text::GenericFontFamilies::Serif)
+  if(genericFamily == System::Drawing::Text::GenericFontFamilies::Serif)
     *this = System::Drawing::FontFamily(genericFontFamilySerifName);
-  else if (genericFamily == System::Drawing::Text::GenericFontFamilies::SansSerif)
+  else if(genericFamily == System::Drawing::Text::GenericFontFamilies::SansSerif)
     *this = System::Drawing::FontFamily(genericFontFamilySansSerifName);
   else
     *this = System::Drawing::FontFamily(genericFontFamilyMonospaceName);
 }
 
 System::Drawing::FontFamily::~FontFamily() {
-  if (this->data.IsUnique())
+  if(this->data.IsUnique())
     Native::FontFamilyApi::ReleaseResource(this->data().handle);
 }
 

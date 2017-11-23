@@ -14,13 +14,13 @@ void RadioButton::CreateHandle() {
 }
 
 void RadioButton::SetChecked(bool checked) {
-  if (this->checked != checked) {
+  if(this->checked != checked) {
     this->checked = checked;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::RadioButtonApi::SetChecked(*this);
-    if (this->AutoCheck && this->checked && this->Parent()) {
-      for (auto control : this->Parent()().Controls()) {
-        if (control != *this && is<RadioButton>(control))
+    if(this->AutoCheck && this->checked && this->Parent()) {
+      for(auto control : this->Parent()().Controls()) {
+        if(control != *this && is<RadioButton>(control))
           as<RadioButton>(control)().Checked = false;
       }
     }

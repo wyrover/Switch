@@ -29,7 +29,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::SeekOrigin> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::SeekOrigin::Begin, "Begin"}, {(int64)System::IO::SeekOrigin::Current, "Current"}, {(int64)System::IO::SeekOrigin::End, "End"}};
     flags =  false;
   }

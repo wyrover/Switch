@@ -10,8 +10,8 @@ using namespace System::IO;
 
 DirectoryInfo Directory::CreateDirectory(const string& path) {
   DirectoryInfo dirInfo(path);
-  if (!dirInfo.Exists()) {
-    if (!string::IsNullOrEmpty(dirInfo.Parent().FullName))
+  if(!dirInfo.Exists()) {
+    if(!string::IsNullOrEmpty(dirInfo.Parent().FullName))
       Directory::CreateDirectory(dirInfo.Parent().FullName());
     dirInfo.Create();
   }
@@ -45,7 +45,7 @@ System::Collections::Generic::Enumerator<string> Directory::EnumerateFiles(const
 bool Directory::Exists(const string& path) {
   try {
     return DirectoryInfo(path).Exists();
-  } catch (const Exception& ) {
+  } catch(const Exception&) {
     return false;
   }
 }
@@ -60,28 +60,28 @@ DateTime Directory::GetCreationTimeUtc(const string& path) {
 
 System::Array<string> Directory::GetDirectories(const string& path) {
   System::Collections::Generic::List<string> directories;
-  for (const auto& item : EnumerateDirectories(path))
+  for(const auto& item : EnumerateDirectories(path))
     directories.Add(item);
   return directories.ToArray();
 }
 
 System::Array<string> Directory::GetDirectories(const string& path, const string& pattern) {
   System::Collections::Generic::List<string> directories;
-  for (const auto& item : EnumerateDirectories(path, pattern))
+  for(const auto& item : EnumerateDirectories(path, pattern))
     directories.Add(item);
   return directories.ToArray();
 }
 
 System::Array<string> Directory::GetFiles(const string& path) {
   System::Collections::Generic::List<string> files;
-  for (const auto& item : EnumerateDirectories(path))
+  for(const auto& item : EnumerateDirectories(path))
     files.Add(item);
   return files.ToArray();
 }
 
 System::Array<string> Directory::GetFiles(const string& path, const string& pattern) {
   System::Collections::Generic::List<string> files;
-  for (const auto& item : EnumerateDirectories(path, pattern))
+  for(const auto& item : EnumerateDirectories(path, pattern))
     files.Add(item);
   return files.ToArray();
 }
@@ -103,10 +103,9 @@ DirectoryInfo Directory::GetParent(const string& path) {
 }
 
 void Directory::Move(const string& src, const string& dst) {
-  if (Path::HasExtension(src)) {
+  if(Path::HasExtension(src))
     File::Move(src, dst);
-  } else {
+  else
     DirectoryInfo(src).MoveTo(dst);
-  }
 }
 

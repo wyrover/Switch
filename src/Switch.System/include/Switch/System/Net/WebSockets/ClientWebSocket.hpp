@@ -63,30 +63,30 @@ namespace Switch {
           WebSocketCloseStatus GetCloseStatus() const override {return this->closeStatus;}
           
           string GetCloseStatusDescription() const override {
-            switch (this->closeStatus) {
-              case WebSocketCloseStatus::Empty: return "No error specified.";
-              case WebSocketCloseStatus::InternalServerError: return "The connection will be closed by the server because of an error on the server.";
-              case WebSocketCloseStatus::NormalClosure: return "(1000) The connection has closed after the request was fulfilled.";
-              case WebSocketCloseStatus::EndpointUnavailable: return "(1001) Indicates an endpoint is being removed. Either the server or client will become unavailable.";
-              case WebSocketCloseStatus::ProtocolError: return "(1002) The client or server is terminating the connection because of a protocol error.";
-              case WebSocketCloseStatus::InvalidMessageType: return "(1003) The client or server is terminating the connection because it cannot accept the data type it received.";
-              case WebSocketCloseStatus::MessageTooBig: return "(1004) Reserved for future use.";
-              case WebSocketCloseStatus::InvalidPayloadData: return "(1007) The client or server is terminating the connection because it has received data inconsistent with the message type.";
-              case WebSocketCloseStatus::PolicyViolation: return "(1008) The connection will be closed because an endpoint has received a message that violates its policy.";
-              case WebSocketCloseStatus::MandatoryExtension: return "(1010) The client is terminating the connection because it expected the server to negotiate an extension.";
-              default : throw InvalidOperationException(_caller);
+            switch(this->closeStatus) {
+            case WebSocketCloseStatus::Empty: return "No error specified.";
+            case WebSocketCloseStatus::InternalServerError: return "The connection will be closed by the server because of an error on the server.";
+            case WebSocketCloseStatus::NormalClosure: return "(1000) The connection has closed after the request was fulfilled.";
+            case WebSocketCloseStatus::EndpointUnavailable: return "(1001) Indicates an endpoint is being removed. Either the server or client will become unavailable.";
+            case WebSocketCloseStatus::ProtocolError: return "(1002) The client or server is terminating the connection because of a protocol error.";
+            case WebSocketCloseStatus::InvalidMessageType: return "(1003) The client or server is terminating the connection because it cannot accept the data type it received.";
+            case WebSocketCloseStatus::MessageTooBig: return "(1004) Reserved for future use.";
+            case WebSocketCloseStatus::InvalidPayloadData: return "(1007) The client or server is terminating the connection because it has received data inconsistent with the message type.";
+            case WebSocketCloseStatus::PolicyViolation: return "(1008) The connection will be closed because an endpoint has received a message that violates its policy.";
+            case WebSocketCloseStatus::MandatoryExtension: return "(1010) The client is terminating the connection because it expected the server to negotiate an extension.";
+            default : throw InvalidOperationException(_caller);
             }
           }
           
           WebSocketState GetState() const override;
-
+          
           string GetSubProtocol() const override {return this->subProtocol;}
           /// @endcond
           
         private:
           ClientWebSocket(const ClientWebSocket&) = delete;
           ClientWebSocket& operator =(const ClientWebSocket&) = delete;
-
+          
           WebSocketCloseStatus closeStatus = WebSocketCloseStatus::Empty;
           string subProtocol;
           easywsclient::WebSocket* socket = null;

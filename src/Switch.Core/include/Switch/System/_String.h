@@ -20,7 +20,7 @@ class __opaque_format_item__ {
     
     template<typename T>
     class Factory<T, refptr<T>> {
-    //class Factory<T, typename std::enable_if<std::is_base_of<refptr<T>, T>::value>::type> {
+      //class Factory<T, typename std::enable_if<std::is_base_of<refptr<T>, T>::value>::type> {
     public:
       refobj operator()(const T& value) {return refobj(new T(value));}
     };
@@ -31,7 +31,7 @@ class __opaque_format_item__ {
     
     template<typename T>
     refobj(const T& value, bool clone) {
-      if (clone == true)
+      if(clone == true)
         ptr = new T(value);
       else
         obj = value;
@@ -42,7 +42,7 @@ class __opaque_format_item__ {
     
     const object& operator*() const { return this->ptr != null ? this->ptr() : this->obj(); }
     object& operator*() { return this->ptr != null ? this->ptr() : this->obj(); }
-   
+    
     bool operator==(const refobj& refobj) const {return this->obj == refobj.obj && this->ptr == refobj.ptr;}
     bool operator!=(const refobj& refobj) const {return !this->operator==(refobj);}
     
@@ -88,7 +88,7 @@ public:
   __opaque_format_item__(const __opaque_format_item__& any) : value(any.value) {}
   bool operator==(const __opaque_format_item__& any) const {return value == any.value;}
   bool operator!=(const __opaque_format_item__& any) const {return value != any.value;}
- 
+  
 private:
   __opaque_format_item__(byte value) : value(new System::Byte(value)) {}
   __opaque_format_item__(char value) : value(new System::Char(value)) {}
@@ -127,7 +127,7 @@ private:
   
   template<typename T, typename Attribute>
   __opaque_format_item__(const _property<const T&, Attribute>& value) : __opaque_format_item__(value()) {}
-
+  
   template<typename T, typename Attribute>
   __opaque_format_item__(const _property<T, Attribute>& value) : __opaque_format_item__(value(), true) {}
   
@@ -176,7 +176,7 @@ private:
   
   template<typename T>
   __opaque_format_item__(const T& value, bool clone) : value(ObjectOrEnumOrOtherToAny<T>()(value, clone)) {}
-
+  
   refobj value;
 };
 /// @cond
@@ -184,28 +184,28 @@ private:
 template<typename T>
 System::String System::String::Concat(const System::Collections::Generic::IEnumerable<T>& objs) {
   int32 size = 0;;
-  for (T item : objs)
+  for(T item : objs)
     size += static_cast<int32>(System::Convert::ToString(item).string.length());
-  
+    
   StringType str;
   str.reserve(size);
-  for (T item : objs)
+  for(T item : objs)
     str.append(System::Convert::ToString(item).string);
   return str.c_str();
 }
 
 template<typename T, int32 length>
-System::String System::String::Concat(const T (&objs)[length]) {
-  if (objs == null)
+System::String System::String::Concat(const T(&objs)[length]) {
+  if(objs == null)
     throw ArgumentNullException(_caller);
-
+    
   int32 size = 0;
-  for (int32 index = 0; index < length; index ++)
+  for(int32 index = 0; index < length; index ++)
     size += System::Convert::ToString(objs[index]).string.length();
-
+    
   StringType str;
   str.reserve(size);
-  for (int32 index = 0; index < length; index ++)
+  for(int32 index = 0; index < length; index ++)
     str.append(System::Convert::ToString(objs[index]).string);
   return str.c_str();
 }
@@ -217,12 +217,12 @@ System::String System::String::Join(const System::String& separator, const Syste
 
 template<typename T>
 System::String System::String::Join(const System::String& separator, const System::Array<T>& objs, int32 startIndex, int32 count) {
-  if (startIndex < 0 || count < 0 || startIndex + count > objs.Length)
+  if(startIndex < 0 || count < 0 || startIndex + count > objs.Length)
     throw ArgumentOutOfRangeException(_caller);
   System::String str;
   bool first = true;
-  for (int32 i = startIndex; i < startIndex + count; i++) {
-    if (first)
+  for(int32 i = startIndex; i < startIndex + count; i++) {
+    if(first)
       first = false;
     else
       str += separator;
@@ -236,8 +236,8 @@ System::String System::String::Join(const System::String& separator, const Syste
   System::String str;
   bool first = true;
   System::Collections::Generic::Enumerator<T> enumerator = objs.GetEnumerator();
-  while (enumerator.MoveNext()) {
-    if (!first)
+  while(enumerator.MoveNext()) {
+    if(!first)
       str += separator;
     str += System::Convert::ToString(enumerator.Current);
     first = false;
@@ -247,16 +247,16 @@ System::String System::String::Join(const System::String& separator, const Syste
 
 template<typename T>
 System::String System::String::Join(const System::String& separator, const System::Collections::Generic::IEnumerable<T>& objs, int32 startIndex, int32 count) {
-  if (startIndex < 0 || count < 0 || startIndex + count > objs.Length)
+  if(startIndex < 0 || count < 0 || startIndex + count > objs.Length)
     throw ArgumentOutOfRangeException(_caller);
   System::String str;
   bool first = true;
   int32 index = 0;
   System::Collections::Generic::Enumerator<T> enumerator = objs.GetEnumerator();
-  while (enumerator.MoveNext()) {
-    if (index < startIndex) continue;
-    if (index++ > startIndex + count) break;
-    if (!first)
+  while(enumerator.MoveNext()) {
+    if(index < startIndex) continue;
+    if(index++ > startIndex + count) break;
+    if(!first)
       str += separator;
     str += System::Convert::ToString(enumerator.Current);
     first = false;
@@ -265,12 +265,12 @@ System::String System::String::Join(const System::String& separator, const Syste
 }
 
 template<typename T, int32 len>
-System::String System::String::Join(const System::String& separator, const T (&objs)[len]) {
+System::String System::String::Join(const System::String& separator, const T(&objs)[len]) {
   System::String str;
   bool first = true;
- 
+  
   for(int32 index = 0; index < len; index++) {
-    if (first)
+    if(first)
       first = false;
     else
       str += separator;
@@ -280,12 +280,12 @@ System::String System::String::Join(const System::String& separator, const T (&o
 }
 
 template<typename ...Args>
-System::String System::String::Format(const System::String& format, const Args&... args) {
+System::String System::String::Format(const System::String& format, const Args& ... args) {
   return System::String::FormatToString(System::FormatProvider(), format, System::Array<__opaque_format_item__> {args...});
 }
 
 template<typename ...Args>
-System::String System::String::Format(const IFormatProvider& provider, const System::String& format, const Args&... args) {
+System::String System::String::Format(const IFormatProvider& provider, const System::String& format, const Args& ... args) {
   return System::String::FormatToString(provider, format, System::Array<__opaque_format_item__> {args...});
 }
 

@@ -52,15 +52,15 @@ void Native::FormApi::Close(System::Windows::Forms::Form& form) {
 intptr Native::FormApi::Create(System::Windows::Forms::Form& form) {
   System::Drawing::Rectangle bounds = form.Bounds;
   Random random;
-  switch (form.StartPosition) {
-    case FormStartPosition::Manual: bounds = form.Bounds; break;
-    case FormStartPosition::WindowsDefaultBounds: bounds = System::Drawing::Rectangle(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), random.Next(640, 800), random.Next(480, 600))); break;
-    case FormStartPosition::WindowsDefaultLocation: bounds = System::Drawing::Rectangle(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), form.Width, form.Height)); break;
-    default: break;
+  switch(form.StartPosition) {
+  case FormStartPosition::Manual: bounds = form.Bounds; break;
+  case FormStartPosition::WindowsDefaultBounds: bounds = System::Drawing::Rectangle(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), random.Next(640, 800), random.Next(480, 600))); break;
+  case FormStartPosition::WindowsDefaultLocation: bounds = System::Drawing::Rectangle(System::Drawing::Rectangle(random.Next(50, 300), random.Next(50, 200), form.Width, form.Height)); break;
+  default: break;
   }
-  form.Location= System::Drawing::Point(bounds.Left, bounds.Top);
-  form.Size= System::Drawing::Size(bounds.Width, bounds.Height);
-
+  form.Location = System::Drawing::Point(bounds.Left, bounds.Top);
+  form.Size = System::Drawing::Size(bounds.Width, bounds.Height);
+  
   Native::Form* handle = new Native::Form();
   handle->Text(form.Text);
   return (intptr)handle;

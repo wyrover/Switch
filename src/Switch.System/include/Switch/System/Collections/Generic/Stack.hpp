@@ -19,7 +19,7 @@ namespace Switch {
         /// @remarks Stack<T> accepts null as a valid value for reference types and allows duplicate elements.
         /// @par Library
         /// Switch.System
-        template<typename T, typename TAllocator=Allocator<T>>
+        template<typename T, typename TAllocator = Allocator<T>>
         class Stack : public object, public System::Linq::Extension::Enumerable<Stack<T, TAllocator>, T>, public ICollection<T> {
           using Item = T;
         public:
@@ -30,9 +30,8 @@ namespace Switch {
           /// @param collection The collection whose elements are copied to the new Stack.
           /// @exception ArgumentNullException The parameters collection is null or element reference null in collection.
           Stack(const IEnumerable<T>& collection) {
-            for (T item : collection) {
+            for(T item : collection)
               Push(item);
-            }
           }
           /// @brief Initializes a new instance of the Stack<T> class that is empty and has the specified initial capacity.
           /// @param capacity The number of elements that the new Stack can initially store.
@@ -45,10 +44,10 @@ namespace Switch {
           
           /// @cond
           Stack(InitializerList<T> il) {
-            for (const T& item : il)
+            for(const T& item : il)
               this->Push(item);
           }
-
+          
           Stack(Stack&& stack) : stack(Move(stack.stack)) {}
           /// @endcond
           
@@ -57,7 +56,7 @@ namespace Switch {
           
           /// @brief Removes all elements from the Stack<T>.
           void Clear() {this->stack.Clear();}
-
+          
           /// @brief Determines whether an element is in the Stack<T>.
           /// @param value The object to be added to the end of the Stack<T>. The value can not be null for reference types.
           virtual bool Contains(const T& value) const {return this->stack.Contains(value);}
@@ -93,7 +92,7 @@ namespace Switch {
           /// The number of elements in the source List<T> is greater than the available space from arrayIndex to the end of the destination array.
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the Stack<T>.
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {this->stack.CopyTo(index, array, arrayIndex, count);}
-
+          
           /// @brief Removes and returns the object at the top of the Stack<T>.
           /// @return refptr<T> The object removed
           /// @exception InvalidOperationException The Stack<T> is Empty.
@@ -102,7 +101,7 @@ namespace Switch {
             this->stack.RemoveAt(0);
             return value;
           }
-
+          
           /// @brief AInserts an object at the top of the Stack<T>.
           /// @param value The object to be added to the end of the Stack<T>. The value can not be null for reference types.
           /// @remarks Stack<T> allows duplicate elements.
@@ -117,18 +116,18 @@ namespace Switch {
           /// @return refptr<T> The object to peek from the Stack<T>. The value can not be null.
           /// @exception InvalidOperationException The Stack<T> is Empty.
           T Peek() {
-            if (this->stack.Count == 0)
+            if(this->stack.Count == 0)
               throw InvalidOperationException(_caller);
-
+              
             return this->stack[0];
           }
-
+          
           /// @brief Copies the Stack<T> elements to a new array.
           /// @return Array<T>*> The new Array<T> copied.
           Array<T> ToArray() const {
             return this->stack.ToArray();
           }
-
+          
           /// @brief Copies the Stack<T> elements to a new array.
           /// @return Array<T>*> The new Array<T> copied.
           void TrimExcess() { this->stack.TrimExcess(); }
@@ -148,7 +147,7 @@ namespace Switch {
           iterator end() {return this->stack.end();}
           const_iterator end() const {return this->stack.end();}
           /// @endcond
-
+          
         protected:
           /// @cond
           List<T, TAllocator> stack;
@@ -158,7 +157,7 @@ namespace Switch {
           bool GetIsReadOnly() const override {return false;}
           bool GetIsSynchronized() const override {return this->stack.IsSynchronized;}
           const object& GetSyncRoot() const override {return this->stack.SyncRoot;}
-
+          
           void Add(const T&) override { }
           bool Remove(const T&) override { return false; }
         };

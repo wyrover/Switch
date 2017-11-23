@@ -5,7 +5,7 @@ using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
 
-namespace {  
+namespace {
   TEST(IPEndPoint, Constructor) {
     ASSERT_EQ(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).ToString(), "172.16.10.30:11000");
     ASSERT_THROW(IPEndPoint(IPAddress(172, 16, 10, 30), IPEndPoint::MinPort - 1), ArgumentOutOfRangeException);

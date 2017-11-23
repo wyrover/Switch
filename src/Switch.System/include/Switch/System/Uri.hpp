@@ -49,7 +49,7 @@ namespace Switch {
         String originalUri = this->originalUri.TrimStart(' ').TrimEnd(' ');
         
         SetScheme(originalUri);
-        if (this->scheme != "news") {
+        if(this->scheme != "news") {
           SetUserInfo(originalUri);
           SetHost(originalUri);
           SetPort(originalUri);
@@ -58,21 +58,21 @@ namespace Switch {
         SetFragment(originalUri);
         SetQuery(originalUri);
         
-        if (this->kind == UriKind::Absolute) {
-          if (this->scheme.Length() == 0)
+        if(this->kind == UriKind::Absolute) {
+          if(this->scheme.Length() == 0)
             throw UriFormatException(_caller);
-          
-          if (this->scheme != "news" && this->host.Length() == 0)
+            
+          if(this->scheme != "news" && this->host.Length() == 0)
             throw UriFormatException(_caller);
-          
-          if (CheckSchemeName(this->scheme) == false)
+            
+          if(CheckSchemeName(this->scheme) == false)
             throw UriFormatException(_caller);
-        } else if (this->kind == UriKind::Relative) {
-          if (this->scheme.Length() != 0 && this->host.Length() != 0)
+        } else if(this->kind == UriKind::Relative) {
+          if(this->scheme.Length() != 0 && this->host.Length() != 0)
             throw UriFormatException(_caller);
         }
         
-        if (originalUri.Length() != 0)
+        if(originalUri.Length() != 0)
           throw UriFormatException(_caller);
       }
       /// @endcond
@@ -168,7 +168,7 @@ namespace Switch {
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       /// @remarks The Authority property is typically a server DNS host name or IP address. This property might include the service port number if it differs from the default port for the URI. If the Authority component contains reserved characters, these are escaped in the string value returned by this property.
       _property<String, _readonly> Authority {
-        _get {return this->GetComponents(UriComponents((int32)UriComponents::UserInfo|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped) + GetComponents(UriComponents((int32)UriComponents::Host|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped) + GetComponents(UriComponents((int32)UriComponents::Port|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);}
+        _get {return this->GetComponents(UriComponents((int32)UriComponents::UserInfo | (int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped) + GetComponents(UriComponents((int32)UriComponents::Host | (int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped) + GetComponents(UriComponents((int32)UriComponents::Port | (int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);}
       };
       
       /// @brief Gets an unescaped host name that is safe to use for DNS resolution.
@@ -185,7 +185,7 @@ namespace Switch {
       /// @remarks The Fragment property gets any text following a fragment marker (#) in the URI, including the fragment marker itself. Given the URI http://www.contoso.com/index.htm#main, the Fragment property would return #main.
       /// @remarks The Fragment property is ! considered in any Equals comparison.
       _property<String, _readonly> Fragment {
-        _get {return this->GetComponents(UriComponents((int32)UriComponents::Fragment|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);}
+        _get {return this->GetComponents(UriComponents((int32)UriComponents::Fragment | (int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);}
       };
       
       /// @brief Gets the host component of this instance.
@@ -201,24 +201,24 @@ namespace Switch {
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       _property<UriHostNameType, _readonly> HostNameType {
         _get {
-          if (this->kind!= UriKind::Absolute)
+          if(this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
-          if (!String::IsNullOrEmpty(this->Host)) {
+          if(!String::IsNullOrEmpty(this->Host)) {
             System::Net::IPAddress ipAddress;
-            if (System::Net::IPAddress::TryParse(this->Host, ipAddress) == false)
+            if(System::Net::IPAddress::TryParse(this->Host, ipAddress) == false)
               return UriHostNameType::Dns;
-
-            if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetwork)
+              
+            if(ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetwork)
               return UriHostNameType::IPv4;
-
-            if (ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetworkV6)
+              
+            if(ipAddress.AddressFamily == System::Net::Sockets::AddressFamily::InterNetworkV6)
               return UriHostNameType::IPv6;
           }
           
-          if (this->Scheme() == Uri::UriSchemeMailto || this->Scheme() == Uri::UriSchemeFile)
+          if(this->Scheme() == Uri::UriSchemeMailto || this->Scheme() == Uri::UriSchemeFile)
             return UriHostNameType::Basic;
-          
+            
           return UriHostNameType::Unknown;
         }
       };
@@ -235,7 +235,7 @@ namespace Switch {
       /// @exception InvalidOperationException This instance represents a relative URI, and this property is valid only for absolute URIs.
       _property<bool, _readonly> IsDefaultPort {
         _get {
-          if (this->kind != UriKind::Absolute)
+          if(this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
           return (this->Port() == -1 || this->Port() == 21 || this->Port() == 70 || this->Port() == 80 || this->Port() == 443 || this->Port() == 389 || this->Port() == 25 || this->Port() == 119);
@@ -248,7 +248,7 @@ namespace Switch {
       /// @remarks The IsFile property is true when the Scheme property equals UriSchemeFile.
       _property<bool, _readonly> IsFile {
         _get {
-          if (this->kind != UriKind::Absolute)
+          if(this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
           return this->Scheme() == UriSchemeFile;
@@ -261,7 +261,7 @@ namespace Switch {
       /// @remarks IsLoopback returns true if the URI specified when this instance was created was 127.0.0.1, loopback, or localhost, or if the URI did ! specify host information (for example, file:///c:Dir/file.txt). All other URIs return false.
       _property<bool, _readonly> IsLoopback {
         _get {
-          if (this->kind != UriKind::Absolute)
+          if(this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
           return this->Host() == System::Net::IPAddress::Loopback().ToString() || this->Host() == System::Net::IPAddress::IPv6Loopback().ToString() || this->Host() == "loopback" || this->Host() == "localhost" || String::IsNullOrEmpty(this->Host());
@@ -274,7 +274,7 @@ namespace Switch {
       /// @remarks The IsUnc property is true if the specified Uri instance is a UNC path (such as \\server\folder or file://server/folder). This property always returns true if the URI has the file:// scheme and specifies a host component.
       _property<bool, _readonly> IsUnc {
         _get {
-          if (this->kind != UriKind::Absolute)
+          if(this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
           return this->Scheme() == Uri::UriSchemeFile && !String::IsNullOrEmpty(this->Host());
@@ -303,7 +303,7 @@ namespace Switch {
       /// @remarks When a Uri object is serialized, the OriginalString is ! preserved. The serialization process uses the fully escaped and canonicalized AbsoluteUri property when serializing. For a Uri that contains an IPv6 address, the IPv6 address and the scope ID are included in the serialized Uri object.
       _property<const String&, _readonly> OriginalString {
         _get->const string& {
-          if (this->kind != UriKind::Absolute)
+          if(this->kind != UriKind::Absolute)
             throw InvalidOperationException(_caller);
             
           return this->originalUri;
@@ -327,22 +327,22 @@ namespace Switch {
       _property<int32, _readonly> Port {
         _get {
           int32 port = -1;
-          if (Int32::TryParse(this->GetComponents(UriComponents::Port, UriFormat::UriEscaped), port) == true)
+          if(Int32::TryParse(this->GetComponents(UriComponents::Port, UriFormat::UriEscaped), port) == true)
             return port;
-          
-          if (Scheme() == Uri::UriSchemeFtp)
+            
+          if(Scheme() == Uri::UriSchemeFtp)
             return 21;
-          if (Scheme() == Uri::UriSchemeGopher)
+          if(Scheme() == Uri::UriSchemeGopher)
             return 70;
-          if (Scheme() == Uri::UriSchemeHttp)
+          if(Scheme() == Uri::UriSchemeHttp)
             return 80;
-          if (Scheme() == Uri::UriSchemeHttps)
+          if(Scheme() == Uri::UriSchemeHttps)
             return 443;
-          if (Scheme() == "ldap")
+          if(Scheme() == "ldap")
             return 389;
-          if (Scheme() == Uri::UriSchemeMailto)
+          if(Scheme() == Uri::UriSchemeMailto)
             return 25;
-          if (Scheme() == Uri::UriSchemeNntp)
+          if(Scheme() == Uri::UriSchemeNntp)
             return 119;
           return -1;
         }
@@ -403,26 +403,26 @@ namespace Switch {
       _property<Array<String>, _readonly> Segments {
         _get {
           String absolutePath = this->AbsolutePath();
-          if (string::IsNullOrEmpty(absolutePath) == true)
+          if(string::IsNullOrEmpty(absolutePath) == true)
             return Array<String>();
             
           Array<String> segments;
           int32 startIndex = 0;
           int32 length = 1;
           
-          if (absolutePath[startIndex] == '/') {
-            Array<>::Resize(segments, segments.Length+1);
-            segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
+          if(absolutePath[startIndex] == '/') {
+            Array<>::Resize(segments, segments.Length + 1);
+            segments[segments.Length - 1] = absolutePath.Substring(startIndex, length);
             startIndex += length;
           }
           
-          while (startIndex < absolutePath.Length()) {
+          while(startIndex < absolutePath.Length()) {
             length = absolutePath.IndexOf('/', startIndex);
-            if (length == -1)
+            if(length == -1)
               length = absolutePath.Length() - startIndex;
               
-            Array<>::Resize(segments, segments.Length+1);
-            segments[segments.Length-1] = absolutePath.Substring(startIndex, length);
+            Array<>::Resize(segments, segments.Length + 1);
+            segments[segments.Length - 1] = absolutePath.Substring(startIndex, length);
             startIndex += length;
           }
           return segments;
@@ -444,13 +444,13 @@ namespace Switch {
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static bool CheckSchemeName(const String& scheme) {
         bool first = true;
-        for (char32 c : scheme) {
-          if (first) {
+        for(char32 c : scheme) {
+          if(first) {
             first = false;
-            if (! Char::IsLetter(c))
+            if(! Char::IsLetter(c))
               return false;
           } else {
-            if (! Char::IsLetterOrDigit(c) && c != '.' && c != '+' && c != '-')
+            if(! Char::IsLetterOrDigit(c) && c != '.' && c != '+' && c != '-')
               return false;
           }
         }
@@ -468,17 +468,17 @@ namespace Switch {
       /// @remarks By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 and RFC 3987. See these RFCs for a definition of reserved and unreserved characters.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static String EscapeDataString(const String& value) {
-        if (value.Length() > 32766)
+        if(value.Length() > 32766)
           throw UriFormatException(_caller);
-        
+          
         bool escapeNeeded = false;
-        for (int32 index = 0; !escapeNeeded && index < value.Length(); index++)
+        for(int32 index = 0; !escapeNeeded && index < value.Length(); index++)
           escapeNeeded = !IsHexEncoding(value, index) && NeedToEscapeDataChar(value[index]);
-        
-        if (escapeNeeded) {
+          
+        if(escapeNeeded) {
           String retValue;
-          for (int32 index = 0; index < value.Length(); index++) {
-            if (!IsHexEncoding(value, index) && NeedToEscapeDataChar(value[index]))
+          for(int32 index = 0; index < value.Length(); index++) {
+            if(!IsHexEncoding(value, index) && NeedToEscapeDataChar(value[index]))
               retValue += HexEscape(value[index]);
             else
               retValue += Char(value[index]).ToString();
@@ -500,17 +500,17 @@ namespace Switch {
       /// @remarks By default, the string is escaped according to RFC 2396. If International Resource Identifiers (IRIs) or Internationalized Domain Name (IDN) parsing is enabled, the string is escaped according to RFC 3986 and RFC 3987. See these RFCs for a definition of reserved and unreserved characters.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       static String EscapeUriString(const String& value) {
-        if (value.Length() > 32766)
+        if(value.Length() > 32766)
           throw UriFormatException(_caller);
-        
+          
         bool escapeNeeded = false;
-        for (int32 index = 0; !escapeNeeded && index < value.Length(); index++)
+        for(int32 index = 0; !escapeNeeded && index < value.Length(); index++)
           escapeNeeded = !IsHexEncoding(value, index) && NeedToEscapeUriChar(value[index]);
-        
-        if (escapeNeeded) {
+          
+        if(escapeNeeded) {
           String retValue;
-          for (int32 index = 0; index < value.Length(); index++) {
-            if (!IsHexEncoding(value, index) && NeedToEscapeUriChar(value[index]))
+          for(int32 index = 0; index < value.Length(); index++) {
+            if(!IsHexEncoding(value, index) && NeedToEscapeUriChar(value[index]))
               retValue += HexEscape(value[index]);
             else
               retValue += Char(value[index]).ToString();
@@ -526,16 +526,16 @@ namespace Switch {
       /// @return int32 An int32 value that contains a number from 0 to 15 that corresponds to the specified hexadecimal digit.
       /// @exception ArgumentException digit is ! a valid hexadecimal digit (0-9, a-f, A-F).
       /// @remarks The FromHex method converts a character representing a hexadecimal digit (0-9, a-f, A-F) to its decimal value (0 to 15). If digit is ! a valid hexadecimal digit, an ArgumentException exception is thrown.
-      static int32 FromHex (char32 digit) {
-        if ('0' <= digit && digit <= '9')
+      static int32 FromHex(char32 digit) {
+        if('0' <= digit && digit <= '9')
           return digit - '0';
-        
-        if ('a' <= digit && digit <= 'f')
+          
+        if('a' <= digit && digit <= 'f')
           return 10 + digit - 'a';
-        
-        if ('A' <= digit && digit <= 'F')
+          
+        if('A' <= digit && digit <= 'F')
           return 10 + digit - 'A';
-        
+          
         throw ArgumentException(_caller);
       }
       
@@ -549,47 +549,47 @@ namespace Switch {
       /// @remarks When International Resource Identifier (IRI) and Internationalized Domain Name (IDN) support are enabled, the number of characters returned in the string increases. Punycode names used to support IRI contain only ASCII characters and always start with the xn-- prefix. When IRI and IDN are enabled, Unicode surrogate characters are handled correctly by the GetComponents method.
       /// @remarks For more information on IRI support, see the Remarks section for the Uri class.
       String GetComponents(UriComponents components, UriFormat format) const {
-        if (this->kind != UriKind::Absolute)
+        if(this->kind != UriKind::Absolute)
           throw InvalidOperationException(_caller);
-        
+          
         String str;
         
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Scheme))
-          str+= this->scheme;
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Scheme) && (components & ~UriComponents::Scheme) != UriComponents::None)
-          str+= this->schemeDelimiter;
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::UserInfo))
-          str+= this->userInfo;
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::UserInfo) && this->userInfo.Length() && (components & ~UriComponents::UserInfo) != UriComponents::None)
-          str+= "@";
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Host))
-          str+= this->host;
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Port) && this->port.Length() && (components & ~UriComponents::Port) != UriComponents::None)
-          str+= ":";
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Port))
-          str+= this->port;
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Path))
-          str+= this->path;
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Query) && this->query.Length() && (components & ~UriComponents::Query) != UriComponents::None)
-          str+= "?";
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Query))
-          str+= this->query;
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Fragment) && this->fragment.Length() && (components & ~UriComponents::Fragment) != UriComponents::None)
-          str+= "#";
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::Fragment))
-          str+= this->fragment;
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::StrongPort) && (components & ~UriComponents::StrongPort) != UriComponents::None)
-          str+= ":";
-        if (Enum<UriComponents>(components).HasFlag(UriComponents::StrongPort))
-          str+= String::Format("{0}",Port());
-        
-        if (format == UriFormat::SafeUnescaped)
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Scheme))
+          str += this->scheme;
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Scheme) && (components & ~UriComponents::Scheme) != UriComponents::None)
+          str += this->schemeDelimiter;
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::UserInfo))
+          str += this->userInfo;
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::UserInfo) && this->userInfo.Length() && (components & ~UriComponents::UserInfo) != UriComponents::None)
+          str += "@";
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Host))
+          str += this->host;
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Port) && this->port.Length() && (components & ~UriComponents::Port) != UriComponents::None)
+          str += ":";
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Port))
+          str += this->port;
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Path))
+          str += this->path;
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Query) && this->query.Length() && (components & ~UriComponents::Query) != UriComponents::None)
+          str += "?";
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Query))
+          str += this->query;
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Fragment) && this->fragment.Length() && (components & ~UriComponents::Fragment) != UriComponents::None)
+          str += "#";
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::Fragment))
+          str += this->fragment;
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::StrongPort) && (components & ~UriComponents::StrongPort) != UriComponents::None)
+          str += ":";
+        if(Enum<UriComponents>(components).HasFlag(UriComponents::StrongPort))
+          str += String::Format("{0}", Port());
+          
+        if(format == UriFormat::SafeUnescaped)
           str = UnescapeDataString(str);
-        else if (format == UriFormat::Unescaped)
+        else if(format == UriFormat::Unescaped)
           str = UnescapeDataString(str);
         else
           str = EscapeUriString(str);
-        
+          
         return str;
       }
       
@@ -614,12 +614,12 @@ namespace Switch {
       /// | news:123456@contoso.com                     | news:   | news:123456@contoso.com | news:123456@contoso.com                    | <None>                                      |
       /// | file://server/filename.ext                  | file:// | file://server           | file://server/filename.ext                 | file://server/filename.ext                  |
       String GetLeftPart(UriPartial part) const {
-        switch (part) {
-          case UriPartial::Scheme: return GetComponents(UriComponents((int32)UriComponents::Scheme|(int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);
-          case UriPartial::Authority: return GetComponents(UriComponents((int32)UriComponents::Scheme|(int32)UriComponents::UserInfo|(int32)UriComponents::Host|(int32)UriComponents::Port), UriFormat::UriEscaped);
-          case UriPartial::Path: return GetComponents(UriComponents((int32)UriComponents::Scheme|(int32)UriComponents::UserInfo|(int32)UriComponents::Host|(int32)UriComponents::Port|(int32)UriComponents::Path), UriFormat::UriEscaped);
-          case UriPartial::Query: return GetComponents(UriComponents((int32)UriComponents::Scheme|(int32)UriComponents::UserInfo|(int32)UriComponents::Host|(int32)UriComponents::Port|(int32)UriComponents::PathAndQuery), UriFormat::UriEscaped);
-          default: break;
+        switch(part) {
+        case UriPartial::Scheme: return GetComponents(UriComponents((int32)UriComponents::Scheme | (int32)UriComponents::KeepDelimiter), UriFormat::UriEscaped);
+        case UriPartial::Authority: return GetComponents(UriComponents((int32)UriComponents::Scheme | (int32)UriComponents::UserInfo | (int32)UriComponents::Host | (int32)UriComponents::Port), UriFormat::UriEscaped);
+        case UriPartial::Path: return GetComponents(UriComponents((int32)UriComponents::Scheme | (int32)UriComponents::UserInfo | (int32)UriComponents::Host | (int32)UriComponents::Port | (int32)UriComponents::Path), UriFormat::UriEscaped);
+        case UriPartial::Query: return GetComponents(UriComponents((int32)UriComponents::Scheme | (int32)UriComponents::UserInfo | (int32)UriComponents::Host | (int32)UriComponents::Port | (int32)UriComponents::PathAndQuery), UriFormat::UriEscaped);
+        default: break;
         }
         throw ArgumentException(_caller);
       }
@@ -646,9 +646,9 @@ namespace Switch {
       /// @return string The hexadecimal representation of the specified character.
       /// @exception ArgumentOutOfRangeException character is greater than 255.
       static String HexEscape(char32 character) {
-        if (character > 255)
+        if(character > 255)
           throw ArgumentOutOfRangeException(_caller);
-        
+          
         return String::Format("%{0:X2}", Convert::ToInt32(character));
       }
       
@@ -658,8 +658,8 @@ namespace Switch {
       /// @return Char The character represented by the hexadecimal encoding at position index. If the character at index is ! hexadecimal encoded, the character at index is returned. The value of index is incremented to point to the character following the one returned.
       /// @exception ArgumentOutOfRangeException index is less than 0 or greater than or equal to the number of characters in pattern.
       static char32 HexUnescape(const String& pattern, int32& index) {
-        index+=3;
-        return Int32::Parse(pattern.Substring(index-2, 2), 16);
+        index += 3;
+        return Int32::Parse(pattern.Substring(index - 2, 2), 16);
       }
       
       /// @brief Determines whether the current Uri instance is a base of the specified Uri instance.
@@ -682,8 +682,8 @@ namespace Switch {
       /// | http://host/path/path2/MoreDir        | no                                          |
       /// | http://host/path/File                 | no                                          |
       bool IsBasOf(const Uri& uri) const {
-        String path = (this->path.Remove(this->path.Length()-1).LastIndexOf('/') == -1 ? this->path : this->path.Remove(this->path.Remove(this->path.Length()-1).LastIndexOf('/')));
-        String uripath = (uri.path.Remove(uri.path.Length()-1).LastIndexOf('/') == -1 ? uri.path : uri.path.Remove(uri.path.Remove(uri.path.Length()-1).LastIndexOf('/')));
+        String path = (this->path.Remove(this->path.Length() - 1).LastIndexOf('/') == -1 ? this->path : this->path.Remove(this->path.Remove(this->path.Length() - 1).LastIndexOf('/')));
+        String uripath = (uri.path.Remove(uri.path.Length() - 1).LastIndexOf('/') == -1 ? uri.path : uri.path.Remove(uri.path.Remove(uri.path.Length() - 1).LastIndexOf('/')));
         
         return this->scheme == uri.scheme && this->schemeDelimiter == uri.schemeDelimiter && this->host == uri.host && this->port == uri.port && path == uripath;
       }
@@ -700,17 +700,17 @@ namespace Switch {
       /// @return bool A bool value that is true if pattern is hexadecimal encoded at the specified location; otherwise, false.
       /// @remarks The IsHexEncoding method checks for hexadecimal encoding that follows the pattern "%hexhex" in a string, where "hex" is a digit from 0 to 9 or a letter from A-F (case-insensitive).
       static bool IsHexEncoding(const String& pattern, int32 index) {
-        if (index < 0 || pattern.Length() < index + 3)
+        if(index < 0 || pattern.Length() < index + 3)
           return false;
-        
+          
         System::Collections::Generic::Enumerator<char32> enumerator = pattern.GetEnumerator();
         enumerator.MoveNext();
-        while (index--) enumerator.MoveNext();
-        if (enumerator.Current() != '%') return false;
+        while(index--) enumerator.MoveNext();
+        if(enumerator.Current() != '%') return false;
         enumerator.MoveNext();
-        if (! IsHexDigit(enumerator.Current)) return false;
+        if(! IsHexDigit(enumerator.Current)) return false;
         enumerator.MoveNext();
-        if (! IsHexDigit(enumerator.Current)) return false;
+        if(! IsHexDigit(enumerator.Current)) return false;
         
         return true;
       }
@@ -733,21 +733,21 @@ namespace Switch {
       bool IsWellFormedOriginalString() {
         bool wellFormatedOriginalString = true;
         
-        for (int32 index = 0; !wellFormatedOriginalString && index < this->originalUri.Length(); index++)
+        for(int32 index = 0; !wellFormatedOriginalString && index < this->originalUri.Length(); index++)
           wellFormatedOriginalString = !(IsHexEncoding(this->originalUri, index) || NeedToEscapeUriChar(this->originalUri[index]));
-        
-        if (wellFormatedOriginalString == true)
+          
+        if(wellFormatedOriginalString == true)
           wellFormatedOriginalString = IO::Path::IsPathRooted(this->originalUri);
-        
-        if (wellFormatedOriginalString == true)
+          
+        if(wellFormatedOriginalString == true)
           wellFormatedOriginalString = this->originalUri.IndexOf('\\') != -1;
-        
-        if (wellFormatedOriginalString == true)
+          
+        if(wellFormatedOriginalString == true)
           wellFormatedOriginalString = !(this->schemeDelimiter.Length() == 0 && this->host.Length() != 0);
-        
-        if (wellFormatedOriginalString == true)
+          
+        if(wellFormatedOriginalString == true)
           wellFormatedOriginalString = CheckSchemeName(this->scheme);
-        
+          
         return wellFormatedOriginalString;
       }
       
@@ -772,7 +772,7 @@ namespace Switch {
         try {
           Uri uri(uriString, uriString);
           wellFormedUriString = uri.IsWellFormedOriginalString();
-        } catch (...) {
+        } catch(...) {
           wellFormedUriString = false;
         }
         
@@ -788,16 +788,16 @@ namespace Switch {
       static String UnescapeDataString(const String& value) {
         // See http://www.geekhideout.com/urlcode.shtml
         bool unescapeNeeded = false;
-        for (int32 index = 0; !unescapeNeeded && index < value.Length(); index++)
+        for(int32 index = 0; !unescapeNeeded && index < value.Length(); index++)
           unescapeNeeded = IsHexEncoding(value, index);
-        
-        if (!unescapeNeeded)
+          
+        if(!unescapeNeeded)
           return value;
-        
+          
         String retValue;
         int32 index = 0;
-        while (index < value.Length()) {
-          if (IsHexEncoding(value, index))
+        while(index < value.Length()) {
+          if(IsHexEncoding(value, index))
             retValue += String::Format("{0}", Char(HexUnescape(value, index)));
           else
             retValue += Char(value[index++]).ToString();
@@ -818,18 +818,18 @@ namespace Switch {
       /// @remarks The string returned by this method does ! contain port information when the port is the default port for the scheme.
       String ToString() const override { return GetComponents(UriComponents::AbsoluteUri, UriFormat::Unescaped); }
       
-      private :
+    private :
       void SetScheme(String& escapeUri) {
         int32 indexStart = escapeUri.IndexOf(SchemeDelimiter);
-        if (indexStart != -1)
+        if(indexStart != -1)
           this->schemeDelimiter = SchemeDelimiter;
         else {
           indexStart = escapeUri.IndexOf(':');
-          if (indexStart != -1)
+          if(indexStart != -1)
             this->schemeDelimiter = ":";
         }
         
-        if (indexStart != -1) {
+        if(indexStart != -1) {
           this->scheme = escapeUri.Remove(indexStart).ToLower();
           escapeUri = escapeUri.Substring(indexStart + this->schemeDelimiter.Length());
         }
@@ -838,9 +838,9 @@ namespace Switch {
       void SetUserInfo(String& escapeUri) {
         static Array<char32> endHostChars = {char32('/'), char32('?'), char32('#')};
         int32 indexStart = escapeUri.IndexOf('@');
-        if (indexStart != -1 && indexStart < escapeUri.IndexOfAny(endHostChars)) {
+        if(indexStart != -1 && indexStart < escapeUri.IndexOfAny(endHostChars)) {
           this->userInfo = escapeUri.Remove(indexStart);
-          if (indexStart < escapeUri.Length())
+          if(indexStart < escapeUri.Length())
             indexStart++;
           escapeUri = escapeUri.Substring(indexStart);
         }
@@ -849,9 +849,9 @@ namespace Switch {
       void SetHost(String& escapeUri) {
         static Array<char32> endHostChars = {char32(':'), char32('/'), char32('?'), char32('#')};
         int32 indexStart = escapeUri.IndexOfAny(endHostChars);
-        if (indexStart == -1)
+        if(indexStart == -1)
           indexStart = escapeUri.Length();
-        if (indexStart != -1) {
+        if(indexStart != -1) {
           this->host = escapeUri.Remove(indexStart).ToLower();
           escapeUri = escapeUri.Substring(indexStart);
         }
@@ -860,17 +860,17 @@ namespace Switch {
       void SetPort(String& escapeUri) {
         try {
           int32 indexStart = escapeUri.IndexOf(':');
-          if (indexStart == -1)
+          if(indexStart == -1)
             return;
-          
+            
           escapeUri = escapeUri.Substring(1);
           indexStart = escapeUri.IndexOf('/');
-          if (indexStart == -1)
+          if(indexStart == -1)
             indexStart = escapeUri.Length();
-          
-          if (indexStart == -1)
+            
+          if(indexStart == -1)
             return;
-          
+            
           this->port = escapeUri.Remove(indexStart);
           Int32::Parse(this->port);
           
@@ -883,7 +883,7 @@ namespace Switch {
       void SetPath(String& escapeUri) {
         static Array<char32> endPathChars = {char32('?'), char32('#')};
         int32 indexStart = escapeUri.IndexOfAny(endPathChars);
-        if (indexStart != -1) {
+        if(indexStart != -1) {
           this->path = escapeUri.Remove(indexStart);
           escapeUri = escapeUri.Substring(indexStart);
           return;
@@ -894,27 +894,27 @@ namespace Switch {
       }
       
       void SetFragment(String& escapeUri) {
-        int32 indexStart = escapeUri.IndexOf('#')+1;
-        if (indexStart == 0)
+        int32 indexStart = escapeUri.IndexOf('#') + 1;
+        if(indexStart == 0)
           indexStart = escapeUri.Length();
-        if (indexStart == -1)
+        if(indexStart == -1)
           return;
-        
-        this->fragment = escapeUri.Substring(indexStart, escapeUri.Length()-indexStart);
-        if (indexStart != escapeUri.Length())
-          escapeUri = escapeUri.Remove(indexStart-1, escapeUri.Length()-indexStart+1);
+          
+        this->fragment = escapeUri.Substring(indexStart, escapeUri.Length() - indexStart);
+        if(indexStart != escapeUri.Length())
+          escapeUri = escapeUri.Remove(indexStart - 1, escapeUri.Length() - indexStart + 1);
       }
       
       void SetQuery(String& escapeUri) {
-        int32 indexStart = escapeUri.IndexOf('?')+1;
-        if (indexStart == 0)
+        int32 indexStart = escapeUri.IndexOf('?') + 1;
+        if(indexStart == 0)
           indexStart = escapeUri.Length();
-        if (indexStart == -1)
+        if(indexStart == -1)
           return;
-        
-        this->query = escapeUri.Substring(indexStart, escapeUri.Length()-indexStart);
-        if (indexStart != escapeUri.Length())
-          escapeUri = escapeUri.Remove(indexStart-1, escapeUri.Length()-indexStart+1);
+          
+        this->query = escapeUri.Substring(indexStart, escapeUri.Length() - indexStart);
+        if(indexStart != escapeUri.Length())
+          escapeUri = escapeUri.Remove(indexStart - 1, escapeUri.Length() - indexStart + 1);
       }
       
       static bool NeedToEscapeDataChar(char32 character) {

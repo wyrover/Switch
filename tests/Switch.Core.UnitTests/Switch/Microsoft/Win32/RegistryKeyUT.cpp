@@ -15,7 +15,7 @@ namespace {
       Registry::CurrentUser().DeleteSubKeyTree("UnitTest", false);
     }
   };
-
+  
   TEST_F(RegistryKeyUT, CreateSubKeyWithEmptySubKeyName) {
     int32 count = Registry::CurrentUser().SubKeyCount();
     RegistryKey key = Registry::CurrentUser().CreateSubKey("");

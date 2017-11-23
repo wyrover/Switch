@@ -120,7 +120,7 @@ namespace Switch {
       /// @param value Value to assign this instance.
       /// @return Exception& This instance assigned
       Exception& operator=(const Exception& value);
-
+      
       /// @brief Check if the generation of the stack trace is enabled.
       /// @return true if stack trace generation is enabled.
       static bool StackTraceEnabled() { return Exception::stackTraceEnabled; }
@@ -128,7 +128,7 @@ namespace Switch {
       /// @brief Enable / disable the generation of the stack trace.
       /// @param enabled True to enable the stack trace generation.
       static void StackTraceEnabled(bool enabled) { Exception::stackTraceEnabled = enabled; }
-
+      
     protected:
       /// @cond
       virtual String GetDefaultMessage() const;
@@ -138,8 +138,8 @@ namespace Switch {
       void SetHResult(int32 hresult) {this->hresult = hresult;}
       void SetInnerException(ref<Exception> innerException) {this->innerException = innerException;}
       void SetStackTrace(const Exception& exception);
-    
-    //private:
+      
+      //private:
       String message;
       String helpLink;
       System::Runtime::CompilerServices::Caller caller;

@@ -36,7 +36,7 @@ namespace Switch {
         
         template<typename TTraceListener>
         void Add(const TTraceListener& value) {
-          _lock (this->SyncRoot()) {
+          _lock(this->SyncRoot()) {
             static_assert(!std::is_same<TraceListener, TTraceListener>::value, "Must not be System::Diagnostics::TraceListener but inherited");
             static_assert(std::is_base_of<TraceListener, TTraceListener>::value, "Is not inherited from System::Diagnostics::TraceListener");
             this->list.Add(value.template MemberwiseClone<TTraceListener>().template As<System::Diagnostics::TraceListener>());
@@ -44,14 +44,14 @@ namespace Switch {
         }
         
         void Clear() override {
-          _lock (this->SyncRoot()) {
+          _lock(this->SyncRoot()) {
             this->list.Clear();
           }
         }
         
-        bool Contains(const TraceListener &value) const override {return this->IndexOf(value) != -1;}
+        bool Contains(const TraceListener& value) const override {return this->IndexOf(value) != -1;}
         
-        void CopyTo (System::Array<refptr<TraceListener>>& array, int32 index) const {this->list.CopyTo(array, index);}
+        void CopyTo(System::Array<refptr<TraceListener>>& array, int32 index) const {this->list.CopyTo(array, index);}
         
         System::Collections::Generic::Enumerator<TraceListener> GetEnumerator() const override {
           class Enumerator : public System::Collections::Generic::IEnumerator<TraceListener>, public object {
@@ -68,54 +68,54 @@ namespace Switch {
           return System::Collections::Generic::Enumerator<TraceListener>(new Enumerator(this->list.GetEnumerator()));
         }
         
-        int32 IndexOf(const TraceListener &value) const override {
+        int32 IndexOf(const TraceListener& value) const override {
           for(int32 index = 0; index < this->list.Count; index++) {
-            if (*this->list[index] == value)
+            if(*this->list[index] == value)
               return index;
           }
           return -1;
         }
         
         template<typename TTraceListener>
-        void Insert(int32 index, const TTraceListener &value) {
-          _lock (this->SyncRoot()) {
+        void Insert(int32 index, const TTraceListener& value) {
+          _lock(this->SyncRoot()) {
             static_assert(!std::is_same<TraceListener, TTraceListener>::value, "Must not be System::Diagnostics::TraceListener but inherited");
             static_assert(std::is_base_of<TraceListener, TTraceListener>::value, "Is not inherited from System::Diagnostics::TraceListener");
             this->list.Insert(index, value.template MemberwiseClone<TTraceListener>().template As<System::Diagnostics::TraceListener>());
           }
         }
-
-        const TraceListener& operator[] (int32 index) const override {return *this->list[index];}
         
-        TraceListener& operator[] (int32 index) override {return *this->list[index];}
+        const TraceListener& operator[](int32 index) const override {return *this->list[index];}
         
-        const TraceListener& operator[] (const string& name) const {
+        TraceListener& operator[](int32 index) override {return *this->list[index];}
+        
+        const TraceListener& operator[](const string& name) const {
           static NullTraceListener nullTraceListener;
-          for (const auto& item : this->list)
-            if (item->Name == name)
+          for(const auto& item : this->list)
+            if(item->Name == name)
               return *item;
           return nullTraceListener;
         }
         
-        TraceListener& operator[] (const string& name) {
+        TraceListener& operator[](const string& name) {
           static NullTraceListener nullTraceListener;
-          for (auto& item : this->list)
-            if (item->Name == name)
+          for(auto& item : this->list)
+            if(item->Name == name)
               return *item;
           return nullTraceListener;
         }
         
-        bool Remove (const TraceListener& value) override {
-          _lock (this->SyncRoot()) {
+        bool Remove(const TraceListener& value) override {
+          _lock(this->SyncRoot()) {
             int32 index = IndexOf(value);
-            if (index == -1)return false;
+            if(index == -1)return false;
             this->RemoveAt(index);
           }
           return true;
         }
-
+        
         void RemoveAt(int32 index) override {
-          _lock (this->SyncRoot()) {
+          _lock(this->SyncRoot()) {
             this->list.RemoveAt(index);
           }
         }
@@ -129,9 +129,9 @@ namespace Switch {
         
       private:
         void Add(const TraceListener& traceListener) override {throw InvalidOperationException(_caller);}
-        void CopyTo (System::Array<TraceListener>& array, int32 index) const override {throw InvalidOperationException(_caller);}
+        void CopyTo(System::Array<TraceListener>& array, int32 index) const override {throw InvalidOperationException(_caller);}
         void Insert(int32 index, const TraceListener& value) override {throw InvalidOperationException(_caller);}
-
+        
         System::Collections::Generic::List<refptr<TraceListener>> list;
       };
     }

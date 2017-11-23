@@ -6,7 +6,7 @@ using namespace System;
 
 namespace {
   class ParentA : public System::Object {
-    
+  
   public:
     static int32 parentAReleaseCount;
     
@@ -17,10 +17,10 @@ namespace {
     }
   };
   
-  int32 ParentA::parentAReleaseCount=0;
+  int32 ParentA::parentAReleaseCount = 0;
   
   class ChildB: public ParentA {
-    
+  
   public:
     static int32 childBReleaseCount;
     
@@ -180,10 +180,10 @@ namespace {
     ASSERT_EQ("Test Share Pointer", *str.ToPointer());
     ASSERT_EQ(1, str.GetUseCount());
     ASSERT_EQ("Test Share Pointer", *str);
-    ASSERT_EQ(18,str->Length());
+    ASSERT_EQ(18, str->Length());
     ASSERT_EQ('T', (*str)[0]);
     
-    refptr<string> str2= new string("Test an other Share Pointer");
+    refptr<string> str2 = new string("Test an other Share Pointer");
     ASSERT_FALSE(refptr<string>::IsNullOrInvalid(str2));
     ASSERT_EQ("Test an other Share Pointer", str2.ToObject());
     ASSERT_EQ("Test an other Share Pointer", *str2.ToPointer());
@@ -228,16 +228,16 @@ namespace {
     ASSERT_THROW(stringNull->Length(), std::exception);
     ASSERT_THROW((*stringNull)[0], std::exception);
     
-    refptr<string> str =new string("Test Share Pointer");
+    refptr<string> str = new string("Test Share Pointer");
     ASSERT_FALSE(refptr<string>::IsNullOrInvalid(str));
     ASSERT_EQ("Test Share Pointer", str.ToObject());
     ASSERT_EQ("Test Share Pointer", *str.ToPointer());
     ASSERT_EQ(1, str.GetUseCount());
     ASSERT_EQ("Test Share Pointer", *str);
-    ASSERT_EQ(18,str->Length());
+    ASSERT_EQ(18, str->Length());
     ASSERT_EQ('T', (*str)[0]);
     
-    refptr<string> str2 =new string("Test an other Share Pointer");
+    refptr<string> str2 = new string("Test an other Share Pointer");
     ASSERT_FALSE(refptr<string>::IsNullOrInvalid(str2));
     ASSERT_EQ("Test an other Share Pointer", str2.ToObject());
     ASSERT_EQ("Test an other Share Pointer", *str2.ToPointer());
@@ -252,14 +252,14 @@ namespace {
     ASSERT_EQ("Test Share Pointer", *str.ToPointer());
     ASSERT_EQ(2, str.GetUseCount());
     ASSERT_EQ("Test Share Pointer", *str);
-    ASSERT_EQ(18,str->Length());
+    ASSERT_EQ(18, str->Length());
     ASSERT_EQ('T', (*str)[0]);
     ASSERT_FALSE(refptr<string>::IsNullOrInvalid(str3));
     ASSERT_EQ("Test Share Pointer", str3.ToObject());
     ASSERT_EQ("Test Share Pointer", *str3.ToPointer());
     ASSERT_EQ(2, str3.GetUseCount());
     ASSERT_EQ("Test Share Pointer", *str3);
-    ASSERT_EQ(18,str3->Length());
+    ASSERT_EQ(18, str3->Length());
     ASSERT_EQ('T', (*str3)[0]);
     ASSERT_EQ(2, str.GetUseCount());
     
@@ -417,7 +417,7 @@ namespace {
      ASSERT_FALSE(stringNull != IntPtr::Zero);
      ASSERT_FALSE(stringNull != IntPtr(null));
      ASSERT_FALSE(stringNull);
-     
+    
      refptr<string> str =new string();
      ASSERT_FALSE(str == IntPtr::Zero);
      ASSERT_FALSE(str == IntPtr(null));
@@ -429,7 +429,7 @@ namespace {
   }
   
   TEST(RefPtrTest, Cast) {
-    refptr<string> str= new string("Test for cast");
+    refptr<string> str = new string("Test for cast");
     string strCopy;
     
     ASSERT_EQ("Test for cast", *str);
@@ -438,19 +438,19 @@ namespace {
   }
   
   TEST(RefPtrTest, Release) {
-    ParentA::parentAReleaseCount=0;
+    ParentA::parentAReleaseCount = 0;
     {
-      refptr<ParentA> parentA=new ParentA();
-      refptr<ParentA> parentA1=new ParentA();
+      refptr<ParentA> parentA = new ParentA();
+      refptr<ParentA> parentA1 = new ParentA();
       ASSERT_EQ(0, ParentA::parentAReleaseCount);
     }
     ASSERT_EQ(2, ParentA::parentAReleaseCount);
   }
   
   TEST(RefPtrTest, Copy) {
-    ParentA::parentAReleaseCount=0;
+    ParentA::parentAReleaseCount = 0;
     {
-      refptr<ParentA> parentA=new ParentA();
+      refptr<ParentA> parentA = new ParentA();
       refptr<ParentA> parentA1(parentA);
       ASSERT_EQ(0, ParentA::parentAReleaseCount);
     }
@@ -458,20 +458,20 @@ namespace {
   }
   
   TEST(RefPtrTest, Affectation) {
-    ParentA::parentAReleaseCount=0;
+    ParentA::parentAReleaseCount = 0;
     {
-      refptr<ParentA> parentA=new ParentA();
-      refptr<ParentA> parentA1=parentA;
+      refptr<ParentA> parentA = new ParentA();
+      refptr<ParentA> parentA1 = parentA;
       ASSERT_EQ(0, ParentA::parentAReleaseCount);
     }
     ASSERT_EQ(1, ParentA::parentAReleaseCount);
   }
   
   TEST(RefPtrTest, Cast2) {
-    ParentA::parentAReleaseCount=0;
-    ChildB::childBReleaseCount=0;
+    ParentA::parentAReleaseCount = 0;
+    ChildB::childBReleaseCount = 0;
     {
-      refptr<ChildB> childB=new ChildB();
+      refptr<ChildB> childB = new ChildB();
       refptr<ParentA> parentA = childB.ChangeType<ParentA>();
       ASSERT_EQ(0, ParentA::parentAReleaseCount);
       ASSERT_EQ(0, ChildB::childBReleaseCount);
@@ -500,10 +500,10 @@ namespace {
   }
   
   TEST(RefPtrTest, CopyCast) {
-    ParentA::parentAReleaseCount=0;
-    ChildB::childBReleaseCount=0;
+    ParentA::parentAReleaseCount = 0;
+    ChildB::childBReleaseCount = 0;
     {
-      refptr<ChildB> childB=new ChildB();
+      refptr<ChildB> childB = new ChildB();
       //refptr<ParentA> parentA(childB);
       refptr<ParentA> parentA = childB.ChangeType<ParentA>();
       

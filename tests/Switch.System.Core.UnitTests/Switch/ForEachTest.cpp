@@ -14,14 +14,13 @@ namespace SwitchUnitTests {
     void Vector() {
       std::vector<Int32> collection(10);
       int32 index = 0;
-      for (Int32& item : collection) {
+      for(Int32& item : collection)
         item = 100 + index++;
-      }
-      
+        
       index = 0;
       int32 checksum1 = 0;
       int32 checksum2 = 0;
-      for (Int32 item : collection) {
+      for(Int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
         Assert::AreEqual(100 + index++, item, _caller);
@@ -33,14 +32,13 @@ namespace SwitchUnitTests {
     void List() {
       System::Collections::Generic::List<int32> collection = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
       int32 index = 0;
-      for (int32& item : collection) {
+      for(int32& item : collection)
         item = 100 + index++;
-      }
-      
+        
       index = 0;
       int32 checksum1 = 0;
       int32 checksum2 = 0;
-      for (int32 item : collection) {
+      for(int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
         Assert::AreEqual(100 + index++, item, _caller);
@@ -52,14 +50,13 @@ namespace SwitchUnitTests {
     void LinkedList() {
       System::Collections::Generic::LinkedList<int32> collection = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
       int32 index = 0;
-      for (int32& item : collection) {
+      for(int32& item : collection)
         item = 100 + index++;
-      }
-      
+        
       index = 0;
       int32 checksum1 = 0;
       int32 checksum2 = 0;
-      for (int32 item : collection) {
+      for(int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
         Assert::AreEqual(100 + index++, item, _caller);
@@ -74,7 +71,7 @@ namespace SwitchUnitTests {
       int32 index = 0;
       int32 checksum1 = 0;
       int32 checksum2 = 0;
-      for (int32 item : collection) {
+      for(int32 item : collection) {
         checksum1 += 100 + index++;
         checksum2 += item;
       }
@@ -88,7 +85,7 @@ namespace SwitchUnitTests {
       int32 index = 0;
       int32 checksum1 = 0;
       int32 checksum2 = 0;
-      for (int32 item : collection) {
+      for(int32 item : collection) {
         checksum1 += 100 + index++;
         checksum2 += item;
       }
@@ -102,7 +99,7 @@ namespace SwitchUnitTests {
       int32 index = 0;
       int32 checksum1 = 0;
       int32 checksum2 = 0;
-      for (auto item : collection) {
+      for(auto item : collection) {
         checksum1 += 100 + index++;
         checksum2 += item.Value();
       }
@@ -122,15 +119,15 @@ namespace SwitchUnitTests {
       
       // test foreach without scope
       index = 1;
-      for (Int32 i : testList)
+      for(Int32 i : testList)
         Assert::AreEqual(index++, i, _caller);
-      
+        
       Assert::AreEqual(index, 6, _caller);
       
       // test full enumeration
       index = 0;
       count = 0;
-      for (Int32 i : testList)  {
+      for(Int32 i : testList)  {
         Assert::AreEqual(++index, i, _caller);
         count++;
       }
@@ -139,36 +136,33 @@ namespace SwitchUnitTests {
       // test break
       index = 0;
       count = 0;
-      for (Int32 i : testList) {
+      for(Int32 i : testList) {
         Assert::AreEqual(++index, i, _caller);
         count++;
-        if (count == 2)
+        if(count == 2)
           break;
       }
       Assert::AreEqual(count, 2, _caller);
       
       // test modification
-      for (Int32& i : testList) {
+      for(Int32& i : testList)
         i++;
-      }
-      
+        
       index = 1;
-      for (Int32 i : testList) {
+      for(Int32 i : testList)
         Assert::AreEqual(++index, i, _caller);
-      }
     }
     
     void Array() {
       System::Array<int32> collection = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
       int32 index = 0;
-      for (int32& item : collection) {
+      for(int32& item : collection)
         item = 100 + index++;
-      }
-      
+        
       index = 0;
       int32 checksum1 = 0;
       int32 checksum2 = 0;
-      for (int32 item : collection) {
+      for(int32 item : collection) {
         checksum1 += 100 + index;
         checksum2 += item;
         Assert::AreEqual(100 + index++, item, _caller);
@@ -188,15 +182,15 @@ namespace SwitchUnitTests {
       testArray[4] = 5;
       
       // test foreach without scope
-      for (uint32 i : testArray)
+      for(uint32 i : testArray)
         index = i;
-      
+        
       Assert::AreEqual(index, 5u, _caller);
       
       // test full enumeration
       index = 0;
       count = 0;
-      for (uint32 i : testArray) {
+      for(uint32 i : testArray) {
         Assert::AreEqual(++index, i, _caller);
         count++;
       }
@@ -205,23 +199,21 @@ namespace SwitchUnitTests {
       // test break
       index = 0;
       count = 0;
-      for (uint32 i : testArray) {
+      for(uint32 i : testArray) {
         Assert::AreEqual(++index, i, _caller);
         count++;
-        if (count == 2)
+        if(count == 2)
           break;
       }
       Assert::AreEqual(count, 2u, _caller);
       
       // test modification
-      for (uint32& i : testArray) {
+      for(uint32& i : testArray)
         i++;
-      }
-      
+        
       index = 1;
-      for (uint32 i : testArray) {
+      for(uint32 i : testArray)
         Assert::AreEqual(++index, i, _caller);
-      }
     }
     
     void Dictionary() {
@@ -230,7 +222,7 @@ namespace SwitchUnitTests {
       int32 index = 0;
       int32 checksum1 = 0;
       int32 checksum2 = 0;
-      for (auto item : collection) {
+      for(auto item : collection) {
         checksum1 += 100 + index++;
         checksum2 += item.Value();
       }
@@ -249,13 +241,13 @@ namespace SwitchUnitTests {
       testDictionary[5] = "5";
       
       // test foreach without scope
-      for (auto i : testDictionary)
+      for(auto i : testDictionary)
         count += i.Key();
       Assert::AreEqual(15u, count, _caller);
       
       // test full enumeration
       count = 0u;
-      for (auto i : testDictionary) {
+      for(auto i : testDictionary) {
         Assert::GreaterOrEqual(i.Key(), 1u, _caller);
         Assert::LessOrEqual(i.Key(), 5u, _caller);
         Assert::AreEqual(UInt32(i.Key()).ToString(), i.Value(), _caller);
@@ -265,8 +257,8 @@ namespace SwitchUnitTests {
       
       // test break
       count = 0u;
-      for (auto i : testDictionary) {
-        if (++count == 2u)
+      for(auto i : testDictionary) {
+        if(++count == 2u)
           break;
       }
       
@@ -279,7 +271,7 @@ namespace SwitchUnitTests {
       int32 index = 0;
       int32 checksum1 = 0;
       int32 checksum2 = 0;
-      for (char32 item : collection) {
+      for(char32 item : collection) {
         checksum1 += collection[index++];
         checksum2 += item;
       }
@@ -292,9 +284,8 @@ namespace SwitchUnitTests {
       const byte bytes[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
       
       byte i = 0;
-      for (byte b : bytes) {
+      for(byte b : bytes)
         Assert::AreEqual(i++, b, _caller);
-      }
     }
   };
   

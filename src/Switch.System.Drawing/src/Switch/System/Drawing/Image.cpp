@@ -57,27 +57,27 @@ refptr<Image> Image::FromData(const char* data[]) {
   
   System::Collections::Generic::Dictionary<String, Color> palette;
   
-  for (int32 index1 = 0; index1 < colors; index1++) {
-    string colorLine(data[1+index1]);
-    if (colorLine.Contains("None"))
+  for(int32 index1 = 0; index1 < colors; index1++) {
+    string colorLine(data[1 + index1]);
+    if(colorLine.Contains("None"))
       palette[colorLine.Substring(0, charPerPixel)] = Color::Transparent;
     else
-      palette[colorLine.Substring(0, charPerPixel)] = Color::FromArgb(255, Int32::Parse(colorLine.Substring(4+charPerPixel, 2), 16), Int32::Parse(colorLine.Substring(6+charPerPixel, 2), 16), Int32::Parse(colorLine.Substring(8+charPerPixel, 2), 16));
+      palette[colorLine.Substring(0, charPerPixel)] = Color::FromArgb(255, Int32::Parse(colorLine.Substring(4 + charPerPixel, 2), 16), Int32::Parse(colorLine.Substring(6 + charPerPixel, 2), 16), Int32::Parse(colorLine.Substring(8 + charPerPixel, 2), 16));
   }
   
   image->rawData = Array<byte>(columns * rows * 3);
   
-  for (int32 index1 = 0; index1 < rows; index1++) {
-    string colorLine(data[1+colors+index1]);
-    for (int32 index2 = 0; index2 < columns; index2++) {
+  for(int32 index1 = 0; index1 < rows; index1++) {
+    string colorLine(data[1 + colors + index1]);
+    for(int32 index2 = 0; index2 < columns; index2++) {
       string pixel = colorLine.Substring(0, charPerPixel);
       colorLine = colorLine.Remove(0, charPerPixel);
-      image->rawData[(index1*columns*3)+(index2*3)] = static_cast<byte>(palette[pixel].R());
-      image->rawData[(index1*columns*3)+(index2*3)+1] = static_cast<byte>(palette[pixel].G());
-      image->rawData[(index1*columns*3)+(index2*3)+2] = static_cast<byte>(palette[pixel].B());
+      image->rawData[(index1 * columns * 3) + (index2 * 3)] = static_cast<byte>(palette[pixel].R());
+      image->rawData[(index1 * columns * 3) + (index2 * 3) + 1] = static_cast<byte>(palette[pixel].G());
+      image->rawData[(index1 * columns * 3) + (index2 * 3) + 2] = static_cast<byte>(palette[pixel].B());
     }
   }
- 
+  
   image->flags = Imaging::ImageFlags::ReadOnly | Imaging::ImageFlags::HasRealPixelSize | Imaging::ImageFlags::HasRealDpi | Imaging::ImageFlags::ColorSpaceRgb;
   image->frameDimensionList = {Imaging::FrameDimension::Page().Guid};
   //image->horizontalResolution = Convert::ToSingle(bmpInfo.xPixelsPerMeter) / inchesPerMeter;
@@ -98,13 +98,13 @@ void Image::ReadStream(refptr<System::IO::Stream> stream) {
   // List of file signatures
   // http://en.wikipedia.org/wiki/List_of_file_signatures
   
-  switch (magicNumber) {
-    case 0x4D42: Bmp(stream).Read(*this); break;
-    case 0xD8FF: Jpg(stream).Read(*this); break;
-    case 0x4947: Gif(stream).Read(*this); break;
-    case 0x5089: Png(stream).Read(*this); break;
-    case 0x4949: Tif(stream).Read(*this); break;
-    case 0x4D4D: Tif(stream).Read(*this); break;
-    default: throw OutOfMemoryException(_caller); break;
+  switch(magicNumber) {
+  case 0x4D42: Bmp(stream).Read(*this); break;
+  case 0xD8FF: Jpg(stream).Read(*this); break;
+  case 0x4947: Gif(stream).Read(*this); break;
+  case 0x5089: Png(stream).Read(*this); break;
+  case 0x4949: Tif(stream).Read(*this); break;
+  case 0x4D4D: Tif(stream).Read(*this); break;
+  default: throw OutOfMemoryException(_caller); break;
   }
 }

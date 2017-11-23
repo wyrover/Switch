@@ -21,7 +21,7 @@ Dictionary<int64, long(__stdcall*)(HWND, uint32, uint32, long)> Native::WindowPr
 //Dictionary<intptr, WNDPROC> WindowProcedure::DefWindowProcs;
 
 void Native::WindowProcedure::SetWindowTheme(HWND handle) {
-  if (!Native::ApplicationApi::HasVisualStylesEnabled())
+  if(!Native::ApplicationApi::HasVisualStylesEnabled())
     ::SetWindowTheme(handle, L"", L"");
 }
 

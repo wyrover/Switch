@@ -13,24 +13,24 @@ void CheckBox::CreateHandle() {
 }
 
 void CheckBox::SetAutoCheck(bool autoCheck) {
-  if (this->autoCheck != autoCheck) {
+  if(this->autoCheck != autoCheck) {
     this->autoCheck = autoCheck;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::CheckBoxApi::SetAutoCheck(*this);
   }
 }
 
 void CheckBox::SetCheckState(System::Windows::Forms::CheckState checkState) {
-  if (this->checkState != checkState) {
+  if(this->checkState != checkState) {
     bool oldChecked = this->Checked;
     this->checkState = checkState;
-
-    if (this->IsHandleCreated)
+    
+    if(this->IsHandleCreated)
       Native::CheckBoxApi::SetChecked(*this);
-
-    if (oldChecked != this->Checked)
+      
+    if(oldChecked != this->Checked)
       this->OnCheckedChanged(EventArgs::Empty());
-
+      
     this->OnCheckStateChanged(EventArgs::Empty());
   }
 }

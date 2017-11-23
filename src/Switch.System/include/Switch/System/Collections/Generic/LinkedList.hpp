@@ -35,7 +35,7 @@ namespace Switch {
         /// @remarks The LinkedList<T> class does not support chaining, splitting, cycles, or other features that can leave the list in an inconsistent state. The list remains consistent on a single thread. The only multithreaded scenario supported by LinkedList<T> is multithreaded read operations.
         /// @par Library
         /// Switch.System
-        template<typename T, typename TAllocator=Allocator<T>>
+        template<typename T, typename TAllocator = Allocator<T>>
         class LinkedList : public Object, public System::Linq::Extension::Enumerable<LinkedList<T, TAllocator>, T>, public ICollection<T> {
           using Item = T;
         public:
@@ -49,7 +49,7 @@ namespace Switch {
           /// The code example adds, inserts, and removes items, showing how the capacity changes as these methods are used.
           /// @include LinkedList.cpp
           LinkedList() : operationNumber(0) {}
-
+          
           /// @brief Initializes a new instance of the LinkedList<T> class that contains elements copied from the specified collection and has sufficient capacity to accommodate the number of elements copied.
           /// @param collection The collection whose elements are copied to the new list.
           /// @exception ArgumentNullException The parameters collection is null or element reference null in collection.
@@ -59,14 +59,14 @@ namespace Switch {
           /// The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           LinkedList(const IEnumerable<T>& collection) : operationNumber(0) {
-            for (T value : collection)
+            for(T value : collection)
               this->Add(value);
           }
-
+          
           /// @brief Default copy constructor
           /// @param list the LinkedList<T> which elements will be inserted from
           LinkedList(const LinkedList& list) : list(list.list), operationNumber(list.operationNumber) {}
-
+          
           /// @cond
           LinkedList(LinkedList&& list) : list(Move(list.list)), operationNumber(list.operationNumber) {list.operationNumber = 0;}
           /// @endcond
@@ -75,14 +75,14 @@ namespace Switch {
           /// @param array the Array to copy.
           /// @remarks The LinkedList class is not thread safe.
           template<int32 len>
-          LinkedList(const T (&array)[len]) : operationNumber(0) {
-            for (int32 index = 0; index < len; index++)
+          LinkedList(const T(&array)[len]) : operationNumber(0) {
+            for(int32 index = 0; index < len; index++)
               this->Add(array[index]);
           }
           
           /// @cond
           LinkedList(InitializerList<T> il) : operationNumber(0) {
-            for (T item : il)
+            for(T item : il)
               this->Add(item);
           }
           /// @endcond
@@ -99,7 +99,7 @@ namespace Switch {
           void Add(const T& value) override {
             this->list.push_back(value);
           }
-
+          
           /// @brief Adds copy of elements from the specified collection to the end of the LinkedList<T>.
           /// @param collection The collection whose elements should be added to the end of the LinkedList<T>. The value can not be null and can contains reference element null.
           /// @exception ArgumentNullException The parameters collection is null or element reference null in collection.
@@ -110,7 +110,7 @@ namespace Switch {
           /// The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(const IEnumerable<T>& enumerable) {
-            for (T value : enumerable)
+            for(T value : enumerable)
               this->list.push_back(value);
           }
           
@@ -124,7 +124,7 @@ namespace Switch {
           /// The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(InitializerList<T> il) {
-            for (T item : il)
+            for(T item : il)
               this->Add(item);
           }
           
@@ -139,20 +139,20 @@ namespace Switch {
           void Clear() override {
             this->list.clear();
           }
-
+          
           /// @brief Determines whether an element is in the LinkedList<T>.
           /// @param value The object to locate in the LinkedList<T>. The value can be null for reference types.
           /// @return true if item is found in the LinkedList<T>; otherwise, false.
           /// @remarks This method determines equality by using the default equality comparer, as defined by the object's implementation of the IEquatable<T>.Equals method for T (the type of values in the list).
           /// @remarks This method performs a linear search; therefore, this method is an O(n) operation, where n is Count.
           bool Contains(const T& value) const override {
-            for (T elem : *this)
-              if (elem == value)
+            for(T elem : *this)
+              if(elem == value)
                 return true;
-
+                
             return false;
           }
-
+          
           /// @brief Copies the entire LinkedList<T> to a compatible one-dimensional array.
           /// @param array The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.
           /// @exception ArgumentNullException array is null.
@@ -166,7 +166,7 @@ namespace Switch {
           void CopyTo(Array<T>& array) const {
             this->CopyTo(0, array, 0, this->Count);
           }
-
+          
           /// @brief Copies the entire LinkedList<T> to a compatible one-dimensional array, starting at the specified index of the target array.
           /// @param array The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.
           /// @param arrayIndex The zero-based index in array at which copying begins;
@@ -182,7 +182,7 @@ namespace Switch {
           void CopyTo(Array<T>& array, int32 arrayIndex) const override {
             this->CopyTo(0, array, arrayIndex, this->Count);
           }
-
+          
           /// @brief Copies the entire LinkedList<T> to a compatible one-dimensional array, starting at the specified index of the target array.
           /// @param index The zero-based index in the source LinkedList<T> at which copying begins.
           /// @param array The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.
@@ -198,25 +198,25 @@ namespace Switch {
           /// The following code example demonstrates all three overloads of the CopyTo method. A LinkedList<T> of strings is created and populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include LinkedList.CopyTo.cpp
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
-
-            if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
+          
+            if(index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
               throw System::ArgumentOutOfRangeException(_caller);
-
-            if (index + count > this->Count || arrayIndex + count > array.Length)
+              
+            if(index + count > this->Count || arrayIndex + count > array.Length)
               throw System::ArgumentException(_caller);
-
+              
             int32 i = 0, c = 0;
-            for (T item : *this) {
-              if (i >= index + count)
+            for(T item : *this) {
+              if(i >= index + count)
                 return;
-              if (i >= index) {
+              if(i >= index) {
                 array[arrayIndex + c] = item;
                 c += 1;
               }
               i += 1;
             }
           }
-
+          
           /// @brief Determines whether the LinkedList<T> contains elements that match the conditions defined by the specified predicate.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return Boolean true if the LinkedList<T> contains one or more elements that match the conditions defined by the specified predicate; otherwise, false.
@@ -230,13 +230,13 @@ namespace Switch {
           /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include LinkedList.Exists.cpp
           bool Exists(const Predicate<const T&>& match) const {
-            for (T elem : *this)
-              if (match(elem))
+            for(T elem : *this)
+              if(match(elem))
                 return true;
-
+                
             return false;
           }
-
+          
           /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire LinkedList<T>.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return The first element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type T.
@@ -258,13 +258,13 @@ namespace Switch {
           /// @par Examples
           /// @include LinkedList.Find.cpp
           const T Find(const Predicate<const T&>& match) {
-            for (T elem : *this)
-              if (match(elem))
+            for(T elem : *this)
+              if(match(elem))
                 return elem;
-
+                
             return T();
           }
-
+          
           /// @brief Retrieves all the elements that match the conditions defined by the specified predicate.
           /// @param match The Predicate<T> delegate that defines the conditions of the elements to search for.
           /// @return A LinkedList<T> containing all the elements that match the conditions defined by the specified predicate, if found; otherwise, an empty LinkedList<T>.
@@ -286,13 +286,13 @@ namespace Switch {
           /// @include LinkedList.Find.cpp
           LinkedList FindAll(const Predicate<const T&>& match) {
             LinkedList list;
-            for (T elem : *this)
-              if (match(elem))
+            for(T elem : *this)
+              if(match(elem))
                 list.Add(elem);
-
+                
             return list;
           }
-
+          
           /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of first occurrence within the entire LinkedList<T>.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return Int32 The first zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, -1.
@@ -314,7 +314,7 @@ namespace Switch {
           int32 FindIndex(const Predicate<const T&>& match) {
             return this->FindIndex(0, this->Count, match);
           }
-
+          
           /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of first occurrence within the entire LinkedList<T>.
           /// @param sratIndex The zero-based starting index of the search.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
@@ -335,9 +335,9 @@ namespace Switch {
           /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindIndex(int32 startIndex, const Predicate<const T&>& match) {
-            return this->FindIndex(startIndex, this->Count-startIndex, match);
+            return this->FindIndex(startIndex, this->Count - startIndex, match);
           }
-
+          
           /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of first occurrence within the entire LinkedList<T>.
           /// @param startIndex The zero-based starting index of the search.
           /// @param count The number of elements in the section to search.
@@ -359,25 +359,25 @@ namespace Switch {
           /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) {
-            if (startIndex < 0 || count < 0)
+            if(startIndex < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
-
-            if (startIndex + count > this->Count)
+              
+            if(startIndex + count > this->Count)
               throw ArgumentException(_caller);
-
+              
             Enumerator enumerator(*this);
-            for (int32 i = 0; i < startIndex; i+= 1)
+            for(int32 i = 0; i < startIndex; i += 1)
               enumerator.MoveNext();
-
-            for (int32 i = 0; i < count; i += 1) {
+              
+            for(int32 i = 0; i < count; i += 1) {
               enumerator.MoveNext();
-              if (match(enumerator.Current))
+              if(match(enumerator.Current))
                 return startIndex + i;
             }
-
+            
             return -1;
           }
-
+          
           /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the last occurrence within the entire LinkedList<T>.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return T The last element that matches the conditions defined by the specified predicate, if found; otherwise, the default value for type T.
@@ -399,12 +399,12 @@ namespace Switch {
           /// @include LinkedList.Find.cpp
           const T FindLast(const Predicate<const T&>& match) {
             Generic::Enumerator<T> reverseEnumerator(new ReverseEnumerator(*this));
-            while (reverseEnumerator.MoveNext())
-              if (match(reverseEnumerator.Current))
+            while(reverseEnumerator.MoveNext())
+              if(match(reverseEnumerator.Current))
                 return reverseEnumerator.Current;
             return T();
           }
-
+          
           /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of last occurrence within the entire LinkedList<T>.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
           /// @return Int32 The first zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, -1.
@@ -424,9 +424,9 @@ namespace Switch {
           /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindLastIndex(const Predicate<const T&>& match) {
-            return this->FindLastIndex(this->Count-1, this->Count, match);
+            return this->FindLastIndex(this->Count - 1, this->Count, match);
           }
-
+          
           /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the range of elements in the LinkedList<T> that extends from the first element to the specified index.
           /// @param startIndex The zero-based starting index of the search.
           /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
@@ -447,9 +447,9 @@ namespace Switch {
           /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindLastIndex(int32 startIndex, const Predicate<const T&>& match) {
-            return this->FindLastIndex(startIndex, startIndex+1, match);
+            return this->FindLastIndex(startIndex, startIndex + 1, match);
           }
-
+          
           /// @brief Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the range of elements in the LinkedList<T> that contains the specified number of elements and ends at the specified index.
           /// @param startIndex The zero-based starting index of the search.
           /// @param count The number of elements in the section to search.
@@ -471,25 +471,25 @@ namespace Switch {
           /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindLastIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) {
-            if (startIndex < 0 || count < 0 || startIndex >= this->Count)
+            if(startIndex < 0 || count < 0 || startIndex >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
-
-            if (startIndex - count < -1)
+              
+            if(startIndex - count < -1)
               throw ArgumentException(_caller);
-
+              
             ReverseEnumerator enumerator(*this);
-            for (int32 i = this->Count-1; i > startIndex; i-= 1)
+            for(int32 i = this->Count - 1; i > startIndex; i -= 1)
               enumerator.MoveNext();
-
-            for (int32 i = 0; i < count; i += 1) {
+              
+            for(int32 i = 0; i < count; i += 1) {
               enumerator.MoveNext();
-              if (match(enumerator.Current))
+              if(match(enumerator.Current))
                 return startIndex - i;
             }
-
+            
             return -1;
           }
-
+          
           /// @brief Performs the specified action on each element of the LinkedList<T>.
           /// @param action The action pointer function to perform on each element of the LinkedList<T>.
           /// @return None.
@@ -497,16 +497,16 @@ namespace Switch {
           /// @remarks The action is a pointer to a method that performs an action on the object passed to it. The elements of the current LinkedList<T> are individually passed to the pointer function.
           /// @remarks This method is an O(n) operation, where n is Count.
           void ForEach(const Action<const T&>& action) {
-            for (T elem : *this)
+            for(T elem : *this)
               action(elem);
           }
-
+          
           /// @brief Returns an enumerator that iterates through the LinkedList<T>.
           /// @return A LinkedList<T>::Enumerator for the LinkedList<T>.
           System::Collections::Generic::Enumerator<T> GetEnumerator() const override {
             return System::Collections::Generic::Enumerator<T>(new LinkedList::Enumerator(*const_cast<LinkedList*>(this)));
           }
-
+          
           /// @brief Creates a shallow copy of a range of elements in the source LinkedList<T>.
           /// @param index The zero-based LinkedList<T> index at which the range starts.
           /// @param count The number of elements in the range.
@@ -521,43 +521,43 @@ namespace Switch {
           /// The following code example demonstrates the GetRange method and other methods of the LinkedList<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting LinkedList<T>, creating an array of three elements. The elements of the array are displayed.
           /// @include List2.cpp
           LinkedList GetRange(int32 index, int32 count) {
-
-            if (index < 0 || count < 0)
+          
+            if(index < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
-
-            if (index + count > this->Count)
+              
+            if(index + count > this->Count)
               throw ArgumentException(_caller);
-
+              
             LinkedList list;
-
+            
             typename std::list<T, TAllocator>::iterator position = this->list.begin();
             std::advance(position, index);
-            for (int32 i = 0; i < count; i++) {
+            for(int32 i = 0; i < count; i++) {
               list.Add(*position);
               position++;
             }
-
+            
             return list;
           }
-
+          
           /// @brief Determines the index of a specific item in the LinkedList.
           /// @param value The object to locate in the LinkedList.
           /// @return int32 The index of value if found in the list; otherwise, -1.
           virtual int32 IndexOf(const T& value) const {
-            if (this->Count == 0)
+            if(this->Count == 0)
               return -1;
             return this->IndexOf(value, 0, this->Count);
           }
-
+          
           /// @brief Determines the index of a specific item in the LinkedList.
           /// @param value The object to locate in the LinkedList.
           /// @param index The zero-based starting index of the search.
           /// @return Int32 The index of value if found in the list; otherwise, -1.
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0.
           virtual int32 IndexOf(const T& value, int32 index) const {
-            return this->IndexOf(value, index, this->Count-index);
+            return this->IndexOf(value, index, this->Count - index);
           }
-
+          
           /// @brief Determines the index of a specific item in the LinkedList.
           /// @param value The object to locate in the LinkedList.
           /// @param index The zero-based starting index of the search.
@@ -566,37 +566,37 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0 or The parameters count is
           /// less than 0 or index and count do not specify a valid section in the LinkedList<T>.
           virtual int32 IndexOf(const T& value, int32 index, int32 count) const {
-            if (index < 0 || count < 0 || index >= this->Count || index + count > this->Count)
+            if(index < 0 || count < 0 || index >= this->Count || index + count > this->Count)
               throw ArgumentOutOfRangeException(_caller);
-
+              
             Enumerator enumerator(*const_cast<LinkedList*>(this));
-            for (int32 i = 0; i < index ; i+=1 )
+            for(int32 i = 0; i < index ; i += 1)
               enumerator.MoveNext();
-
-            for (int32 i = 0; i < count; i++) {
+              
+            for(int32 i = 0; i < count; i++) {
               enumerator.MoveNext();
-              if (enumerator.Current() == value)
-                return index+i;
+              if(enumerator.Current() == value)
+                return index + i;
             }
-
+            
             return -1;
           }
-
+          
           /// @brief Inserts an element into the LinkedList<T> at the specified index.
           /// @param index The zero-based index at which the new element should be inserted.
           /// @param value The element should be inserted into the LinkedList<T>. The value can not be null.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is greater than Count.
           /// @remarks LinkedList<T> allows duplicate elements.
           virtual void Insert(int32 index, const T& value) {
-            if (index < 0 || index > this->Count())
+            if(index < 0 || index > this->Count())
               throw ArgumentOutOfRangeException(_caller);
-
+              
             this->operationNumber++;
             typename std::list<T, TAllocator>::iterator position = this->list.begin();
             std::advance(position, index);
             this->list.insert(position, value);
           }
-
+          
           /// @brief Inserts copy of elements from a collection into the LinkedList<T> at the specified index.
           /// @param index The zero-based index at which the new elements should be inserted.
           /// @param collection The collection whose elements should be inserted into the LinkedList<T>. The value can not be null and cannot contains reference element null.
@@ -605,36 +605,36 @@ namespace Switch {
           /// @remarks LinkedList<T> allows duplicate elements.
           /// @remarks The order of the elements in the collection is preserved in the LinkedList<T>.
           void InsertRange(int32 index, const IEnumerable<T>& enumerable) {
-            if (index < 0)
+            if(index < 0)
               throw ArgumentOutOfRangeException(_caller);
-
+              
             this->operationNumber++;
             int32 i = index;
-            for (T value : enumerable) {
+            for(T value : enumerable) {
               typename std::list<T, TAllocator>::iterator position = this->list.begin();
               std::advance(position, i++);
               this->list.insert(position, value);
             }
           }
-
+          
           /// @brief Determines the last index of a specific item in the LinkedList.
           /// @param value The object to locate in the LinkedList.
           /// @return Int32 The last index of value if found in the list; otherwise, -1.
           int32 LastIndexOf(const T& value) const {
-            if (this->Count == 0)
+            if(this->Count == 0)
               return -1;
-            return this->LastIndexOf(value, this->Count-1, this->Count);
+            return this->LastIndexOf(value, this->Count - 1, this->Count);
           }
-
+          
           /// @brief Determines the last index of a specific item in the LinkedList.
           /// @param value The object to locate in the LinkedList.
           /// @param index The zero-based starting index of the search.
           /// @return Int32 The last index of value if found in the list; otherwise, -1.
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0.
           int32 LastIndexOf(const T& value, int32 index) const {
-            return this->LastIndexOf(value, index, index+1);
+            return this->LastIndexOf(value, index, index + 1);
           }
-
+          
           /// @brief Determines the last index of a specific item in the LinkedList.
           /// @param value The object to locate in the LinkedList.
           /// @param index The zero-based starting index of the search.
@@ -642,41 +642,41 @@ namespace Switch {
           /// @return Int32 The last index of value if found in the list; otherwise, -1.
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0 or The parameters count is less than 0 or index and count do not specify a valid section in the LinkedList<T>.
           int32 LastIndexOf(const T& value, int32 index, int32 count) const {
-            if (index < 0 || count < 0 || index >= this->Count)
+            if(index < 0 || count < 0 || index >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
-
-            if (index - count < -1)
+              
+            if(index - count < -1)
               throw System::ArgumentException(_caller);
-
+              
             ReverseEnumerator enumerator(*this);
-            for (int32 i = this->Count-1; i > index; i-= 1)
+            for(int32 i = this->Count - 1; i > index; i -= 1)
               enumerator.MoveNext();
-
-            for (int32 i = 0; i < count; i += 1) {
+              
+            for(int32 i = 0; i < count; i += 1) {
               enumerator.MoveNext();
-              if (value == enumerator.Current)
+              if(value == enumerator.Current)
                 return index - i;
             }
-
+            
             return -1;
           }
-
+          
           /// @brief Removes the first occurrence of a specific object from the LinkedList<T>.
           /// @param item The object to remove from the LinkedList<(Of <(T>)>). The value can not be null.
           /// @return Boolean true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the LinkedList<T>.
           bool Remove(const T& item) override {
-            if (this->Count == 0)
+            if(this->Count == 0)
               return false;
-
+              
             int32 index = this->IndexOf(item);
-            if (index != -1) {
+            if(index != -1) {
               this->RemoveAt(index);
               return true;
             }
-
+            
             return false;
           }
-
+          
           /// @brief Removes all the elements that match the conditions defined by the specified predicate.
           /// @param match The Predicate<T> delegate that defines the conditions of the elements to remove.
           /// @return The number of elements removed from the LinkedList<T> .
@@ -692,33 +692,32 @@ namespace Switch {
           int32 RemoveAll(const Predicate<const T&>& match) {
             int32 count = 0;
             typename std::list<T, TAllocator>::iterator it = this->list.begin();
-            while (it != this->list.end()) {
-              if (match(*it)) {
+            while(it != this->list.end()) {
+              if(match(*it)) {
                 it = this->list.erase(it);
                 count += 1;
-              } else {
+              } else
                 it++;
-              }
             }
-
-            if (count) this->operationNumber++;
+            
+            if(count) this->operationNumber++;
             return count;
           }
-
+          
           /// @brief Removes the element at the specified index of the LinkedList<T>.
           /// @param index The zero-based index of the item to remove
           /// @return None.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is greater than Count.
           virtual void RemoveAt(int32 index) {
-            if (index < 0 || index >= this->Count)
+            if(index < 0 || index >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
-
+              
             this->operationNumber++;
             typename std::list<T, TAllocator>::iterator position = this->list.begin();
             std::advance(position, index);
             this->list.erase(position);
           }
-
+          
           /// @brief Removes a range of elements from the LinkedList<T>.
           /// @param index The zero-based index of the item to remove
           /// @param count The number of elements to remove
@@ -726,17 +725,17 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException index or count is less than 0 or index + count is greater than Count.
           /// @remarks The items are removed and all the elements following them in the LinkedList<T> have their indexes reduced by count.
           void RemoveRange(int32 index, int32 count) {
-            if (index < 0 || index + count > this->Count)
+            if(index < 0 || index + count > this->Count)
               throw ArgumentOutOfRangeException(_caller);
-
+              
             this->operationNumber++;
             typename std::list<T, TAllocator>::iterator begin = this->list.begin();
             typename std::list<T, TAllocator>::iterator end = this->list.begin();
             std::advance(begin, index);
-            std::advance(end, index+count);
+            std::advance(end, index + count);
             this->list.erase(begin, end);
           }
-
+          
           /// @brief Reverses the order of the elements in the entire LinkedList<T>.
           /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at LinkedList<T>[i], where i is any index within the range, moves to LinkedList<T>[j], where j equals index plus index plus count minus i minus 1.
           /// @remarks This method is an O(n) operation, where n is Count.
@@ -747,7 +746,7 @@ namespace Switch {
             this->operationNumber++;
             this->list.reverse();
           }
-
+          
           /// @brief Reverses the order of the elements in the specified range.
           /// @param index The zero-based starting index of the range to reverse.
           /// @param count The number of elements in the range to reverse.
@@ -759,22 +758,22 @@ namespace Switch {
           /// The following code example demonstrates both overloads of the Reverse method. The code example creates a LinkedList<T> of strings and adds six strings. The Reverse() method overload is used to reverse the list, and then the Reverse(int32, int32) method overload is used to reverse the middle of the list, beginning with element 1 and encompassing four elements.
           /// @include LinkedList.Reverse.cpp
           void Reverse(int32 index, int32 count) {
-            if (index < 0 || count < 0)
+            if(index < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
-
-            if (index + count > this->Count)
+              
+            if(index + count > this->Count)
               throw ArgumentException(_caller);
-
-            int pos1 = index, pos2 = (index + count)-1;
+              
+            int pos1 = index, pos2 = (index + count) - 1;
             typename std::list<T, TAllocator>::iterator it1 = this->list.begin(), it2 = this->list.begin();
-
-            std::advance(it1,pos1);
-            std::advance(it2,pos2);
-
-            while (pos1++ < pos2--)
-              std::iter_swap(it1++,it2--);
+            
+            std::advance(it1, pos1);
+            std::advance(it2, pos2);
+            
+            while(pos1++ < pos2--)
+              std::iter_swap(it1++, it2--);
           }
-
+          
           /// @brief Copies the elements of the LinkedList<T> to a new array.
           /// @return An array containing copies of the elements of the LinkedList<T>.
           /// @remarks The elements are copied using Array.Copy, which is an O(n) operation, where n is Count.
@@ -787,7 +786,7 @@ namespace Switch {
             this->CopyTo(array);
             return array;
           }
-
+          
           /// @brief Clear the list and insert the element of the list given in argument.
           /// @param list the LinkedList<T> which elements will be inserted from
           /// @return LinkedList<T> the list
@@ -797,38 +796,38 @@ namespace Switch {
             this->list = list.list;
             return *this;
           }
-
+          
           class Enumerator : public object, public IEnumerator<T> {
           public:
             Enumerator(LinkedList& list) : list(list) {Reset();}
             Enumerator(const Enumerator& e) : operationNumber(e.operationNumber), beforeFirst(e.beforeFirst), list(e.list), iterator(e.iterator) {}
-
+            
             void Reset() {
               this->beforeFirst = true;
               this->operationNumber = this->list.operationNumber;
               this->iterator = this->list.list.begin();
             }
-
+            
             virtual bool MoveNext() {
-              if (this->operationNumber != this->list.operationNumber)
+              if(this->operationNumber != this->list.operationNumber)
                 throw InvalidOperationException(_caller);
-
-              if (IsFinished())
+                
+              if(IsFinished())
                 return false;
-
-              if (this->beforeFirst)
+                
+              if(this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
-
+                
               return !IsFinished();
             }
-
+            
           private:
             const T& GetCurrent() const {
-              if (this->beforeFirst || IsFinished())
+              if(this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
-              
+                
               return *this->iterator;
             }
             
@@ -838,38 +837,38 @@ namespace Switch {
             LinkedList& list;
             typename std::list<T, TAllocator>::iterator iterator;
           };
-
+          
           class ReverseEnumerator : public object, public IEnumerator<T> {
           public:
             ReverseEnumerator(LinkedList& list) : list(list) {Reset();}
             ReverseEnumerator(const ReverseEnumerator& e) : operationNumber(e.operationNumber), beforeFirst(e.beforeFirst), list(e.list), iterator(e.iterator) {}
-
+            
             void Reset() {
               this->beforeFirst = true;
               this->operationNumber = this->list.operationNumber;
               this->iterator = this->list.list.rbegin();
             }
-
+            
             virtual bool MoveNext() {
-              if (this->operationNumber != this->list.operationNumber)
+              if(this->operationNumber != this->list.operationNumber)
                 throw InvalidOperationException(_caller);
-
-              if (IsFinished())
+                
+              if(IsFinished())
                 return false;
-
-              if (this->beforeFirst)
+                
+              if(this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
-
+                
               return !IsFinished();
             }
-
+            
           private:
             const T& GetCurrent() const {
-              if (this->beforeFirst || IsFinished())
+              if(this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
-              
+                
               return *this->iterator;
             }
             
@@ -879,7 +878,7 @@ namespace Switch {
             LinkedList& list;
             typename std::list<T, TAllocator>::reverse_iterator iterator;
           };
-
+          
           /// @cond
           using const_iterator = typename std::list<T, TAllocator>::const_iterator;
           using iterator = typename std::list<T, TAllocator>::iterator;
@@ -897,24 +896,24 @@ namespace Switch {
           std::list<T, TAllocator> list;
           int64 operationNumber;
           object syncRoot;
-
+          
         private:
           int32 GetCount() const override {return static_cast<int32>(this->list.size());}
           bool GetIsReadOnly() const override {return false;}
           bool GetIsSynchronized() const override { return false; }
           const object& GetSyncRoot() const override {return this->syncRoot;}
-
+          
           class ListComparer : public std::binary_function<T, T, bool> {
-            private:
-              const IComparer<T>* comparer;
-
-            public:
-              ListComparer(const IComparer<T>* c) : comparer(c) { }
-              ListComparer(const ListComparer& mc) { *this = mc; }
-              ~ListComparer() { }
-
-              ListComparer& operator =(const ListComparer& mc) { comparer = mc.comparer; return *this; }
-              bool operator()(const T& e1, const T& e2) const { return comparer->Compare(e1,e2) < 0; }
+          private:
+            const IComparer<T>* comparer;
+            
+          public:
+            ListComparer(const IComparer<T>* c) : comparer(c) { }
+            ListComparer(const ListComparer& mc) { *this = mc; }
+            ~ListComparer() { }
+            
+            ListComparer& operator =(const ListComparer& mc) { comparer = mc.comparer; return *this; }
+            bool operator()(const T& e1, const T& e2) const { return comparer->Compare(e1, e2) < 0; }
           };
           /// @endcond
         };

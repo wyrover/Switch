@@ -28,7 +28,7 @@ namespace Switch {
         /// @param length The number of elements of value to include in the new instance.
         /// @remarks This constructor initializes the new SecureString object to the number of characters in value specified by length; the value of the instance is then encrypted.
         SecureString(const char32 value[], int32 length);
-
+        
         /// @cond
         SecureString(const SecureString& secureString) : data(secureString.data), readOnly(secureString.readOnly) {}
         ~SecureString() {
@@ -48,11 +48,11 @@ namespace Switch {
         /// @exception InvalidOperationException This secure string is read-only.
         /// @remarks If the implementation uses a protection mechanism, such as encryption, the value of this secure string, if any, is unprotected; c is appended; then the new value of the secure string is re-protected.
         void AppendChar(char32 c);
-
+        
         /// @breif Deletes the value of the current secure string.
         /// @brief The computer memory that contains the value of this secure string is zeroed, then the length of the value of this secure string is set to zero.
         void Clear();
-
+        
         /// Creates a copy of the current secure string.
         /// @return SecureString A duplicate of this secure string.
         /// @exception InvalidOperationException This secure string is read-only.
@@ -62,7 +62,7 @@ namespace Switch {
           secureString.data = this->data;
           return secureString;
         }
- 
+        
         /// @brief Inserts a character in this secure string at the specified index position.
         /// @param index The index position where parameter c is inserted.
         /// @param c The character to insert.
@@ -90,7 +90,7 @@ namespace Switch {
         /// @remarks The index is zero-based; the first character in this instance is at index position zero.
         /// @remarks If the implementation uses a protection mechanism, such as encryption, the value of this secure string, if any, is unprotected; the character at the specified index position is removed; then the new value is re-protected.
         void RemoveAt(int32 index);
-
+        
         /// @brief Replaces the existing character at the specified index position with another character.
         /// @param index The index position of an existing character in this secure string
         /// @param c A character that replaces the existing character.

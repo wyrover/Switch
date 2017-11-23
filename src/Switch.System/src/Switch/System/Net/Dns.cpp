@@ -25,13 +25,13 @@ IPHostEntry Dns::GetHostEntry(const string& hostNameOrAddress) {
   Hostent hostent;
   IPAddress address;
   intptr host;
-  if (IPAddress::TryParse(hostNameOrAddress, address) == false) {
+  if(IPAddress::TryParse(hostNameOrAddress, address) == false) {
     host = Native::DnsApi::GetHostByName(hostNameOrAddress);
-    if (host == 0)
+    if(host == 0)
       throw InvalidOperationException(_caller);
   } else {
     host = Native::DnsApi::GetHostByAddress(address.ToString(), address.AddressFamily());
-    if (host == 0)
+    if(host == 0)
       throw InvalidOperationException(_caller);
   }
   IPHostEntry hostEntry(Native::DnsApi::GetAddresses(host), Native::DnsApi::GetAliases(host), Native::DnsApi::GetHostName(host));

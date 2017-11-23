@@ -44,7 +44,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Diagnostics::TraceEventType> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Diagnostics::TraceEventType::Critical, "Critical"}, {(int64)System::Diagnostics::TraceEventType::Error, "Error"}, {(int64)System::Diagnostics::TraceEventType::Information, "Information"}, {(int64)System::Diagnostics::TraceEventType::Resume, "Resume"}, {(int64)System::Diagnostics::TraceEventType::Start, "Start"}, {(int64)System::Diagnostics::TraceEventType::Stop, "Stop"}, {(int64)System::Diagnostics::TraceEventType::Suspend, "Suspend"}, {(int64)System::Diagnostics::TraceEventType::Transfer, "Transfer"}, {(int64)System::Diagnostics::TraceEventType::Verbose, "Verbose"}, {(int64)System::Diagnostics::TraceEventType::Warning, "Warning"}};
     flags = false;
   }

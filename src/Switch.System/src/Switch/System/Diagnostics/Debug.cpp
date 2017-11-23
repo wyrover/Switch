@@ -19,7 +19,7 @@ _property<int32> Debug::IndentLevel {
   [] {return indentLevel;},
   [](int32 value) {
     indentLevel = value;
-    for (auto& listener : Trace::__get_listeners__())
+    for(auto& listener : Trace::__get_listeners__())
       listener.IndentLevel = indentLevel;
   }
 };
@@ -28,7 +28,7 @@ _property<int32> Debug::IndentSize {
   [] {return indentSize;},
   [](int32 value) {
     indentSize = value;
-    for (auto& listener : Trace::__get_listeners__())
+    for(auto& listener : Trace::__get_listeners__())
       listener.IndentSize = indentSize;
   }
 };

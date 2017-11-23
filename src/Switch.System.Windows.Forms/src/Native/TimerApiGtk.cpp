@@ -6,12 +6,12 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-namespace{
+namespace {
   struct TimerGtk {
     guint timer = 0;
     delegate<void> tick;
   };
-
+  
   int TimerPeroc(gpointer timer) {
     ((TimerGtk*)timer)->tick();
     return 1;

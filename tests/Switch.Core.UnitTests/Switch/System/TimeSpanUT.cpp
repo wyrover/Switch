@@ -10,11 +10,11 @@ namespace {
   TEST(TimeSpan, MaxValue) {
     ASSERT_EQ(Int64::MaxValue, TimeSpan::MaxValue.Ticks);
   }
-
+  
   TEST(TimeSpan, MinValue) {
     ASSERT_EQ(Int64::MinValue, TimeSpan::MinValue.Ticks);
   }
-
+  
   TEST(TimeSpan, TicksPerDay) {
     ASSERT_EQ(864000000000, TimeSpan::TicksPerDay);
   }
@@ -38,7 +38,7 @@ namespace {
   TEST(TimeSpan, Zero) {
     ASSERT_EQ(0, TimeSpan::Zero().Ticks);
   }
-
+  
   TEST(TimeSpan, Ctor) {
     ASSERT_EQ(0, TimeSpan().Ticks);
   }
@@ -56,8 +56,8 @@ namespace {
   TEST(TimeSpan, FromMilliseconds) {
     ASSERT_EQ(2570000, TimeSpan::FromMilliseconds(256.7).Ticks);
     ASSERT_EQ(2560000, TimeSpan::FromMilliseconds((int64)256.7).Ticks);
-    ASSERT_EQ(290000, TimeSpan::FromMilliseconds((29.0/100.0)*100).Ticks);
-    ASSERT_EQ(280000, TimeSpan::FromMilliseconds(int64((29.0/100.0)*100)).Ticks);
+    ASSERT_EQ(290000, TimeSpan::FromMilliseconds((29.0 / 100.0) * 100).Ticks);
+    ASSERT_EQ(280000, TimeSpan::FromMilliseconds(int64((29.0 / 100.0) * 100)).Ticks);
     ASSERT_EQ(-10000, TimeSpan::FromMilliseconds(-1).Ticks);
   }
   
@@ -126,7 +126,7 @@ namespace {
     TimeSpan time1 = TimeSpan::FromDays(1.5);
     TimeSpan time2 = TimeSpan::FromHours(1.5);
     TimeSpan time3 = TimeSpan::FromHours(-1.5);
-
+    
     ASSERT_EQ(1, TimeSpan::Compare(time1, time2));
     ASSERT_EQ(0, TimeSpan::Compare(time1, time1));
     ASSERT_EQ(-1, TimeSpan::Compare(time3, time2));

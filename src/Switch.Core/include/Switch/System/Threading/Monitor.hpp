@@ -43,7 +43,7 @@ namespace Switch {
         /// @remarks Use Enter to acquire the Monitor on the object passed as the parameter. If another thread has executed an Enter on the object, but has not yet executed the corresponding Exit, the current thread will block until the other thread releases the object. It is legal for the same thread to invoke Enter more than once without it blocking; however, an equal number of Exit calls must be invoked before other threads waiting on the object will unblock.
         /// @remarks Use Monitor to lock objects (that is, reference types), not value types. When you pass a value type variable to Enter, it is boxed as an object. If you pass the same variable to Enter again, the thread is block. The code that Monitor is supposedly protecting is not protected. Furthermore, when you pass the variable to Exit, still another separate object is created. Because the object passed to Exit is different from the object passed to Enter, Monitor throws SynchronizationLockException. For details, see the conceptual topic Monitors.
         static void Enter(const object& obj, bool& lockTaken) {
-          if (TryEnter(obj, lockTaken) == false)
+          if(TryEnter(obj, lockTaken) == false)
             throw InvalidOperationException(_caller);
         }
         
@@ -62,7 +62,7 @@ namespace Switch {
         /// Only the current owner of the lock can signal a waiting object using Pulse.
         /// The thread that currently owns the lock on the specified object invokes this method to signal the next thread in line for the lock. Upon receiving the pulse, the waiting thread is moved to the ready queue. When the thread that invoked Pulse releases the lock, the next thread in the ready queue (which is not necessarily the thread that was pulsed) acquires the lock.
         static void Pulse(const object& obj);
-
+        
         /// @brief Notifies all waiting threads of a change in the object's state.
         /// @param obj The object a thread is waiting for.
         /// @exception ArgumentNullException The obj parameter is null.
@@ -72,7 +72,7 @@ namespace Switch {
         /// @remarks The remarks for the Pulse method explain what happens if Pulse is called when no threads are waiting.
         /// @remarks To signal a single thread, use the Pulse method.
         static void PulseAll(const object& obj);
-
+        
         /// @brief Releases an exclusive lock on the specified obj.
         /// @param obj The object on which to release the lock.
         /// @exception ArgumentNullException The obj parameter is null.
@@ -118,9 +118,9 @@ namespace Switch {
         /// @exception ArgumentNullException The obj parameter is null.
         /// @remarks If the millisecondsTimeout parameter equals Timeout::Infinite, this method is equivalent to Enter. If millisecondsTimeout equals 0, this method is equivalent to TryEnter.
         static bool TryEnter(const object& obj, int32 millisecondsTimeout, bool& lockTaken) {
-          if (millisecondsTimeout < -1)
+          if(millisecondsTimeout < -1)
             return false;
-          
+            
           lockTaken = Add(obj, millisecondsTimeout);
           return true;
         }
@@ -145,9 +145,9 @@ namespace Switch {
         /// @exception ArgumentNullException The obj parameter is null.
         /// @remarks If the millisecondsTimeout parameter equals Timeout::Infinite, this method is equivalent to Enter. If millisecondsTimeout equals 0, this method is equivalent to TryEnter.
         static bool TryEnter(const object& obj, int64 millisecondsTimeout, bool& lockTaken) {
-          if (millisecondsTimeout < -1)
+          if(millisecondsTimeout < -1)
             return false;
-          
+            
           lockTaken = Add(obj, (int32)millisecondsTimeout);
           return true;
         }
@@ -172,7 +172,7 @@ namespace Switch {
         /// @exception ArgumentNullException The obj timeout or  parameter is null.
         /// @remarks If the value of the timeout parameter converted to milliseconds equals -1, this method is equivalent to Enter. If the value of timeout equals 0, this method is equivalent to TryEnter.
         static bool TryEnter(const object& obj, const TimeSpan& timeout, bool& lockTaken) {return TryEnter(obj, as<int32>(timeout.TotalMilliseconds()), lockTaken);}
-
+        
         /// @brief Releases the lock on an object and blocks the current thread until it reacquires the lock.
         /// @param obj The object on which to wait.
         /// @return Boolean true if the call returned because the caller reacquired the lock for the specified object. This method does not return if the lock is not reacquired.
@@ -185,7 +185,7 @@ namespace Switch {
         /// The Pulse, PulseAll, and Wait methods must be invoked from within a synchronized block of code.
         /// The remarks for the Pulse method explain what happens if Pulse is called when no threads are waiting.
         static bool Wait(const object& obj) {return Wait(obj, Timeout::Infinite);}
-
+        
         /// @brief Releases the lock on an object and blocks the current thread until it reacquires the lock.
         /// @param obj The object on which to wait.
         /// @param millisecondsTimeout The number of milliseconds to wait before the thread enters the ready queue.
@@ -201,7 +201,7 @@ namespace Switch {
         /// The Pulse, PulseAll, and Wait methods must be invoked from within a synchronized block of code.
         /// The remarks for the Pulse method explain what happens if Pulse is called when no threads are waiting.
         static bool Wait(const object& obj, int32 millisecondsTimeout);
-
+        
         /// @brief Releases the lock on an object and blocks the current thread until it reacquires the lock. If the specified time-out interval elapses, the thread enters the ready queue.
         /// @param obj The object on which to wait.
         /// @param timeout A TimeSpan representing the amount of time to wait before the thread enters the ready queue.
@@ -217,34 +217,33 @@ namespace Switch {
         /// The Pulse, PulseAll, and Wait methods must be invoked from within a synchronized block of code.
         ///The remarks for the Pulse method explain what happens if Pulse is called when no threads are waiting.
         static bool Wait(const object& obj, const TimeSpan& timeout) {return Wait(obj, as<int32>(timeout.TotalMilliseconds()));}
-
+        
       private:
         struct MonitorItem {
           MonitorItem() {}
           MonitorItem(const string& name) : name(name) {}
           bool operator==(const MonitorItem& monitorItem) const {return this->event == monitorItem.event && this->usedCounter == monitorItem.usedCounter;}
           bool operator!=(const MonitorItem& monitorItem) const {return !this->operator==(monitorItem);}
-
+          
           Mutex event {false};
           int32 usedCounter {0};
           Nullable<string> name;
         };
         
         static const object* ToKey(const object& obj) {
-          if (is<string>(obj)) {
-            for (const auto& item : MonitorItems())
-              if (item.Value().name.HasValue && item.Value().name.Value().Equals((const string&)obj)) {
+          if(is<string>(obj)) {
+            for(const auto& item : MonitorItems())
+              if(item.Value().name.HasValue && item.Value().name.Value().Equals((const string&)obj))
                 return item.Key;
-              }
           }
           return &obj;
         }
-
+        
         static System::Collections::Generic::Dictionary<const object*, MonitorItem>& MonitorItems() {
           static System::Collections::Generic::Dictionary<const object*, MonitorItem> monitorItems;
           return monitorItems;
         }
-
+        
         static bool Add(const object& obj, int32 millisecondsTimeout);
         static void Remove(const object& obj);
       };

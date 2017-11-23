@@ -14,7 +14,7 @@ intptr Native::GdiApi::GetDeviceContext(intptr hwnd) {
  intptr Native::GdiApi::BeginPaint(intptr hwnd, System::Drawing::Rectangle& clipRectangle) {
  return IntPtr::Zero;
  }
- 
+
  void Native::GdiApi::EndPaint(intptr hwnd, intptr hdc) {
  }*/
 

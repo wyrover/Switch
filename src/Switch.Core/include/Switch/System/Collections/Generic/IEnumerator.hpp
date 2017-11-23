@@ -33,7 +33,7 @@ namespace Switch {
           /// @return Boolean true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
           /// @return @see object
           virtual bool MoveNext() = 0;
-
+          
           /// @brief Sets the enumerator to its initial position, which is before the first element in the collection.
           /// @return None.
           /// @return @see object
@@ -44,7 +44,7 @@ namespace Switch {
           /// After an enumerator is created or after a Reset, MoveNext must be called to advance the enumerator to the first element of the collection before calling GetCurrent; otherwise it throws System::InvalidOperationException.
           /// @return T The current element in the collection.
           virtual const T& GetCurrent() const = 0;
-
+          
           // Not correct for an interface but necessary for C++ language.
         private:
           class Iterator : public std::iterator<std::input_iterator_tag, T> {
@@ -53,20 +53,20 @@ namespace Switch {
             
             explicit Iterator(IEnumerator<T>* enumerator) : enumerator(enumerator), pos(0) {
               this->enumerator->Reset();
-              if (this->enumerator->MoveNext() == false)
+              if(this->enumerator->MoveNext() == false)
                 this->pos = -1;
             }
             
             Iterator(IEnumerator<T>* enumerator, bool end) : enumerator(enumerator), pos(0) {
               this->enumerator->Reset();
-              if (this->enumerator->MoveNext() == false || end == true)
+              if(this->enumerator->MoveNext() == false || end == true)
                 this->pos = -1;
             }
             
             Iterator& operator++() {
-              if (this->pos != -1) {
+              if(this->pos != -1) {
                 ++this->pos;
-                if (this->enumerator->MoveNext() == false)
+                if(this->enumerator->MoveNext() == false)
                   this->pos = -1;
               }
               return *this;
@@ -74,9 +74,9 @@ namespace Switch {
             
             Iterator operator++(int) {
               Iterator iterator(*this);
-              if (this->pos != -1) {
+              if(this->pos != -1) {
                 ++this->pos;
-                if (this->enumerator->MoveNext() == false)
+                if(this->enumerator->MoveNext() == false)
                   this->pos = -1;
               }
               return iterator;
@@ -135,7 +135,7 @@ namespace Switch {
           operator refptr<IEnumerator<T>>() const {return this->enumerator;}
           operator refptr<IEnumerator<T>>() {return this->enumerator;}
           /// @endcond
-
+          
         protected:
           const T& GetCurrent() const override {return this->enumerator->Current();}
           

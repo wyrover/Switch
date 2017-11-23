@@ -39,7 +39,7 @@ namespace {
   TEST(ArrayListTest, ConstructorFromGenericIEnumerable) {
     Array<Any> array = {String("Tyrannosaurus"), String("Compsognathus"), String("Amargasaurus")};
     Generic::IEnumerable<Any>& enumerable = array;
-
+    
     ArrayList arrayList(enumerable);
     
     ASSERT_EQ(3, arrayList.Count);
@@ -52,7 +52,7 @@ namespace {
   TEST(ArrayListTest, ConstructorFromIEnumerable) {
     ArrayList array(Array<Any> {String("Tyrannosaurus"), String("Compsognathus"), String("Amargasaurus")});
     IEnumerable& enumerable = array;
-
+    
     ArrayList arrayList(enumerable);
     
     ASSERT_EQ(3, arrayList.Count);
@@ -64,7 +64,7 @@ namespace {
   
   TEST(ArrayListTest, AddSpObject) {
     ArrayList arrayList;
-
+    
     arrayList.Add(String("Tyrannosaurus"));
     arrayList.Add(String("Amargasaurus"));
     arrayList.Add(String("Mamenchisaurus"));
@@ -81,7 +81,7 @@ namespace {
   
   TEST(ArrayListTest, AddSpString) {
     ArrayList arrayList;
-
+    
     arrayList.Add("Tyrannosaurus");
     arrayList.Add("Amargasaurus");
     arrayList.Add("Mamenchisaurus");
@@ -98,7 +98,7 @@ namespace {
   
   TEST(ArrayListTest, AddNewObject) {
     ArrayList arrayList;
-
+    
     arrayList.Add(String("Tyrannosaurus"));
     arrayList.Add(String("Amargasaurus"));
     arrayList.Add(String("Mamenchisaurus"));
@@ -115,7 +115,7 @@ namespace {
   
   TEST(ArrayListTest, AddObject) {
     ArrayList arrayList;
-
+    
     arrayList.Add(String("Tyrannosaurus"));
     arrayList.Add(String("Amargasaurus"));
     arrayList.Add(String("Mamenchisaurus"));
@@ -132,7 +132,7 @@ namespace {
   
   TEST(ArrayListTest, AddValueType) {
     ArrayList arrayList;
-
+    
     arrayList.Add("Tyrannosaurus");
     arrayList.Add("Amargasaurus");
     arrayList.Add("Mamenchisaurus");
@@ -320,7 +320,7 @@ namespace {
     arrayList.Add("Deinonychus");
     arrayList.Add("Compsognathus");
     
-    Array<Any> array(arrayList.Count-1);
+    Array<Any> array(arrayList.Count - 1);
     ASSERT_THROW({arrayList.CopyTo(array);}, ArgumentException);
   }
   
@@ -332,7 +332,7 @@ namespace {
     arrayList.Add("Deinonychus");
     arrayList.Add("Compsognathus");
     
-    Array<Any> array(arrayList.Count+10);
+    Array<Any> array(arrayList.Count + 10);
     arrayList.CopyTo(array, 5);
     
     ASSERT_FALSE(array[0].HasValue());
@@ -360,7 +360,7 @@ namespace {
     arrayList.Add("Deinonychus");
     arrayList.Add("Compsognathus");
     
-    Array<Any> array(arrayList.Count+10);
+    Array<Any> array(arrayList.Count + 10);
     ASSERT_THROW({arrayList.CopyTo(array, 15);}, ArgumentException);
   }
   
@@ -372,7 +372,7 @@ namespace {
     arrayList.Add("Deinonychus");
     arrayList.Add("Compsognathus");
     
-    Array<Any> array(arrayList.Count+10);
+    Array<Any> array(arrayList.Count + 10);
     ASSERT_THROW({arrayList.CopyTo(array, -1);}, ArgumentException);
   }
   
@@ -384,7 +384,7 @@ namespace {
     arrayList.Add("Deinonychus");
     arrayList.Add("Compsognathus");
     
-    Array<Any> array(arrayList.Count+10);
+    Array<Any> array(arrayList.Count + 10);
     arrayList.CopyTo(2, array, 5, 2);
     
     ASSERT_FALSE(array[0].HasValue());
@@ -414,11 +414,10 @@ namespace {
     
     const char* array[] = {"Tyrannosaurus", "Amargasaurus", "Mamenchisaurus", "Deinonychus", "Compsognathus"};
     int32 index = 0;
-
+    
     Enumerator enumerator = arrayList.GetEnumerator();
-    while (enumerator.MoveNext()) {
+    while(enumerator.MoveNext())
       ASSERT_EQ(array[index++], as<String>(enumerator.Current()));
-    }
     ASSERT_EQ(5, index);
   }
   
@@ -432,9 +431,8 @@ namespace {
     
     const char* array[] = {"Tyrannosaurus", "Amargasaurus", "Mamenchisaurus", "Deinonychus", "Compsognathus"};
     int32 index = 0;
-    for (auto item : arrayList) {
+    for(auto item : arrayList)
       ASSERT_EQ(array[index++], as<String>(item));
-    }
     ASSERT_EQ(5, index);
   }
   

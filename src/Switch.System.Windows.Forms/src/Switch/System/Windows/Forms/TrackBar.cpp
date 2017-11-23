@@ -21,9 +21,9 @@ void TrackBar::CreateHandle() {
 
 void TrackBar::WndProc(Message& message) {
   Control::WndProc(message);
-  if (message.Msg == (WM_REFLECT + WM_HSCROLL) || message.Msg == (WM_REFLECT + WM_VSCROLL)) {
+  if(message.Msg == (WM_REFLECT + WM_HSCROLL) || message.Msg == (WM_REFLECT + WM_VSCROLL)) {
     int32 value = this->GetValue();
-    if (this->value != value) {
+    if(this->value != value) {
       this->value = value;
       OnScroll(EventArgs::Empty());
       OnValueChanged(EventArgs::Empty());
@@ -32,18 +32,17 @@ void TrackBar::WndProc(Message& message) {
 }
 
 void TrackBar::SetLargeChange(int32 largeChange) {
-  if (this->largeChange != largeChange) {
+  if(this->largeChange != largeChange) {
     this->largeChange = largeChange;
-    if (this->IsHandleCreated) {
+    if(this->IsHandleCreated)
       Native::TrackBarApi::SetLargeChange(*this);
-    }
   }
 }
 
 void TrackBar::SetMaximum(int32 maximum) {
-  if (this->maximum != maximum) {
+  if(this->maximum != maximum) {
     this->maximum = maximum;
-    if (this->IsHandleCreated) {
+    if(this->IsHandleCreated) {
       Native::TrackBarApi::SetMaximum(*this);
       Native::TrackBarApi::SetValue(*this);
     }
@@ -51,9 +50,9 @@ void TrackBar::SetMaximum(int32 maximum) {
 }
 
 void TrackBar::SetMinimum(int32 minimum) {
-  if (this->minimum != minimum) {
+  if(this->minimum != minimum) {
     this->minimum = minimum;
-    if (this->IsHandleCreated) {
+    if(this->IsHandleCreated) {
       Native::TrackBarApi::SetMinimum(*this);
       Native::TrackBarApi::SetValue(*this);
     }
@@ -61,50 +60,49 @@ void TrackBar::SetMinimum(int32 minimum) {
 }
 
 void TrackBar::SetOrientation(System::Windows::Forms::Orientation orientation) {
-  if (this->orientation != orientation) {
+  if(this->orientation != orientation) {
     this->orientation = orientation;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::TrackBarApi::SetOrientation(*this);
   }
 }
 
 void TrackBar::SetSmallChange(int32 smallChange) {
-  if (this->smallChange != smallChange) {
+  if(this->smallChange != smallChange) {
     this->smallChange = smallChange;
-    if (this->IsHandleCreated) {
+    if(this->IsHandleCreated)
       Native::TrackBarApi::SetSmallChange(*this);
-    }
   }
 }
 
 void TrackBar::SetTickFrequency(int32 tickFrequency) {
-  if (tickFrequency < 0)
+  if(tickFrequency < 0)
     throw ArgumentOutOfRangeException(_caller);
-  if (this->tickFrequency != tickFrequency) {
+  if(this->tickFrequency != tickFrequency) {
     this->tickFrequency = tickFrequency;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::TrackBarApi::SetTickFrequency(*this);
   }
 }
 
 void TrackBar::SetTickStyle(System::Windows::Forms::TickStyle style) {
-  if (this->style != style) {
+  if(this->style != style) {
     this->style = style;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::TrackBarApi::SetTickStyle(*this);
   }
 }
 
 int32 TrackBar::GetValue() const {
-  if (this->IsHandleCreated)
+  if(this->IsHandleCreated)
     return Native::TrackBarApi::GetValue(*this);
   return this->value;
 }
 
 void TrackBar::SetValue(int32 value) {
-  if (this->value != value) {
+  if(this->value != value) {
     this->value = value;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::TrackBarApi::SetValue(*this);
     OnValueChanged(EventArgs::Empty());
   }

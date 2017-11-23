@@ -17,7 +17,7 @@ namespace Native {
       Native::Widget::RegisterEvent();
       this->signal_value_changed().connect(_delegate {
         ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle((intptr)this);
-        if (control == null) return;
+        if(control == null) return;
         Message event = Message::Create((intptr)this, as<System::Windows::Forms::TrackBar>(control)().Orientation == Orientation::Vertical ? WM_VSCROLL : WM_HSCROLL, 0, (intptr)this, 0, 0);
         control().Parent()().WndProc(event);
       });
@@ -33,7 +33,7 @@ intptr Native::TrackBarApi::Create(const System::Windows::Forms::TrackBar& track
   handle->Text(trackBar.Text);
   handle->set_draw_value(false);
   handle->show();
- return (intptr)handle;
+  return (intptr)handle;
 }
 
 void Native::TrackBarApi::SetLargeChange(const System::Windows::Forms::TrackBar& trackBar) {
@@ -44,7 +44,7 @@ void Native::TrackBarApi::SetMaximum(const System::Windows::Forms::TrackBar& tra
   ((Native::TrackBar*)trackBar.Handle())->set_range(trackBar.Minimum(), trackBar.Maximum());
 }
 
-void Native::TrackBarApi::SetMinimum(const System::Windows::Forms::TrackBar &trackBar) {
+void Native::TrackBarApi::SetMinimum(const System::Windows::Forms::TrackBar& trackBar) {
   ((Native::TrackBar*)trackBar.Handle())->set_range(trackBar.Minimum(), trackBar.Maximum());
 }
 
@@ -57,16 +57,16 @@ void Native::TrackBarApi::SetSmallChange(const System::Windows::Forms::TrackBar&
 }
 
 void Native::TrackBarApi::SetTickFrequency(const System::Windows::Forms::TrackBar& trackBar) {
-  if (trackBar.Style == TickStyle::None)
+  if(trackBar.Style == TickStyle::None)
     ((Native::TrackBar*)trackBar.Handle())->clear_marks();
   else {
     Gtk::PositionType position = Gtk::POS_BOTTOM;
-    if (trackBar.Orientation == Orientation::Horizontal)
+    if(trackBar.Orientation == Orientation::Horizontal)
       position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_TOP : Gtk::POS_BOTTOM;
     else
       position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_LEFT : Gtk::POS_RIGHT;
-    
-    for (int32 i = 0; i <= trackBar.Maximum - trackBar.Minimum; i +=  trackBar.TickFrequency)
+      
+    for(int32 i = 0; i <= trackBar.Maximum - trackBar.Minimum; i +=  trackBar.TickFrequency)
       ((Native::TrackBar*)trackBar.Handle())->add_mark(i, position, "");
   }
 }
@@ -76,10 +76,10 @@ void Native::TrackBarApi::SetTickStyle(const System::Windows::Forms::TrackBar& t
 }
 
 int32 Native::TrackBarApi::GetValue(const System::Windows::Forms::TrackBar& trackBar) {
-  return   ((Native::TrackBar*)trackBar.Handle())->get_value();
+  return ((Native::TrackBar*)trackBar.Handle())->get_value();
 }
 
-void Native::TrackBarApi::SetValue(const System::Windows::Forms::TrackBar &trackBar) {
+void Native::TrackBarApi::SetValue(const System::Windows::Forms::TrackBar& trackBar) {
   ((Native::TrackBar*)trackBar.Handle())->set_value(trackBar.Value());
 }
 

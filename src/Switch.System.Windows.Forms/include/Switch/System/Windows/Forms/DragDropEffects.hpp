@@ -29,7 +29,7 @@ class AddFlagOperators<System::Windows::Forms::DragDropEffects> : public TrueTyp
 template<>
 class EnumToStrings<System::Windows::Forms::DragDropEffects> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::DragDropEffects::None, "None"}, {(int64)System::Windows::Forms::DragDropEffects::Copy, "Copy"}, {(int64)System::Windows::Forms::DragDropEffects::Move, "Move"}, {(int64)System::Windows::Forms::DragDropEffects::Link, "Link"}, {(int64)System::Windows::Forms::DragDropEffects::Scroll, "Scroll"}, {(int64)System::Windows::Forms::DragDropEffects::All, "All"}};
     flags = true;
   }

@@ -32,7 +32,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Threading::ThreadPriority> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Threading::ThreadPriority::Lowest, "Lowest"}, {(int64)System::Threading::ThreadPriority::BelowNormal, "BelowNormal"}, {(int64)System::Threading::ThreadPriority::Normal, "Normal"}, {(int64)System::Threading::ThreadPriority::AboveNormal, "AboveNormal"}, {(int64)System::Threading::ThreadPriority::Highest, "Highest"}};
     flags = false;
   }

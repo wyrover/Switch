@@ -23,17 +23,17 @@ SocketAddress DnsEndPoint::Serialize() const {
 }
 
 void DnsEndPoint::SetHost(const string& host) {
-  if (string::IsNullOrEmpty(host))
+  if(string::IsNullOrEmpty(host))
     throw ArgumentException(_caller);
-  
+    
   IPHostEntry IPHostEntry = Dns::GetHostEntry(this->host);
   this->host = IPHostEntry.HostName;
 }
 
 void DnsEndPoint::SetPort(int32 port) {
-  if (port < IPEndPoint::MinPort || port > IPEndPoint::MaxPort)
+  if(port < IPEndPoint::MinPort || port > IPEndPoint::MaxPort)
     throw ArgumentOutOfRangeException(_caller);
-  
+    
   this->port = port;
 }
 

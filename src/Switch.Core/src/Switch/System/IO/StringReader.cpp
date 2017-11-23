@@ -30,12 +30,12 @@ void StringReader::Close() {
 }
 
 int32 StringReader::Peek() const {
-  if (this->closed)
+  if(this->closed)
     throw ObjectDisposedException(_caller);
-  
-  if (this->finished)
+    
+  if(this->finished)
     return -1;
-  
+    
   return Convert::ToInt32(this->enumerator.Current());
 }
 
@@ -48,11 +48,11 @@ int32 StringReader::Read() {
 
 string StringReader::ReadLine() {
   string line;
-  while (!finished) {
+  while(!finished) {
     int32 c = Read();
-    if (c == 10)
+    if(c == 10)
       return line;
-    if (c == 13)
+    if(c == 13)
       continue;
     line += char32(c);
   }
@@ -60,7 +60,7 @@ string StringReader::ReadLine() {
 }
 
 string StringReader::ReadToEnd() {
-  if (this->closed)
+  if(this->closed)
     throw ObjectDisposedException(_caller);
   this->finished = true;
   return this->input.Substring(this->position);

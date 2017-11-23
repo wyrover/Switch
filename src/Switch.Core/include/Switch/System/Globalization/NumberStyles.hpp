@@ -44,7 +44,7 @@ class AddFlagOperators<System::Globalization::NumberStyles> : public TrueType {}
 template<>
 class EnumToStrings<System::Globalization::NumberStyles> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Globalization::NumberStyles::None, "None"}, {(int64)System::Globalization::NumberStyles::AllowLeadingWhite, "AllowLeadingWhite"}, {(int64)System::Globalization::NumberStyles::AllowTrailingWhite, "AllowTrailingWhite"}, {(int64)System::Globalization::NumberStyles::AllowLeadingSign, "AllowLeadingSign"}, {(int64)System::Globalization::NumberStyles::AllowTrailingSign, "AllowTrailingSign"}, {(int64)System::Globalization::NumberStyles::AllowParentheses, "AllowParentheses"}, {(int64)System::Globalization::NumberStyles::AllowDecimalPoint, "AllowDecimalPoint"}, {(int64)System::Globalization::NumberStyles::AllowThousands, "AllowThousands"}, {(int64)System::Globalization::NumberStyles::AllowExponent, "AllowExponent"}, {(int64)System::Globalization::NumberStyles::AllowCurrencySymbol, "AllowCurrencySymbol"}, {(int64)System::Globalization::NumberStyles::AllowHexSpecifier, "AllowHexSpecifier"}, {(int64)System::Globalization::NumberStyles::Integer, "Integer"}, {(int64)System::Globalization::NumberStyles::HexNumber, "HexNumber"}, {(int64)System::Globalization::NumberStyles::Number, "Number"}, {(int64)System::Globalization::NumberStyles::Float, "Float"}, {(int64)System::Globalization::NumberStyles::Currency, "Currency"}, {(int64)System::Globalization::NumberStyles::Any, "Any"}};
     flags = true;
   }

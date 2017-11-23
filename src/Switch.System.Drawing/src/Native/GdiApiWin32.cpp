@@ -51,7 +51,7 @@ System::Drawing::Rectangle Native::GdiApi::GetClipRectangleFromHwnd(intptr hwnd)
 }
 
 void Native::GdiApi::DrawRectangle(intptr handle, const System::Drawing::Pen& pen, int32 x, int32 y, int32 w, int32 h) {
-  RECT rect { x, y, x+w, y+h };
+  RECT rect { x, y, x + w, y + h };
   HGDIOBJ oldBrush = SelectObject((HDC)handle, GetStockObject(NULL_BRUSH));
   HGDIOBJ oldPen = SelectObject((HDC)handle, (HGDIOBJ)pen.GetNativePen());
   ::Rectangle((HDC)handle, x, y, x + w, y + h);
@@ -61,12 +61,12 @@ void Native::GdiApi::DrawRectangle(intptr handle, const System::Drawing::Pen& pe
 
 
 void Native::GdiApi::FillPie(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle) {
-  RECT rect { x, y, x+w, y+h };
-  Pie((HDC)handle, x,y, w, h, (int32)startAngle, (int32)sweepAngle, (int32)startAngle, (int32)sweepAngle);
+  RECT rect { x, y, x + w, y + h };
+  Pie((HDC)handle, x, y, w, h, (int32)startAngle, (int32)sweepAngle, (int32)startAngle, (int32)sweepAngle);
 }
 
 void Native::GdiApi::FillRectangle(intptr handle, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h) {
-  RECT rect { x, y, x+w, y+h };
+  RECT rect { x, y, x + w, y + h };
   FillRect((HDC)handle, &rect, (HBRUSH)brush.GetNativeBrush());
 }
 

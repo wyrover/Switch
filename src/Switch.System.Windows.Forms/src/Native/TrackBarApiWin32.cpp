@@ -19,16 +19,16 @@ intptr Native::TrackBarApi::Create(const System::Windows::Forms::TrackBar& track
   icc.dwICC = ICC_PROGRESS_CLASS;
   InitCommonControlsEx(&icc);
   int32 style = WS_CHILD;
-  if (trackBar.Orientation == Orientation::Horizontal) style |= TBS_HORZ;
+  if(trackBar.Orientation == Orientation::Horizontal) style |= TBS_HORZ;
   else style |= TBS_VERT;
-  switch (trackBar.Style) {
+  switch(trackBar.Style) {
   case TickStyle::None: style |= TBS_NOTICKS; break;
   case TickStyle::TopLeft:
-    if (trackBar.Orientation == Orientation::Horizontal) style |= TBS_AUTOTICKS | TBS_TOP;
+    if(trackBar.Orientation == Orientation::Horizontal) style |= TBS_AUTOTICKS | TBS_TOP;
     else style |= TBS_AUTOTICKS | TBS_LEFT;
     break;
   case TickStyle::BottomRight:
-    if (trackBar.Orientation == Orientation::Horizontal) style |= TBS_AUTOTICKS | TBS_BOTTOM;
+    if(trackBar.Orientation == Orientation::Horizontal) style |= TBS_AUTOTICKS | TBS_BOTTOM;
     else style |= TBS_AUTOTICKS | TBS_RIGHT;
     break;
   case TickStyle::Both: style |= TBS_AUTOTICKS | TBS_BOTH; break;

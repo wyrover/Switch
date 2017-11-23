@@ -33,7 +33,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::VisualStyles::VisualStyleState> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::VisualStyles::VisualStyleState::NoneEnabled, "NoneEnabled"}, {(int64)System::Windows::Forms::VisualStyles::VisualStyleState::NonClientAreaEnabled, "NonClientAreaEnabled"}, {(int64)System::Windows::Forms::VisualStyles::VisualStyleState::ClientAreaEnabled, "ClientAreaEnabled"}, {(int64)System::Windows::Forms::VisualStyles::VisualStyleState::ClientAndNonClientAreasEnabled, "ClientAndNonClientAreasEnabled"}};
     flags = false;
   }

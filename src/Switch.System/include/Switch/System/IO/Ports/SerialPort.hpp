@@ -37,13 +37,13 @@ namespace Switch {
           SerialPort(const String& port, int32 baudRate, Parity parity, int32 dataBits) : port(port), baudRate(baudRate), parity(parity), dataBits(dataBits) {}
           
           SerialPort(const String& port, int32 baudRate, Parity parity, int32 dataBits, StopBits stopBits) : port(port), baudRate(baudRate), parity(parity), dataBits(dataBits), stopBits(stopBits) {}
-
+          
           static Array<String> GetPortNames();
-
+          
           _property<int32, _readonly> BaudRate {
             _get {return this->baudRate;}
           };
-
+          
           _property<int32, _readonly> DataBits {
             _get {return this->dataBits;}
           };
@@ -59,7 +59,7 @@ namespace Switch {
           _property<System::IO::Ports::StopBits, _readonly> StopBits {
             _get {return this->stopBits;}
           };
-
+          
         private:
           String port;
           int32 baudRate = 9600;

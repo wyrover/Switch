@@ -16,7 +16,7 @@ namespace Switch {
         class _export TaskFactory : public object {
         public:
           TaskFactory() {}
-
+          
           /// @cond
           TaskFactory(const TaskFactory& taskFactory) {}
           TaskFactory& operator=(const TaskFactory& taskFactory) {return *this;}

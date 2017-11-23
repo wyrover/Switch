@@ -34,7 +34,7 @@ namespace Switch {
           _property<string, _readonly> Name {
             _get {return this->name;}
           };
-
+          
         private:
           System::Guid guid;
           string name;

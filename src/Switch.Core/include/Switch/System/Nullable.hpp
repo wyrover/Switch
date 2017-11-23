@@ -19,7 +19,7 @@ namespace Switch {
     template <class T>
     struct Nullable : public IComparable, public object {
     public:
-      /// @brief Initializes a new instance of the Nullable<T> structure to the specified value. 
+      /// @brief Initializes a new instance of the Nullable<T> structure to the specified value.
       /// @param value A vlue type.
       /// @remarks The Nullable<T> constructor initializes the HasValue property of the new Nullable<T> object to true, and the Value property to the value of the value parameter.
       Nullable(T value) : value{value}, hasValue{true} {}
@@ -28,7 +28,7 @@ namespace Switch {
       Nullable() {}
       Nullable(NullPtr) {}
       Nullable(const Nullable& value) : value(value.value), hasValue(value.hasValue) {}
-
+      
       Nullable& operator=(const Nullable& value) {
         this->value = value.value;
         this->hasValue = value.hasValue;
@@ -83,7 +83,7 @@ namespace Switch {
       /// | Zero              | This instance is equal to obj.     |
       /// | Greater than zero | This instance is greater than obj. |
       int32 CompareTo(const IComparable& obj) const override {
-        if (!is<Nullable>(obj)) return -1;
+        if(!is<Nullable>(obj)) return -1;
         return CompareTo(as<Nullable<T>>(obj));
       }
       
@@ -97,8 +97,8 @@ namespace Switch {
       /// | Zero              | This instance is equal to obj.     |
       /// | Greater than zero | This instance is greater than obj. |
       int32 CompareTo(const Nullable& obj) const {
-        if (this->value < obj.value) return -1;
-        if (this->value > obj.value) return 1;
+        if(this->value < obj.value) return -1;
+        if(this->value > obj.value) return 1;
         return 0;
       }
       
@@ -111,17 +111,17 @@ namespace Switch {
       /// @param value The Nullable<T> to compare with the current Object.
       /// @return true if the specified value is equal to the current Nullable<T>. otherwise, false.
       bool Equals(const Nullable& value) const {
-        if (this->hasValue == false && value.hasValue == false)
+        if(this->hasValue == false && value.hasValue == false)
           return true;
         return this->hasValue == value.hasValue && this->value == value.value;
       }
-
+      
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
       int32 GetHashCode() const override {
         return ::GetHashCode(this->value);
       }
-
+      
       /// @brief Retrieves the value of the current Nullable<T> object, or the object's default value.
       /// @return The value of the Value property if the HasValue property is true; otherwise, the default value of the current Nullable<T> object. The type of the default value is the type argument of the current Nullable<T> object, and the value of the default value consists solely of binary zeroes.
       /// @remarks The GetValueOrDefault method returns a value even if the HasValue property is false (unlike the Value property, which throws an exception).
@@ -134,7 +134,7 @@ namespace Switch {
       /// @return The value of the Value property if the HasValue property is true; otherwise, the defaultValue parameter.
       /// @remarks The GetValueOrDefault method returns a value even if the HasValue property is false (unlike the Value property, which throws an exception).
       T GetValueOrDefault(T defaultValue) {
-        if (!this->hasValue)
+        if(!this->hasValue)
           return defaultValue;
         return this->value;
       }
@@ -143,7 +143,7 @@ namespace Switch {
       /// @return The text representation of the value of the current Nullable<T> object if the HasValue property is true, or an empty string ("") if the HasValue property is false.
       /// @remarks The ToString property returns the string yielded by calling the ToString property of the object returned by the Value property.
       String ToString() const override {
-        if (!this->hasValue)
+        if(!this->hasValue)
           return "";
         return Convert::ToString(this->value);
       }
@@ -153,7 +153,7 @@ namespace Switch {
       bool hasValue = false;
     };
   }
-
+  
   /// @brief Represents a value type that can be assigned null.
   /// @par Examples
   /// The following code example defines three rows of a table in the Microsoft Pubs sample database. The table contains two columns that are not nullable and two columns that are nullable.
@@ -163,14 +163,14 @@ namespace Switch {
   
   template<typename TT, typename T>
   bool is(const System::Nullable<T>& value) {
-    if (!value.HasValue)
+    if(!value.HasValue)
       return false;
     return is<TT>(value.Value());
   }
   
   template<typename TT, typename T>
   bool is(System::Nullable<T>& value) {
-    if (!value.HasValue)
+    if(!value.HasValue)
       return false;
     return is<TT>(value.Value());
   }

@@ -22,11 +22,11 @@ namespace Switch {
           /// @cond
           TabPage(const TabPage& tabPage) : Panel(tabPage) {}
           /// @endcond
-
+          
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(200, 100); }
-
+          
           void SetParent(ref<Control> parent) override;
         };
       }

@@ -15,7 +15,7 @@ namespace Switch {
       /// Switch.System.Drawing
       enum class GraphicsUnit {
         /// @brief Specifies the unit of measure for the given data.
-        World = 0 ,
+        World = 0,
         /// @brief Specifies 1/75 inch as the unit of measure.
         Display = 1,
         /// @brief Specifies a device pixel as the unit of measure.
@@ -37,7 +37,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Drawing::GraphicsUnit> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Drawing::GraphicsUnit::World, "World"}, {(int64)System::Drawing::GraphicsUnit::Display, "Display"}, {(int64)System::Drawing::GraphicsUnit::Pixel, "Pixel"}, {(int64)System::Drawing::GraphicsUnit::Point, "Point"}, { (int64)System::Drawing::GraphicsUnit::Inch, "Inch" }, { (int64)System::Drawing::GraphicsUnit::Document, "Document" }, { (int64)System::Drawing::GraphicsUnit::Millimeter, "Millimeter" },};
     flags = false;
   }

@@ -36,7 +36,7 @@ namespace Switch {
           /// @param index The zero-based index at which value should be inserted
           /// @param value The object to insert into the IList.
           virtual void Insert(int32 index, const T& value) = 0;
-
+          
           /// @brief Removes the IList item at the specified index.
           /// @param index The zero-based index of the item to remove
           virtual void RemoveAt(int32 index) = 0;
@@ -52,7 +52,7 @@ namespace Switch {
           /// @return T The element at the specified index.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
           virtual T& operator[](int32 index) = 0;
-
+          
         protected:
           /// @brief Gets a value indicating whether the IList has a fixed size.
           /// @return Boolean true if the IList has a fixed size; otherwise, false.

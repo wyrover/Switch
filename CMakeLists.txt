@@ -65,25 +65,10 @@ list(APPEND ASTYLE_ARGS
   --close-templates
   --suffix=none
   --recursive
-  ${CMAKE_SOURCE_DIR}/src/Switch/include/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/Switch/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.Core/include/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.Core/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System/include/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/include/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/include/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/include/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/include/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Core/include/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Core/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Framework/include/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Framework/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Main/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/src/*.h
+  ${CMAKE_SOURCE_DIR}/src/*.hpp
+  ${CMAKE_SOURCE_DIR}/src/*.cpp
+  ${CMAKE_SOURCE_DIR}/tests/*.hpp
   ${CMAKE_SOURCE_DIR}/tests/*.cpp
   )
 

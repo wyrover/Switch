@@ -50,7 +50,7 @@ namespace Switch {
   /// The following example shows how to declare and raise an event that uses EventHandler as the underlying delegate type.
   /// @include Event.cpp
   /// @ingroup Keywords
-  #define _event \
+#define _event \
   __event__
 }
 

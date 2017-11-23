@@ -66,7 +66,7 @@ namespace {
       ASSERT_EQ(args.GetNumber(), 10);
       ASSERT_EQ(args.GetArgs(), "Argument10");
       
-      ASSERT_TRUE((this->id==1)||(this->id==2));
+      ASSERT_TRUE((this->id == 1) || (this->id == 2));
       NotifyNumber++;
     }
     
@@ -98,19 +98,18 @@ namespace {
     ASSERT_EQ(3, DelegateReceiver::NotifyNumber);
   }
   
-  class DelegateClass : public object
-  {
+  class DelegateClass : public object {
   public:
     DelegateClass() : MemberValue(0)  {}
     
-    void MemberFctNoArgNoReturn() { MemberValue= 1; }
-    static void StaticFctNoArgNoReturn() { StaticValue= 2; }
+    void MemberFctNoArgNoReturn() { MemberValue = 1; }
+    static void StaticFctNoArgNoReturn() { StaticValue = 2; }
     
     Int32 MemberFctNoArgReturnInt32() { return 3; }
     static Int32 StaticFctNoArgReturnInt32() { return 4; }
     
-    void MemberFctArgInt32NoReturn(Int32 a1) { MemberValue= a1; }
-    static void StaticFctArgInt32NoReturn(Int32 a1) { StaticValue= a1; }
+    void MemberFctArgInt32NoReturn(Int32 a1) { MemberValue = a1; }
+    static void StaticFctArgInt32NoReturn(Int32 a1) { StaticValue = a1; }
     
     string MemberFctArgInt32ReturnString(Int32 a1) { return "{" + string::Join(", ", {a1.ToString()}) + "}"; }
     static string StaticFctArgInt32ReturnString(Int32 a1) { return "{" + string::Join(", ", {a1.ToString()}) + "}"; }

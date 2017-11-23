@@ -5,7 +5,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace {
-  
+
   TEST(NumericalFormatTest, P_SByte) {
     ASSERT_EQ("0.00 %", String::Format("{0:P}", SByte(0)));
     ASSERT_EQ("500.00 %", String::Format("{0:P}", SByte(5)));
@@ -437,7 +437,7 @@ C# program to generate those tests (replace *type*] by a typename) :
     {
       Single[] t = { 0.0f, 0.2132f, -0.9987f, 1.21f, 1233.0123f };
       String[] f = { "P", "P0", "P1", "P2", "P4" };
-      Generate<Single>(f, t);    
+      Generate<Single>(f, t);
 
       int a = 74;
     }

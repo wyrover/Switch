@@ -25,15 +25,15 @@ public:
   _property(const Getter& getter, const Setter& setter) : getter(getter), setter(setter) {}
   
   T Get() const {return this->getter();}
-  T operator ()() const {return this->getter();}
+  T operator()() const {return this->getter();}
   
-  operator T () const {return this->getter();}
+  operator T() const {return this->getter();}
   _property& operator=(const _property& _property) {this->setter(_property.getter()); return *this;}
   bool operator==(T value) const {return this->getter() == value;}
   bool operator !=(T value) const {return this->getter() != value;}
   
   T Set(T value) {this->setter(value); return this->getter();}
-  T operator ()(T value) {this->setter(value); return this->getter();}
+  T operator()(T value) {this->setter(value); return this->getter();}
   
   _property& operator=(T value) {this->setter(value); return *this;}
   void operator+=(T value) {this->setter(this->getter() + value);}
@@ -64,9 +64,9 @@ public:
   _property& operator=(const _property& _property) {return *this;}
   
   T Get() const {return this->getter();}
-  T operator ()() const {return this->getter();}
-  operator T () const { return this->getter(); }
-  operator T () { return this->getter(); }
+  T operator()() const {return this->getter();}
+  operator T() const { return this->getter(); }
+  operator T() { return this->getter(); }
   bool operator==(T value) const {return this->getter() == value;}
   bool operator !=(T value) const {return this->getter() != value;}
   
@@ -86,7 +86,7 @@ public:
   _property& operator=(const _property& _property) {return *this;}
   
   void Set(T value) {this->setter(value);}
-  void operator ()(T value) {this->setter(value);}
+  void operator()(T value) {this->setter(value);}
   void operator=(T value) {this->setter(value);}
   
 private:
@@ -99,17 +99,17 @@ private:
 namespace Switch {
   /// @brief #_readonly keyword represent a #_property read only attribute.
   /// @ingroup Keywords
-  #define _readonly \
+#define _readonly \
   _readonly
   
   /// @brief #_readwrite keyword represent a #_property read write attribute.
   /// @ingroup Keywords
-  #define _readwrite \
+#define _readwrite \
   _readwrite
   
   /// @brief #_writeonly keyword represent a #_property write only attribute.
   /// @ingroup Keywords
-  #define _writeonly \
+#define _writeonly \
   _writeonly
   
   /// @brief A #_property is a member that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be used as if they are public data members, but they are actually special methods called accessors. This enables data to be accessed easily and still helps promote the safety and flexibility of methods.
@@ -118,7 +118,7 @@ namespace Switch {
   /// This sample shows a Person class that has two properties: Name (string) and Age (int). Both properties are read/write.
   /// @include Properties.cpp
   /// @ingroup Keywords
-  #define _property \
+#define _property \
   _property
   
   /// @brief The get keyword defines an accessor method in a #_property or indexer that retrieves the value of the #_property or the indexer element.
@@ -139,7 +139,7 @@ namespace Switch {
   /// };
   /// @endcode
   /// @ingroup Keywords
-  #define _get \
+#define _get \
   [&]()
   
   /// @brief The set keyword defines an accessor method in a #_property or indexer that assigns the value of the #_property or the indexer element.
@@ -160,9 +160,9 @@ namespace Switch {
   /// };
   /// @endcode
   /// @ingroup Keywords
-  #define _set \
+#define _set \
   [&](const auto& value)
 }
 
 using namespace Switch;
-  
+

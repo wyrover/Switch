@@ -25,17 +25,17 @@ namespace Switch {
           /// @param array TThe one-dimensional Array that is the destination of the elements copied from the IProducerConsumerCollection<T>. The array must have zero-based indexing.
           /// @param index The zero-based index in array at which copying begins;
           virtual void CopyTo(System::Array<T>& array, int32 index) const = 0;
-
+          
           /// @brief Copies the elements contained in the IProducerConsumerCollection<T> to a new array.
           /// @return A new array containing the elements copied from the IProducerConsumerCollection<T>.
           virtual System::Array<T> ToArray() const = 0;
-
+          
           /// @brief Attempts to add an object to the IProducerConsumerCollection<T>.
           /// @param item The object to add to the IProducerConsumerCollection<T>.
           /// @return true if the object was added successfully; otherwise, false.
           /// @exception ArgumentException The item was invalid for this collection.
           virtual bool TryAdd(const T& item) = 0;
-
+          
           /// @brief Attempts to remove and return an object from the IProducerConsumerCollection<T>.
           /// @param result When this method returns, if the object was removed and returned successfully, item contains the removed object. If no object was available to be removed, the value is unspecified.
           /// @return true if an object Netwas removed and returned successfully; otherwise, false.

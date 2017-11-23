@@ -43,7 +43,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::MessageBoxIcon> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = { {(int64)System::Windows::Forms::MessageBoxIcon::None, "None"}, {(int64)System::Windows::Forms::MessageBoxIcon::Asterisk, "Asterisk"}, {(int64)System::Windows::Forms::MessageBoxIcon::Error, "Error"}, {(int64)System::Windows::Forms::MessageBoxIcon::Exclamation, "Exclamation"}, {(int64)System::Windows::Forms::MessageBoxIcon::Hand, "Hand"}, {(int64)System::Windows::Forms::MessageBoxIcon::Information, "Information"}, {(int64)System::Windows::Forms::MessageBoxIcon::Question, "Question"}, {(int64)System::Windows::Forms::MessageBoxIcon::Stop, "Stop"}, {(int64)System::Windows::Forms::MessageBoxIcon::Warning, "Warning"} };
     flags = false;
   }

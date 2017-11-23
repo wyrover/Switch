@@ -44,109 +44,109 @@ namespace Switch {
         public:
           /// @brief Initializes a new instance of the SerializationInfo interface.
           SerializationInfo() {}
-
-         /// @brief Initializes a new instance of the SerializationInfo interface.
+          
+          /// @brief Initializes a new instance of the SerializationInfo interface.
           SerializationInfo(const String& objectType) : objectType(objectType) {}
-
-
-         /// @brief Adds a String value into the SerializationInfo store.
-         /// @param name The name to associate with the value, so it can be deserialized later.
-         /// @param value The String value to serialize.
-         /// @exception ArgumentNullException name is null
+          
+          
+          /// @brief Adds a String value into the SerializationInfo store.
+          /// @param name The name to associate with the value, so it can be deserialized later.
+          /// @param value The String value to serialize.
+          /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const String& value);
-
+          
           /// @brief Adds a Boolean value into the SerializationInfo store.
           /// @param name The name to associate with the value, so it can be deserialized later.
           /// @param value The Boolean value to serialize.
           /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const Boolean& value);
-
+          
           /// @brief Adds a Byte value into the SerializationInfo store.
           /// @param name The name to associate with the value, so it can be deserialized later.
           /// @param value The Byte value to serialize.
           /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const Byte& value);
-
-         /// @brief Adds a SByte value into the SerializationInfo store.
-         /// @param name The name to associate with the value, so it can be deserialized later.
-         /// @param value The SByte value to serialize.
-         /// @exception ArgumentNullException name is null
+          
+          /// @brief Adds a SByte value into the SerializationInfo store.
+          /// @param name The name to associate with the value, so it can be deserialized later.
+          /// @param value The SByte value to serialize.
+          /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const SByte& value);
-
+          
           /// @brief Adds a Char value into the SerializationInfo store.
           /// @param name The name to associate with the value, so it can be deserialized later.
           /// @param value The Char value to serialize.
           /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const Char& value);
-
+          
           /// @brief Adds a DateTime value into the SerializationInfo store.
           /// @param name The name to associate with the value, so it can be deserialized later.
           /// @param value The DateTime value to serialize.
           /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const DateTime& value);
-
+          
           /// @brief Adds a Double value into the SerializationInfo store.
           /// @param name The name to associate with the value, so it can be deserialized later.
           /// @param value The Double value to serialize.
           /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const Double& value);
-
-         /// @brief Adds a Single value into the SerializationInfo store.
-         /// @param name The name to associate with the value, so it can be deserialized later.
-         /// @param value The Single value to serialize.
-         /// @exception ArgumentNullException name is null
+          
+          /// @brief Adds a Single value into the SerializationInfo store.
+          /// @param name The name to associate with the value, so it can be deserialized later.
+          /// @param value The Single value to serialize.
+          /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const Single& value);
-
+          
           /// @brief Adds a Int16 value into the SerializationInfo store.
           /// @param name The name to associate with the value, so it can be deserialized later.
           /// @param value The Int16 value to serialize.
           /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const Int16& value);
-
+          
           /// @brief Adds a Int32 value into the SerializationInfo store.
           /// @param name The name to associate with the value, so it can be deserialized later.
           /// @param value The Int32 value to serialize.
           /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const Int32& value);
-
+          
           /// @brief Adds a Int64 value into the SerializationInfo store.
           /// @param name The name to associate with the value, so it can be deserialized later.
           /// @param value The Int64 value to serialize.
           /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const Int64& value);
-
-         /// @brief Adds a UInt16 value into the SerializationInfo store.
-         /// @param name The name to associate with the value, so it can be deserialized later.
-         /// @param value The UInt16 value to serialize.
-         /// @exception ArgumentNullException name is null
+          
+          /// @brief Adds a UInt16 value into the SerializationInfo store.
+          /// @param name The name to associate with the value, so it can be deserialized later.
+          /// @param value The UInt16 value to serialize.
+          /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const UInt16& value);
-
-         /// @brief Adds a UInt32 value into the SerializationInfo store.
-         /// @param name The name to associate with the value, so it can be deserialized later.
-         /// @param value The UInt32 value to serialize.
-         /// @exception ArgumentNullException name is null
+          
+          /// @brief Adds a UInt32 value into the SerializationInfo store.
+          /// @param name The name to associate with the value, so it can be deserialized later.
+          /// @param value The UInt32 value to serialize.
+          /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const UInt32& value);
-
-         /// @brief Adds a UInt64 value into the SerializationInfo store.
-         /// @param name The name to associate with the value, so it can be deserialized later.
-         /// @param value The UInt64 value to serialize.
-         /// @exception ArgumentNullException name is null
+          
+          /// @brief Adds a UInt64 value into the SerializationInfo store.
+          /// @param name The name to associate with the value, so it can be deserialized later.
+          /// @param value The UInt64 value to serialize.
+          /// @exception ArgumentNullException name is null
           void AddValue(const String& name, const UInt64& value);
-
+          
           /// @brief Adds the specified ISerializable object into the SerializationInfo store, where it is associated with a specified name.
           /// @param name The name to associate with the value, so it can be deserialized later.
           /// @param value The value to be serialized. Any children of this object will automatically be serialized.
           /// @exception ArgumentNullException name or value is null
           /// @exception NotSupportedException value is not a ValueType or ISerializable.
           void AddValue(const String& name, const ISerializable& value, const String& typeName);
-
-         /// @brief Adds the specified ISerializable object into the SerializationInfo store, where it is associated with a specified name.
-         /// @param name The name to associate with the value, so it can be deserialized later.
-         /// @param value The value to be serialized. Any children of this object will automatically be serialized.
-         /// @exception ArgumentNullException name or value is null
-         /// @exception NotSupportedException value is not a ValueType or ISerializable.
+          
+          /// @brief Adds the specified ISerializable object into the SerializationInfo store, where it is associated with a specified name.
+          /// @param name The name to associate with the value, so it can be deserialized later.
+          /// @param value The value to be serialized. Any children of this object will automatically be serialized.
+          /// @exception ArgumentNullException name or value is null
+          /// @exception NotSupportedException value is not a ValueType or ISerializable.
           void AddValue(const String& name, const ISerializable& value);
-
+          
           void AddValue(const String& name, bool value);
           void AddValue(const String& name, byte value);
           void AddValue(const String& name, int16 value);
@@ -162,9 +162,9 @@ namespace Switch {
           void AddValue(const String& name, const System::Collections::Generic::IEnumerable<T>& value) {
             AddValue(name, refptr<object>(new Array<T>(value)), "System::Collections::Generic::IEnumerable");
           }
-
+          
           System::Collections::Generic::Enumerator<System::Collections::Generic::KeyValuePair<System::String, SerializationEntry>> GetEnumerator() const;
-
+          
           bool GetBoolean(const String& name) const;
           byte GetByte(const String& name) const;
           sbyte GetSByte(const String& name) const;
@@ -177,71 +177,71 @@ namespace Switch {
           char32 GetChar32(const String& name) const;
           float GetSingle(const String& name) const;
           double GetDouble(const String& name) const;
-
+          
           String GetString(const String& name) const;
-
+          
           const Object& GetObject(const String& name) const;
-
+          
           template<typename T>
           refptr<T> GetValue(const String& name) const {
             const SerializationEntry& entry = mItems[name];
-            if (is<System::Runtime::Serialization::SerializationInfo>(entry.Value().ToObject()))
+            if(is<System::Runtime::Serialization::SerializationInfo>(entry.Value().ToObject()))
               return T::Deserialize(as<System::Runtime::Serialization::SerializationInfo>(entry.Value()).ToObject());
             else
               throw System::Runtime::Serialization::SerializationException(_caller);
           }
-
+          
           const String& GetObjectType() const { return this->objectType; }
-
+          
           void SetObjectType(const String& objectType) { this->objectType = objectType; }
-
+          
           int32 GetMemberCount() { return mItems.Count; }
-
+          
         private:
           void AddValue(const String& name, refptr<Object> value, const String& typeName);
           String objectType;
           System::Collections::Generic::Dictionary<String, SerializationEntry> mItems;
         };
-
+        
         template<> refptr<System::Boolean>
         SerializationInfo::GetValue<System::Boolean>(const String& name) const;
-
+        
         template<> refptr<String>
         SerializationInfo::GetValue<String>(const String& name) const;
-
+        
         template<> refptr<System::Byte>
         SerializationInfo::GetValue<System::Byte>(const String& name) const;
-
+        
         template<> refptr<System::SByte>
         SerializationInfo::GetValue<System::SByte>(const String& name) const;
-
+        
         template<> refptr<System::Char>
         SerializationInfo::GetValue<System::Char>(const String& name) const;
-
+        
         template<> refptr<System::DateTime>
         SerializationInfo::GetValue<System::DateTime>(const String& name) const;
-
+        
         template<> refptr<System::Single>
         SerializationInfo::GetValue<System::Single>(const String& name) const;
-
+        
         template<> refptr<System::Double>
         SerializationInfo::GetValue<System::Double>(const String& name) const;
-
+        
         template<> refptr<System::Int16>
         SerializationInfo::GetValue<System::Int16>(const String& name) const;
-
+        
         template<> refptr<System::Int32>
         SerializationInfo::GetValue<System::Int32>(const String& name) const;
-
+        
         template<> refptr<System::Int64>
         SerializationInfo::GetValue<System::Int64>(const String& name) const;
-
+        
         template<> refptr<System::UInt16>
         SerializationInfo::GetValue<System::UInt16>(const String& name) const;
-
+        
         template<> refptr<System::UInt32>
         SerializationInfo::GetValue<System::UInt32>(const String& name) const;
-
+        
         template<> refptr<System::UInt64>
         SerializationInfo::GetValue<System::UInt64>(const String& name) const;
       }

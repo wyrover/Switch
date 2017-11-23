@@ -60,7 +60,7 @@ namespace Switch {
           typename std::conditional<std::is_base_of<System::IO::Stream, TTextWriterOrStream>::value, InitStream, InitTextWriter>::type init;
           init(textWriterOrStream, *this);
         }
-
+        
         TextWriterTraceListener(const string& path) {this->textWriter = new System::IO::StreamWriter(path);}
         
         /// @cond
@@ -77,22 +77,22 @@ namespace Switch {
         _property<System::IO::TextWriter&, _readonly> Writer {
           _get->System::IO::TextWriter& {return *this->textWriter;}
         };
-
+        
         void Write(const String& message) override {
-#if defined(DEBUG) || defined(TRACE)
-          if (this->NeedIndent)
+          #if defined(DEBUG) || defined(TRACE)
+          if(this->NeedIndent)
             this->WriteIndent();
           this->textWriter->Write(message);
-#endif
+          #endif
         }
-
+        
         void WriteLine(const String& message) override {
-#if defined(DEBUG) || defined(TRACE)
-          if (this->NeedIndent)
+          #if defined(DEBUG) || defined(TRACE)
+          if(this->NeedIndent)
             this->WriteIndent();
           this->textWriter->WriteLine(message);
           this->NeedIndent = true;
-#endif
+          #endif
         }
         
       private:

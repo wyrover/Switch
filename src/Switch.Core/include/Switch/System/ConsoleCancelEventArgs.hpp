@@ -22,7 +22,7 @@ namespace Switch {
       /// @param effects The type of drag-and-drop operation. Possible values are obtained by applying the bitwise OR (|) operation to the constants defined in the DragDropEffects.
       /// @param true if default pointers are used; otherwise, false.
       ConsoleCancelEventArgs(bool cancel, ConsoleSpecialKey specialKey) : cancel(cancel), specialKey(specialKey) {}
-
+      
       /// @cond
       ConsoleCancelEventArgs(const ConsoleCancelEventArgs& consoleCancelSpecialEventArgs) : cancel(consoleCancelSpecialEventArgs.cancel), specialKey(consoleCancelSpecialEventArgs.specialKey) {}
       ConsoleCancelEventArgs& operator=(const ConsoleCancelEventArgs& consoleCancelSpecialEventArgs) {

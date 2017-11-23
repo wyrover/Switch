@@ -32,13 +32,13 @@ namespace Switch {
         /// @remarks You must set at least the SetFileName() property before you start the process. The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the Folder Options dialog box, which is available through the operating system. The Advanced button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.
         /// @remarks Optionally, you can also set other properties before you start the process. The SetVerb() property supplies actions to take, such as "print", with the file indicated in the FileName property. The SetArguments() property supplies a way to pass command-line arguments to the file when the system opens it.
         ProcessStartInfo() {}
-
+        
         /// @brief Initializes a new instance of the ProcessStartInfo class and specifies a file name such as an application or document with which to start the process.
         /// @param fileName An application or document with which to start a process.
         /// @remarks The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the Folder Options dialog box, which is available through the operating system. The Advanced button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.
         /// @remarks You can change the FileName property after you call this constructor, up to the time that the process starts. After you start the process, changing these values has no effect.
         ProcessStartInfo(const String& fileName) {this->data->fileName = fileName;}
-
+        
         /// @brief Initializes a new instance of the ProcessStartInfo class, specifies an application file name with which to start the process, and specifies a set of command-line arguments to pass to the application.
         /// @param fileName  An application with which to start a process.
         /// @param arguments Command-line arguments to pass to the application when the process starts.
@@ -48,7 +48,7 @@ namespace Switch {
           this->data->fileName = fileName;
           this->data->arguments = arguments;
         }
-
+        
         /// @cond
         ProcessStartInfo(const ProcessStartInfo& psi) : data(psi.data) {}
         /// @endcond
@@ -59,7 +59,7 @@ namespace Switch {
           _get {return this->data->arguments;},
           _set {this->data->arguments = value;}
         };
-
+        
         /// @brief Gets a value indicating whether to start the process in a new window.
         /// @param createWindow true if the process should be started without creating a new window to contain it; otherwise, false. The default is false.
         /// @return Boolean true if the process should be started without creating a new window to contain it; otherwise, false. The default is false.
@@ -68,29 +68,29 @@ namespace Switch {
           _get {return this->data->createNoWindow;},
           _set {this->data->createNoWindow = value;}
         };
-
+        
         /// @brief Gets a value that identifies the domain to use when starting the process.
         /// @return string The Active Directory domain to use when starting the process. The domain property is primarily of interest to users within enterprise environments that use Active Directory.
         _property<string> Domain {
           _get {return this->data->domain;},
           _set {this->data->domain = value;}
         };
-
+        
         /// @brief Gets the environment variables that apply to this process and its child processes.
         /// @return IDictionary<string, string> A generic dictionary containing the environment variables that apply to this process and its child processes.
         /// @remarks The environment variables contain search paths for files, directories for temporary files, application-specific options, and other similar information. Although you cannot directly set the Environment property, you can modify the generic dictionary returned by the property. For example, the following code adds a TempPath environment variable: myProcess.StartInfo.Environment.Add("TempPath", "C:\\Temp"). You must set the UseShellExecute property to false to start the process after changing the Environment property. If UseShellExecute is true, an InvalidOperationException is thrown when the Start method is called.
         /// @remarks On Switch Framework applications, using the Environment property is the same as using the EnvironmentVariables property.
         _property<Collections::Generic::IDictionary<string, string>&, _readonly> Environment {
-          _get->Collections::Generic::IDictionary<string, string>&{ return this->data->environmentVariables; }
+          _get->Collections::Generic::IDictionary<string, string>& { return this->data->environmentVariables; }
         };
-
+        
         /// @brief Gets search paths for files, directories for temporary files, application-specific options, and other similar information.
         /// @return Dictionary<string, string> A string dictionary that provides environment variables that apply to this process and child processes. The default is empty.
         /// @remarks Although you cannot set the EnvironmentVariables property, you can modify the StringDictionary returned by the property. For example, the following code adds a TempPath environment variable: myProcess.StartInfo.EnvironmentVariables.Add("TempPath", "C:\\Temp"). You must set the UseShellExecute property to false to start the process after changing the EnvironmentVariables property. If UseShellExecute is true, an InvalidOperationException is thrown when the Start method is called.
         _property<Collections::Generic::Dictionary<string, string>&, _readonly> EnvironmentVariables {
-          _get->Collections::Generic::Dictionary<string, string>&{ return this->data->environmentVariables; }
+          _get->Collections::Generic::Dictionary<string, string>& { return this->data->environmentVariables; }
         };
-
+        
         /// @brief Gets or sets a value indicating whether an error dialog box is displayed to the user if the process cannot be started.
         /// @return bool true if an error dialog box should be displayed on the screen if the process cannot be started; otherwise, false. The default is false.
         /// @note UseShellExecute must be true if you want to set ErrorDialog to true.
@@ -281,7 +281,7 @@ namespace Switch {
         _property<ProcessWindowStyle> WindowStyle {
           _get {return this->data->windowStyle;},
           _set {
-            if (!Enum<ProcessWindowStyle>::IsDefined(value))
+            if(!Enum<ProcessWindowStyle>::IsDefined(value))
               throw System::ComponentModel::InvalidEnumArgumentException(_caller);
             this->data->windowStyle = value;
           }
@@ -299,7 +299,7 @@ namespace Switch {
           _get {return this->data->workingDirectory;},
           _set {this->data->workingDirectory = value;}
         };
-
+        
       private:
         string GetPasswordInClearText() const;
         void SetPasswordInClearText(const string& password);

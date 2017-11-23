@@ -11,7 +11,7 @@ using namespace System::Windows::Forms;
 
 extern HINSTANCE __instance;
 
-namespace{
+namespace {
   static System::Collections::Generic::Dictionary<intptr, delegate<void>> ticks;
   void CALLBACK TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
     ticks[idEvent]();

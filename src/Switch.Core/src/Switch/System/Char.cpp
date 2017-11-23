@@ -88,9 +88,9 @@ bool Char::IsWhiteSpace(const String& value, int32 index) {
 }
 
 char32 Char::Parse(const String& value) {
-  if (value.Length() != 1)
+  if(value.Length() != 1)
     throw FormatException(_caller);
-
+    
   return value[0];
 }
 
@@ -114,7 +114,7 @@ bool Char::ToBoolean(const IFormatProvider& provider) const {
 }
 
 byte Char::ToByte(const IFormatProvider& provider) const {
-  if (this->value > (char32)Byte::MaxValue)
+  if(this->value > (char32)Byte::MaxValue)
     throw OverflowException(_caller);
   return static_cast<byte>(this->value);
 }
@@ -124,25 +124,25 @@ DateTime Char::ToDateTime(const IFormatProvider& provider) const {
 }
 
 int16 Char::ToInt16(const IFormatProvider& provider) const {
-  if (this->value > (char32)Int16::MaxValue)
+  if(this->value > (char32)Int16::MaxValue)
     throw OverflowException(_caller);
   return static_cast<int16>(this->value);
 }
 
 uint16 Char::ToUInt16(const IFormatProvider& provider) const {
-  if (this->value > (char32)UInt16::MaxValue)
+  if(this->value > (char32)UInt16::MaxValue)
     throw OverflowException(_caller);
   return static_cast<uint16>(this->value);
 }
 
 sbyte Char::ToSByte(const IFormatProvider& provider) const {
-  if (this->value > static_cast<uint32>(SByte::MaxValue)) // MaxValue has to be positive...
+  if(this->value > static_cast<uint32>(SByte::MaxValue))  // MaxValue has to be positive...
     throw OverflowException(_caller);
   return static_cast<sbyte>(this->value);
 }
 
 float Char::ToSingle(const IFormatProvider& provider) const {
-  if (this->value > (char32)Single::MaxValue)
+  if(this->value > (char32)Single::MaxValue)
     throw OverflowException(_caller);
   return static_cast<float>(this->value);
 }

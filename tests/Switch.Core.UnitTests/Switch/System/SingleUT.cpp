@@ -70,7 +70,7 @@ namespace {
     ASSERT_FALSE(Single::IsPositiveInfinity(Single::NegativeInfinity));
     ASSERT_TRUE(Single::IsPositiveInfinity(Single::PositiveInfinity));
   }
-
+  
   TEST(SingleTest, IsNaN) {
     ASSERT_FALSE(Single::IsNaN(0.0f));
     ASSERT_FALSE(Single::IsNaN(1.0f));

@@ -10,32 +10,32 @@ namespace {
 
 EventWaitHandle::EventWaitHandle(bool initialState, EventResetMode mode, const string& name) {
   bool createdNew = true;
-  if (name != "")
+  if(name != "")
     this->operator =(events.AddOrCreate(name, createdNew));
-  if (createdNew) {
+  if(createdNew) {
     *this->mode = mode;
     *this->name = name;
-    if (initialState)
+    if(initialState)
       this->Set();
   }
 }
 
 EventWaitHandle::EventWaitHandle(bool initialState, EventResetMode mode, const string& name, bool& createdNew) {
   createdNew = true;
-  if (name != "")
+  if(name != "")
     this->operator =(events.AddOrCreate(name, createdNew));
-  if (createdNew) {
+  if(createdNew) {
     *this->mode = mode;
     *this->name = name;
-    if (initialState)
+    if(initialState)
       this->Set();
   }
 }
 
 void EventWaitHandle::Close() {
-  if (this->guard == null)
+  if(this->guard == null)
     return;
-  if (this->name() != "")
+  if(this->name() != "")
     ::events.Remove(this->name());
   this->name.Reset();
   this->guard.Reset();
@@ -45,7 +45,7 @@ void EventWaitHandle::Close() {
 }
 
 EventWaitHandle EventWaitHandle::OpenExisting(const string& name) {
-  if (!events.Conatains(name))
+  if(!events.Conatains(name))
     throw WaitHandleCannotBeOpenedException(_caller);
   bool createNew;
   EventWaitHandle value = events.AddOrCreate(name, createNew);

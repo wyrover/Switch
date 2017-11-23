@@ -79,9 +79,9 @@ namespace Switch {
           _property<bool> ExclusiveAddressUse {
             _get {return this->data->serverSocket.ExclusiveAddressUse(); },
             _set {
-              if (this->data->active)
+              if(this->data->active)
                 throw ApplicationException(_caller); // tcplistener must be stopped
-
+                
               this->data->serverSocket.ExclusiveAddressUse = value;
             }
           };
@@ -94,7 +94,7 @@ namespace Switch {
           _property<const EndPoint&, _readonly> LocalEndPoint {
             _get->const EndPoint& { return this->data->serverSocket.LocalEndPoint(); }
           };
-
+          
           /// @brief Gets the underlying network Socket.
           /// @return The underlying Socket.
           /// @remarks TcpListener creates a Socket to listen for incoming client connection requests. Classes deriving from TcpListener can use this property to get this Socket.
@@ -105,12 +105,12 @@ namespace Switch {
           _property<Socket, _readonly> Server {
             _get {return this->data->serverSocket; }
           };
-
+          
           /// @brief Creates a new TcpListener instance to listen on the specified port.
           /// @param port The port on which to listen for incoming connection attempts.
           /// @return TcpListener A new TcpListener instance to listen on the specified port.
           static TcpListener Create(int32 port) { return TcpListener(IPAddress::Any, port); }
-
+          
           /// @brief Accepts a pending connection request.
           /// @return A Socket used to send and receive data.
           /// @exception InvalidOperationException The listener has not been started with a call to Start.

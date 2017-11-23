@@ -176,11 +176,11 @@ namespace {
   }
   
   TEST_F(PathTest, GetFileNameFromAbsolutePathFileWithExtension) {
-    ASSERT_EQ("MyFile.ext", System::IO::Path::GetFileName( "/Path/MyFile.ext"));
+    ASSERT_EQ("MyFile.ext", System::IO::Path::GetFileName("/Path/MyFile.ext"));
   }
   
   TEST_F(PathTest, GetFileNameFromAbsoluteMultiplePathFileWithExtension) {
-    ASSERT_EQ("MyFile.ext", System::IO::Path::GetFileName( "/Path/Path2/Path3/MyFile.ext"));
+    ASSERT_EQ("MyFile.ext", System::IO::Path::GetFileName("/Path/Path2/Path3/MyFile.ext"));
   }
   
   TEST_F(PathTest, GetFileNameFromAbsolutePathFilePatternWithExtension) {
@@ -260,7 +260,7 @@ namespace {
   }
   
   TEST_F(PathTest, DirectorySeparatorChar) {
-    if (Environment::OSVersion().Platform() == PlatformID::Unix || Environment::OSVersion().Platform() == PlatformID::MacOSX || Environment::OSVersion().Platform() == PlatformID::IOs || Environment::OSVersion().Platform() == PlatformID::Android)
+    if(Environment::OSVersion().Platform() == PlatformID::Unix || Environment::OSVersion().Platform() == PlatformID::MacOSX || Environment::OSVersion().Platform() == PlatformID::IOs || Environment::OSVersion().Platform() == PlatformID::Android)
       ASSERT_EQ(char32('/'), System::IO::Path::DirectorySeparatorChar());
     else
       ASSERT_EQ(char32('\\'), System::IO::Path::DirectorySeparatorChar());

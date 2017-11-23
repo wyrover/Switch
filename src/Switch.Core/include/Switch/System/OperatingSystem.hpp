@@ -70,16 +70,16 @@ namespace Switch {
           String operatingSystem;
           
           switch(this->platform) {
-            case PlatformID::Win32S: operatingSystem = "Microsoft Win32S"; break;
-            case PlatformID::Win32Windows: operatingSystem = "Microsoft Windows 98"; break;
-            case PlatformID::Win32NT: operatingSystem = "Microsoft Windows NT"; break;
-            case PlatformID::WinCE: operatingSystem = "Microsoft Windows CE"; break;
-            case PlatformID::Unix: operatingSystem = "Unix"; break;
-            case PlatformID::Xbox: operatingSystem = "Xbox"; break;
-            case PlatformID::MacOSX: operatingSystem = "macOS"; break;
-            case PlatformID::IOs: operatingSystem = "IOs"; break;
-            case PlatformID::Android: operatingSystem = "Android"; break;
-            case PlatformID::Unknown: operatingSystem = "<Unknown>"; break;
+          case PlatformID::Win32S: operatingSystem = "Microsoft Win32S"; break;
+          case PlatformID::Win32Windows: operatingSystem = "Microsoft Windows 98"; break;
+          case PlatformID::Win32NT: operatingSystem = "Microsoft Windows NT"; break;
+          case PlatformID::WinCE: operatingSystem = "Microsoft Windows CE"; break;
+          case PlatformID::Unix: operatingSystem = "Unix"; break;
+          case PlatformID::Xbox: operatingSystem = "Xbox"; break;
+          case PlatformID::MacOSX: operatingSystem = "macOS"; break;
+          case PlatformID::IOs: operatingSystem = "IOs"; break;
+          case PlatformID::Android: operatingSystem = "Android"; break;
+          case PlatformID::Unknown: operatingSystem = "<Unknown>"; break;
           }
           
           return String::Format("{0} {1} {2}", operatingSystem, this->version, this->ServicePack).TrimEnd(' ');

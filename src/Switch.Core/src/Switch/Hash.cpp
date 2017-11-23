@@ -16,7 +16,7 @@
 #include "../../include/Switch/System/UInt64.hpp"
 
 int32 Switch::GetHashCode(const void* value) {
-  return int32(int64(value) & 0x00000000FFFFFFFF) ^ int32((int64(value)>>32) & 0x00000000FFFFFFFF);
+  return int32(int64(value) & 0x00000000FFFFFFFF) ^ int32((int64(value) >> 32) & 0x00000000FFFFFFFF);
 }
 
 int32 Switch::GetHashCode(const NullPtr&) {

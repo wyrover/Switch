@@ -26,7 +26,7 @@ namespace Switch {
     public:
       /// @brief Function pointer type
       using Function = std::function<Result(Arguments...)>;
-
+      
       /// @brief Function pointer type
       using FunctionPointer = Result(*)(Arguments...);
       
@@ -60,7 +60,7 @@ namespace Switch {
       /// @cond
       template<typename Fn>
       Delegate(Fn function) {this->functions.push_back(function);}
-
+      
       template<typename Object, typename A1>
       Delegate(const Object& object, Result(Object::*member)(A1) const) {
         this->functions.push_back(Function(std::bind(member, const_cast<Object*>(&object), std::placeholders::_1)));
@@ -166,13 +166,13 @@ namespace Switch {
       /// @param arguments The paramter list.
       /// @return Result The return value.
       Result operator()(Arguments... arguments) const {
-        if (this->functions.size() == 0) return Result();
-        for(size_t index = 0; index < this->functions.size()-1; index++) {
-          if (this->functions[index] == null)
+        if(this->functions.size() == 0) return Result();
+        for(size_t index = 0; index < this->functions.size() - 1; index++) {
+          if(this->functions[index] == null)
             throw NullReferenceException(_caller);
           this->functions[index](arguments...);
         }
-        if (this->functions.back() == null)
+        if(this->functions.back() == null)
           throw NullReferenceException(_caller);
         return this->functions.back()(arguments...);
       }
@@ -189,8 +189,8 @@ namespace Switch {
       /// @remarks The invocation list can contain duplicate entries; that is, entries that refer to the same method on the same object.
       static Delegate Combine(const System::Array<Delegate>& delegates) {
         Delegate result;
-        for (const Delegate& delegate : delegates)
-          for (const Function& function : delegate.functions)
+        for(const Delegate& delegate : delegates)
+          for(const Function& function : delegate.functions)
             result.functions.push_back(function);
         return result;
       }
@@ -213,11 +213,11 @@ namespace Switch {
       /// @remarks If the invocation list of value matches a contiguous set of elements in the invocation list of source, then the invocation list of value is said to occur within the invocation list of source. If the invocation list of value occurs more than once in the invocation list of source, the last occurrence is removed.
       static Delegate Remove(const Delegate& source, const Delegate& value) {
         Delegate result = source;
-        for (const Function& function : value.functions) {
-          if (Find(result.functions.begin(), result.functions.end(), function) != result.functions.end()) {
-            for (typename std::vector<Function>::reverse_iterator iterator = result.functions.rbegin(); iterator != result.functions.rend(); ++iterator) {
-              if (AreEquals(*iterator, function)) {
-                result.functions.erase((iterator+1).base());
+        for(const Function& function : value.functions) {
+          if(Find(result.functions.begin(), result.functions.end(), function) != result.functions.end()) {
+            for(typename std::vector<Function>::reverse_iterator iterator = result.functions.rbegin(); iterator != result.functions.rend(); ++iterator) {
+              if(AreEquals(*iterator, function)) {
+                result.functions.erase((iterator + 1).base());
                 break;
               }
             }
@@ -233,12 +233,11 @@ namespace Switch {
       /// @remarks If the invocation list of value matches a contiguous set of elements in the invocation list of source, then the invocation list of value is said to occur within the invocation list of source. If the invocation list of value occurs more than once in the invocation list of source, all occurrences are removed.
       static Delegate RemoveAll(const Delegate& source, const Delegate& value) {
         Delegate result = source;
-        for (const Function& function : value.functions) {
-          if (Find(result.functions.begin(), result.functions.end(), function) != result.functions.end()) {
-            for (typename std::vector<Function>::reverse_iterator iterator = result.functions.rbegin(); iterator != result.functions.rend(); ++iterator) {
-              if (AreEquals(*iterator, function)) {
-                result.functions.erase((iterator+1).base());
-              }
+        for(const Function& function : value.functions) {
+          if(Find(result.functions.begin(), result.functions.end(), function) != result.functions.end()) {
+            for(typename std::vector<Function>::reverse_iterator iterator = result.functions.rbegin(); iterator != result.functions.rend(); ++iterator) {
+              if(AreEquals(*iterator, function))
+                result.functions.erase((iterator + 1).base());
             }
           }
         }
@@ -249,13 +248,13 @@ namespace Switch {
       /// @param value The DelegateType to compare.
       /// @return bool true if the value of this instance is the same as the value of value; otherwise, false.
       bool operator==(const Delegate& delegate) const {
-        if (this->functions.size () != delegate.functions.size())
+        if(this->functions.size() != delegate.functions.size())
           return false;
-        
-        for (size_t index = 0; index < this->functions.size(); index++)
-          if (!AreEquals(this->functions[index], delegate.functions[index]))
+          
+        for(size_t index = 0; index < this->functions.size(); index++)
+          if(!AreEquals(this->functions[index], delegate.functions[index]))
             return false;
-        
+            
         return true;
       }
       
@@ -297,8 +296,8 @@ namespace Switch {
       }
       
       static typename std::vector<Function>::const_iterator Find(typename std::vector<Function>::const_iterator begin, typename std::vector<Function>::const_iterator end, const Function& function) {
-        for (typename std::vector<Function>::const_iterator iterator = begin; iterator != end; ++iterator)
-          if (AreEquals(*iterator, function))
+        for(typename std::vector<Function>::const_iterator iterator = begin; iterator != end; ++iterator)
+          if(AreEquals(*iterator, function))
             return iterator;
         return end;
       }
@@ -306,7 +305,7 @@ namespace Switch {
       std::vector<Function> functions;
     };
   }
-
+  
   /// @brief Represents a delegate, which is a data structure that refers to a static method or to a class instance and an instance method of that class.
   /// @par Examples
   /// The following example shows how to define a delegate named myMethodDelegate. Instances of this delegate are created for an instance method and a static method of the nested mySampleClass class. The delegate for the instance method requires an instance of mySampleClass. The mySampleClass instance is saved in a variable named mySC.
@@ -323,7 +322,7 @@ namespace Switch {
   /// };
   /// @endcode
   /// @ingroup Keywords
-  #define _delegate \
+#define _delegate \
   [&]
 }
 

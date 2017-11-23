@@ -24,7 +24,7 @@ namespace Switch {
         /// @cond
         EventHandlerList(const EventHandlerList& eventHandlerList) = default;
         /// @endcond
-
+        
         delegate<Result, Arguments...> operator[](ref<object>) {}
         
       private:

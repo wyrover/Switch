@@ -18,13 +18,13 @@ namespace Switch {
         static EventArgs empty;
         return empty;
       }
-
+      
       /// @brief Create a new instance of class EventArgs
       EventArgs() {}
       
       /// @brief Create a new instance of class EventArgs
       EventArgs(const EventArgs&) {}
-   };
+    };
   }
 }
 

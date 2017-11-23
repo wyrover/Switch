@@ -10,7 +10,7 @@ using namespace System;
 using namespace Microsoft::Win32;
 
 RegistryKey::RegistryHandle::RegistryHandle(intptr key, const string& name) {
-  if (Native::RegistryApi::CreateSubKey(key, name, this->handle) != 0)
+  if(Native::RegistryApi::CreateSubKey(key, name, this->handle) != 0)
     throw IO::IOException(_caller);
 }
 
@@ -44,48 +44,48 @@ void RegistryKey::Close() {
 
 RegistryKey RegistryKey::CreateSubKey(const string& subKey, RegistryKeyPermissionCheck permissionCheck) {
   RegistryKey key = OpenSubKey(subKey, permissionCheck);
-  if (key != RegistryKey::Null())
+  if(key != RegistryKey::Null())
     return key;
-
-  if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
+    
+  if(this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
     throw UnauthorizedAccessException(_caller);
-
+    
   key.handle = new RegistryHandle(this->handle->Handle(), subKey);
   key.path = string::Format("{0}\\{1}", this->name, subKey);
   key.name = string::Format("{0}\\{1}", this->name, subKey);
   key.permission = permissionCheck == RegistryKeyPermissionCheck::Default ? this->permission : permissionCheck;
-
+  
   return key;
 }
 
 void  RegistryKey::DeleteSubKey(const string& subKey, bool throwOnMissingSubKey) {
-  if (subKey == "")
+  if(subKey == "")
     throw InvalidOperationException(_caller);
-
-  if (IsBaseKey(subKey))
+    
+  if(IsBaseKey(subKey))
     throw ArgumentException(_caller);
-
+    
   //if (Native::RegistryApi::NumberOfSubKey)
-
+  
   int32 result = Native::RegistryApi::DeleteSubKey(this->handle->Handle(), subKey);
-
-  if (result == 2 && throwOnMissingSubKey)
+  
+  if(result == 2 && throwOnMissingSubKey)
     throw ArgumentException(_caller);
-
-  if (result != 0 && result != 2)
+    
+  if(result != 0 && result != 2)
     throw IO::IOException(_caller);
 }
 
 void  RegistryKey::DeleteSubKeyTree(const string& subKey, bool throwOnMissingSubKey) {
-  if (subKey == "" || IsBaseKey(subKey))
+  if(subKey == "" || IsBaseKey(subKey))
     throw ArgumentException(_caller);
-
+    
   int32 result = Native::RegistryApi::DeleteTree(this->handle->Handle(), subKey);
-
-  if (result == 2 && throwOnMissingSubKey)
+  
+  if(result == 2 && throwOnMissingSubKey)
     throw ArgumentException(_caller);
-
-  if (result != 0 && result != 2)
+    
+  if(result != 0 && result != 2)
     throw IO::IOException(_caller);
 }
 
@@ -93,24 +93,24 @@ namespace {
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const Array<byte>& value) {
     Native::RegistryApi::SetValue(key, keyName, kind, (const byte*)value.Data(), value.Length());
   }
-
+  
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const Int32& value) {
     int32 i = value;
     Native::RegistryApi::SetValue(key, keyName, kind, (const byte*)&i, 4);
   }
-
+  
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const Int64& value) {
     int64 i = value;
     Native::RegistryApi::SetValue(key, keyName, kind, (const byte*)&i, 8);
   }
-
+  
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const Array<string>& values) {
     int32 length = 1;
-    for (auto& value : values)
+    for(auto& value : values)
       length += (int32)value.w_str().length() + 1;
     std::wstring str(length, '\0');
     int32 index = 0;
-    for (auto& value : values) {
+    for(auto& value : values) {
       std::wstring s = value.w_str();
       str = str.replace(index, s.length(), s);
       index += (int32)s.length() + 1;
@@ -118,12 +118,12 @@ namespace {
     str[index] = 0;
     Native::RegistryApi::SetValue(key, keyName, kind, (const byte*)str.c_str(), (int32)str.length() * sizeof(wchar_t));
   }
-
+  
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const string& value) {
     std::wstring str = value.w_str();
     Native::RegistryApi::SetValue(key, keyName, kind, (const byte*)str.c_str(), (int32)str.length() * sizeof(wchar_t));
   }
-
+  
   void SetValue(intptr key, const string& keyName, RegistryValueKind kind, const object& value) {
     std::wstring str = value.ToString().w_str();
     Native::RegistryApi::SetValue(key, keyName, kind, (const byte*)str.c_str(), (int32)str.length() * sizeof(wchar_t));
@@ -131,8 +131,8 @@ namespace {
 }
 
 void RegistryKey::Flush() {
-  for (const RegistryKeyValue& registryKeyValue : this->values.Values()) {
-    switch (registryKeyValue.Kind()) {
+  for(const RegistryKeyValue& registryKeyValue : this->values.Values()) {
+    switch(registryKeyValue.Kind()) {
     case RegistryValueKind::String: ::SetValue(this->handle->Handle(), registryKeyValue.Key(), registryKeyValue.Kind(), as<string>(registryKeyValue.InternalValue())); break;
     case RegistryValueKind::ExpandString: ::SetValue(this->handle->Handle(), registryKeyValue.Key(), registryKeyValue.Kind(), as<string>(registryKeyValue.InternalValue())); break;
     case RegistryValueKind::MultiString: ::SetValue(this->handle->Handle(), registryKeyValue.Key(), registryKeyValue.Kind(), as<System::Array<string>>(registryKeyValue.InternalValue())); break;
@@ -148,24 +148,24 @@ namespace {
   const Array<byte>& BytesToBinary(const Array<byte>& bytes) {
     return bytes;
   }
-
+  
   Int32 BytesToDWord(const Array<byte>& bytes) {
-    return Int32((int32)*bytes.Data());
+    return Int32((int32) * bytes.Data());
   }
-
+  
   Array<string> BytesToMultiString(const Array<byte>& bytes) {
     Array<string> values;
-    for (wchar* line = (wchar*)bytes.Data(); line[0] != 0; line += wcslen(line) + 1) {
+    for(wchar* line = (wchar*)bytes.Data(); line[0] != 0; line += wcslen(line) + 1) {
       Array<>::Resize(values, values.Length + 1);
       values[values.Length - 1] = line;
     }
     return values;
   }
-
+  
   Int64 BytesToQWord(const Array<byte>& bytes) {
-    return Int64((int64)*bytes.Data());
+    return Int64((int64) * bytes.Data());
   }
-
+  
   string BytesToString(const Array<byte>& bytes) {
     return string((const wchar*)bytes.Data());
   }
@@ -173,21 +173,21 @@ namespace {
 
 void RegistryKey::Load() {
   this->values.Clear();
-
+  
   int32 subKeyNumber = 0;
   int32 keyvalueNumber = 0;
-  if (Native::RegistryApi::QueryInfoKey(this->handle->Handle(), subKeyNumber, keyvalueNumber) != 0)
+  if(Native::RegistryApi::QueryInfoKey(this->handle->Handle(), subKeyNumber, keyvalueNumber) != 0)
     return;
-  
-  for (int32 index = 0; index < keyvalueNumber; index++) {
+    
+  for(int32 index = 0; index < keyvalueNumber; index++) {
     string keyName;
     RegistryValueKind kind;
-    if (Native::RegistryApi::EnumValues(this->handle->Handle(), index, keyName, kind) != 0)
+    if(Native::RegistryApi::EnumValues(this->handle->Handle(), index, keyName, kind) != 0)
       break;
     Array<byte> data;
     Native::RegistryApi::GetValue(this->handle->Handle(), keyName, kind, data);
-
-    switch (kind) {
+    
+    switch(kind) {
     case RegistryValueKind::Binary: this->values[keyName.ToLower()] = RegistryKeyValue(keyName, BytesToBinary(data), kind); break;
     case RegistryValueKind::MultiString: this->values[keyName.ToLower()] = RegistryKeyValue(keyName, BytesToMultiString(data), kind); break;
     case RegistryValueKind::DWord: this->values[keyName.ToLower()] = RegistryKeyValue(keyName, BytesToDWord(data), kind); break;
@@ -199,31 +199,31 @@ void RegistryKey::Load() {
 
 RegistryKey RegistryKey::OpenSubKey(const string& subKeyName, RegistryKeyPermissionCheck permissionCheck) {
   intptr handle = 0;
-
-  if (this->handle == null)
+  
+  if(this->handle == null)
     throw ArgumentNullException(_caller);
-
-  if (Native::RegistryApi::OpenSubKey(this->handle->Handle(), subKeyName.Data(), handle) != 0)
+    
+  if(Native::RegistryApi::OpenSubKey(this->handle->Handle(), subKeyName.Data(), handle) != 0)
     return RegistryKey::Null();
-
+    
   RegistryKey key;
   key.name = this->name + "\\" + subKeyName;
   key.permission = permissionCheck == RegistryKeyPermissionCheck::Default ? this->permission : permissionCheck;
   key.handle = new RegistryHandle(handle);
   key.Load();
-
+  
   return key;
 }
 
 Array<string> RegistryKey::GetSubKeyNames() {
   int32 subKeyNumber = 0;
   int32 keyvalueNumber = 0;
-  if (Native::RegistryApi::QueryInfoKey(this->handle->Handle(), subKeyNumber, keyvalueNumber) != 0)
+  if(Native::RegistryApi::QueryInfoKey(this->handle->Handle(), subKeyNumber, keyvalueNumber) != 0)
     return Array<string>();
-
+    
   Array<string> subKeys(subKeyNumber);
-  for (int32 index = 0; index < subKeyNumber; index++)
-    if (Native::RegistryApi::EnumKey(this->handle->Handle(), index, subKeys[index]) != 0)
+  for(int32 index = 0; index < subKeyNumber; index++)
+    if(Native::RegistryApi::EnumKey(this->handle->Handle(), index, subKeys[index]) != 0)
       break;
   return subKeys;
 }

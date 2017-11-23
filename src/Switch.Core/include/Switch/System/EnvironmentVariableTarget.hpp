@@ -25,7 +25,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::EnvironmentVariableTarget> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::EnvironmentVariableTarget::Process, "Process"}, {(int64)System::EnvironmentVariableTarget::User, "User"}, {(int64)System::EnvironmentVariableTarget::Machine, "Machine"}};
     flags = false;
   }

@@ -12,7 +12,7 @@ namespace {
   }
   
   TEST(Int32Test, MinValue) {
-    ASSERT_EQ((-2147483647)-1, Int32::MinValue); //  VS2012 does not handle -2147483648 correctly
+    ASSERT_EQ((-2147483647) - 1, Int32::MinValue); //  VS2012 does not handle -2147483648 correctly
   }
   
   TEST(Int32Test, DefaultValue) {
@@ -50,14 +50,14 @@ namespace {
   }
   
   TEST(Int32Test, Parse_Spaces) {
-    ASSERT_EQ(5,Int32::Parse(" 5"));
-    ASSERT_EQ(5,Int32::Parse("     5"));
-    ASSERT_EQ(5,Int32::Parse("5 "));
-    ASSERT_EQ(51,Int32::Parse("51     "));
-    ASSERT_EQ(5,Int32::Parse(" 5      "));
-    ASSERT_EQ(52,Int32::Parse("        +52 "));
-    ASSERT_EQ(52,Int32::Parse("        +052 "));
-    ASSERT_EQ(-52,Int32::Parse("        -52 "));
+    ASSERT_EQ(5, Int32::Parse(" 5"));
+    ASSERT_EQ(5, Int32::Parse("     5"));
+    ASSERT_EQ(5, Int32::Parse("5 "));
+    ASSERT_EQ(51, Int32::Parse("51     "));
+    ASSERT_EQ(5, Int32::Parse(" 5      "));
+    ASSERT_EQ(52, Int32::Parse("        +52 "));
+    ASSERT_EQ(52, Int32::Parse("        +052 "));
+    ASSERT_EQ(-52, Int32::Parse("        -52 "));
   }
   
   TEST(Int32Test, Parse_FormatException) {
@@ -83,52 +83,52 @@ namespace {
   }
   
   TEST(Int32Test, Parse_Binary) {
-    ASSERT_EQ(0, Int32::Parse("0",2));
-    ASSERT_EQ(1, Int32::Parse("1",2));
-    ASSERT_EQ(2, Int32::Parse("10",2));
-    ASSERT_EQ(3, Int32::Parse("11",2));
-    ASSERT_EQ(6, Int32::Parse("110",2));
-    ASSERT_EQ(-1, Int32::Parse("-1",2));
-    ASSERT_EQ(-4, Int32::Parse("-100",2));
-    ASSERT_EQ(-15, Int32::Parse("-1111",2));
+    ASSERT_EQ(0, Int32::Parse("0", 2));
+    ASSERT_EQ(1, Int32::Parse("1", 2));
+    ASSERT_EQ(2, Int32::Parse("10", 2));
+    ASSERT_EQ(3, Int32::Parse("11", 2));
+    ASSERT_EQ(6, Int32::Parse("110", 2));
+    ASSERT_EQ(-1, Int32::Parse("-1", 2));
+    ASSERT_EQ(-4, Int32::Parse("-100", 2));
+    ASSERT_EQ(-15, Int32::Parse("-1111", 2));
   }
   
   TEST(Int32Test, Parse_Binary_Complement) {
-    ASSERT_EQ(-1, Int32::Parse("11111111111111111111111111111111",2));
-    ASSERT_EQ(Int32::MinValue, Int32::Parse("10000000000000000000000000000000",2));
-    ASSERT_EQ(-294127, Int32::Parse("11111111111110111000001100010001",2));
-    ASSERT_EQ(-3452119, Int32::Parse("11111111110010110101001100101001",2));
-    ASSERT_EQ(-2011477291, Int32::Parse("10001000000110110100101011010101",2));
-    ASSERT_EQ(Int32::MinValue, Int32::Parse("-10000000000000000000000000000000",2));
+    ASSERT_EQ(-1, Int32::Parse("11111111111111111111111111111111", 2));
+    ASSERT_EQ(Int32::MinValue, Int32::Parse("10000000000000000000000000000000", 2));
+    ASSERT_EQ(-294127, Int32::Parse("11111111111110111000001100010001", 2));
+    ASSERT_EQ(-3452119, Int32::Parse("11111111110010110101001100101001", 2));
+    ASSERT_EQ(-2011477291, Int32::Parse("10001000000110110100101011010101", 2));
+    ASSERT_EQ(Int32::MinValue, Int32::Parse("-10000000000000000000000000000000", 2));
   }
   
   TEST(Int32Test, Parse_Binary_Complement_Overflow) {
-    ASSERT_THROW(Int32::Parse("-11111111111111111111111111111111",2), OverflowException);
-    ASSERT_THROW(Int32::Parse("-10000000000000000000000000000001",2), OverflowException);
+    ASSERT_THROW(Int32::Parse("-11111111111111111111111111111111", 2), OverflowException);
+    ASSERT_THROW(Int32::Parse("-10000000000000000000000000000001", 2), OverflowException);
   }
   
   TEST(Int32Test, Parse_Exceptions_Binary) {
-    ASSERT_THROW(Int32::Parse("",2), FormatException);
-    ASSERT_THROW(Int32::Parse("2",2), FormatException);
-    ASSERT_THROW(Int32::Parse("103",2), FormatException);
-    ASSERT_THROW(Int32::Parse("++0",2), FormatException);
-    ASSERT_THROW(Int32::Parse("+",2), FormatException);
-    ASSERT_THROW(Int32::Parse("-",2), FormatException);
-    ASSERT_THROW(Int32::Parse("--1",2), FormatException);
-    ASSERT_THROW(Int32::Parse("0x53",2), FormatException);
-    ASSERT_THROW(Int32::Parse("100a",2), FormatException);
-    ASSERT_THROW(Int32::Parse("10u",2), FormatException);
+    ASSERT_THROW(Int32::Parse("", 2), FormatException);
+    ASSERT_THROW(Int32::Parse("2", 2), FormatException);
+    ASSERT_THROW(Int32::Parse("103", 2), FormatException);
+    ASSERT_THROW(Int32::Parse("++0", 2), FormatException);
+    ASSERT_THROW(Int32::Parse("+", 2), FormatException);
+    ASSERT_THROW(Int32::Parse("-", 2), FormatException);
+    ASSERT_THROW(Int32::Parse("--1", 2), FormatException);
+    ASSERT_THROW(Int32::Parse("0x53", 2), FormatException);
+    ASSERT_THROW(Int32::Parse("100a", 2), FormatException);
+    ASSERT_THROW(Int32::Parse("10u", 2), FormatException);
   }
   
   TEST(Int32Test, Parse_Octal) {
-    ASSERT_EQ(0, Int32::Parse("0",8));
-    ASSERT_EQ(1, Int32::Parse("1",8));
-    ASSERT_EQ(12, Int32::Parse("14",8));
-    ASSERT_EQ(56, Int32::Parse("70",8));
-    ASSERT_EQ(601, Int32::Parse("1131",8));
-    ASSERT_EQ(-1, Int32::Parse("-1",8));
-    ASSERT_EQ(-4, Int32::Parse("-4",8));
-    ASSERT_EQ(-15, Int32::Parse("-17",8));
+    ASSERT_EQ(0, Int32::Parse("0", 8));
+    ASSERT_EQ(1, Int32::Parse("1", 8));
+    ASSERT_EQ(12, Int32::Parse("14", 8));
+    ASSERT_EQ(56, Int32::Parse("70", 8));
+    ASSERT_EQ(601, Int32::Parse("1131", 8));
+    ASSERT_EQ(-1, Int32::Parse("-1", 8));
+    ASSERT_EQ(-4, Int32::Parse("-4", 8));
+    ASSERT_EQ(-15, Int32::Parse("-17", 8));
   }
   
   TEST(Int32Test, Parse_Hexadecimal) {
@@ -363,7 +363,7 @@ namespace {
     int32 x;
     ASSERT_TRUE(Int32::TryParse("11111111111111111111111111111111", 2, x));
     ASSERT_EQ(-1, x);
-    ASSERT_TRUE(Int32::TryParse("10000000000000000000000000000000",2, x));
+    ASSERT_TRUE(Int32::TryParse("10000000000000000000000000000000", 2, x));
     ASSERT_EQ(Int32::MinValue, x);
     ASSERT_TRUE(Int32::TryParse("11111111111110111000001100010001", 2, x));
     ASSERT_EQ(-294127, x);
@@ -371,7 +371,7 @@ namespace {
     ASSERT_EQ(-3452119, x);
     ASSERT_TRUE(Int32::TryParse("10001000000110110100101011010101", 2, x));
     ASSERT_EQ(-2011477291, x);
-    ASSERT_TRUE(Int32::TryParse("-10000000000000000000000000000000",2, x));
+    ASSERT_TRUE(Int32::TryParse("-10000000000000000000000000000000", 2, x));
     ASSERT_EQ(Int32::MinValue, x);
   }
   
@@ -379,7 +379,7 @@ namespace {
     Int32 x;
     ASSERT_TRUE(Int32::TryParse("11111111111111111111111111111111", 2, x));
     ASSERT_EQ(-1, x);
-    ASSERT_TRUE(Int32::TryParse("10000000000000000000000000000000",2, x));
+    ASSERT_TRUE(Int32::TryParse("10000000000000000000000000000000", 2, x));
     ASSERT_EQ(Int32::MinValue, x);
     ASSERT_TRUE(Int32::TryParse("11111111111110111000001100010001", 2, x));
     ASSERT_EQ(-294127, x);
@@ -387,48 +387,48 @@ namespace {
     ASSERT_EQ(-3452119, x);
     ASSERT_TRUE(Int32::TryParse("10001000000110110100101011010101", 2, x));
     ASSERT_EQ(-2011477291, x);
-    ASSERT_TRUE(Int32::TryParse("-10000000000000000000000000000000",2, x));
+    ASSERT_TRUE(Int32::TryParse("-10000000000000000000000000000000", 2, x));
     ASSERT_EQ(Int32::MinValue, x);
   }
   
   TEST(Int32Test, TryParse_Binary_Complement_Overflow) {
     int32 x;
-    ASSERT_FALSE(Int32::TryParse("-11111111111111111111111111111111",2,x));
-    ASSERT_FALSE(Int32::TryParse("-10000000000000000000000000000001",2,x));
+    ASSERT_FALSE(Int32::TryParse("-11111111111111111111111111111111", 2, x));
+    ASSERT_FALSE(Int32::TryParse("-10000000000000000000000000000001", 2, x));
   }
   
   TEST(Int32Test, TryParse_Binary_Complement_Overflow_Int32) {
     Int32 x;
-    ASSERT_FALSE(Int32::TryParse("-11111111111111111111111111111111",2,x));
-    ASSERT_FALSE(Int32::TryParse("-10000000000000000000000000000001",2,x));
+    ASSERT_FALSE(Int32::TryParse("-11111111111111111111111111111111", 2, x));
+    ASSERT_FALSE(Int32::TryParse("-10000000000000000000000000000001", 2, x));
   }
   
   TEST(Int32Test, TryParse_Exceptions_Binary) {
     int32 x;
-    ASSERT_FALSE(Int32::TryParse("",2,x));
-    ASSERT_FALSE(Int32::TryParse("2",2,x));
-    ASSERT_FALSE(Int32::TryParse("103",2,x));
-    ASSERT_FALSE(Int32::TryParse("++0",2,x));
-    ASSERT_FALSE(Int32::TryParse("+",2,x));
-    ASSERT_FALSE(Int32::TryParse("-",2,x));
-    ASSERT_FALSE(Int32::TryParse("--1",2,x));
-    ASSERT_FALSE(Int32::TryParse("0x53",2,x));
-    ASSERT_FALSE(Int32::TryParse("100a",2,x));
-    ASSERT_FALSE(Int32::TryParse("10u",2,x));
+    ASSERT_FALSE(Int32::TryParse("", 2, x));
+    ASSERT_FALSE(Int32::TryParse("2", 2, x));
+    ASSERT_FALSE(Int32::TryParse("103", 2, x));
+    ASSERT_FALSE(Int32::TryParse("++0", 2, x));
+    ASSERT_FALSE(Int32::TryParse("+", 2, x));
+    ASSERT_FALSE(Int32::TryParse("-", 2, x));
+    ASSERT_FALSE(Int32::TryParse("--1", 2, x));
+    ASSERT_FALSE(Int32::TryParse("0x53", 2, x));
+    ASSERT_FALSE(Int32::TryParse("100a", 2, x));
+    ASSERT_FALSE(Int32::TryParse("10u", 2, x));
   }
   
   TEST(Int32Test, TryParse_Exceptions_Binary_Int32) {
     Int32 x;
-    ASSERT_FALSE(Int32::TryParse("",2,x));
-    ASSERT_FALSE(Int32::TryParse("2",2,x));
-    ASSERT_FALSE(Int32::TryParse("103",2,x));
-    ASSERT_FALSE(Int32::TryParse("++0",2,x));
-    ASSERT_FALSE(Int32::TryParse("+",2,x));
-    ASSERT_FALSE(Int32::TryParse("-",2,x));
-    ASSERT_FALSE(Int32::TryParse("--1",2,x));
-    ASSERT_FALSE(Int32::TryParse("0x53",2,x));
-    ASSERT_FALSE(Int32::TryParse("100a",2,x));
-    ASSERT_FALSE(Int32::TryParse("10u",2,x));
+    ASSERT_FALSE(Int32::TryParse("", 2, x));
+    ASSERT_FALSE(Int32::TryParse("2", 2, x));
+    ASSERT_FALSE(Int32::TryParse("103", 2, x));
+    ASSERT_FALSE(Int32::TryParse("++0", 2, x));
+    ASSERT_FALSE(Int32::TryParse("+", 2, x));
+    ASSERT_FALSE(Int32::TryParse("-", 2, x));
+    ASSERT_FALSE(Int32::TryParse("--1", 2, x));
+    ASSERT_FALSE(Int32::TryParse("0x53", 2, x));
+    ASSERT_FALSE(Int32::TryParse("100a", 2, x));
+    ASSERT_FALSE(Int32::TryParse("10u", 2, x));
   }
   
   TEST(Int32Test, TryParse_Octal) {
@@ -545,7 +545,7 @@ namespace {
     Int32 x;
     ASSERT_FALSE(Int32::TryParse("-FFFFFFFF", 16, x));
     ASSERT_FALSE(Int32::TryParse("-80000001", 16, x));
-  }  
+  }
 }
 
 /*
@@ -578,7 +578,7 @@ namespace Natives {
       try {
         MethodInfo method = _typeof(T).GetMethod("Parse", new Type[] {_typeof(String)});
         T value = (T)method.Invoke(prototype, new object[] {s});
-        Console.WriteLine("ASSERT_EQ({0}{3}, {1}::Parse(\"{2}\"));", 
+        Console.WriteLine("ASSERT_EQ({0}{3}, {1}::Parse(\"{2}\"));",
           (value as IFormattable).ToString(fmt, System::Globalization::CultureInfo.CreateSpecificCulture("en-US")), type, s, suffix);
       } catch (System::FormatException) {
         Console.WriteLine("ASSERT_THROW({0}::Parse(\"{1}\"), FormatException);", type, s);

@@ -22,18 +22,17 @@ namespace Switch {
         class _export CheckBox : public ButtonBase {
         public:
           CheckBox() : ButtonBase("", 0, 0, 104, 24) { this->SetStyle(ControlStyles::UserPaint, false); }
-
+          
           _property<bool> AutoCheck {
             _get{ return this->autoCheck; },
             _set{ this->SetAutoCheck(value); }
           };
-
+          
           _property<bool> Checked {
             _get {return this->CheckState != System::Windows::Forms::CheckState::Unchecked;},
             _set {
-              if (this->Checked != value) {
+              if(this->Checked != value)
                 this->CheckState = value ? System::Windows::Forms::CheckState::Checked : System::Windows::Forms::CheckState::Unchecked;
-              }
             }
           };
           
@@ -41,27 +40,27 @@ namespace Switch {
             _get {return this->checkState;},
             _set {this->SetCheckState(value);}
           };
-
+          
           EventHandler CheckedChanged;
           EventHandler CheckStateChanged;
-
+          
         protected:
           void CreateHandle() override;
           void SetAutoCheck(bool autoCheck);
           void SetCheckState(System::Windows::Forms::CheckState checkState);
-
+          
           System::Drawing::Size GetDefaultSize() const override {return System::Drawing::Size(104, 24);}
-
+          
           virtual void OnCheckedChanged(const EventArgs& e) {this->CheckedChanged(*this, e);}
           
           virtual void OnCheckStateChanged(const EventArgs& e) {this->CheckedChanged(*this, e);}
           
           void OnClick(const EventArgs& e) override {
-            if (this->AutoCheck)
+            if(this->AutoCheck)
               this->Checked = !this->Checked;
             this->Control::OnClick(e);
           }
-
+          
           /// @cond
           bool autoCheck = true;
           System::Windows::Forms::CheckState checkState = System::Windows::Forms::CheckState::Unchecked;

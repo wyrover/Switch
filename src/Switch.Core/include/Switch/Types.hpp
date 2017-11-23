@@ -19,7 +19,7 @@ namespace Switch {
   /// @brief Represents a 8-bit unsigned integer.
   /// @ingroup Types
   using byte = uint8_t;
-
+  
   /// @brief Represents a 16-bit unicode character.
   /// @ingroup Types
   using char16 = char16_t;
@@ -69,11 +69,11 @@ namespace Switch {
   /// @brief Stores information about a type.
   /// @ingroup Types
   using type = std::type_info;
-
+  
   /// @brief Represents a 8-bit unsigned integer.
   /// @ingroup Types
   using uchar = unsigned char;
-
+  
   /// @brief Represents a 32-bit unsigned integer.
   /// @ingroup Types
   using uint = unsigned int;
@@ -93,11 +93,11 @@ namespace Switch {
   /// @brief Represent a pointer or a handle.
   /// @ingroup Types
   using uintptr = uintptr_t;
-
+  
   /// @brief Represents a 16-bit unsigned integer.
   /// @ingroup Types
   using ushort = unsigned short;
-
+  
   /// @brief Represents a 32-bit or 64-bit unsigned integer.
   /// @ingroup Types
   using ulong = unsigned long;
@@ -105,16 +105,16 @@ namespace Switch {
   /// @brief Represents a wide character.
   /// @ingroup Types
   using wchar = wchar_t;
-
+  
   /// @cond
-#if defined(__linux__) && defined(_LP64)
+  #if defined(__linux__) && defined(_LP64)
   using llong = long long int;
   using ullong = unsigned long long int;
-#else
+  #else
   using llong = long;
   using ullong = unsigned long;
-#endif
-/// @endcond
+  #endif
+  /// @endcond
 }
 
 using namespace Switch;

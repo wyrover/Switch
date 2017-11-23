@@ -34,7 +34,7 @@ namespace {
     ASSERT_TRUE(Char::IsLetter(6346));
     ASSERT_TRUE(Char::IsLetter(69804));
     ASSERT_TRUE(Char::IsLetter(194751));
-
+    
     ASSERT_FALSE(Char::IsLetter('0'));
     ASSERT_FALSE(Char::IsLetter('4'));
     ASSERT_FALSE(Char::IsLetter('9'));
@@ -91,10 +91,10 @@ namespace {
   }
   
   TEST(CharTest, CompareTo) {
-    EXPECT_GT(Char('a').CompareTo(Char('A')),0);
-    EXPECT_LT(Char('B').CompareTo(Char('z')),0);
-    ASSERT_EQ(Char('8').CompareTo(Char('8')),0);
-    EXPECT_GT(Char('A').CompareTo(Int32(2)),0);
+    EXPECT_GT(Char('a').CompareTo(Char('A')), 0);
+    EXPECT_LT(Char('B').CompareTo(Char('z')), 0);
+    ASSERT_EQ(Char('8').CompareTo(Char('8')), 0);
+    EXPECT_GT(Char('A').CompareTo(Int32(2)), 0);
   }
   
   TEST(CharTest, GetTypeCode) {
@@ -178,19 +178,19 @@ TEST(char32, operator_p) {
   char32 a('a');
   char32 a2('a');
   char32 b('b');
-  ASSERT_TRUE((a + a2) == ('a'+'a'));
-  ASSERT_TRUE((a2 + a) == ('a'+'a'));
-  ASSERT_TRUE((a + b) == ('a'+'b'));
-  ASSERT_TRUE((b + a) == ('a'+'b'));
+  ASSERT_TRUE((a + a2) == ('a' + 'a'));
+  ASSERT_TRUE((a2 + a) == ('a' + 'a'));
+  ASSERT_TRUE((a + b) == ('a' + 'b'));
+  ASSERT_TRUE((b + a) == ('a' + 'b'));
 }
 
 TEST(char32, operator_m) {
   char32 a('a');
   char32 a2('a');
   char32 b('b');
-  ASSERT_TRUE((a - a2) == ('a'-'a'));
-  ASSERT_TRUE((a2 - a) == ('a'-'a'));
-  ASSERT_TRUE((a - b) == unsigned('a'-'b'));
+  ASSERT_TRUE((a - a2) == ('a' - 'a'));
+  ASSERT_TRUE((a2 - a) == ('a' - 'a'));
+  ASSERT_TRUE((a - b) == unsigned('a' - 'b'));
   ASSERT_TRUE((b - a) == ('b' - 'a'));
 }
 
@@ -245,18 +245,18 @@ TEST(char32, operator_ge_int) {
 
 TEST(char32, operator_p_int) {
   char32 a('a');
-  ASSERT_TRUE((a + 'a') == ('a'+'a'));
-  ASSERT_TRUE(('a' + a) == ('a'+'a'));
-  ASSERT_TRUE((a + 'b') == ('a'+'b'));
-  ASSERT_TRUE(('b' + a) == ('a'+'b'));
+  ASSERT_TRUE((a + 'a') == ('a' + 'a'));
+  ASSERT_TRUE(('a' + a) == ('a' + 'a'));
+  ASSERT_TRUE((a + 'b') == ('a' + 'b'));
+  ASSERT_TRUE(('b' + a) == ('a' + 'b'));
   
   ASSERT_TRUE(char32('0') + 9 == '9');
 }
 
 TEST(char32, operator_m_int) {
   char32 a('a');
-  ASSERT_TRUE((a - 'a') == ('a'-'a'));
-  ASSERT_TRUE(('a' - a) == ('a'-'a'));
-  ASSERT_TRUE((a - 'b') == unsigned('a'-'b'));
+  ASSERT_TRUE((a - 'a') == ('a' - 'a'));
+  ASSERT_TRUE(('a' - a) == ('a' - 'a'));
+  ASSERT_TRUE((a - 'b') == unsigned('a' - 'b'));
   ASSERT_TRUE(('b' - a) == ('b' - 'a'));
 }

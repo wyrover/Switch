@@ -19,14 +19,14 @@ StringWriter::~StringWriter() {
 }
 
 void StringWriter::Close() {
-  if (this->data->close == false) {
+  if(this->data->close == false) {
     this->data->close = true;
     this->data->str = "";
   }
 }
 
 void StringWriter::Write(const String& value) {
-  if (this->data->close)
+  if(this->data->close)
     throw ObjectDisposedException(_caller);
   this->data->str += value;
   

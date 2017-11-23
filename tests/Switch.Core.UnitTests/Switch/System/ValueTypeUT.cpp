@@ -125,7 +125,7 @@ namespace {
     ASSERT_TRUE(Int16(25) == UInt16(25));
     ASSERT_TRUE(Int16(25) == UInt32(25));
     ASSERT_TRUE(Int16(25) == UInt64(25));
-
+    
     ASSERT_FALSE(Int16(-30) == Byte(-30));
     ASSERT_TRUE(Int16(-30) == Int16(-30));
     ASSERT_TRUE(Int16(-30) == Int32(-30));
@@ -134,7 +134,7 @@ namespace {
     ASSERT_FALSE(Int16(-30) == UInt16(-30));
     ASSERT_TRUE(Int16(-30) == UInt32(-30));
     ASSERT_TRUE(Int16(-30) == UInt64(-30));
-}
+  }
   
   TEST(ValueTypeTest, Int16MinValueEqualOperator) {
     ASSERT_TRUE(Int16(Int16::MinValue) == Int16(Int16::MinValue));
@@ -260,7 +260,7 @@ namespace {
     ASSERT_TRUE(SByte(25) == UInt16(25));
     ASSERT_TRUE(SByte(25) == UInt32(25));
     ASSERT_TRUE(SByte(25) == UInt64(25));
-
+    
     ASSERT_FALSE(SByte(-30) == Byte(-30));
     ASSERT_TRUE(SByte(-30) == Int16(-30));
     ASSERT_TRUE(SByte(-30) == Int32(-30));
@@ -269,7 +269,7 @@ namespace {
     ASSERT_FALSE(SByte(-30) == UInt16(-30));
     ASSERT_TRUE(SByte(-30) == UInt32(-30));
     ASSERT_TRUE(SByte(-30) == UInt64(-30));
-}
+  }
   
   TEST(ValueTypeTest, SByteMinValueEqualOperator) {
     ASSERT_FALSE(SByte(SByte::MinValue) == Byte(SByte::MinValue));

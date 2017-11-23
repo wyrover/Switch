@@ -76,7 +76,7 @@ namespace Switch {
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreEqual(const TExpected& expected, const TActual& actual, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (actual == expected)
+        if(actual == expected)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, caller);
@@ -129,7 +129,7 @@ namespace Switch {
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (actual != expected)
+        if(actual != expected)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: not {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, caller);
@@ -178,7 +178,7 @@ namespace Switch {
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreNotSame(const TExpected& expected, const TActual& actual, const System::Runtime::CompilerServices::Caller& caller) {AreNotSame(expected, actual, "", caller);}
-
+      
       /// @brief Asserts that two objects do refer to differents objects. If they are the same an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
       /// @param actual the actual value.
@@ -194,7 +194,7 @@ namespace Switch {
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreNotSame(const TExpected& expected, const TActual& actual, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (&actual != &expected)
+        if(&actual != &expected)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: not same as {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, caller);
@@ -259,7 +259,7 @@ namespace Switch {
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreSame(const TExpected& expected, const TActual& actual, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (&actual == &expected)
+        if(&actual == &expected)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: same as {0}{1}But was:  {2}", ValueToString(expected), System::Environment::NewLine, ValueToString(actual)), message, caller);
@@ -316,7 +316,7 @@ namespace Switch {
       /// @endcode
       template<typename TItem, typename TItemCollection>
       static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (collection.Contains(item))
+        if(collection.Contains(item))
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: collection containing {0}{1}But was:  < {2} >", ValueToString(item), System::Environment::NewLine, string::Join(", ", collection)), message, caller);
@@ -368,7 +368,7 @@ namespace Switch {
         try {
           statement();
           Succeed(message, caller);
-        } catch (const AssertionException&) {
+        } catch(const AssertionException&) {
           throw;
         } catch(const System::Exception& exception) {
           Fail(string::Format("Expected: No Exception to be thrown{0}But was:  <{1}>", System::Environment::NewLine, exception.GetType().FullName()), message, caller);
@@ -376,10 +376,10 @@ namespace Switch {
           Fail(string::Format("Expected: No Exception to be thrown{0}But was:  <exception>", System::Environment::NewLine), message, caller);
         }
       }
-
+      
       /// @brief The Equals method throws an Switch::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
       static inline bool Equals(const Object&, const Object&) { throw AssertionException(_caller); }
-
+      
       /// @brief Throws an Switch::TUnit::AssertionException. This is used by the other Assert functions.
       static inline void Fail() {Fail("", "", System::Runtime::CompilerServices::Caller());}
       
@@ -400,7 +400,7 @@ namespace Switch {
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param caller Contains information about current file and current line.
       static inline void Fail(const string& error, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (!string::IsNullOrEmpty(message))
+        if(!string::IsNullOrEmpty(message))
           System::Console::WriteLine(message);
         //::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, caller.FilePath().Data, caller.Line, error.Data) = ::testing::Message(message.Data);
         ::testing::internal::AssertHelper(::testing::TestPartResult::kFatalFailure, caller.FilePath().Data, caller.LineNumber, error.Data) = ::testing::Message();
@@ -502,7 +502,7 @@ namespace Switch {
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void Greater(const TValue1& val1, const TValue2& val2, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (val1 > val2)
+        if(val1 > val2)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: greater than {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, caller);
@@ -559,7 +559,7 @@ namespace Switch {
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (val1 >= val2)
+        if(val1 >= val2)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: greater than or equal to {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, caller);
@@ -612,7 +612,7 @@ namespace Switch {
       /// Assert::IsEmpty(v2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       static inline void IsEmpty(const string& value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (string::IsNullOrEmpty(value))
+        if(string::IsNullOrEmpty(value))
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: <Empty>{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, caller);
@@ -669,7 +669,7 @@ namespace Switch {
       /// @endcode
       template<typename TItem>
       static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (collection.GetEnumerator().MoveNext() == false)
+        if(collection.GetEnumerator().MoveNext() == false)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: <empty>{0}But was:  < {1} >", System::Environment::NewLine, string::Join(", ", collection)), message, caller);
@@ -722,7 +722,7 @@ namespace Switch {
       /// Assert::IsFalse(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       static inline void IsFalse(bool condition, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (condition == false)
+        if(condition == false)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: False{0}But was:  True", System::Environment::NewLine), message, caller);
@@ -779,7 +779,7 @@ namespace Switch {
       /// @endcode
       template<typename TT, typename TValue>
       static inline void IsInstanceOf(const TValue& value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (is<TT>(value))
+        if(is<TT>(value))
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: instance of <{0}>{1}But was:  <{2}>", _typeof(value), System::Environment::NewLine, _typeof<TT>()), message, caller);
@@ -884,7 +884,7 @@ namespace Switch {
       /// Assert::IsNaN(v2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       static inline void IsNaN(double value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (System::Double::IsNaN(value))
+        if(System::Double::IsNaN(value))
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: NaN{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, caller);
@@ -937,7 +937,7 @@ namespace Switch {
       /// Assert::IsNaN(v2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       static inline void IsNaN(float value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (System::Double::IsNaN(value))
+        if(System::Double::IsNaN(value))
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: NaN{0}But was:  {1}", System::Environment::NewLine, ValueToString(value)), message, caller);
@@ -990,7 +990,7 @@ namespace Switch {
       /// Assert::IsNotEmpty(v2, "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       static inline void IsNotEmpty(const string& value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (!string::IsNullOrEmpty(value))
+        if(!string::IsNullOrEmpty(value))
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: not <empty>{0}But was:  <empty>", System::Environment::NewLine), message, caller);
@@ -1047,7 +1047,7 @@ namespace Switch {
       /// @endcode
       template<typename TItem>
       static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (collection.GetEnumerator().MoveNext() == true)
+        if(collection.GetEnumerator().MoveNext() == true)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: not <empty>{0}But was:  <empty>", System::Environment::NewLine), message, caller);
@@ -1104,7 +1104,7 @@ namespace Switch {
       /// @endcode
       template<typename TT, typename TValue>
       static inline void IsNotInstanceOf(TValue value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (!is<TT>(value))
+        if(!is<TT>(value))
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: not instance of <{0}>{1}But was:  <{2}>", _typeof(value), System::Environment::NewLine, _typeof<TT>()), message, caller);
@@ -1228,7 +1228,7 @@ namespace Switch {
       /// @endcode
       template<typename TPointer>
       static inline void IsNotNull(const TPointer* pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (pointer != null)
+        if(pointer != null)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, caller);
@@ -1285,7 +1285,7 @@ namespace Switch {
       /// @endcode
       template<typename TPointer>
       static inline void IsNotNull(const refptr<TPointer>& pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (pointer != null)
+        if(pointer != null)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: not null{0}But was:  null", System::Environment::NewLine), message, caller);
@@ -1357,7 +1357,7 @@ namespace Switch {
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const TPointer* pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (pointer == null)
+        if(pointer == null)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(*pointer)), message, caller);
@@ -1414,7 +1414,7 @@ namespace Switch {
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const refptr<TPointer>& pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (pointer == null)
+        if(pointer == null)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(*pointer)), message, caller);
@@ -1471,7 +1471,7 @@ namespace Switch {
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const ref<TPointer>& pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (pointer == null)
+        if(pointer == null)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: null{0}But was:  {1}", System::Environment::NewLine, ValueToString(pointer)), message, caller);
@@ -1524,7 +1524,7 @@ namespace Switch {
       /// Assert::IsTrue(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       static inline void IsTrue(bool condition, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (condition == true)
+        if(condition == true)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: True{0}But was:  False", System::Environment::NewLine), message, caller);
@@ -1577,7 +1577,7 @@ namespace Switch {
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void Less(const TValue1& val1, const TValue2& val2, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (val1 < val2)
+        if(val1 < val2)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: less than {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, caller);
@@ -1634,7 +1634,7 @@ namespace Switch {
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void LessOrEqual(const TValue1& val1, const TValue2& val2, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
-        if (val1 <= val2)
+        if(val1 <= val2)
           Succeed(message, caller);
         else
           Fail(string::Format("Expected: less than or equal to {0}{1}But was:  {2}", ValueToString(val2), System::Environment::NewLine, ValueToString(val1)), message, caller);
@@ -1825,7 +1825,7 @@ namespace Switch {
       /// @endcode
       template<typename TPointer>
       static inline void Null(const TPointer* pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {IsNull(pointer, message, caller);}
-            
+      
       /// @brief Asserts that the pointer is null. If the pointer is null the method throws an Switch::TUnit::AssertionException.
       /// @param pointer The pointer to check is null.
       /// @par Examples
@@ -1896,7 +1896,7 @@ namespace Switch {
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @param caller Contains information about current file and current line.
       static inline void Succeed(const string& message, const System::Runtime::CompilerServices::Caller& caller) {::testing::internal::AssertHelper(::testing::TestPartResult::kSuccess, caller.FilePath().Data, caller.LineNumber, "Succeeded") = ::testing::Message(message.Data);}
-
+      
       template<typename TActual>
       static void That(const TActual& actual, const Constraints::Constraint& constraint) {That(actual, constraint, "", System::Runtime::CompilerServices::Caller());}
       
@@ -1911,7 +1911,7 @@ namespace Switch {
         const_cast<Constraints::Constraint&>(constraint).Actual = actual;
         const_cast<Constraints::Constraint&>(constraint).Message = message;
         const_cast<Constraints::Constraint&>(constraint).Caller = caller;
-        if (constraint.Verify(actual))
+        if(constraint.Verify(actual))
           Succeed(message, caller);
         else
           Fail(constraint.Error, constraint.Message, constraint.Caller);
@@ -1955,11 +1955,11 @@ namespace Switch {
       template<typename ExceptionType>
       static inline void Throws(const System::Delegate<void>& statement, const System::Runtime::CompilerServices::Caller& caller) {Throws<ExceptionType>(statement, "", caller);}
       
-#if defined(_WIN32)
+      #if defined(_WIN32)
 #pragma warning(push)
 #pragma warning(disable:4286)
-#endif
-
+      #endif
+      
       /// @brief Verifies that the statement throws a particular exception when called.
       /// @param exceptionType The exception type that must be throw.
       /// @param statement The statement that verify.
@@ -1976,21 +1976,21 @@ namespace Switch {
         try {
           statement();
           Fail(string::Format("Expected: <{0}>{1}But was:  <nothing>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, caller);
-        } catch (const AssertionException&) {
+        } catch(const AssertionException&) {
           throw;
         } catch(const ExceptionType&) {
           Succeed(message, caller);
-        } catch (const System::Exception& exception) {
+        } catch(const System::Exception& exception) {
           Fail(string::Format("Expected: <{0}>{1}But was:  <{2}>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine, exception.GetType().FullName()), message, caller);
-        } catch (...) {
+        } catch(...) {
           Fail(string::Format("Expected: <{0}>{1}But was:  <exception>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, caller);
         }
       }
-
-#if defined(_WIN32)
+      
+      #if defined(_WIN32)
 #pragma warning(pop)
-#endif
-
+      #endif
+      
       /// @brief Verifies that the statement throws any exception when called.
       /// @param statement The statement that verify.
       /// @par Examples
@@ -2037,7 +2037,7 @@ namespace Switch {
         try {
           statement();
           Fail(string::Format("Expected: <exception>{0}But was:  <nothing>", System::Environment::NewLine), message, caller);
-        } catch (const AssertionException&) {
+        } catch(const AssertionException&) {
           throw;
         } catch(...) {
           Succeed(message, caller);
@@ -2091,7 +2091,7 @@ namespace Switch {
       /// Assert::True(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
       /// @endcode
       static inline void True(bool condition, const string& message, const System::Runtime::CompilerServices::Caller& caller) {IsTrue(condition, message, caller);}
-
+      
     private:
       Assert() = delete;
       
@@ -2145,7 +2145,7 @@ namespace Switch {
       static System::String ValueToString(const System::UInt64& value) {return string::Format("{0}", value);}
       static System::String ValueToString(const System::Object& value) {return string::Format("<{0}>", value);}
       static System::String ValueToString(const string& value) {
-        if (string::IsNullOrEmpty(value)) return "<string::Empty>";
+        if(string::IsNullOrEmpty(value)) return "<string::Empty>";
         return string::Format("\"{0}\"", value);
       }
       
@@ -2161,7 +2161,7 @@ namespace Switch {
           return string::Format("{0}-byte object <{1}{2}>", static_cast<int32>(sizeof(O)), System::BitConverter::ToString(System::Array<byte>((byte*)&value, static_cast<int32>(size))), size < sizeof(O) ? "-..." : "");
         }
       };
-
+      
       template<typename TValue>
       static System::String ValueToString(const TValue& value) {
         using Stringer = typename std::conditional<std::is_base_of<object, TValue>::value, StringerFromObject, StringerFromOther>::type;

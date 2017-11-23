@@ -27,7 +27,7 @@ namespace Switch {
         TraceEventCache(const TraceEventCache& tec) : dateTime(tec.dateTime) {}
         TraceEventCache& operator=(const TraceEventCache& tec) {this->dateTime = tec.dateTime; return *this;}
         /// @endcond
-
+        
         /// @brief Gets the call stack for the current thread.
         /// @return string A string containing stack trace information. This value can be an empty string ("").
         /// @remarks The Callstack property gets the call stack from the StackTrace property of the Environment class. The property value lists method calls in reverse chronological order. That is, the most recent method call is described first. One line of stack trace information is listed for each method call on the stack. For more information, see StackTrace.
@@ -40,7 +40,7 @@ namespace Switch {
         /// @remarks The first time the property is accessed in an instance of the TraceEventCache class, the current time is returned. Subsequent queries of this property in that instance return that same DateTime value, allowing it to be used as a timestamp.
         _property<System::DateTime, _readonly> DateTime {
           _get {
-            if (this->dateTime == DateTime::MinValue)
+            if(this->dateTime == DateTime::MinValue)
               this->dateTime = System::DateTime::Now();
             return this->dateTime;
           }

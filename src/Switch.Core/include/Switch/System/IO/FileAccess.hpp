@@ -29,7 +29,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::FileAccess> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::FileAccess::Read, "Read"}, {(int64)System::IO::FileAccess::Write, "Write"}, {(int64)System::IO::FileAccess::ReadWrite, "ReadWrite"}};
     flags = false;
   }

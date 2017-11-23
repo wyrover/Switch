@@ -14,7 +14,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
-    template<typename T1=NullPtr, typename T2=NullPtr, typename T3=NullPtr, typename T4=NullPtr, typename T5=NullPtr, typename T6=NullPtr, typename T7=NullPtr, typename TRest=NullPtr>
+    template<typename T1 = NullPtr, typename T2 = NullPtr, typename T3 = NullPtr, typename T4 = NullPtr, typename T5 = NullPtr, typename T6 = NullPtr, typename T7 = NullPtr, typename TRest = NullPtr>
     class Tuple;
     /// @endcond
     
@@ -109,7 +109,7 @@ namespace Switch {
         _get {return std::get<7>(this->tuple);},
         _set {std::get<7>(this->tuple) = value;}
       };
-
+      
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
       /// @return Int32 A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings:
@@ -126,17 +126,17 @@ namespace Switch {
       ///  - Greater than zero   This instance is greater than obj.
       int32 CompareTo(const Tuple& tuple) const {
         int32 result = 0;
-        if ((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T5>::Default().Compare(this->Item5, tuple.Item5)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T6>::Default().Compare(this->Item6, tuple.Item6)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T7>::Default().Compare(this->Item7, tuple.Item7)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<TRest>::Default().Compare(this->Rest, tuple.Rest)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T5>::Default().Compare(this->Item5, tuple.Item5)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T6>::Default().Compare(this->Item6, tuple.Item6)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T7>::Default().Compare(this->Item7, tuple.Item7)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<TRest>::Default().Compare(this->Rest, tuple.Rest)) != 0) return result;
         return result;
       }
-
+      
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
@@ -248,13 +248,13 @@ namespace Switch {
       ///  - Greater than zero   This instance is greater than obj.
       int32 CompareTo(const Tuple& tuple) const {
         int32 result = 0;
-        if ((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T5>::Default().Compare(this->Item5, tuple.Item5)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T6>::Default().Compare(this->Item6, tuple.Item6)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T7>::Default().Compare(this->Item7, tuple.Item7)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T5>::Default().Compare(this->Item5, tuple.Item5)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T6>::Default().Compare(this->Item6, tuple.Item6)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T7>::Default().Compare(this->Item7, tuple.Item7)) != 0) return result;
         return result;
       }
       
@@ -361,12 +361,12 @@ namespace Switch {
       ///  - Greater than zero   This instance is greater than obj.
       int32 CompareTo(const Tuple& tuple) const {
         int32 result = 0;
-        if ((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T5>::Default().Compare(this->Item5, tuple.Item5)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T6>::Default().Compare(this->Item6, tuple.Item6)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T5>::Default().Compare(this->Item5, tuple.Item5)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T6>::Default().Compare(this->Item6, tuple.Item6)) != 0) return result;
         return result;
       }
       
@@ -465,11 +465,11 @@ namespace Switch {
       ///  - Greater than zero   This instance is greater than obj.
       int32 CompareTo(const Tuple& tuple) const {
         int32 result = 0;
-        if ((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T5>::Default().Compare(this->Item5, tuple.Item5)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T5>::Default().Compare(this->Item5, tuple.Item5)) != 0) return result;
         return result;
       }
       
@@ -560,10 +560,10 @@ namespace Switch {
       ///  - Greater than zero   This instance is greater than obj.
       int32 CompareTo(const Tuple& tuple) const {
         int32 result = 0;
-        if ((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T4>::Default().Compare(this->Item4, tuple.Item4)) != 0) return result;
         return result;
       }
       
@@ -646,9 +646,9 @@ namespace Switch {
       ///  - Greater than zero   This instance is greater than obj.
       int32 CompareTo(const Tuple& tuple) const {
         int32 result = 0;
-        if ((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T3>::Default().Compare(this->Item3, tuple.Item3)) != 0) return result;
         return result;
       }
       
@@ -731,8 +731,8 @@ namespace Switch {
       ///  - Greater than zero   This instance is greater than obj.
       int32 CompareTo(const Tuple& tuple) const {
         int32 result = 0;
-        if ((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
-        if ((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T1>::Default().Compare(this->Item1, tuple.Item1)) != 0) return result;
+        if((result = System::Collections::Generic::Comparer<T2>::Default().Compare(this->Item2, tuple.Item2)) != 0) return result;
         return result;
       }
       

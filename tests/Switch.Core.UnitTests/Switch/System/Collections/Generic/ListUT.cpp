@@ -9,7 +9,7 @@ using namespace System::Threading;
 
 namespace {
   class AbstractListHelper : public object {
-    
+  
   protected:
     AbstractListHelper() {}
     AbstractListHelper(int32 value, const string& name) : value(value), name(name) {}
@@ -23,7 +23,7 @@ namespace {
   };
   
   class ListHelper : public AbstractListHelper {
-    
+  
   public:
     ListHelper() {}
     ListHelper(int32 value, const string& name) : AbstractListHelper(value, name) {}
@@ -45,9 +45,9 @@ namespace {
     const string& GetName() const { return this->name; }
     
     bool Equals(const object& obj) const override {
-      if (!is<Dinosaur>(obj))
+      if(!is<Dinosaur>(obj))
         return false;
-      
+        
       const Dinosaur* that = (const Dinosaur*)&obj;
       return this->name.Equals(that->name) && this->numberOfLegsUsedToWalk == that->numberOfLegsUsedToWalk;
     }
@@ -78,11 +78,11 @@ namespace {
   TEST(ListTest, ConstructorWithCapacityEqualTo25) {
     List<Boolean> booleans(25);
     EXPECT_LE(25, booleans.Capacity);
-    ASSERT_EQ( 0, booleans.Count);
+    ASSERT_EQ(0, booleans.Count);
     ASSERT_FALSE(booleans.IsFixedSize);
     ASSERT_FALSE(booleans.IsReadOnly);
   }
-
+  
   TEST(ListTest, ConstructorWithCapacityEqualTo0) {
     List<Int32> int32s(0);
     EXPECT_LE(0, int32s.Capacity);
@@ -92,7 +92,7 @@ namespace {
   }
   
   TEST(ListTest, ConstructorWithArray) {
-    Array<Int64> int64Items = {1, 2, 3, 4,5 , 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
+    Array<Int64> int64Items = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
     List<Int64> int64s(int64Items);
     EXPECT_LE(19, int64s.Capacity);
     ASSERT_EQ(19, int64s.Count);
@@ -202,7 +202,7 @@ namespace {
     dinosaurs.Add("Compsognathus");
     
     ASSERT_TRUE(dinosaurs[2].Equals(string("Mamenchisaurus")));
-    dinosaurs.RemoveRange(2,2);
+    dinosaurs.RemoveRange(2, 2);
     ASSERT_EQ(3, dinosaurs.Count);
     ASSERT_TRUE(dinosaurs[2].Equals(string("Compsognathus")));
   }
@@ -221,7 +221,7 @@ namespace {
     ASSERT_TRUE(dinosaurs[1].Equals(string("Amargasaurus")));
     ASSERT_TRUE(dinosaurs[2].Equals(string("Mamenchisaurus")));
     
-    dinosaurs.Insert(2,string("Deinonychus"));
+    dinosaurs.Insert(2, string("Deinonychus"));
     
     ASSERT_EQ(4, dinosaurs.Count);
     ASSERT_TRUE(dinosaurs[0].Equals(string("Tyrannosaurus")));
@@ -229,7 +229,7 @@ namespace {
     ASSERT_TRUE(dinosaurs[2].Equals(string("Deinonychus")));
     ASSERT_TRUE(dinosaurs[3].Equals(string("Mamenchisaurus")));
     
-    dinosaurs.Insert(2,"Compsognathus");
+    dinosaurs.Insert(2, "Compsognathus");
     
     ASSERT_EQ(5, dinosaurs.Count);
     ASSERT_TRUE(dinosaurs[0].Equals(string("Tyrannosaurus")));
@@ -267,7 +267,7 @@ namespace {
     ASSERT_EQ(0, dinosaurs.Count);
     
     // Create List<T> to used with Clear function
-    List<string> dinosaurs2 (5);
+    List<string> dinosaurs2(5);
     EXPECT_LE(5, dinosaurs2.Capacity);
     ASSERT_EQ(0, dinosaurs2.Count);
     
@@ -426,7 +426,7 @@ namespace {
   }
   
   class CompareString : public object {
-    
+  
   public:
     CompareString(const string& str) {
       mEndWith = str;
@@ -436,12 +436,12 @@ namespace {
       return dinosaur.EndsWith(mEndWith, true);
     }
     
-    private :
+  private :
     string mEndWith;
   };
   
   class TestList : public object {
-    
+  
   public:
     TestList(const string& value) {
       mValue = value;
@@ -502,7 +502,7 @@ namespace {
     dinosaurs.Add("Gallimimus");
     dinosaurs.Add("Triceratops");
     
-    ASSERT_EQ(dinosaurs.RemoveAll(Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)),3);
+    ASSERT_EQ(dinosaurs.RemoveAll(Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 3);
     ASSERT_EQ(dinosaurs.Count, 6);
     ASSERT_EQ(dinosaurs[0], "Compsognathus");
     ASSERT_EQ(dinosaurs[1], "Oviraptor");
@@ -517,13 +517,13 @@ namespace {
     List<int32> dinosaurs;
     
     // Add 9 items
-    for (int32 i = 0; i < 9; i += 1)
+    for(int32 i = 0; i < 9; i += 1)
       dinosaurs.Add(i);
     dinosaurs.Reverse();
     
-    for (int32 i = 0; i < 9; i += 1)
-      ASSERT_EQ(dinosaurs[i], 8-i);
-    
+    for(int32 i = 0; i < 9; i += 1)
+      ASSERT_EQ(dinosaurs[i], 8 - i);
+      
     dinosaurs.Reverse(3, 4);
     ASSERT_EQ(dinosaurs[0], 8);
     ASSERT_EQ(dinosaurs[1], 7);
@@ -562,9 +562,9 @@ namespace {
     ASSERT_EQ(dinosaurs[8], 1);
     
     dinosaurs.Clear();
-
+    
     // Add many items
-    for (int32 i = 0; i < 20000; i += 1)
+    for(int32 i = 0; i < 20000; i += 1)
       dinosaurs.Add(i);
     dinosaurs.Reverse(0, dinosaurs.Count);
   }
@@ -659,19 +659,19 @@ namespace {
     ASSERT_EQ(dinosaurs.FindLastIndex(Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 6);
     ASSERT_EQ(dinosaurs.FindLastIndex(Predicate<const string&>(TestList("Cat"), &TestList::StartsWithValue)), -1);
     
-    ASSERT_EQ(dinosaurs.FindLastIndex(0,Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 0);
-    ASSERT_EQ(dinosaurs.FindLastIndex(2,Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 2);
-    ASSERT_EQ(dinosaurs.FindLastIndex(3,Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 2);
-    ASSERT_EQ(dinosaurs.FindLastIndex(7,Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 6);
-    ASSERT_THROW(dinosaurs.FindLastIndex(9,Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), ArgumentOutOfRangeException);
+    ASSERT_EQ(dinosaurs.FindLastIndex(0, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 0);
+    ASSERT_EQ(dinosaurs.FindLastIndex(2, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 2);
+    ASSERT_EQ(dinosaurs.FindLastIndex(3, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 2);
+    ASSERT_EQ(dinosaurs.FindLastIndex(7, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 6);
+    ASSERT_THROW(dinosaurs.FindLastIndex(9, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), ArgumentOutOfRangeException);
     
     ASSERT_EQ(dinosaurs.FindLastIndex(5, 3, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), -1);
     ASSERT_EQ(dinosaurs.FindLastIndex(8, 6, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 6);
     ASSERT_EQ(dinosaurs.FindLastIndex(2, 3, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 2);
     ASSERT_EQ(dinosaurs.FindLastIndex(2, 0, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), -1);
     ASSERT_EQ(dinosaurs.FindLastIndex(2, 1, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), 2);
-    ASSERT_THROW(dinosaurs.FindLastIndex(2,4,Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), ArgumentException);
-    ASSERT_THROW(dinosaurs.FindLastIndex(9,2,Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), ArgumentOutOfRangeException);
+    ASSERT_THROW(dinosaurs.FindLastIndex(2, 4, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), ArgumentException);
+    ASSERT_THROW(dinosaurs.FindLastIndex(9, 2, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), ArgumentOutOfRangeException);
     ASSERT_THROW(dinosaurs.FindLastIndex(0, -1, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), ArgumentOutOfRangeException);
     
     ASSERT_THROW(dinosaurs.FindLastIndex(10, 1, Predicate<const string&>(TestList("saurus"), &TestList::EndsWithValue)), ArgumentOutOfRangeException);
@@ -683,7 +683,7 @@ namespace {
     
     ASSERT_EQ(-1, dinosaurs.IndexOf("Siats meekerorum"));
     ASSERT_THROW(dinosaurs.IndexOf("Siats meekerorum", 0), ArgumentOutOfRangeException);
-    ASSERT_THROW(dinosaurs.IndexOf("Siats meekerorum", 0,0), ArgumentOutOfRangeException);
+    ASSERT_THROW(dinosaurs.IndexOf("Siats meekerorum", 0, 0), ArgumentOutOfRangeException);
     
     // Add 9 items
     dinosaurs.Add("Dilophosaurus"); // 0
@@ -698,15 +698,15 @@ namespace {
     
     ASSERT_EQ(0,  dinosaurs.IndexOf("Dilophosaurus"));
     ASSERT_EQ(-1, dinosaurs.IndexOf("Hello Kitty"));
-    ASSERT_EQ(-1, dinosaurs.IndexOf("Hello Kitty",0));
-    ASSERT_EQ(-1, dinosaurs.IndexOf("Hello Kitty",0,0));
-    ASSERT_EQ(-1, dinosaurs.IndexOf("Hello Kitty",0,1));
+    ASSERT_EQ(-1, dinosaurs.IndexOf("Hello Kitty", 0));
+    ASSERT_EQ(-1, dinosaurs.IndexOf("Hello Kitty", 0, 0));
+    ASSERT_EQ(-1, dinosaurs.IndexOf("Hello Kitty", 0, 1));
     
     ASSERT_EQ(0, dinosaurs.IndexOf("Dilophosaurus", 0));
-    ASSERT_EQ(8, dinosaurs.IndexOf("Triceratops"  , 8));
+    ASSERT_EQ(8, dinosaurs.IndexOf("Triceratops", 8));
     ASSERT_EQ(2, dinosaurs.IndexOf("Dilophosaurus", 2));
     ASSERT_EQ(6, dinosaurs.IndexOf("Dilophosaurus", 3));
-    ASSERT_EQ(-1,dinosaurs.IndexOf("Dilophosaurus", 7));
+    ASSERT_EQ(-1, dinosaurs.IndexOf("Dilophosaurus", 7));
     ASSERT_THROW(dinosaurs.IndexOf("Dilophosaurus", 9), ArgumentOutOfRangeException);
     
     ASSERT_EQ(dinosaurs.IndexOf("Dilophosaurus", 5, 3), 6);
@@ -714,8 +714,8 @@ namespace {
     ASSERT_EQ(dinosaurs.IndexOf("Dilophosaurus", 6, 3), 6);
     ASSERT_EQ(dinosaurs.IndexOf("Dilophosaurus", 5, 3), 6);
     ASSERT_EQ(dinosaurs.IndexOf("Dilophosaurus", 2, 5), 2);
-    ASSERT_THROW(dinosaurs.IndexOf("Dilophosaurus", 7,4), ArgumentOutOfRangeException);
-    ASSERT_THROW(dinosaurs.IndexOf("Dilophosaurus", 9,2), ArgumentOutOfRangeException);
+    ASSERT_THROW(dinosaurs.IndexOf("Dilophosaurus", 7, 4), ArgumentOutOfRangeException);
+    ASSERT_THROW(dinosaurs.IndexOf("Dilophosaurus", 9, 2), ArgumentOutOfRangeException);
     
     ASSERT_THROW(dinosaurs.IndexOf("Dilophosaurus", 0, -1), ArgumentOutOfRangeException);
     
@@ -751,8 +751,8 @@ namespace {
     ASSERT_EQ(dinosaurs.LastIndexOf("Dilophosaurus", 2, 3), 2);
     ASSERT_EQ(dinosaurs.LastIndexOf("Dilophosaurus", 2, 0), -1);
     ASSERT_EQ(dinosaurs.LastIndexOf("Dilophosaurus", 2, 1), 2);
-    ASSERT_THROW(dinosaurs.LastIndexOf("Dilophosaurus", 2,4), ArgumentException);
-    ASSERT_THROW(dinosaurs.LastIndexOf("Dilophosaurus", 9,2), ArgumentOutOfRangeException);
+    ASSERT_THROW(dinosaurs.LastIndexOf("Dilophosaurus", 2, 4), ArgumentException);
+    ASSERT_THROW(dinosaurs.LastIndexOf("Dilophosaurus", 9, 2), ArgumentOutOfRangeException);
     
     ASSERT_THROW(dinosaurs.LastIndexOf("Dilophosaurus", 0, -1), ArgumentOutOfRangeException);
     
@@ -760,7 +760,7 @@ namespace {
     ASSERT_THROW(dinosaurs.LastIndexOf("Dilophosaurus", 0, 10), ArgumentException);
     
     List<string> emptyList;
-    ASSERT_EQ(-1,emptyList.LastIndexOf("Catch me if you can"));
+    ASSERT_EQ(-1, emptyList.LastIndexOf("Catch me if you can"));
   }
   
   static void CheckDinosaur(const string& dinosaur) {
@@ -789,18 +789,17 @@ namespace {
     Int32 clipsRemoved = 0;
     int32 nbRepeat = rand.Next(1, 11);
     
-    for (Int32 i = 0; i < nbRepeat; i++) {
+    for(Int32 i = 0; i < nbRepeat; i++) {
       int32 addCount = rand.Next(list.Capacity - clipsAdded + clipsRemoved);
-      clipsAdded+= addCount;
-      for (Int32 index = 0; index < addCount; index++)
+      clipsAdded += addCount;
+      for(Int32 index = 0; index < addCount; index++)
         list.Add(Int32(rand.Next()));
       ASSERT_EQ(list.Count, clipsAdded - clipsRemoved);
       
       Int32 deleteCount = rand.Next(list.Count);
-      clipsRemoved+= deleteCount;
-      for (Int32 index = 0; index < deleteCount; index++) {
-        list.RemoveAt(rand.Next(list.Count-1));
-      }
+      clipsRemoved += deleteCount;
+      for(Int32 index = 0; index < deleteCount; index++)
+        list.RemoveAt(rand.Next(list.Count - 1));
       ASSERT_EQ(list.Count, clipsAdded - clipsRemoved);
     }
   }
@@ -841,7 +840,7 @@ namespace {
     
     refptr<IEnumerator<string>> enumerators[50];
     
-    for (Int32 index = 0; index < 50; index++) {
+    for(Int32 index = 0; index < 50; index++) {
       enumerators[index] = ref_new<Enumerator<string>>(dinosaurs.GetEnumerator());
       enumerators[index]->MoveNext();
       ASSERT_EQ("Tyrannosaurus", enumerators[index]->Current());
@@ -853,17 +852,17 @@ namespace {
   }
   
   static void MyThread(const Object& param) {
-    List<string> *dinosaurs = &((List<string>&) param);
+    List<string>* dinosaurs = &((List<string>&) param);
     
-    _lock (dinosaurs->SyncRoot) {
+    _lock(dinosaurs->SyncRoot) {
       // Add 9 items
-      for (Int32 index = 1; index < 10; index++) {
+      for(Int32 index = 1; index < 10; index++) {
         dinosaurs->Add("Line " + index);
         Thread::Sleep(0);
       }
     }
   }
-
+  
   TEST(ListTest, GetSyncRoot) {
     // Create List<T> to used with Contains function
     List<string> dinosaurs;
@@ -871,7 +870,7 @@ namespace {
     Thread myThread((ParameterizedThreadStart)MyThread);
     myThread.Start(dinosaurs);
     
-    _lock (dinosaurs.SyncRoot) {
+    _lock(dinosaurs.SyncRoot) {
       // Add 9 items
       dinosaurs.Add("Tyrannosaurus");
       Thread::Sleep(0);
@@ -895,7 +894,7 @@ namespace {
     
     myThread.Join();
     
-    if (dinosaurs[0] == "Line 1") {
+    if(dinosaurs[0] == "Line 1") {
       ASSERT_EQ("Line 1", dinosaurs[0]);
       ASSERT_EQ("Line 2", dinosaurs[1]);
       ASSERT_EQ("Line 3", dinosaurs[2]);
@@ -958,51 +957,51 @@ namespace {
   
   TEST(ListTest, Sort) {
     int k;
-    string names[9] = {"Tyrannosaurus","Compsognathus","Amargasaurus","Oviraptor","Velociraptor","Deinonychus","Dilophosaurus","Gallimimus","Triceratops"};
-    string sortedNames[9] = {"Amargasaurus","Compsognathus","Deinonychus","Dilophosaurus","Gallimimus","Oviraptor","Triceratops","Tyrannosaurus","Velociraptor"};
+    string names[9] = {"Tyrannosaurus", "Compsognathus", "Amargasaurus", "Oviraptor", "Velociraptor", "Deinonychus", "Dilophosaurus", "Gallimimus", "Triceratops"};
+    string sortedNames[9] = {"Amargasaurus", "Compsognathus", "Deinonychus", "Dilophosaurus", "Gallimimus", "Oviraptor", "Triceratops", "Tyrannosaurus", "Velociraptor"};
     
     // First we test a sort function on IComparable objects (string in this case)
     
     List<string> dinosaurNames;
-    for (int i = 0; i < 9; i++)
+    for(int i = 0; i < 9; i++)
       dinosaurNames.Add(names[i]);
+      
+    ASSERT_EQ(9, dinosaurNames.Count);
     
-    ASSERT_EQ(9,dinosaurNames.Count);
-    
-    k=0;
-    for (string s : dinosaurNames)
+    k = 0;
+    for(string s : dinosaurNames)
       ASSERT_TRUE(s.Equals(names[k++]));
-    
+      
     dinosaurNames.Sort();
     
-    k=0;
-    for (string s : dinosaurNames)
+    k = 0;
+    for(string s : dinosaurNames)
       ASSERT_TRUE(s.Equals(sortedNames[k++]));
-    
+      
     // Second we test a sort function on objects not implementing IComparable (Dinosaur in this case)
     // Thus we provide an IComparer (DinosaurComparer)
     // Create List<T> to used with Contains function
     List<Dinosaur> dinosaurs;
     
     // Add 6 items
-    dinosaurs.Add(Dinosaur("Tyrannosaurus",2));
-    dinosaurs.Add(Dinosaur("Compsognathus",2));
-    dinosaurs.Add(Dinosaur("Amargasaurus",4));
-    dinosaurs.Add(Dinosaur("Oviraptor",2));
-    dinosaurs.Add(Dinosaur("Velociraptor",2));
-    dinosaurs.Add(Dinosaur("Deinonychus",2));
-    dinosaurs.Add(Dinosaur("Dilophosaurus",2));
-    dinosaurs.Add(Dinosaur("Gallimimus",2));
-    dinosaurs.Add(Dinosaur("Triceratops",4));
+    dinosaurs.Add(Dinosaur("Tyrannosaurus", 2));
+    dinosaurs.Add(Dinosaur("Compsognathus", 2));
+    dinosaurs.Add(Dinosaur("Amargasaurus", 4));
+    dinosaurs.Add(Dinosaur("Oviraptor", 2));
+    dinosaurs.Add(Dinosaur("Velociraptor", 2));
+    dinosaurs.Add(Dinosaur("Deinonychus", 2));
+    dinosaurs.Add(Dinosaur("Dilophosaurus", 2));
+    dinosaurs.Add(Dinosaur("Gallimimus", 2));
+    dinosaurs.Add(Dinosaur("Triceratops", 4));
     
-    k=0;
-    for (Dinosaur d : dinosaurs)
+    k = 0;
+    for(Dinosaur d : dinosaurs)
       ASSERT_TRUE(d.GetName().Equals(names[k++]));
-    
+      
     dinosaurs.Sort(DinosaurComparer());
     
-    k=0;
-    for (Dinosaur d : dinosaurs)
+    k = 0;
+    for(Dinosaur d : dinosaurs)
       ASSERT_TRUE(d.GetName().Equals(sortedNames[k++]));
   }
   
@@ -1045,7 +1044,7 @@ namespace {
     ASSERT_TRUE(list.Remove(22));
     list.RemoveAt(1);
     
-    ASSERT_EQ(3,list.Count);
+    ASSERT_EQ(3, list.Count);
     ASSERT_EQ(1,     list[0]);
     ASSERT_EQ(4444,  list[1]);
     ASSERT_EQ(55555, list[2]);
@@ -1062,68 +1061,68 @@ namespace {
     testList.Add(8);
     ASSERT_EQ(5, testList.Count);
     
-    for (Int32 value : testList) {
-      if (value % 2 == 0)
+    for(Int32 value : testList) {
+      if(value % 2 == 0)
         toRemove.Add(value);
     }
     
     ASSERT_EQ(5, testList.Count);
     ASSERT_EQ(3, toRemove.Count);
     
-    for (Int32 value : toRemove)
+    for(Int32 value : toRemove)
       testList.Remove(value);
-    
+      
     ASSERT_EQ(2, testList.Count);
   }
   
   TEST(ListTest, Equals) {
     List<Dinosaur> dinosaurs;
-    dinosaurs.Add(Dinosaur("Tyrannosaurus",2));
-    dinosaurs.Add(Dinosaur("Compsognathus",2));
-    dinosaurs.Add(Dinosaur("Amargasaurus",4));
-    dinosaurs.Add(Dinosaur("Oviraptor",2));
-    dinosaurs.Add(Dinosaur("Velociraptor",2));
-    dinosaurs.Add(Dinosaur("Deinonychus",2));
-    dinosaurs.Add(Dinosaur("Dilophosaurus",2));
-    dinosaurs.Add(Dinosaur("Gallimimus",2));
-    dinosaurs.Add(Dinosaur("Triceratops",4));
+    dinosaurs.Add(Dinosaur("Tyrannosaurus", 2));
+    dinosaurs.Add(Dinosaur("Compsognathus", 2));
+    dinosaurs.Add(Dinosaur("Amargasaurus", 4));
+    dinosaurs.Add(Dinosaur("Oviraptor", 2));
+    dinosaurs.Add(Dinosaur("Velociraptor", 2));
+    dinosaurs.Add(Dinosaur("Deinonychus", 2));
+    dinosaurs.Add(Dinosaur("Dilophosaurus", 2));
+    dinosaurs.Add(Dinosaur("Gallimimus", 2));
+    dinosaurs.Add(Dinosaur("Triceratops", 4));
     
     List<Dinosaur> dinosaurs2; // same
-    dinosaurs2.Add(Dinosaur("Tyrannosaurus",2));
-    dinosaurs2.Add(Dinosaur("Compsognathus",2));
-    dinosaurs2.Add(Dinosaur("Amargasaurus",4));
-    dinosaurs2.Add(Dinosaur("Oviraptor",2));
-    dinosaurs2.Add(Dinosaur("Velociraptor",2));
-    dinosaurs2.Add(Dinosaur("Deinonychus",2));
-    dinosaurs2.Add(Dinosaur("Dilophosaurus",2));
-    dinosaurs2.Add(Dinosaur("Gallimimus",2));
-    dinosaurs2.Add(Dinosaur("Triceratops",4));
+    dinosaurs2.Add(Dinosaur("Tyrannosaurus", 2));
+    dinosaurs2.Add(Dinosaur("Compsognathus", 2));
+    dinosaurs2.Add(Dinosaur("Amargasaurus", 4));
+    dinosaurs2.Add(Dinosaur("Oviraptor", 2));
+    dinosaurs2.Add(Dinosaur("Velociraptor", 2));
+    dinosaurs2.Add(Dinosaur("Deinonychus", 2));
+    dinosaurs2.Add(Dinosaur("Dilophosaurus", 2));
+    dinosaurs2.Add(Dinosaur("Gallimimus", 2));
+    dinosaurs2.Add(Dinosaur("Triceratops", 4));
     
     List<Dinosaur> dinosaurs3; // Deinnonychus has zero legs
-    dinosaurs3.Add(Dinosaur("Tyrannosaurus",2));
-    dinosaurs3.Add(Dinosaur("Compsognathus",2));
-    dinosaurs3.Add(Dinosaur("Amargasaurus",4));
-    dinosaurs3.Add(Dinosaur("Oviraptor",2));
-    dinosaurs3.Add(Dinosaur("Velociraptor",2));
-    dinosaurs3.Add(Dinosaur("Deinonychus",0));
-    dinosaurs3.Add(Dinosaur("Dilophosaurus",2));
-    dinosaurs3.Add(Dinosaur("Gallimimus",2));
-    dinosaurs3.Add(Dinosaur("Triceratops",4));
+    dinosaurs3.Add(Dinosaur("Tyrannosaurus", 2));
+    dinosaurs3.Add(Dinosaur("Compsognathus", 2));
+    dinosaurs3.Add(Dinosaur("Amargasaurus", 4));
+    dinosaurs3.Add(Dinosaur("Oviraptor", 2));
+    dinosaurs3.Add(Dinosaur("Velociraptor", 2));
+    dinosaurs3.Add(Dinosaur("Deinonychus", 0));
+    dinosaurs3.Add(Dinosaur("Dilophosaurus", 2));
+    dinosaurs3.Add(Dinosaur("Gallimimus", 2));
+    dinosaurs3.Add(Dinosaur("Triceratops", 4));
     
     List<Dinosaur> dinosaurs4; // two triceratops
-    dinosaurs4.Add(Dinosaur("Tyrannosaurus",2));
-    dinosaurs4.Add(Dinosaur("Compsognathus",2));
-    dinosaurs4.Add(Dinosaur("Amargasaurus",4));
-    dinosaurs4.Add(Dinosaur("Oviraptor",2));
-    dinosaurs4.Add(Dinosaur("Velociraptor",2));
-    dinosaurs4.Add(Dinosaur("Deinonychus",0));
-    dinosaurs4.Add(Dinosaur("Dilophosaurus",2));
-    dinosaurs4.Add(Dinosaur("Gallimimus",2));
-    dinosaurs4.Add(Dinosaur("Triceratops",4));
-    dinosaurs4.Add(Dinosaur("Triceratops",18));
+    dinosaurs4.Add(Dinosaur("Tyrannosaurus", 2));
+    dinosaurs4.Add(Dinosaur("Compsognathus", 2));
+    dinosaurs4.Add(Dinosaur("Amargasaurus", 4));
+    dinosaurs4.Add(Dinosaur("Oviraptor", 2));
+    dinosaurs4.Add(Dinosaur("Velociraptor", 2));
+    dinosaurs4.Add(Dinosaur("Deinonychus", 0));
+    dinosaurs4.Add(Dinosaur("Dilophosaurus", 2));
+    dinosaurs4.Add(Dinosaur("Gallimimus", 2));
+    dinosaurs4.Add(Dinosaur("Triceratops", 4));
+    dinosaurs4.Add(Dinosaur("Triceratops", 18));
     
     List<Dinosaur> dinosaurs5; // one element
-    dinosaurs5.Add(Dinosaur("Tyrannosaurus",2));
+    dinosaurs5.Add(Dinosaur("Tyrannosaurus", 2));
     
     List<Dinosaur> dinosaurs6; //empty
     

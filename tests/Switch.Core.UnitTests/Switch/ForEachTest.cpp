@@ -10,14 +10,13 @@ namespace SwitchUnitTests {
   TEST(ForeachTest, Vector) {
     std::vector<Int32> collection(10);
     int32 index = 0;
-    for (Int32& item : collection) {
+    for(Int32& item : collection)
       item = 100 + index++;
-    }
-    
+      
     index = 0;
     int32 checksum1 = 0;
     int32 checksum2 = 0;
-    for (Int32 item : collection) {
+    for(Int32 item : collection) {
       checksum1 += 100 + index;
       checksum2 += item;
       ASSERT_EQ(100 + index++, item);
@@ -29,14 +28,13 @@ namespace SwitchUnitTests {
   TEST(ForeachTest, List) {
     System::Collections::Generic::List<int32> collection = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int32 index = 0;
-    for (int32& item : collection) {
+    for(int32& item : collection)
       item = 100 + index++;
-    }
-    
+      
     index = 0;
     int32 checksum1 = 0;
     int32 checksum2 = 0;
-    for (int32 item : collection) {
+    for(int32 item : collection) {
       checksum1 += 100 + index;
       checksum2 += item;
       ASSERT_EQ(100 + index++, item);
@@ -57,15 +55,15 @@ namespace SwitchUnitTests {
     
     // test foreach without scope
     index = 1;
-    for (Int32 i : testList)
+    for(Int32 i : testList)
       ASSERT_EQ(index++, i);
-    
+      
     ASSERT_EQ(index, 6);
     
     // test full enumeration
     index = 0;
     count = 0;
-    for (Int32 i : testList)  {
+    for(Int32 i : testList)  {
       ASSERT_EQ(++index, i);
       count++;
     }
@@ -74,36 +72,33 @@ namespace SwitchUnitTests {
     // test break
     index = 0;
     count = 0;
-    for (Int32 i : testList) {
+    for(Int32 i : testList) {
       ASSERT_EQ(++index, i);
       count++;
-      if (count == 2)
+      if(count == 2)
         break;
     }
     ASSERT_EQ(count, 2);
     
     // test modification
-    for (Int32& i : testList) {
+    for(Int32& i : testList)
       i++;
-    }
-    
+      
     index = 1;
-    for (Int32 i : testList) {
+    for(Int32 i : testList)
       ASSERT_EQ(++index, i);
-    }
   }
   
   TEST(ForeachTest, Array) {
     System::Array<int32> collection = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int32 index = 0;
-    for (int32& item : collection) {
+    for(int32& item : collection)
       item = 100 + index++;
-    }
-    
+      
     index = 0;
     int32 checksum1 = 0;
     int32 checksum2 = 0;
-    for (int32 item : collection) {
+    for(int32 item : collection) {
       checksum1 += 100 + index;
       checksum2 += item;
       ASSERT_EQ(100 + index++, item);
@@ -123,15 +118,15 @@ namespace SwitchUnitTests {
     testArray[4] = 5;
     
     // test foreach without scope
-    for (uint32 i : testArray)
+    for(uint32 i : testArray)
       index = i;
-    
+      
     ASSERT_EQ(index, 5u);
     
     // test full enumeration
     index = 0;
     count = 0;
-    for (uint32 i : testArray) {
+    for(uint32 i : testArray) {
       ASSERT_EQ(++index, i);
       count++;
     }
@@ -140,23 +135,21 @@ namespace SwitchUnitTests {
     // test break
     index = 0;
     count = 0;
-    for (uint32 i : testArray) {
+    for(uint32 i : testArray) {
       ASSERT_EQ(++index, i);
       count++;
-      if (count == 2)
+      if(count == 2)
         break;
     }
     ASSERT_EQ(count, 2u);
     
     // test modification
-    for (uint32& i : testArray) {
+    for(uint32& i : testArray)
       i++;
-    }
-    
+      
     index = 1;
-    for (uint32 i : testArray) {
+    for(uint32 i : testArray)
       ASSERT_EQ(++index, i);
-    }
   }
   
   TEST(ForeachTest, Dictionary) {
@@ -165,7 +158,7 @@ namespace SwitchUnitTests {
     int32 index = 0;
     int32 checksum1 = 0;
     int32 checksum2 = 0;
-    for (auto item : collection) {
+    for(auto item : collection) {
       checksum1 += 100 + index++;
       checksum2 += item.Value();
     }
@@ -184,13 +177,13 @@ namespace SwitchUnitTests {
     testDictionary[5] = "5";
     
     // test foreach without scope
-    for (auto i : testDictionary)
+    for(auto i : testDictionary)
       count += i.Key();
     ASSERT_EQ(15u, count);
     
     // test full enumeration
     count = 0u;
-    for (auto i : testDictionary) {
+    for(auto i : testDictionary) {
       ASSERT_GE(i.Key(), 1u);
       ASSERT_LE(i.Key(), 5u);
       ASSERT_EQ(UInt32(i.Key()).ToString(), i.Value());
@@ -200,8 +193,8 @@ namespace SwitchUnitTests {
     
     // test break
     count = 0u;
-    for (auto i : testDictionary) {
-      if (++count == 2u)
+    for(auto i : testDictionary) {
+      if(++count == 2u)
         break;
     }
     
@@ -214,7 +207,7 @@ namespace SwitchUnitTests {
     int32 index = 0;
     int32 checksum1 = 0;
     int32 checksum2 = 0;
-    for (char32 item : collection) {
+    for(char32 item : collection) {
       checksum1 += collection[index++];
       checksum2 += item;
     }
@@ -226,9 +219,8 @@ namespace SwitchUnitTests {
     const byte bytes[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     
     byte i = 0;
-    for (byte b : bytes) {
+    for(byte b : bytes)
       ASSERT_EQ(i++, b);
-    }
   }
 }
 

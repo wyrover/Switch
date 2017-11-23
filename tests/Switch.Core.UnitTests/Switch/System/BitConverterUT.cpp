@@ -12,7 +12,7 @@ void EXPECT_B1(T b, TArray bytes) {
 template<typename T, typename TArray>
 void EXPECT_B2(T b1, T b2, TArray bytes) {
   ASSERT_EQ(2, bytes.Length);
-  if (System::BitConverter::IsLittleEndian()) {
+  if(System::BitConverter::IsLittleEndian()) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
   } else {
@@ -24,7 +24,7 @@ void EXPECT_B2(T b1, T b2, TArray bytes) {
 template<typename T, typename TArray>
 void EXPECT_B4(T b1, T b2, T b3, T b4, TArray bytes) {
   ASSERT_EQ(4, bytes.Length);
-  if (System::BitConverter::IsLittleEndian()) {
+  if(System::BitConverter::IsLittleEndian()) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
     ASSERT_EQ(b3, bytes[2]);
@@ -40,7 +40,7 @@ void EXPECT_B4(T b1, T b2, T b3, T b4, TArray bytes) {
 template<typename T, typename TArray>
 void EXPECT_B8(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, TArray bytes) {
   ASSERT_EQ(8, bytes.Length);
-  if (System::BitConverter::IsLittleEndian()) {
+  if(System::BitConverter::IsLittleEndian()) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
     ASSERT_EQ(b3, bytes[2]);
@@ -64,7 +64,7 @@ void EXPECT_B8(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, TArray bytes) {
 template<typename T, typename TArray>
 void EXPECT_B16(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, T b9, T b10, T b11, T b12, T b13, T b14, T b15, T b16, TArray bytes) {
   ASSERT_EQ(16, bytes.Length);
-  if (System::BitConverter::IsLittleEndian()) {
+  if(System::BitConverter::IsLittleEndian()) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
     ASSERT_EQ(b3, bytes[2]);
@@ -104,7 +104,7 @@ void EXPECT_B16(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, T b9, T b10, T b
 namespace {
   TEST(BitConverterTest, GetBytesBoolean) {
     _using(Array<byte> bytes = BitConverter::GetBytes(false)) {
-     EXPECT_B1(0, bytes);
+      EXPECT_B1(0, bytes);
     }
     
     _using(Array<byte> bytes = BitConverter::GetBytes(true)) {
@@ -150,7 +150,7 @@ namespace {
     _using(Array<byte> bytes = BitConverter::GetBytes(1.0)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F, bytes);
     }
-
+    
     _using(Array<byte> bytes = BitConverter::GetBytes(255.0)) {
       EXPECT_B8(0x00, 0x00, 0x00, 0x00, 0x00, 0xE0, 0x6F, 0x40, bytes);
     }
@@ -292,7 +292,7 @@ namespace {
     _using(Array<byte> bytes = BitConverter::GetBytes(1000000000LL)) {
       EXPECT_B8(0x00, 0xCA, 0x9A, 0x3B, 0x00, 0x00, 0x00, 0x00, bytes);
     }
-
+    
     _using(Array<byte> bytes = BitConverter::GetBytes(-1000000000LL)) {
       EXPECT_B8(0x00, 0x36, 0x65, 0xC4, 0xFF, 0xFF, 0xFF, 0xFF, bytes);
     }
@@ -497,7 +497,7 @@ namespace {
   TEST(BitConverterTest, ToBoolean) {
     ASSERT_THROW(BitConverter::ToBoolean({0}, -1), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToBoolean({0}, 1), ArgumentOutOfRangeException);
-
+    
     ASSERT_FALSE(BitConverter::ToBoolean({0}, 0));
     ASSERT_TRUE(BitConverter::ToBoolean({1}, 0));
     ASSERT_TRUE(BitConverter::ToBoolean({2}, 0));
@@ -514,7 +514,7 @@ namespace {
     ASSERT_THROW(BitConverter::ToChar({0x00, 0x00, 0x00, 0x00}, -1), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToChar({0x00, 0x00, 0x00, 0x00}, 4), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToChar({0x00, 0x00, 0x00, 0x00}, 1), ArgumentException);
-
+    
     ASSERT_EQ(' ', BitConverter::ToChar({0x20, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ('*', BitConverter::ToChar({0x2A, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ('3', BitConverter::ToChar({0x33, 0x00, 0x00, 0x00}, 0));
@@ -528,7 +528,7 @@ namespace {
     ASSERT_THROW(BitConverter::ToDouble({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, -1), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToDouble({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 8), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToDouble({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 1), ArgumentException);
-
+    
     ASSERT_EQ(0.0, BitConverter::ToDouble({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ(1.0, BitConverter::ToDouble({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F}, 0));
     ASSERT_EQ(255.0, BitConverter::ToDouble({0x00, 0x00, 0x00, 0x00, 0x00, 0xE0, 0x6F, 0x40}, 0));
@@ -566,7 +566,7 @@ namespace {
     ASSERT_THROW(BitConverter::ToInt32({0x00, 0x00, 0x00, 0x00}, -1), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToInt32({0x00, 0x00, 0x00, 0x00}, 4), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToInt32({0x00, 0x00, 0x00, 0x00}, 1), ArgumentException);
-
+    
     ASSERT_EQ(0, BitConverter::ToInt32({0x00, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ(15, BitConverter::ToInt32({0x0F, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ(-15, BitConverter::ToInt32({0xF1, 0xFF, 0xFF, 0xFF}, 0));
@@ -582,7 +582,7 @@ namespace {
     ASSERT_THROW(BitConverter::ToInt64({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, -1), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToInt64({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 8), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToInt64({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 1), ArgumentException);
-
+    
     ASSERT_EQ(0LL, BitConverter::ToInt64({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ(0xFFFFFFLL, BitConverter::ToInt64({0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ(1000000000LL, BitConverter::ToInt64({0x00, 0xCA, 0x9A, 0x3B, 0x00, 0x00, 0x00, 0x00}, 0));
@@ -601,7 +601,7 @@ namespace {
     ASSERT_THROW(BitConverter::ToSingle({0x00, 0x00, 0x00, 0x00}, -1), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToSingle({0x00, 0x00, 0x00, 0x00}, 4), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToSingle({0x00, 0x00, 0x00, 0x00}, 1), ArgumentException);
-
+    
     ASSERT_EQ(0.0, BitConverter::ToSingle({0x00, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ(1.0f, BitConverter::ToSingle({0x00, 0x00, 0x80, 0x3F}, 0));
     ASSERT_EQ(15.0f, BitConverter::ToSingle({0x00, 0x00, 0x70, 0x41}, 0));
@@ -624,22 +624,22 @@ namespace {
   TEST(BitConverterTest, ToString) {
     Array<byte> arrayOne = {0, 1, 2, 4, 8, 16, 32, 64, 128, 255};
     ASSERT_EQ("00-01-02-04-08-10-20-40-80-FF", BitConverter::ToString(arrayOne));
-
+    
     Array<byte> arrayTwo = {32, 0, 0, 42, 0, 65, 0, 125, 0, 197, 0, 168, 3, 41, 4, 172, 32};
     ASSERT_EQ("20-00-00-2A-00-41-00-7D-00-C5-00-A8-03-29-04-AC-20", BitConverter::ToString(arrayTwo));
-
+    
     Array<byte> arrayThree = {15, 0, 0, 128, 16, 39, 240, 216, 241, 255, 127};
     ASSERT_EQ("0F-00-00-80-10-27-F0-D8-F1-FF-7F", BitConverter::ToString(arrayThree));
-
+    
     Array<byte> arrayFour = {15, 0, 0, 0, 0, 16, 0, 255, 3, 0, 0, 202, 154, 59, 255, 255, 255, 255, 127};
     ASSERT_EQ("0F-00-00-00-00-10-00-FF-03-00-00-CA-9A-3B-FF-FF-FF-FF-7F", BitConverter::ToString(arrayFour));
-
+    
     Array<byte> arrayEmpty;
     ASSERT_EQ("", BitConverter::ToString(arrayEmpty));
   }
   
   TEST(BitConverterTest, ToStringWithStartIndex) {
-    Array<byte> arrayOne = {3,6,9};
+    Array<byte> arrayOne = {3, 6, 9};
     ASSERT_THROW(BitConverter::ToString(arrayOne, -1), ArgumentOutOfRangeException);
     ASSERT_EQ("03-06-09", BitConverter::ToString(arrayOne, 0));
     ASSERT_EQ("06-09", BitConverter::ToString(arrayOne, 1));
@@ -652,7 +652,7 @@ namespace {
   }
   
   TEST(BitConverterTest, ToStringWithStartIndexAndLength) {
-    Array<byte> arrayOne = {3,6,9};
+    Array<byte> arrayOne = {3, 6, 9};
     
     ASSERT_THROW(BitConverter::ToString(arrayOne, -1, 1), ArgumentOutOfRangeException);
     
@@ -668,7 +668,7 @@ namespace {
     ASSERT_EQ("06", BitConverter::ToString(arrayOne, 1, 1));
     ASSERT_EQ("06-09", BitConverter::ToString(arrayOne, 1, 2));
     ASSERT_THROW(BitConverter::ToString(arrayOne, 1, 3), ArgumentException);
-
+    
     ASSERT_THROW(BitConverter::ToString(arrayOne, 2, -1), ArgumentException);
     ASSERT_EQ("", BitConverter::ToString(arrayOne, 2, 0));
     ASSERT_EQ("09", BitConverter::ToString(arrayOne, 2, 1));
@@ -684,7 +684,7 @@ namespace {
     ASSERT_THROW(BitConverter::ToUInt16({0x00, 0x00}, -1), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToUInt16({0x00, 0x00}, 2), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToUInt16({0x00, 0x00}, 1), ArgumentException);
- 
+    
     ASSERT_EQ(15, BitConverter::ToUInt16({0x0F, 0x00}, 0));
     ASSERT_EQ(1023, BitConverter::ToUInt16({0xFF, 0x03}, 0));
     ASSERT_EQ(10000, BitConverter::ToUInt16({0x10, 0x27}, 0));
@@ -697,7 +697,7 @@ namespace {
     ASSERT_THROW(BitConverter::ToUInt32({0x00, 0x00, 0x00, 0x00}, -1), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToUInt32({0x00, 0x00, 0x00, 0x00}, 4), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToUInt32({0x00, 0x00, 0x00, 0x00}, 1), ArgumentException);
-
+    
     ASSERT_EQ(15U, BitConverter::ToUInt32({0x0F, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ(1023U, BitConverter::ToUInt32({0xFF, 0x03, 0x00, 0x00}, 0));
     ASSERT_EQ(0x100000U, BitConverter::ToUInt32({0x00, 0x00, 0x10, 0x00}, 0));
@@ -711,7 +711,7 @@ namespace {
     ASSERT_THROW(BitConverter::ToUInt64({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, -1), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToUInt64({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 8), ArgumentOutOfRangeException);
     ASSERT_THROW(BitConverter::ToUInt64({0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 1), ArgumentException);
-
+    
     ASSERT_EQ(0xFFFFFFULL, BitConverter::ToUInt64({0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ(1000000000ULL, BitConverter::ToUInt64({0x00, 0xCA, 0x9A, 0x3B, 0x00, 0x00, 0x00, 0x00}, 0));
     ASSERT_EQ(0x100000000ULL, BitConverter::ToUInt64({0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00}, 0));

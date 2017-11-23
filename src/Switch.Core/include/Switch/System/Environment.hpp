@@ -147,7 +147,7 @@ namespace Switch {
         /// @brief The file system directory that acts as a staging area for files waiting to be written to a CD.
         CDBurning = 59
       };
-
+      
       /// @brief Specifies options to use for getting the path to a special folder.
       /// @remarks The System.Environment.SpecialFolderOption enumeration is used to define the precise behavior of the Environment.GetFolderPath method.
       enum class SpecialFolderOption {
@@ -441,7 +441,7 @@ namespace Switch {
       /// The following example attempts to retrieve the value of an environment variable named Test1 from the process environment block. If the variable doesn't exist, the example creates its and retrieves its value. The example displays the value of the variable. If the example created the variable, it also calls the GetEnvironmentVariables(EnvironmentVariableTarget) method with each member of the EnvironmentVariableTarget enumeration to establish that the variable can be retrieved only from the current process environment block. Finally, if the example created the variable, it deletes it.
       /// @include EnvironmentGetEnvironmentVariable2.cpp
       static String GetEnvironmentVariable(const String& variable) {return GetEnvironmentVariable(variable, EnvironmentVariableTarget::Process);}
-
+      
       /// @brief Retrieves the value of an environment variable from the current process or from the Windows operating system registry key for the current user or local machine.
       /// @param variable The name of an environment variable.
       /// @param target One of the EnvironmentVariableTarget values.
@@ -454,7 +454,7 @@ namespace Switch {
       /// The following example creates environment variables for the Process, User, and Machine targets, checks whether the operating system registry contains the User and Machine environment variables, then deletes the environment variables.
       /// @include EnvironmentGetEnvironmentVariable3.cpp
       static String GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target);
-
+      
       /// @brief Retrieves all environment variable names and their values from the current process.
       /// @return Collections::Generic::IDictionary<string, string> A dictionary that contains all environment variable names and their values; otherwise, an empty dictionary if no environment variables are found.
       /// @remarks The names and values for the environment variables are stored as key-value pairs in the returned IDictionary.
@@ -462,7 +462,7 @@ namespace Switch {
       /// The following example demonstrates the GetEnvironmentVariables method.
       /// @include EnvironmentGetEnvironmentVariables.cpp
       static const Collections::Generic::IDictionary<String, String>& GetEnvironmentVariables() {return GetEnvironmentVariables(System::EnvironmentVariableTarget::Process);}
-
+      
       /// @brief Retrieves all environment variable names and their values from the current process, or from the Windows operating system registry key for the current user or local machine.
       /// @param target One of the EnvironmentVariableTarget values.
       /// @return A dictionary that contains all environment variable names and their values from the source specified by the target parameter; otherwise, an empty dictionary if no environment variables are found.
@@ -485,7 +485,7 @@ namespace Switch {
       /// The following example demonstrates how to use the GetFolderPath method to return and display the path associated with the folder parameter.
       /// @include EnvironmentGetFolderPath.cpp
       static String GetFolderPath(Environment::SpecialFolder folder) {return GetFolderPath(folder, Environment::SpecialFolderOption::None);}
-
+      
       /// @brief Gets the path to the system special folder that is identified by the specified enumeration, and uses a specified option for accessing special folders.
       /// @exception ArgumentException folder is not a member of System.Environment.SpecialFolder.
       /// @param folder An enumerated constant that identifies a system special folder.
@@ -496,7 +496,7 @@ namespace Switch {
       /// @remarks The folder parameter designates the special folder to retrieve and must be one of the values in the Environment.SpecialFolder enumeration; any other value throws an exception.
       /// @remarks For more information about special folders, see the CSIDL values topic.
       static String GetFolderPath(Environment::SpecialFolder folder, Environment::SpecialFolderOption option);
-
+      
       /// @brief Returns an array of string containing the names of the logical drives on the current computer.
       /// @return Array<string> An array of strings where each element contains the name of a logical drive. For example, if the computer's hard drive is the first logical drive, the first element returned is "C:\".
       /// @Exception IOException An I/O error occurs.
@@ -506,7 +506,7 @@ namespace Switch {
       static Array<String> GetLogicalDrives();
       
       /// @brief Initailize CommandLineArgs with specified command line arguments.
-     /// @param argv Command line arguments.
+      /// @param argv Command line arguments.
       /// @param argc Number of command line arguments.
       /// @return Array<string> A string array that contains the arguments without the command line.
       /// @exception InvalidOperationException Call more than once. CommandeLine has already been set and is not empty.
@@ -532,7 +532,7 @@ namespace Switch {
       /// The following example attempts to retrieve the value of an environment variable named Test1 from the process environment block. If the variable doesn't exist, the example creates the variable and retrieves its value. The example displays the value of the variable. If the example created the variable, it also calls the GetEnvironmentVariables(EnvironmentVariableTarget) method with each member of the EnvironmentVariableTarget enumeration to establish that the variable can be retrieved only from the current process environment block. Finally, if the example created the variable, it deletes it.
       /// @include EnvironmentSetEnvironmentVariable.cpp
       static void SetEnvironmentVariable(const String& name, const String& value) {SetEnvironmentVariable(name, value, System::EnvironmentVariableTarget::Process);}
-
+      
       /// @brief Creates, modifies, or deletes an environment variable stored in the current process or in the Windows operating system registry key reserved for the current user or local machine.
       /// @param name The name of an environment variable.
       /// @param value A value to assign to variable.
@@ -566,7 +566,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Environment::SpecialFolder> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Environment::SpecialFolder::Desktop, "Desktop"}, {(int64)System::Environment::SpecialFolder::Programs, "Programs"}, {(int64)System::Environment::SpecialFolder::MyDocuments, "MyDocuments"}, /*{(int64)System::Environment::SpecialFolder::Personal, "Personal"},*/ {(int64)System::Environment::SpecialFolder::Favorites, "Favorites"}, {(int64)System::Environment::SpecialFolder::Startup, "Startup"}, {(int64)System::Environment::SpecialFolder::Recent, "Recent"}, {(int64)System::Environment::SpecialFolder::SendTo, "SendTo"}, {(int64)System::Environment::SpecialFolder::StartMenu, "StartMenu"}, {(int64)System::Environment::SpecialFolder::MyMusic, "MyMusic"}, {(int64)System::Environment::SpecialFolder::MyVideos, "MyVideos"}, {(int64)System::Environment::SpecialFolder::DesktopDirectory, "DesktopDirectory"}, {(int64)System::Environment::SpecialFolder::MyComputer, "MyComputer"}, {(int64)System::Environment::SpecialFolder::NetworkShortcuts, "NetworkShortcuts"}, {(int64)System::Environment::SpecialFolder::Fonts, "Fonts"}, {(int64)System::Environment::SpecialFolder::Templates, "Templates"}, {(int64)System::Environment::SpecialFolder::CommonStartMenu, "CommonStartMenu"}, {(int64)System::Environment::SpecialFolder::CommonPrograms, "CommonPrograms"}, {(int64)System::Environment::SpecialFolder::CommonStartup, "CommonStartup"}, {(int64)System::Environment::SpecialFolder::CommonDesktopDirectory, "CommonDesktopDirectory"}, {(int64)System::Environment::SpecialFolder::ApplicationData, "ApplicationData"}, {(int64)System::Environment::SpecialFolder::PrinterShortcuts, "PrinterShortcuts"}, {(int64)System::Environment::SpecialFolder::LocalApplicationData, "LocalApplicationData"}, {(int64)System::Environment::SpecialFolder::InternetCache, "InternetCache"}, {(int64)System::Environment::SpecialFolder::Cookies, "Cookies"}, {(int64)System::Environment::SpecialFolder::History, "History"}, {(int64)System::Environment::SpecialFolder::CommonApplicationData, "CommonApplicationData"}, {(int64)System::Environment::SpecialFolder::Windows, "Windows"}, {(int64)System::Environment::SpecialFolder::System, "System"}, {(int64)System::Environment::SpecialFolder::ProgramFiles, "ProgramFiles"}, {(int64)System::Environment::SpecialFolder::MyPictures, "MyPictures"}, {(int64)System::Environment::SpecialFolder::UserProfile, "UserProfile"}, {(int64)System::Environment::SpecialFolder::SystemX86, "SystemX86"}, {(int64)System::Environment::SpecialFolder::ProgramFilesX86, "ProgramFilesX86"}, {(int64)System::Environment::SpecialFolder::CommonProgramFiles, "CommonProgramFiles"}, {(int64)System::Environment::SpecialFolder::CommonProgramFilesX86, "CommonProgramFilesX86"}, {(int64)System::Environment::SpecialFolder::CommonTemplates, "CommonTemplates"}, {(int64)System::Environment::SpecialFolder::CommonDocuments, "CommonDocuments"}, {(int64)System::Environment::SpecialFolder::CommonAdminTools, "CommonAdminTools"}, {(int64)System::Environment::SpecialFolder::AdminTools, "AdminTools"}, {(int64)System::Environment::SpecialFolder::CommonMusic, "CommonMusic"}, {(int64)System::Environment::SpecialFolder::CommonPictures, "CommonPictures"}, {(int64)System::Environment::SpecialFolder::CommonVideos, "CommonVideos"}, {(int64)System::Environment::SpecialFolder::Resources, "Resources"}, {(int64)System::Environment::SpecialFolder::LocalizedResources, "LocalizedResources"}, {(int64)System::Environment::SpecialFolder::CommonOemLinks, "CommonOemLinks"}, {(int64)System::Environment::SpecialFolder::CDBurning, "CDBurning"}};
     flags = false;
   }
@@ -575,7 +575,7 @@ public:
 template<>
 class EnumToStrings<System::Environment::SpecialFolderOption> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Environment::SpecialFolderOption::None, "None"}, {(int64)System::Environment::SpecialFolderOption::DoNotVerify, "DoNotVerify"}, {(int64)System::Environment::SpecialFolderOption::Create, "Create"}};
     flags = false;
   }

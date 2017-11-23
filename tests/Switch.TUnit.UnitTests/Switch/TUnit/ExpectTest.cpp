@@ -8,11 +8,11 @@ namespace SwitchUnitTests {
   class ExpectTest : public TestFixture {
   protected:
     ExpectTest() {}
-
+    
     void SetUp() override {
       value = 42;
     }
-
+    
     void TearDown() override {
       value = 0;
     }
@@ -80,84 +80,84 @@ namespace SwitchUnitTests {
       string fourtyTwo = "Forty two";
       Expect::AreEqual("Forty two", fourtyTwo, "My message", _caller);
     }
-
+    
     void AreNotEqual() {
       System::String string = "Test";
       Expect::AreNotEqual("Tes", string, _caller);
     }
-
+    
     void AreNotSame() {
       System::Version ver1(1, 2, 3);
       System::Version ver2(1, 2, 3);
       Expect::AreNotSame(ver1, ver2, _caller);
     }
-
+    
     void AreSame() {
       System::DateTime date1 = System::DateTime::Now();
       System::DateTime* date2 = &date1;
       Expect::AreSame(date1, *date2, _caller);
     }
-
+    
     void DoesNotThrows() {
       const char* string1 = "Not null";
       Expect::DoesNotThrows(_delegate {System::String string2(string1);}, _caller);
     }
-
+    
     void Greater() {
       int32 fourtyTwo = 42;
       Expect::Greater(fourtyTwo, 40, _caller);
     }
-
+    
     void GreaterOrEqual() {
       int32 fourtyTwo = 42;
       Expect::GreaterOrEqual(fourtyTwo, 40, _caller);
       Expect::GreaterOrEqual(fourtyTwo, 42, _caller);
     }
-
+    
     void IsFalse() {
       bool boolean = false;
       Expect::IsFalse(boolean, _caller);
     }
-
+    
     void IsNull() {
       System::Object* pointer = null;
       Expect::IsNull(pointer, _caller);
     }
-
+    
     void IsTrue() {
       bool boolean = true;
       Expect::IsTrue(boolean, _caller);
     }
-
+    
     void Less() {
       int32 fourtyTwo = 42;
       Expect::Less(fourtyTwo, 44, _caller);
     }
-
+    
     void LessOrEqual() {
       int32 fourtyTwo = 42;
       Expect::LessOrEqual(fourtyTwo, 44, _caller);
       Expect::LessOrEqual(fourtyTwo, 42, _caller);
     }
-
+    
     void Throws() {
       const char* string1 = null;
       Expect::Throws<System::ArgumentNullException>(_delegate {System::String string2(string1);}, _caller);
     }
-
+    
     void ThrowsAny() {
       System::Array<System::String> array(10);
       Expect::ThrowsAny(_delegate {array[10];}, _caller);
     }
-
+    
     void AnyTest() {
       Expect::AreEqual(10, 10, _caller);
     }
-
+    
   private:
     int32 value;
   };
-
+  
   _AddTest(ExpectTest, AreEqualInternalValue)
   _AddTest(ExpectTest, AreEqualInt32)
   _AddTest(ExpectTest, AreEqualInt32WithCurrentInformation)

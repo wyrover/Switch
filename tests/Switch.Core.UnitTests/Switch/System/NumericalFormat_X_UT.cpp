@@ -4,7 +4,7 @@
 using namespace System;
 
 namespace {
-  
+
   TEST(NumericalFormatTest, X_ParsePrecision) {
     ASSERT_EQ("0", String::Format("{0:X}", Int32(0)));
     ASSERT_EQ("9FB2B", String::Format("{0:X}", Int32(654123)));
@@ -80,7 +80,7 @@ namespace {
   }
   
   TEST(NumericalFormatTest, X1_Byte) {
-    
+  
     ASSERT_EQ("0", String::Format("{0:X1}", Byte(0x0)));
     ASSERT_EQ("5", String::Format("{0:X1}", Byte(0x5)));
     ASSERT_EQ("7F", String::Format("{0:X1}", Byte(0x7F)));
@@ -88,7 +88,7 @@ namespace {
   }
   
   TEST(NumericalFormatTest, X4_Byte) {
-    
+  
     ASSERT_EQ("0000", String::Format("{0:X4}", Byte(0x0)));
     ASSERT_EQ("0005", String::Format("{0:X4}", Byte(0x5)));
     ASSERT_EQ("007F", String::Format("{0:X4}", Byte(0x7F)));
@@ -96,7 +96,7 @@ namespace {
   }
   
   TEST(NumericalFormatTest, X8_Byte) {
-    
+  
     ASSERT_EQ("00000000", String::Format("{0:X8}", Byte(0x0)));
     ASSERT_EQ("00000005", String::Format("{0:X8}", Byte(0x5)));
     ASSERT_EQ("0000007F", String::Format("{0:X8}", Byte(0x7F)));

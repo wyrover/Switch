@@ -31,9 +31,9 @@ namespace Switch {
     /// @brief Copy a Reference specified
     /// @param ref Reference to copy.
     Ref(const Ref& ref) : ptr(ref.ptr) {}
-
+    
     Ref(NullPtr) : ptr(null) {}
-
+    
     /// @brief Return true if this instance is null.
     /// @return true if this instance is null; otherwise false.
     static bool IsNullOrInvalid(const Ref<T>& ref) { return &ref == null || ref == null; }
@@ -87,9 +87,9 @@ namespace Switch {
     /// @return the pointer stored in Reference.
     /// @exception NullPointerException the Reference is null
     T* ToPointer() {
-      if (this->ptr == null)
+      if(this->ptr == null)
         throw std::exception();
-      
+        
       return this->ptr;
     }
     
@@ -97,9 +97,9 @@ namespace Switch {
     /// @return the pointer stored in Reference.
     /// @exception NullPointerException the Reference is null
     const T* ToPointer() const {
-      if (this->ptr == null)
+      if(this->ptr == null)
         throw std::exception();
-      
+        
       return this->ptr;
     }
     
@@ -108,11 +108,11 @@ namespace Switch {
     /// @exception NullPointerException the Reference is null
     template<typename TT>
     TT* ToPointer() {
-      if (this->ptr == null)
+      if(this->ptr == null)
         throw std::exception();
-      
+        
       TT* cast = dynamic_cast<TT*>(this->ptr);
-      if (cast == null)
+      if(cast == null)
         throw std::exception();
       return cast;
     }
@@ -122,11 +122,11 @@ namespace Switch {
     /// @exception NullPointerException the Reference is null
     template<typename TT>
     const TT* ToPointer() const {
-      if (this->ptr == null)
+      if(this->ptr == null)
         throw std::exception();
-      
+        
       TT* cast = dynamic_cast<const TT*>(this->ptr);
-      if (cast == null)
+      if(cast == null)
         throw std::exception();
       return cast;
     }
@@ -142,12 +142,12 @@ namespace Switch {
     template<typename TT>
     Ref<TT> As() const {
       try {
-        if (this->ptr == null)
+        if(this->ptr == null)
           return Ref<TT>::Null();
-        
+          
         const TT* ptr = dynamic_cast<const TT*>(this->ptr);
         return Ref<TT>(*ptr);
-      } catch (const std::bad_cast&) {
+      } catch(const std::bad_cast&) {
         return Ref<TT>::Null();
       }
     }
@@ -174,11 +174,11 @@ namespace Switch {
     template<typename TT>
     bool Is() const {
       try {
-        if (this->ptr == null)
+        if(this->ptr == null)
           return false;
-        
+          
         return dynamic_cast<const TT*>(this->ptr) != null;
-      } catch (const std::bad_cast&) {
+      } catch(const std::bad_cast&) {
         return false;
       }
     }
@@ -219,7 +219,7 @@ namespace Switch {
     /// @brief Returns a string that represents the current Reference.
     /// @return string A string that represents the current object.
     std::string ToString() const {
-      if (this->ptr == null)
+      if(this->ptr == null)
         return "Switch::Ref [Reference=null]";
       std::stringstream s;
       s << "Switch::Ref [Reference=" << this->ptr << "]";
@@ -241,8 +241,8 @@ namespace Switch {
     const T* operator->() const { return ToPointer(); }
     T* operator->() { return ToPointer(); }
     
-    operator const T&() const { return ToObject(); }
-    operator T&() { return ToObject(); }
+    operator const T& () const { return ToObject(); }
+    operator T& () { return ToObject(); }
     
     Ref<T>& operator=(const T& ref) {
       Reset(ref);
@@ -253,7 +253,7 @@ namespace Switch {
       Reset(*ref.ptr);
       return *this;
     }
-
+    
     bool operator==(NullPtr) const { return this->ptr == null; }
     
     bool operator==(const T& ref) const { return this->ptr == &ref; }
@@ -261,7 +261,7 @@ namespace Switch {
     bool operator==(const Ref<T>& ref) const { return this->ptr == ref.ptr; }
     
     bool operator!=(NullPtr) const { return this->ptr != null; }
-
+    
     bool operator!=(const T& ref) const { return this->ptr != &ref; }
     
     bool operator!=(const Ref<T>& ref) const { return this->ptr != ref.ptr; }
@@ -276,7 +276,7 @@ namespace Switch {
     T* ptr = null;
     /// @endcond
   };
-
+  
   template<typename T>
   using ref = Ref<T>;
 }

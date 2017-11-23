@@ -80,17 +80,17 @@ namespace Switch {
             return *this;
           }
           /// @endcond
-
+          
           /// @brief Gets which drag-and-drop operations are allowed by the originator (or source) of the drag event.
           /// @return One of the DragDropEffects values.
           _property<DragDropEffects, _readonly> AllowedEffect {
             _get {return this->allowedEffect;}
           };
-
+          
           _property<const object&, _readonly> Data {
             _get->const object& {return *this->data;}
           };
-
+          
           /// @brief Gets or sets the target drop effect in a drag-and-drop operation.
           /// @param value One of the DragDropEffects values.
           /// By default, the effect applied determines the mouse cursor for the target of a drag-and-drop operation. This is useful to provide feedback to the user on the operation that will occur. For example, if you press the CTRL key when you drag a file from a source, specify DragDropEffects.Copy to indicate the target will try to perform a copy operation.
@@ -146,7 +146,7 @@ namespace Switch {
             _get {return this->effect;},
             _set {this->effect = value;}
           };
-
+          
           /// @brief Gets the current state of the SHIFT, CTRL, and ALT keys, as well as the state of the mouse buttons.
           /// @return The current state of the SHIFT, CTRL, and ALT keys and of the mouse buttons.
           /// You can make the effect of a drag-and-drop operation to depend on the state of a particular key. For example, you may decide to copy or move data depending on whether the CTRL or SHIFT keys are pressed during the drag-and-drop operation.
@@ -211,15 +211,15 @@ namespace Switch {
           _property<int32, _readonly> KeyState {
             _get {return this->keyState;}
           };
-
+          
           _property<int32, _readonly> X {
             _get {return this->x;}
           };
-
+          
           _property<int32, _readonly> Y {
             _get {return this->y;}
           };
-
+          
         private:
           const object* data = null;
           DragDropEffects allowedEffect = DragDropEffects::None;

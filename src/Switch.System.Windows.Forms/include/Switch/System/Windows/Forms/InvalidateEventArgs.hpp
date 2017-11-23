@@ -15,11 +15,11 @@ namespace Switch {
           /// @brief Initializes a new instance of the InvalidateEventArgs class.
           /// @param invalidRect The Rectangle that contains the invalidated window area.
           InvalidateEventArgs(const Switch::System::Drawing::Rectangle& invalidRect) : invalidRect(invalidRect) {}
-
+          
           /// @brief Gets the Rectangle that contains the invalidated window area.
           /// @return The invalidated window area.
           const Switch::System::Drawing::Rectangle& InvalidRect() const { return this->invalidRect; }
-
+          
         private:
           Switch::System::Drawing::Rectangle invalidRect;
         };

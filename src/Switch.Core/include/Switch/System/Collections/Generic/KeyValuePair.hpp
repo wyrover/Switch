@@ -20,7 +20,7 @@ namespace Switch {
       /// @brief The System::Collections::Generic namespace contains interfaces and classes that define generic collections, which allow users to create strongly typed collections that provide better type safety and performance than non-generic strongly typed collections.
       namespace Generic {
         /// @cond
-        template<typename TKey=NullPtr, typename TValue=NullPtr>
+        template<typename TKey = NullPtr, typename TValue = NullPtr>
         class KeyValuePair;
         /// @endcond
         
@@ -39,28 +39,28 @@ namespace Switch {
           KeyValuePair(const std::pair<TKey, TValue>& pair) : pair(pair) {}
           operator std::pair<TKey, TValue>() const {return this->pair;}
           /// @endcond
-
-         /// @brief Gets the key in the key/value pair.
-         /// @return TKey A TKey that is the key of the KeyValuePair<TKey, TValue>.
+          
+          /// @brief Gets the key in the key/value pair.
+          /// @return TKey A TKey that is the key of the KeyValuePair<TKey, TValue>.
           _property<const TKey&, _readonly> Key {
             _get->const TKey& {return this->pair.first;}
           };
-
-         /// @brief Gets the value in the key/value pair.
-         /// @return TValue A TValue that is the value of the KeyValuePair<TKey, TValue>.
+          
+          /// @brief Gets the value in the key/value pair.
+          /// @return TValue A TValue that is the value of the KeyValuePair<TKey, TValue>.
           _property<const TValue&, _readonly> Value {
             _get->const TValue& {return this->pair.second;}
           };
-
+          
           /// @brief Returns a String representation of the KeyValuePair<TKey, TValue>, using the String representations of the key and value.
           /// @return const String A String representation of the KeyValuePair<TKey, TValue>, which includes the String representations of the key and value.
           /// @return String
           String ToString() const override {return String::Format("[{0}, {1}]", this->pair.first, this->pair.second);}
-
+          
           bool Equals(const KeyValuePair& value) const {return this->pair == value.pair;}
           
           bool Equals(const Object& obj) const override {return is<KeyValuePair>(obj) && Equals(static_cast<const KeyValuePair&>(obj));}
-
+          
         private:
           std::pair<TKey, TValue> pair;
         };

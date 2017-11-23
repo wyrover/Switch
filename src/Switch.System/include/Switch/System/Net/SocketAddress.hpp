@@ -34,10 +34,10 @@ namespace Switch {
       public:
         /// @brief Creates a new instance of the SocketAddress class for the given address family.
         SocketAddress(Sockets::AddressFamily addressFamily) : SocketAddress(addressFamily, 32) {}
-
+        
         /// @brief Creates a new instance of the SocketAddress class using the specified address family and buffer size.
         SocketAddress(Sockets::AddressFamily addressFamily, int32 bufferSize);
-
+        
         /// @brief Creates a new instance of the SocketAddress class using the specified byte buffer .
         SocketAddress(const Array<byte>& buffer);
         
@@ -51,18 +51,18 @@ namespace Switch {
         _property<Sockets::AddressFamily, _readonly> AddressFamily {
           _get {return this->GetAddressFamily();}
         };
-
+        
         /// @brief Gets the underlying buffer size of the SocketAddress.
         /// @return int32 The underlying buffer size of the SocketAddress.
         _property<int32, _readonly> Size {
           _get {return this->bytes.Length();}
         };
-
+        
         /// @brief Gets or sets the specified index element in the underlying buffer.
         /// @param index The array index element of the desired information.
         /// @return byte The value of the specified index element in the underlying buffer.
         byte& operator[](int32 index) { return this->bytes[index]; }
-
+        
         /// @brief Gets the specified index element in the underlying buffer.
         /// @param index The array index element of the desired information.
         /// @return byte The value of the specified index element in the underlying buffer.
@@ -75,13 +75,13 @@ namespace Switch {
         /// @return string A string that contains information about the SocketAddress.
         /// @remarks The ToString method returns a string that contains the AddressFamily enumerated value, the size of the underlying buffer of the SocketAddress structure, and the remaining contents of the buffer.
         virtual String ToString() const;
-
+        
       private :
         friend class IPEndPoint;
         friend class Sockets::Socket;
         Sockets::AddressFamily GetAddressFamily() const;
         Array<byte> bytes;
-     };
+      };
     }
   }
 }

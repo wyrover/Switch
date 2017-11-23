@@ -38,7 +38,7 @@ namespace Switch {
           WebRequestStream() {}
           WebRequestStream(WebRequest* webRequest) {this->data->webRequest = webRequest;}
           WebRequestStream(const WebRequestStream& wrs) {}
-
+          
           void Write(const void* handle, int32 count);
           void Write(const Array<byte>& buffzer, int32 offset, int32 count) override;
           int32 Read(Array<byte>& buffer, int32 offset, int32 count) override { return 0; }
@@ -68,7 +68,7 @@ namespace Switch {
           refptr<WebRequestStreamData> data = ref_new<WebRequestStreamData>();
         };
         
-
+        
         /// @brief Initializes a new WebRequest instance for the specified URI scheme.
         /// @param requestUriString The URI that identifies the Internet resource.
         /// @return WebRequest A WebRequest descendant for the specified URI scheme.
@@ -82,7 +82,7 @@ namespace Switch {
         /// @remarks The Switch includes support for the http://, ftp:// URI schemes.
         /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
         static refptr<WebRequest> Create(const String& requestUriString) { return Create(Uri(requestUriString)); }
-
+        
         /// @brief Initializes a new WebRequest instance for the specified URI scheme.
         /// @param requestUriString A Uri containing the URI of the requested resource.
         /// @return WebRequest A WebRequest descendant for the specified URI scheme.
@@ -96,7 +96,7 @@ namespace Switch {
         /// @remarks The Switch includes support for the http://, ftp:// URI schemes.
         /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
         static refptr<WebRequest> Create(const Uri& requestUriString);
-
+        
         _property<int64> ContentLength {
           _get {return this->GetContentLength();},
           _set {this->SetContentLength(value);}
@@ -115,7 +115,7 @@ namespace Switch {
         _property<System::Uri, _readonly> RequestUri {
           _get {return this->GetRequestUri();}
         };
-
+        
         _property<int32> Timeout {
           _get {return this->timeout;},
           _set {this->timeout = value;}
@@ -123,9 +123,9 @@ namespace Switch {
         
         virtual WebResponse& GetResponse() = 0;
         virtual WebRequestStream GetRequestStream();
-
+        
         virtual ~WebRequest();
-
+        
       protected:
         virtual int64 GetContentLength() const { return this->contentLength; }
         virtual void SetContentLength(int64 contentLength) { this->contentLength = contentLength; }
@@ -138,9 +138,9 @@ namespace Switch {
         
         bool IsResponseStreamNeeded() const;
         bool IsRequestStreamNeeded() const;
-
+        
         virtual WebResponse& GetInternalResponse() = 0;
-
+        
         /// @brief Initializes a new instance of the WebRequest class.
         /// @param uri : A Uri containing the URI of the requested resource.
         /// @remarks Use the Create method to initialize new WebRequest instances. Do not use the constructor.
@@ -148,7 +148,7 @@ namespace Switch {
         WebRequest(const System::Uri& uri);
         WebRequest(const WebRequest& webRequest) = delete;
         WebRequest& operator =(const WebRequest& webRequest) = delete;
-
+        
         static int32 pendingRequest;
         intptr requestHandle = IntPtr::Zero;
         string method;
@@ -158,7 +158,7 @@ namespace Switch {
         System::Uri uri;
         System::Net::WebRequest::WebRequestStream  requestStream {this};
         int32 internalError = 0;
-
+        
         void ProccessRequest();
         virtual void Finished(int32 error);
         static size_t ReadStream(void* buffer, size_t size, size_t nmemb, void* stream);
@@ -166,7 +166,7 @@ namespace Switch {
       private:
         void ProccessRequestThread();
         System::Threading::Thread requestThread {System::Threading::ThreadStart(*this, &WebRequest::ProccessRequestThread)};
-
+        
         void InitWebRequest();
       };
     }

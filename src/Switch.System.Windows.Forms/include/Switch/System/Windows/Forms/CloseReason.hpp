@@ -32,7 +32,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::CloseReason> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::CloseReason::None, "None"}, {(int64)System::Windows::Forms::CloseReason::WindowsShutDown, "WindowsShutDown"}, {(int64)System::Windows::Forms::CloseReason::MdiFormClosing, "MdiFormClosing"}, {(int64)System::Windows::Forms::CloseReason::UserClosing, "UserClosing"}, {(int64)System::Windows::Forms::CloseReason::TaskManagerClosing, "TaskManagerClosing"}, {(int64)System::Windows::Forms::CloseReason::FormOwnerClosing, "FormOwnerClosing"}, {(int64)System::Windows::Forms::CloseReason::ApplicationExitCall, "ApplicationExitCall"}};
     flags = false;
   }

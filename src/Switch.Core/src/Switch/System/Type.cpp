@@ -32,16 +32,16 @@ bool Type::Equals(const Type& type) const {
 
 String Type::GetFullName() const {
   String fullName = Native::TypeApi::Demangle(this->type.name());
-  for (string item : {"Switch::System::Func", "Switch::System::Tuple"}) {
-    if (fullName.StartsWith(item)) {
+  for(string item : {"Switch::System::Func", "Switch::System::Tuple"}) {
+    if(fullName.StartsWith(item)) {
       fullName = fullName.Replace(", std::nullptr_t", "");
       break;
     }
   }
-
+  
   // replace some keywords by other...
-  for (auto keyValue : System::Collections::Generic::Dictionary<string, string> {{"std::nullptr_t", "Switch::NUllPtr"}, {"std::__1::allocator", "Switch::Allocator"}, {"std::allocator", "Switch::Allocator"}, {"std::initializer_list", "Switch::InitializerList"}, {"const", ""}, {"__property__", "_property"}, {"__readonly__", "_readonly"}, {"__writeonly__", "_writeonly"}, {"__readwrite__", "_readwrite"},}) {
-    if (fullName.Contains(keyValue.Key))
+  for(auto keyValue : System::Collections::Generic::Dictionary<string, string> {{"std::nullptr_t", "Switch::NUllPtr"}, {"std::__1::allocator", "Switch::Allocator"}, {"std::allocator", "Switch::Allocator"}, {"std::initializer_list", "Switch::InitializerList"}, {"const", ""}, {"__property__", "_property"}, {"__readonly__", "_readonly"}, {"__writeonly__", "_writeonly"}, {"__readwrite__", "_readwrite"},}) {
+    if(fullName.Contains(keyValue.Key))
       fullName = fullName.Replace(keyValue.Key, keyValue.Value);
   }
   return fullName.TrimEnd('*');
@@ -50,9 +50,9 @@ String Type::GetFullName() const {
 String Type::GetName() const {
   String fullName = GetFullName();
   int length = fullName.LastIndexOf("<");
-  if (length == -1)
+  if(length == -1)
     length = fullName.Length;
-  if (fullName.LastIndexOf("::", 0, length) == -1)
+  if(fullName.LastIndexOf("::", 0, length) == -1)
     return fullName;
   return fullName.Substring(fullName.LastIndexOf("::", 0, length) + 2);
 }
@@ -60,9 +60,9 @@ String Type::GetName() const {
 String Type::GetNamespace() const {
   String fullName = GetFullName();
   int length = fullName.LastIndexOf("<");
-  if (length == -1)
+  if(length == -1)
     length = fullName.Length;
-  if (fullName.LastIndexOf("::", 0, length) == -1)
+  if(fullName.LastIndexOf("::", 0, length) == -1)
     return fullName;
   return fullName.Remove(fullName.LastIndexOf("::", 0, length));
 }

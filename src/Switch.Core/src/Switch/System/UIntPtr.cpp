@@ -16,9 +16,9 @@ UIntPtr::UIntPtr(const UInt32& value) {
 }
 
 UIntPtr::UIntPtr(const UInt64& value) {
-  if (Size == 4 && value > UInt32::MaxValue)
+  if(Size == 4 && value > UInt32::MaxValue)
     throw OverflowException(_caller);
-
+    
   this->value = (uintptr)value;
 }
 
@@ -37,10 +37,10 @@ bool UIntPtr::Equals(const object& obj) const {
 int32 UIntPtr::GetHashCode() const {
   uint64 handleValue = this->value;
   int32 hash = 0;
-
+  
   hash = static_cast<int32>(handleValue & 0x00000000FFFFFFFF);
-  hash = hash ^ static_cast<int32>((handleValue>>32) & 0x00000000FFFFFFFF);
-
+  hash = hash ^ static_cast<int32>((handleValue >> 32) & 0x00000000FFFFFFFF);
+  
   return hash;
 }
 
@@ -49,21 +49,21 @@ int32 UIntPtr::CompareTo(const UIntPtr& value) const {
 }
 
 int32 UIntPtr::CompareTo(const IComparable& obj) const {
-  if (!is<UIntPtr>(obj))
+  if(!is<UIntPtr>(obj))
     return 1;
-
+    
   return CompareTo(static_cast<const UIntPtr&>(obj));
 }
 
 uint32 UIntPtr::ToUInt32() const {
-  if (Size == 8 && this->value > UInt32::MaxValue)
+  if(Size == 8 && this->value > UInt32::MaxValue)
     throw OverflowException(_caller);
-
+    
   return *((uint32*)&this->value);
 }
 
 uint64 UIntPtr::ToUInt64() const {
-  if (UIntPtr::Size == 4)
+  if(UIntPtr::Size == 4)
     return *((int32*)&this->value);
   return this->value;
 }

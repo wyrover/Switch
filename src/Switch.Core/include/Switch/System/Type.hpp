@@ -24,12 +24,12 @@ namespace Switch {
 namespace __s__ {
   template<typename T>
   Switch::System::Type __typeof_();
-
+  
   template<typename T>
   Switch::System::Type __typeof_(const T& value);
 }
 /// @endcond
-  
+
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
@@ -65,13 +65,13 @@ namespace Switch {
       /// @param type The Type to compare with the current Object.
       /// @return bool true if the specified type is equal to the current Type. otherwise, false.
       bool Equals(const Type& type) const;
-
+      
       /// @brief Gets the underlying type code of the specified Type
       /// @param value The value of type whose underlying type code to get.
       /// @return The code of the underlying type, or Empty if type is null.
       template<typename T>
       static TypeCode GetTypeCode(const T& value) {
-        if (!is<IConvertible>(value))
+        if(!is<IConvertible>(value))
           return TypeCode::Object;
         return dynamic_cast<const IConvertible&>(value).GetTypeCode();
       }
@@ -115,10 +115,10 @@ namespace __s__ {
   Switch::System::Type __typeof_() {
     return System::Type(typeid(T));
   }
-
+  
   template<typename T>
   Switch::System::Type __typeof_(const T& value) {
-  return System::Type(typeid(value));
+    return System::Type(typeid(value));
   }
 }
 /// @endcond
@@ -142,7 +142,7 @@ namespace Switch {
   /// @remarks The _typeof operator cannot be overloaded.
   /// @see System::Type
   /// @ingroup Keywords
-  #define _typeof  \
+#define _typeof  \
   __s__::__typeof_
 }
 

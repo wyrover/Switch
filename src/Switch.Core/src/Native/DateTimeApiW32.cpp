@@ -13,9 +13,9 @@ namespace {
 
 int32 Native::DateTimeApi::Ftime(int64& seconds, int32& milliseconds, int32& timeZone, bool& daylight) {
   TIME_ZONE_INFORMATION tzi = { 0 };
-  if (GetTimeZoneInformation(&tzi) == TIME_ZONE_ID_UNKNOWN)
+  if(GetTimeZoneInformation(&tzi) == TIME_ZONE_ID_UNKNOWN)
     return -1;
-
+    
   SYSTEMTIME st = { 0 };
   GetSystemTime(&st);
   seconds = Mkgmtime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
@@ -30,9 +30,9 @@ int32 Native::DateTimeApi::Gmtime(int64 time, int32& year, int32& month, int32& 
   uli.QuadPart = (time * 10000000UL) + dateFixOs;
   FILETIME ft = { uli.LowPart, uli.HighPart };
   SYSTEMTIME st = { 0 };
-  if (FileTimeToSystemTime(&ft, &st) == 0)
+  if(FileTimeToSystemTime(&ft, &st) == 0)
     return -1;
-
+    
   year = st.wYear;
   month = st.wMonth;
   day = st.wDay;
@@ -49,13 +49,13 @@ int32 Native::DateTimeApi::Localtime(int64 time, int32& year, int32& month, int3
   uli.QuadPart = (time * 10000000UL) + dateFixOs;
   FILETIME ft = { uli.LowPart, uli.HighPart };
   FILETIME locFt = { 0 };
-  if (FileTimeToLocalFileTime((const FILETIME*)&ft, &locFt) == 0)
+  if(FileTimeToLocalFileTime((const FILETIME*)&ft, &locFt) == 0)
     return -1;
-
+    
   SYSTEMTIME st = { 0 };
-  if (FileTimeToSystemTime(&locFt, &st) == 0)
+  if(FileTimeToSystemTime(&locFt, &st) == 0)
     return -1;
-
+    
   year = st.wYear;
   month = st.wMonth;
   day = st.wDay;
@@ -70,9 +70,9 @@ int32 Native::DateTimeApi::Localtime(int64 time, int32& year, int32& month, int3
 int64 Native::DateTimeApi::Mkgmtime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) {
   SYSTEMTIME st = { (WORD)year, (WORD)month, 0, (WORD)day, (WORD)hour, (WORD)minute, (WORD)second, 0 };
   FILETIME ft = { 0 };
-  if (SystemTimeToFileTime(&st, &ft) == 0)
+  if(SystemTimeToFileTime(&st, &ft) == 0)
     return -1;
-  
+    
   ULARGE_INTEGER lt = { ft.dwLowDateTime, ft.dwHighDateTime };
   lt.QuadPart -= dateFixOs;
   lt.QuadPart /= 10000000ULL;
@@ -82,13 +82,13 @@ int64 Native::DateTimeApi::Mkgmtime(int32 year, int32 month, int32 day, int32 ho
 int64 Native::DateTimeApi::Mktime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) {
   SYSTEMTIME st = { (WORD)year, (WORD)month, 0, (WORD)day, (WORD)hour, (WORD)minute, (WORD)second, 0 };
   FILETIME ft = { 0 };
-  if (SystemTimeToFileTime(&st, &ft) == 0)
+  if(SystemTimeToFileTime(&st, &ft) == 0)
     return -1;
-
+    
   FILETIME ftUtc;
-  if (LocalFileTimeToFileTime((const FILETIME*)&ft, &ftUtc) == 0)
+  if(LocalFileTimeToFileTime((const FILETIME*)&ft, &ftUtc) == 0)
     return -1;
-
+    
   ULARGE_INTEGER lt = { ftUtc.dwLowDateTime, ftUtc.dwHighDateTime };
   lt.QuadPart -= dateFixOs;
   lt.QuadPart /= 10000000ULL;
@@ -96,7 +96,7 @@ int64 Native::DateTimeApi::Mktime(int32 year, int32 month, int32 day, int32 hour
 }
 
 int32 Native::DateTimeApi::Strftime(string& output, const string& format, int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, int32 dayOfYear, int32 dayOfWeek, bool daylight) {
-  struct tm value = { second, minute, hour, day, month-1, year - 1900, dayOfWeek, dayOfYear, daylight == true ? 1 : 0 };
+  struct tm value = { second, minute, hour, day, month - 1, year - 1900, dayOfWeek, dayOfYear, daylight == true ? 1 : 0 };
   char buffer[256];
   int32 result = (int32)strftime(buffer, 256, format.Data, &value);
   output = buffer;
@@ -105,7 +105,7 @@ int32 Native::DateTimeApi::Strftime(string& output, const string& format, int32 
 
 bool Native::DateTimeApi::IsDaylight(int64 localTime) {
   struct tm value = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    localtime_s(&value, &localTime);
+  localtime_s(&value, &localTime);
   return value.tm_isdst != 0;
 }
 

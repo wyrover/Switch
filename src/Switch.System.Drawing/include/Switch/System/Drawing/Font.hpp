@@ -20,74 +20,74 @@ namespace Switch {
       class _export Font : public object {
       public:
         Font(const string& name) {this->FromName(name, this->data().size, this->data().fontStyle);}
-
+        
         Font(const string& name, float size) {this->FromName(name, size, this->data().fontStyle);}
-
+        
         Font(const string& name, float size, const System::Drawing::FontStyle& style) {this->FromName(name, size, style);}
-
+        
         Font(const System::Drawing::FontFamily& fontFamily) {this->FromName(fontFamily.Name, this->data().size, this->data().fontStyle);}
-
+        
         /// @cond
         Font() {}
         Font(const System::Drawing::Font& font) : data(font.data) {}
         /// @endcond
-
+        
         _property<bool, _readonly> Bold{
           _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Bold) == System::Drawing::FontStyle::Bold; }
         };
-
+        
         _property<System::Drawing::FontFamily, _readonly> FontFamily{
           _get{ return this->data().fontFamily; }
         };
-
+        
         _property<bool, _readonly> Italic{
           _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Italic) == System::Drawing::FontStyle::Italic; }
         };
-
+        
         _property<bool, _readonly> Strikeout{
           _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Strikeout) == System::Drawing::FontStyle::Strikeout; }
         };
-
+        
         _property<bool, _readonly> Underline{
           _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Underline) == System::Drawing::FontStyle::Underline; }
         };
-
+        
         _property<const string&, _readonly> Name {
           _get->const string& {return this->data().name;}
         };
-
+        
         _property<System::Drawing::FontStyle, _readonly> Style {
           _get {return this->data().fontStyle;}
         };
-
+        
         _property<float, _readonly> Size {
           _get {return this->data().size;}
         };
-
+        
         static System::Drawing::Font FromHdc(intptr hdc);
-
+        
         static System::Drawing::Font FromHFont(intptr hfont);
-
+        
         template<typename object>
         static System::Drawing::Font FromLogFont(const object& lf) { return FromLogFont(lf, 0); }
-
+        
         template<typename object>
         static System::Drawing::Font FromLogFont(const object& lf, intptr hdc) { return FromLogFontHandle((intptr)&lf, hdc); }
-
+        
         intptr ToHFont() const {return this->data().hfont;}
-
+        
         bool IsStyleAvaible(const System::Drawing::FontStyle& style) const {
-          if (style == System::Drawing::FontStyle::Regular)
+          if(style == System::Drawing::FontStyle::Regular)
             return true;
           return System::Drawing::FontStyle(int(this->data().fontStyle) & int(style)) == style;
         }
-
+        
         String ToString() const override { return string::Format("[{0}: Name={1}, Size={2}, Units={3}, GdiCharSet={4}, GdiVerticalFont={5}]", this->GetType().Name, this->data().fontFamily.Name, this->data().size, (int32)this->data().fontUnit, this->data().gdiCharSet, this->data().gdiVerticalFont); }
-
+        
       private:
         void FromName(const string& name, float size, System::Drawing::FontStyle style);
         static System::Drawing::Font FromLogFontHandle(intptr lf, intptr hdc);
-
+        
         struct FontData {
           System::Drawing::FontFamily fontFamily;
           System::Drawing::FontStyle fontStyle = System::Drawing::FontStyle::Regular;

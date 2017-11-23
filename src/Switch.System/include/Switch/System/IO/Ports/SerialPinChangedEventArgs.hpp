@@ -23,14 +23,14 @@ namespace Switch {
         public:
           SerialPinChangedEventArgs(SerialPinChange eventType) : eventType(eventType) {}
           SerialPinChangedEventArgs(const SerialPinChangedEventArgs& spcea) : eventType(spcea.eventType) {}
-
+          
           /// @brief Gets the event type.
           /// @return One of the SerialPinChange values.
           /// @remarks This property provides information about the event type that caused the PinChanged event.
           _property<SerialPinChange, _readonly> EventType {
             _get {return this->eventType;}
           };
-
+          
         private:
           SerialPinChange eventType;
         };

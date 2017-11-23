@@ -38,7 +38,7 @@ namespace Switch {
           /// @brief
           /// @return string
           static _property<string, _readonly> UploadFile;
-
+          
           /// @brief
           /// @return string
           static _property<string, _readonly> DownloadFile;
@@ -55,7 +55,7 @@ namespace Switch {
           /// @return string
           static _property<string, _readonly> MakeDirectory;
         };
-
+        
         /// @brief Represents the types of HTTP protocol methods that can be used with an HTTP request.
         class Http _static {
         public:

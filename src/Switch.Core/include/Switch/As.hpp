@@ -108,7 +108,7 @@ namespace Switch {
   /// @ingroup Switch
   template<typename TT, typename T>
   const TT* as(const T* value) {
-    if (value == null)
+    if(value == null)
       return null;
     return &as<TT>(*value);
   }
@@ -123,7 +123,7 @@ namespace Switch {
   /// @ingroup Switch
   template<typename TT, typename T>
   TT* as(T* value) {
-    if (value == null)
+    if(value == null)
       return null;
     return &as<TT>(*value);
   }

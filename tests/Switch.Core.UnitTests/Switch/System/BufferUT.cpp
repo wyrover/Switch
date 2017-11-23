@@ -5,7 +5,7 @@
 using namespace System;
 
 namespace {
-  
+
   TEST(BufferTest, BlockCompare) {
     char block1[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVW";
     char block2[] = "0123456789BACDEFGHIJKLMNOPQRSTUVW";
@@ -28,7 +28,7 @@ namespace {
     
     ASSERT_THROW(Buffer::BlockCompare(block1, sizeof(block1), 1, block2, sizeof(block2), 0, sizeof(block1)), ArgumentException);
     ASSERT_THROW(Buffer::BlockCompare(block1, sizeof(block1), 0, block2, sizeof(block2), 1, sizeof(block1)), ArgumentException);
-    ASSERT_THROW(Buffer::BlockCompare(block1, sizeof(block1), 0, block2, sizeof(block2), 0, sizeof(block1)+1), ArgumentException);
+    ASSERT_THROW(Buffer::BlockCompare(block1, sizeof(block1), 0, block2, sizeof(block2), 0, sizeof(block1) + 1), ArgumentException);
   }
   
   TEST(BufferTest, BlockCopy) {
@@ -40,17 +40,17 @@ namespace {
     ASSERT_EQ(0x05040302, a1[2]);
     
     char source[48];
-    for (Int32 index = 0; index < 48; index++)
-      source[index]= 0x10 + static_cast<sbyte>(index);
+    for(Int32 index = 0; index < 48; index++)
+      source[index] = 0x10 + static_cast<sbyte>(index);
     char target[48];
-    for (Int32 index = 0; index < 48; index++)
-      target[index]= 0x01;
-    
-    for (Int32 index = 0; index < 48; index++)
+    for(Int32 index = 0; index < 48; index++)
+      target[index] = 0x01;
+      
+    for(Int32 index = 0; index < 48; index++)
       ASSERT_EQ(source[index], 0x10 + index);
-    for (Int32 index = 0; index < 48; index++)
+    for(Int32 index = 0; index < 48; index++)
       ASSERT_EQ(target[index], 0x01);
-    
+      
     Buffer::BlockCopy(source, 48, 0, target, 48, 0, 1);
     ASSERT_EQ(target[0], 0x10);
     
@@ -65,9 +65,9 @@ namespace {
     ASSERT_EQ(target[11], 0x01);
     
     Buffer::BlockCopy(source, 48, 0, target, 48, 0, 48);
-    for (Int32 index = 0; index < 48; index++)
+    for(Int32 index = 0; index < 48; index++)
       ASSERT_EQ(target[index], 0x10 + index);
-    
+      
     ASSERT_THROW(Buffer::BlockCopy(null, 48, 0, target, 48, 0, 48), ArgumentNullException);
     ASSERT_THROW(Buffer::BlockCopy(source, 48, 0, null, 48, 0, 48), ArgumentNullException);
     
@@ -84,11 +84,11 @@ namespace {
   
   TEST(BufferTest, BlockFill) {
     char mem[48];
-    for (Int32 index = 0; index < 48; index++)
-      mem[index]= 0x10;
-    for (Int32 index = 0; index < 48; index++)
+    for(Int32 index = 0; index < 48; index++)
+      mem[index] = 0x10;
+    for(Int32 index = 0; index < 48; index++)
       ASSERT_EQ(mem[index], 0x10);
-    
+      
     Buffer::BlockFill(0x24, mem, 48, 0, 1);
     ASSERT_EQ(mem[0], 0x24);
     ASSERT_EQ(mem[1], 0x10);
@@ -105,9 +105,9 @@ namespace {
     ASSERT_EQ(mem[22], 0x10);
     
     Buffer::BlockFill(0x24, mem, 48, 0, 48);
-    for (Int32 index = 0; index < 48; index++)
+    for(Int32 index = 0; index < 48; index++)
       ASSERT_EQ(mem[index], 0x24);
-    
+      
     ASSERT_THROW(Buffer::BlockFill(0x24, null, 48, 0, 48), ArgumentNullException);
     
     ASSERT_THROW(Buffer::BlockFill(0x24, mem, -1, 0, 48), ArgumentOutOfRangeException);
@@ -120,11 +120,11 @@ namespace {
   
   TEST(BufferTest, BlockZero) {
     char mem[48];
-    for (Int32 index = 0; index < 48; index++)
-      mem[index]= 0x10;
-    for (Int32 index = 0; index < 48; index++)
+    for(Int32 index = 0; index < 48; index++)
+      mem[index] = 0x10;
+    for(Int32 index = 0; index < 48; index++)
       ASSERT_EQ(mem[index], 0x10);
-    
+      
     Buffer::BlockZero(mem, 48, 0, 1);
     ASSERT_EQ(mem[0], 0);
     ASSERT_EQ(mem[1], 0x10);
@@ -141,9 +141,9 @@ namespace {
     ASSERT_EQ(mem[22], 0x10);
     
     Buffer::BlockZero(mem, 48, 0, 48);
-    for (Int32 index = 0; index < 48; index++)
+    for(Int32 index = 0; index < 48; index++)
       ASSERT_EQ(mem[index], 0);
-    
+      
     ASSERT_THROW(Buffer::BlockZero(null, 48, 0, 48), ArgumentNullException);
     
     ASSERT_THROW(Buffer::BlockZero(mem, -1, 0, 48), ArgumentOutOfRangeException);

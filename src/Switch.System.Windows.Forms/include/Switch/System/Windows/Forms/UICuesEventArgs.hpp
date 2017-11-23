@@ -20,7 +20,7 @@ namespace Switch {
           /// @brief Initializes a new instance of the UICuesEventArgs class with the specified UICues.
           /// @param change A bitwise combination of the UICues values.
           UICuesEventArgs(const UICues& change) : changed(change) {}
-
+          
           /// @brief Gets the bitwise combination of the UICues values.
           /// @return A bitwise combination of the UICues values. The default is Changed.
           /// @par Examples
@@ -43,7 +43,7 @@ namespace Switch {
           /// }
           /// @endcode
           const UICues& Changed() const { return changed; }
-
+          
           /// @brief Gets a value indicating whether the state of the focus cues has changed.
           /// @return A bitwise combination of the UICues values. The default is Changed.
           /// @par Examples
@@ -66,7 +66,7 @@ namespace Switch {
           /// }
           /// @endcode
           bool ChangeFocus() const { return Enum<UICues>(this->changed).HasFlag(UICues::ChangeFocus); }
-
+          
           /// @brief Gets a value indicating whether the state of the keyboard cues has changed.
           /// @return true if the state of the keyboard cues has changed; otherwise, false.
           /// @par Examples
@@ -89,7 +89,7 @@ namespace Switch {
           /// }
           /// @endcode
           bool ChangeKeyboard() const { return Enum<UICues>(this->changed).HasFlag(UICues::ChangeKeyboard); }
-
+          
           /// @brief Gets a value indicating whether focus rectangles are shown after the change.
           /// @return true if focus rectangles are shown after the change; otherwise, false.
           /// @par Examples
@@ -112,7 +112,7 @@ namespace Switch {
           /// }
           /// @endcode
           bool ShowFocus() const { return Enum<UICues>(this->changed).HasFlag(UICues::ShowFocus); }
-
+          
           /// @brief Gets a value indicating whether keyboard cues are underlined after the change.
           /// @return true if keyboard cues are underlined after the change; otherwise, false.
           /// @par Examples
@@ -135,7 +135,7 @@ namespace Switch {
           /// }
           /// @endcode
           bool ShowKeyboard() const { return Enum<UICues>(this->changed).HasFlag(UICues::ShowKeyboard); }
-
+          
         private:
           UICues changed;
         };

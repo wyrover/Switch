@@ -38,7 +38,7 @@ namespace {
   template<typename T> bool IsUInt64(T) {return false;}
   template<typename T> bool IsUIntPtr(T) {return false;}
   template<typename T> bool IsVoidPointer(T) {return false;}
-
+  
   TEST(LiteralOperatorConverterTest, DoubleTo_byte) {
     ASSERT_TRUE(IsByte(1.6_b));
     ASSERT_EQ(2, 1.6_b);
@@ -258,7 +258,7 @@ namespace {
     ASSERT_TRUE(is<Double>(1.6_D));
     ASSERT_DOUBLE_EQ(1.6, 1.6_D);
   }
-
+  
   TEST(LiteralOperatorConverterTest, UInt64ToDouble) {
     ASSERT_TRUE(is<Double>(42_D));
     ASSERT_DOUBLE_EQ(42.0, 42_D);

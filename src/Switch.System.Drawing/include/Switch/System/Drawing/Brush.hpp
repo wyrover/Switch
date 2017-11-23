@@ -22,7 +22,7 @@ namespace Switch {
       }
     }
     /// @endcond
-
+    
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     namespace Drawing {
       class _export Brush : public object, public ICloneable {
@@ -32,11 +32,11 @@ namespace Switch {
         Brush& operator=(const Brush& brush) = delete;
         ~Brush();
         /// @endcond
-
+        
       protected:
         /// @brief Initializes a new instance of the Brush class.
         Brush() {}
-
+        
         /// @brief In a derived class, sets a reference to a GDI+ brush object.
         /// @param brush A pointer to the GDI+ brush object.
         void SetNativeBrush(intptr brush);
@@ -44,9 +44,9 @@ namespace Switch {
         friend class Native::GdiApi;
         friend class Windows::Forms::Control;
         intptr GetNativeBrush() const { return this->brush; }
-
+        
         void ReleaseNativeBrush();
-
+        
         intptr brush = IntPtr::Zero;
       };
     }

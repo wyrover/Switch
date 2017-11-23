@@ -30,7 +30,7 @@ namespace {
     ASSERT_EQ("US/Pacific", TimeZoneInfo::TimeFindSystemTimeZoneById("US/Pacific").Id());
     ASSERT_EQ("US/Samoa", TimeZoneInfo::TimeFindSystemTimeZoneById("US/Samoa").Id());
     
-   ASSERT_THROW(TimeZoneInfo::TimeFindSystemTimeZoneById("Any/Nothing"), TimeZoneNotFoundException);
+    ASSERT_THROW(TimeZoneInfo::TimeFindSystemTimeZoneById("Any/Nothing"), TimeZoneNotFoundException);
     
     //Console::WriteLine(TimeZoneInfo::ConvertTimeToUtc(DateTime::Now));
     //Console::WriteLine(DateTime::Now + TimeZoneInfo::Local().BaseUtcOffset());
@@ -39,7 +39,7 @@ namespace {
   TEST(TimeZoneInfoTest, ConvertTimeToUtc) {
     DateTime now = DateTime::Now();
     ASSERT_EQ(now.ToUniversalTime(), TimeZoneInfo::ConvertTimeToUtc(now));
-
+    
     //Console::WriteLine("Local {0}", now);
     //Console::WriteLine("Utc   {0}", TimeZoneInfo::ConvertTimeToUtc(now));
   }
@@ -51,9 +51,9 @@ namespace {
     }
   }
    */
-
+  
   /* Generate by this c# code source :
-   
+  
   using System;
   using System::Collections::ObjectModel;
   using System::Windows::Forms;
@@ -82,7 +82,7 @@ namespace {
       }
     }
   }
-
+  
    */
   
   TEST(TimeZoneInfoTest, GetSystemTimeZonesAfrica_Abidjan) {

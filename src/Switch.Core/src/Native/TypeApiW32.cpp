@@ -2,7 +2,7 @@
 
 #include "Api.hpp"
 
-string Native::TypeApi::Demangle(const string &name) {
+string Native::TypeApi::Demangle(const string& name) {
   System::Array<string> types = {"enum ", "class ", "union ", "struct "};
   string result = name;
   for(string item : types)

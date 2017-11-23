@@ -4,15 +4,15 @@ using namespace System;
 using namespace System::Text;
 
 ANSIEncoding::ANSIEncoding() : Encoding(0) {
-  
+
 }
 
 ANSIEncoding::ANSIEncoding(int32 codePage) : Encoding(codePage) {
-  
+
 }
 
 ANSIEncoding::ANSIEncoding(const ANSIEncoding& encoding) : Encoding(encoding) {
-  
+
 }
 
 ANSIEncoding& ANSIEncoding::operator=(const ANSIEncoding& encoding) {
@@ -21,7 +21,7 @@ ANSIEncoding& ANSIEncoding::operator=(const ANSIEncoding& encoding) {
 }
 
 Encoding& ANSIEncoding::operator=(const Encoding& encoding) {
-  if (!is<ANSIEncoding>(encoding))
+  if(!is<ANSIEncoding>(encoding))
     return Encoding::operator=(encoding);
   return operator= (static_cast<const ANSIEncoding&>(encoding));
 }
@@ -31,31 +31,31 @@ int32 ANSIEncoding::GetByteCount(char32) const {
 }
 
 int32 ANSIEncoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
+  if(bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
   ValidateGCC(bytesSize, index, count);
   return count;
 }
 
 int32 ANSIEncoding::GetMaxByteCount(int32 charCount) const {
-  if (charCount < 0) throw ArgumentOutOfRangeException(_caller);
+  if(charCount < 0) throw ArgumentOutOfRangeException(_caller);
   return charCount;
 }
 
 int32 ANSIEncoding::GetMaxCharCount(int32 byteCount) const {
-  if (byteCount < 0) throw ArgumentOutOfRangeException(_caller);
+  if(byteCount < 0) throw ArgumentOutOfRangeException(_caller);
   return byteCount;
 }
 
 bool ANSIEncoding::Equals(const object& obj) const {
   const ANSIEncoding* enc = dynamic_cast<const ANSIEncoding*>(&obj);
-  if (enc == null)
+  if(enc == null)
     return false;
-  
+    
   return this->codePage == enc->codePage;
 }
 
 CodePage437Encoding::CodePage437Encoding() : ANSIEncoding(437) {
-  
+
 }
 
 refptr<Encoding::Decoder> CodePage437Encoding::CreateDecoder() const {
@@ -67,11 +67,11 @@ refptr<Encoding::Encoder> CodePage437Encoding::CreateEncoder() const {
 }
 
 int32 CodePage437Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if (index < 0) throw ArgumentOutOfRangeException(_caller);
+  if(bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
+  if(index < 0) throw ArgumentOutOfRangeException(_caller);
   
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if(index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -79,7 +79,7 @@ int32 CodePage437Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, i
 }
 
 CodePage28591Encoding::CodePage28591Encoding() : ANSIEncoding(28591) {
-  
+
 }
 
 refptr<Encoding::Decoder> CodePage28591Encoding::CreateDecoder() const {
@@ -91,11 +91,11 @@ refptr<Encoding::Encoder> CodePage28591Encoding::CreateEncoder() const {
 }
 
 int32 CodePage28591Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if (index < 0) throw ArgumentOutOfRangeException(_caller);
+  if(bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
+  if(index < 0) throw ArgumentOutOfRangeException(_caller);
   
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if(index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -105,7 +105,7 @@ int32 CodePage28591Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength,
 
 
 CodePage28592Encoding::CodePage28592Encoding() : ANSIEncoding(28592) {
-  
+
 }
 
 refptr<Encoding::Decoder> CodePage28592Encoding::CreateDecoder() const {
@@ -117,11 +117,11 @@ refptr<Encoding::Encoder> CodePage28592Encoding::CreateEncoder() const {
 }
 
 int32 CodePage28592Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if (index < 0) throw ArgumentOutOfRangeException(_caller);
+  if(bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
+  if(index < 0) throw ArgumentOutOfRangeException(_caller);
   
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if(index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -156,8 +156,8 @@ String ANSIEncoding::Encoder::ToString() const {
 }
 
 byte CodePage437Encoding::Encoder::GetByte(char32 cp) {
-  if (cp < 0x80) return static_cast<byte>(cp);
-  switch (cp) {
+  if(cp < 0x80) return static_cast<byte>(cp);
+  switch(cp) {
   case 0x00c7: return 0x80; //LATIN CAPITAL LETTER C WITH CEDILLA
   case 0x00fc: return 0x81; //LATIN SMALL LETTER U WITH DIAERESIS
   case 0x00e9: return 0x82; //LATIN SMALL LETTER E WITH ACUTE
@@ -286,42 +286,42 @@ byte CodePage437Encoding::Encoder::GetByte(char32 cp) {
   case 0x00b2: return 0xfd; //SUPERSCRIPT TWO
   case 0x25a0: return 0xfe; //BLACK SQUARE
   case 0x00a0: return 0xff; //NO-BREAK SPACE
-
-    // 225 (E1) is both the German sharp S (U+00DF) and the Greek lowercase beta (U+03B2).
+  
+  // 225 (E1) is both the German sharp S (U+00DF) and the Greek lowercase beta (U+03B2).
   case 0x03B2: return 0xE1;
-
-    // 227 (E3) is the Greek lowercase pi (U+03C0), but early fonts such as
-    // Terminal use a variant of pi that is ambiguous in case, and therefore
-    // can be used for the Greek capital pi (U+03A0) or the n-ary product sign (U+220F).
+  
+  // 227 (E3) is the Greek lowercase pi (U+03C0), but early fonts such as
+  // Terminal use a variant of pi that is ambiguous in case, and therefore
+  // can be used for the Greek capital pi (U+03A0) or the n-ary product sign (U+220F).
   case 0x03A0: return 0xE3;
   case 0x220F: return 0xE3;
-
-    // 228 (E4) is both the n-ary summation sign (U+2211) and the Greek uppercase sigma (U+03A3).
+  
+  // 228 (E4) is both the n-ary summation sign (U+2211) and the Greek uppercase sigma (U+03A3).
   case 0x2211: return 0xE4;
-
-    //230 (E6) is both the micro sign (U+00B5) and the Greek lowercase mu (U+03BC).
+  
+  //230 (E6) is both the micro sign (U+00B5) and the Greek lowercase mu (U+03BC).
   case 0x03BC: return 0xE6;
-
-    //234 (EA) is both the ohm sign (U+2126) and the Greek uppercase omega (U+03A9).
+  
+  //234 (EA) is both the ohm sign (U+2126) and the Greek uppercase omega (U+03A9).
   case 0x2126: return 0xEA;
-
-    // 235 (EB) is the Greek lowercase delta (U+03B4), but it has also been used
-    // as a surrogate for the Icelandic lowercase eth (U+00F0, ð) and the partial
-    // derivative sign (U+2202, d).
+  
+  // 235 (EB) is the Greek lowercase delta (U+03B4), but it has also been used
+  // as a surrogate for the Icelandic lowercase eth (U+00F0, ð) and the partial
+  // derivative sign (U+2202, d).
   case 0x00F0: return 0xEB;
   case 0x2202: return 0xEB;
-
-    // 237 (ED) is supposed to be used as Greek lowercase phi, but is mainly used
-    // as the empty set sign (U+2205) and was also used as the Greek phi symbol
-    // in italics (U+03D5) to name angles, diameter sign (U+2300, \varnothing),
-    // and as a surrogate for the Latin lowercase O with stroke (U+00F8).
+  
+  // 237 (ED) is supposed to be used as Greek lowercase phi, but is mainly used
+  // as the empty set sign (U+2205) and was also used as the Greek phi symbol
+  // in italics (U+03D5) to name angles, diameter sign (U+2300, \varnothing),
+  // and as a surrogate for the Latin lowercase O with stroke (U+00F8).
   case 0x2205: return 0xED;
   case 0x03D5: return 0xED;
   case 0x2300: return 0xED;
   case 0x00F8: return 0xED;
-
-    // 238 (EE) is both the Greek lowercase epsilon (U+03B5) and the element-of
-    // sign (U+2208). Later it was often used for the euro sign (U+20AC).
+  
+  // 238 (EE) is both the Greek lowercase epsilon (U+03B5) and the element-of
+  // sign (U+2208). Later it was often used for the euro sign (U+20AC).
   case 0x2208: return 0xEE;
   case 0x20AC: return 0xEE;
   }
@@ -329,15 +329,15 @@ byte CodePage437Encoding::Encoder::GetByte(char32 cp) {
 }
 
 byte CodePage28591Encoding::Encoder::GetByte(char32 cp) {
-  if (cp > 0xFF)
+  if(cp > 0xFF)
     return '?';
   return static_cast<byte>(cp);
-
+  
 }
 
 byte CodePage28592Encoding::Encoder::GetByte(char32 cp) {
-  if (cp < 0xA1) return static_cast<byte>(cp);
-  switch (cp) {
+  if(cp < 0xA1) return static_cast<byte>(cp);
+  switch(cp) {
   case 0x0104: return 0xA1; // LATIN CAPITAL LETTER A WITH OGONEK
   case 0x02D8: return 0xA2; // BREVE
   case 0x0141: return 0xA3; // LATIN CAPITAL LETTER L WITH STROKE
@@ -432,7 +432,7 @@ byte CodePage28592Encoding::Encoder::GetByte(char32 cp) {
   case 0x00FC: return 0xFC; // LATIN SMALL LETTER U WITH DIAERESIS
   case 0x00FD: return 0xFD; // LATIN SMALL LETTER Y WITH ACUTE
   case 0x0163: return 0xFE; // LATIN SMALL LETTER T WITH CEDILLA
-  case 0x02D9: return 0xFF; // DOT ABOVE      
+  case 0x02D9: return 0xFF; // DOT ABOVE
   }
   return '?';
 }
@@ -463,13 +463,13 @@ String ANSIEncoding::Decoder::ToString() const {
 
 char32 ANSIEncoding::Decoder::GetCodePoint(byte b, const std::vector<char32>& codePoints, uint32 unchanged) {
   // if 0 <= b < unchanged, codePoint corresponds to byte
-  if (static_cast<char32>(b) < unchanged) return b;
+  if(static_cast<char32>(b) < unchanged) return b;
   return codePoints[b - unchanged];
 }
 
 char32 CodePage437Encoding::Decoder::GetCodePoint(byte b) {
-  if (b < 0x80) return b;
-  switch (b) {
+  if(b < 0x80) return b;
+  switch(b) {
   case 0x80: return  0x00c7; //LATIN CAPITAL LETTER C WITH CEDILLA
   case 0x81: return  0x00fc; //LATIN SMALL LETTER U WITH DIAERESIS
   case 0x82: return  0x00e9; //LATIN SMALL LETTER E WITH ACUTE
@@ -607,8 +607,8 @@ char32 CodePage28591Encoding::Decoder::GetCodePoint(byte b) {
 }
 
 char32 CodePage28592Encoding::Decoder::GetCodePoint(byte b) {
-  if (b < 0xA1) return b;
-  switch (b) {
+  if(b < 0xA1) return b;
+  switch(b) {
   case 0xA1: return  0x0104; // LATIN CAPITAL LETTER A WITH OGONEK
   case 0xA2: return  0x02D8; // BREVE
   case 0xA3: return  0x0141; // LATIN CAPITAL LETTER L WITH STROKE

@@ -15,12 +15,12 @@ void Form::Close() {
   //Native::FormApi::Close(*this);
   FormClosingEventArgs e;
   this->OnFormClosing(e);
-  if (e.Cancel != true)
+  if(e.Cancel != true)
     this->OnFormClosed(FormClosedEventArgs(e.CloseReason));
 }
 
 void Form::CreateHandle() {
-  if (!this->backColor.HasValue && System::Environment::OSVersion().Platform == System::PlatformID::Unix)
+  if(!this->backColor.HasValue && System::Environment::OSVersion().Platform == System::PlatformID::Unix)
     this->backColor = System::Drawing::SystemColors::Window;
   this->messageActions[WM_CLOSE] = {*this, &Form::WmClose};
   this->handle = Native::FormApi::Create(*this);
@@ -28,7 +28,7 @@ void Form::CreateHandle() {
 }
 
 void Form::WndProc(Message& message) {
-  if (message.Msg == WM_CLOSE)
+  if(message.Msg == WM_CLOSE)
     this->messageActions[message.Msg](message);
   else
     this->Control::WndProc(message);
@@ -37,7 +37,7 @@ void Form::WndProc(Message& message) {
 void Form::WmClose(Message& message) {
   FormClosingEventArgs e;
   this->OnFormClosing(e);
-  if (e.Cancel != true)
+  if(e.Cancel != true)
     this->OnFormClosed(FormClosedEventArgs(e.CloseReason));
 }
 

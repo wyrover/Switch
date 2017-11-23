@@ -117,7 +117,7 @@ namespace Switch {
             _get {return this->data->clientSocket.ExclusiveAddressUse();},
             _set {this->data->clientSocket.ExclusiveAddressUse(value);}
           };
-
+          
           /// @brief Gets a value that specifies whether the Socket will delay closing a socket in an attempt to send all pending data.
           /// @return A LingerOption that specifies how to linger while closing a socket.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.

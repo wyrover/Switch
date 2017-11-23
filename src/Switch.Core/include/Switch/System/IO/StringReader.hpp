@@ -23,7 +23,7 @@ namespace Switch {
           static StringReader nullStringReader("");
           return nullStringReader;
         }
-
+        
         /// @brief Initializes a new instance of the StringReader class that reads from the specified string.
         /// @param s The string to which the StringReader should be initialized.
         StringReader(const String& s);
@@ -102,7 +102,7 @@ namespace Switch {
         /// }
         /// @endcode
         String ReadToEnd() override;
-
+        
       protected:
         /// @cond
         bool closed = false;

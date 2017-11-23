@@ -16,23 +16,22 @@ FtpWebRequest::FtpWebRequest(const Uri& uri): WebRequest(uri) {
 }
 
 WebRequest::WebRequestStream FtpWebRequest::GetRequestStream() {
-  if (GetMethod()==WebRequestMethods::Ftp::UploadFile)
+  if(GetMethod() == WebRequestMethods::Ftp::UploadFile)
     return WebRequest::GetRequestStream();
-
+    
   throw InvalidOperationException(_caller);
 }
 
 void FtpWebRequest::SetUseBinary(bool useBinary) {
-  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
-
+    
   this->useBinary = useBinary;
-
-  if (useBinary) {
+  
+  if(useBinary) {
     Native::CurlApi::SetTransfertText(this->requestHandle, 0L);
     Native::CurlApi::SetCarriageReturnLinefeed(this->requestHandle, 0L);
-  }
-  else
+  } else
     Native::CurlApi::SetTransfertText(this->requestHandle, 1L);
 }
 
@@ -41,43 +40,41 @@ bool FtpWebRequest::GetUseBinary() {
 }
 
 void FtpWebRequest::ProcessMakeDirectory() {
-  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
-
+    
   Native::CurlApi::SetCreateDirectoryIfDirectoryMissing(this->requestHandle);
   this->internalError = Native::CurlApi::Perform(this->requestHandle);
 }
 
 void FtpWebRequest::ProcessListDirectory() {
-  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
-
+    
   Native::CurlApi::SetDirectoryListOnly(this->requestHandle, 1L);
 }
 
 void FtpWebRequest::ProcessListDirectoryDetails() {
-  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
 }
 
 WebResponse& FtpWebRequest::GetInternalResponse() {
-    return this->ftpWebResponse;
+  return this->ftpWebResponse;
 }
 
 WebResponse& FtpWebRequest::GetResponse() {
-  if (GetMethod()==WebRequestMethods::Ftp::MakeDirectory) {
+  if(GetMethod() == WebRequestMethods::Ftp::MakeDirectory) {
     //No stream needed to process the request
     ProcessMakeDirectory();
-  }
-  else if (GetMethod()==WebRequestMethods::Ftp::ListDirectory) {
+  } else if(GetMethod() == WebRequestMethods::Ftp::ListDirectory) {
     //A reponse stream is needed
     ProcessListDirectory();
-  }
-  else if (GetMethod()==WebRequestMethods::Ftp::ListDirectoryDetails) {
+  } else if(GetMethod() == WebRequestMethods::Ftp::ListDirectoryDetails) {
     //A reponse stream is needed
     ProcessListDirectoryDetails();
   }
-  if (IsResponseStreamNeeded())
+  if(IsResponseStreamNeeded())
     this->ftpWebResponse.StartTransfert();
   return this->ftpWebResponse;
 }

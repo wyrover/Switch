@@ -54,47 +54,47 @@ namespace SwitchUnitTests {
   class TUnitTest : public TestFixture {
   public:
     void SetUp() override {}
-    
+
     void TearDown() override {}
-    
+
     void AreEqualInt32() {
       Assert::AreEqual(41, int32(42));
       Assert::AreEqual(43, int32(42));
       Assert::AreEqual(42, int32(42));
     }
-    
+
     void AreNotEqualInt32() {
       Assert::AreNotEqual(42, int32(42));
       Assert::AreNotEqual(41, int32(42));
     }
-    
+
     void AreEqualtring() {
       Assert::AreEqual("Tes", string("Test"));
       Assert::AreEqual("Test", string("Test"));
     }
-    
+
     void AreNotEqualString() {
       Assert::AreNotEqual("Test", string("Test"));
       Assert::AreNotEqual("Tes", string("Test"));
     }
-    
+
     void ThrowException() {
       throw ArgumentNullException(_caller);
     }
-    
+
     void IsTrueBoolean() {
       Assert::IsTrue(true);
     }
-    
+
     void ThrowArgumentNullException() {
       Assert::Throws<ArgumentNullException>(_delegate {throw ArgumentNullException(_caller);}, _caller);
     }
-    
+
     void ThrowIndexOutOfRangeException() {
       Assert::Throws<IndexOutOfRangeException>(_delegate {throw ArgumentNullException(_caller);}, _caller);
     }
   };
-  
+
   _AddTest(TUnitTest, AreEqualInt32);
   _AddTest(TUnitTest, AreNotEqualInt32);
   _AddTest(TUnitTest, AreEqualtring);

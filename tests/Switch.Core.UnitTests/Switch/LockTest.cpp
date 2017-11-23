@@ -11,7 +11,7 @@ namespace SwitchUnitTests {
     int value = 0;
     object lock;
     
-    _lock (lock) {
+    _lock(lock) {
       ++value;
     }
     
@@ -23,9 +23,9 @@ namespace SwitchUnitTests {
     object lock;
     object lock2;
     
-    _lock (lock) {
+    _lock(lock) {
       ++value;
-      _lock (lock2) {
+      _lock(lock2) {
         ++value;
       }
     }
@@ -37,9 +37,9 @@ namespace SwitchUnitTests {
     int value = 0;
     object lock;
     
-    _lock (lock) {
+    _lock(lock) {
       ++value;
-      _lock (lock) {
+      _lock(lock) {
         ++value;
       }
     }
@@ -50,11 +50,11 @@ namespace SwitchUnitTests {
   TEST(LockTest, LockDuration) {
     object lock;
     int value = 0;
-    int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000;
-    _lock (lock) {
+    int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
+    _lock(lock) {
       ++value;
     }
-    ASSERT_LE(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count()/1000000 - start, 1);
+    ASSERT_LE(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start, 1);
   }
   
   TEST(LockTest, Thread) {
@@ -62,26 +62,26 @@ namespace SwitchUnitTests {
     object lock;
     std::thread t1(_delegate {
       _lock(lock) {
-        for (int i = 0; i < 500; i++)
+        for(int i = 0; i < 500; i++)
           s += '1';
       }
     });
     std::thread t2(_delegate {
       _lock(lock) {
-        for (int i = 0; i < 500; i++)
+        for(int i = 0; i < 500; i++)
           s += '2';
       }
     });
     
-    if (t1.joinable())
+    if(t1.joinable())
       t1.join();
-    if (t2.joinable())
+    if(t2.joinable())
       t2.join();
-    
+      
     char32 o = 0;
     int32 i = 0;
-    for (char32 c : s) {
-      if (o == 0) o = c;
+    for(char32 c : s) {
+      if(o == 0) o = c;
       ASSERT_FALSE(++i < 500 && o != c);
     }
   }

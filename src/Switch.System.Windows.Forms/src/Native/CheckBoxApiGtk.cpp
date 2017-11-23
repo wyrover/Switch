@@ -25,7 +25,7 @@ intptr Native::CheckBoxApi::Create(const System::Windows::Forms::CheckBox& check
 }
 
 void Native::CheckBoxApi::SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox) {
-  
+
 }
 
 void Native::CheckBoxApi::SetChecked(const System::Windows::Forms::CheckBox& checkBox) {

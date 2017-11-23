@@ -26,13 +26,13 @@ namespace Switch {
         };
         
         WebResponse::WebResponseStream GetResponseStream() override;
-
+        
       protected:
         FtpWebResponse();
         
       private:
         friend class FtpWebRequest;
-
+        
         System::Net::FtpStatusCode GetStatusCode() const;
         const String GetStatusDescription() const;
       };

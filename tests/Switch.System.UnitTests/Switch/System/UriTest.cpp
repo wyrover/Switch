@@ -106,8 +106,8 @@ namespace {
   TEST(UriTest, GetComponents) {
     ASSERT_EQ(Uri("  Http://yfi:MyPass@www.Contoso.com:8080/C:a ta%20log/ShowNew.htm?Date=ToDay#bOdy  ").GetComponents(UriComponents::Host, UriFormat::SafeUnescaped), "www.contoso.com");
     ASSERT_EQ(Uri("  Http://yfi:MyPass@www.Contoso.com:8080/C:a ta%20log/ShowNew.htm?Date=ToDay#bOdy  ").GetComponents(UriComponents::Port, UriFormat::SafeUnescaped), "8080");
-    ASSERT_EQ(Uri("  Http://yfi:MyPass@www.Contoso.com:8080/C:a ta%20log/ShowNew.htm?Date=ToDay#bOdy  ").GetComponents(UriComponents::Port|UriComponents::KeepDelimiter, UriFormat::SafeUnescaped), ":8080");
-    ASSERT_EQ(Uri("  Http://yfi:MyPass@www.Contoso.com:8080/C:a ta%20log/ShowNew.htm?Date=ToDay#bOdy  ").GetComponents(UriComponents::Host|UriComponents::Port, UriFormat::SafeUnescaped), "www.contoso.com:8080");
+    ASSERT_EQ(Uri("  Http://yfi:MyPass@www.Contoso.com:8080/C:a ta%20log/ShowNew.htm?Date=ToDay#bOdy  ").GetComponents(UriComponents::Port | UriComponents::KeepDelimiter, UriFormat::SafeUnescaped), ":8080");
+    ASSERT_EQ(Uri("  Http://yfi:MyPass@www.Contoso.com:8080/C:a ta%20log/ShowNew.htm?Date=ToDay#bOdy  ").GetComponents(UriComponents::Host | UriComponents::Port, UriFormat::SafeUnescaped), "www.contoso.com:8080");
     ASSERT_EQ(Uri("  Http://yfi:MyPass@www.Contoso.com:8080/C:a ta%20log/ShowNew.htm?Date=ToDay#bOdy  ").GetComponents(UriComponents::HostAndPort, UriFormat::SafeUnescaped), "www.contoso.com:8080");
   }
   
@@ -309,7 +309,7 @@ namespace {
      ASSERT_TRUE(Uri("http://host/path/path/file?query").IsBasOf(Uri("http://host/path/path/OtherFile?Query")));
      ASSERT_TRUE(Uri("http://host/path/path/file?query").IsBasOf(Uri("http://host/path/path/")));
      ASSERT_TRUE(Uri("http://host/path/path/file?query").IsBasOf(Uri("http://host/path/path/file")));
-     
+    
      ASSERT_FALSE(Uri("http://host/path/path/file?query").IsBasOf(Uri("http://host/path/path")));
      ASSERT_FALSE(Uri("http://host/path/path/file?query").IsBasOf(Uri("http://host/path/path?query")));
      ASSERT_FALSE(Uri("http://host/path/path/file?query").IsBasOf(Uri("http://host/path/path#Fragment")));
@@ -366,6 +366,6 @@ namespace {
   TEST(UriTest, UnescapeDataString) {
     ASSERT_EQ(Uri::UnescapeDataString("abc123XYZ%3C%3E%25%22%7B%7D%7C%5C%5E%60%5B%5D%20%3D%3F%3A%23%40!"), "abc123XYZ<>%\"{}|\\^`[] =?:#@!");
     ASSERT_EQ(Uri::UnescapeDataString("abc123XYZ%3C%3E%25%22%7B%7D%7C%5C%5E%60%5B%5D%20=?:#@!"), "abc123XYZ<>%\"{}|\\^`[] =?:#@!");
-  }  
+  }
 }
 

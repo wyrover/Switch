@@ -45,10 +45,10 @@ namespace SwitchUnitTests {
     ASSERT_FALSE(guid.Equals(Guid::Empty()));
     ASSERT_FALSE(guid.Equals(guid2));
   }
-
+  
   TEST(GuidTest, NewGuid) {
     Dictionary<Guid, Guid> guids;
-    for (int32 i = 0; i < 1'000; i++) {
+    for(int32 i = 0; i < 1'000; i++) {
       Guid guid = Guid::NewGuid();
       ASSERT_FALSE(guids.ContainsKey(guid));
       guids.Add(guid, guid);

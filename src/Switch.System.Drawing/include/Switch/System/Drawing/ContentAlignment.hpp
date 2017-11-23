@@ -41,7 +41,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Drawing::ContentAlignment> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Drawing::ContentAlignment::TopLeft, "TopLeft"}, {(int64)System::Drawing::ContentAlignment::TopCenter, "TopCenter"}, {(int64)System::Drawing::ContentAlignment::TopRight, "TopRight"}, {(int64)System::Drawing::ContentAlignment::MiddleLeft, "MiddleLeft"}, {(int64)System::Drawing::ContentAlignment::MiddleCenter, "MiddleCenter"}, {(int64)System::Drawing::ContentAlignment::MiddleRight, "MiddleRight"}, {(int64)System::Drawing::ContentAlignment::BottomLeft, "BottomLeft"}, {(int64)System::Drawing::ContentAlignment::BottomCenter, "BottomCenter"}, {(int64)System::Drawing::ContentAlignment::BottomRight, "BottomRight"}};
     flags = false;
   }

@@ -36,7 +36,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::IO::DriveType> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::IO::DriveType::Unknown, "Unknown"}, {(int64)System::IO::DriveType::NoRootDirectory, "NoRootDirectory"}, {(int64)System::IO::DriveType::Removable, "Removable"}, {(int64)System::IO::DriveType::Fixed, "Fixed"}, {(int64)System::IO::DriveType::Network, "Network"}, {(int64)System::IO::DriveType::CDRom, "CDRom"}, {(int64)System::IO::DriveType::Ram, "Ram"}};
     flags = false;
   }

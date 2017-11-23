@@ -145,10 +145,10 @@ namespace SwitchUnitTests {
     ASSERT_FALSE(Boolean::TryParse("Not true or false", result));
   }
   
-#if defined(_WIN32)
+  #if defined(_WIN32)
 #pragma warning(push)
 #pragma warning(disable:4305)
-#endif
+  #endif
   
   TEST(BooleanTest, Equals) {
     ASSERT_TRUE(Boolean(true).Equals(Boolean(true)));
@@ -156,14 +156,14 @@ namespace SwitchUnitTests {
     ASSERT_TRUE(Boolean(false).Equals(Boolean(false)));
     ASSERT_FALSE(Boolean(false).Equals(Boolean(true)));
     
-    ASSERT_TRUE(Boolean(false).Equals((const Object &)Boolean(false)));
-    ASSERT_FALSE(Boolean(false).Equals((const Object &)Boolean(true)));
+    ASSERT_TRUE(Boolean(false).Equals((const Object&)Boolean(false)));
+    ASSERT_FALSE(Boolean(false).Equals((const Object&)Boolean(true)));
     ASSERT_FALSE(Boolean(false).Equals(int32(24)));
   }
   
-#if defined(_WIN32)
+  #if defined(_WIN32)
 #pragma warning(pop)
-#endif
+  #endif
   
   TEST(BooleanTest, GetHashCode) {
     ASSERT_EQ(Boolean(true).GetHashCode(), int32(1));
@@ -193,10 +193,10 @@ namespace SwitchUnitTests {
     ASSERT_EQ(Boolean(true).CompareTo(Boolean(true)), 0);
     ASSERT_EQ(Boolean(false).CompareTo((const IComparable&)Boolean(false)), 0);
     ASSERT_EQ(Boolean(false).CompareTo(0), 0);
-    ASSERT_GE(Boolean(true).CompareTo(0),0);
+    ASSERT_GE(Boolean(true).CompareTo(0), 0);
   }
   
-  TEST(BooleanTest,GetTypeCode) {
+  TEST(BooleanTest, GetTypeCode) {
     ASSERT_EQ(TypeCode::Boolean, Boolean().GetTypeCode());
   }
 }

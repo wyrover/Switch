@@ -36,7 +36,7 @@ namespace Switch {
         /// @param maximumCount The maximum number of requests for the semaphore that can be granted concurrently.
         /// @exception IO::IOException An Io error occurred.
         Semaphore(int32 initialCount, int32 maximumCount) : count(ref_new<int32>(initialCount)), maxCount(ref_new<int32>(maximumCount)) {}
-
+        
         /// @brief Initializes a new instance of the System::Threading::Semaphore class, specifying the maximum number of concurrent entries, optionally reserving some entries
         /// for the calling thread, and optionally specifying the name of a system semaphore
         /// object.
@@ -46,7 +46,7 @@ namespace Switch {
         /// @exception ArgumentException name is longer than 128 characters -or- initialCount is greater than maximumCount -or- maximumCount is less than 1.
         /// @exception IO::IOException An Io error occurred.
         Semaphore(int32 initialCount, int32 maximumCount, const String& name);
-
+        
         /// @brief Initializes a new instance of the System::Threading::Semaphore class, specifying the maximum number of concurrent entries, optionally reserving some entries for the calling thread, optionally specifying the name of a system semaphore object, and specifying a variable that receives a value indicating whether a new system semaphore was created.
         /// @param initialCount The initial number of requests for the semaphore that can be granted concurrently.
         /// @param maximumCount The maximum number of requests for the semaphore that can be granted concurrently.
@@ -55,7 +55,7 @@ namespace Switch {
         /// @exception ArgumentException name is longer than 128 characters -or- initialCount is greater than maximumCount -or- maximumCount is less than 1.
         /// @exception IO::IOException An Io error occurred.
         Semaphore(int32 initialCount, int32 maximumCount, const String& name, bool& createdNew);
-
+        
         /// @cond
         Semaphore(const Semaphore& semaphore) : guard(semaphore.guard), signal(semaphore.signal), count(semaphore.count), maxCount(semaphore.maxCount), name(semaphore.name) {}
         ~Semaphore() {this->Close();}
@@ -68,7 +68,7 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-
+        
         /// @brief When overridden in a derived class, releases all resources held by the current System::Threading::WaitHandle.
         void Close() override;
         
@@ -81,7 +81,7 @@ namespace Switch {
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
         bool Equals(const Object& obj) const override {return is<Semaphore>(obj) && this->Equals((const Semaphore&)obj);}
-
+        
         /// @brief Opens an existing named semaphore.
         /// @param name The name of a named system semaphore.
         /// @return A System::Threading::Semaphore object that represents a named system semaphore.
@@ -89,23 +89,23 @@ namespace Switch {
         /// @exception ArgumentException name is longer than 128 characters
         /// @exception IO::IOException An Io error occurred.
         static Semaphore OpenExisting(const String& name);
-
+        
         /// @brief Exits the semaphore and returns the previous count.
         /// @return The count on the semaphore before the Overload:System::Threading::Semaphore.Release method was called.
         /// @exception SemaphoreFullException The semaphore count is already at the maximum value.
         /// @exception IO::IOException An Io error occurred.
         int32 Release() {return this->Release(1);}
-
+        
         /// @brief Exits the semaphore and returns the previous count.
         /// @param releaseCount The number of times to exit the semaphore.
         /// @return The count on the semaphore before the Overload:System::Threading::Semaphore.Release method was called.
         /// @exception SemaphoreFullException The semaphore count is already at the maximum value.
         /// @exception IO::IOException An Io error occurred.
         int32 Release(int32 releaseCount) {
-          if (this->guard == null)
+          if(this->guard == null)
             throw ObjectDisposedException(_caller);
           std::unique_lock<std::mutex> lock(*this->guard);
-          if (*this->count + releaseCount > *this->maxCount)
+          if(*this->count + releaseCount > *this->maxCount)
             throw SemaphoreFullException(_caller);
           *this->count += releaseCount;
           this->signal->notify_all();
@@ -117,7 +117,7 @@ namespace Switch {
         /// @param result When this method returns, contains a Semaphore object that represents the named semaphore if the call succeeded, or null if the call failed. This parameter is treated as uninitialized.
         /// @return true if the named semaphore was opened successfully; otherwise, false.
         static bool TryOpenExisting(const String& name, Semaphore& result);
-
+        
       private:
         bool Signal() override {
           this->Release();
@@ -125,23 +125,23 @@ namespace Switch {
         }
         
         bool Wait(int32 millisecondsTimeOut) override {
-          if (this->guard == null)
+          if(this->guard == null)
             throw ObjectDisposedException(_caller);
-          if (millisecondsTimeOut < -1)
+          if(millisecondsTimeOut < -1)
             throw AbandonedMutexException(_caller);
-              
+            
           std::unique_lock<std::mutex> lock(*this->guard);
           while(*this->count == 0) {
-            if (millisecondsTimeOut == -1)
+            if(millisecondsTimeOut == -1)
               this->signal->wait(lock);
-            else if (this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
+            else if(this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
               return false;
           }
           
           *this->count -= 1;
           return true;
         }
-
+        
         refptr<std::mutex> guard = ref_new<std::mutex>();
         refptr<std::condition_variable> signal = ref_new<std::condition_variable>();
         refptr<int32> count = ref_new<int32>(0);

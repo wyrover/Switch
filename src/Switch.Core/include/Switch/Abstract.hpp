@@ -71,8 +71,8 @@ namespace Switch {
   /// _startup(TestReader::Program)
   /// @endcode
   /// @ingroup Keywords
-  #define _abstract\
-  : public Abstract
+#define _abstract\
+: public Abstract
 }
 
 using namespace Switch;

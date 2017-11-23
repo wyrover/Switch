@@ -25,7 +25,7 @@ namespace SwitchUnitTests {
   TEST(ControlTest, SetBackColorToAColor) {
     Control control;
     Color newBackColor;
-    control.BackColorChanged += _delegate(const object& sender, const EventArgs& e) {
+    control.BackColorChanged += _delegate(const object & sender, const EventArgs & e) {
       newBackColor = as<Control>(sender).BackColor;
     };
     
@@ -38,7 +38,7 @@ namespace SwitchUnitTests {
   TEST(ControlTest, SetForeColorToAColor) {
     Control control;
     Color newForeColor;
-    control.ForeColorChanged += _delegate(const object& sender, const EventArgs& e) {
+    control.ForeColorChanged += _delegate(const object & sender, const EventArgs & e) {
       newForeColor = as<Control>(sender).ForeColor;
     };
     
@@ -55,7 +55,7 @@ namespace SwitchUnitTests {
    control.ParentChanged += _delegate(const object& sender, const EventArgs& e) {
    newParent = as<Control>(sender).Parent;
    };
-   
+  
    control.Parent = parent;
    ASSERT_EQ(parent, control.Parent);
    ASSERT_EQ(parent, newParent);

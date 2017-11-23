@@ -7,9 +7,11 @@
 #include "IFormatProvider.hpp"
 
 /// @cond
-namespace Switch { namespace System {
+namespace Switch {
+  namespace System {
     class IFormatProvider;
-}}
+  }
+}
 /// @endcond
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.

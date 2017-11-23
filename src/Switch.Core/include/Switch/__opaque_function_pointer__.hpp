@@ -18,12 +18,12 @@ class _export __opaque_inner_function_ptr__ {
 private:
   template<typename TResult, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, typename T16>
   friend class __opaque_function_pointer__;
-
+  
   __opaque_inner_function_ptr__() {}
   
   __opaque_inner_function_ptr__(const __opaque_inner_function_ptr__& rhs) {
     this->size = rhs.size;
-    if (this->size != 0) {
+    if(this->size != 0) {
       this->value = malloc(this->size);
       memcpy(this->value, rhs.value, this->size);
     }
@@ -33,7 +33,7 @@ private:
   
   template<typename T>
   __opaque_inner_function_ptr__(T* value) {
-    if (value == null) {
+    if(value == null) {
       this->value = null;
       this->size = 0;
       return;
@@ -45,7 +45,7 @@ private:
   
   template<typename T>
   __opaque_inner_function_ptr__(const T* value) {
-    if (value == null) {
+    if(value == null) {
       this->value = null;
       this->size = 0;
       return;
@@ -70,16 +70,16 @@ private:
   }
   
   ~__opaque_inner_function_ptr__() {
-    if (this->value != null && this->size != 0)
+    if(this->value != null && this->size != 0)
       free(this->value);
   }
   
   __opaque_inner_function_ptr__& operator=(const __opaque_inner_function_ptr__& rhs) {
-    if (this->value != null && this->size != 0)
+    if(this->value != null && this->size != 0)
       free(this->value);
-    
+      
     this->size = rhs.size;
-    if (this->size != 0) {
+    if(this->size != 0) {
       this->value = malloc(this->size);
       memcpy(this->value, rhs.value, this->size);
     }
@@ -87,24 +87,24 @@ private:
   }
   
   bool operator==(const __opaque_inner_function_ptr__& rhs) const {
-    if (this->size != rhs.size)
+    if(this->size != rhs.size)
       return false;
     return memcmp(this->value, rhs.value, this->size) == 0;
   }
   
   bool operator !=(const __opaque_inner_function_ptr__& rhs) const {
-    if (this->size != rhs.size)
+    if(this->size != rhs.size)
       return true;
     return memcmp(this->value, rhs.value, this->size) != 0;
   }
   
   template<typename T>
-  operator T&() const {
+  operator T& () const {
     return *(reinterpret_cast<T*>(this->value));
   }
   
   template<typename T>
-  operator T*() const {
+  operator T* () const {
     return *reinterpret_cast<T**>(this->value);
   }
   
@@ -159,7 +159,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -191,7 +191,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
     }
@@ -200,7 +200,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
     }
@@ -209,7 +209,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
     }
@@ -218,7 +218,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15, T16 a16) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
     }
@@ -273,7 +273,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -305,7 +305,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
     }
@@ -314,7 +314,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
     }
@@ -323,7 +323,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
     }
@@ -332,7 +332,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14, T15 a15) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
     }
@@ -387,7 +387,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -419,7 +419,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
     }
@@ -428,7 +428,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
     }
@@ -437,7 +437,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
     }
@@ -446,7 +446,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13, T14 a14) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
     }
@@ -501,7 +501,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -533,7 +533,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
     }
@@ -542,7 +542,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<TResult(T::*)(T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13)>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
     }
@@ -551,7 +551,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
     }
@@ -560,7 +560,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12, T13 a13) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
     }
@@ -615,7 +615,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -647,7 +647,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
     }
@@ -656,7 +656,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
     }
@@ -665,7 +665,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
     }
@@ -674,7 +674,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11, T12 a12) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
     }
@@ -729,7 +729,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -761,7 +761,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
     }
@@ -770,7 +770,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
     }
@@ -779,7 +779,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
     }
@@ -788,7 +788,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10, T11 a11) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
     }
@@ -843,7 +843,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -875,7 +875,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
     }
@@ -884,7 +884,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
     }
@@ -893,7 +893,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
     }
@@ -902,7 +902,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
     }
@@ -957,7 +957,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8, a9); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -989,7 +989,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9);
     }
@@ -998,7 +998,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9);
     }
@@ -1007,7 +1007,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8, a9);
     }
@@ -1016,7 +1016,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7, a8, a9);
     }
@@ -1070,7 +1070,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7, a8); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -1102,7 +1102,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7, a8);
     }
@@ -1111,7 +1111,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8);
     }
@@ -1120,7 +1120,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7, a8);
     }
@@ -1129,7 +1129,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7, a8);
     }
@@ -1184,7 +1184,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6, a7); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -1216,7 +1216,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6, a7);
     }
@@ -1225,7 +1225,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7);
     }
@@ -1234,7 +1234,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6, a7);
     }
@@ -1243,7 +1243,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6, a7);
     }
@@ -1297,7 +1297,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5, a6); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -1329,7 +1329,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5, a6);
     }
@@ -1338,7 +1338,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5, a6);
     }
@@ -1347,7 +1347,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5, a6);
     }
@@ -1356,7 +1356,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5, a6);
     }
@@ -1411,7 +1411,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) const { return this->invoker(this->target, this->method, a1, a2, a3, a4, a5); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -1424,7 +1424,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4, a5);
     }
@@ -1433,7 +1433,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4, a5);
     }
@@ -1442,7 +1442,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4, a5);
     }
@@ -1451,7 +1451,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4, a5);
     }
@@ -1506,7 +1506,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3, T4 a4) const { return this->invoker(this->target, this->method, a1, a2, a3, a4); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3, T4 a4) const { return this->invoker(this->target, this->method, a1, a2, a3, a4); }
+  TResult operator()(T1 a1, T2 a2, T3 a3, T4 a4) const { return this->invoker(this->target, this->method, a1, a2, a3, a4); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -1538,7 +1538,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3, a4);
     }
@@ -1547,7 +1547,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3, a4);
     }
@@ -1556,7 +1556,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3, a4);
     }
@@ -1565,7 +1565,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3, T4 a4) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3, a4);
     }
@@ -1620,7 +1620,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2, T3 a3) const { return this->invoker(this->target, this->method, a1, a2, a3); }
   
-  TResult operator ()(T1 a1, T2 a2, T3 a3) const { return this->invoker(this->target, this->method, a1, a2, a3); }
+  TResult operator()(T1 a1, T2 a2, T3 a3) const { return this->invoker(this->target, this->method, a1, a2, a3); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -1652,7 +1652,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2, a3);
     }
@@ -1661,7 +1661,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2, a3);
     }
@@ -1670,7 +1670,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2, a3);
     }
@@ -1679,7 +1679,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2, T3 a3) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2, a3);
     }
@@ -1734,7 +1734,7 @@ public:
   
   TResult Invoke(T1 a1, T2 a2) const { return this->invoker(this->target, this->method, a1, a2); }
   
-  TResult operator ()(T1 a1, T2 a2) const { return this->invoker(this->target, this->method, a1, a2); }
+  TResult operator()(T1 a1, T2 a2) const { return this->invoker(this->target, this->method, a1, a2); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -1766,7 +1766,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1, a2);
     }
@@ -1774,7 +1774,7 @@ private:
   
   template<typename T> struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1, a2);
     }
@@ -1782,7 +1782,7 @@ private:
   
   template<typename T> struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1, a2);
     }
@@ -1790,7 +1790,7 @@ private:
   
   template<typename T> struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1, T2 a2) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1, a2);
     }
@@ -1845,7 +1845,7 @@ public:
   
   TResult Invoke(T1 a1) const { return this->invoker(this->target, this->method, a1); }
   
-  TResult operator ()(T1 a1) const { return this->invoker(this->target, this->method, a1); }
+  TResult operator()(T1 a1) const { return this->invoker(this->target, this->method, a1); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -1877,7 +1877,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))(a1);
     }
@@ -1885,7 +1885,7 @@ private:
   
   template<typename T> struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))(a1);
     }
@@ -1894,7 +1894,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))(a1);
     }
@@ -1903,7 +1903,7 @@ private:
   template<typename T>
   struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function, T1 a1) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return static_cast<T>(target)(a1);
     }
@@ -1958,7 +1958,7 @@ public:
   
   TResult Invoke() const { return this->invoker(this->target, this->method); }
   
-  TResult operator ()() const { return this->invoker(this->target, this->method); }
+  TResult operator()() const { return this->invoker(this->target, this->method); }
   
   bool operator==(const FunctionType& other) const { return this->target == other.target && this->method == other.method; }
   
@@ -1990,7 +1990,7 @@ public:
 private:
   struct StaticFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function) {
-      if (function.IsNull())
+      if(function.IsNull())
         throw std::exception();
       return (static_cast<Function>(function))();
     }
@@ -1999,7 +1999,7 @@ private:
   template<typename T>
   struct MemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename Member<T>::Type>(function))();
     }
@@ -2008,7 +2008,7 @@ private:
   template<typename T>
   struct ConstMemberFunctionInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function) {
-      if (target.IsNull() || function.IsNull())
+      if(target.IsNull() || function.IsNull())
         throw std::exception();
       return (static_cast<T*>(target)->*static_cast<typename ConstMember<T>::Type>(function))();
     }
@@ -2016,7 +2016,7 @@ private:
   
   template<typename T> struct FunctorInvoker {
     static TResult Invoke(const __opaque_inner_function_ptr__& target, const __opaque_inner_function_ptr__& function) {
-      if (target.IsNull())
+      if(target.IsNull())
         throw std::exception();
       return (static_cast<T>(target))();
     }

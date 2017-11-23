@@ -26,7 +26,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::CheckState > {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::CheckState::Unchecked, "Unchecked"}, {(int64)System::Windows::Forms::CheckState::Checked, "Checked"}, {(int64)System::Windows::Forms::CheckState::Indeterminate, "Indeterminate"}};
     flags = false;
   }

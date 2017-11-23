@@ -96,7 +96,7 @@ namespace Switch {
       /// The following code example demonstrates simple threading functionality.
       /// @include Thread.cpp
       class _export Thread : public object {
-      public:        
+      public:
         /// @brief Initializes a new instance of the Thread class.
         /// @param start A ThreadStart delegate that represents the methods to be invoked when this thread begins executing.
         explicit Thread(System::Threading::ThreadStart start) : data(new ThreadItem(start)) {}
@@ -137,8 +137,8 @@ namespace Switch {
         
         _property<intptr, _readonly> Handle {
           _get {
-            if (this->data->managedThreadId == NoneManagedThreadId)
-              return (intptr)-1;
+            if(this->data->managedThreadId == NoneManagedThreadId)
+              return (intptr) - 1;
             return (intptr)this->data->thread.native_handle();}
         };
         
@@ -153,10 +153,10 @@ namespace Switch {
         _property<bool> IsBackground {
           _get {return Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Background);},
           _set {
-            if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
+            if(this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
               throw InvalidOperationException(_caller);
-            
-            if (value)
+              
+            if(value)
               this->data->state |= System::Threading::ThreadState::Background;
             else
               this->data->state &= ~System::Threading::ThreadState::Background;
@@ -170,7 +170,8 @@ namespace Switch {
         /// @brief Gets a unique identifier for the current managed thread.
         /// @return An integer that represents a unique identifier for this managed thread.
         _property<int32, _readonly> ManagedThreadId {
-          _get {return this->data->managedThreadId;
+          _get {
+            return this->data->managedThreadId;
           }
         };
         
@@ -179,7 +180,7 @@ namespace Switch {
         _property<string> Name {
           _get {return this->data->name;},
           _set {
-            if (this->data->managedThreadId == NoneManagedThreadId)
+            if(this->data->managedThreadId == NoneManagedThreadId)
               throw InvalidOperationException(_caller);
             this->SetName(value);
           }
@@ -191,7 +192,7 @@ namespace Switch {
         _property<ThreadPriority> Priority {
           _get {return this->data->priority;},
           _set {
-            if (this->data->managedThreadId == NoneManagedThreadId)
+            if(this->data->managedThreadId == NoneManagedThreadId)
               throw InvalidOperationException(_caller);
             this->SetPriority(value);
           }
@@ -209,7 +210,7 @@ namespace Switch {
         
         /// @brief Notifies a host that execution is about to enter a region of code in which the effects of a thread abort.
         static void BeginCriticalRegion() {
-          if (CurrentThread().data->managedThreadId == NoneManagedThreadId)
+          if(CurrentThread().data->managedThreadId == NoneManagedThreadId)
             throw InvalidOperationException(_caller);
           CurrentThread().data->criticalRegion = true;
         }
@@ -234,7 +235,7 @@ namespace Switch {
         
         /// @brief Notifies a host that execution is about to leave a region of code in which the effects of a thread abort.
         static void EndCriticalRegion() {
-          if (CurrentThread().data->managedThreadId == NoneManagedThreadId)
+          if(CurrentThread().data->managedThreadId == NoneManagedThreadId)
             throw InvalidOperationException(_caller);
           CurrentThread().data->criticalRegion = false;
         }
@@ -259,19 +260,19 @@ namespace Switch {
         /// @exception ThreadStateExceptionError The caller attempted to join a thread that is in the ThreadStateUnstarted state.
         /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         bool Join(int32 millisecondsTimeout) {
-          if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
+          if(this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
             throw InvalidOperationException(_caller);
-          if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
+          if(Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
             throw ThreadStateException(_caller);
-          
-          if (millisecondsTimeout < Timeout::Infinite)
+            
+          if(millisecondsTimeout < Timeout::Infinite)
             throw ArgumentOutOfRangeException(_caller);
-          
-          if (this->data->interrupted == true)
+            
+          if(this->data->interrupted == true)
             this->Interrupt();
-          
+            
           bool result = this->data->endThreadEvent.WaitOne(millisecondsTimeout);
-          if (result == true) {
+          if(result == true) {
             try {
               CurrentThread().data->state |= System::Threading::ThreadState::WaitSleepJoin;
               this->data->thread.join();
@@ -302,17 +303,17 @@ namespace Switch {
         /// @param millisecondsTimeout The number of milliseconds for which the thread is blocked. Specify zero (0) to indicate that this thread should be suspended to allow other waiting threads to execute. Specify System::Threading::Timeout.Infinite to block the thread indefinitely.
         /// @exception ArgumentException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         static void Sleep(int32 millisecondsTimeout) {
-          if (millisecondsTimeout < Timeout::Infinite)
+          if(millisecondsTimeout < Timeout::Infinite)
             throw ArgumentException(_caller);
-          
-          if (CurrentThread().data->interrupted)
+            
+          if(CurrentThread().data->interrupted)
             CurrentThread().Interrupt();
-          
+            
           CurrentThread().data->state |= System::Threading::ThreadState::WaitSleepJoin;
-          if (millisecondsTimeout == Timeout::Infinite) {
+          if(millisecondsTimeout == Timeout::Infinite) {
             while(true)
               std::this_thread::sleep_for(std::chrono::hours::max());
-          } else if (millisecondsTimeout == 0)
+          } else if(millisecondsTimeout == 0)
             Yield();
           else
             std::this_thread::sleep_for(std::chrono::milliseconds(millisecondsTimeout));
@@ -350,7 +351,7 @@ namespace Switch {
         using NativeHandle = std::thread::native_handle_type;
         using ThreadId = std::thread::id;
         using ThreadCollection = System::Collections::Generic::List<Thread>;
-
+        
         struct ThreadItem {
           ThreadItem() {};
           ThreadItem(System::Threading::ThreadStart threadStart) : threadStart(threadStart), managedThreadId(GenerateManagedThreadId()) {}
@@ -377,7 +378,7 @@ namespace Switch {
             managedThreadIdCounter = managedThreadIdCounter == Int32::MaxValue ? 2 : managedThreadIdCounter + 1;
             return managedThreadIdCounter;
           }
-
+          
           void Run() {RunWithOrWithoutParam(null, false);}
           void ParameterizedRun(const object* obj) {RunWithOrWithoutParam(obj, true);}
           void RunWithOrWithoutParam(const object* obj, bool withParam);
@@ -391,11 +392,11 @@ namespace Switch {
         bool Cancel();
         void Close();
         static bool DoWait(WaitHandle& waitHandle, int32 millisecondsTimeOut);
-
+        
         static void RegisterCurrentThread() {
           std::lock_guard<std::recursive_mutex> lock(mutex);
-          for (const Thread& item : threads)
-            if (item.data->managedThreadId == MainManagedThreadId)
+          for(const Thread& item : threads)
+            if(item.data->managedThreadId == MainManagedThreadId)
               throw InvalidOperationException(_caller);
           Thread thread;
           thread.data->managedThreadId = MainManagedThreadId;
@@ -408,20 +409,20 @@ namespace Switch {
         void SetPriority(ThreadPriority priority);
         
         void ThreadStart(const object* obj) {
-          if (!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
+          if(!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
             throw ThreadStateException(_caller);
-          
-          if (obj == null && this->data->threadStart.IsEmpty() && this->data->parameterizedThreadStart.IsEmpty())
+            
+          if(obj == null && this->data->threadStart.IsEmpty() && this->data->parameterizedThreadStart.IsEmpty())
             throw InvalidOperationException(_caller);
-          
-          if (obj != null && this->data->parameterizedThreadStart.IsEmpty())
+            
+          if(obj != null && this->data->parameterizedThreadStart.IsEmpty())
             throw InvalidOperationException(_caller);
-          
+            
           std::lock_guard<std::recursive_mutex> lock(mutex);
           threads.Add(*this);
-          Thread& thread = threads[threads.Count-1];
+          Thread& thread = threads[threads.Count - 1];
           thread.data->state &= ~System::Threading::ThreadState::Unstarted;
-          if (obj == null && !this->data->threadStart.IsEmpty())
+          if(obj == null && !this->data->threadStart.IsEmpty())
             thread.data->thread = std::thread(std::function<void()>(std::bind(&ThreadItem::Run, thread.data.ToPointer())));
           else
             thread.data->thread = std::thread(std::function<void(const object*)>(std::bind(&ThreadItem::ParameterizedRun, thread.data.ToPointer(), std::placeholders::_1)), obj == null ? this : obj);

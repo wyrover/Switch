@@ -13,7 +13,7 @@ namespace Switch {
         /// @cond
         class Control;
         /// @endcond
-
+        
         /// @brief Provides data for the ControlAdded and ControlRemoved events.
         /// @remarks For more information about handling events, see Handling and Raising Events.
         /// @par Examples
@@ -113,7 +113,7 @@ namespace Switch {
           /// }
           /// @endcode
           ControlEventArgs(const System::Windows::Forms::Control& control) : control(&control) {}
-
+          
           /// @brief Gets the control object used by this event.
           /// @return The Control used by this event.
           /// @par Examples
@@ -162,7 +162,7 @@ namespace Switch {
           /// }
           /// @endcode
           const System::Windows::Forms::Control& Control() const { return *control; }
-
+          
         private:
           const System::Windows::Forms::Control* control;
         };

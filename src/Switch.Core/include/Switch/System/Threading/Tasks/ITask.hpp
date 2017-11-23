@@ -8,10 +8,16 @@
 #include "../../TimeSpan.hpp"
 
 /// @cond
-namespace Switch {namespace System {namespace Threading {namespace Tasks {
-  template <typename TResult=void>
-  class Task;
-}}}}
+namespace Switch {
+  namespace System {
+    namespace Threading {
+      namespace Tasks {
+        template <typename TResult = void>
+        class Task;
+      }
+    }
+  }
+}
 
 class _export __opaque_task_id_generator__ {
   template <typename TResult>
@@ -39,7 +45,7 @@ namespace Switch {
         public:
           /// @brief Starts the Task, scheduling it for execution to the current TaskScheduler.
           virtual void Start() = 0;
- 
+          
           /// @brief Waits for the Task to complete execution.
           virtual void Wait() = 0;
           

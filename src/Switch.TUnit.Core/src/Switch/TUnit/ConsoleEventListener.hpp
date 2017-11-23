@@ -72,7 +72,7 @@ namespace Switch {
       static void WriteLine(System::ConsoleColor color, const System::String& value);
       static void Write(const System::String& value);
       static void WriteLine(const System::String& value);
-      static void WriteLine();      
+      static void WriteLine();
     };
   }
 }

@@ -28,7 +28,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::TabAlignment> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::TabAlignment::Top, "Top"}, {(int64)System::Windows::Forms::TabAlignment::Bottom, "Bottom"}, {(int64)System::Windows::Forms::TabAlignment::Left, "Left"}, {(int64)System::Windows::Forms::TabAlignment::Right, "Right"}};
     flags = false;
   }

@@ -10,7 +10,7 @@ namespace {
 }
 
 TextWriter::TextWriter() : encoding(utf8Encoding) {
-} 
+}
 
 NullTextWriter& TextWriter::Null() {
   static NullTextWriter textWriter;
@@ -27,5 +27,5 @@ SynchronizedTextWriter::SynchronizedTextWriter(System::IO::TextWriter& writer) :
 
 void SynchronizedTextWriter::Write(const string& value) {
   _lock(*this->writer)
-    this->writer->Write(value);
+  this->writer->Write(value);
 }

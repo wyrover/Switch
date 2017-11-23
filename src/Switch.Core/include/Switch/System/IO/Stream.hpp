@@ -29,40 +29,40 @@ namespace Switch {
       class _export Stream _abstract {
       public:
         static NullStream& Null();
-
+        
         /// @brief Initializes a new instance of the Stream class
         /// @remarks Use Null to redirect output to a stream that will not consume any operating system resources. When the methods of Stream that provide writing are invoked on cNull, the call simply returns, and no data is written.
         /// @remarks Null also implements a Read method that returns zero without reading data.
         Stream() {}
-
+        
         /// @brief When overridden in a derived class, gets a value indicating whether the current
         /// stream supports reading.
         /// @return true if the stream supports reading; otherwise, false.
         _property<bool, _readonly> CanRead {
           _get {return this->GetCanRead();}
         };
-
+        
         /// @brief When overridden in a derived class, gets a value indicating whether the current
         /// stream supports seeking.
         /// @return true if the stream supports seeking; otherwise, false.
         _property<bool, _readonly> CanSeek {
           _get {return this->GetCanSeek();}
         };
-
+        
         /// @brief Gets a value that determines whether the current stream can time out.
         /// @return A value that determines whether the current stream can time out.
         /// @remarks The CanTimeout() function always returns false. Some stream implementations require different behavior, such as NetworkStream, which times out if network connectivity is interrupted or lost. If you are implementing a stream that must be able to time out, this property should be overridden to return true.
         _property<bool, _readonly> CanTimeout {
           _get {return this->GetCanTimeout();}
         };
-
+        
         /// @brief When overridden in a derived class, gets a value indicating whether the current
         /// stream supports writing.
         /// @return true if the stream supports writing; otherwise, false.
         _property<bool, _readonly> CanWrite {
           _get {return this->GetCanWrite();}
         };
-
+        
         /// @brief When overridden in a derived class, gets the length in bytes of the stream.
         /// @param length The desired length of the current stream in bytes.
         /// @return A long value representing the length of the stream in bytes.
@@ -70,7 +70,7 @@ namespace Switch {
           _get {return this->GetLength();},
           _set {this->SetLength(value);}
         };
-
+        
         /// @brief When overridden in a derived class, gets the position within the current stream.
         /// @param position the position within the stream
         /// @return The current position within the stream.
@@ -78,7 +78,7 @@ namespace Switch {
           _get {return this->GetPosition();},
           _set {this->SetPosition(value);}
         };
-
+        
         /// @brief Gets a value, in miliseconds, that determines how long the stream will attempt to read before timing out.
         /// @param readTimeout A value, in miliseconds, that determines how long the stream will attempt to read before timing out
         /// @return A value, in miliseconds, that determines how long the stream will attempt to read before timing out.
@@ -86,7 +86,7 @@ namespace Switch {
           _get {return this->GetReadTimeout();},
           _set {this->SetReadTimeout(value);}
         };
-
+        
         /// @brief Gets a value, in miliseconds, that determines how long the stream will attempt to write before timing out.
         /// @param writeTimeout A value, in miliseconds, that determines how long the stream will attempt to write before timing out
         /// @return A value, in miliseconds, that determines how long the stream will attempt to write before timing out.
@@ -100,7 +100,7 @@ namespace Switch {
         _property<bool, _readonly> IsClosed {
           _get {return this->GetIsClosed();}
         };
-
+        
         /// @brief Begins an asynchronous read operation.
         /// @param buffer The buffer to read the data into.
         /// @param offset The byte offset in buffer at which to begin writing data read from the stream.
@@ -111,7 +111,7 @@ namespace Switch {
         IAsyncResult& BeginRead(byte buffer[], int32 offset, int32 count, void (*callback)(const IAsyncResult&), const object& state) {
           return BeginRead(buffer, offset, count, AsyncCallback(callback), state);
         }
-
+        
         /// @brief Begins an asynchronous read operation.
         /// @param buffer The buffer to read the data into.
         /// @param offset The byte offset in buffer at which to begin writing data read from the stream.
@@ -123,7 +123,7 @@ namespace Switch {
         IAsyncResult& BeginRead(byte buffer[], int32 offset, int32 count, const T& caller, void (T::*callback)(const IAsyncResult&), const object& state) {
           return BeginRead(buffer, offset, count, AsyncCallback(caller, callback), state);
         }
-
+        
         /// @brief Begins an asynchronous read operation.
         /// @param buffer The buffer to read the data into.
         /// @param offset The byte offset in buffer at which to begin writing data read from the stream.
@@ -131,11 +131,11 @@ namespace Switch {
         /// @param asyncCallback An optional asynchronous callback, to be called when the read is complete.
         /// @param state A user-provided object that distinguishes this particular asynchronous read request from other requests.
         /// @return IAsyncResult An IAsyncResult that represents the asynchronous read, which could still be pending.
-        virtual IAsyncResult& BeginRead(byte [], int32, int32, const AsyncCallback& , const object& state) {
+        virtual IAsyncResult& BeginRead(byte [], int32, int32, const AsyncCallback&, const object& state) {
           this->asyncResult = AsyncResult(state);
           return this->asyncResult;
         }
-
+        
         /// @brief Begins an asynchronous write operation.
         /// @param buffer The buffer to write data from.
         /// @param offset The byte offset in buffer from which to begin writing.
@@ -146,7 +146,7 @@ namespace Switch {
         IAsyncResult& BeginWrite(const byte buffer[], int32 offset, int32 count, void (*callback)(const IAsyncResult&), const object& state) {
           return BeginWrite(buffer, offset, count, AsyncCallback(callback), state);
         }
-
+        
         /// @brief Begins an asynchronous write operation.
         /// @param buffer The buffer to write data from.
         /// @param offset The byte offset in buffer from which to begin writing.
@@ -158,7 +158,7 @@ namespace Switch {
         IAsyncResult& BeginWrite(const byte buffer[], int32 offset, int32 count, const T& caller, void (T::*callback)(const IAsyncResult&), const object& state) {
           return BeginWrite(buffer, offset, count, AsyncCallback(caller, callback), state);
         }
-
+        
         /// @brief Begins an asynchronous write operation.
         /// @param buffer The buffer to write data from.
         /// @param offset The byte offset in buffer from which to begin writing.
@@ -169,25 +169,25 @@ namespace Switch {
         virtual IAsyncResult& BeginWrite(const byte [], int32, int32, const AsyncCallback&, const object& state) {
           this->asyncResult = AsyncResult(state); return this->asyncResult;
         }
-
+        
         /// @brief Closes the current stream and releases any resources (such as sockets and file handles) associated with the current stream.
         virtual void Close() {
           Flush();
           this->closed = true;
         }
-
+        
         /// @brief Waits for the pending asynchronous read to complete.
         /// @param asyncResult A reference to the outstanding asynchronous I/O request.
         virtual int32 EndRead(const IAsyncResult&) {return 0;}
-
+        
         /// @brief Ends an asynchronous write operation.
         /// @param asyncResult The reference to the pending asynchronous request to finish.
         virtual void EndWrite(const IAsyncResult&) {}
-
+        
         /// @brief When overridden in a derived class, clears all buffers for this stream and
         /// causes any buffered data to be written to the underlying device.
         virtual void Flush() {}
-
+        
         /// @brief When overridden in a derived class, reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
         /// @param buffer An array of bytes. When this method returns, the buffer contains the specified byte array with the values between offset and (offset + count - 1) replaced by the bytes read from the current source.
         /// @param bufferLength The length of buffer. (Total number of elements).
@@ -201,7 +201,7 @@ namespace Switch {
         /// @exception NotSupportedException The stream does not support reading.
         /// @exception IOException An I/O error occurs.
         virtual int32 Read(Array<byte>& buffer, int32 offset, int32 count) = 0;
-
+        
         /// @brief Reads a byte from the stream and advances the position within the stream
         /// by one byte, or returns -1 if at the end of the stream.
         /// @return The unsigned byte cast to an int32, or -1 if at the end of the stream.
@@ -209,18 +209,18 @@ namespace Switch {
         /// @exception NotSupportedException The stream does not support reading.
         /// @exception IO::IOException An I/O error occurs.
         virtual int32 ReadByte();
-
+        
         /// @brief When overridden in a derived class, sets the position within the current stream.
         /// @param offset A byte offset relative to the origin parameter.
         /// @param origin A value of type SeekOrigin indicating the reference point used to obtain the new position
         /// @return The new position within the current stream.
         virtual int64 Seek(int64 offset, System::IO::SeekOrigin origin) = 0;
-
+        
         /// @brief Creates a thread-safe (synchronized) wrapper around the specified Stream object.
         /// @param stream The Stream object to synchronize.
         /// @return Stream A thread-safe Stream object.
         static Stream& Synchronised(Stream& stream);
-
+        
         /// @brief When overridden in a derived class, writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
         /// @param buffer An array of bytes. This method copies count bytes from buffer to the current stream.
         /// @param bufferLength The length of buffer. (Total number of elements).
@@ -233,7 +233,7 @@ namespace Switch {
         /// @exception NotSupportedException The stream does not support writing.
         /// @exception IO::IOException An I/O error occurs.
         virtual void Write(const Array<byte>& buffer, int32 offset, int32 count) = 0;
-
+        
         /// @brief Writes a byte to the current position in the stream and advances the position
         /// within the stream by one byte.
         /// @param value The byte to write to the stream.
@@ -241,7 +241,7 @@ namespace Switch {
         /// @exception NotSupportedException The stream does not support writing.
         /// @exception IO::IOException An I/O error occurs.
         virtual void WriteByte(byte value);
-
+        
       protected:
         /// @brief When overridden in a derived class, gets a value indicating whether the current
         /// stream supports reading.
@@ -301,40 +301,40 @@ namespace Switch {
         virtual bool GetIsClosed() const {return this->closed;}
         
         Stream(object& lock) : lock(&lock) {}
-
+        
         Stream(int32 readTimeout, int32 writeTimeout) : readTimeout(readTimeout), writeTimeout(writeTimeout) {}
-
+        
         Stream(object& lock, int32 readTimeout, int32 writeTimeout) : lock(&lock), readTimeout(readTimeout), writeTimeout(writeTimeout) {}
-
+        
         const object& GetLock() const {return *this->lock;}
-
+        
       private:
         class AsyncResult : public object, public IAsyncResult {
-
+        
         public:
           AsyncResult() { }
           AsyncResult(const object& state) : state(const_cast<object*>(&state)) { }
           AsyncResult(const AsyncResult& ar) : state(ar.state) { }
           AsyncResult& operator =(const AsyncResult& ar) {this->state = ar.state; return *this;}
-
+          
           virtual const object& GetAsyncState() const {
             static object o;
             return o;
           }
-
+          
           virtual const Threading::WaitHandle& GetAsyncWaitHandle() const {
             static Threading::AutoResetEvent e(true);
             return e;
           }
-
+          
           virtual bool GetCompletedSynchronously() const {return true;}
-
+          
           virtual bool GetIsCompleted() const {return true;};
-
+          
         private:
           object* state = null;
         };
-
+        
         AsyncResult asyncResult;
         object* lock = null;
         int32 readTimeout = 0;
@@ -366,7 +366,7 @@ namespace Switch {
 inline System::IO::Stream& operator<<(System::IO::Stream& stream, const string& value) {
   static System::Text::UTF8Encoding utf8Encoding(false);
   System::Array<byte> bytes = utf8Encoding.GetBytes(value);
-  if ( bytes.Length != 0)
+  if(bytes.Length != 0)
     stream.Write(bytes, 0,  bytes.Length);
   return stream;
 }

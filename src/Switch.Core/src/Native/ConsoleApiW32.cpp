@@ -20,8 +20,8 @@ void Native::ConsoleApi::Beep(int32 frequency, int32 duration) {
 
 void Native::ConsoleApi::Clrscr() {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
-  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE),&csbi);
-
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+  
   const COORD coord = {0, 0};
   DWORD nbCharsWritten = 0;
   FillConsoleOutputAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes, csbi.dwSize.X * csbi.dwSize.Y, coord, &nbCharsWritten);
@@ -146,9 +146,9 @@ void Native::ConsoleApi::ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool
   INPUT_RECORD inputRecord;
   do {
     DWORD nbEventsRead = 0;
-    ReadConsoleInput( GetStdHandle(STD_INPUT_HANDLE), &inputRecord, 1, &nbEventsRead);
-  } while (!(inputRecord.EventType == KEY_EVENT && (inputRecord.Event.KeyEvent.bKeyDown == 1 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x10 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x11 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x12)));
-
+    ReadConsoleInput(GetStdHandle(STD_INPUT_HANDLE), &inputRecord, 1, &nbEventsRead);
+  } while(!(inputRecord.EventType == KEY_EVENT && (inputRecord.Event.KeyEvent.bKeyDown == 1 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x10 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x11 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x12)));
+  
   keyChar = inputRecord.Event.KeyEvent.uChar.AsciiChar;
   keyCode = inputRecord.Event.KeyEvent.wVirtualKeyCode;
   alt = (inputRecord.Event.KeyEvent.dwControlKeyState & LEFT_ALT_PRESSED) == LEFT_ALT_PRESSED || (inputRecord.Event.KeyEvent.dwControlKeyState & RIGHT_ALT_PRESSED) == RIGHT_ALT_PRESSED;
@@ -163,7 +163,7 @@ bool Native::ConsoleApi::ResetColor() {
 bool Native::ConsoleApi::SetBackgroundColor(ConsoleColor color) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-
+  
   csbi.wAttributes &= 0xFF0F;
   csbi.wAttributes |= (int32)color << 4;
   return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes) == TRUE;
@@ -200,7 +200,7 @@ bool Native::ConsoleApi::SetCursorTop(int32 top) {
 void Native::ConsoleApi::SetCursorSize(int32 size) {
   CONSOLE_CURSOR_INFO cci;
   GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cci);
-
+  
   cci.dwSize = size;
   SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cci);
 }
@@ -220,7 +220,7 @@ void Native::ConsoleApi::SetEchoVisible(bool visible) {
 bool Native::ConsoleApi::SetForegroundColor(ConsoleColor color) {
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-
+  
   csbi.wAttributes &= 0xFFF0;
   csbi.wAttributes |= (int32)color;
   return SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes) == TRUE;

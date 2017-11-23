@@ -26,7 +26,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::UriKind> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::UriKind::RelativeOrAbsolute, "RelativeOrAbsolute"}, {(int64)System::UriKind::Absolute, "Absolute"}, {(int64)System::UriKind::Relative, "Relative"}};
     flags = false;
   }

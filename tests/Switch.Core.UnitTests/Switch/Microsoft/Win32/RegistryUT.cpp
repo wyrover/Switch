@@ -7,7 +7,7 @@ using namespace System;
 namespace {
   class RegistryUT : public testing::Test {
   protected:
-    
+  
     void SetUp() override {
       Registry::CurrentUser().DeleteSubKeyTree("UnitTest", false);
     }

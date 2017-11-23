@@ -39,7 +39,7 @@ namespace ManualTests {
   class _TestFixture(Test2) {
     void _OneTimeSetUp(OneTimeInit) {
     }
-
+    
     void _OneTimeTearDown(OneTimeCleanup) {
     }
     
@@ -67,7 +67,7 @@ namespace ManualTests {
     
     void _OneTimeTearDown(OneTimeCleanup) {
     }
-
+    
     void _Test(TestCase1) {
     }
   };
@@ -78,13 +78,13 @@ namespace ManualTests {
     
     void _OneTimeTearDown(OneTimeCleanup) {
     }
-
+    
     void _Test(TestCase2) {
     }
   };
-
+  
   _AddTestFixture(Test4);
-
+  
   class MainTest {
   public:
     static void Main(const Array<string>& args) {

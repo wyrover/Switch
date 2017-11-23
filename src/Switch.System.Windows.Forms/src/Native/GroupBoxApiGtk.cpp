@@ -24,7 +24,7 @@ namespace Native {
     }
     
     const Gtk::Container& Container() const override {return this->fixed;}
-   
+    
     Gtk::Container& Container() override {return this->fixed;}
     
     void Text(const string& text) override {this->set_label(text.c_str());}

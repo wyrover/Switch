@@ -28,7 +28,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::UriPartial> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::UriPartial::Scheme, "Scheme"}, {(int64)System::UriPartial::Authority, "Authority"}, {(int64)System::UriPartial::Path, "Path"}, {(int64)System::UriPartial::Query, "Query"}};
     flags = false;
   }

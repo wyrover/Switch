@@ -29,19 +29,19 @@ namespace Switch {
       _property<const Object&, _readonly> AsyncState {
         _get->const object& {return this->GetAsyncState();}
       };
-
+      
       /// @brief Gets a WaitHandle that is used to wait for an asynchronous operation to complete.
       /// @return A WaitHandle that is used to wait for an asynchronous operation to complete.
       _property<const System::Threading::WaitHandle&, _readonly> AsyncWaitHandle {
         _get->const System::Threading::WaitHandle& {return this->GetAsyncWaitHandle();}
       };
-
+      
       /// @brief Gets an indication of whether the asynchronous operation completed synchronously.
       /// @return true if the asynchronous operation completed synchronously; otherwise, false.
       _property<bool, _readonly> CompletedSynchronously {
         _get {return this->GetCompletedSynchronously();}
       };
-
+      
       /// @brief Gets an indication whether the asynchronous operation has completed.
       /// @return true if the operation is complete; otherwise, false.
       _property<bool, _readonly> IsCompleted {

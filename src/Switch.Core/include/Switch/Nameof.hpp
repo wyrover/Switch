@@ -30,7 +30,7 @@ namespace Switch {
   /// }
   /// @endcode
   /// @ingroup Keywords
-  #define _nameof(value) \
+#define _nameof(value) \
   System::String(#value)
 }
 

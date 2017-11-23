@@ -16,19 +16,19 @@ void ProgressBar::CreateHandle() {
 }
 
 void ProgressBar::SetMarqueeAnimationSpeed(int32 marqueeAnimationSpeed) {
-  if (marqueeAnimationSpeed < 0)
+  if(marqueeAnimationSpeed < 0)
     throw ArgumentOutOfRangeException(_caller);
-  if (this->marqueeAnimationSpeed != marqueeAnimationSpeed) {
+  if(this->marqueeAnimationSpeed != marqueeAnimationSpeed) {
     this->marqueeAnimationSpeed = marqueeAnimationSpeed;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::ProgressBarApi::SetMarquee(*this);
   }
 }
 
 void ProgressBar::SetMaximum(int32 maximum) {
-  if (this->maximum != maximum) {
+  if(this->maximum != maximum) {
     this->maximum = maximum;
-    if (this->IsHandleCreated) {
+    if(this->IsHandleCreated) {
       Native::ProgressBarApi::SetMaximum(*this);
       Native::ProgressBarApi::SetValue(*this);
     }
@@ -36,9 +36,9 @@ void ProgressBar::SetMaximum(int32 maximum) {
 }
 
 void ProgressBar::SetMinimum(int32 minimum) {
-  if (this->minimum != minimum) {
+  if(this->minimum != minimum) {
     this->minimum = minimum;
-    if (this->IsHandleCreated) {
+    if(this->IsHandleCreated) {
       Native::ProgressBarApi::SetMinimum(*this);
       Native::ProgressBarApi::SetValue(*this);
     }
@@ -46,17 +46,17 @@ void ProgressBar::SetMinimum(int32 minimum) {
 }
 
 void ProgressBar::SetProgressStyle(ProgressBarStyle style) {
-  if (this->style != style) {
+  if(this->style != style) {
     this->style = style;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::ProgressBarApi::SetMarquee(*this);
   }
 }
 
 void ProgressBar::SetValue(int32 value) {
-  if (this->value != value) {
+  if(this->value != value) {
     this->value = value;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::ProgressBarApi::SetValue(*this);
   }
 }

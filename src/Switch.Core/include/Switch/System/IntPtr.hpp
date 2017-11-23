@@ -31,62 +31,62 @@ namespace Switch {
       /// @brief Create a new instance of class IntPtr
       /// @remarks IntPtr is initialized by default to null.
       IntPtr() {}
-
+      
       /// @brief Create a new instance of class IntPtr
       /// @param value A pointer or handle contained in a 32-bit signed integer.
       IntPtr(const Int32& value);
-
+      
       /// @brief Create a new instance of class IntPtr
       /// @param value A pointer or handle contained in a 64-bit signed integer.
       /// @exception OverflowException On a 32-bit platform, value is too large or too small to represent as an IntPtr
       IntPtr(const Int64& value);
-
+      
       /// @brief Create a new instance of class IntPtr
       /// @param value A pointer to an unspecified type.
       IntPtr(intptr value);
-
+      
       /// @brief Determines whether this instance of IntPtr and a specified object, which must also be a IntPtr object, have the same value.
       /// @param value The IntPtr to compare with the current object.
       /// @return bool true if the specified value is equal to the current object. otherwise, false.
       bool Equals(const IntPtr& value) const;
-
+      
       /// @brief Determines whether this instance of IntPtr and a specified object, which must also be a IntPtr object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       bool Equals(const object& obj) const override;
-
+      
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
       int32 GetHashCode() const override;
-
+      
       /// @brief Converts the value of this instance to a 32-bit signed integer.
       /// @return Int32 A 32-bit signed integer equal to the value of this instance.
       /// @exception OverflowException On a 64-bit platform, the value of this instance is too large or too small to represent as a 32-bit signed integer.
       int32 ToInt32() const;
-
+      
       /// @brief Converts the value of this instance to a 64-bit signed integer.
       /// @return Int64 A 64-bit signed integer equal to the value of this instance.
       int64 ToInt64() const;
-
+      
       /// @brief Converts the value of this instance to a pointer to an unspecified type.
       /// @return void* A pointer to void; that is, a pointer to memory containing data of an unspecified type.
       void* ToPointer() const;
-
+      
       /// @brief Converts the numeric value of the current IntPtr object to its equivalent String representation.
       /// @return const String The String representation of the value of this instance.
       String ToString() const override;
-
+      
       /// @brief Converts the numeric value of the current IntPtr object to its equivalent String representation.
       /// @param format Format-control String.
       /// @return String The String representation of the value of the current IntPtr object.
       String ToString(const String& format) const;
-
+      
       /// @brief Returns a String that represents the current IntPtr.
       /// @param format Format-control String.
       /// @param formatProvider an IFormatProvider for specifie the format.
       /// @return String A String that represents the current IntPtr.
       String ToString(const String& format, const IFormatProvider& formatProvider) const override;
-
+      
       /// @brief Compares this instance to a specified Int32 object and returns an indication of their relative values.
       /// @param value An Int32 object to compare with this instance.
       /// @return Int32 A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings:
@@ -94,7 +94,7 @@ namespace Switch {
       /// Zero                This instance is equal to value.
       /// Greater than zero   This instance is greater than value.
       int32 CompareTo(const IntPtr& value) const;
-
+      
       /// @brief Compares the current instance with another object of the same type.
       /// @param obj An object to compare with this instance.
       /// @return Int32 A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings:
@@ -104,19 +104,19 @@ namespace Switch {
       /// -or-
       /// obj is nullNothingnullptra null reference.
       int32 CompareTo(const IComparable& obj) const override;
-
+      
     private:
       friend class String;
-
+      
       intptr value = 0;
-
+      
     public:
       /// @cond
       IntPtr(const IntPtr& value) : value(value.value) {}
       operator intptr() const;
       IntPtr& operator =(const IntPtr& value);
       /// @endcond
-   };
+    };
   }
 }
 

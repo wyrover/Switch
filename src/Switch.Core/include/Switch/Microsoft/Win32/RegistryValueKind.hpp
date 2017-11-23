@@ -37,7 +37,7 @@ namespace Switch {
 template<>
 class EnumToStrings<Microsoft::Win32::RegistryValueKind> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)Microsoft::Win32::RegistryValueKind::Unknown, "Unknown"}, {(int64)Microsoft::Win32::RegistryValueKind::String, "String"}, {(int64)Microsoft::Win32::RegistryValueKind::ExpandString, "ExpandString"}, {(int64)Microsoft::Win32::RegistryValueKind::Binary, "Binary"}, {(int64)Microsoft::Win32::RegistryValueKind::DWord, "DWord"}, {(int64)Microsoft::Win32::RegistryValueKind::MultiString, "MultiString"}, {(int64)Microsoft::Win32::RegistryValueKind::QWord, "QWord"}, {(int64)Microsoft::Win32::RegistryValueKind::None, "None"}};
     flags = false;
   }

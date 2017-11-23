@@ -13,9 +13,9 @@ void Button::CreateHandle() {
 }
 
 void Button::SetIsDefault(bool isDefault) {
-  if (this->isDefault != isDefault) {
+  if(this->isDefault != isDefault) {
     this->isDefault = isDefault;
-    if (this->IsHandleCreated)
+    if(this->IsHandleCreated)
       Native::ButtonApi::SetIsDefault(*this);
   }
 }

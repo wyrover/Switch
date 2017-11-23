@@ -26,7 +26,7 @@ namespace {
       tcgetattr(0, &this->initialSettings);
       
       this->newSettings = this->initialSettings;
-      this->newSettings.c_lflag &= ~(ICANON|ECHO);
+      this->newSettings.c_lflag &= ~(ICANON | ECHO);
       this->newSettings.c_cc[VMIN] = 1;
       this->newSettings.c_cc[VTIME] = 0;
       tcsetattr(0, TCSANOW, &this->newSettings);
@@ -36,24 +36,24 @@ namespace {
     
     int32 Getch() {
       sbyte character = this->peekCharacter;
-      if (this->peekCharacter != -1) {
+      if(this->peekCharacter != -1) {
         this->peekCharacter = -1;
         return character;
       }
       
-      while (read(0, &character, 1) != 1);
+      while(read(0, &character, 1) != 1);
       return character;
     }
     
     bool KeyAvailable() {
-      if (this->peekCharacter != -1)
+      if(this->peekCharacter != -1)
         return true;
-      
+        
       this->newSettings.c_cc[VMIN] = 0;
       tcsetattr(0, TCSANOW, &newSettings);
       
-      while (read(0, &this->peekCharacter, 1) != 1);
-
+      while(read(0, &this->peekCharacter, 1) != 1);
+      
       this->newSettings.c_cc[VMIN] = 1;
       tcsetattr(0, TCSANOW, &this->newSettings);
       
@@ -62,9 +62,9 @@ namespace {
     
     static bool IsAnsiSupported() {
       static std::string terminal = getenv("TERM") == null ? "" : getenv("TERM");
-      return isatty(fileno(stdout)) && (terminal == "xterm" ||terminal == "xterm-color" || terminal == "xterm-256color" || terminal == "screen" || terminal == "screen-256color" || terminal == "linux" || terminal == "cygwin");
+      return isatty(fileno(stdout)) && (terminal == "xterm" || terminal == "xterm-color" || terminal == "xterm-256color" || terminal == "screen" || terminal == "screen-256color" || terminal == "linux" || terminal == "cygwin");
     }
-
+    
   private:
     termios initialSettings;
     termios newSettings;
@@ -106,7 +106,7 @@ namespace {
       
       void Add(int32 c) {this->chars.push_back(c);}
       void AddFront(int32 c) {this->chars.push_front(c);}
-      void Remove (int32 c) {this->chars.remove(c);}
+      void Remove(int32 c) {this->chars.remove(c);}
       int32 Count() const {return static_cast<int32>(this->chars.size());}
       int32 Pop() { int32 c = this->chars.front();  this->chars.erase(this->chars.begin()); return c;}
       void Clear() {this->chars.clear();}
@@ -116,8 +116,8 @@ namespace {
       std::string ToString() const {
         std::stringstream result;
         std::list<int32>::const_iterator iterator = this->chars.begin();
-        while (iterator != this->chars.end()) {
-          if (char(*iterator & 0xFF) == 27)
+        while(iterator != this->chars.end()) {
+          if(char(*iterator & 0xFF) == 27)
             result << "^[";
           else
             result << char(*iterator & 0xFF);
@@ -129,8 +129,8 @@ namespace {
       static InputList Parse(const std::string& value) {
         InputList result;
         std::string::const_iterator iterator = value.begin();
-        while (iterator != value.end()) {
-          if (*iterator == '^' &&  *(iterator+1) == '[') {
+        while(iterator != value.end()) {
+          if(*iterator == '^' &&  *(iterator + 1) == '[') {
             result.chars.push_back(27);
             iterator++;
           } else
@@ -158,25 +158,25 @@ namespace {
     static bool KeyAvailable() {return !inputs.IsEmpty() || terminal.KeyAvailable();}
     
     static KeyInfo Read() {
-      if (!inputs.IsEmpty())
+      if(!inputs.IsEmpty())
         return ToKeyInfo(inputs.Pop());
-
+        
       do
         inputs.Add(terminal.Getch());
-      while (terminal.KeyAvailable());
-
-      if (KeyInfo::keys.find(inputs.ToString()) != KeyInfo::keys.end()) {
+      while(terminal.KeyAvailable());
+      
+      if(KeyInfo::keys.find(inputs.ToString()) != KeyInfo::keys.end()) {
         std::string str = inputs.ToString();
         inputs.Clear();
         return KeyInfo(KeyInfo::keys[str].key, KeyInfo::keys[str].keyChar, false, false, KeyInfo::keys[str].shift);
       }
       
-      if (inputs.Count() == 1)
+      if(inputs.Count() == 1)
         return ToKeyInfo(inputs.Pop());
-      
-      if (inputs.Count() > 1 && *inputs.begin() != 27)
+        
+      if(inputs.Count() > 1 && *inputs.begin() != 27)
         return ToKeyInfo(ToKey(inputs));
- 
+        
       inputs.Pop();
       return ToKeyInfo(inputs.Pop(), true);
     }
@@ -207,123 +207,123 @@ namespace {
     static int32 ToKey(InputList& inputs) {
       int32 key = 0;
       int32 index = 1;
-      for (auto c : inputs)
-        key |= (c & 0xFF) << (8*index--);
+      for(auto c : inputs)
+        key |= (c & 0xFF) << (8 * index--);
       inputs.Clear();
       return key;
     }
-  
+    
     static KeyInfo ToKeyInfo(int32 key) {
       return ToKeyInfo(key, false);
     }
     
     static KeyInfo ToKeyInfo(int32 key, bool alt) {
       // Ctrl + Space
-      if (key == 0)
+      if(key == 0)
         return KeyInfo(' ', ' ', false, true, false);
-      
+        
       // Ctrl + [a; z]
-      if ((key >= 1 && key <= 7) || (key >= 10 && key <= 11) || (key >= 14 && key <= 18) || (key >= 20 && key<= 26))
+      if((key >= 1 && key <= 7) || (key >= 10 && key <= 11) || (key >= 14 && key <= 18) || (key >= 20 && key <= 26))
         return KeyInfo(key + 'A' - 1, key, false, true, false);
-      
-      switch (key) {
-        case 50086 : return KeyInfo(0, U'æ', alt, false, false);
-        case 50054 : return KeyInfo(0, U'Æ', alt, false, false);
-        case 50079 : return KeyInfo(0, U'ß', alt, false, false);
-        case -1426005368 : return KeyInfo(0, U'∫', alt, false, false);
-        case 49833 : return KeyInfo(0, U'©', alt, false, false);
-        case 49826 : return KeyInfo(0, U'¢', alt, false, false);
-        case -2113871224 : return KeyInfo(0, U'∂', alt, false, false);
-        case -2046762360 : return KeyInfo(0, U'∆', alt, false, false);
-        case 50090 : return KeyInfo(0, U'ê', alt, false, false);
-        case 50058 : return KeyInfo(0, U'Ê', alt, false, false);
-        case 50834 : return KeyInfo(0, U'ƒ', alt, false, false);
-        case 49847 : return KeyInfo(0, U'·', alt, false, false);
-        case -2130645076 : return KeyInfo(0, U'ﬁ', alt, false, false);
-        case -2113867860 : return KeyInfo(0, U'ﬂ', alt, false, false);
-        case 50060 : return KeyInfo(0, U'Ì', alt, false, false);
-        case 50062 : return KeyInfo(0, U'Î', alt, false, false);
-        case 50094 : return KeyInfo(0, U'î', alt, false, false);
-        case 50095 : return KeyInfo(0, U'ï', alt, false, false);
-        case 50063 : return KeyInfo(0, U'Ï', alt, false, false);
-        case 50061 : return KeyInfo(0, U'Í', alt, false, false);
-        case 50056 : return KeyInfo(0, U'È', alt, false, false);
-        case 50059 : return KeyInfo(0, U'Ë', alt, false, false);
-        case 49836 : return KeyInfo(0, U'¬', alt, false, false);
-        case 49845 : return KeyInfo(0, U'µ', alt, false, false);
-        case 50067 : return KeyInfo(0, U'Ó', alt, false, false);
-        case 50353 : return KeyInfo(0, U'ı', alt, false, false);
-        case 50579 : return KeyInfo(0, U'œ', alt, false, false);
-        case 50578 : return KeyInfo(0, U'Œ', alt, false, false);
-        case 53120 : return KeyInfo(0, U'π', alt, false, false);
-        case -1895767416 : return KeyInfo(0, U'∏', alt, false, false);
-        case -1593777536 : return KeyInfo(0, U'‡', alt, false, false);
-        case 52905 : return KeyInfo(0, U'Ω', alt, false, false);
-        case 49838 : return KeyInfo(0, U'®', alt, false, false);
-        case -1577000316 : return KeyInfo(0, U'‚', alt, false, false);
-        case 50066 : return KeyInfo(0, U'Ò', alt, false, false);
-        case -1862212984 : return KeyInfo(0, U'∑', alt, false, false);
-        case -1610554752 : return KeyInfo(0, U'†', alt, false, false);
-        case -1711218048 : return KeyInfo(0, U'™', alt, false, false);
-        case 49850 : return KeyInfo(0, U'º', alt, false, false);
-        case 49834 : return KeyInfo(0, U'ª', alt, false, false);
-        case -1979653481 : return KeyInfo(0, U'◊', alt, false, false);
-        case -1711218040 : return KeyInfo(0, U'√', alt, false, false);
-        case -1191124352 : return KeyInfo(0, U'‹', alt, false, false);
-        case -1174347136 : return KeyInfo(0, U'›', alt, false, false);
-        case -2013207927 : return KeyInfo(0, U'≈', alt, false, false);
-        case -2080316799 : return KeyInfo(0, U'⁄', alt, false, false);
-        case 50074 : return KeyInfo(0, U'Ú', alt, false, false);
-        case 50616 : return KeyInfo(0, U'Ÿ', alt, false, false);
-        case 50050 : return KeyInfo(0, U'Â', alt, false, false);
-        case 50053 : return KeyInfo(0, U'Å', alt, false, false);
-        case 50089 : return KeyInfo(0, U'é', alt, false, false);
-        case 49831 : return KeyInfo(0, U'§', alt, false, false);
-        case 50088 : return KeyInfo(0, U'è', alt, false, false);
-        case 50087 : return KeyInfo(0, U'ç', alt, false, false);
-        case 50080 : return KeyInfo(0, U'à', alt, false, false);
-        case 49840 : return KeyInfo(0, U'°', alt, false, false);
-        case 50105 : return KeyInfo(0, U'ù', alt, false, false);
-        case 49827 : return KeyInfo(0, U'£', alt, false, false);
-        case -1577000320 : return KeyInfo(0, U'•', alt, false, false);
-        case -1090457693 : return KeyInfo(0, U'', alt, false, false);
-        case 49844 : return KeyInfo(0, U'´', alt, false, false);
-        case 50091 : return KeyInfo(0, U'ë', alt, false, false);
-        case -1644109184 : return KeyInfo(0, U'„', alt, false, false);
-        case -1677663616 : return KeyInfo(0, U'“', alt, false, false);
-        case -1660886400 : return KeyInfo(0, U'”', alt, false, false);
-        case -1744772480 : return KeyInfo(0, U'‘', alt, false, false);
-        case -1727995264 : return KeyInfo(0, U'’', alt, false, false);
-        case 49846 : return KeyInfo(0, U'¶', alt, false, false);
-        case 50085 : return KeyInfo(0, U'å', alt, false, false);
-        case 49835 : return KeyInfo(0, U'«', alt, false, false);
-        case 49851 : return KeyInfo(0, U'»', alt, false, false);
-        case 49825 : return KeyInfo(0, U'¡', alt, false, false);
-        case 50075 : return KeyInfo(0, U'Û', alt, false, false);
-        case 50055 : return KeyInfo(0, U'Ç', alt, false, false);
-        case 50049 : return KeyInfo(0, U'Á', alt, false, false);
-        case 50104 : return KeyInfo(0, U'ø', alt, false, false);
-        case 50072 : return KeyInfo(0, U'Ø', alt, false, false);
-        case -1811881344 : return KeyInfo(0, U'—', alt, false, false);
-        case -1828658560 : return KeyInfo(0, U'–', alt, false, false);
-        case -1543445879 : return KeyInfo(0, U'≤', alt, false, false);
-        case -1526668663 : return KeyInfo(0, U'≥', alt, false, false);
-        case 50100 : return KeyInfo(0, U'ô', alt, false, false);
-        case 50068 : return KeyInfo(0, U'Ô', alt, false, false);
-        case -1409228158 : return KeyInfo(0, U'€', alt, false, false);
-        case 50073 : return KeyInfo(0, U'Ù', alt, false, false);
-        case -1342119296 : return KeyInfo(0, U'‰', alt, false, false);
-        case -1644109176 : return KeyInfo(0, U'∞', alt, false, false);
-        case 49855 : return KeyInfo(0, U'¿', alt, false, false);
-        case -1509891456 : return KeyInfo(0, U'…', alt, false, false);
-        case 50103 : return KeyInfo(0, U'÷', alt, false, false);
-        case -1610554743 : return KeyInfo(0, U'≠', alt, false, false);
-        case 49841 : return KeyInfo(0, U'±', alt, false, false);
+        
+      switch(key) {
+      case 50086 : return KeyInfo(0, U'æ', alt, false, false);
+      case 50054 : return KeyInfo(0, U'Æ', alt, false, false);
+      case 50079 : return KeyInfo(0, U'ß', alt, false, false);
+      case -1426005368 : return KeyInfo(0, U'∫', alt, false, false);
+      case 49833 : return KeyInfo(0, U'©', alt, false, false);
+      case 49826 : return KeyInfo(0, U'¢', alt, false, false);
+      case -2113871224 : return KeyInfo(0, U'∂', alt, false, false);
+      case -2046762360 : return KeyInfo(0, U'∆', alt, false, false);
+      case 50090 : return KeyInfo(0, U'ê', alt, false, false);
+      case 50058 : return KeyInfo(0, U'Ê', alt, false, false);
+      case 50834 : return KeyInfo(0, U'ƒ', alt, false, false);
+      case 49847 : return KeyInfo(0, U'·', alt, false, false);
+      case -2130645076 : return KeyInfo(0, U'ﬁ', alt, false, false);
+      case -2113867860 : return KeyInfo(0, U'ﬂ', alt, false, false);
+      case 50060 : return KeyInfo(0, U'Ì', alt, false, false);
+      case 50062 : return KeyInfo(0, U'Î', alt, false, false);
+      case 50094 : return KeyInfo(0, U'î', alt, false, false);
+      case 50095 : return KeyInfo(0, U'ï', alt, false, false);
+      case 50063 : return KeyInfo(0, U'Ï', alt, false, false);
+      case 50061 : return KeyInfo(0, U'Í', alt, false, false);
+      case 50056 : return KeyInfo(0, U'È', alt, false, false);
+      case 50059 : return KeyInfo(0, U'Ë', alt, false, false);
+      case 49836 : return KeyInfo(0, U'¬', alt, false, false);
+      case 49845 : return KeyInfo(0, U'µ', alt, false, false);
+      case 50067 : return KeyInfo(0, U'Ó', alt, false, false);
+      case 50353 : return KeyInfo(0, U'ı', alt, false, false);
+      case 50579 : return KeyInfo(0, U'œ', alt, false, false);
+      case 50578 : return KeyInfo(0, U'Œ', alt, false, false);
+      case 53120 : return KeyInfo(0, U'π', alt, false, false);
+      case -1895767416 : return KeyInfo(0, U'∏', alt, false, false);
+      case -1593777536 : return KeyInfo(0, U'‡', alt, false, false);
+      case 52905 : return KeyInfo(0, U'Ω', alt, false, false);
+      case 49838 : return KeyInfo(0, U'®', alt, false, false);
+      case -1577000316 : return KeyInfo(0, U'‚', alt, false, false);
+      case 50066 : return KeyInfo(0, U'Ò', alt, false, false);
+      case -1862212984 : return KeyInfo(0, U'∑', alt, false, false);
+      case -1610554752 : return KeyInfo(0, U'†', alt, false, false);
+      case -1711218048 : return KeyInfo(0, U'™', alt, false, false);
+      case 49850 : return KeyInfo(0, U'º', alt, false, false);
+      case 49834 : return KeyInfo(0, U'ª', alt, false, false);
+      case -1979653481 : return KeyInfo(0, U'◊', alt, false, false);
+      case -1711218040 : return KeyInfo(0, U'√', alt, false, false);
+      case -1191124352 : return KeyInfo(0, U'‹', alt, false, false);
+      case -1174347136 : return KeyInfo(0, U'›', alt, false, false);
+      case -2013207927 : return KeyInfo(0, U'≈', alt, false, false);
+      case -2080316799 : return KeyInfo(0, U'⁄', alt, false, false);
+      case 50074 : return KeyInfo(0, U'Ú', alt, false, false);
+      case 50616 : return KeyInfo(0, U'Ÿ', alt, false, false);
+      case 50050 : return KeyInfo(0, U'Â', alt, false, false);
+      case 50053 : return KeyInfo(0, U'Å', alt, false, false);
+      case 50089 : return KeyInfo(0, U'é', alt, false, false);
+      case 49831 : return KeyInfo(0, U'§', alt, false, false);
+      case 50088 : return KeyInfo(0, U'è', alt, false, false);
+      case 50087 : return KeyInfo(0, U'ç', alt, false, false);
+      case 50080 : return KeyInfo(0, U'à', alt, false, false);
+      case 49840 : return KeyInfo(0, U'°', alt, false, false);
+      case 50105 : return KeyInfo(0, U'ù', alt, false, false);
+      case 49827 : return KeyInfo(0, U'£', alt, false, false);
+      case -1577000320 : return KeyInfo(0, U'•', alt, false, false);
+      case -1090457693 : return KeyInfo(0, U'', alt, false, false);
+      case 49844 : return KeyInfo(0, U'´', alt, false, false);
+      case 50091 : return KeyInfo(0, U'ë', alt, false, false);
+      case -1644109184 : return KeyInfo(0, U'„', alt, false, false);
+      case -1677663616 : return KeyInfo(0, U'“', alt, false, false);
+      case -1660886400 : return KeyInfo(0, U'”', alt, false, false);
+      case -1744772480 : return KeyInfo(0, U'‘', alt, false, false);
+      case -1727995264 : return KeyInfo(0, U'’', alt, false, false);
+      case 49846 : return KeyInfo(0, U'¶', alt, false, false);
+      case 50085 : return KeyInfo(0, U'å', alt, false, false);
+      case 49835 : return KeyInfo(0, U'«', alt, false, false);
+      case 49851 : return KeyInfo(0, U'»', alt, false, false);
+      case 49825 : return KeyInfo(0, U'¡', alt, false, false);
+      case 50075 : return KeyInfo(0, U'Û', alt, false, false);
+      case 50055 : return KeyInfo(0, U'Ç', alt, false, false);
+      case 50049 : return KeyInfo(0, U'Á', alt, false, false);
+      case 50104 : return KeyInfo(0, U'ø', alt, false, false);
+      case 50072 : return KeyInfo(0, U'Ø', alt, false, false);
+      case -1811881344 : return KeyInfo(0, U'—', alt, false, false);
+      case -1828658560 : return KeyInfo(0, U'–', alt, false, false);
+      case -1543445879 : return KeyInfo(0, U'≤', alt, false, false);
+      case -1526668663 : return KeyInfo(0, U'≥', alt, false, false);
+      case 50100 : return KeyInfo(0, U'ô', alt, false, false);
+      case 50068 : return KeyInfo(0, U'Ô', alt, false, false);
+      case -1409228158 : return KeyInfo(0, U'€', alt, false, false);
+      case 50073 : return KeyInfo(0, U'Ù', alt, false, false);
+      case -1342119296 : return KeyInfo(0, U'‰', alt, false, false);
+      case -1644109176 : return KeyInfo(0, U'∞', alt, false, false);
+      case 49855 : return KeyInfo(0, U'¿', alt, false, false);
+      case -1509891456 : return KeyInfo(0, U'…', alt, false, false);
+      case 50103 : return KeyInfo(0, U'÷', alt, false, false);
+      case -1610554743 : return KeyInfo(0, U'≠', alt, false, false);
+      case 49841 : return KeyInfo(0, U'±', alt, false, false);
       }
-
-       if (KeyInfo::keys.find(std::string(1, toupper((char)key))) != KeyInfo::keys.end())
-         return KeyInfo(toupper(key), key, alt, false, key >= 'A' && key <= 'Z');
-
+      
+      if(KeyInfo::keys.find(std::string(1, toupper((char)key))) != KeyInfo::keys.end())
+        return KeyInfo(toupper(key), key, alt, false, key >= 'A' && key <= 'Z');
+        
       return KeyInfo(0, key, alt, false, key >= 'A' && key <= 'Z');
     }
     
@@ -503,13 +503,13 @@ const int32 KIOCSOUND = 0x4B2F;
 
 void Native::ConsoleApi::Beep(int32 frequency, int32 duration) {
   int32 fd = open("/dev/console", O_WRONLY);
-  if (fd == -1) {
+  if(fd == -1)
     printf("\a");
-  } else {
-    if (ioctl(fd, KIOCSOUND, (int32)(1193180/frequency)) < 0) {
+  else {
+    if(ioctl(fd, KIOCSOUND, (int32)(1193180 / frequency)) < 0)
       printf("\a");
-    } else {
-      usleep(1000*duration);
+    else {
+      usleep(1000 * duration);
       ioctl(fd, KIOCSOUND, 0);
     }
     close(fd);
@@ -517,7 +517,7 @@ void Native::ConsoleApi::Beep(int32 frequency, int32 duration) {
 }
 
 void Native::ConsoleApi::Clrscr() {
-  if (Terminal::IsAnsiSupported())
+  if(Terminal::IsAnsiSupported())
     printf("\x1b[H\x1b[2J");
 }
 
@@ -541,19 +541,19 @@ bool Native::ConsoleApi::GetCapsLock() {
 }
 
 int32 Native::ConsoleApi::GetCursorLeft() {
-  if (!Terminal::IsAnsiSupported())
+  if(!Terminal::IsAnsiSupported())
     return 0;
-
+    
   printf("\x1b[6n");
   fflush(stdout);
   terminal.Getch();
   terminal.Getch();
-
+  
   char c;
-  while ((c = terminal.Getch()) != ';');
-
+  while((c = terminal.Getch()) != ';');
+  
   std::string str;
-  while ((c = terminal.Getch()) != 'R')
+  while((c = terminal.Getch()) != 'R')
     str.push_back(c);
   return atoi(str.c_str()) - 1;
 }
@@ -563,21 +563,21 @@ int32 Native::ConsoleApi::GetCursorSize() {
 }
 
 int32 Native::ConsoleApi::GetCursorTop() {
-  if (!Terminal::IsAnsiSupported())
+  if(!Terminal::IsAnsiSupported())
     return 0;
-
+    
   printf("\x1b[6n");
   fflush(stdout);
   terminal.Getch();
   terminal.Getch();
-
+  
   char c;
   std::string str;
-  while ((c = terminal.Getch()) != ';')
+  while((c = terminal.Getch()) != ';')
     str.push_back(c);
+    
+  while((c = terminal.Getch()) != 'R');
   
-  while ((c = terminal.Getch()) != 'R');
-
   return atoi(str.c_str()) - 1;
 }
 
@@ -626,7 +626,7 @@ int32 Native::ConsoleApi::GetWindowLeft() {
 }
 
 int32 Native::ConsoleApi::GetWindowHeight() {
-  if (!Terminal::IsAnsiSupported())
+  if(!Terminal::IsAnsiSupported())
     return 24;
   int32 top = GetCursorTop();
   SetCursorTop(999);
@@ -641,7 +641,7 @@ int32 Native::ConsoleApi::GetWindowTop() {
 }
 
 int32 Native::ConsoleApi::GetWindowWidth() {
-  if (!Terminal::IsAnsiSupported())
+  if(!Terminal::IsAnsiSupported())
     return 80;
   int32 left = GetCursorLeft();
   SetCursorLeft(999);
@@ -664,7 +664,7 @@ void Native::ConsoleApi::ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool
 }
 
 bool Native::ConsoleApi::ResetColor() {
-  if (Terminal::IsAnsiSupported()) {
+  if(Terminal::IsAnsiSupported()) {
     printf("\033[49m");
     printf("\033[39m");
   }
@@ -672,9 +672,9 @@ bool Native::ConsoleApi::ResetColor() {
 }
 
 bool Native::ConsoleApi::SetBackgroundColor(ConsoleColor color) {
-  static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[40m"}, {(int32)ConsoleColor::DarkBlue, "\033[44m"}, {(int32)ConsoleColor::DarkGreen, "\033[42m"}, {(int32)ConsoleColor::DarkCyan, "\033[46m"}, {(int32)ConsoleColor::DarkRed, "\033[41m"}, {(int32)ConsoleColor::DarkMagenta, "\033[45m"}, {(int32)ConsoleColor::DarkYellow, "\033[43m"}, {(int32)ConsoleColor::Gray, "\033[47m"}, {(int32)ConsoleColor::DarkGray, "\033[100m"}, {(int32)ConsoleColor::Blue, "\033[104m"}, {(int32)ConsoleColor::Green, "\033[102m"}, {(int32)ConsoleColor::Cyan, "\033[106m"}, {(int32)ConsoleColor::Red, "\033[101m"}, {(int32)ConsoleColor::Magenta,"\033[105m"}, {(int32)ConsoleColor::Yellow, "\033[103m"}, {(int32)ConsoleColor::White,"\033[107m"}};
+  static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[40m"}, {(int32)ConsoleColor::DarkBlue, "\033[44m"}, {(int32)ConsoleColor::DarkGreen, "\033[42m"}, {(int32)ConsoleColor::DarkCyan, "\033[46m"}, {(int32)ConsoleColor::DarkRed, "\033[41m"}, {(int32)ConsoleColor::DarkMagenta, "\033[45m"}, {(int32)ConsoleColor::DarkYellow, "\033[43m"}, {(int32)ConsoleColor::Gray, "\033[47m"}, {(int32)ConsoleColor::DarkGray, "\033[100m"}, {(int32)ConsoleColor::Blue, "\033[104m"}, {(int32)ConsoleColor::Green, "\033[102m"}, {(int32)ConsoleColor::Cyan, "\033[106m"}, {(int32)ConsoleColor::Red, "\033[101m"}, {(int32)ConsoleColor::Magenta, "\033[105m"}, {(int32)ConsoleColor::Yellow, "\033[103m"}, {(int32)ConsoleColor::White, "\033[107m"}};
   backColor = color;
-  if (Terminal::IsAnsiSupported())
+  if(Terminal::IsAnsiSupported())
     printf("%s", colors[(int32)backColor].c_str());
   return true;
 }
@@ -690,20 +690,20 @@ bool Native::ConsoleApi::SetBufferWidth(int32 width) {
 }
 
 bool Native::ConsoleApi::SetCursorLeft(int32 left) {
-  if (Terminal::IsAnsiSupported())
+  if(Terminal::IsAnsiSupported())
     printf("\x1b[%d;%df", GetCursorTop() + 1, left + 1);
   return true;
 }
 
 bool Native::ConsoleApi::SetCursorTop(int32 top) {
-  if (Terminal::IsAnsiSupported())
+  if(Terminal::IsAnsiSupported())
     printf("\x1b[%d;%df", top + 1, GetCursorLeft() + 1);
   return true;
 }
 
 void Native::ConsoleApi::SetCursorSize(int32 size) {
-  if (Terminal::IsAnsiSupported()) {
-    if (size < 50)
+  if(Terminal::IsAnsiSupported()) {
+    if(size < 50)
       printf("\x1b[4 q");
     else
       printf("\x1b[2 q");
@@ -712,24 +712,24 @@ void Native::ConsoleApi::SetCursorSize(int32 size) {
 
 void Native::ConsoleApi::SetCursorVisible(bool visible) {
   cursorVisible = visible;
-  if (Terminal::IsAnsiSupported())
+  if(Terminal::IsAnsiSupported())
     printf(cursorVisible ? "\x1b[?25h" : "\x1b[?25l");
 }
 
 void Native::ConsoleApi::SetEchoVisible(bool visible) {
   termios settings;
   tcgetattr(0, &settings);
-  if (visible)
-    settings.c_lflag |= (ICANON|ECHO);
+  if(visible)
+    settings.c_lflag |= (ICANON | ECHO);
   else
-    settings.c_lflag &= ~(ICANON|ECHO);
+    settings.c_lflag &= ~(ICANON | ECHO);
   tcsetattr(0, TCSANOW, &settings);
 }
 
 bool Native::ConsoleApi::SetForegroundColor(ConsoleColor color) {
-  static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[30m"}, {(int32)ConsoleColor::DarkBlue, "\033[34m"}, {(int32)ConsoleColor::DarkGreen, "\033[32m"}, {(int32)ConsoleColor::DarkCyan, "\033[36m"}, {(int32)ConsoleColor::DarkRed, "\033[31m"}, {(int32)ConsoleColor::DarkMagenta, "\033[35m"}, {(int32)ConsoleColor::DarkYellow, "\033[33m"}, {(int32)ConsoleColor::Gray, "\033[37m"}, {(int32)ConsoleColor::DarkGray, "\033[90m"}, {(int32)ConsoleColor::Blue, "\033[94m"}, {(int32)ConsoleColor::Green, "\033[92m"}, {(int32)ConsoleColor::Cyan, "\033[96m"}, {(int32)ConsoleColor::Red, "\033[91m"}, {(int32)ConsoleColor::Magenta,"\033[95m"}, {(int32)ConsoleColor::Yellow, "\033[93m"}, {(int32)ConsoleColor::White,"\033[97m"}};
+  static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[30m"}, {(int32)ConsoleColor::DarkBlue, "\033[34m"}, {(int32)ConsoleColor::DarkGreen, "\033[32m"}, {(int32)ConsoleColor::DarkCyan, "\033[36m"}, {(int32)ConsoleColor::DarkRed, "\033[31m"}, {(int32)ConsoleColor::DarkMagenta, "\033[35m"}, {(int32)ConsoleColor::DarkYellow, "\033[33m"}, {(int32)ConsoleColor::Gray, "\033[37m"}, {(int32)ConsoleColor::DarkGray, "\033[90m"}, {(int32)ConsoleColor::Blue, "\033[94m"}, {(int32)ConsoleColor::Green, "\033[92m"}, {(int32)ConsoleColor::Cyan, "\033[96m"}, {(int32)ConsoleColor::Red, "\033[91m"}, {(int32)ConsoleColor::Magenta, "\033[95m"}, {(int32)ConsoleColor::Yellow, "\033[93m"}, {(int32)ConsoleColor::White, "\033[97m"}};
   foreColor = color;
-  if (Terminal::IsAnsiSupported())
+  if(Terminal::IsAnsiSupported())
     printf("%s", colors[(int32)foreColor].c_str());
   return true;
 }
@@ -746,7 +746,7 @@ bool Native::ConsoleApi::SetOutputCodePage(int32 codePage) {
 
 bool Native::ConsoleApi::SetTitle(const string& title) {
   /// @todo set window title on linux and macOS
-  if (Terminal::IsAnsiSupported())
+  if(Terminal::IsAnsiSupported())
     printf("\x1b[0;%s\x7", title.c_str());
   return true;
 }
@@ -757,7 +757,7 @@ bool Native::ConsoleApi::SetWindowLeft(int32 height) {
 }
 
 bool Native::ConsoleApi::SetWindowHeight(int32 height) {
-  if (Terminal::IsAnsiSupported())
+  if(Terminal::IsAnsiSupported())
     printf("\x1b[8;%d;%dt", height, GetWindowWidth());
   return true;
 }
@@ -768,7 +768,7 @@ bool Native::ConsoleApi::SetWindowTop(int32 height) {
 }
 
 bool Native::ConsoleApi::SetWindowWidth(int32 width) {
-  if (Terminal::IsAnsiSupported())
+  if(Terminal::IsAnsiSupported())
     printf("\x1b[8;%d;%dt", GetWindowHeight(), width);
   return true;
 }

@@ -19,22 +19,22 @@ namespace Switch {
       DateTime2() {}
       
       explicit DateTime2(int64 ticks) {
-        if (ticks < MinTicks || ticks > MaxTicks)
+        if(ticks < MinTicks || ticks > MaxTicks)
           throw ArgumentOutOfRangeException(_caller);
         this->dateData = Convert::ToUInt64(ticks);
       }
       
       DateTime2(const DateTime2& date) : dateData(date.dateData) {}
       
-      DateTime2& operator=(const DateTime2& date ) {
+      DateTime2& operator=(const DateTime2& date) {
         this->dateData = date.dateData;
         return *this;
       }
       
       DateTime2(int64 ticks, DateTimeKind kind) {
-        if (ticks < MinTicks || ticks > MaxTicks)
+        if(ticks < MinTicks || ticks > MaxTicks)
           throw ArgumentOutOfRangeException(_caller);
-        if (kind < DateTimeKind::Unspecified || kind > DateTimeKind::Local)
+        if(kind < DateTimeKind::Unspecified || kind > DateTimeKind::Local)
           throw ArgumentOutOfRangeException(_caller);
         this->dateData = Convert::ToUInt64(ticks) | (Convert::ToUInt64(kind) << KindShift);
       }
@@ -44,7 +44,7 @@ namespace Switch {
       DateTime2(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) : dateData(Convert::ToUInt64(DateToTicks(year, month, day) + TimeToTicks(hour, minute, second))) {}
       
       DateTime2(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, DateTimeKind kind) : dateData((Convert::ToUInt64(DateToTicks(year, month, day) + TimeToTicks(hour, minute, second)) | (Convert::ToUInt64(kind) << KindShift))) {
-        if (kind < DateTimeKind::Unspecified || kind > DateTimeKind::Local)
+        if(kind < DateTimeKind::Unspecified || kind > DateTimeKind::Local)
           throw ArgumentException(_caller);
       }
       
@@ -73,16 +73,16 @@ namespace Switch {
       
       _property<DateTimeKind, _readonly> Kind {
         _get {
-          switch (this->InternalKind) {
-            case KindUnspecified: return DateTimeKind::Unspecified;
-            case KindUtc: return DateTimeKind::Utc;
-            default: return DateTimeKind::Local;
+          switch(this->InternalKind) {
+          case KindUnspecified: return DateTimeKind::Unspecified;
+          case KindUtc: return DateTimeKind::Utc;
+          default: return DateTimeKind::Local;
           }
         }
       };
       
       _property<int32, _readonly> Millisecond {
-        _get {return Convert::ToInt32((this->InternalTicks/ TicksPerMillisecond) % 1000);}
+        _get {return Convert::ToInt32((this->InternalTicks / TicksPerMillisecond) % 1000);}
       };
       
       _property<int32, _readonly> Minute {
@@ -116,14 +116,14 @@ namespace Switch {
       };
       
       bool IsDaylightSavingTime() const {
-        if (this->Kind == DateTimeKind::Utc)
+        if(this->Kind == DateTimeKind::Utc)
           return false;
         //return TimeZoneInfo::Local().IsDaylightSavingTime(*this, TimeZoneInfoOptions::NoThrowOnValidTime);
         return false;
       }
       
       static bool IsLeapYear(int32 year) {
-        if (year < 1 || year > 9999)
+        if(year < 1 || year > 9999)
           throw ArgumentOutOfRangeException(_caller);
         return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
       }
@@ -138,9 +138,9 @@ namespace Switch {
         //int64 offset = TimeZoneInfo::GetDateTimeNowUtcOffsetFromUtc(utc, isAmbiguousLocalDst).Ticks;
         int64 offset = TimeZoneInfo::Local().BaseUtcOffset().Ticks;
         int64 tick = utc.Ticks + offset + TicksPerHour;
-        if (tick > DateTime2::MaxTicks)
+        if(tick > DateTime2::MaxTicks)
           return DateTime2(DateTime2::MaxTicks, DateTimeKind::Local);
-        if (tick<DateTime2::MinTicks)
+        if(tick < DateTime2::MinTicks)
           return DateTime2(DateTime2::MinTicks, DateTimeKind::Local);
         return DateTime2(tick, DateTimeKind::Local, isAmbiguousLocalDst);
       }
@@ -155,9 +155,8 @@ namespace Switch {
       //DateTime2(uint64 dateData) : dateData(dateData) {}
       
       DateTime2(int64 ticks, DateTimeKind kind, bool isAmbiguousDst) {
-        if (ticks < MinTicks || ticks > MaxTicks) {
+        if(ticks < MinTicks || ticks > MaxTicks)
           throw ArgumentOutOfRangeException(_caller);
-        }
         dateData = (Convert::ToUInt64(ticks) | (isAmbiguousDst ? KindLocalAmbiguousDst : KindLocal));
       }
       
@@ -241,9 +240,9 @@ namespace Switch {
       uint64 dateData = 0;
       
       static int64 DateToTicks(int32 year, int32 month, int32 day) {
-        if (year >= 1 && year <= 9999 && month >= 1 && month <= 12) {
-          const int32* days = IsLeapYear(year)? DaysToMonth366 : DaysToMonth365;
-          if (day >= 1 && day <= days[month] - days[month - 1]) {
+        if(year >= 1 && year <= 9999 && month >= 1 && month <= 12) {
+          const int32* days = IsLeapYear(year) ? DaysToMonth366 : DaysToMonth365;
+          if(day >= 1 && day <= days[month] - days[month - 1]) {
             int y = year - 1;
             int n = y * 365 + y / 4 - y / 100 + y / 400 + days[month - 1] + day - 1;
             return n * TicksPerDay;
@@ -263,7 +262,7 @@ namespace Switch {
         // numberPer100Years = number of whole 100-year periods within 400-year period
         int32 numberPer100Years = numberOfDays / DaysPer100Years;
         // Last 100-year period has an extra day, so decrement result if 4
-        if (numberPer100Years == 4) numberPer100Years = 3;
+        if(numberPer100Years == 4) numberPer100Years = 3;
         // numberOfDays = day number within 100-year period
         numberOfDays -= numberPer100Years * DaysPer100Years;
         // daysPer4Years = number of whole 4-year periods within 100-year period
@@ -273,26 +272,25 @@ namespace Switch {
         // daysPer1Years = number of whole years within 4-year period
         int32 daysPer1Years = numberOfDays / DaysPerYear;
         // Last year has an extra day, so decrement result if 4
-        if (daysPer1Years == 4) daysPer1Years = 3;
+        if(daysPer1Years == 4) daysPer1Years = 3;
         // If year was requested, compute and return it
-        if (part == DatePartYear) {
+        if(part == DatePartYear)
           return numberOf400YearPeriods * 400 + numberPer100Years * 100 + daysPer4Years * 4 + daysPer1Years + 1;
-        }
         // numberOfDays = day number within year
         numberOfDays -= daysPer1Years * DaysPerYear;
         // If day-of-year was requested, return it
-        if (part == DatePartDayOfYear) return numberOfDays + 1;
+        if(part == DatePartDayOfYear) return numberOfDays + 1;
         // Leap year calculation looks different from IsLeapYear since daysPer1Years, daysPer4Years,
         // and numberPer100Years are relative to year 1, not year 0
         bool leapYear = daysPer1Years == 3 && (daysPer4Years != 24 || numberPer100Years == 3);
-        const int32* days = leapYear? DaysToMonth366 : DaysToMonth365;
+        const int32* days = leapYear ? DaysToMonth366 : DaysToMonth365;
         // All months have less than 32 days, so numberOfDays >> 5 is a good conservative
         // estimate for the month
         int32 months = (numberOfDays >> 5) + 1;
         // months = 1-based month number
-        while (numberOfDays >= days[months]) months++;
+        while(numberOfDays >= days[months]) months++;
         // If month was requested, return it
-        if (part == DatePartMonth) return months;
+        if(part == DatePartMonth) return months;
         // Return 1-based day-of-month
         return numberOfDays - days[months - 1] + 1;
       }
@@ -302,9 +300,9 @@ namespace Switch {
         const int64 MinSeconds = Int64::MinValue / TicksPerSecond;
         //TimeSpan.TimeToTicks is a family access function which does no error checking, so
         //we need to put some error checking out here.
-        if (hour >= 0 && hour < 24 && minute >= 0 && minute < 60 && second >=0 && second < 60) {
+        if(hour >= 0 && hour < 24 && minute >= 0 && minute < 60 && second >= 0 && second < 60) {
           int64 totalSeconds = Convert::ToInt64(hour * 3600) + Convert::ToInt64(minute * 60) + Convert::ToInt64(second);
-          if (totalSeconds > MaxSeconds || totalSeconds < MinSeconds)
+          if(totalSeconds > MaxSeconds || totalSeconds < MinSeconds)
             throw ArgumentOutOfRangeException(_caller);
           return totalSeconds * TicksPerSecond;
         }
@@ -328,12 +326,12 @@ _property<DateTime2, _readonly> DateTime2::MinValue {
 };
 
 _property<DateTime2, _readonly> DateTime2::MaxValue{
-  [] { return DateTime2((int64)3652059*10000*1000*60*60*24-1, DateTimeKind::Unspecified);}
+  [] { return DateTime2((int64)3652059 * 10000 * 1000 * 60 * 60 * 24 - 1, DateTimeKind::Unspecified);}
 };
 
 int64 GetSystemTimeAsFileTime() {
   static constexpr int64 TicksSince1601To1970 =  116444736000000000LL;
-  return (int64)std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count()/100 + TicksSince1601To1970;
+  return (int64)std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count() / 100 + TicksSince1601To1970;
 }
 
 _property<DateTime2, _readonly> DateTime2::Now {
@@ -603,8 +601,8 @@ namespace {
   }
   
   TEST(DateTime2Test, Constructor) {
-    ASSERT_THROW(DateTime2(DateTime2::MaxValue().Ticks()+TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
-    ASSERT_THROW(DateTime2(DateTime2::MinValue().Ticks()-TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
+    ASSERT_THROW(DateTime2(DateTime2::MaxValue().Ticks() + TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
+    ASSERT_THROW(DateTime2(DateTime2::MinValue().Ticks() - TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
   }
   
   /*

@@ -68,21 +68,21 @@ namespace Switch {
       /// @brief Create a new instance of struct DateTime
       /// @remarks DateTime is initialized by default to midnight, January 1, 1.
       DateTime(const DateTime& date);
-
+      
       /// @brief Create a new instance of struct DateTime
       /// @remarks DateTime is initialized by default to midnight, January 1, 1.
       DateTime();
-
+      
       /// @brief Initializes a new instance of the DateTime structure to a specified number of ticks.
       /// @param ticks A date and time expressed in 100-nanosecond units.
       /// @remarks The Kind() is initialized to DateTimeKindUnspecified
       DateTime(int64 ticks);
-
+      
       /// @brief Initializes a new instance of the DateTime structure to a specified number of ticks and to Coordinated Universal Time (UTC) or local time.
       /// @param ticks A date and time expressed in 100-nanosecond units.
       /// @param kind One of the DateTimeKind values that indicates whether ticks specifies a local time, Coordinated Universal Time (UTC), or neither
       DateTime(int64 ticks, DateTimeKind kind);
-
+      
       /// @brief Initializes a new instance of the DateTime class to the specified year, month, and day.
       /// @param year The year (1 through 9999)
       /// @param month The month (1 through 12).
@@ -90,7 +90,7 @@ namespace Switch {
       /// @remarks The time of day for the resulting DateTime is midnight (00:00:00).
       /// @remarks The Kind() is initialized to DateTimeKindUnspecified
       DateTime(int32 year, int32 month, int32 day);
-
+      
       /// @brief Initializes a new instance of the DateTime class to the specified year, month, day, hour, minute and second.
       /// @param year The year (1 through 9999)
       /// @param month The month (1 through 12).
@@ -100,7 +100,7 @@ namespace Switch {
       /// @param second The seconds (0 through 59).
       /// @remarks The Kind() is initialized to DateTimeKindUnspecified
       DateTime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second);
-
+      
       /// @brief Initializes a new instance of the DateTime class to the specified year, month, day, hour, minute, second and Coordinated Universal Time (UTC) or local time.
       /// @param year The year (1 through 9999)
       /// @param month The month (1 through 12).
@@ -110,7 +110,7 @@ namespace Switch {
       /// @param second The seconds (0 through 59).
       /// @param kind One of the DateTimeKind values that indicates whether year, month, day, hour, minute and second specify a local time, Coordinated Universal Time (UTC), or neither.
       DateTime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, DateTimeKind kind);
-
+      
       /// @brief Initializes a new instance of the DateTime class to the specified year, month, day, hour, minute, second and millisecond.
       /// @param year The year (1 through 9999)
       /// @param month The month (1 through 12).
@@ -121,7 +121,7 @@ namespace Switch {
       /// @param millisecond The milliseconds (0 through 999).
       /// @remarks The Kind() is initialized to DateTimeKindUnspecified
       DateTime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, int32 millisecond);
-
+      
       /// @brief Initializes a new instance of the DateTime class to the specified year, month, day, hour, minute, second, millisecond and Coordinated Universal Time (UTC) or local time.
       /// @param year The year (1 through 9999)
       /// @param month The month (1 through 12).
@@ -132,55 +132,55 @@ namespace Switch {
       /// @param millisecond The milliseconds (0 through 999).
       /// @param kind One of the DateTimeKind values that indicates whether year, month, day, hour, minute and second specify a local time, Coordinated Universal Time (UTC), or neither.
       DateTime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, int32 millisecond, DateTimeKind kind);
-
+      
       /// @brief Gets the date component of this instance.
       /// @param A new DateTime with the same date as this instance, and the time value set to 12:00:00 midnight (00:00:00).
       _property<DateTime, _readonly> Date {
-        _get {return DateTime(Year(), Month(), Day(), 0 ,0, 0, 0, this->kind);}
+        _get {return DateTime(Year(), Month(), Day(), 0, 0, 0, 0, this->kind);}
       };
-
+      
       /// @brief Gets the day of the month represented by this instance.
       /// @param The day component, expressed as a value between 1 and 31.
       _property<int32, _readonly> Day {
         _get {return this->GetDay();}
       };
-
+      
       /// @brief Gets the day of the week represented by this instance.
       /// @param DayOfWeek A DayOfWeek enumerated constant that indicates the day of the week. This property value ranges from zero, indicating Sunday, to six, indicating Saturday.
       _property<System::DayOfWeek, _readonly> DayOfWeek {
         _get {return this->GetDayOfWeek();}
       };
-
+      
       /// @brief Gets the day of the year represented by this instance.
       /// @param The day of the year, expressed as a value between 1 and 366.
       _property<int32, _readonly> DayOfYear {
         _get {return this->GetDayOfYear();}
       };
-
+      
       /// @brief Gets the hour component of the date represented by this instance.
       /// @param The hour component, expressed as a value between 0 and 23.
       _property<int32, _readonly> Hour {
         _get {return this->GetHour();}
       };
-
+      
       /// @brief Gets a value that indicates whether the time represented by this instance is based on local time, Coordinated Universal Time (UTC), or neither.
       /// @return DateTimeKind One of the DateTimeKind values. The default is DateTimeKindUnspecified.
       _property<DateTimeKind, _readonly> Kind {
         _get {return this->GetKind();}
       };
-
+      
       /// @brief Gets the millisecond component of the date represented by this instance.
       /// @return The millisecond component, expressed as a value between 0 and 999.
       _property<int32, _readonly> Millisecond {
         _get {return this->GetMillisecond();}
       };
-
+      
       /// @brief Gets the minute component of the date represented by this instance.
       /// @return The minute component, expressed as a value between 0 and 59.
       _property<int32, _readonly> Minute {
         _get {return this->GetMinute();}
       };
-
+      
       /// @brief Gets the month component of the date represented by this instance.
       /// @return The month component, expressed as a value between 1 and 12.
       _property<int32, _readonly> Month {
@@ -190,97 +190,97 @@ namespace Switch {
       /// @brief Gets a DateTime object that is set to the current date and time on this computer, expressed as the local time.
       /// @return DateTime A DateTime object that is set to the current date and time on this computer
       static DateTime Now();
-
+      
       /// @brief Gets the second component of the date represented by this instance.
       /// @return The second component, expressed as a value between 0 and 59.
       _property<int32, _readonly> Second {
         _get {return this->GetSecond();}
       };
-
+      
       /// @brief Gets the number of ticks component of the date represented by this instance.
       /// @return The number of ticks that represent the date and time of this instance. The value is between DateTime::MinValue and DateTime::MaxValue.
       _property<int64, _readonly> Ticks {
         _get {return this->GetTicks();}
       };
-
+      
       /// @brief Gets the time of day for this instance.
       /// @return TimeSpan A TimeSpan that represents the fraction of the day that has elapsed since midnight.
       /// @remarks The return value is a DateTime whose Kind property returns DateTimeKindLocal.
       _property<TimeSpan, _readonly> TimeOfDay {
         _get {return this->GetTimeOfDay();}
       };
-
+      
       /// @brief Gets the current date.
       /// @return DateTime A DateTime set to today's date, with the time component set to 00:00:00.
       /// @remarks The return value is a DateTime whose Kind property returns DateTimeKindLocal.
       static DateTime Today();
-
+      
       /// @brief Gets a DateTime object that is set to the current date and time on this computer, expressed as the universal time.
       /// @return DateTime A DateTime object that is set to the current date and time on this computer
       static DateTime UtcNow();
-
+      
       /// @brief Gets the year component of the date represented by this instance.
       /// @return The year component, expressed as a value between 1 and 9999.
       _property<int32, _readonly> Year {
         _get {return this->GetYear();}
       };
-
+      
       /// @brief Adds the value of the specified TimeSpan to the value of this instance.
       /// @param value A TimeSpan that contains the interval to add
       /// @return DateTime A DateTime whose value is the sum of the date and time represented by this instance and the time interval represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       DateTime Add(TimeSpan value) const { return DateTime(this->value + value.Ticks(), this->kind); }
-
+      
       /// @brief Adds the specified number of days to the value of this instance.
       /// @param value A number of whole and fractional days. The value parameter can be negative or positive.
       /// @return DateTime A DateTime whose value is the sum of the date and time represented by this instance and the number of days represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       DateTime AddDays(double value) const { return DateTime(this->value + (int64)(value * TimeSpan::TicksPerDay), this->kind); }
-
+      
       /// @brief Adds the specified number of hours to the value of this instance.
       /// @param value A number of whole and fractional hours. The value parameter can be negative or positive.
       /// @return DateTime A DateTime whose value is the sum of the date and time represented by this instance and the number of hours represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       DateTime AddHours(double value) const { return DateTime(this->value + (int64)(value * TimeSpan::TicksPerHour), this->kind); }
-
+      
       /// @brief Adds the specified number of milliseconds to the value of this instance.
       /// @param value A number of whole and fractional milliseconds. The value parameter can be negative or positive.
       /// @return DateTime A DateTime whose value is the sum of the date and time represented by this instance and the number of milliseconds represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       DateTime AddMilliseconds(double value) const { return DateTime(this->value + (int64)(value * TimeSpan::TicksPerMillisecond), this->kind); }
-
+      
       /// @brief Adds the specified number of minutes to the value of this instance.
       /// @param value A number of whole and fractional minutes. The value parameter can be negative or positive.
       /// @return DateTime A DateTime whose value is the sum of the date and time represented by this instance and the number of minutes represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       DateTime AddMinutes(double value) const { return DateTime(this->value + (int64)(value * TimeSpan::TicksPerMinute), this->kind); }
-
+      
       /// @brief Adds the specified number of months to the value of this instance.
       /// @param value A number of whole and fractional months. The value parameter can be negative or positive.
       /// @return DateTime A DateTime whose value is the sum of the date and time represented by this instance and the number of months represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       /// @remarks !!! NOT YET ENDED !!!
       DateTime AddMonths(double value) const { return DateTime(this->value + (int64)(value * TimeSpan::TicksPerDay * 31), this->kind); }
-
+      
       /// @brief Adds the specified number of seconds to the value of this instance.
       /// @param value A number of whole and fractional seconds. The value parameter can be negative or positive.
       /// @return DateTime A DateTime whose value is the sum of the date and time represented by this instance and the number of seconds represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       DateTime AddSeconds(double value) const { return DateTime(this->value + (int64)(value * TimeSpan::TicksPerSecond), this->kind); }
-
+      
       /// @brief Adds the specified number of ticks to the value of this instance.
       /// @param value A number of ticks. The value parameter can be negative or positive.
       /// @return DateTime A DateTime whose value is the sum of the date and time represented by this instance and the number of ticks represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       DateTime AddTicks(int64 value) const { return DateTime(this->value + value, this->kind); }
-
+      
       /// @brief Adds the specified number of years to the value of this instance.
       /// @param value A number of whole and fractional years. The value parameter can be negative or positive.
       /// @return DateTime A DateTime whose value is the sum of the date and time represented by this instance and the number of years represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       /// @remarks !!! NOT YET ENDED !!!
       DateTime AddYears(double value) const { return DateTime(this->value + (int64)(value * TimeSpan::TicksPerDay * 365), this->kind); }
-
+      
       /// @brief Compares two instances of DateTime and returns an indication of their relative values
       /// @param dateTimeA The first DateTime.
       /// @param dateTimeB The second DateTime.
@@ -292,7 +292,7 @@ namespace Switch {
       static int32 Compare(const DateTime& dateTimeA, const DateTime& dateTimeB) {
         return dateTimeA.CompareTo(dateTimeB);
       }
-
+      
       /// @brief Returns the number of days in the specified month and year.
       /// @param year The year.
       /// @param month The month (a number ranging from 1 to 12).
@@ -300,7 +300,7 @@ namespace Switch {
       /// For example, if month equals 2 for February, the return value is 28 or 29 depending upon whether year is a leap year.
       /// @exception ArgumentOutOfRangeException month is less than 1 or greater than 12.
       static int32 DaysInMonth(int32 year, int32 month);
-
+      
       /// @brief Determines whether two specified DateTime objects have the same value.
       /// @param dateTimeA The first DateTime to compare.
       /// @param dateTimeB The second DateTime to compare.
@@ -308,12 +308,12 @@ namespace Switch {
       static bool Equals(const DateTime& dateTimeA, const DateTime& dateTimeB) {
         return dateTimeA.Equals(dateTimeB);
       }
-
+      
       /// @brief Deserializes a 64-bit binary value and recreates an original serialized DateTime object.
       /// @param dateData A 64-bit signed integer that encodes the Kind property in a 2-bit field and the Ticks property in a 62-bit field.
       /// @return DateTime A DateTime object that is equivalent to the DateTime object that was serialized by the ToBinary method.
-      static DateTime FromBinary(int64 dateData) {return DateTime(dateData & 0x3FFFFFFFFFFFFFFFLL, (DateTimeKind)(int32)(((dateData & 0xC000000000000000LL)>>62) & 0x0000000000000003LL));}
-
+      static DateTime FromBinary(int64 dateData) {return DateTime(dateData & 0x3FFFFFFFFFFFFFFFLL, (DateTimeKind)(int32)(((dateData & 0xC000000000000000LL) >> 62) & 0x0000000000000003LL));}
+      
       /// @brief Converts the specified Windows file time to an equivalent local time.
       /// @param fileTime A Windows file time expressed in ticks.
       /// @return DateTime A DateTime object that represents a local time equivalent to the date and time represented by the fileTime parameter.
@@ -322,7 +322,7 @@ namespace Switch {
       /// @remarks The fileTime parameter specifies a file time expressed in seconds.
       /// @remarks The return value is a DateTime whose Kind() function is DateTimeKindLocal.
       static DateTime FromFileTime(int64 fileTime);
-
+      
       /// @brief Converts the specified Windows file time to an equivalent universal time.
       /// @param fileTime A Windows file time expressed in ticks.
       /// @return DateTime A DateTime object that represents a universal time equivalent to the date and time represented by the fileTime parameter.
@@ -331,23 +331,23 @@ namespace Switch {
       /// @remarks The fileTime parameter specifies a file time expressed in 100-nanosecond ticks.
       /// @remarks The return value is a DateTime whose Kind() function is DateTimeKindUtc.
       static DateTime FromFileTimeUtc(int64 fileTime);
-
+      
       /// @brief Indicates whether this instance of DateTime is within the Daylight Saving Time range for the current time zone.
       /// @return Boolean true if Kind is Local or Unspecified and the value of this instance of DateTime is within the Daylight Saving Time range for the current time zone. false if Kind is Utc.
       bool IsDaylightSavingTime() const;
-
+      
       /// @brief Returns an indication whether the specified year is a leap year.
       /// @param year A 4-digit year.
       /// @return Boolean true if year is a leap year; otherwise, false.
       static bool IsLeapYear(int32 year) { return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0); }
-
+      
       /// @brief Converts the specified String representation of a logical value to its DateTime equivalent.
       /// @param str A String containing the value to convert.
       /// @return A DateTime equivalent to the number contained in str.
       /// @exception ArgumentNullException The parameters str is null.
       /// @remarks !!! NOT YET ENDED !!!
       static DateTime Parse(const String& str);
-
+      
       /// @brief Creates a new DateTime object that represents the same time as the specified DateTime, but is designated in either local time, Coordinated Universal Time (UTC), or neither, as indicated by the specified DateTimeKind value.
       /// @param value A DateTime object.
       /// @param kind One of the DateTimeKind values.
@@ -359,25 +359,25 @@ namespace Switch {
       /// The following example uses the SpecifyKind method to demonstrate how the Kind property influences the ToLocalTime and ToUniversalTime conversion methods.
       /// @include DateTimeSpecifyKind.cpp
       static DateTime SpecifyKind(DateTime value, DateTimeKind kind);
-
+      
       /// @brief Subtracts the specified date and time from this instance.
       /// @param value An instance of DateTime.
       /// @return TimeSpan A TimeSpan interval equal to the date and time represented by this instance minus the date and time represented by value.
       /// @remarks This method does not change the value of this DateTime object. Instead, a new TimeSpan is returned whose value is the result of this operation.
       /// @remarks Before subtracting DateTime objects, insure that the objects represent times in the same time zone. Otherwise, the result will include the difference between time zones.
       const TimeSpan Subtract(const DateTime& value) const { return TimeSpan(this->value - value.value); }
-
+      
       /// @brief Subtracts the specified duration from this instance.
       /// @param value An instance of TimeSpan.
       /// @return DateTime A DateTime equal to the date and time represented by this instance minus the time interval represented by value.
       /// @remarks This method does not change the value of this DateTime. Instead, a new DateTime is returned whose value is the result of this operation.
       DateTime Subtract(const TimeSpan& value) const { return DateTime(this->value - value.Ticks()); }
-
+      
       /// @brief Serializes the current DateTime object to a 64-bit binary value that subsequently can be used to recreate the DateTime object.
       /// @return Int64 A 64-bit signed integer that encodes the Kind and Ticks properties.
       /// @remarks Use the ToBinary method to convert the value of the current DateTime object to a binary value. Subsequently, use the binary value and the FromBinary method to recreate the original DateTime object.
       int64 ToBinary() const {return (this->value & 0x3FFFFFFFFFFFFFFFLL) + (((int64)this->kind << 62) & 0xC000000000000000LL);}
-
+      
       /// @brief Converts the value of the current DateTime object to local time.
       /// @return DateTime A DateTime object whose Kind() property is DateTimeKindLocal, and whose value is the local time equivalent
       /// to the value of the current DateTime object, or MaxValue if the converted value is too large to be represented by a DateTime object,
@@ -392,23 +392,23 @@ namespace Switch {
       /// The following example uses the SpecifyKind method to demonstrate how the Kind property influences the ToLocalTime and ToUniversalTime conversion methods.
       /// @include DateTimeSpecifyKind.cpp
       DateTime ToLocalTime() const;
-
+      
       /// @brief Converts the value of the current DateTime object to its equivalent long date String representation.
       /// @return String A String that contains the long date String representation of the current DateTime object.
       const String ToLongDateString() const;
-
+      
       /// @brief Converts the value of the current DateTime object to its equivalent long time String representation.
       /// @return String A String that contains the long time String representation of the current DateTime object.
       const String ToLongTimeString() const;
-
+      
       /// @brief Converts the value of the current DateTime object to its equivalent short date String representation.
       /// @return String A String that contains the short date String representation of the current DateTime object.
       const String ToShortDateString() const;
-
+      
       /// @brief Converts the value of the current DateTime object to its equivalent short time String representation.
       /// @return String A String that contains the short time String representation of the current DateTime object.
       const String ToShortTimeString() const;
-
+      
       /// @brief Converts the value of the current DateTime object to universal time.
       /// @return DateTime A DateTime object whose Kind() property is DateTimeKindUtc, and whose value is the universal time equivalent
       /// to the value of the current DateTime object, or MaxValue if the converted value is too large to be represented by a DateTime object,
@@ -423,27 +423,27 @@ namespace Switch {
       /// The following example uses the SpecifyKind method to demonstrate how the Kind property influences the ToLocalTime and ToUniversalTime conversion methods.
       /// @include DateTimeSpecifyKind.cpp
       DateTime ToUniversalTime() const;
-
+      
       /// @brief Determines whether this instance and another specified DateTime object have the same value.
       /// @param value The DateTime to compare.
       /// @return bool true if the value of this instance is the same as the value of value; otherwise, false.
       /// @exception ArgumentNullException The parameters value is null.
       bool Equals(const DateTime& value) const;
-
+      
       /// @brief Determines whether this instance of DateTime and a specified object, which must also be a DateTime object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       /// @exception ArgumentNullException The parameters obj is null.
       bool Equals(const object& obj) const override;
-
+      
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
       int32 GetHashCode() const override;
-
+      
       /// @brief Returns a String that represents the current DateTime.
       /// @return String A String that represents the current DateTime.
       String ToString() const override;
-
+      
       /// @brief Returns a String that represents the current DateTime.
       /// @param format Format-control String.
       /// @return String A String that represents the current DateTime.
@@ -473,7 +473,7 @@ namespace Switch {
       /// | %z, %Z | Either the time-zone name or time zone abbreviation, depending on registry settings; no characters if time zone is unknown. |
       /// | %%     | Percent sign.                                                                                                               |
       String ToString(const String& format) const;
-
+      
       /// @brief Compares this instance to a specified DateTime object and returns an indication of their relative values.
       /// @param value An DateTime object to compare with this instance.
       /// @return DateTime A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings:
@@ -482,7 +482,7 @@ namespace Switch {
       /// Greater than zero   This instance is greater than value.
       /// @remarks Before comparing DateTime objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their Kind() Function.
       int32 CompareTo(const DateTime& value) const;
-
+      
       /// @brief Compares the current instance with another object of the same type.
       /// @param obj An object to compare with this instance.
       /// @return DateTime A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings:
@@ -493,12 +493,12 @@ namespace Switch {
       /// @return obj is nullNothingnullptra null reference.
       /// @remarks Before comparing DateTime objects, make sure that the objects represent times in the same time zone. You can do this by comparing the values of their Kind() function.
       int32 CompareTo(const IComparable& obj) const override;
-
+      
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
       /// @return @see TypeCode
       TypeCode GetTypeCode() const override;
-
+      
     private:
       friend class Convert;
       int32 GetDay() const;
@@ -530,62 +530,62 @@ namespace Switch {
       sbyte ToSByte(const IFormatProvider& provider) const override;
       float ToSingle(const IFormatProvider& provider) const override;
       String ToString(const IFormatProvider& provider) const override;
-
+      
       int64 value = 0;
       DateTimeKind kind = DateTimeKind::Unspecified;
-
+      
     public:
       /// @cond
       operator TimeSpan() const {return TimeSpan(this->value);}
-
+      
       DateTime& operator =(const DateTime& value) {
         this->value = value.value;
         this->kind = value.kind;
         return *this;
       }
-
+      
       DateTime& operator+=(DateTime value) {
         this->value += value.value;
         return *this;
       }
-
+      
       DateTime& operator-=(DateTime value) {
         this->value -= value.value;
         return *this;
       }
-
+      
       DateTime operator+() { return DateTime(+this->value, this->kind); }
-
+      
       DateTime operator-() { return DateTime(-this->value, this->kind); }
-
+      
       DateTime operator+(const DateTime& value) const {
         DateTime result = *this;
         result.value += value.value;
         return result;
       }
-
+      
       DateTime operator-(const DateTime& value) const {
         DateTime result = *this;
         result.value -= value.value;
         return result;
       }
-
+      
       DateTime& operator++() {
         ++this->value;
         return *this;
       }
-
+      
       DateTime operator++(int) { return DateTime(this->value++, this->kind); }
-
+      
       DateTime& operator--() {
         --this->value;
         return *this;
       }
-
+      
       DateTime operator--(int) { return DateTime(this->value--, this->kind); }
       /// @endcond
     };
-
+    
   }
 }
 

@@ -23,11 +23,11 @@ bool SizeF::IsEmpty() const {
   return this->height == Empty().height && this->width == Empty().width;
 }
 
-SizeF SizeF::Add(const SizeF &size1, const SizeF &size2) {
+SizeF SizeF::Add(const SizeF& size1, const SizeF& size2) {
   return SizeF(size1.width + size2.width, size1.height + size2.height);
 }
 
-SizeF SizeF::Subtract(const SizeF &sz1, const SizeF & sz2) {
+SizeF SizeF::Subtract(const SizeF& sz1, const SizeF& sz2) {
   return SizeF(sz1.width - sz2.width, sz1.height - sz2.height);
 }
 
@@ -37,10 +37,10 @@ SizeF& SizeF::operator=(const SizeF& sz) {
   return *this;
 }
 
-SizeF SizeF::operator+(const SizeF & sz) const {
+SizeF SizeF::operator+(const SizeF& sz) const {
   return Add(*this, sz);
 }
 
-SizeF SizeF::operator-(const SizeF & sz) const {
+SizeF SizeF::operator-(const SizeF& sz) const {
   return Subtract(*this, sz);
 }

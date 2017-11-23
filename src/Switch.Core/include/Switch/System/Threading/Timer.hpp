@@ -65,7 +65,7 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         /// @remarks The callback parameter is invoked once after dueTime elapses, and thereafter each time the period time interval elapses.
         Timer(const TimerCallback& callback, uint32 dueTime, uint32 period) : Timer(callback, *this, as<int32>(dueTime), as<int32>(period)) {}
-
+        
         /// @brief Initializes a new instance of the Timer class, using a 32-bit signed integer to specify the time interval.
         /// @param callback the address of a method to be executed
         /// @param state An object containing information to be used by the callback method, or null.
@@ -102,7 +102,7 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         /// @remarks The callback parameter is invoked once after dueTime elapses, and thereafter each time the period time interval elapses.
         Timer(const TimerCallback& callback, object& state, const TimeSpan& dueTime, const TimeSpan& period) : Timer(callback, state, as<int32>(dueTime.TotalMilliseconds()), as<int32>(period.TotalMilliseconds())) {}
-
+        
         /// @brief Initializes a new instance of the Timer class, using a 32-bit unsigned integer to specify the time interval.
         /// @param callback the address of a method to be executed
         /// @param state An object containing information to be used by the callback method, or null.
@@ -112,7 +112,7 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         /// @remarks The callback parameter is invoked once after dueTime elapses, and thereafter each time the period time interval elapses.
         Timer(const TimerCallback& callback, object& state, uint32 dueTime, uint32 period) : Timer(callback, state, as<int32>(dueTime), as<int32>(period)) {}
-
+        
         /// @cond
         Timer() {}
         Timer(const Timer& timer) : data(timer.data) {}
@@ -123,17 +123,17 @@ namespace Switch {
         }
         ~Timer() {this->Close();}
         /// @endcond
-
+        
         /// @brief Changes the start time and the interval between method invocations for a timer, using 32-bit signed integers to measure time intervals.
         /// @param dueTime The amount of time to delay before callback is invoked, in milliseconds. Specify Timeout::Infinite to prevent the timer from starting. Specify zero (0) to start the timer immediately.
         /// @param period The time interval between invocations of callback, in milliseconds. Specify Timeout::Infinite to disable periodic signaling.
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         void Change(int32 dueTime, int32 period) {
-          if (this->data->callback.IsEmpty())
+          if(this->data->callback.IsEmpty())
             throw InvalidOperationException(_caller);
-          if (dueTime < Timeout::Infinite || period < Timeout::Infinite)
+          if(dueTime < Timeout::Infinite || period < Timeout::Infinite)
             throw ArgumentOutOfRangeException(_caller);
-          
+            
           this->data->dueTime = dueTime;
           this->data->period = period;
           this->data->event.Set();
@@ -151,16 +151,16 @@ namespace Switch {
         /// @exception ArgumentNullException The dueTime or period param is null.
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         void Change(const TimeSpan& dueTime, const TimeSpan& period) {this->Change(as<int32>(dueTime.TotalMilliseconds()), as<int32>(period.TotalMilliseconds()));}
-
+        
         /// @brief Changes the start time and the interval between method invocations for a timer, using 32-bit unsigned integers to measure time intervals.
         /// @param dueTime The amount of time to delay before callback is invoked, in milliseconds. Specify Timeout::Infinite to prevent the timer from starting. Specify zero (0) to start the timer immediately.
         /// @param period The time interval between invocations of callback, in milliseconds. Specify Timeout::Infinite to disable periodic signaling.
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         void Change(uint32 dueTime, uint32 period) {this->Change(as<int32>(dueTime), as<int32>(period));}
-
+        
       private:
         void Close() {
-          if (this->data.GetUseCount() == 1) {
+          if(this->data.GetUseCount() == 1) {
             this->data->closed = true;
             this->data->event.Set();
             this->data->thread.Join();
@@ -174,16 +174,16 @@ namespace Switch {
           int32 period {-1};
           Object* state{this};
           Thread thread {ThreadStart {_delegate {
-            bool runOnce = false;
-            while (!this->closed) {
-              if (!this->event.WaitOne(runOnce ? this->period : this->dueTime)) {
-                runOnce = true;
-                ThreadPool::QueueUserWorkItem(this->callback, *this->state);
-              }
-            }
-          }}};
+                bool runOnce = false;
+                while(!this->closed) {
+                  if(!this->event.WaitOne(runOnce ? this->period : this->dueTime)) {
+                    runOnce = true;
+                    ThreadPool::QueueUserWorkItem(this->callback, *this->state);
+                  }
+                }
+              }}};
         };
-
+        
         refptr<TimerData> data = new TimerData();
       };
     }

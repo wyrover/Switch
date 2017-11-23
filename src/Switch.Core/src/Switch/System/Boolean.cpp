@@ -19,14 +19,14 @@ const String& Boolean::TrueString() {
 
 bool Boolean::Parse(const String& str) {
   bool value;
-  if (TryParse(str, value) == false)
+  if(TryParse(str, value) == false)
     throw FormatException(_caller);
   return value;
 }
 
 bool Boolean::TryParse(const String& str, bool& value) {
   String trimed  = str.TrimStart(' ').TrimEnd(' ');
-  if (String::Compare(trimed, TrueString(), true) != 0 && String::Compare(trimed, FalseString(), true) != 0)
+  if(String::Compare(trimed, TrueString(), true) != 0 && String::Compare(trimed, FalseString(), true) != 0)
     return false;
   value = String::Compare(trimed, TrueString(), true) == 0;
   return true;

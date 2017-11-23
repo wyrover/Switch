@@ -17,7 +17,7 @@ namespace SwitchUnitTests {
       ~NotInheritedFromAnInterface() {result += "~NotInheritedFromAnInterface";}
     };
     
-    _using (refptr<NotAnInterface> value = ref_new<NotInheritedFromAnInterface>());
+    _using(refptr<NotAnInterface> value = ref_new<NotInheritedFromAnInterface>());
     ASSERT_EQ("~NotAnInterface", result);
   }
   
@@ -32,7 +32,7 @@ namespace SwitchUnitTests {
       ~InheritedFromAnInterface() {result += "~InheritedFromAnInterface";}
     };
     
-    _using (refptr<AnInterface> value = ref_new<InheritedFromAnInterface>());
+    _using(refptr<AnInterface> value = ref_new<InheritedFromAnInterface>());
     ASSERT_EQ("~InheritedFromAnInterface~AnInterface", result);
   }
 }

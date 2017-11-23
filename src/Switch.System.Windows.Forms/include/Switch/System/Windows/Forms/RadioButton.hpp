@@ -21,38 +21,38 @@ namespace Switch {
         class _export RadioButton : public ButtonBase {
         public:
           RadioButton() : ButtonBase("", 0, 0, 104, 24) { this->SetStyle(ControlStyles::UserPaint, false); }
-
+          
           _property<bool> AutoCheck {
             _get {return this->autoCheck;},
             _set {
-              if (this->autoCheck != value)
+              if(this->autoCheck != value)
                 this->autoCheck = value;
             }
           };
-
+          
           _property<bool> Checked{
             _get {return this->checked;},
             _set {this->SetChecked(value);}
           };
-
+          
           EventHandler CheckedChanged;
-
+          
         protected:
           void CreateHandle() override;
           void SetChecked(bool checked);
-
+          
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(104, 24); }
-
+          
           virtual void OnCheckedChanged(const EventArgs& e) {this->CheckedChanged(*this, e);}
-
+          
           void OnClick(const EventArgs& e) override {
-            if (this->AutoCheck)
+            if(this->AutoCheck)
               this->Checked = true;
             this->Control::OnClick(e);
           }
           
           void OnParentChanged(const EventArgs& e) override;
-
+          
           bool autoCheck = true;
           bool checked = false;
         };

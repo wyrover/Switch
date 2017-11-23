@@ -36,7 +36,7 @@ namespace Switch {
     const_iterator begin = (const_iterator)&value;
     const_iterator end = begin + sizeof(T);
     int32 hash = 0;
-    for (const_iterator it = begin; it != end; ++it)
+    for(const_iterator it = begin; it != end; ++it)
       hash = 5 * hash + *it;
     return hash;
   }
@@ -62,13 +62,13 @@ namespace Switch {
     
     int32 CompareTo(const IComparable& value) const override {return is<T>(value) ? this->CompareTo((const T&)value) : 1;}
     int32 CompareTo(const Boxer& value) const {return this->CompareTo((const T&)value);}
-    int32 CompareTo(const T& value) const {return CompareBoxedType((const T&)*this, value);}
+    int32 CompareTo(const T& value) const {return CompareBoxedType((const T&) * this, value);}
     
     bool Equals(const object& obj) const override {return is<T>(obj) && this->Equals((const T&)obj);}
     bool Equals(const Boxer& value) const {return this->Equals((const T&)value);}
     bool Equals(const T& value) const {return this->CompareTo(value) == 0;}
     
-    int32 GetHashCode() const override {return Switch::GetHashCodeFromBoxedType((const T&)*this);}
+    int32 GetHashCode() const override {return Switch::GetHashCodeFromBoxedType((const T&) * this);}
   };
   
   /// @brief Support boxing of type
@@ -84,7 +84,7 @@ namespace Switch {
     /// @cond
     TypeBoxer() = delete;
     /// @endcond
-
+    
     /// @brief Boxing a bool to a Boolean
     /// @param value bool to Boxing.
     /// @return Boolean boxed value
@@ -94,7 +94,7 @@ namespace Switch {
     /// @param value byte to Boxing.
     /// @return Byte boxed value
     static System::Byte Boxing(byte value) {return value;}
-  
+    
     /// @brief Boxing a double to a Double
     /// @param value double to Boxing.
     /// @return Double boxed value
@@ -114,7 +114,7 @@ namespace Switch {
     /// @param value int64 to Boxing.
     /// @return Int64 boxed value
     static System::Int64 Boxing(int64 value) {return value;}
-
+    
     /// @brief Boxing a sbyte to a SByte
     /// @param value sbyte to Boxing.
     /// @return SByte boxed value
@@ -184,7 +184,7 @@ namespace Switch {
     static System::Int64 Boxing(llong value) {return value;}
     static System::UInt64 Boxing(ullong value) {return value;}
     /// @endcond
-
+    
     /// @brief Boxing an void* to an UIntPtr
     /// @param value void* to Boxing.
     /// @return UIntPtr boxed value
@@ -512,7 +512,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
   inline System::UInt64 Box(uint64 value) {return TypeBoxer::Boxing(value);}
-
+  
   /// @cond
   inline System::Int64 Box(llong value) {return TypeBoxer::Boxing(value);}
   inline System::UInt64 Box(ullong value) {return TypeBoxer::Boxing(value);}
@@ -532,7 +532,7 @@ namespace Switch {
   /// @cond
   template<typename T>
   inline const T& Box(const T& value) {return TypeBoxer::Boxing(value);}
-
+  
   template<typename T, typename Attribute>
   inline T Box(const _property<T, Attribute>& value) {return T(Box(value()));}
   /// @endcond
@@ -727,10 +727,10 @@ namespace Switch {
   /// @cond
   template<typename T>
   inline T& Unbox(T& value) {return TypeUnboxer::Unboxing(value);}
-
+  
   template<typename T>
   inline const T& Unbox(const T& value)  {return TypeUnboxer::Unboxing(value);}
-/// @endcond
+  /// @endcond
 }
 
 using namespace Switch;

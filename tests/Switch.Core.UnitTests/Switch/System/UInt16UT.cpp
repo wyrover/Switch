@@ -50,12 +50,12 @@ namespace {
   }
   
   TEST(UInt16Test, Parse_Spaces) {
-    ASSERT_EQ(5u,UInt16::Parse(" 5"));
-    ASSERT_EQ(5u,UInt16::Parse("     5"));
-    ASSERT_EQ(5u,UInt16::Parse("5 "));
-    ASSERT_EQ(51u,UInt16::Parse("51     "));
-    ASSERT_EQ(5u,UInt16::Parse(" 5      "));
-    ASSERT_EQ(52u,UInt16::Parse("        52 "));
+    ASSERT_EQ(5u, UInt16::Parse(" 5"));
+    ASSERT_EQ(5u, UInt16::Parse("     5"));
+    ASSERT_EQ(5u, UInt16::Parse("5 "));
+    ASSERT_EQ(51u, UInt16::Parse("51     "));
+    ASSERT_EQ(5u, UInt16::Parse(" 5      "));
+    ASSERT_EQ(52u, UInt16::Parse("        52 "));
   }
   
   TEST(UInt16Test, Parse_FormatException) {
@@ -82,32 +82,32 @@ namespace {
   }
   
   TEST(UInt16Test, Parse_Binary) {
-    ASSERT_EQ(0u, UInt16::Parse("0",2));
-    ASSERT_EQ(1u, UInt16::Parse("1",2));
-    ASSERT_EQ(2u, UInt16::Parse("10",2));
-    ASSERT_EQ(3u, UInt16::Parse("11",2));
-    ASSERT_EQ(6u, UInt16::Parse("110",2));
+    ASSERT_EQ(0u, UInt16::Parse("0", 2));
+    ASSERT_EQ(1u, UInt16::Parse("1", 2));
+    ASSERT_EQ(2u, UInt16::Parse("10", 2));
+    ASSERT_EQ(3u, UInt16::Parse("11", 2));
+    ASSERT_EQ(6u, UInt16::Parse("110", 2));
   }
   
   TEST(UInt16Test, Parse_Exceptions_Binary) {
-    ASSERT_THROW(UInt16::Parse("",2), FormatException);
-    ASSERT_THROW(UInt16::Parse("2",2), FormatException);
-    ASSERT_THROW(UInt16::Parse("103",2), FormatException);
-    ASSERT_THROW(UInt16::Parse("++0",2), FormatException);
-    ASSERT_THROW(UInt16::Parse("+",2), FormatException);
-    ASSERT_THROW(UInt16::Parse("-",2), FormatException);
-    ASSERT_THROW(UInt16::Parse("--1",2), FormatException);
-    ASSERT_THROW(UInt16::Parse("0x53",2), FormatException);
-    ASSERT_THROW(UInt16::Parse("100a",2), FormatException);
-    ASSERT_THROW(UInt16::Parse("10u",2), FormatException);
+    ASSERT_THROW(UInt16::Parse("", 2), FormatException);
+    ASSERT_THROW(UInt16::Parse("2", 2), FormatException);
+    ASSERT_THROW(UInt16::Parse("103", 2), FormatException);
+    ASSERT_THROW(UInt16::Parse("++0", 2), FormatException);
+    ASSERT_THROW(UInt16::Parse("+", 2), FormatException);
+    ASSERT_THROW(UInt16::Parse("-", 2), FormatException);
+    ASSERT_THROW(UInt16::Parse("--1", 2), FormatException);
+    ASSERT_THROW(UInt16::Parse("0x53", 2), FormatException);
+    ASSERT_THROW(UInt16::Parse("100a", 2), FormatException);
+    ASSERT_THROW(UInt16::Parse("10u", 2), FormatException);
   }
   
   TEST(UInt16Test, Parse_Octal) {
-    ASSERT_EQ(0u, UInt16::Parse("0",8));
-    ASSERT_EQ(1u, UInt16::Parse("1",8));
-    ASSERT_EQ(12u, UInt16::Parse("14",8));
-    ASSERT_EQ(56u, UInt16::Parse("70",8));
-    ASSERT_EQ(601u, UInt16::Parse("1131",8));
+    ASSERT_EQ(0u, UInt16::Parse("0", 8));
+    ASSERT_EQ(1u, UInt16::Parse("1", 8));
+    ASSERT_EQ(12u, UInt16::Parse("14", 8));
+    ASSERT_EQ(56u, UInt16::Parse("70", 8));
+    ASSERT_EQ(601u, UInt16::Parse("1131", 8));
   }
   
   TEST(UInt16Test, Parse_Hexadecimal) {
@@ -119,7 +119,7 @@ namespace {
     ASSERT_EQ(0xFFFFu, UInt16::Parse("FFFF", 16));
     ASSERT_THROW(UInt16::Parse("10000", 16), OverflowException);
   }
-
+  
   TEST(UInt16Test, TryParse) {
     uint16 x;
     ASSERT_TRUE(UInt16::TryParse("0", x));
@@ -262,7 +262,7 @@ namespace {
     ASSERT_EQ(0xFFFFu, x);
     ASSERT_FALSE(UInt16::TryParse("10000",  16, x));
   }
- 
+  
   TEST(UInt16Test, TryParse_UInt16) {
     UInt16 x;
     ASSERT_TRUE(UInt16::TryParse("0", x));
@@ -405,36 +405,36 @@ namespace {
     ASSERT_EQ(0xFFFFu, x);
     ASSERT_FALSE(UInt16::TryParse("10000",  16, x));
   }
-
+  
 }
 
 /*
- 
+
  C# program used to generate this unit test :
- 
+
  using System;
  using System::Collections::Generic;
  using System::Linq;
  using System::Text;
  using System::Threading::Tasks;
  using System::Reflection;
- 
+
  namespace Natives {
   class Program {
     static void Main(string[] args) {
     //String[] tests = { "0", "00", "000", "01", "0001", "099", "0000999" };
     String[] tests = { "--56", "00", "000", "01", "0001", "099", "0000999" };
- 
+
     for (String s : tests)
       MakeTest<UInt16>(s, 5, "");
- 
+
       Console.ReadKey(true);
     }
- 
+
  static void MakeTest<T>(String s, T prototype, String fmt) {
  String type = _typeof(T).Name;
  String suffix = type == "Single" ? "f" : "";
- 
+
  try {
  MethodInfo method = _typeof(T).GetMethod("Parse", new Type[] {_typeof(String)});
  T value = (T)method.Invoke(prototype, new object[] {s});

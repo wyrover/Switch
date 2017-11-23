@@ -60,7 +60,7 @@ namespace Switch {
         _property<TimeSpan, _readonly> Elapsed {
           _get {return TimeSpan::FromTicks(ElapsedTicks);}
         };
-
+        
         /// @brief Gets the total elapsed time measured by the current instance, in milliseconds.
         /// @return A long integer representing the total number of milliseconds measured by the current instance.
         /// @remarks This property represents elapsed time rounded down to the nearest whole millisecond value. For higher precision measurements, use the Elapsed or ElapsedTicks properties.
@@ -69,7 +69,7 @@ namespace Switch {
         _property<int64, _readonly> ElapsedMilliseconds {
           _get {return this->GetElapsedTicks() / TimeSpan::TicksPerMillisecond;}
         };
-
+        
         /// @brief Gets the total elapsed time measured by the current instance, in timer ticks.
         /// @return A long integer representing the total number of timer ticks measured by the current instance.
         /// @remarks This property represents the number of elapsed ticks in the underlying timer mechanism. A tick is the smallest unit of time that the Stopwatch timer can measure. Use the Frequency field to convert the ElapsedTicks value into a number of seconds.
@@ -85,26 +85,26 @@ namespace Switch {
         _property<bool, _readonly> IsRunning {
           _get {return this->running;}
         };
-
+        
         /// @brief Gets the current number of ticks in the timer mechanism.
         /// @return A long integer representing the tick counter value of the underlying timer mechanism.
         /// @remarks If the Stopwatch class uses a high-resolution performance counter, GetTimestamp returns the current value of that counter. If the Stopwatch class uses the system timer, GetTimestamp returns the current DateTime.Ticks property of the DateTime.Now instance.
         static int64 GetTimestamp();
-
+        
         /// @brief Stops time interval measurement and resets the elapsed time to zero.
         /// @remarks A Stopwatch instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset. Use Stop to stop the current interval measurement and retain the cumulative elapsed time value. Use Reset to stop any interval measurement in progress and clear the elapsed time value.
         void Reset() {
           this->start = this->stop = 0;
           this->running = false;
         }
-
+        
         /// @brief Stops time interval measurement, resets the elapsed time to zero, and starts measuring elapsed time.
         /// @remarks A Stopwatch instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset or restarted. Use Stop to stop the current interval measurement and retain the cumulative elapsed time value. Use Reset to stop any interval measurement in progress and clear the elapsed time value. Use Restart to stop current interval measurement and start a new interval measurement.
         void Restart() {
           this->Reset();
           this->Start();
         }
-
+        
         /// @brief Starts, or resumes, measuring elapsed time for an interval.
         /// @remarks n a typical Stopwatch scenario, you call the Start method, then eventually call the Stop method, and then you check elapsed time using the Elapsed property.
         /// @remarks Once started, a Stopwatch timer measures the current interval, in elapsed timer ticks, until the instance is stopped or reset. Starting a Stopwatch that is already running does not change the timer state or reset the elapsed time properties.
@@ -113,11 +113,11 @@ namespace Switch {
           this->start = this->GetTimestamp() - (this->stop - this->start);
           this->running = true;
         }
-
+        
         /// @brief Initializes a new Stopwatch instance, sets the elapsed time property to zero, and starts measuring elapsed time.
         /// @remarks This method is equivalent to calling the Stopwatch constructor and then calling Start on the new instance.
         static Stopwatch StartNew() {return Stopwatch(true);}
-
+        
         /// @brief Stops measuring elapsed time for an interval.
         /// @remarks In a typical Stopwatch scenario, you call the Start method, then eventually call the Stop method, and then you check elapsed time using the Elapsed property.
         /// @remarks The Stop method ends the current time interval measurement. Stopping a Stopwatch that is not running does not change the timer state or reset the elapsed time properties.
@@ -126,15 +126,15 @@ namespace Switch {
           this->stop = this->GetTimestamp();
           this->running = false;
         }
-
+        
       private:
         Stopwatch(bool start) {
-          if (start)
+          if(start)
             Start();
         }
         
         int64 GetElapsedTicks() const {
-          if (this->running)
+          if(this->running)
             return this->GetTimestamp() - this->start;
           return (this->stop - this->start);
         }

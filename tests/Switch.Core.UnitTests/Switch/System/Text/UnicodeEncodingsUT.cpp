@@ -313,7 +313,7 @@ namespace {
     ASSERT_EQ(TypeParam::encodingName, TypeParam::encoding.GetEncodingName());
   }
   
- TYPED_TEST(Encoding, IsReadOnly) {
+  TYPED_TEST(Encoding, IsReadOnly) {
     ASSERT_TRUE(TypeParam::encoding.IsReadOnly());
   }
   
@@ -360,14 +360,14 @@ namespace {
   
   TYPED_TEST(Encoding, GetByteCount_Chars) {
     EncodingUT::UnicodeSequence sequence =
-    Encoding<TypeParam>::charA +
-    Encoding<TypeParam>::charAE +
-    Encoding<TypeParam>::charSpecialT +
-    Encoding<TypeParam>::sigma +
-    Encoding<TypeParam>::syriacSemkath +
-    Encoding<TypeParam>::fullBlock +
-    Encoding<TypeParam>::cjk +
-    Encoding<TypeParam>::koala;
+      Encoding<TypeParam>::charA +
+      Encoding<TypeParam>::charAE +
+      Encoding<TypeParam>::charSpecialT +
+      Encoding<TypeParam>::sigma +
+      Encoding<TypeParam>::syriacSemkath +
+      Encoding<TypeParam>::fullBlock +
+      Encoding<TypeParam>::cjk +
+      Encoding<TypeParam>::koala;
     ASSERT_EQ(sequence.Size(), TypeParam::encoding.GetByteCount(sequence.Chars(), sequence.Count()));
   }
   
@@ -416,12 +416,11 @@ namespace {
   TYPED_TEST(Encoding, GetMaxByteCount) {
     ASSERT_EQ(0, TypeParam::encoding.GetMaxByteCount(0));
     ASSERT_EQ(TypeParam::maxByteSize, TypeParam::encoding.GetMaxByteCount(1));
-    ASSERT_EQ(TypeParam::maxByteSize*3, TypeParam::encoding.GetMaxByteCount(3));
+    ASSERT_EQ(TypeParam::maxByteSize * 3, TypeParam::encoding.GetMaxByteCount(3));
     ASSERT_THROW(TypeParam::encoding.GetMaxByteCount(-1), ArgumentOutOfRangeException);
     
-    if (TypeParam::maxByteSize > 1) {
-      ASSERT_THROW(TypeParam::encoding.GetMaxByteCount((Int32::MaxValue/2)+1), ArgumentOutOfRangeException);
-    }
+    if(TypeParam::maxByteSize > 1)
+      ASSERT_THROW(TypeParam::encoding.GetMaxByteCount((Int32::MaxValue / 2) + 1), ArgumentOutOfRangeException);
   }
   
   TYPED_TEST(Encoding, GetMaxCharCount) {
@@ -431,11 +430,10 @@ namespace {
     
     ASSERT_THROW(TypeParam::encoding.GetMaxCharCount(-1), ArgumentOutOfRangeException);
     
-    if (TypeParam::minByteSize == 2) {
+    if(TypeParam::minByteSize == 2)
       ASSERT_EQ(0, TypeParam::encoding.GetMaxCharCount(1));
-    }
-    
-    if (TypeParam::minByteSize == 4) {
+      
+    if(TypeParam::minByteSize == 4) {
       ASSERT_EQ(0, TypeParam::encoding.GetMaxCharCount(1));
       ASSERT_EQ(0, TypeParam::encoding.GetMaxCharCount(2));
       ASSERT_EQ(0, TypeParam::encoding.GetMaxCharCount(3));
@@ -451,7 +449,7 @@ namespace {
   
   TYPED_TEST(Encoding, GetBytes_String_Bytes___Larger_Buffer) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
-    int32 bytesSize = sequence.Size()+10;
+    int32 bytesSize = sequence.Size() + 10;
     System::Array<byte> bytes(bytesSize);
     ASSERT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.ToString(), (byte*)bytes.Data(), bytesSize));
     EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
@@ -459,7 +457,7 @@ namespace {
   
   TYPED_TEST(Encoding, GetBytes_String_Bytes___Too_Small_Buffer) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
-    int32 bytesSize = sequence.Size()-1;
+    int32 bytesSize = sequence.Size() - 1;
     System::Array<byte> bytes(bytesSize);
     ASSERT_THROW(TypeParam::encoding.GetBytes(sequence.ToString(), (byte*)bytes.Data(), bytesSize), ArgumentException);
   }
@@ -488,7 +486,7 @@ namespace {
   
   TYPED_TEST(Encoding, GetBytes_Chars_Bytes___LargerBuffer) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
-    int32 bytesSize = sequence.Size()+1;
+    int32 bytesSize = sequence.Size() + 1;
     System::Array<byte> bytes(bytesSize);
     ASSERT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), (byte*)bytes.Data(), bytesSize));
     EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
@@ -561,7 +559,7 @@ namespace {
   }
   
   TYPED_TEST(Encoding, GetBytes_Array_Index_Count_1char32_Exceptions) {
-    ASSERT_THROW(TypeParam::encoding.GetBytes(Encoding<TypeParam>::cjk.Chars(), Encoding<TypeParam>::cjk.Count() , -1, 0), ArgumentOutOfRangeException);
+    ASSERT_THROW(TypeParam::encoding.GetBytes(Encoding<TypeParam>::cjk.Chars(), Encoding<TypeParam>::cjk.Count(), -1, 0), ArgumentOutOfRangeException);
     ASSERT_THROW(TypeParam::encoding.GetBytes(Encoding<TypeParam>::cjk.Chars(), Encoding<TypeParam>::cjk.Count(), 0, -1), ArgumentOutOfRangeException);
   }
   
@@ -584,14 +582,14 @@ namespace {
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Bytes_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::koala;
-    int32 bytesSize = sequence.Size()-1;
+    int32 bytesSize = sequence.Size() - 1;
     System::Array<byte> bytes(bytesSize);
     ASSERT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, sequence.Count(), (byte*)bytes.Data(), bytesSize), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Bytes_Larger) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::koala;
-    int32 bytesSize = sequence.Size()+1;
+    int32 bytesSize = sequence.Size() + 1;
     System::Array<byte> bytes(bytesSize);
     ASSERT_EQ(sequence.Size(), TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, sequence.Count(), (byte*)bytes.Data(), bytesSize));
     EncodingUT::EXPECT_BYTES(sequence.Bytes(), sequence.Size(), bytes.Data());
@@ -616,8 +614,8 @@ namespace {
     int32 bytesOffset = Encoding<TypeParam>::charA.Size();
     
     System::Array<byte> bytes(bytesSize);
-    ASSERT_EQ(sequence.Size() - bytesOffset, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, sequence.Count()-index, (byte*)bytes.Data(), bytesSize));
-    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[bytesOffset], sequence.Size()-bytesOffset, bytes.Data());
+    ASSERT_EQ(sequence.Size() - bytesOffset, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, sequence.Count() - index, (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[bytesOffset], sequence.Size() - bytesOffset, bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Index_Is_3) {
@@ -627,8 +625,8 @@ namespace {
     int32 bytesOffset = Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::charSpecialT.Size() + Encoding<TypeParam>::fullBlock.Size();
     
     System::Array<byte> bytes(bytesSize);
-    ASSERT_EQ(sequence.Size() - bytesOffset, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, sequence.Count()-index, (byte*)bytes.Data(), bytesSize));
-    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[bytesOffset], sequence.Size()-bytesOffset, bytes.Data());
+    ASSERT_EQ(sequence.Size() - bytesOffset, TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, sequence.Count() - index, (byte*)bytes.Data(), bytesSize));
+    EncodingUT::EXPECT_BYTES(&sequence.Bytes()[bytesOffset], sequence.Size() - bytesOffset, bytes.Data());
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Index_Is_1_And_Count_Is_Too_Large) {
@@ -637,8 +635,8 @@ namespace {
     int32 bytesSize = sequence.Size();
     
     System::Array<byte> bytes(bytesSize);
-    ASSERT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 1 + (sequence.Count()-index), (byte*)bytes.Data(), bytesSize),
-                 ArgumentOutOfRangeException);
+    ASSERT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), index, 1 + (sequence.Count() - index), (byte*)bytes.Data(), bytesSize),
+      ArgumentOutOfRangeException);
   }
   
   TYPED_TEST(Encoding, GetBytes_Chars_Index_Count_Bytes___Index_Is_1_And_Count_Is_0) {
@@ -748,7 +746,7 @@ namespace {
     ASSERT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, 2, bytes, 3, 2), ArgumentException);
     ASSERT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, 1, bytes, 3, 3), ArgumentException);
     ASSERT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 0, 0, bytes, 3, 4), ArgumentException);
-    ASSERT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 4, 0, bytes, 3, 0),ArgumentException);
+    ASSERT_THROW(TypeParam::encoding.GetBytes(sequence.Chars(), sequence.Count(), 4, 0, bytes, 3, 0), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetBytes_String_Index_Count_Bytes_Index___Bytes_Is_Null) {
@@ -927,11 +925,10 @@ namespace {
   int32 GetCompleteChars(const UnicodeCharacters& chars, int32 index) {
     int32 completed = 0;
     int32 size = 0;
-    for (int32 i = 0; i < chars.Length; i++) {
+    for(int32 i = 0; i < chars.Length; i++) {
       size += chars[i].Size();
-      if (index < size) {
+      if(index < size)
         return completed;
-      }
       completed += 1;
     }
     return completed;
@@ -961,9 +958,8 @@ namespace {
   TYPED_TEST(Encoding, GetCharCount_Bytes) {
     UnicodeCharacters chars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::charSpecialT, Encoding<TypeParam>::sigma, Encoding<TypeParam>::syriacSemkath, Encoding<TypeParam>::fullBlock, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(chars);
-    for (int32 i = 0; i <= sequence.Size(); i++) {
+    for(int32 i = 0; i <= sequence.Size(); i++)
       ASSERT_EQ(GetCompleteChars(chars, i), TypeParam::encoding.GetCharCount(sequence.Bytes(), i));
-    }
   }
   
   TYPED_TEST(Encoding, GetCharCount_byte_array_null) {
@@ -986,16 +982,16 @@ namespace {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::sigma + Encoding<TypeParam>::fullBlock;
     
     EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), 1,
-                             TypeParam::encoding.GetChars(sequence.Bytes(), Encoding<TypeParam>::charA.Size()));
-    
+      TypeParam::encoding.GetChars(sequence.Bytes(), Encoding<TypeParam>::charA.Size()));
+      
     EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), 2,
-                             TypeParam::encoding.GetChars(sequence.Bytes(), Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::charAE.Size()));
-    
+      TypeParam::encoding.GetChars(sequence.Bytes(), Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::charAE.Size()));
+      
     EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), 3,
-                             TypeParam::encoding.GetChars(sequence.Bytes(), Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::charAE.Size() + Encoding<TypeParam>::sigma.Size()));
-    
+      TypeParam::encoding.GetChars(sequence.Bytes(), Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::charAE.Size() + Encoding<TypeParam>::sigma.Size()));
+      
     EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), 4,
-                             TypeParam::encoding.GetChars(sequence.Bytes(), Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::charAE.Size() + Encoding<TypeParam>::sigma.Size() + Encoding<TypeParam>::fullBlock.Size()));
+      TypeParam::encoding.GetChars(sequence.Bytes(), Encoding<TypeParam>::charA.Size() + Encoding<TypeParam>::charAE.Size() + Encoding<TypeParam>::sigma.Size() + Encoding<TypeParam>::fullBlock.Size()));
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Chars) {
@@ -1070,14 +1066,14 @@ namespace {
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars___Chars_Is_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
-    int32 nbChars = sequence.Count()-1;
+    int32 nbChars = sequence.Count() - 1;
     Array<char32> chars(nbChars);
     ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), (char32*)chars.Data(), nbChars), ArgumentException);
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars___Chars_Is_Larger) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
-    int32 nbChars = sequence.Count()+1;
+    int32 nbChars = sequence.Count() + 1;
     Array<char32> chars(nbChars);
     ASSERT_EQ(sequence.Count(), TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), (char32*)chars.Data(), nbChars));
     EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), sequence.Count(), chars.Data());
@@ -1089,7 +1085,7 @@ namespace {
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
     
-    for (int32 i = 0; i <= sequence.Size(); i += 1) {
+    for(int32 i = 0; i <= sequence.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(uchars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, i, (char32*)chars.Data(), nbChars));
       EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), expectedNbChars, chars.Data());
@@ -1104,7 +1100,7 @@ namespace {
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
     
-    for (int32 i = 0; i <= expected.Size(); i += 1) {
+    for(int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), uchars[0].Size(), i, (char32*)chars.Data(), nbChars));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
@@ -1122,7 +1118,7 @@ namespace {
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
     
-    for (int32 i = 0; i <= expected.Size(); i += 1) {
+    for(int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
@@ -1150,22 +1146,21 @@ namespace {
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars___Index_Is_Out_Of_Range) {
     EncodingUT::UnicodeSequence sequence(Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala);
     char32 chars[3];
-    ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), sequence.Size()+1, 1, chars, 3), ArgumentOutOfRangeException);
+    ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), sequence.Size() + 1, 1, chars, 3), ArgumentOutOfRangeException);
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars___Count_Is_Out_Of_Range) {
     EncodingUT::UnicodeSequence sequence(Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala);
     char32 chars[3];
-    ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size()+1, chars, 3), ArgumentOutOfRangeException);
+    ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size() + 1, chars, 3), ArgumentOutOfRangeException);
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars___Invalid_Range) {
     EncodingUT::UnicodeSequence sequence(Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala);
     char32 chars[3];
     
-    for (int32 i = 0; i < sequence.Size(); i += 1) {
-      ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size()-i)+1, chars, 3), ArgumentOutOfRangeException);
-    }
+    for(int32 i = 0; i < sequence.Size(); i += 1)
+      ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size() - i) + 1, chars, 3), ArgumentOutOfRangeException);
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count___Bytes_Is_Null) {
@@ -1182,7 +1177,7 @@ namespace {
     UnicodeCharacters uchars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(uchars);
     
-    for (int32 i = 0; i <= sequence.Size(); i += 1) {
+    for(int32 i = 0; i <= sequence.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(uchars, i);
       EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, i));
     }
@@ -1194,10 +1189,10 @@ namespace {
     EncodingUT::UnicodeSequence sequence(uchars);
     EncodingUT::UnicodeSequence expected(expectedChars);
     
-    for (int32 i = 0; i <= expected.Size(); i += 1) {
+    for(int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars,
-                               TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), uchars[0].Size(), i));
+        TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), uchars[0].Size(), i));
     }
   }
   
@@ -1209,10 +1204,10 @@ namespace {
     EncodingUT::UnicodeSequence expected(expectedChars);
     EncodingUT::UnicodeSequence prefix(prefixChars);
     
-    for (int32 i = 0; i <= expected.Size(); i += 1) {
+    for(int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars,
-                               TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i));
+        TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i));
     }
   }
   
@@ -1233,19 +1228,18 @@ namespace {
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count___Index_Is_Out_Of_Range) {
     EncodingUT::UnicodeSequence sequence(Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala);
-    ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), sequence.Size()+1, 1), ArgumentOutOfRangeException);
+    ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), sequence.Size() + 1, 1), ArgumentOutOfRangeException);
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count___Count_Is_Out_Of_Range) {
     EncodingUT::UnicodeSequence sequence(Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala);
-    ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size()+1), ArgumentOutOfRangeException);
+    ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size() + 1), ArgumentOutOfRangeException);
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count___Invalid_Range) {
     EncodingUT::UnicodeSequence sequence(Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala);
-    for (int32 i = 0; i < sequence.Size(); i += 1) {
-      ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size()-i)+1), ArgumentOutOfRangeException);
-    }
+    for(int32 i = 0; i < sequence.Size(); i += 1)
+      ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size() - i) + 1), ArgumentOutOfRangeException);
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index) {
@@ -1290,18 +1284,16 @@ namespace {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
-    for (int32 i = 0; i < sequence.Size(); i += 1) {
-      ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size()-i)+1, (char32*)chars.Data(), nbChars, 0), ArgumentOutOfRangeException);
-    }
+    for(int32 i = 0; i < sequence.Size(); i += 1)
+      ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size() - i) + 1, (char32*)chars.Data(), nbChars, 0), ArgumentOutOfRangeException);
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index___Chars_Is_Too_Small) {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
-    for (int32 i = 1; i <= nbChars; i += 1) {
+    for(int32 i = 1; i <= nbChars; i += 1)
       ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), (char32*)chars.Data(), nbChars, i), ArgumentException);
-    }
   }
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count_Chars_Index___Chars_Index_At_End_With_Zero_Length) {
@@ -1322,7 +1314,7 @@ namespace {
     int32 nbChars = expected.Count();
     Array<char32> chars(nbChars);
     
-    for (int32 i = 0; i <= expected.Size(); i += 1) {
+    for(int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars, 0));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
@@ -1340,7 +1332,7 @@ namespace {
     int32 nbChars = expected.Count() + 3;
     Array<char32> chars(nbChars);
     
-    for (int32 i = 0; i <= expected.Size(); i += 1) {
+    for(int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars, 3));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, &chars.Data()[3]);
@@ -1359,7 +1351,7 @@ namespace {
     int32 nbChars = expected.Count();
     Array<char32> chars(nbChars);
     
-    for (int32 i = 0; i <= expected.Size(); i += 1) {
+    for(int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars, 0));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
@@ -1368,10 +1360,10 @@ namespace {
   
   String FromCharactersToDecodedString(UnicodeCharacters& characters, int32 index, int32 count) {
     String concat;
-    for (EncodingUT::UnicodeCharacter character : characters) {
-      if (index > 0)  {
+    for(EncodingUT::UnicodeCharacter character : characters) {
+      if(index > 0)
         index -= 1;
-      } else if (index == 0 && count > 0) {
+      else if(index == 0 && count > 0) {
         count -= 1;
         concat += character.DecodedCharacter();
       }
@@ -1402,9 +1394,8 @@ namespace {
   TYPED_TEST(Encoding, GetString_Bytes) {
     UnicodeCharacters chars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::charSpecialT, Encoding<TypeParam>::sigma, Encoding<TypeParam>::syriacSemkath, Encoding<TypeParam>::fullBlock, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(chars);
-    for (int32 i = 0; i <= sequence.Size(); i++) {
+    for(int32 i = 0; i <= sequence.Size(); i++)
       ASSERT_EQ(FromCharactersToDecodedString(chars, 0, GetCompleteChars(chars, i)), TypeParam::encoding.GetString(sequence.Bytes(), i));
-    }
   }
   
   TYPED_TEST(Encoding, GetString_Bytes___Bytes_Is_Null) {
@@ -1416,9 +1407,8 @@ namespace {
   TYPED_TEST(Encoding, GetString_Bytes_Index_Count___Index_Is_Zero) {
     UnicodeCharacters chars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::charSpecialT, Encoding<TypeParam>::sigma, Encoding<TypeParam>::syriacSemkath, Encoding<TypeParam>::fullBlock, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(chars);
-    for (int32 i = 0; i <= sequence.Size(); i++) {
+    for(int32 i = 0; i <= sequence.Size(); i++)
       ASSERT_EQ(FromCharactersToDecodedString(chars, 0, GetCompleteChars(chars, i)), TypeParam::encoding.GetString(sequence.Bytes(), sequence.Size(), 0, i));
-    }
   }
   
   TYPED_TEST(Encoding, GetString_Bytes_Index_Count___Index_Is_Three) {
@@ -1427,10 +1417,10 @@ namespace {
     EncodingUT::UnicodeSequence sequence(chars);
     EncodingUT::UnicodeSequence prefix = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT;
     EncodingUT::UnicodeSequence expected(expectedChars);
-    for (int32 i = 0; i < expected.Size(); i++) {
+    for(int32 i = 0; i < expected.Size(); i++) {
       ASSERT_EQ(
-                FromCharactersToDecodedString(chars, 3, GetCompleteChars(expectedChars, i)),
-                TypeParam::encoding.GetString(sequence.Bytes(), sequence.Size(), prefix.Size(), i));
+        FromCharactersToDecodedString(chars, 3, GetCompleteChars(expectedChars, i)),
+        TypeParam::encoding.GetString(sequence.Bytes(), sequence.Size(), prefix.Size(), i));
     }
   }
   
@@ -1480,144 +1470,144 @@ namespace {
    ASSERT_EQ(0, TypeParam::encoding.GetCharCount(bytes, 0, 0, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetCharCount(bytes, 1, 0, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetCharCount(bytes, 2, 0, 0));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 1, 0), ArgumentOutOfRangeException);
    ASSERT_EQ(0, TypeParam::encoding.GetCharCount(bytes, 1, 1, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetCharCount(bytes, 2, 1, 0));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 2, 0), ArgumentOutOfRangeException);
    ASSERT_EQ(0, TypeParam::encoding.GetCharCount(bytes, 2, 2, 0));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 3, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 3, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 3, 0), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetCharCount_byte_array_index_count1) {
    byte bytes[2] = { 0x61, 0x91 };
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 0, 1), ArgumentException);
    ASSERT_EQ(1, TypeParam::encoding.GetCharCount(bytes, 1, 0, 1));
    ASSERT_EQ(1, TypeParam::encoding.GetCharCount(bytes, 2, 0, 1));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 1, 1), ArgumentOutOfRangeException);
    ASSERT_EQ(1, TypeParam::encoding.GetCharCount(bytes, 2, 1, 1));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 2, 1), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 3, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 3, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 3, 1), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetCharCount_byte_array_index_count2) {
    byte bytes[2] = { 0x61, 0x91 };
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 0, 2), ArgumentException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 0, 2), ArgumentOutOfRangeException);
    ASSERT_EQ(2, TypeParam::encoding.GetCharCount(bytes, 2, 0, 2));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 1, 2), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 1, 2), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 1, 2), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 2, 2), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 2, 2), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 2, 2), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 3, 2), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 3, 2), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 3, 2), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetCharCount_byte_array_index_count3) {
    byte bytes[2] = { 0x61, 0x91 };
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 0, 3), ArgumentException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 0, 3), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 0, 3), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 1, 3), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 1, 3), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 1, 3), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 2, 3), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 2, 3), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 2, 3), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 0, 3, 3), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 1, 3, 3), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetCharCount(bytes, 2, 3, 3), ArgumentOutOfRangeException);
    }
-   
-   
+  
+  
    // index 0
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count0_char_array0_index0) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 0, 0, chars, 0, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 0, 0, chars, 0, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 0, 0, chars, 0, 0));
-   
+  
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 1, 0, chars, 0, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 1, 0, chars, 0, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 1, 0, chars, 0, 0));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 0, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 0, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 2, 0, chars, 0, 0));
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count1_char_array0_index0) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 1, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 1, chars, 0, 0), ArgumentException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 0, 1, chars, 0, 0), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 1, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 1, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 1, chars, 0, 0), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 1, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 1, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 1, chars, 0, 0), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count2_char_array0_index0) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 2, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 2, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 0, 2, chars, 0, 0), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 2, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 2, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 2, chars, 0, 0), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 2, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 2, chars, 0, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 2, chars, 0, 0), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count0_char_array1_index0) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 0, 0, chars, 1, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 0, 0, chars, 1, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 0, 0, chars, 1, 0));
-   
+  
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 1, 0, chars, 1, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 1, 0, chars, 1, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 1, 0, chars, 1, 0));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 0, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 0, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 2, 0, chars, 1, 0));
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count1_char_array1_index0) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
@@ -1627,50 +1617,50 @@ namespace {
    EncodingUT::EXPECT_CHARS(expected, 1, chars);
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 0, 1, chars, 1, 0));
    EncodingUT::EXPECT_CHARS(expected, 1, chars);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 1, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 1, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 1, 1, chars, 1, 0));
    EncodingUT::EXPECT_CHARS(&expected[1], 1, chars);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 1, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 1, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 1, chars, 1, 0), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count2_char_array1_index0) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 2, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 2, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 0, 2, chars, 1, 0), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 2, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 2, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 2, chars, 1, 0), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 2, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 2, chars, 1, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 2, chars, 1, 0), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count0_char_array2_index0) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 0, 0, chars, 2, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 0, 0, chars, 2, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 0, 0, chars, 2, 0));
-   
+  
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 1, 0, chars, 2, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 1, 0, chars, 2, 0));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 1, 0, chars, 2, 0));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 0, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 0, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 2, 0, chars, 2, 0));
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count1_char_array2_index0) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
@@ -1680,36 +1670,36 @@ namespace {
    EncodingUT::EXPECT_CHARS(expected, 1, chars);
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 0, 1, chars, 2, 0));
    EncodingUT::EXPECT_CHARS(expected, 1, chars);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 1, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 1, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 1, 1, chars, 2, 0));
    EncodingUT::EXPECT_CHARS(&expected[1], 1, chars);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 1, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 1, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 1, chars, 2, 0), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count2_char_array2_index0) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    char32 expected[2] = { Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE };
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 2, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 2, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_EQ(2, TypeParam::encoding.GetChars(bytes, 2, 0, 2, chars, 2, 0));
    EncodingUT::EXPECT_CHARS(expected, 2, chars);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 2, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 2, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 2, chars, 2, 0), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 2, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 2, chars, 2, 0), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 2, chars, 2, 0), ArgumentOutOfRangeException);
    }
-   
+  
    // index 1
    TYPED_TEST(Encoding, GetChar_byte_array__index_count0_char_array0_index1) {
    byte bytes[2] = { 0x61, 0x91 };
@@ -1717,113 +1707,113 @@ namespace {
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 0, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 0, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 0, 0, chars, 0, 1), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 0, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 0, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 0, chars, 0, 1), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 0, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 0, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 0, chars, 0, 1), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count1_char_array0_index1) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 1, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 1, chars, 0, 1), ArgumentException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 0, 1, chars, 0, 1), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 1, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 1, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 1, chars, 0, 1), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 1, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 1, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 1, chars, 0, 1), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count2_char_array0_index1) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 2, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 2, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 0, 2, chars, 0, 1), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 2, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 2, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 2, chars, 0, 1), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 2, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 2, chars, 0, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 2, chars, 0, 1), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count0_char_array1_index1) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 0, 0, chars, 1, 1));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 0, 0, chars, 1, 1));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 0, 0, chars, 1, 1));
-   
+  
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 1, 0, chars, 1, 1));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 1, 0, chars, 1, 1));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 1, 0, chars, 1, 1));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 0, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 0, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 2, 0, chars, 1, 1));
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count1_char_array1_index1) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 1, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 1, chars, 1, 1), ArgumentException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 0, 1, chars, 1, 1), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 1, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 1, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 1, chars, 1, 1), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 1, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 1, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 1, chars, 1, 1), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count2_char_array1_index1) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 2, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 2, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 0, 2, chars, 1, 1), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 2, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 2, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 2, chars, 1, 1), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 2, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 2, chars, 1, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 2, chars, 1, 1), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count0_char_array2_index1) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 0, 0, chars, 2, 1));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 0, 0, chars, 2, 1));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 0, 0, chars, 2, 1));
-   
+  
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 0, 1, 0, chars, 2, 1));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 1, 1, 0, chars, 2, 1));
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 1, 0, chars, 2, 1));
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 0, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 0, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_EQ(0, TypeParam::encoding.GetChars(bytes, 2, 2, 0, chars, 2, 1));
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count1_char_array2_index1) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
@@ -1833,51 +1823,51 @@ namespace {
    EncodingUT::EXPECT_CHARS(expected, 1, &chars[1]);
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 0, 1, chars, 2, 1));
    EncodingUT::EXPECT_CHARS(expected, 1, &chars[1]);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 1, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 1, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 1, 1, chars, 2, 1));
    EncodingUT::EXPECT_CHARS(&expected[1], 1, &chars[1]);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 1, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 1, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 1, chars, 2, 1), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count2_char_array2_index1) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 0, 2, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 0, 2, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 0, 2, chars, 2, 1), ArgumentException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 1, 2, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 1, 2, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 1, 2, chars, 2, 1), ArgumentOutOfRangeException);
-   
+  
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 0, 2, 2, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 1, 2, 2, chars, 2, 1), ArgumentOutOfRangeException);
    ASSERT_THROW(TypeParam::encoding.GetChars(bytes, 2, 2, 2, chars, 2, 1), ArgumentOutOfRangeException);
    }
-   
+  
    TYPED_TEST(Encoding, GetChar_byte_array__index_count_char_array_index) {
    byte bytes[2] = { 0x61, 0x91 };
    char32 chars[2];
    char32 expected[2] = { Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE };
-   
+  
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 0, 1, chars, 2, 0));
    EncodingUT::EXPECT_CHARS(expected, 1, chars);
-   
+  
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 0, 1, chars, 2, 1));
    EncodingUT::EXPECT_CHARS(expected, 1, &chars[1]);
-   
+  
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 1, 1, chars, 2, 0));
    EncodingUT::EXPECT_CHARS(&expected[1], 1, chars);
-   
+  
    ASSERT_EQ(1, TypeParam::encoding.GetChars(bytes, 2, 1, 1, chars, 2, 1));
    EncodingUT::EXPECT_CHARS(&expected[1], 1, &chars[1]);
-   
+  
    ASSERT_EQ(2, TypeParam::encoding.GetChars(bytes, 2, 0, 2, chars, 2, 0));
    EncodingUT::EXPECT_CHARS(expected, 1, chars);
    }*/

@@ -66,7 +66,7 @@ namespace Switch {
           /// @brief Gets the default WebSocket protocol keep-alive interval in milliseconds.
           /// @return the current state of the WebSocket connection.
           virtual WebSocketState GetState() const = 0;
-
+          
           /// @brief The subprotocol that was negotiated during the opening handshake.
           virtual string GetSubProtocol() const = 0;
         };

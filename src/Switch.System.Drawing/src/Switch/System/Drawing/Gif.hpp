@@ -18,7 +18,7 @@ namespace Switch {
         
         void Read(Image& image) {
         }
-
+        
       private:
         System::IO::BinaryReader reader;
       };

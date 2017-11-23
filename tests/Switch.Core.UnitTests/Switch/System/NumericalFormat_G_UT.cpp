@@ -5,7 +5,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace {
-  
+
   TEST(NumericalFormatTest, G_SByte) {
     ASSERT_EQ("0", String::Format("{0:G}", SByte(0)));
     ASSERT_EQ("5", String::Format("{0:G}", SByte(5)));
@@ -20,7 +20,7 @@ namespace {
     ASSERT_EQ("5", String::Format("{0:G1}", SByte(5)));
     ASSERT_EQ("1E+02", String::Format("{0:G1}", SByte(127)));
     ASSERT_EQ("-1", String::Format("{0:G1}", SByte(-1)));
-    ASSERT_EQ("-2E+01",String::Format("{0:G1}", SByte(-19)));
+    ASSERT_EQ("-2E+01", String::Format("{0:G1}", SByte(-19)));
     ASSERT_EQ("-1E+02", String::Format("{0:G1}", SByte(-128)));
   }
   

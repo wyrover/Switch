@@ -5,7 +5,7 @@
 
 using namespace System;
 
-namespace SwitchUnitTests {  
+namespace SwitchUnitTests {
   TEST(AbstractTest, CreateClassNotInheritedFromAnAbstract) {
     static string result;
     result = "";
@@ -17,7 +17,7 @@ namespace SwitchUnitTests {
       ~NotInheritedFromAnAbstract() {result += "~NotInheritedFromAnAbstract";}
     };
     
-    _using (refptr<NotAnAbstract> value = ref_new<NotInheritedFromAnAbstract>());
+    _using(refptr<NotAnAbstract> value = ref_new<NotInheritedFromAnAbstract>());
     GTEST_ASSERT_EQ("~NotAnAbstract", result);
   }
   
@@ -32,7 +32,7 @@ namespace SwitchUnitTests {
       ~InheritedFromAnAbstract() {result += "~InheritedFromAnAbstract";}
     };
     
-    _using (refptr<AnAbstract> value = ref_new<InheritedFromAnAbstract>());
+    _using(refptr<AnAbstract> value = ref_new<InheritedFromAnAbstract>());
     GTEST_ASSERT_EQ("~InheritedFromAnAbstract~AnAbstract", result);
   }
 }

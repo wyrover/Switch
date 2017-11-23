@@ -30,7 +30,7 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-
+        
         /// @brief Get List of IP addresses that are associated with a host.
         /// @return Array<IPAddress> An IPAddress array on List of IP addresses that are associated with a host.
         _property<const Array<IPAddress>&, _readonly> AddressList {
@@ -42,21 +42,21 @@ namespace Switch {
         _property<const Array<string>&, _readonly> Aliases {
           _get->const Array<string>& {return this->GetAliases();}
         };
-
+        
         /// @brief Get the DNS name of the host.
         /// @return string A string represent the DNS name of the host.
         _property<const string&, _readonly> HostName {
           _get->const string& {return this->GetHostName();}
         };
- 
+        
       private:
         friend class Dns;
         IPHostEntry(const Array<IPAddress>& addresses, const Array<string>& aliases, const string& hostName) : addresses(addresses), aliases(aliases), hostName(hostName) {}
-
+        
         const Array<IPAddress>& GetAddressList() const;
         const Array<string>& GetAliases() const;
         const String& GetHostName() const;
-
+        
         Array<IPAddress> addresses;
         Array<string> aliases;
         string hostName;

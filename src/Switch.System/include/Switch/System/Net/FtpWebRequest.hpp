@@ -24,7 +24,7 @@ namespace Switch {
         };
         
         WebResponse& GetResponse() override;
-
+        
         WebRequest::WebRequestStream GetRequestStream() override;
         
       protected:
@@ -32,21 +32,21 @@ namespace Switch {
         FtpWebRequest(const System::Uri& uri);
         FtpWebRequest(const FtpWebRequest& ftpWebRequest) = delete;
         FtpWebRequest operator =(const FtpWebRequest& ftpWebRequest) = delete;
-
+        
         WebResponse& GetInternalResponse() override;
         void Finished(int32 error) override;
-
+        
         System::Net::FtpWebResponse ftpWebResponse;
-
+        
       private:
         friend class System::Net::WebRequest;
         friend class System::Net::FtpWebResponse;
         
         bool GetUseBinary();
         void SetUseBinary(bool useBinary);
-
+        
         bool useBinary = false;
-
+        
         void ProcessMakeDirectory();
         void ProcessListDirectory();
         void ProcessListDirectoryDetails();

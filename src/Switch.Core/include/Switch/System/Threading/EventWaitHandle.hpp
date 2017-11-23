@@ -32,10 +32,10 @@ namespace Switch {
         /// @param mode One of the System::Threading::EventResetMode values that determines whether the event resets automatically or manually.
         /// @exception IO::IOException A Win32 error occurred.
         EventWaitHandle(bool initialState, EventResetMode mode) : mode(ref_new<EventResetMode>(mode)) {
-          if (initialState)
+          if(initialState)
             this->Set();
         }
-
+        
         /// @brief Initializes a new instance of the System::Threading::EventWaitHandle class, specifying whether the wait handle is initially signaled if created as a result of this call, whether it resets automatically or manually, the name of a system synchronization event.
         /// @param initialState true to set the initial state to signaled if the named event is created as a result of this call; false to set it to nonsignaled.
         /// @param mode One of the System::Threading::EventResetMode values that determines whether the event resets automatically or manually.
@@ -44,7 +44,7 @@ namespace Switch {
         /// @exception ArgumentException name is longer than 128 characters
         /// @exception IO::IOException A Win32 error occurred.
         EventWaitHandle(bool initialState, EventResetMode mode, const System::String& name);
-
+        
         /// @brief Initializes a new instance of the System::Threading::EventWaitHandle class, specifying whether the wait handle is initially signaled if created as a result of this call, whether it resets automatically or manually, the name of a system synchronization event, and a Boolean variable whose value after the call indicates whether the named system event was created.
         /// @param initialState true to set the initial state to signaled if the named event is created as a result of this call; false to set it to nonsignaled.
         /// @param mode One of the System::Threading::EventResetMode values that determines whether the event resets automatically or manually.
@@ -54,7 +54,7 @@ namespace Switch {
         /// @exception ArgumentException name is longer than 128 characters
         /// @exception IO::IOException A Win32 error occurred.
         EventWaitHandle(bool initialState, EventResetMode mode, const System::String& name, bool& createdNew);
-
+        
         /// @cond
         EventWaitHandle(const EventWaitHandle& evh) : guard(evh.guard), signal(evh.signal), event(evh.event), mode(evh.mode), name(evh.name) {}
         ~EventWaitHandle()  {Close();}
@@ -70,7 +70,7 @@ namespace Switch {
         
         /// @brief Releases all resources held by the current EventWaitHandle.
         void Close() override;
-
+        
         /// @brief Opens an existing named synchronization event.
         /// @param name The name of a system-wide synchronization event.
         /// @return A System::Threading::EventWaitHandle object that represents the named system event.
@@ -78,11 +78,11 @@ namespace Switch {
         /// @exception ArgumentException name is longer than 128 characters
         /// @exception IO::IOException A Win32 error occurred.
         static EventWaitHandle OpenExisting(const System::String& name);
-
+        
         /// @brief Sets the state of the event to nonsignaled, causing threads to block.
         /// @return true if the operation succeeds; otherwise, false.
         bool Reset() {
-          if (this->guard == null)
+          if(this->guard == null)
             throw ObjectDisposedException(_caller);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = false;
@@ -92,7 +92,7 @@ namespace Switch {
         /// @brief Sets the state of the event to signaled, allowing one or more waiting threads to proceed.
         /// @return true if the operation succeeds; otherwise, false.
         bool Set() {
-          if (this->guard == null)
+          if(this->guard == null)
             throw ObjectDisposedException(_caller);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = true;
@@ -105,31 +105,31 @@ namespace Switch {
         /// @return Boolean true if the value of this instance is the same as the value of value; otherwise, false.
         /// @exception ArgumentNullException The parameters value is null.
         bool Equals(const EventWaitHandle& value) const {return this->guard == value.guard && this->signal == value.signal && this->event == value.event &&  this->mode == value.mode && this->name == value.name;}
-
+        
         /// @brief Determines whether this instance of EventWaitHandle and a specified object, which must also be a EventWaitHandle object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
         /// @exception ArgumentNullException The parameters obj is null.
         bool Equals(const object& obj) const override {return is<EventWaitHandle>(obj) && this->Equals((const EventWaitHandle&)obj);}
-
+        
       private:
         bool Signal() override {return this->Set();}
         
         bool Wait(int32 millisecondsTimeOut) override {
-          if (this->guard == null)
+          if(this->guard == null)
             throw ObjectDisposedException(_caller);
-          if (millisecondsTimeOut < -1)
+          if(millisecondsTimeOut < -1)
             throw AbandonedMutexException(_caller);
-              
+            
           std::unique_lock<std::mutex> lock(*this->guard);
           while(*this->event == false) {
-            if (millisecondsTimeOut == -1)
+            if(millisecondsTimeOut == -1)
               this->signal->wait(lock);
-            else if (this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
+            else if(this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
               return false;
           }
           
-          if (*this->mode == EventResetMode::AutoReset)
+          if(*this->mode == EventResetMode::AutoReset)
             *this->event = false;
           return true;
         }

@@ -32,7 +32,7 @@ llong Native::InterlockedApi::CompareExchange(llong& location, llong value, llon
 #pragma warning(disable:4311)
 #pragma warning(disable:4312)
 void* Native::InterlockedApi::CompareExchange(void*& location, void* value, void* comparand) {
-  if (sizeof(void*) == 4)
+  if(sizeof(void*) == 4)
     return (void*)InterlockedCompareExchange((long*)&location, (long)value, (long)comparand);
   return (void*)InterlockedCompareExchange64((long long*)&location, (long long)value, (long long)comparand);
 }
@@ -63,7 +63,7 @@ llong Native::InterlockedApi::Exchange(llong& location, llong value) {
 #pragma warning(disable:4311)
 #pragma warning(disable:4312)
 void* Native::InterlockedApi::Exchange(void*& location, void* value) {
-  if (sizeof(void*) == 4)
+  if(sizeof(void*) == 4)
     return (void*)InterlockedExchange((long*)&location, (long)value);
   return (void*)InterlockedExchange64((long long*)&location, (long long)value);
 }

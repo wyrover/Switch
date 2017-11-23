@@ -38,7 +38,7 @@ namespace Switch {
   /// This example demontrate how to use async and await
   /// @include Async2.cpp
   /// @ingroup Keywords
-  #define _async(Task, name, method) \
+#define _async(Task, name, method) \
   async<Task> name{[&] method}
 }
 

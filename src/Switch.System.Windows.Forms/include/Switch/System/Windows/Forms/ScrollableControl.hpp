@@ -17,7 +17,7 @@ namespace Switch {
         public:
           /// @brief Initializes a new instance of the ScrollableControl class with default settings.
           ScrollableControl() {}
-
+          
           /// @brief Initializes a new instance of the ScrollableControl class with specific text, size, and location.
           /// @param text The text displayed by the control.
           /// @param left The X position of the control, in pixels, from the left edge of the control's container. The value is assigned to the Left property.
@@ -32,17 +32,17 @@ namespace Switch {
           /// @cond
           ScrollableControl(const ScrollableControl& scrollableControl) : Control(scrollableControl) {}
           /// @endcond
-
+          
           _property<bool> HScroll {
             _get {return this->hscroll;},
             _set {this->hscroll = value;}
           };
-
+          
           _property<bool> VScroll {
             _get {return this->vscroll;},
             _set {this->vscroll = value;}
           };
-
+          
         protected:
           /// @cond
           bool hscroll = false;

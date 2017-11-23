@@ -13,26 +13,26 @@ namespace {
     
     template<typename T>
     inline static bool Contains(const T array[], int32 size, const T& item) {
-      for (int32 index = 0; index < size; index++)
-        if (array[index] == item)
+      for(int32 index = 0; index < size; index++)
+        if(array[index] == item)
           return true;
       return false;
     }
     
     static inline void ValidateArray(const void* array, int32 size) {
-      if (size < 0)
+      if(size < 0)
         throw System::ArgumentException(_caller);
-      if (array == null && size > 0)
+      if(array == null && size > 0)
         throw System::ArgumentNullException(_caller);
     }
     
     static inline void ValidateIndex(int32 index, int32 size) {
-      if (index < 0 || index > size)
+      if(index < 0 || index > size)
         throw System::ArgumentOutOfRangeException(_caller);
     }
     
     static inline void ValidateRange(int32 size, int32 index, int32 count) {
-      if (! IsValidRange(size, index, count))
+      if(! IsValidRange(size, index, count))
         throw System::ArgumentOutOfRangeException(_caller);
     }
   };

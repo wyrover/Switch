@@ -21,7 +21,7 @@ namespace Switch {
       /// @cond
       class WebRequest;
       /// @endcond
-
+      
       /// @brief Provides a response from a Uniform Resource Identifier (URI). This is an abstract class.
       /// @par Library
       /// Switch.System
@@ -79,7 +79,7 @@ namespace Switch {
         };
         
         virtual ~WebResponse();
-
+        
         virtual WebResponseStream GetResponseStream();
         
       protected:
@@ -95,14 +95,14 @@ namespace Switch {
         WebResponse(const WebResponse& webResponse) = delete;
         WebResponse& operator =(const WebResponse& webResponse) = delete;
         
-
+        
         int64 contentLength = 0;
         string contentType;
-
+        
         void SetWebRequest(System::Net::WebRequest& webRequest);
         System::Net::WebRequest* webRequest = null;
         System::Net::WebResponse::WebResponseStream responseStream;
-
+        
         static size_t WriteNullStream(void* buffer, size_t size, size_t nmemb, void* stream);
         static size_t WriteStream(void* buffer, size_t size, size_t nmemb, void* stream);
         virtual void EndTransfert();

@@ -6,21 +6,21 @@ using namespace System;
 namespace {
   static bool IsApproximatelyEquals(double value1, double value2, double epsilon) {
     // If they are equal anyway, just return True.
-    if (value1 == value2)
+    if(value1 == value2)
       return true;
-    
+      
     // Handle NaN, Infinity.
-    if (Double::IsInfinity(value1) || Double::IsNaN(value1))
+    if(Double::IsInfinity(value1) || Double::IsNaN(value1))
       return value1 == value2;
-    else if (Double::IsInfinity(value2) || Double::IsNaN(value2))
+    else if(Double::IsInfinity(value2) || Double::IsNaN(value2))
       return value1 == value2;
-    
+      
     // Handle zero to avoid division by zero
     double divisor = Math::Max(value1, value2);
-    if (divisor == 0.0)
+    if(divisor == 0.0)
       divisor = Math::Min(value1, value2);
-    
-    return Math::Abs(value1 - value2)/divisor <= epsilon;
+      
+    return Math::Abs(value1 - value2) / divisor <= epsilon;
   }
   
   static bool IsApproximatelyEquals(double value1, double value2) {
@@ -38,9 +38,9 @@ namespace {
   TEST(MathTest, IsApproximatelyEquals) {
     double one1 = .1 * 10;
     double one2 = 0;
-    for (int ctr = 1; ctr <= 10; ctr++)
+    for(int ctr = 1; ctr <= 10; ctr++)
       one2 += .1;
-
+      
     ASSERT_FALSE(one1 == one2);
     ASSERT_TRUE(IsApproximatelyEquals(one1, one2, .000000001));
   }
@@ -80,7 +80,7 @@ namespace {
     ASSERT_EQ(270, ToDegrees(ToRadians(270)));
     ASSERT_EQ(360, ToDegrees(ToRadians(360)));
   }
-
+  
   TEST(MathTest, E) {
     ASSERT_EQ(2.7182818284590452354, Math::E);
   }
@@ -98,7 +98,7 @@ namespace {
     ASSERT_EQ(double(15.058e18), Math::Abs(double(-15.058e18)));
     ASSERT_EQ(-Double::MinValue, Math::Abs(Double::MinValue));
   }
-
+  
   TEST(MathTest, AbsInt16) {
     ASSERT_EQ(Int16::MaxValue, Math::Abs(Int16::MaxValue));
     ASSERT_EQ(int16(10328), Math::Abs(int16(10328)));
@@ -181,8 +181,8 @@ namespace {
     ASSERT_TRUE(IsApproximatelyEquals(0.839287844473872, Math::Atan2(127, 114), .000000000000001));
     ASSERT_EQ(0, Math::Atan2(0, 1));
     ASSERT_EQ(Math::PI, Math::Atan2(0, -1));
-    ASSERT_EQ(Math::PI/2, Math::Atan2(1, 0));
-    ASSERT_EQ(-Math::PI/2, Math::Atan2(-1, 0));
+    ASSERT_EQ(Math::PI / 2, Math::Atan2(1, 0));
+    ASSERT_EQ(-Math::PI / 2, Math::Atan2(-1, 0));
     ASSERT_TRUE(Double::IsNaN(Math::Atan2(Double::NaN, 1)));
     ASSERT_TRUE(Double::IsNaN(Math::Atan2(1, Double::NaN)));
     ASSERT_TRUE(Double::IsNaN(Math::Atan2(Double::PositiveInfinity, Double::PositiveInfinity)));
@@ -246,7 +246,7 @@ namespace {
       ASSERT_EQ(-1073741, Math::DivRem(Int32::MinValue, int32(2000), remainder));
       ASSERT_EQ(-1648, remainder);
     }
-
+    
     _using(int32 remainder = 0) {
       ASSERT_EQ(-1073741, Math::DivRem(Int32::MaxValue, int32(-2000), remainder));
       ASSERT_EQ(1647, remainder);

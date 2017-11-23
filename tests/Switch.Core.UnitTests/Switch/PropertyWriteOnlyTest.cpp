@@ -39,7 +39,7 @@ namespace SwitchUnitTests {
   public:
     PropertyWriteTestClass() {}
     PropertyWriteTestClass(const PropertyWriteTestClass& property) : name(property.name) {}
-
+    
     _property<string, _writeonly> Name {
       _set {this->name = value;}
     };
@@ -47,7 +47,7 @@ namespace SwitchUnitTests {
   public:
     string name = "Test property";
   };
- 
+  
   TEST(PropertyWriteOnlyTest, PropertyCopyConstructor) {
     refptr<PropertyWriteTestClass> p1 = ref_new<PropertyWriteTestClass>();
     refptr<PropertyWriteTestClass> p2 = ref_new<PropertyWriteTestClass>(*p1);

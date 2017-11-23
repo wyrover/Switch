@@ -23,9 +23,8 @@ namespace Switch {
         /// @param collection The collection whose elements are copied to the new Stack.
         /// @exception ArgumentNullException The parameters collection is null or element reference null in collection.
         Stack(const IEnumerable& collection) {
-          for (any item : collection) {
+          for(any item : collection)
             Push(item);
-          }
         }
         /// @brief Initializes a new instance of the Stack<T> class that is empty and has the specified initial capacity.
         /// @param capacity The number of elements that the new Stack can initially store.
@@ -38,7 +37,7 @@ namespace Switch {
         
         /// @cond
         Stack(InitializerList<any> il) {
-          for (const any& item : il)
+          for(const any& item : il)
             this->Push(item);
         }
         
@@ -109,7 +108,7 @@ namespace Switch {
         /// @return refptr<T> The object to peek from the Stack<T>. The value can not be null.
         /// @exception InvalidOperationException The Stack<T> is Empty.
         any Peek() {
-          if (this->stack.Count == 0)
+          if(this->stack.Count == 0)
             throw InvalidOperationException(_caller);
           return this->stack[0];
         }

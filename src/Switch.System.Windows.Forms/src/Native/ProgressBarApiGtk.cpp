@@ -18,8 +18,8 @@ namespace Native {
     guint marquee = 0;
     bool isMarquee = false;
   };
-
- int MarqueeProc(gpointer progressBar) {
+  
+  int MarqueeProc(gpointer progressBar) {
     ((Native::ProgressBar*)progressBar)->pulse();
     return 1;
   }
@@ -30,30 +30,30 @@ intptr Native::ProgressBarApi::Create(const System::Windows::Forms::ProgressBar&
   handle->Move(progressBar.Location().X, progressBar.Location().Y);
   handle->Text(progressBar.Text);
   handle->show();
- return (intptr)handle;
+  return (intptr)handle;
 }
 
 void Native::ProgressBarApi::SetMaximum(const System::Windows::Forms::ProgressBar& progressBar) {
   // no implementation
 }
 
-void Native::ProgressBarApi::SetMinimum(const System::Windows::Forms::ProgressBar &progressBar) {
-    // no implementation
+void Native::ProgressBarApi::SetMinimum(const System::Windows::Forms::ProgressBar& progressBar) {
+  // no implementation
 }
 
-void Native::ProgressBarApi::SetMarquee(const System::Windows::Forms::ProgressBar &progressBar) {
-  if (progressBar.Style == ProgressBarStyle::Marquee) {
+void Native::ProgressBarApi::SetMarquee(const System::Windows::Forms::ProgressBar& progressBar) {
+  if(progressBar.Style == ProgressBarStyle::Marquee) {
     ((Native::ProgressBar*)progressBar.Handle())->isMarquee = true;
     ((Native::ProgressBar*)progressBar.Handle())->marquee = g_timeout_add(progressBar.MarqueeAnimationSpeed(), MarqueeProc, (gpointer)progressBar.Handle());
   } else {
-    if (((Native::ProgressBar*)progressBar.Handle())->isMarquee == true) {
+    if(((Native::ProgressBar*)progressBar.Handle())->isMarquee == true) {
       g_source_remove(((Native::ProgressBar*)progressBar.Handle())->marquee);
       ((Native::ProgressBar*)progressBar.Handle())->isMarquee = false;
     }
   }
 }
 
-void Native::ProgressBarApi::SetValue(const System::Windows::Forms::ProgressBar &progressBar) {
+void Native::ProgressBarApi::SetValue(const System::Windows::Forms::ProgressBar& progressBar) {
   ((Native::ProgressBar*)progressBar.Handle())->set_fraction(double(progressBar.Value()) / (double(progressBar.Maximum()) - double(progressBar.Minimum)));
 }
 

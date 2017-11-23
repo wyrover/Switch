@@ -11,7 +11,7 @@ constexpr int64 Int64::MaxValue;
 constexpr int64 Int64::MinValue;
 
 int64 Int64::Parse(const string& value) {
-  return Parse(value,10);
+  return Parse(value, 10);
 }
 
 int64 Int64::Parse(const string& str, int32 base) {
@@ -28,7 +28,7 @@ bool Int64::TryParse(const string& str, Int64& value) {
 
 bool Int64::TryParse(const string& str, int32 base, int64& value) {
   try {
-    value = Parse(str,base);
+    value = Parse(str, base);
   } catch(const Exception&) {
     return false;
   }
@@ -40,7 +40,7 @@ bool Int64::TryParse(const string& str, int32 base, Int64& value) {
 }
 
 int32 Int64::GetHashCode() const {
-  return (int32)(this->value & 0x00000000FFFFFFFF) ^ (int32)((this->value>>32) & 0x00000000FFFFFFFF);
+  return (int32)(this->value & 0x00000000FFFFFFFF) ^ (int32)((this->value >> 32) & 0x00000000FFFFFFFF);
 }
 
 string Int64::ToString() const {
@@ -56,39 +56,39 @@ string Int64::ToString(const string& format, const IFormatProvider&) const {
   int32 precision;
   char32 type = NumericalFormat::GetFormatType(format, precision);
   switch(type) {
-    case 0:   return NumericalFormat::Format_Custom(arg,format);
-    case 'b': return NumericalFormat::Format_B(arg, precision, 64);
-    case 'd': return NumericalFormat::Format_D(arg, precision);
-    case 'e': return NumericalFormat::Format_E(this->value, precision == 0 ? 19 : precision, false);
-    case 'E': return NumericalFormat::Format_E(this->value, precision == 0 ? 19 : precision, true);
-    case 'f':
-      if (format.Length() == 1) precision = 2;
-      return NumericalFormat::Format_F(arg, precision);
-    case 'g':
-    case 'G': {
-      if (precision == 0) precision = 19;
-      return NumericalFormat::Format_G(arg, precision, type == 'G');
-    }
-    case 'n': 
-      if (format.Length() == 1) precision = 2;
-      return NumericalFormat::Format_N(arg, precision);
-    case 'p': 
-      if (format.Length() == 1) precision = 2;
-      return NumericalFormat::Format_P(arg, precision);
-    case 'x': return NumericalFormat::Format_X(arg, precision, false, 16);
-    case 'X': return NumericalFormat::Format_X(arg, precision, true,  16);
+  case 0:   return NumericalFormat::Format_Custom(arg, format);
+  case 'b': return NumericalFormat::Format_B(arg, precision, 64);
+  case 'd': return NumericalFormat::Format_D(arg, precision);
+  case 'e': return NumericalFormat::Format_E(this->value, precision == 0 ? 19 : precision, false);
+  case 'E': return NumericalFormat::Format_E(this->value, precision == 0 ? 19 : precision, true);
+  case 'f':
+    if(format.Length() == 1) precision = 2;
+    return NumericalFormat::Format_F(arg, precision);
+  case 'g':
+  case 'G': {
+    if(precision == 0) precision = 19;
+    return NumericalFormat::Format_G(arg, precision, type == 'G');
+  }
+  case 'n':
+    if(format.Length() == 1) precision = 2;
+    return NumericalFormat::Format_N(arg, precision);
+  case 'p':
+    if(format.Length() == 1) precision = 2;
+    return NumericalFormat::Format_P(arg, precision);
+  case 'x': return NumericalFormat::Format_X(arg, precision, false, 16);
+  case 'X': return NumericalFormat::Format_X(arg, precision, true,  16);
   }
   return format;
 }
 
 int32 Int64::CompareTo(const Int64& value) const {
-  if (this->value < value.value) return -1;
-  if (this->value == value.value) return 0;
+  if(this->value < value.value) return -1;
+  if(this->value == value.value) return 0;
   return 1;
 }
 
 int32 Int64::CompareTo(const IComparable& obj) const {
-  if (!is<Int64>(obj))
+  if(!is<Int64>(obj))
     return 1;
   return CompareTo(static_cast<const Int64&>(obj));
 }
@@ -102,19 +102,19 @@ bool Int64::ToBoolean(const IFormatProvider&) const {
 }
 
 byte Int64::ToByte(const IFormatProvider&) const {
-  if (this->value < Byte::MinValue)
+  if(this->value < Byte::MinValue)
     throw OverflowException(_caller);
-  
-  if (this->value > Byte::MaxValue)
+    
+  if(this->value > Byte::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (sbyte)this->value;
 }
 
 char32 Int64::ToChar(const IFormatProvider&) const {
-  if (this->value < 0 || this->value > static_cast<int64>(Char::MaxValue))
+  if(this->value < 0 || this->value > static_cast<int64>(Char::MaxValue))
     throw OverflowException(_caller);
-  
+    
   return (char)this->value;
 }
 
@@ -127,22 +127,22 @@ double Int64::ToDouble(const IFormatProvider&) const {
 }
 
 int16 Int64::ToInt16(const IFormatProvider&) const {
-  if (this->value < Int16::MinValue)
+  if(this->value < Int16::MinValue)
     throw OverflowException(_caller);
-  
-  if (this->value > Int16::MaxValue)
+    
+  if(this->value > Int16::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (int16)this->value;
 }
 
 int32 Int64::ToInt32(const IFormatProvider&) const {
-  if (this->value < Int32::MinValue)
+  if(this->value < Int32::MinValue)
     throw OverflowException(_caller);
-  
-  if (this->value > Int32::MaxValue)
+    
+  if(this->value > Int32::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (int32)this->value;
 }
 
@@ -151,42 +151,42 @@ int64 Int64::ToInt64(const IFormatProvider&) const {
 }
 
 uint16 Int64::ToUInt16(const IFormatProvider&) const {
-  if (this->value < UInt16::MinValue)
+  if(this->value < UInt16::MinValue)
     throw OverflowException(_caller);
-  
-  if (this->value > UInt16::MaxValue)
+    
+  if(this->value > UInt16::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (uint16)this->value;
 }
 
 uint32 Int64::ToUInt32(const IFormatProvider&) const {
-  if (this->value < 0)
+  if(this->value < 0)
     throw OverflowException(_caller);
-  
-  if (this->value > UInt32::MaxValue)
+    
+  if(this->value > UInt32::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (uint32)this->value;
 }
 
 uint64 Int64::ToUInt64(const IFormatProvider&) const {
-  if (this->value < 0)
+  if(this->value < 0)
     throw OverflowException(_caller);
-  
-  if ((uint64)this->value > UInt64::MaxValue)
+    
+  if((uint64)this->value > UInt64::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (uint64)this->value;
 }
 
 sbyte Int64::ToSByte(const IFormatProvider&) const {
-  if (this->value < SByte::MinValue)
+  if(this->value < SByte::MinValue)
     throw OverflowException(_caller);
-  
-  if (this->value > SByte::MaxValue)
+    
+  if(this->value > SByte::MaxValue)
     throw OverflowException(_caller);
-  
+    
   return (sbyte)this->value;
 }
 
@@ -223,44 +223,44 @@ Int64& Int64::operator *=(const Int64& value)  {
 }
 
 Int64& Int64::operator /=(const Int64& value) {
-  if (value == 0)
+  if(value == 0)
     throw DivideByZeroException(_caller);
-
+    
   this->value /= value.value;
   return *this;
 }
 
 Int64& Int64::operator %=(const Int64& value) {
-  if (value == 0)
+  if(value == 0)
     throw DivideByZeroException(_caller);
-
+    
   this->value %= value;
   return *this;
 }
 
 Int64& Int64::operator &=(const Int64& value) {
-   this->value &= value.value;
-   return *this;
+  this->value &= value.value;
+  return *this;
 }
 
 Int64& Int64::operator |=(const Int64& value) {
-   this->value |= value.value;
-   return *this;
+  this->value |= value.value;
+  return *this;
 }
 
 Int64& Int64::operator ^=(const Int64& value) {
-   this->value ^= value.value;
-   return *this;
+  this->value ^= value.value;
+  return *this;
 }
 
 Int64& Int64::operator <<=(const Int64& value) {
-   this->value <<= value.value;
-   return *this;
+  this->value <<= value.value;
+  return *this;
 }
 
 Int64& Int64::operator >>=(const Int64& value) {
-   this->value >>= value.value;
-   return *this;
+  this->value >>= value.value;
+  return *this;
 }
 
 Int64& Int64::operator ++() {

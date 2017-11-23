@@ -58,7 +58,7 @@ namespace Switch {
         using TextWriter::Write;
         void Write(const System::String& s) override;
       };
-
+      
       /// @brief Gets or sets the background color of the console.
       /// @param A ConsoleColor that specifies the background color of the console; that is, the color that appears behind each character.
       /// @exception ArgumentException The color specified in a set operation is not a valid member of System::ConsoleColor.
@@ -70,25 +70,25 @@ namespace Switch {
       /// The following example saves the values of the ConsoleColor enumeration to an array and stores the current values of the BackgroundColor and ForegroundColor properties to variables. It then changes the foreground color to each color in the ConsoleColor enumeration except to the color that matches the current background, and it changes the background color to each color in the ConsoleColor enumeration except to the color that matches the current foreground. (If the foreground color is the same as the background color, the text isn't visible.) Finally, it calls the ResetColor method to restore the original console colors.
       /// @include ConsoleColor4.cpp
       static _property<ConsoleColor> BackgroundColor;
-
+      
       /// @brief Gets or sets the height of the buffer area.
       /// @param The current height, in rows, of the buffer area.
       /// @par Example
       /// This example demonstrates the BufferHeight and BufferWidth properties. The example reports the dimensions of an operating system window set to a buffer size of 300 rows and 85 columns.
       /// @include ConsoleBuffer.cpp
       static _property<int32> BufferHeight;
-
+      
       /// @brief Gets or sets the width of the buffer area.
       /// @param The current width, in columns, of the buffer area.
       /// @par Example
       /// This example demonstrates the BufferHeight and BufferWidth properties. The example reports the dimensions of an operating system window set to a buffer size of 300 rows and 85 columns.
       /// @include ConsoleBuffer.cpp
       static _property<int32> BufferWidth;
-
+      
       /// @brief Gets a value indicating whether the CAPS LOCK keyboard toggle is turned on or turned off.
       /// @param true if CAPS LOCK is turned on; false if CAPS LOCK is turned off.
       static _property<bool, _readonly> CapsLock;
-
+      
       /// @brief Gets or sets the column position of the cursor within the buffer area.
       /// @param The current position, in columns, of the cursor.
       /// @exception ArgumentOutOfRangeException left less than 1 or greater than 80.
@@ -96,7 +96,7 @@ namespace Switch {
       /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
       /// @include ConsoleCursor.cpp
       static _property<int32> CursorLeft;
-
+      
       /// @brief Gets or sets the height of the cursor within a character cell.
       /// @param size The size of the cursor expressed as a percentage of the height of a character cell. The property value ranges from 1 to 100.
       /// @exception ArgumentOutOfRangeException size less than 1 or greater than 100.
@@ -104,7 +104,7 @@ namespace Switch {
       /// This example demonstrates the CursorSize property. The example increases the size of the cursor each time any console key is pressed, then restores the cursor to its original size before terminating.
       /// @include ConsoleCursorSize.cpp
       static _property<int32> CursorSize;
-
+      
       /// @brief Gets or sets the row position of the cursor within the buffer area.
       /// @param int32 The current position, in rows, of the cursor.
       /// @exception ArgumentOutOfRangeException top less than 1 or greater than 25.
@@ -112,48 +112,48 @@ namespace Switch {
       /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
       /// @include ConsoleCursor.cpp
       static _property<int32> CursorTop;
-
+      
       /// @brief Gets or sets a value indicating whether the cursor is visible.
       /// @param true if the cursor is visible; otherwise, false.
       /// @par Example
       /// This example demonstrates the CursorVisible property. The example makes the cursor visible if the first column of input is a '+' character or invisible if the input is a '-' character.
       /// @include ConsoleCursorVisible.cpp
       static _property<bool> CursorVisible;
-
+      
       /// @brief Gets the standard error outpout stream.
       /// @param A TextWriter that represents the standard error output stream.
       static _property<StandardErrorOutput&, _readonly> Error;
-
+      
       /// @brief Gets or sets the foreground color of the console.
       /// @param A ConsoleColor that specifies the foreground color of the console; that is, the color of each character that is displayed.
       /// @par Example
       /// The following example saves the values of the ConsoleColor enumeration to an array and stores the current values of the BackgroundColor and ForegroundColor properties to variables. It then changes the foreground color to each color in the ConsoleColor enumeration except to the color that matches the current background, and it changes the background color to each color in the ConsoleColor enumeration except to the color that matches the current foreground. (If the foreground color is the same as the background color, the text isn't visible.) Finally, it calls the ResetColor method to restore the original console colors.
       /// @include ConsoleColor4.cpp
       static _property<ConsoleColor> ForegroundColor;
-
+      
       /// @brief Gets the standard input stream.
       /// @param A TextReader that represents the standard input stream.
       /// @par Example
       /// The following sample illustrates the use of the In property.
       /// @include ConsoleInOut.cpp
       static _property<StandardInput&, _readonly> In;
-
+      
       /// @brief Gets or sets the encoding the console uses to read input.
       /// @param The encoding used to read console input.
       static _property<const refptr<System::Text::Encoding>&> InputEncoding;
-
+      
       /// @brief Gets a value that indicates whether the error output stream has been redirected from the standard error stream.
       /// @param true if error output is redirected; otherwise, false.
       static _property<bool, _readonly> IsErrorRedirected;
-
+      
       /// @brief  Gets a value that indicates whether the input stream has been redirected from the standard input stream.
       /// @param true if input is redirected; otherwise, false.
       static _property<bool, _readonly> IsInputRedirected;
-
+      
       /// @brief  Gets a value that indicates whether the output stream has been redirected from the standard output stream.
       /// @param true if output is redirected; otherwise, false.
       static _property<bool, _readonly> IsOutputRedirected;
-
+      
       /// @brief Gets a value indicating whether a key press is available in the input stream.
       /// @param true if a key press is available; otherwise, false
       /// @remarks The KeyAvailable method is returned immediately; that is, the KeyAvailable method does not block input until a key press is available.
@@ -162,40 +162,40 @@ namespace Switch {
       /// The following example demonstrates how to use the KeyAvailable property to create a loop that runs until a key is pressed.
       /// @include ConsoleKeyAvaible.cpp
       static _property<bool, _readonly> KeyAvailable;
-
+      
       /// @brief Gets the largest possible number of console window rows, based on the current font and screen resolution.
       /// @param The height of the largest possible console window measured in rows.
       static _property<int32, _readonly> LargestWindowHeight;
-
+      
       /// @brief Gets the largest possible number of console window columns, based on the current font and screen resolution.
       /// @param The width of the largest possible console window measured in colomns.
       static _property<int32, _readonly> LargestWindowWidth;
-
+      
       /// @brief Gets a value indicating whether the NUM LOCK keyboard toggle is turned on or turned off.
       /// @param true if NUM LOCK is turned on; false if NUM LOCK is turned off.
       static _property<bool, _readonly> NumberLock;
-
+      
       /// @brief Gets the standard output stream.
       /// @param A TextWriter that represents the standard output stream.
       static _property<StandardOutput&, _readonly> Out;
-
+      
       /// @brief Gets the encoding the console uses to write output.
       /// @param The encoding used to write console output.
       static _property<const refptr<System::Text::Encoding>&> OutputEncoding;
-
+      
       /// @brief Gets or sets the title to display in the console title bar.
       /// @param The string to be displayed in the title bar of the console. The maximum length of the title string is 24500 characters.
       /// @par Example
       /// This example demonstrates the Title property. The example displays the current title of the operating system window, waits for a key press, then displays a new title.
       /// @include ConsoleTitle.cpp
       static _property<string> Title;
-
+      
       /// @brief Gets or sets a value indicating whether the combination of the Control modifier key and C console key (Ctrl+C) is treated as ordinary input or as an interruption that is handled by the operating system.
       /// @param bool true if Ctrl+C is treated as ordinary input; otherwise, false.
       /// @remarks If the value of the TreatControlCAsInput property is false and Ctrl+C is pressed, the pressed keys are not stored in the input buffer and the operating system terminates the currently executing process. This is the default value.
       /// @warning Use this property judiciously because setting it to true has such a dramatic effect. Most users expect Ctrl+C to terminate a console application. If you disable the effect of Ctrl+C, the user must remember to use Ctrl+Break to terminate the application, which is a less familiar key combination.
       static _property<bool> TreatControlCAsInput;
-
+      
       /// @brief Gets or sets the height of the console window area.
       /// @param The height of the console window measured in rows.
       /// @par Example
@@ -203,15 +203,15 @@ namespace Switch {
       /// The example reports the dimensions of a console window set to 85 columns and 43 rows, then waits for a key press. When any key is pressed, the dimensions of the console window are halved, the new dimensions are reported, and the example waits for another key press. Finally, when any key is pressed the console window is restored to its original dimensions and the example terminates.
       /// @include ConsoleWindowSize.cpp
       static _property<int32> WindowHeight;
-
+      
       /// @brief Gets or sets the leftmost position of the console window area relative to the screen buffer.
       /// @param The leftmost console window position measured in columns.
       static _property<int32> WindowLeft;
-
+      
       /// @brief Gets or sets the top position of the console window area relative to the screen buffer.
       /// @param The uppermost console window position measured in rows.
       static _property<int32> WindowTop;
-
+      
       /// @brief Gets or sets the width of the console window.
       /// @param The width of the console window measured in columns.
       /// @par Example
@@ -219,16 +219,16 @@ namespace Switch {
       /// The example reports the dimensions of a console window set to 85 columns and 43 rows, then waits for a key press. When any key is pressed, the dimensions of the console window are halved, the new dimensions are reported, and the example waits for another key press. Finally, when any key is pressed the console window is restored to its original dimensions and the example terminates.
       /// @include ConsoleWindowSize.cpp
       static _property<int32> WindowWidth;
-
+      
       /// @brief Plays the sound of a beep through the console speaker.
       /// @remarks By default, the beep plays at a frequency of 800 hertz for a duration of 200 milliseconds
       static void Beep() {Beep(800, 200);}
-
+      
       /// @brief Plays the sound of a beep of a specified frequency and duration through the console speaker.
       /// @param frequency The frequency of the beep, ranging from 37 to 32767 hertz
       /// @param duration The duration of the beep measured in milliseconds
       static void Beep(int32 frequency, int32 duration);
-
+      
       /// @brief Clears the console buffer and corresponding console window of display information.
       /// @remarks Using the Clear method is equivalent invoking the MS-DOS cls command in the command prompt window.
       /// @remarks When the Clear method is called, the cursor automatically scrolls to the top-left corner of the window and the contents of the screen buffer are set to blanks using the current foreground background colors.
@@ -244,9 +244,9 @@ namespace Switch {
       static void MoveBufferArea(int32 sourceLeft, int32 sourceTop, int32 sourceWidth, int32 sourceHeight, int32 targetLeft, int32 targetTop) {
         MoveBufferArea(sourceLeft, sourceTop, sourceWidth, sourceHeight, targetLeft, targetTop, ' ', Console::BackgroundColor, Console::ForegroundColor);
       }
-
+      
       static void MoveBufferArea(int32 sourceLeft, int32 sourceTop, int32 sourceWidth, int32 sourceHeight, int32 targetLeft, int32 targetTop, char32 sourceChar, ConsoleColor sourceForeColor, ConsoleColor sourceBackColor);
-
+      
       /// @brief Reads the next character from the standard input stream.
       /// @return int32 The next character from the input stream, or negative one (-1) if there are currently no more characters to be read
       /// @remarks The Read method blocks its return while you type input characters; it terminates when you press the Enter key.
@@ -259,21 +259,21 @@ namespace Switch {
       /// The following example demonstrates the Read method.
       /// @include ConsoleRead.cpp
       static int32 Read();
-
+      
       /// @brief Reads the next line of characters from the standard input stream.
       static String ReadLine();
-
+      
       /// @brief Obtains the next character or function key pressed by the user. The pressed key is displayed in the console window.
       /// @return ConsoleKeyInfo A ConsoleKeyInfo object that describes the ConsoleKey constant and Unicode character, if any, that correspond to the pressed console key.
       /// The ConsoleKeyInfo object also describes, in a bitwise combination of ConsoleModifiers values, whether one or more SHIFT, ALT, or CTRL modifier keys was pressed simultaneously with the console key.
       static ConsoleKeyInfo ReadKey();
-
+      
       /// @brief Obtains the next character or function key pressed by the user. The pressed key is optionally displayed in the console window.
       /// @param intercept Determines whether to display the pressed key in the console window. true to not display the pressed key; otherwise, false
       /// @return ConsoleKeyInfo A ConsoleKeyInfo object that describes the ConsoleKey constant and Unicode character, if any, that correspond to the pressed console key.
       /// The ConsoleKeyInfo object also describes, in a bitwise combination of ConsoleModifiers values, whether one or more SHIFT, ALT, or CTRL modifier keys was pressed simultaneously with the console key.
       static ConsoleKeyInfo ReadKey(bool intercept);
-
+      
       /// @brief Sets the foreground and background console colors to their defaults.
       /// @remarks The foreground and background colors are restored to the colors that existed when the current process began.
       /// @remarks For more information, see the GetForegroundColor() and GetBackgroundColor() properties
@@ -281,7 +281,7 @@ namespace Switch {
       /// The following example saves the values of the ConsoleColor enumeration to an array and stores the current values of the BackgroundColor and ForegroundColor properties to variables. It then changes the foreground color to each color in the ConsoleColor enumeration except to the color that matches the current background, and it changes the background color to each color in the ConsoleColor enumeration except to the color that matches the current foreground. (If the foreground color is the same as the background color, the text isn't visible.) Finally, it calls the ResetColor method to restore the original console colors.
       /// @include ConsoleColor4.cpp
       static void ResetColor();
-
+      
       /// @brief Sets the position of the cursor.
       /// @param left The column position of the cursor.
       /// @param top The row position of the cursor.
@@ -334,37 +334,37 @@ namespace Switch {
       /// @brief Writes the specified wchar value to the standard output stream.
       /// @param value The value to write
       static void Write(wchar value);
-
+      
       /// @brief Writes the specified double value to the standard output stream.
       /// @param value The value to write
       static void Write(double value);
-
+      
       /// @brief Writes the specified int32 value to the standard output stream.
       /// @param value The value to write
       static void Write(int32 value);
-
+      
       /// @brief Writes the specified int64 value to the standard output stream.
       /// @param value The value to write
       static void Write(int64 value);
-
+      
       /// @brief Writes the specified object value to the standard output stream.
       /// @param value The value to write
       /// @exception ArgumentNullException The parameters value is null.
       static void Write(const object& value);
-
+      
       /// @brief Writes the specified single value to the standard output stream.
       /// @param value The value to write
       static void Write(float value);
-
+      
       /// @brief Writes the specified String value to the standard output stream.
       /// @param value The value to write
       /// @exception ArgumentNullException The parameters value is null.
       static void Write(const String& value);
-
+      
       /// @brief Writes the specified Uint32 value to the standard output stream.
       /// @param value The value to write
       static void Write(uint32 value);
-
+      
       /// @brief Writes the specified UInt64 value to the standard output stream.
       /// @param value The value to write
       static void Write(uint64 value);
@@ -391,66 +391,66 @@ namespace Switch {
       
       static void Write(llong value);
       static void Write(ullong value);
-
+      
       static void Write(unsigned char* value);
       
       static void Write(const String& format, const Array< ref<Object>>& array) {
-        Write(String::Format(format,array));
+        Write(String::Format(format, array));
       }
-
+      
       template<typename T0>
       static void Write(const String& format, const T0& arg0) {
         Write(String::Format(format, arg0));
       }
-
+      
       template<typename T0, typename T1>
       static void Write(const String& format, const T0& arg0, const T1& arg1) {
         Write(String::Format(format, arg0, arg1));
       }
-
+      
       template<typename T0, typename T1, typename T2>
       static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2) {
-        Write(String::Format(format,arg0, arg1, arg2));
+        Write(String::Format(format, arg0, arg1, arg2));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3>
       static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3) {
-        Write(String::Format(format,arg0, arg1, arg2,arg3));
+        Write(String::Format(format, arg0, arg1, arg2, arg3));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4>
       static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4) {
-        Write(String::Format(format,arg0, arg1, arg2,arg3,arg4));
+        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
       static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5) {
-        Write(String::Format(format,arg0, arg1, arg2, arg3, arg4, arg5));
+        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
       static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6) {
-        Write(String::Format(format,arg0, arg1, arg2, arg3, arg4, arg5, arg6));
+        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
       static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7) {
-        Write(String::Format(format,arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7));
+        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
       static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7, const T8& arg8) {
-        Write(String::Format(format,arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
       static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7, const T8& arg8, const T9& arg9) {
         Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
       }
-
+      
       /// @brief Writes the current line terminator to the standard output stream.
       static void WriteLine();
-
+      
       /// @brief Writes the specified bool value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(bool value);
@@ -470,46 +470,46 @@ namespace Switch {
       /// @brief Writes the specified wchar value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(wchar value);
-
+      
       /// @brief Writes the specified double value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(double value);
-
+      
       /// @brief Writes the specified int32 value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(int32 value);
-
+      
       /// @brief Writes the specified int64 value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(int64 value);
-
+      
       /// @brief Writes the specified object value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       /// @exception ArgumentNullException The parameters value is null.
       static void WriteLine(const object& value);
-
+      
       /// @brief Writes the specified single value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(float value);
-
+      
       /// @brief Writes the specified String value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       /// @exception ArgumentNullException The parameters value is null.
       static void WriteLine(const String& value);
-
+      
       /// @brief Writes the specified uint32 value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(uint32 value);
-
+      
       /// @brief Writes the specified UInt64 value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(uint64 value);
-
+      
       /// @cond
       static void WriteLine(llong value);
       static void WriteLine(ullong value);
       /// @endcond
-
+      
       /// @brief Writes the specified Format-control String value, followed by the current line terminator, to the standard output stream.
       /// @param format The value to write
       /// @exception ArgumentNullException The parameters value is null.
@@ -531,65 +531,65 @@ namespace Switch {
       static void WriteLine(const wchar value[]);
       
       static void WriteLine(const String& format, const Array< ref<Object>>& array) {
-        WriteLine(String::Format(format,array));
+        WriteLine(String::Format(format, array));
       }
-
+      
       template<typename T0>
       static void WriteLine(const String& format, const T0& arg0) {
         WriteLine(String::Format(format, arg0));
       }
-
+      
       template<typename T0, typename T1>
       static void WriteLine(const String& format, const T0& arg0, const T1& arg1) {
         WriteLine(String::Format(format, arg0, arg1));
       }
-
+      
       template<typename T0, typename T1, typename T2>
       static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2) {
-        WriteLine(String::Format(format,arg0, arg1, arg2));
+        WriteLine(String::Format(format, arg0, arg1, arg2));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3>
       static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3) {
-        WriteLine(String::Format(format,arg0, arg1, arg2,arg3));
+        WriteLine(String::Format(format, arg0, arg1, arg2, arg3));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4>
       static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4) {
-        WriteLine(String::Format(format,arg0, arg1, arg2,arg3,arg4));
+        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
       static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5) {
-        WriteLine(String::Format(format,arg0, arg1, arg2, arg3, arg4, arg5));
+        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
       static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6) {
-        WriteLine(String::Format(format,arg0, arg1, arg2, arg3, arg4, arg5, arg6));
+        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
       static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7) {
-        WriteLine(String::Format(format,arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7));
+        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
       static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7, const T8& arg8) {
-        WriteLine(String::Format(format,arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
       }
-
+      
       template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
       static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7, const T8& arg8, const T9& arg9) {
         WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
       }
-
+      
       static void SetError(System::IO::TextWriter& error);
-
+      
       static void SetInt(System::IO::TextReader& in);
-
+      
       static void SetOut(System::IO::TextWriter& out);
-
+      
       /// @brief Occurs when the Control modifier key (Ctrl) and either the ConsoleKey.C console key (C) or the Break key are pressed simultaneously (Ctrl+C or Ctrl+Break).
       /// @remarks This event is used in conjunction with System::ConsoleCancelEventHandler and System::ConsoleCancelEventArgs. The CancelKeyPress event enables a console application to intercept the Ctrl+C signal so the event handler can decide whether to continue executing or terminate. For more information about handling events, see Handling and Raising Events.
       /// When the user presses either Ctrl+C or Ctrl+Break, the CancelKeyPress event is fired and the application's ConsoleCancelEventHandler event handler is executed. The event handler is passed a ConsoleCancelEventArgs object that has two useful properties:

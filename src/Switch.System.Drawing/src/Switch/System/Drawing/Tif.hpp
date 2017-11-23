@@ -15,10 +15,10 @@ namespace Switch {
         Tif(const TStream& stream) : reader(stream) {}
         
         Tif(refptr<System::IO::Stream> stream) : reader(stream) {}
-
+        
         void Read(Image& image) {
         }
-
+        
       private:
         System::IO::BinaryReader reader;
       };

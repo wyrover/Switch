@@ -112,7 +112,7 @@ namespace SwitchUnitTests {
       Assert::AreEqual(0, s1.Count, _caller);
       Assert::AreEqual(10, s2.Count, _caller);
     }
- };
+  };
   
   _test(MoveTest, MoveString)
   _test(MoveTest, MoveArray)

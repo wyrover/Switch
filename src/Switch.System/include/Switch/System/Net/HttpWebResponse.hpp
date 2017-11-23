@@ -18,7 +18,7 @@ namespace Switch {
       class _export HttpWebResponse : public System::Net::WebResponse {
       public:
         virtual ~HttpWebResponse();
-
+        
         _property<System::Net::HttpStatusCode, _readonly> StatusCode {
           _get {return this->GetStatusCode();}
         };
@@ -34,7 +34,7 @@ namespace Switch {
         
       private:
         friend class HttpWebRequest;
-
+        
         System::Net::HttpStatusCode GetStatusCode() const;
         const String GetStatusDescription() const;
       };

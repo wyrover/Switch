@@ -149,14 +149,15 @@ namespace Switch {
     bool operator==(const T& value) const {return As<T>() == value;}
     template<typename T>
     bool operator!=(const T& value) const {return !this->operator==(value);}
-
+    
     bool operator==(const Any& value) const {
       if(!this->HasValue && !value.HasValue) return true;
-      return *this->value == *value.value;}
+      return *this->value == *value.value;
+    }
     bool operator!=(const Any& value) const {return !this->operator==(value);}
     
     /// @endcond
-
+    
     /// @brief Gets a value indicating whether the current Nullable<T> object has a valid value of its underlying type.
     /// @return true if the current Nullable<T> object has a value; false if the current Nullable<T> object has no value.
     /// @remarks If the HasValue property is true, the value of the current Nullable<T> object can be accessed with the Value property. Otherwise, attempting to access its value throws an InvalidOperationException exception.
@@ -213,7 +214,7 @@ namespace Switch {
     /// | Zero              | This instance is equal to obj.     |
     /// | Greater than zero | This instance is greater than obj. |
     int32 CompareTo(const IComparable& obj) const override {
-      if (!is<Any>(obj)) return -1;
+      if(!is<Any>(obj)) return -1;
       return CompareTo(as<Any>(obj));
     }
     
@@ -227,8 +228,8 @@ namespace Switch {
     /// | Zero              | This instance is equal to obj.     |
     /// | Greater than zero | This instance is greater than obj. |
     int32 CompareTo(const Any& obj) const {
-      if (this->value < obj.value) return -1;
-      if (this->value > obj.value) return 1;
+      if(this->value < obj.value) return -1;
+      if(this->value > obj.value) return 1;
       return 0;
     }
     
@@ -243,7 +244,7 @@ namespace Switch {
     /// @param obj The Object to compare with the current Object.
     /// @return true if the specified Object is equal to the current Object. otherwise, false.
     bool Equals(const object& obj) const override {
-      if (is<Any>(obj))
+      if(is<Any>(obj))
         return Equals(as<Any>(obj));
       return *this->value == obj;
     }
@@ -295,7 +296,7 @@ namespace Switch {
     /// @return The text representation of the value of the current Nullable<T> object if the HasValue property is true, or an empty string ("") if the HasValue property is false.
     /// @remarks The ToString property returns the string yielded by calling the ToString property of the object returned by the Value property.
     string ToString() const override {
-      if (this->HasValue == false)
+      if(this->HasValue == false)
         return "";
       return value->ToString();
     }
@@ -391,7 +392,7 @@ namespace Switch {
     return as<System::UInt64>(this->value.ToObject());
   }
   /// @endcond
-
+  
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
@@ -439,7 +440,7 @@ namespace Switch {
   bool is(Any& value) {
     return value.Is<T>();
   }
-
+  
   /// @cond
   template<>
   inline bool as<bool>(const Any& value) {
@@ -471,12 +472,12 @@ namespace Switch {
     return value.As<System::Int64>();
   }
   
-#if defined(__APPLE__)
+  #if defined(__APPLE__)
   template<>
   inline intptr as<intptr>(const Any& value) {
     return value.As<System::IntPtr>();
   }
-#endif
+  #endif
   
   template<>
   inline sbyte as<sbyte>(const Any& value) {
@@ -498,13 +499,13 @@ namespace Switch {
     return value.As<System::UInt64>();
   }
   
-#if defined(__APPLE__)
+  #if defined(__APPLE__)
   template<>
   inline uintptr as<uintptr>(const Any& value) {
     return value.As<System::UIntPtr>();
   }
-#endif
-
+  #endif
+  
   template<>
   inline bool as<bool>(Any& value) {
     return value.As<System::Boolean>();
@@ -535,12 +536,12 @@ namespace Switch {
     return value.As<System::Int64>();
   }
   
-#if defined(__APPLE__)
+  #if defined(__APPLE__)
   template<>
   inline intptr as<intptr>(Any& value) {
     return value.As<System::IntPtr>();
   }
-#endif
+  #endif
   
   template<>
   inline sbyte as<sbyte>(Any& value) {
@@ -562,14 +563,14 @@ namespace Switch {
     return value.As<System::UInt64>();
   }
   
-#if defined(__APPLE__)
+  #if defined(__APPLE__)
   template<>
   inline uintptr as<uintptr>(Any& value) {
     return value.As<System::UIntPtr>();
   }
-#endif
+  #endif
   /// @endcond
-
+  
   /// @brief Represent a polymorphic wrapper capable of holding any type.
   /// @par Examples
   /// This example show how to use any:

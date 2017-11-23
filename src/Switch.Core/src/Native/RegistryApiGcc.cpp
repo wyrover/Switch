@@ -38,11 +38,11 @@ int32  Native::RegistryApi::EnumKey(intptr key, int32 index, string& subkeyname)
   throw System::InvalidOperationException(_caller);
 }
 
-int32 Native::RegistryApi::QueryInfoKey(intptr key,int32& subKey ,int32& value) {
+int32 Native::RegistryApi::QueryInfoKey(intptr key, int32& subKey, int32& value) {
   throw System::InvalidOperationException(_caller);
 }
 
-int32  Native::RegistryApi::DeleteSubKey(intptr Key,const string& subkeyName) {
+int32  Native::RegistryApi::DeleteSubKey(intptr Key, const string& subkeyName) {
   throw System::InvalidOperationException(_caller);
 }
 
@@ -50,7 +50,7 @@ int32 Native::RegistryApi::GetValue(intptr key, const string& subKey, Microsoft:
   throw System::InvalidOperationException(_caller);
 }
 
-int32  Native::RegistryApi::GetHandleBaseKey (Microsoft::Win32::RegistryHive reghive, intptr& key) {
+int32  Native::RegistryApi::GetHandleBaseKey(Microsoft::Win32::RegistryHive reghive, intptr& key) {
   throw System::InvalidOperationException(_caller);
 }
 

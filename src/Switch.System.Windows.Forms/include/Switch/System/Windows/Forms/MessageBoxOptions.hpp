@@ -35,7 +35,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Windows::Forms::MessageBoxOptions> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Windows::Forms::MessageBoxOptions::DefaultDesktopOnly, "DefaultDesktopOnly"}, {(int64)System::Windows::Forms::MessageBoxOptions::RightAlign, "RightAlign"}, {(int64)System::Windows::Forms::MessageBoxOptions::RtlReading, "RtlReading"}, {(int64)System::Windows::Forms::MessageBoxOptions::ServiceNotification, "ServiceNotification"}};
     flags = true;
   }

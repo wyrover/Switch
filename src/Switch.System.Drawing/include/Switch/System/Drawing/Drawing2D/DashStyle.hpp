@@ -41,7 +41,7 @@ class AddFlagOperators<System::Drawing::Drawing2D::DashStyle> : public TrueType 
 template<>
 class EnumToStrings<System::Drawing::Drawing2D::DashStyle> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Drawing::Drawing2D::DashStyle::Solid, "Solid"}, { (int64)System::Drawing::Drawing2D::DashStyle::Dash, "Dash" }, { (int64)System::Drawing::Drawing2D::DashStyle::Dot, "Dot" }, { (int64)System::Drawing::Drawing2D::DashStyle::DashDot, "DashDot" }, { (int64)System::Drawing::Drawing2D::DashStyle::DashDotDot, "DashDotDot" }, { (int64)System::Drawing::Drawing2D::DashStyle::Custom, "Custom" }};
     flags = true;
   }

@@ -21,7 +21,7 @@ namespace Switch {
   /// This example show a Main method with argument and return code
   /// @include Main4.cpp
   /// @ingroup Keywords
-  #define _startup(mainClass) \
+#define _startup(mainClass) \
   int main(int argc, char* argv[]) {\
     struct Startup {\
       int operator()(System::Delegate<void>::FunctionPointer startup, const System::Array<System::String>& args) {startup(); return System::Environment::ExitCode;}\

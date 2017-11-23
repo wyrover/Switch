@@ -17,7 +17,7 @@ namespace Switch {
         void AddSetUp(const RegisteredMethod& registeredMethod) {this->setUps.Add(registeredMethod);}
         void AddTearDown(const RegisteredMethod& registeredMethod) {this->tearDowns.Insert(0, registeredMethod);}
         void AddTest(const RegisteredMethod& registeredMethod) {this->tests.Add(registeredMethod);}
-
+        
       private:
         friend class UnitTest;
         friend struct OneTimeSetUpAttribute;
@@ -25,7 +25,7 @@ namespace Switch {
         friend struct SetUpAttribute;
         friend struct TearDownAttribute;
         friend struct TestAttribute;
-
+        
         void AddOneTimeSetUp(const RegisteredMethod& registeredMethod) {this->oneTimeSetUps.Add(registeredMethod);}
         
         System::Collections::Generic::List<RegisteredMethod> oneTimeSetUps;

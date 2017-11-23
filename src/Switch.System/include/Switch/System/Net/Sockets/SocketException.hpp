@@ -47,7 +47,7 @@ namespace Switch {
           /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
           /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
           SocketException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
-
+          
           /// @brief Create a new instance of class SocketException
           /// @param error The error code that indicates the error that occurred.
           /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
@@ -58,7 +58,7 @@ namespace Switch {
           _property<const Sockets::SocketError&, _readonly> SocketErrorCode {
             _get->const Sockets::SocketError& {return this->error; }
           };
-
+          
         private:
           System::String GetDefaultMessage() const override {return "The Socket operation failed."; }
           Sockets::SocketError error;

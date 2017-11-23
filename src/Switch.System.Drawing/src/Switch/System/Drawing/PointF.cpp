@@ -21,11 +21,11 @@ bool PointF::Equals(const object& obj) const {
   return is<PointF>(obj) && Equals((const PointF&)obj);
 }
 
-PointF PointF::Add(const PointF &pt, const SizeF & sz) {
+PointF PointF::Add(const PointF& pt, const SizeF& sz) {
   return PointF(pt.x + sz.Width(), pt.y + sz.Height());
 }
 
-PointF PointF::Subtract(const PointF &pt, const SizeF & sz) {
+PointF PointF::Subtract(const PointF& pt, const SizeF& sz) {
   return PointF(pt.x - sz.Width(), pt.y - sz.Height());
 }
 
@@ -35,11 +35,11 @@ PointF& PointF::operator=(const PointF& pt) {
   return *this;
 }
 
-PointF PointF::operator+(const SizeF & sz) const {
+PointF PointF::operator+(const SizeF& sz) const {
   return Add(*this, sz);
 }
 
-PointF PointF::operator-(const SizeF & sz) const {
+PointF PointF::operator-(const SizeF& sz) const {
   return Subtract(*this, sz);
 }
 

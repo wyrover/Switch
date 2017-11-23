@@ -49,17 +49,17 @@ namespace Switch {
       /// @brief Create a new instance of struct Boolean
       /// @remarks Boolean is initialized by default to false.
       Boolean() {}
-
+      
       /// @brief Create a new instance of struct Boolean
       /// @param value Value for the Boolean. true or false.
-      Boolean(int32 value) : value(value!=0) {} // int value instead of bool to avoid too many implicit casts (int vs bool in c++)
-
+      Boolean(int32 value) : value(value != 0) {} // int value instead of bool to avoid too many implicit casts (int vs bool in c++)
+      
       /// @cond
       Boolean(const Boolean& value) : value(value.value) {}
-      virtual Boolean& operator =(const Boolean& value) {this->value= value; return *this;}
-      virtual Boolean& operator =(int32 value) {this->value= value!=0; return *this;}
+      virtual Boolean& operator =(const Boolean& value) {this->value = value; return *this;}
+      virtual Boolean& operator =(int32 value) {this->value = value != 0; return *this;}
       operator bool() const { return this->value; }
-
+      
       friend std::ostream& operator<<(std::ostream& output, const Boolean& value);
       /// @endcond
       
@@ -94,7 +94,7 @@ namespace Switch {
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
       int32 CompareTo(const IComparable& obj) const override {
-        if (!is<Boolean>(obj)) return 1;
+        if(!is<Boolean>(obj)) return 1;
         return CompareTo(static_cast<const Boolean&>(obj));
       }
       
@@ -121,22 +121,22 @@ namespace Switch {
       /// @return Boolean true if str is equivalent to TrueString; otherwise, false.
       /// @exception ArgumentException str is not equivalent to TrueString or FalseString.
       static bool Parse(const String& str);
-
+      
       /// @brief Converts the specified string representation of a logical value to its Boolean equivalent.
       /// @param str A string containing the value to convert.
       /// @param result When this method returns, if the conversion succeeded, contains true if str is equivalent to TrueString or false if str is equivalent to FalseString. If the conversion failed, contains false. The conversion fails if value is null reference or is not equivalent to either TrueString or FalseString. This parameter is passed uninitialized.
       /// @return Boolean true if value was converted successfully; otherwise, false.
       static bool TryParse(const String& str, bool& result);
-
+      
       /// @brief Returns a string that represents the current Boolean.
       /// @return const string A string that represents the current Boolean.
       String ToString() const override;
-
+      
     protected:
       /// @cond
       bool value = false;
       /// @endcond
-
+      
     private:
       friend class Convert;
       bool ToBoolean(const IFormatProvider& provider) const override {return this->value;}

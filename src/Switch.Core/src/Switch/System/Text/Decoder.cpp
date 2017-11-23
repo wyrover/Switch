@@ -27,12 +27,12 @@ Encoding::Decoder& Encoding::Decoder::operator =(const Decoder& b) {
 }
 
 void Encoding::Decoder::Reset() {
-    finished = false;
-    count = 0;
+  finished = false;
+  count = 0;
 }
 
 void Encoding::Decoder::Add(byte b) {
-  if (finished)
+  if(finished)
     Reset();
   bytes[count++] = b;
 }

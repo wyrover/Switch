@@ -28,7 +28,7 @@ namespace SwitchUnitTests {
   }
   
   TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaAndWithArgumentThenInvoke) {
-    __opaque_function_pointer__<void, const string&> fct = _delegate(const string& value) {
+    __opaque_function_pointer__<void, const string&> fct = _delegate(const string & value) {
       result = value;
     };
     ASSERT_FALSE(fct.IsEmpty());

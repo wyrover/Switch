@@ -22,15 +22,15 @@ namespace {
     logFont.lfPitchAndFamily = 0;
     return logFont;
   }
-
+  
   int CALLBACK EnumFamilyCallback(CONST LOGFONTW* logFont, CONST TEXTMETRICW* textMetric, DWORD fontType, LPARAM logFonts) {
-    if ((fontType & TRUETYPE_FONTTYPE) == TRUETYPE_FONTTYPE && logFont->lfFaceName[0] != '@')
+    if((fontType & TRUETYPE_FONTTYPE) == TRUETYPE_FONTTYPE && logFont->lfFaceName[0] != '@')
       (*(SortedDictionary<string, LOGFONTW*>*)logFonts)[string(logFont->lfFaceName).ToLower()] = new LOGFONT(*logFont);
     return 1;
   }
-
+  
   int CALLBACK EnumFamilyFromNameCallback(CONST LOGFONTW* logFont, CONST TEXTMETRICW* textMetric, DWORD fontType, LPARAM result) {
-    if ((fontType & TRUETYPE_FONTTYPE) == TRUETYPE_FONTTYPE && logFont->lfFaceName[0] != '@' && (*(LOGFONTW**)result) == null)
+    if((fontType & TRUETYPE_FONTTYPE) == TRUETYPE_FONTTYPE && logFont->lfFaceName[0] != '@' && (*(LOGFONTW**)result) == null)
       (*(LOGFONTW**)result) = new LOGFONT(*logFont);
     return 1;
   }
@@ -44,7 +44,7 @@ Array<System::Drawing::FontFamily> Native::FontFamilyApi::GetInstalledFontFamili
   ReleaseDC(NULL, hdc);
   System::Array<System::Drawing::FontFamily> families(logFonts.Count);
   int32 index = 0;
-  for (auto item : logFonts)
+  for(auto item : logFonts)
     families[index++] = System::Drawing::FontFamily((intptr)item.Value());
   return  families;
 }
@@ -55,19 +55,19 @@ System::Drawing::FontFamily Native::FontFamilyApi::GetFontFamilyFromName(const s
   LOGFONTW* result = null;
   EnumFontFamiliesEx(hdc, &logFont, EnumFamilyFromNameCallback, (LPARAM)&result, 0);
   ReleaseDC(NULL, hdc);
-  if (result != null)
+  if(result != null)
     return System::Drawing::FontFamily((intptr)result);
   throw ArgumentException(_caller);
 }
 
 string Native::FontFamilyApi::GetName(intptr handle) {
-  if (handle == 0) return "";
+  if(handle == 0) return "";
   return ((LOGFONT*)handle)->lfFaceName;
 }
 
 bool Native::FontFamilyApi::IsStyleAvailable(intptr handle, FontStyle style) {
-  if (handle == 0) return false;
-
+  if(handle == 0) return false;
+  
   /*
   if ((style & FontStyle::Italic) == FontStyle::Italic && result->lfItalic == 0) return false;
   if ((style & FontStyle::Underline) == FontStyle::Underline && result->lfUnderline == 0) return false;
@@ -77,8 +77,8 @@ bool Native::FontFamilyApi::IsStyleAvailable(intptr handle, FontStyle style) {
 }
 
 void Native::FontFamilyApi::ReleaseResource(intptr handle) {
-  if (handle != 0)
-    delete (LOGFONT*)handle;
+  if(handle != 0)
+    delete(LOGFONT*)handle;
 }
 
 #endif

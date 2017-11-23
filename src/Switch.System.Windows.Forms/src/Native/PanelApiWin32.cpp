@@ -25,7 +25,7 @@ intptr Native::PanelApi::Create(const System::Windows::Forms::Panel& panel) {
 void Native::PanelApi::SetBorderStyle(const System::Windows::Forms::Panel& panel) {
   SetWindowLongPtr((HWND)panel.Handle(), GWL_STYLE, GetWindowLongPtr((HWND)panel.Handle(), GWL_STYLE) & ~WS_BORDER);
   SetWindowLongPtr((HWND)panel.Handle(), GWL_EXSTYLE, GetWindowLongPtr((HWND)panel.Handle(), GWL_EXSTYLE) & ~WS_EX_CLIENTEDGE);
-  switch (panel.BorderStyle) {
+  switch(panel.BorderStyle) {
   case BorderStyle::FixedSingle: SetWindowLongPtr((HWND)panel.Handle(), GWL_STYLE, GetWindowLongPtr((HWND)panel.Handle(), GWL_STYLE) | WS_BORDER); break;
   case BorderStyle::Fixed3D: SetWindowLongPtr((HWND)panel.Handle(), GWL_EXSTYLE, GetWindowLongPtr((HWND)panel.Handle(), GWL_EXSTYLE) | WS_EX_CLIENTEDGE); break;
   }

@@ -10,7 +10,7 @@
 #elif WIN32
 #  if SWITCH_EXPORTS
 #    define _export __declspec(dllexport)
-#  else  
+#  else
 #    define _export __declspec(dllimport)
 #  endif
 #elif __GNUC__ >= 4 || defined(__clang__)

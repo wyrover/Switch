@@ -46,7 +46,7 @@ class AddFlagOperators<System::Threading::ThreadState> : public TrueType {};
 template<>
 class EnumToStrings<System::Threading::ThreadState> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Threading::ThreadState::Running, "Running"}, {(int64)System::Threading::ThreadState::StopRequested, "StopRequested"}, {(int64)System::Threading::ThreadState::SuspendRequested, "SuspendRequested"}, {(int64)System::Threading::ThreadState::Background, "Background"}, {(int64)System::Threading::ThreadState::Unstarted, "Unstarted"}, {(int64)System::Threading::ThreadState::Stopped, "Stopped"}, {(int64)System::Threading::ThreadState::WaitSleepJoin, "WaitSleepJoin"}, {(int64)System::Threading::ThreadState::Suspended, "Suspended"}, {(int64)System::Threading::ThreadState::AbortRequested, "AbortRequested"}, {(int64)System::Threading::ThreadState::Aborted, "Aborted"}};
     flags = true;
   }

@@ -23,17 +23,17 @@ namespace Switch {
           /// @cond
           Panel(const Panel& panel) : ContainerControl(panel), borderStyle(panel.borderStyle) {}
           /// @endcond
-
+          
           _property<System::Windows::Forms::BorderStyle> BorderStyle {
             _get{return this->borderStyle;},
-            _set{this->SetBorderStyle (value);}
+            _set{this->SetBorderStyle(value);}
           };
-
+          
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(200, 100); }
           void SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle);
-
+          
           /// @cond
           System::Windows::Forms::BorderStyle borderStyle = System::Windows::Forms::BorderStyle::None;
           /// @endcond

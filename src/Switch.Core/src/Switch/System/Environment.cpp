@@ -25,9 +25,9 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 #if defined(_WIN32)
-  __declspec(dllimport) extern char** environ;
+__declspec(dllimport) extern char** environ;
 #else
-  extern char** environ;
+extern char** environ;
 #endif
 
 namespace {
@@ -49,24 +49,24 @@ namespace {
   
   struct ConsoleInterceptSignals {
     ConsoleInterceptSignals() {
-      auto signalKeys =Native::ConsoleApi::GetSignalKeys();
+      auto signalKeys = Native::ConsoleApi::GetSignalKeys();
       for(auto signal : signalKeys)
         ::signal(signal.Key, ConsoleInterceptSignals::SignalHandler);
     }
     
     ~ConsoleInterceptSignals() {
-      auto signalKeys =Native::ConsoleApi::GetSignalKeys();
+      auto signalKeys = Native::ConsoleApi::GetSignalKeys();
       for(auto signal : signalKeys)
         ::signal(signal.Key, SIG_DFL);
     }
     
   private:
     static void SignalHandler(int32 signal) {
-      static auto signalKeys =Native::ConsoleApi::GetSignalKeys();
+      static auto signalKeys = Native::ConsoleApi::GetSignalKeys();
       ::signal(signal, ConsoleInterceptSignals::SignalHandler);
       System::ConsoleCancelEventArgs consoleCancel = System::ConsoleCancelEventArgs(false, signalKeys[signal]);
       System::Console::CancelKeyPress(ref<object>::Null(), consoleCancel);
-      if (consoleCancel.Cancel == false)
+      if(consoleCancel.Cancel == false)
         Environment::Exit(-1);
     }
   };
@@ -107,16 +107,16 @@ namespace {
       throw System::AccessViolationException(_caller);
     }
   };
-
+  
   Collections::Generic::Dictionary<string, string> GetEnvironmentVariables() {
     Collections::Generic::Dictionary<string, string> envs;
-    for (int32 index = 0; environ[index] != null; index++) {
+    for(int32 index = 0; environ[index] != null; index++) {
       System::Array<string> keyValue = string(environ[index]).Split('=');
       envs[keyValue[0]] = keyValue[1];
     }
     return envs;
   }
-
+  
   _property<Collections::Generic::Dictionary<string, string>&, _readonly> EnvironmentVariables {
     []()->Collections::Generic::Dictionary<string, string>& {
       static Collections::Generic::Dictionary<string, string> environmentVariables = GetEnvironmentVariables();
@@ -135,11 +135,11 @@ namespace {
 
 _property<String, _readonly> Environment::CommandLine {
   [] {
-    if (commandLineArgs->Length == 0)
+    if(commandLineArgs->Length == 0)
       throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", _caller);
       
     string commandLine = string::Format("\"{0}\" ", commandLineArgs.ToObject()[0]);
-    for (int i = 1; i < commandLineArgs->Length; i++)
+    for(int i = 1; i < commandLineArgs->Length; i++)
       commandLine += string::Format(" {0}", (commandLineArgs.ToObject()[i].Contains(" ") ? string::Format("\"{0}\"", commandLineArgs.ToObject()[i]) : commandLineArgs.ToObject()[i]));
     return commandLine;
   }
@@ -148,11 +148,11 @@ _property<String, _readonly> Environment::CommandLine {
 _property<string> Environment::CurrentDirectory {
   [] {return Native::DirectoryApi::GetCurrentDirectory();},
   [](string value) {
-    if (String::IsNullOrEmpty(value))
+    if(String::IsNullOrEmpty(value))
       throw ArgumentException(_caller);
-    if (!System::IO::Directory::Exists(value))
+    if(!System::IO::Directory::Exists(value))
       throw IO::DirectoryNotFoundException(_caller);
-    if (Native::DirectoryApi::SetCurrentDirectory(value) != 0)
+    if(Native::DirectoryApi::SetCurrentDirectory(value) != 0)
       throw IO::IOException(_caller);
   }
 };
@@ -189,7 +189,7 @@ _property<String, _readonly> Environment::NewLine {
 _property<const OperatingSystem&, _readonly> Environment::OSVersion {
   []()->const OperatingSystem& {
     static OperatingSystem os(PlatformID::Unknown, System::Version());
-    if (os.Platform == PlatformID::Unknown) {
+    if(os.Platform == PlatformID::Unknown) {
       int32 major, minor, build, revision;
       Native::EnvironmentApi::GetOsVersion(major, minor, build, revision);
       os = OperatingSystem(Native::EnvironmentApi::GetOsPlatformID(), System::Version(major, minor, build, revision));
@@ -250,15 +250,15 @@ String Environment::ExpandEnvironmentVariables(const String& name) {
   string result;
   
   int32 index = buffer.IndexOf('%');
-  while (index != -1 && buffer.IndexOf('%', index+1) != -1) {
+  while(index != -1 && buffer.IndexOf('%', index + 1) != -1) {
     result += buffer.Substring(0, index);
-    buffer = buffer.Remove(0, index+1);
+    buffer = buffer.Remove(0, index + 1);
     index = buffer.IndexOf('%');
-    if (Environment::GetEnvironmentVariable(buffer.Substring(0, index)) != "")
+    if(Environment::GetEnvironmentVariable(buffer.Substring(0, index)) != "")
       result += Environment::GetEnvironmentVariable(buffer.Substring(0, index));
     else
       result += string::Format("%{0}%", buffer.Substring(0, index));
-    buffer = buffer.Remove(0, index+1);
+    buffer = buffer.Remove(0, index + 1);
     index = buffer.IndexOf('%');
   }
   result += buffer;
@@ -266,50 +266,50 @@ String Environment::ExpandEnvironmentVariables(const String& name) {
 }
 
 const Array<String>& Environment::GetCommandLineArgs() {
-  if (commandLineArgs->Length == 0)
+  if(commandLineArgs->Length == 0)
     throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", _caller);
   return commandLineArgs();
 }
 
 String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target) {
-  if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
+  if(!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
     throw ArgumentException(_caller);
-  
-  if (target == EnvironmentVariableTarget::Process) {
+    
+  if(target == EnvironmentVariableTarget::Process) {
     char* value = getenv(variable.Data());
     return value == null ? "" : value;
-  } else  if (target == EnvironmentVariableTarget::User)
+  } else  if(target == EnvironmentVariableTarget::User)
     return Microsoft::Win32::Registry::GetValue("HKEY_CURRENT_USER\\Environment", variable, "").ToString();
   return Microsoft::Win32::Registry::GetValue("HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment", variable, "").ToString();
 }
 
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables(EnvironmentVariableTarget target) {
-  if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
+  if(!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
     throw ArgumentException(_caller);
-  
-  if (target == EnvironmentVariableTarget::Process)
+    
+  if(target == EnvironmentVariableTarget::Process)
     return EnvironmentVariables;
-
+    
   static Collections::Generic::Dictionary<string, string> environmentVariables;
   environmentVariables.Clear();
   Microsoft::Win32::RegistryKey key = target == EnvironmentVariableTarget::User ? Microsoft::Win32::Registry::CurrentUser().CreateSubKey("Environment") : Microsoft::Win32::Registry::LocalMachine().CreateSubKey("System").CreateSubKey("CurrentControlSet").CreateSubKey("Control").CreateSubKey("Session Manager").CreateSubKey("Environment");
-  for (auto name : key.GetValueNames())
+  for(auto name : key.GetValueNames())
     environmentVariables[name] = key.GetValue(name).ToString();
   return environmentVariables;
 }
 
 String Environment::GetFolderPath(Environment::SpecialFolder folder, Environment::SpecialFolderOption option) {
-  if (!Enum<Environment::SpecialFolderOption>::GetValues().Contains(option))
+  if(!Enum<Environment::SpecialFolderOption>::GetValues().Contains(option))
     throw ArgumentException(_caller);
-  
+    
   string path = Native::DirectoryApi::GetKnowFolderPath(folder);
-
-  if (option == Environment::SpecialFolderOption::None)
+  
+  if(option == Environment::SpecialFolderOption::None)
     return  !System::IO::Directory::Exists(path) ? "" :  path;
-  
-  if (!System::IO::Directory::Exists(path))
+    
+  if(!System::IO::Directory::Exists(path))
     System::IO::Directory::CreateDirectory(path);
-  
+    
   return path;
 }
 
@@ -318,22 +318,22 @@ Array<String> Environment::GetLogicalDrives() {
 }
 
 void Environment::SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target) {
-  if (string::IsNullOrEmpty(name))
+  if(string::IsNullOrEmpty(name))
     throw ArgumentException(_caller);
-  
-  if (target == EnvironmentVariableTarget::Process) {
-    if (string::IsNullOrEmpty(value)) {
+    
+  if(target == EnvironmentVariableTarget::Process) {
+    if(string::IsNullOrEmpty(value)) {
       EnvironmentVariables().Remove(name);
-      if (Native::EnvironmentApi::UnsetEnv(name) != 0)
+      if(Native::EnvironmentApi::UnsetEnv(name) != 0)
         throw ArgumentException(_caller);
     } else {
       EnvironmentVariables()[name] = value;
-      if (Native::EnvironmentApi::SetEnv(name, value) != 0)
+      if(Native::EnvironmentApi::SetEnv(name, value) != 0)
         throw ArgumentException(_caller);
     }
   } else {
     Microsoft::Win32::RegistryKey key = target == EnvironmentVariableTarget::User ? Microsoft::Win32::Registry::CurrentUser().CreateSubKey("Environment") : Microsoft::Win32::Registry::LocalMachine().CreateSubKey("System").CreateSubKey("CurrentControlSet").CreateSubKey("Control").CreateSubKey("Session Manager").CreateSubKey("Environment");
-    if (string::IsNullOrEmpty(value))
+    if(string::IsNullOrEmpty(value))
       key.DeleteValue(name);
     else
       key.SetValue(name, value);
@@ -341,16 +341,16 @@ void Environment::SetEnvironmentVariable(const String& name, const String& value
 }
 
 Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
-  if (commandLineArgs != null)
+  if(commandLineArgs != null)
     throw InvalidOperationException("Can be called only once", _caller);
-
+    
   socketInit = ref_new<SocketInit>();
   consoleChangeCodePage = ref_new<ConsoleChangeCodePage>();
   consoleInterceptSignals = ref_new<ConsoleInterceptSignals>();
   signalCatcher = ref_new<SignalCatcher>();
   System::Threading::Thread::RegisterCurrentThread();
-  commandLineArgs = ref_new<Array<string>>(std::vector<string>(argv, argv+argc));
-  return Array<string>(std::vector<string>(argv+1, argv+argc));
+  commandLineArgs = ref_new<Array<string>>(std::vector<string>(argv, argv + argc));
+  return Array<string>(std::vector<string>(argv + 1, argv + argc));
 }
 
 void Environment::SetUserInteractive(bool ui) {

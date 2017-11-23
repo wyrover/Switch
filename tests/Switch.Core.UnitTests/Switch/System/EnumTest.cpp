@@ -75,7 +75,7 @@ namespace SwitchUnitTests {
 template<>
 class EnumToStrings<SwitchUnitTests::Pet> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)SwitchUnitTests::Pet::None, "None"}, {(int64)SwitchUnitTests::Pet::Dog, "Dog"}, {(int64)SwitchUnitTests::Pet::Cat, "Cat"}, {(int64)SwitchUnitTests::Pet::Bird, "Bird"}};
     flags = false;
   }
@@ -84,7 +84,7 @@ public:
 template<>
 class EnumToStrings<SwitchUnitTests::Number> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)SwitchUnitTests::Number::Zero, "Zero"}, {(int64)SwitchUnitTests::Number::One, "One"}, {(int64)SwitchUnitTests::Number::Two, "Two"}, {(int64)SwitchUnitTests::Number::Three, "Three"}, {(int64)SwitchUnitTests::Number::Four, "Four"}, {(int64)SwitchUnitTests::Number::Five, "Five"}, {(int64)SwitchUnitTests::Number::Six, "Six"}, {(int64)SwitchUnitTests::Number::Seven, "Seven"}, {(int64)SwitchUnitTests::Number::Eight, "Eight"}, {(int64)SwitchUnitTests::Number::Nine, "Nine"}};
     flags = false;
   }
@@ -95,7 +95,7 @@ template <> class AddFlagOperators<SwitchUnitTests::Letter> : public TrueType {}
 template<>
 class EnumToStrings<SwitchUnitTests::Letter> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)SwitchUnitTests::Letter::None, "None"}, {(int64)SwitchUnitTests::Letter::A, "A"}, {(int64)SwitchUnitTests::Letter::B, "B"}, {(int64)SwitchUnitTests::Letter::C, "C"}, {(int64)SwitchUnitTests::Letter::D, "D"}, {(int64)SwitchUnitTests::Letter::E, "E"}, {(int64)SwitchUnitTests::Letter::F, "F"}, {(int64)SwitchUnitTests::Letter::G, "G"}, {(int64)SwitchUnitTests::Letter::H, "H"}, {(int64)SwitchUnitTests::Letter::I, "I"}, {(int64)SwitchUnitTests::Letter::J, "J"}, {(int64)SwitchUnitTests::Letter::K, "K"}, {(int64)SwitchUnitTests::Letter::L, "L"}, {(int64)SwitchUnitTests::Letter::M, "M"}, {(int64)SwitchUnitTests::Letter::N, "N"}, {(int64)SwitchUnitTests::Letter::O, "O"}, {(int64)SwitchUnitTests::Letter::P, "P"}, {(int64)SwitchUnitTests::Letter::Q, "Q"}, {(int64)SwitchUnitTests::Letter::R, "R"}, {(int64)SwitchUnitTests::Letter::S, "S"}, {(int64)SwitchUnitTests::Letter::T, "T"}, {(int64)SwitchUnitTests::Letter::U, "U"}, {(int64)SwitchUnitTests::Letter::V, "V"}, {(int64)SwitchUnitTests::Letter::W, "W"}, {(int64)SwitchUnitTests::Letter::X, "X"}, {(int64)SwitchUnitTests::Letter::Y, "Y"}, {(int64)SwitchUnitTests::Letter::Z, "Z"}};
     flags = true;
   }
@@ -137,12 +137,12 @@ namespace SwitchUnitTests {
     
     ASSERT_EQ(0b00000000000000000000000000000000, Enum<Letter>::ToInt32(Letter::None));
     ASSERT_EQ(0b00000000000000000000000000001000, Enum<Letter>::ToInt32(Letter::D));
-    ASSERT_EQ(0b00000000000000000000000000000111, Enum<Letter>::ToInt32(Letter::A|Letter::B|Letter::C));
+    ASSERT_EQ(0b00000000000000000000000000000111, Enum<Letter>::ToInt32(Letter::A | Letter::B | Letter::C));
     ASSERT_EQ(0b00000000000000000000100000000000, Enum<Letter>::ToInt32((Letter)0b00000000000000000000100000000000));
     ASSERT_EQ(0b01100000000000000000000000000000, Enum<Letter>::ToInt32((Letter)0b01100000000000000000000000000000));
     
     Letter letterNone = Letter::None;
-    Letter letterAB = Letter::A|Letter::B;
+    Letter letterAB = Letter::A | Letter::B;
     Letter letterBC = (Letter)Enum<Letter>::Parse("B, C");
     Letter letterCD = (Letter)Enum<Letter>::Parse("c, d", true);
     
@@ -192,26 +192,26 @@ namespace SwitchUnitTests {
   
   TEST(EnumTest, SwitchCase) {
     Pet PetDog = Pet::Dog;
-    switch (PetDog) {
-      case Pet::Dog : SUCCEED(); break;
-      case Pet::Cat : FAIL(); break;
-      case Pet::Bird : FAIL(); break;
-      default: FAIL(); break;
+    switch(PetDog) {
+    case Pet::Dog : SUCCEED(); break;
+    case Pet::Cat : FAIL(); break;
+    case Pet::Bird : FAIL(); break;
+    default: FAIL(); break;
     }
     
     Number number8 = Number::Eight;
-    switch (number8) {
-      case Number::Zero : FAIL(); break;
-      case Number::One : FAIL(); break;
-      case Number::Two : FAIL(); break;
-      case Number::Three : FAIL(); break;
-      case Number::Four : FAIL(); break;
-      case Number::Five : FAIL(); break;
-      case Number::Six : FAIL(); break;
-      case Number::Seven : FAIL(); break;
-      case Number::Eight : SUCCEED(); break;
-      case Number::Nine : FAIL(); break;
-      default: FAIL(); break;
+    switch(number8) {
+    case Number::Zero : FAIL(); break;
+    case Number::One : FAIL(); break;
+    case Number::Two : FAIL(); break;
+    case Number::Three : FAIL(); break;
+    case Number::Four : FAIL(); break;
+    case Number::Five : FAIL(); break;
+    case Number::Six : FAIL(); break;
+    case Number::Seven : FAIL(); break;
+    case Number::Eight : SUCCEED(); break;
+    case Number::Nine : FAIL(); break;
+    default: FAIL(); break;
     }
   }
   
@@ -225,7 +225,7 @@ namespace SwitchUnitTests {
     
     ASSERT_EQ("None", Enum<Letter>::GetName(Letter::None).ToString());
     ASSERT_EQ("G", Enum<Letter>::GetName(Letter::G).ToString());
-    ASSERT_EQ("A, B, C", Enum<Letter>::GetName(Letter::A|Letter::B|Letter::C).ToString());
+    ASSERT_EQ("A, B, C", Enum<Letter>::GetName(Letter::A | Letter::B | Letter::C).ToString());
     
     ASSERT_EQ("0", Enum<RGBPixel>::GetName(RGBPixel::Red));
     ASSERT_EQ("1", Enum<RGBPixel>::GetName(RGBPixel::Green));
@@ -325,7 +325,7 @@ namespace SwitchUnitTests {
   }
   
   TEST(EnumTest, HasFlag) {
-    ASSERT_TRUE(Enum<Letter>(Letter::A|Letter::B|Letter::C).HasFlag(Letter::B | Letter::C));
+    ASSERT_TRUE(Enum<Letter>(Letter::A | Letter::B | Letter::C).HasFlag(Letter::B | Letter::C));
     ASSERT_TRUE(Enum<Letter>(Letter::A).HasFlag(0b00000000000000000000000000000001));
     ASSERT_FALSE(Enum<Letter>(Letter::None).HasFlag(Letter::A));
     ASSERT_FALSE(Enum<Letter>(Letter::None).HasFlag(0b10000000000000000000000000000000));
@@ -339,7 +339,7 @@ namespace SwitchUnitTests {
     ASSERT_TRUE(Enum<Letter>::IsDefined(Letter::B));
     ASSERT_TRUE(Enum<Letter>::IsDefined(0x00020000));
     ASSERT_FALSE(Enum<Letter>::IsDefined(0x20000000));
-    ASSERT_FALSE(Enum<Letter>::IsDefined(Letter::B|Letter::C|Letter::Z));
+    ASSERT_FALSE(Enum<Letter>::IsDefined(Letter::B | Letter::C | Letter::Z));
     
     ASSERT_FALSE(Enum<NoEnum>::IsDefined(NoEnum::None));
   }
@@ -400,7 +400,7 @@ namespace SwitchUnitTests {
     ASSERT_EQ("None", Enum<Letter>::ToString(Letter::None));
     ASSERT_EQ("A", Enum<Letter>::ToString(Letter::A));
     ASSERT_EQ("B", Enum<Letter>::ToString(Letter::B));
-    ASSERT_EQ("A, B", Enum<Letter>::ToString(Letter::A|Letter::B));
+    ASSERT_EQ("A, B", Enum<Letter>::ToString(Letter::A | Letter::B));
     //ASSERT_EQ("D, G, I", Enum<Letter>::ToString(Letter::D|Letter::G|Letter::I));
     
     ASSERT_EQ("0", Enum<RGBPixel>::ToString(RGBPixel::Red));

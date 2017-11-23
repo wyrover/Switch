@@ -22,25 +22,25 @@ namespace Switch {
         /// The following code example demonstrates the use of the AltDirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
         static char32 AltDirectorySeparatorChar();
-
+        
         /// @brief Provides a platform-specific character used to separate directory levels in a path string that reflects a hierarchical file system organization.
         /// @par Examples
         /// The following code example demonstrates the use of the DirectorySeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
         static char32 DirectorySeparatorChar();
-
+        
         /// @brief A platform-specific separator character used to separate path strings in environment variables.
         /// @par Examples
         /// The following code example demonstrates the use of the PathSeparator() property.
         /// @include DirectorySeparatorChar.cpp
         static char32 PathSeparator();
-
+        
         /// @brief Provides a platform-specific volume separator character.
         /// @par Examples
         /// The following code example demonstrates the use of the VolumeSeparatorChar() property.
         /// @include DirectorySeparatorChar.cpp
         static char32 VolumeSeparatorChar();
-
+        
         /// @brief Changes the extension of a path string.
         /// @param path The path information to modify. The path cannot contain any of the characters defined in GetInvalidPathChars.
         /// @param extension The new extension (with or without a leading period). Specify null to remove an existing extension from path.
@@ -62,15 +62,15 @@ namespace Switch {
         /// @return an absolute path, this method returns path2.
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string Combine(const string& path1, const string& path2) {
-          if (path1.IndexOfAny(GetInvalidPathChars()) != -1 || path2.IndexOfAny(GetInvalidPathChars()) != -1)
+          if(path1.IndexOfAny(GetInvalidPathChars()) != -1 || path2.IndexOfAny(GetInvalidPathChars()) != -1)
             throw ArgumentException(_caller);
-          
-          if (string::IsNullOrEmpty(path2))
+            
+          if(string::IsNullOrEmpty(path2))
             return path1;
-          
-          if (string::IsNullOrEmpty(path1) || IsPathRooted(path2))
+            
+          if(string::IsNullOrEmpty(path1) || IsPathRooted(path2))
             return path2;
-          
+            
           return string::Concat(path1, path1.EndsWith(DirectorySeparatorChar()) ? string::Empty : Char(DirectorySeparatorChar()).ToString(), path2);
         }
         
@@ -113,7 +113,7 @@ namespace Switch {
         /// @return if path does not contain directory information.
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string GetDirectoryName(const string& path);
-
+        
         /// @brief Returns the extension of the specified path string.
         /// @param path The path string from which to get the extension.
         /// @return A System::string containing the extension of the specified path (including
@@ -121,7 +121,7 @@ namespace Switch {
         /// @return null. If path does not have extension information, GetExtension returns Empty.
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string GetExtension(const string& path);
-
+        
         /// @brief Returns the file name and extension of the specified path string.
         /// @param path The path string from which to obtain the file name and extension.
         /// @return A System::string consisting of the characters after the last directory character
@@ -130,14 +130,14 @@ namespace Switch {
         /// @return method returns null.
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string GetFileName(const string& path);
-
+        
         /// @brief Returns the file name of the specified path string without the extension.
         /// @param path The path of the file.
         /// @return A System::string containing the string returned by System::IO::Path.GetFileName(System::string),
         /// @return minus the last period (.) and all characters following it.
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string GetFileNameWithoutExtension(const string& path);
-
+        
         /// @brief Returns the absolute path for the specified path string.
         /// @param path The file or directory for which to obtain absolute path information.
         /// @return A string containing the fully qualified location of path, such as "C:\\MyFile.txt".
@@ -145,13 +145,13 @@ namespace Switch {
         /// -or- path contains one or more of the invalid characters
         /// -or- The system could not retrieve the absolute path.
         static string GetFullPath(const string& path);
-
+        
         /// @brief Gets an array containing the characters that are not allowed in path names.
         /// @return Array<char32>
         /// An array containing the characters that are not allowed in path names.
         /// @remarks The array returned from this method is not guaranteed to contain the complete set of characters that are invalid in file and directory names. The full set of invalid characters can vary by file system. For example, on Windows-based desktop platforms, invalid path characters might include ASCII/Unicode characters 1 through 31, as well as quote ("), less than (<), greater than (>), pipe (|), backspace (\b), null (\0) and tab (\t).
         static Array<char32> GetInvalidPathChars();
-
+        
         /// @brief Gets the root directory information of the specified path.
         /// @param path The path from which to obtain root directory information.
         /// @return A string containing the root directory of path, such as "C:\", or null if
@@ -159,7 +159,7 @@ namespace Switch {
         /// @return information.
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string GetPathRoot(const string& path);
-
+        
         /// @brief Returns a random folder name or file name.
         /// @return A random folder name or file name.
         /// @remarks The GetRandomFileName method returns a cryptographically strong, random string that can be used as either a folder name or a file name. Unlike GetTempFileName, GetRandomFileName does not create a file. When the security of your file system is paramount, this method should be used instead of GetTempFileName.
@@ -189,7 +189,7 @@ namespace Switch {
         /// @return or more characters; otherwise, false.
         /// @exception ArgumentException path contains one or more of the invalid characters
         static bool HasExtension(const string& path) {return !string::IsNullOrEmpty(GetExtension(path));}
-
+        
         /// @brief Gets a value indicating whether the specified path string contains absolute
         /// or relative path information.
         /// @param path The path to test.

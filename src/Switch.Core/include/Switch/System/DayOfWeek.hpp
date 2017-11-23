@@ -34,7 +34,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::DayOfWeek> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::DayOfWeek::Sunday, "Sunday"}, {(int64)System::DayOfWeek::Monday, "Monday"}, {(int64)System::DayOfWeek::Tuesday, "Tuesday"}, {(int64)System::DayOfWeek::Wednesday, "Wednesday"}, {(int64)System::DayOfWeek::Thursday, "Thursday"}, {(int64)System::DayOfWeek::Friday, "Friday"}, {(int64)System::DayOfWeek::Saturday, "Saturday"}};
     flags = false;
   }

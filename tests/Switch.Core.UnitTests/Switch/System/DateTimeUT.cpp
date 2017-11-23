@@ -171,8 +171,8 @@ namespace {
   }
   
   TEST(DateTimeTest, Constructor) {
-    EXPECT_THROW(System::DateTime(System::DateTime::MaxValue.Ticks()+TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
-    EXPECT_THROW(System::DateTime(System::DateTime::MinValue.Ticks()-TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
+    EXPECT_THROW(System::DateTime(System::DateTime::MaxValue.Ticks() + TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
+    EXPECT_THROW(System::DateTime(System::DateTime::MinValue.Ticks() - TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
   }
   
   /*!
@@ -191,11 +191,11 @@ namespace {
    Description
    Be careful test on date is written in the zone GMT+1 so it must be executed with this zone to be correct.
    */
-   /*
+  /*
   TEST(DateTimeTest, ToUniversalTime) {
-    EXPECT_EQ("24/05/2011 10:05:05", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).ToUniversalTime().ToString());
-    EXPECT_EQ("24/05/2011 12:05:05", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Utc)).ToUniversalTime().ToString());
-    EXPECT_EQ("24/05/2011 10:05:05", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Unspecified)).ToUniversalTime().ToString());
+   EXPECT_EQ("24/05/2011 10:05:05", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).ToUniversalTime().ToString());
+   EXPECT_EQ("24/05/2011 12:05:05", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Utc)).ToUniversalTime().ToString());
+   EXPECT_EQ("24/05/2011 10:05:05", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Unspecified)).ToUniversalTime().ToString());
   }
   */
   
@@ -207,7 +207,7 @@ namespace {
   }
   
   TEST(DateTimeTest, Add) {
-	  EXPECT_EQ("24/05/2011 16:55:52", System::DateTime(2011, 5, 24, 14, 31, 0).Add(TimeSpan(2, 24, 52)).ToString());
+    EXPECT_EQ("24/05/2011 16:55:52", System::DateTime(2011, 5, 24, 14, 31, 0).Add(TimeSpan(2, 24, 52)).ToString());
     EXPECT_EQ("25/06/2011 14:31:00", System::DateTime(2011, 5, 24, 14, 31, 0).AddDays(32).ToString());
     EXPECT_EQ("25/05/2011 22:31:00", System::DateTime(2011, 5, 24, 14, 31, 0).AddHours(32).ToString());
     EXPECT_EQ("24/05/2011 14:31:50", System::DateTime(2011, 5, 24, 14, 31, 0).AddMilliseconds(50000).ToString());
@@ -231,9 +231,9 @@ namespace {
   
   TEST(DateTimeTest, Get) {
     EXPECT_EQ("24/05/2011 00:00:00", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).Date().ToString());
-    EXPECT_EQ(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).Day(),24);
-    EXPECT_EQ(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).DayOfYear(),144);
-    EXPECT_EQ(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).TimeOfDay(),TimeSpan(12,5,5));
+    EXPECT_EQ(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).Day(), 24);
+    EXPECT_EQ(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).DayOfYear(), 144);
+    EXPECT_EQ(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).TimeOfDay(), TimeSpan(12, 5, 5));
   }
   
   /*

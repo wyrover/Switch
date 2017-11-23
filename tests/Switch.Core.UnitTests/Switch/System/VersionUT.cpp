@@ -60,7 +60,7 @@ namespace {
     ASSERT_THROW(Version(-1, 0), ArgumentOutOfRangeException);
     ASSERT_THROW(Version(0, -25), ArgumentOutOfRangeException);
   }
-
+  
   TEST(VersionTest, Parse) {
     ASSERT_EQ(Version(11, 0, 2), Version::Parse("11.0.2"));
     ASSERT_EQ(Version(11, 0, 2), Version::Parse("11.00.02"));

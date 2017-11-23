@@ -10,9 +10,11 @@
 #include "Export.hpp"
 
 /// @cond
-namespace Switch { namespace System {
-  class String;
-}}
+namespace Switch {
+  namespace System {
+    class String;
+  }
+}
 
 class _export __opaque_unicode_string__ {
   friend class Switch::System::String;
@@ -20,18 +22,18 @@ class _export __opaque_unicode_string__ {
   __opaque_unicode_string__(const char* str);
   __opaque_unicode_string__(const char32_t* str) {
     int i = 0;
-    while (str[i] != 0)
+    while(str[i] != 0)
       this->append(str[i++]);
     this->stringSize = i;
   }
   __opaque_unicode_string__(const __opaque_unicode_string__& str) : string(str.string), stringSize(str.stringSize) {}
   __opaque_unicode_string__(int length, char c) : stringSize(length) {
-    while (length--)
+    while(length--)
       this->string.push_back(c);
   }
   __opaque_unicode_string__(const char* str, int32_t startIndex) : __opaque_unicode_string__(str, startIndex, (int32_t)npos) {}
   __opaque_unicode_string__(const char* str, int32_t startIndex, int32_t length);
-  __opaque_unicode_string__(const char32_t* str, int32_t startIndex) :__opaque_unicode_string__(str, startIndex, (int32_t)npos) {}
+  __opaque_unicode_string__(const char32_t* str, int32_t startIndex) : __opaque_unicode_string__(str, startIndex, (int32_t)npos) {}
   __opaque_unicode_string__(const char32_t* str, int32_t startIndex, int32_t length);
   __opaque_unicode_string__(__opaque_unicode_string__&& str) : string(std::move(str.string)), stringSize(str.stringSize) {str.stringSize = 0;}
   
@@ -54,11 +56,11 @@ class _export __opaque_unicode_string__ {
   __opaque_unicode_string__ substr(size_t pos = 0, size_t len = npos) const;
   __opaque_unicode_string__ to_upper() const;
   __opaque_unicode_string__ to_lower() const;
-  size_t find (const __opaque_unicode_string__& s, size_t pos = npos, size_t count = npos) const;
-  size_t find (char32_t code, size_t pos = npos, size_t count = npos) const;
-  size_t find_any (const std::vector<char32_t>& any, size_t pos = npos, size_t count = npos) const;
-  size_t rfind (const __opaque_unicode_string__& s, size_t pos = npos) const;
-  size_t rfind (char32_t code, size_t pos = npos) const;
+  size_t find(const __opaque_unicode_string__& s, size_t pos = npos, size_t count = npos) const;
+  size_t find(char32_t code, size_t pos = npos, size_t count = npos) const;
+  size_t find_any(const std::vector<char32_t>& any, size_t pos = npos, size_t count = npos) const;
+  size_t rfind(const __opaque_unicode_string__& s, size_t pos = npos) const;
+  size_t rfind(char32_t code, size_t pos = npos) const;
   size_t length() const {return this->stringSize;}
   bool ends_with(const __opaque_unicode_string__& s) const;
   size_t size() const {return length();}
@@ -97,7 +99,7 @@ class _export __opaque_unicode_string__ {
     int get_byte_index() const { return this->position; }
     int get_format() const { return this->format; }
     int get_logical_index() const { return this->index; }
-
+    
   private:
     friend class __opaque_unicode_string__;
     const std::string* string_pointer;
@@ -121,7 +123,7 @@ class _export __opaque_unicode_string__ {
     int get_byte_index() const { return this->position; }
     int get_format() const { return this->format; }
     int get_logical_index() const { return this->index; }
-
+    
   private:
     friend class __opaque_unicode_string__;
     std::string* string_pointer;
@@ -144,7 +146,7 @@ class _export __opaque_unicode_string__ {
     int get_byte_index() const { return this->position; }
     int get_format() const { return this->format; }
     int get_logical_index() const { return this->index; }
-
+    
   private:
     friend class __opaque_unicode_string__;
     const std::string* string_pointer;
@@ -168,7 +170,7 @@ class _export __opaque_unicode_string__ {
     int get_byte_index() const { return this->position; }
     int get_format() const { return this->format; }
     int get_logical_index() const { return this->index; }
-
+    
   private:
     friend class __opaque_unicode_string__;
     std::string* string_pointer;
@@ -190,7 +192,7 @@ class _export __opaque_unicode_string__ {
   
   static size_t npos;
   static bool equals(__opaque_unicode_string__::const_iterator src, const __opaque_unicode_string__::const_iterator& src_end, __opaque_unicode_string__::const_iterator match, const __opaque_unicode_string__::const_iterator& match_end);
-
+  
   std::string string;
   size_t stringSize = 0;
 };

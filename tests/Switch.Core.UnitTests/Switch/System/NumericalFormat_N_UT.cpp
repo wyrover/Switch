@@ -5,7 +5,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace {
-  
+
   TEST(NumericalFormatTest, N_SByte) {
     ASSERT_EQ("0.00", String::Format("{0:N}", SByte(0)));
     ASSERT_EQ("17.00", String::Format("{0:N}", SByte(17)));
@@ -409,9 +409,9 @@ namespace {
   
   TEST(NumericalFormatTest, N_OverflowTest) {
     ASSERT_EQ("-9,223,372,036,854,775,808.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              String::Format("{0:N99}", Int64::MinValue));
+      String::Format("{0:N99}", Int64::MinValue));
     ASSERT_EQ("9,223,372,036,854,775,807.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              String::Format("{0:N99}", Int64(9223372036854775807)));
+      String::Format("{0:N99}", Int64(9223372036854775807)));
   }
   
 }
@@ -436,14 +436,14 @@ class Program
       }
       Console.WriteLine();
     }
-      
+
     int a = 74;
   }
 
   static void MAKE<T>(String format, IFormattable value) {
     String[] split = value.GetType().ToString().Split('.');
     String type = split[split.Length-1];
-      
+
     Console.WriteLine("  ASSERT_EQ(\"{0}\", String::Format(\"{{0:{1}}}\", {3}({2}))); ", value.ToString(format,null), format, value, type);
   }
 }

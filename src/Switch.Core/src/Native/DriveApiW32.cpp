@@ -9,8 +9,8 @@
 bool Native::DriveApi::GetAvailableFreeSpace(const string& rootPathName, int64& freeBytes, int64& totalNumberOfBytes, int64& totalNumberOfFreeBytes) {
   bool retValue = false;
   WCHAR rootPathNameName[MAX_PATH];
-  if (rootPathName.Length()+1 <= MAX_PATH) {
-    ::MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, rootPathName.Data(), -1, rootPathNameName, sizeof(rootPathNameName)/sizeof(rootPathNameName[0]));
+  if(rootPathName.Length() + 1 <= MAX_PATH) {
+    ::MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, rootPathName.Data(), -1, rootPathNameName, sizeof(rootPathNameName) / sizeof(rootPathNameName[0]));
     retValue = ::GetDiskFreeSpaceExW(rootPathNameName, (PULARGE_INTEGER)&freeBytes, (PULARGE_INTEGER)&totalNumberOfBytes, (PULARGE_INTEGER)&totalNumberOfFreeBytes) != FALSE;
   }
   return retValue;
@@ -23,7 +23,7 @@ System::IO::DriveType Native::DriveApi::GetDriveType(const string& rootPathName)
 System::Array<string> Native::DriveApi::GetDrives() {
   char buffer[MAX_PATH];
   int32 bufferLenght = MAX_PATH;
-  if (::GetLogicalDriveStringsA(bufferLenght, buffer) <= 0)
+  if(::GetLogicalDriveStringsA(bufferLenght, buffer) <= 0)
     return {};
   System::Collections::Generic::List<string> drives;
   for(const char* drive = buffer; drive[0] != 0; drive += strlen(drive) + 1)
@@ -35,9 +35,9 @@ bool Native::DriveApi::GetVolumeInformation(const string& rootPathName, string& 
   DWORD fileSystemFlags = 0;
   char volume[MAX_PATH];
   char fileSystem[MAX_PATH];
-  if (::GetVolumeInformationA(rootPathName.Data(), volume, MAX_PATH, null, null, &fileSystemFlags, fileSystem, MAX_PATH) == FALSE)
+  if(::GetVolumeInformationA(rootPathName.Data(), volume, MAX_PATH, null, null, &fileSystemFlags, fileSystem, MAX_PATH) == FALSE)
     return false;
-  
+    
   volumeName = volume;
   fileSystemName = fileSystem;
   

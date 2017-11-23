@@ -3,11 +3,10 @@
 
 using namespace System;
 
-Object* ValueType::MemberwiseClone() const
-{
+Object* ValueType::MemberwiseClone() const {
   Object* pObject_O = null;
-
-  if (Is<Boolean>(this))
+  
+  if(Is<Boolean>(this))
     pObject_O = ((Object*)this)->MemberwiseClone<Boolean>();
   /*
    else if (Is<System::Byte>(_Value_O))

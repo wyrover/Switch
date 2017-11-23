@@ -13,7 +13,7 @@ namespace Switch {
         /// @cond
         class Control;
         /// @endcond
-
+        
         class _export KeyPressEventArgs : public EventArgs {
         public:
           KeyPressEventArgs() {}
@@ -27,16 +27,16 @@ namespace Switch {
             return *this;
           }
           /// @endcond
-
+          
           _property<bool> Handled {
             _get {return this->handled;},
             _set {this->handled = value;}
           };
-
+          
           _property<char32, _readonly> KeyChar {
             _get {return this->keyChar;}
           };
-
+          
         private:
           char32 keyChar = 0;
           bool handled = false;

@@ -18,9 +18,9 @@ namespace Switch {
         /// @brief Included for completeness, this value is never returned by servers.
         Undefined = 0,
         /// @brief Equivalent to HTTP status 100. Continue indicates that the client can continue with its request.
-        Continue	= 100,
+        Continue  = 100,
         /// @brief  Equivalent to HTTP status 101. SwitchingProtocols indicates that the protocol version or protocol is being changed.
-        SwitchingProtocols =101,
+        SwitchingProtocols = 101,
         /// @brief Equivalent to HTTP status 200. OK indicates that the request succeeded and that the requested information is in the response. This is the most common status code to receive.
         OK = 200,
         /// @brief  Equivalent to HTTP status 201. Created indicates that the request resulted in a new resource created before the response was sent.
@@ -48,7 +48,7 @@ namespace Switch {
         /// @brief Equivalent to HTTP status 305. UseProxy indicates that the request should use the proxy server at the URI specified in the Location header.
         UseProxy = 305,
         /// @brief Equivalent to HTTP status 306. Unused is a proposed extension to the HTTP/1.1 specification that is not fully specified.
-        Unused	= 306,
+        Unused  = 306,
         /// @brief Equivalent to HTTP status 307. TemporaryRedirect indicates that the request information is located at the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will also use the POST method. If the HttpWebRequest.AllowAutoRedirect property is false, TemporaryRedirect will cause an exception to be thrown.
         TemporaryRedirect = 307,
         /// @brief Equivalent to HTTP status 400. BadRequest indicates that the request could not be understood by the server. BadRequest is sent when no other error is applicable, or if the exact error is unknown or does not have its own error code.
@@ -68,13 +68,13 @@ namespace Switch {
         /// @brief Equivalent to HTTP status 407. ProxyAuthenticationRequired indicates that the requested proxy requires authentication. The Proxy-authenticate header contains the details of how to perform the authentication.
         ProxyAuthenticationRequired = 407,
         /// @brief Equivalent to HTTP status 408. RequestTimeout indicates that the client did not send a request within the time the server was expecting the request.
-        RequestTimeout	= 408,
+        RequestTimeout  = 408,
         /// @brief Equivalent to HTTP status 409. Conflict indicates that the request could not be carried out because of a conflict on the server.
         Conflict = 409,
         /// @brief Equivalent to HTTP status 410. Gone indicates that the requested resource is no longer available.
         Gone = 410,
         /// @brief Equivalent to HTTP status 411. LengthRequired indicates that the required Content-length header is missing.
-        LengthRequired	= 411,
+        LengthRequired  = 411,
         /// @brief Equivalent to HTTP status 412. PreconditionFailed indicates that a condition set for this request failed, and the request cannot be carried out. Conditions are set with conditional request headers like If-Match, If-None-Match, or If-Unmodified-Since.
         PreconditionFailed = 412,
         /// @brief Equivalent to HTTP status 413. RequestEntityTooLarge indicates that the request is too large for the server to process.
@@ -90,7 +90,7 @@ namespace Switch {
         /// @brief Equivalent to HTTP status 426. UpgradeRequired indicates that the client should switch to a different protocol such as TLS/1.0.
         UpgradeRequired = 426,
         /// @brief Equivalent to HTTP status 500. InternalServerError indicates that a generic error has occurred on the server.
-        InternalServerError	= 500,
+        InternalServerError = 500,
         /// @brief Equivalent to HTTP status 501. NotImplemented indicates that the server does not support the requested function.
         NotImplemented = 501,
         /// @brief Equivalent to HTTP status 502. BadGateway indicates that an intermediate proxy server received a bad response from another proxy or the origin server.
@@ -100,7 +100,7 @@ namespace Switch {
         /// @brief Equivalent to HTTP status 504. GatewayTimeout indicates that an intermediate proxy server timed out while waiting for a response from another proxy or the origin server.
         GatewayTimeout = 504,
         /// @brief Equivalent to HTTP status 505. HttpVersionNotSupported indicates that the requested HTTP version is not supported by the server.
-        HttpVersionNotSupported	= 505
+        HttpVersionNotSupported = 505
       };
     }
   }
@@ -110,7 +110,7 @@ namespace Switch {
 template<>
 class EnumToStrings<System::Net::HttpStatusCode> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)System::Net::HttpStatusCode::Undefined, "Undefined"}, {(int64)System::Net::HttpStatusCode::SwitchingProtocols, "SwitchingProtocols"}, {(int64)System::Net::HttpStatusCode::OK, "OK"}, {(int64)System::Net::HttpStatusCode::Created, "Created"}, {(int64)System::Net::HttpStatusCode::Accepted, "Accepted"}, {(int64)System::Net::HttpStatusCode::NonAuthoritativeInformation, "NonAuthoritativeInformation"}, {(int64)System::Net::HttpStatusCode::NoContent, "NoContent"}, {(int64)System::Net::HttpStatusCode::ResetContent, "ResetContent"}, {(int64)System::Net::HttpStatusCode::PartialContent, "PartialContent"}, {(int64)System::Net::HttpStatusCode::MultipleChoices, "MultipleChoices"}, {(int64)System::Net::HttpStatusCode::MovedPermanently, "MovedPermanently"}, {(int64)System::Net::HttpStatusCode::Redirect, "Redirect"}, {(int64)System::Net::HttpStatusCode::SeeOther, "SeeOther"}, {(int64)System::Net::HttpStatusCode::NotModified, "NotModified"}, {(int64)System::Net::HttpStatusCode::UseProxy, "UseProxy"}, {(int64)System::Net::HttpStatusCode::Unused, "Unused"}, {(int64)System::Net::HttpStatusCode::TemporaryRedirect, "TemporaryRedirect"}, {(int64)System::Net::HttpStatusCode::BadRequest, "BadRequest"}, {(int64)System::Net::HttpStatusCode::Unauthorized, "Unauthorized"}, {(int64)System::Net::HttpStatusCode::PaymentRequired, "PaymentRequired"}, {(int64)System::Net::HttpStatusCode::Forbidden, "Forbidden"}, {(int64)System::Net::HttpStatusCode::NotFound, "NotFound"}, {(int64)System::Net::HttpStatusCode::MethodNotAllowed, "MethodNotAllowed"}, {(int64)System::Net::HttpStatusCode::NotAcceptable, "NotAcceptable"}, {(int64)System::Net::HttpStatusCode::ProxyAuthenticationRequired, "ProxyAuthenticationRequired"}, {(int64)System::Net::HttpStatusCode::RequestTimeout, "RequestTimeout"}, {(int64)System::Net::HttpStatusCode::Conflict, "Conflict"}, {(int64)System::Net::HttpStatusCode::Gone, "Gone"}, {(int64)System::Net::HttpStatusCode::LengthRequired, "LengthRequired"}, {(int64)System::Net::HttpStatusCode::PreconditionFailed, "PreconditionFailed"}, {(int64)System::Net::HttpStatusCode::RequestEntityTooLarge, "RequestEntityTooLarge"}, {(int64)System::Net::HttpStatusCode::RequestUriTooLong, "RequestUriTooLong"}, {(int64)System::Net::HttpStatusCode::UnsupportedMediaType, "UnsupportedMediaType"}, {(int64)System::Net::HttpStatusCode::RequestedRangeNotSatisfiable, "RequestedRangeNotSatisfiable"}, {(int64)System::Net::HttpStatusCode::ExpectationFailed, "ExpectationFailed"}, {(int64)System::Net::HttpStatusCode::UpgradeRequired, "UpgradeRequired"}, {(int64)System::Net::HttpStatusCode::InternalServerError, "InternalServerError"}, {(int64)System::Net::HttpStatusCode::NotImplemented, "NotImplemented"}, {(int64)System::Net::HttpStatusCode::BadGateway, "BadGateway"}, {(int64)System::Net::HttpStatusCode::ServiceUnavailable, "ServiceUnavailable"}, {(int64)System::Net::HttpStatusCode::GatewayTimeout, "GatewayTimeout"}, {(int64)System::Net::HttpStatusCode::HttpVersionNotSupported, "HttpVersionNotSupported"}};
     flags = false;
   }

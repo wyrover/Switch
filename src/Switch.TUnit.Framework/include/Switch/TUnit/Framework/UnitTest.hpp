@@ -20,8 +20,8 @@ namespace Switch {
         int32 Run() {
           for(auto registeredTestFixture : RegisteredTestFixtures()) {
             this->OneTimeSetUp(registeredTestFixture);
-            for (auto test : registeredTestFixture.testFixture->tests) {
-              if (!test.ignore || this->alsoRunIgnoredTests) {
+            for(auto test : registeredTestFixture.testFixture->tests) {
+              if(!test.ignore || this->alsoRunIgnoredTests) {
                 this->SetUp(registeredTestFixture);
                 test.method();
                 this->TearDown(registeredTestFixture);
@@ -31,7 +31,7 @@ namespace Switch {
           }
           return 0;
         }
-       
+        
       private:
         template <typename TestFixture>
         friend struct TestFixtureAttribute;
@@ -39,27 +39,23 @@ namespace Switch {
         static void Add(const RegisteredTestFixture& registeredTestFixture) {RegisteredTestFixtures().Add(registeredTestFixture);}
         
         void OneTimeSetUp(const RegisteredTestFixture& registeredTestFixture) {
-          for (auto oneTimeSetUp : registeredTestFixture.testFixture->oneTimeSetUps) {
+          for(auto oneTimeSetUp : registeredTestFixture.testFixture->oneTimeSetUps)
             oneTimeSetUp.method();
-          }
         }
         
         void OneTimeTearDown(const RegisteredTestFixture& registeredTestFixture) {
-          for (auto oneTimeTearDown : registeredTestFixture.testFixture->oneTimeTearDowns) {
+          for(auto oneTimeTearDown : registeredTestFixture.testFixture->oneTimeTearDowns)
             oneTimeTearDown.method();
-          }
         }
         
         void SetUp(const RegisteredTestFixture& registeredTestFixture) {
-          for (auto setup : registeredTestFixture.testFixture->setUps) {
+          for(auto setup : registeredTestFixture.testFixture->setUps)
             setup.method();
-          }
         }
         
         void TearDown(const RegisteredTestFixture& registeredTestFixture) {
-          for (auto tearDown : registeredTestFixture.testFixture->tearDowns) {
+          for(auto tearDown : registeredTestFixture.testFixture->tearDowns)
             tearDown.method();
-          }
         }
         
         static System::Collections::Generic::List<TUnit::Framework::RegisteredTestFixture>& RegisteredTestFixtures() {

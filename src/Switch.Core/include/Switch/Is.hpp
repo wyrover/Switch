@@ -58,7 +58,7 @@ namespace Switch {
   bool is(refptr<T>& value) {
     return value.template Is<TT>();
   }
-
+  
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -70,14 +70,14 @@ namespace Switch {
   template<typename TT, typename T>
   bool is(const T* value) {
     try {
-      if (value == null)
+      if(value == null)
         return false;
       return dynamic_cast<const TT*>(value) != null;
-    } catch (const std::bad_cast&) {
+    } catch(const std::bad_cast&) {
       return false;
     }
   }
-
+  
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -88,14 +88,14 @@ namespace Switch {
   template<typename TT, typename T>
   bool is(T* value) {
     try {
-      if (value == null)
+      if(value == null)
         return false;
       return dynamic_cast<TT*>(value) != null;
     } catch(const std::bad_cast&) {
       return false;
     }
   }
-
+  
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -121,7 +121,7 @@ namespace Switch {
   bool is(T& value) {
     return is<TT>(&value);
   }
-
+  
   template<typename T>
   inline bool is(int32 value) {
     return false;

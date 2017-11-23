@@ -47,7 +47,7 @@ namespace {
     
     _using(Random rand(42)) {
       for(int i = 0; i < 100; i++)
-        ASSERT_EQ(bytes[i], rand.Next(Byte::MaxValue+1));
+        ASSERT_EQ(bytes[i], rand.Next(Byte::MaxValue + 1));
     }
   }
 }
