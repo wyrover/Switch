@@ -15,14 +15,53 @@ option(BUILD_SWITCH_TUNIT_FRAMEWORK "Build Switch.TUnit.Framework library" OFF)
 option(BUILD_SWITCH_TUNIT_MAIN "Build Switch.TUnit.Main library" ON)
 option(BUILD_TESTS "Build tests" OFF)
 option(ENABLE_COVERAGE "Enable code coverage" OFF)
+option(ENABLE_ASAN "Enable Google Address Sanitizer" OFF)
+option(ENABLE_USAN "Enable Google Undefined Sanitizer" OFF)
+option(ENABLE_TSAN "Enable Google Thread Sanitizer" OFF)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # set coverage flags
-if (ENABLE_COVERAGE AND UNIX)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
-  set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} --coverage")
+if (ENABLE_COVERAGE AND APPLE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g ")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  --coverage")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+elseif(ENABLE_COVERAGE AND UNIX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g ")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftest-coverage")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+endif()
+
+# set Google Address Sanitizer
+if(ENABLE_ASAN)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O1")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+  if (NOT APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=gold")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
+  endif()
+endif()
+
+# set Google Undefined Sanitizer
+if(ENABLE_USAN)
+  if (NOT APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=gold")
+  endif()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
+endif()
+
+# set Google Thread Sanitizer
+if(ENABLE_TSAN)
+  if (NOT APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=gold")
+  endif()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread")
 endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -86,16 +125,32 @@ list(APPEND ASTYLE_ARGS
 
 list(APPEND CPPCHECK_ARGS
   --enable=warning,style,performance,portability,unusedFunction
-  --std=c++14
-  --verbose
   --error-exitcode=1
+  -I ${CMAKE_SOURCE_DIR}/src/Switch/include
+  -I ${CMAKE_SOURCE_DIR}/src/Switch.Core/include
+  -I ${CMAKE_SOURCE_DIR}/src/Switch.System/include
+  -I ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/include
+  -I ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/include
+  -I ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/include
+  -I ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/include
+  -I ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Core/include
+  -I ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.framework/include
+  -j 8
   --language=c++
+  --std=c++14
   --suppressions-list=${CMAKE_CURRENT_BINARY_DIR}/cppcheck_false_positive.txt
   --template='[{file}:{line}]: ({severity}) {{id}} {message}'
-  -DMAIN=main
-  -I ${CMAKE_SOURCE_DIR}/include
+  --verbose
+  ${CMAKE_SOURCE_DIR}/src/Switch/src
+  ${CMAKE_SOURCE_DIR}/src/Switch.Core/src
+  ${CMAKE_SOURCE_DIR}/src/Switch.System/src
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/src
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/src
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/src
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/src
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Core/src
+  ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.framework/src
   ${CMAKE_SOURCE_DIR}/examples
-  ${CMAKE_SOURCE_DIR}/include
   ${CMAKE_SOURCE_DIR}/tests
   )
 
@@ -126,6 +181,21 @@ if (UNIX)
   message(STATUS "  Code coverage [${ENABLE_COVERAGE}]")
 else()
   message(STATUS "  Code coverage [NOT AVAIBLE]")
+endif()
+if (UNIX)
+  message(STATUS "  Google Address Sanitizer [${ENABLE_ASAN}]")
+else()
+  message(STATUS "  Google Address Sanitizer [NOT AVAIBLE]")
+endif()
+if (UNIX)
+  message(STATUS "  Google Undefined Sanitizer [${ENABLE_USAN}]")
+else()
+  message(STATUS "  Google Undefined Sanitizer [NOT AVAIBLE]")
+endif()
+if (UNIX)
+  message(STATUS "  Google Thread Sanitizer [${ENABLE_TSAN}]")
+else()
+  message(STATUS "  Google Thread Sanitizer [NOT AVAIBLE]")
 endif()
 message(STATUS "  Install prefix [${CMAKE_INSTALL_PREFIX}]")
 message(STATUS "  Output path [${EXECUTABLE_OUTPUT_PATH}]")
@@ -299,6 +369,14 @@ install(FILES scripts/cmake/SwitchConfig.cmake scripts/cmake/SwitchDependencies.
 
 message(STATUS "Custom targets")
 
+# add custom target ${PROJECT_NAME}.Install to install project.
+message(STATUS "  [X] ${PROJECT_NAME}.All")
+if (WIN32)
+  add_custom_target(${PROJECT_NAME}.All "${CMAKE_COMMAND}" --build "${CMAKE_BINARY_DIR}" --config ${SWITCH_BUILD_TYPE} DEPENDS ${PROJECT_NAME} COMMENT "Installing ${PROJECT_NAME}")
+else(UNIX)
+  add_custom_target(${PROJECT_NAME}.All "${CMAKE_COMMAND}" --build "${CMAKE_BINARY_DIR}" -- -j8 DEPENDS ${PROJECT_NAME} COMMENT "Installing ${PROJECT_NAME}")
+endif()
+
 message(STATUS "  [X] ${PROJECT_NAME}.Check")
 add_custom_target(${PROJECT_NAME}.Check COMMAND ${CMAKE_BINARY_DIR}/bin/cppcheck${EXECUTABLE_EXTENSION} ${CPPCHECK_ARGS} COMMENT "running cppcheck" DEPENDS cppcheck)
 
@@ -327,4 +405,4 @@ endif(DOXYGEN_FOUND)
 
 # add custom target ${PROJECT_NAME}.Tests to run project tests.
 message(STATUS "  [X] ${PROJECT_NAME}.Tests")
-add_custom_target(${PROJECT_NAME}.Tests COMMAND ctest --output-on-failure -C ${SWITCH_BUILD_TYPE} DEPENDS ${PROJECT_NAME}.Install)
+add_custom_target(${PROJECT_NAME}.Tests COMMAND ctest --output-on-failure -C ${SWITCH_BUILD_TYPE} DEPENDS ${PROJECT_NAME}.All)
