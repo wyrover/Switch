@@ -249,7 +249,7 @@ if (BUILD_TESTS)
     message(STATUS "  [ ] Switch.Core.ManualTests")
     message(STATUS "  [ ] Switch.Core.UnitTests")
   endif()
-  
+
   if (BUILD_SWITCH_SYSTEM)
     message(STATUS "  [X] Switch.System.ManualTests")
     add_subdirectory("tests/Switch.System.ManualTests")
@@ -259,7 +259,7 @@ if (BUILD_TESTS)
     message(STATUS "  [ ] Switch.System.ManualTests")
     message(STATUS "  [ ] Switch.System.UnitTests")
   endif()
-  
+
   if (BUILD_SWITCH_SYSTEM_DRAWING)
     message(STATUS "  [X] Switch.System.Drawing.ManualTests")
     add_subdirectory("tests/Switch.System.Drawing.ManualTests")
@@ -269,7 +269,7 @@ if (BUILD_TESTS)
     message(STATUS "  [ ] Switch.System.Drawing.ManualTests")
     message(STATUS "  [ ] Switch.System.Drawing.UnitTests")
   endif()
-  
+
   if (BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
     message(STATUS "  [X] Switch.System.Windows.Forms.ManualTests")
     add_subdirectory("tests/Switch.System.Windows.Forms.ManualTests")
@@ -279,7 +279,7 @@ if (BUILD_TESTS)
     message(STATUS "  [ ] Switch.System.Windows.Forms.ManualTests")
     message(STATUS "  [ ] Switch.System.Windows.Forms.UnitTests")
   endif()
-  
+
   if (BUILD_SWITCH_TUNIT_CORE)
     message(STATUS "  [X] Switch.TUnit.ManualTests")
     add_subdirectory("tests/Switch.TUnit.ManualTests")
@@ -289,7 +289,7 @@ if (BUILD_TESTS)
     message(STATUS "  [ ] Switch.TUnit.ManualTests")
     message(STATUS "  [ ] Switch.TUnit.UnitTests")
   endif()
-  
+
   if (BUILD_SWITCH_TUNIT_FRAMEWORK)
     message(STATUS "  [X] Switch.TUnit.Framework.ManualTests")
     add_subdirectory("tests/Switch.TUnit.Framework.ManualTests")
