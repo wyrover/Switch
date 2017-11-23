@@ -1,4 +1,6 @@
-#!/usr/bin/env sh
+#!/bin/bash
+
+set -ev
 
 # generate, build and install 3rdparty
 cd build/3rdparty

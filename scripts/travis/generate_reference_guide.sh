@@ -1,4 +1,6 @@
-#!/usr/bin/env sh
+#!/bin/bash
+
+set -ev
 
 # setup git
 git config --global user.email "gammasoft71@gmail.com"
