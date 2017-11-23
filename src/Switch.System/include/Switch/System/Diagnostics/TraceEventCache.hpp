@@ -40,7 +40,7 @@ namespace Switch {
         /// @remarks The first time the property is accessed in an instance of the TraceEventCache class, the current time is returned. Subsequent queries of this property in that instance return that same DateTime value, allowing it to be used as a timestamp.
         _property<System::DateTime, _readonly> DateTime {
           _get {
-            if(this->dateTime == DateTime::MinValue)
+            if (this->dateTime == DateTime::MinValue)
               this->dateTime = System::DateTime::Now();
             return this->dateTime;
           }

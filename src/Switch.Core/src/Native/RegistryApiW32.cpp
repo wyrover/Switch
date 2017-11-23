@@ -33,7 +33,7 @@ int32 Native::RegistryApi::DeleteValue(intptr hKey, const string& subkeyName) {
 int32  Native::RegistryApi::EnumKey(intptr key, int32 index, string& keyName) {
   wchar_t name[256];
   DWORD size = 255;
-  if(RegEnumKeyEx((HKEY)key, index, name, &size, NULL, NULL, NULL, NULL) != ERROR_SUCCESS)
+  if (RegEnumKeyEx((HKEY)key, index, name, &size, NULL, NULL, NULL, NULL) != ERROR_SUCCESS)
     return -1;
   keyName = name;
   return 0;
@@ -42,7 +42,7 @@ int32  Native::RegistryApi::EnumKey(intptr key, int32 index, string& keyName) {
 int32  Native::RegistryApi::EnumValues(intptr key, int32 index, string& keyName, Microsoft::Win32::RegistryValueKind& kind) {
   int32 keyLength = 16383;
   std::wstring kn(keyLength, '\0');
-  if(RegEnumValue((HKEY)key, index, (LPWSTR)kn.c_str(), (LPDWORD)&keyLength, NULL, (LPDWORD)&kind, NULL, NULL) != ERROR_SUCCESS)
+  if (RegEnumValue((HKEY)key, index, (LPWSTR)kn.c_str(), (LPDWORD)&keyLength, NULL, (LPDWORD)&kind, NULL, NULL) != ERROR_SUCCESS)
     return -1;
   keyName = kn;
   return 0;
@@ -57,7 +57,7 @@ string Native::RegistryApi::GetDefaultString() {
 }
 
 int32 Native::RegistryApi::GetHandleBaseKey(Microsoft::Win32::RegistryHive reghive, intptr& key) {
-  switch(reghive) {
+  switch (reghive) {
   case Microsoft::Win32::RegistryHive::ClassesRoot: key = (intptr)HKEY_CLASSES_ROOT; break;
   case Microsoft::Win32::RegistryHive::CurrentConfig: key = (intptr)HKEY_CURRENT_CONFIG; break;
   case Microsoft::Win32::RegistryHive::CurrentUser: key = (intptr)HKEY_CURRENT_USER; break;
@@ -72,7 +72,7 @@ int32 Native::RegistryApi::GetHandleBaseKey(Microsoft::Win32::RegistryHive reghi
 
 int32 Native::RegistryApi::GetValue(intptr hkey, const string& subKey, Microsoft::Win32::RegistryValueKind& type, System::Array<byte>& data) {
   int32 size = 0;
-  if(RegQueryValueEx((HKEY)hkey, subKey.w_str().c_str(), 0, (DWORD*)&type, NULL, (LPDWORD)&size) != ERROR_SUCCESS)
+  if (RegQueryValueEx((HKEY)hkey, subKey.w_str().c_str(), 0, (DWORD*)&type, NULL, (LPDWORD)&size) != ERROR_SUCCESS)
     return -1;
     
   System::Array<>::Resize(data, size);
@@ -84,7 +84,7 @@ int32 Native::RegistryApi::NumberOfSubKey(intptr key) {
   DWORD classNameSize = MAX_PATH, subKey = 0, maxSubKey, maxClass, value, maxValue, maxValueData, securityDescriptor;
   FILETIME ftLastWriteTime;
   
-  if(RegQueryInfoKeyA((HKEY)key, className, &classNameSize, null, &subKey, &maxSubKey, &maxClass, &value, &maxValue, &maxValueData, &securityDescriptor, &ftLastWriteTime) == ERROR_SUCCESS)
+  if (RegQueryInfoKeyA((HKEY)key, className, &classNameSize, null, &subKey, &maxSubKey, &maxClass, &value, &maxValue, &maxValueData, &securityDescriptor, &ftLastWriteTime) == ERROR_SUCCESS)
     return subKey;
   return -1;
 }
@@ -94,7 +94,7 @@ int32 Native::RegistryApi::NumberOfValue(intptr key) {
   DWORD classNameSize = MAX_PATH, subKey = 0, maxSubKey, maxClass, value, maxValue, maxValueData, securityDescriptor;
   FILETIME ftLastWriteTime;
   
-  if(RegQueryInfoKeyA((HKEY)key, className, &classNameSize, null, &subKey, &maxSubKey, &maxClass, &value, &maxValue, &maxValueData, &securityDescriptor, &ftLastWriteTime) == ERROR_SUCCESS)
+  if (RegQueryInfoKeyA((HKEY)key, className, &classNameSize, null, &subKey, &maxSubKey, &maxClass, &value, &maxValue, &maxValueData, &securityDescriptor, &ftLastWriteTime) == ERROR_SUCCESS)
     return value;
   return -1;
 }
@@ -108,7 +108,7 @@ int32  Native::RegistryApi::QueryInfoKey(intptr hkey, int32& subKey, int32& valu
   DWORD classNameSize = MAX_PATH, subKeyResultQuery = 0, maxSubKey, maxClass, valueResultQuery, maxValue, maxValueData, securityDescriptor;
   FILETIME ftLastWriteTime;
   
-  if(RegQueryInfoKeyA((HKEY)hkey, className, &classNameSize, null, &subKeyResultQuery, &maxSubKey, &maxClass, &valueResultQuery, &maxValue, &maxValueData, &securityDescriptor, &ftLastWriteTime) != ERROR_SUCCESS)
+  if (RegQueryInfoKeyA((HKEY)hkey, className, &classNameSize, null, &subKeyResultQuery, &maxSubKey, &maxClass, &valueResultQuery, &maxValue, &maxValueData, &securityDescriptor, &ftLastWriteTime) != ERROR_SUCCESS)
     return -1;
     
   subKey = subKeyResultQuery;

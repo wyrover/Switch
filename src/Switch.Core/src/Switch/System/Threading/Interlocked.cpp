@@ -18,7 +18,7 @@ int64 Interlocked::Add(int64& location, int64 value) {
 double Interlocked::CompareExchange(double& location, double value, double comparand) {
   double retValue = location;
   std::lock_guard<std::mutex> lock(guard);
-  if(location == comparand)
+  if (location == comparand)
     location = value;
   return retValue;
 }
@@ -42,7 +42,7 @@ void* Interlocked::CompareExchange(void*& location, void* value, void* comparand
 float Interlocked::CompareExchange(float& location, float value, float comparand) {
   float retValue = location;
   std::lock_guard<std::mutex> lock(guard);
-  if(location == comparand)
+  if (location == comparand)
     location = value;
   return retValue;
 }

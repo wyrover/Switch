@@ -70,10 +70,10 @@ namespace Switch {
   template<typename TT, typename T>
   bool is(const T* value) {
     try {
-      if(value == null)
+      if (value == null)
         return false;
       return dynamic_cast<const TT*>(value) != null;
-    } catch(const std::bad_cast&) {
+    } catch (const std::bad_cast&) {
       return false;
     }
   }
@@ -88,10 +88,10 @@ namespace Switch {
   template<typename TT, typename T>
   bool is(T* value) {
     try {
-      if(value == null)
+      if (value == null)
         return false;
       return dynamic_cast<TT*>(value) != null;
-    } catch(const std::bad_cast&) {
+    } catch (const std::bad_cast&) {
       return false;
     }
   }

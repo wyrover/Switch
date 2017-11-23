@@ -10,7 +10,7 @@ namespace {
   HashSet<char> cset(const char* s) {
     HashSet<char> set;
     int len = static_cast<int>(strlen(s));
-    for(int i = 0; i < len; i++)
+    for (int i = 0; i < len; i++)
       set.Add(s[i]);
     return set;
   }
@@ -36,16 +36,16 @@ namespace {
     
     // surname compare
     int32 CompareTo(const IComparable& obj) const override {
-      if(!is<Person>(obj))
+      if (!is<Person>(obj))
         return 1;
       const Person& p = as<Person>(obj);
       int32 r = this->surname.CompareTo(p.surname);
-      if(r != 0) return r;
+      if (r != 0) return r;
       return this->name.CompareTo(p.name);
     }
     
     bool Equals(const object& obj) const override {
-      if(!is<Person>(obj))
+      if (!is<Person>(obj))
         return false;
         
       const Person& p = as<Person>(obj);
@@ -61,7 +61,7 @@ namespace {
   class NameComparer : public IComparer<Person>  {
     virtual int32 Compare(const Person& x, const Person& y) const {
       int32 r = x.GetName().CompareTo(y.GetName());
-      if(r != 0) return r;
+      if (r != 0) return r;
       return x.GetSurname().CompareTo(y.GetSurname());
     }
   };
@@ -74,8 +74,8 @@ namespace {
   
   class ReversedIntegerComparer : public IComparer<int32> {
     virtual int32 Compare(const int32& x, const int32& y) const {
-      if(x < y) return 1;
-      if(x == y) return 0;
+      if (x < y) return 1;
+      if (x == y) return 0;
       return -1;
     }
   };
@@ -227,16 +227,16 @@ namespace {
   TEST(HashSet, ExceptWith) {
     HashSet<int> odds;
     List<int> evens;
-    for(int i = 0; i < 20; i++) {
+    for (int i = 0; i < 20; i++) {
       odds.Add(i);
-      if(i % 2 == 0)
+      if (i % 2 == 0)
         evens.Add(i);
     }
     
     odds.ExceptWith(evens);
     EXPECT_EQ(10, odds.Count);
     
-    for(int x : odds)
+    for (int x : odds)
       EXPECT_EQ(1, x % 2);
       
     odds.ExceptWith(odds);
@@ -245,7 +245,7 @@ namespace {
   
   TEST(HashSet, Remove) {
     HashSet<int> numbers;
-    for(int i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
       numbers.Add(i);
       
     EXPECT_TRUE(numbers.Remove(0));
@@ -257,42 +257,42 @@ namespace {
     EXPECT_FALSE(numbers.Remove(105));
     
     EXPECT_EQ(5, numbers.Count);
-    for(int x : numbers)
+    for (int x : numbers)
       EXPECT_EQ(1, x % 2);
   }
   
   TEST(HashSet, GetViewBetween) {
     HashSet<int32> _1_100;
-    for(int i = 1; i <= 100; i++)
+    for (int i = 1; i <= 100; i++)
       _1_100.Add(i);
       
     HashSet<int32> _100_1(_1_100, new ReversedIntegerComparer());
     int32 test[51];
     int k = 0;
-    for(int i = 75; i >= 25; i--)
+    for (int i = 75; i >= 25; i--)
       test[k++] = i;
       
     HashSet<int32> _75_25 = _100_1.GetViewBetween(25, 75);
     int i = 0;
-    for(int32 x : _75_25)
+    for (int32 x : _75_25)
       EXPECT_EQ(test[i++], x);
       
     HashSet<int32> one = _100_1.GetViewBetween(56, 56);
     EXPECT_EQ(1, one.Count);
-    for(int32 x : one)
+    for (int32 x : one)
       EXPECT_EQ(56, x);
   }
   
   TEST(HashSet, IntersectWith) {
     HashSet<int32> _1_10;
     HashSet<int32> _5_15;
-    for(int i = 1; i < 15; i++) {
-      if(i <= 10) _1_10.Add(i);
-      if(i >= 5)  _5_15.Add(i);
+    for (int i = 1; i < 15; i++) {
+      if (i <= 10) _1_10.Add(i);
+      if (i >= 5)  _5_15.Add(i);
     }
     
     _1_10.IntersectWith(_5_15);
-    for(int32 x : _1_10) {
+    for (int32 x : _1_10) {
       EXPECT_LE(x, 10);
       EXPECT_GE(x, 5);
     }
@@ -498,8 +498,8 @@ namespace {
     set.Add(Person("May", "PARKER"));
     
     set.UnionWith(set2);
-    for(Person p : set) {
-      if(p.GetName().Equals("Gwen"))
+    for (Person p : set) {
+      if (p.GetName().Equals("Gwen"))
         EXPECT_TRUE(string("STACY").Equals(p.GetSurname()));
     }
   }
@@ -507,7 +507,7 @@ namespace {
   TEST(HashSet, Enumerator_Empty) {
     HashSet<char> s(cset(""));
     HashSet<char>::Enumerator e(s);
-    while(e.MoveNext())
+    while (e.MoveNext())
       EXPECT_FALSE(true);
   }
   
@@ -517,7 +517,7 @@ namespace {
     
     int32 count[4] = { 0, 0, 0, 0 };
     
-    while(e.MoveNext()) {
+    while (e.MoveNext()) {
       int i = e.Current() - '0';
       ASSERT_LE(0, i);
       ASSERT_GT(4, i);
@@ -543,7 +543,7 @@ namespace {
     
     HashSet<char>::Enumerator e2(e1);
     
-    while(e2.MoveNext()) {
+    while (e2.MoveNext()) {
       int i = e2.Current() - '0';
       ASSERT_LE(0, i);
       ASSERT_GT(4, i);

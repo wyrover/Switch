@@ -39,7 +39,7 @@ namespace Switch {
           /// @exception ArgumentNullException collection is a null reference.
           ConcurrentBag(const Generic::IEnumerable<T>& collection) {
             _lock(this->list.SyncRoot) {
-              for(T item : collection)
+              for (T item : collection)
                 this->list.Add(item);
             }
           }
@@ -47,7 +47,7 @@ namespace Switch {
           /// @cond
           ConcurrentBag(InitializerList<T> il)  {
             _lock(this->list.SyncRoot) {
-              for(T item : il)
+              for (T item : il)
                 this->list.Add(item);
             }
           }
@@ -72,11 +72,11 @@ namespace Switch {
           /// @param array TThe one-dimensional Array that is the destination of the elements copied from the IProducerConsumerCollection<T>. The array must have zero-based indexing.
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
-            if(index + this->list.Count > array.Length)
+            if (index + this->list.Count > array.Length)
               throw ArgumentOutOfRangeException(_caller);
               
             _lock(this->list.SyncRoot) {
-              for(T item : this->list)
+              for (T item : this->list)
                 array[index++] = item;
             }
           }
@@ -106,7 +106,7 @@ namespace Switch {
               try {
                 this->list.Add(item);
                 return true;
-              } catch(...) {
+              } catch (...) {
                 return false;
               }
             }
@@ -118,7 +118,7 @@ namespace Switch {
           /// @return true if and object was returned successfully; otherwise, false.
           bool TryPeek(T& result) {
             _lock(this->list.SyncRoot) {
-              if(this->list.Count > 0) {
+              if (this->list.Count > 0) {
                 result = this->list[this->Count - 1];
                 return true;
               }
@@ -131,7 +131,7 @@ namespace Switch {
           /// @return true if an object was removed and returned successfully; otherwise, false.
           bool TryTake(T& result) override {
             _lock(this->list.SyncRoot) {
-              if(this->list.Count > 0) {
+              if (this->list.Count > 0) {
                 result = this->list[this->Count - 1];
                 this->list.RemoveAt(this->Count - 1);
                 return true;
@@ -174,7 +174,7 @@ namespace Switch {
             
           protected:
             const T& GetCurrent() const {
-              if(this->index < 0 || this->index >= this->array.Length)
+              if (this->index < 0 || this->index >= this->array.Length)
                 throw InvalidOperationException(_caller);
               return this->array[this->index];
             }

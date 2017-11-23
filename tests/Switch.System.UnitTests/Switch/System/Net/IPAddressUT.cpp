@@ -9,7 +9,7 @@ using namespace System::Net::Sockets;
 template<typename T, typename TArray>
 void EXPECT_B4(T b1, T b2, T b3, T b4, TArray bytes) {
   ASSERT_EQ(4, bytes.Length);
-  if(System::BitConverter::IsLittleEndian()) {
+  if (System::BitConverter::IsLittleEndian()) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
     ASSERT_EQ(b3, bytes[2]);
@@ -25,7 +25,7 @@ void EXPECT_B4(T b1, T b2, T b3, T b4, TArray bytes) {
 template<typename T, typename TArray>
 void EXPECT_B16(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, T b9, T b10, T b11, T b12, T b13, T b14, T b15, T b16, TArray bytes) {
   ASSERT_EQ(16, bytes.Length);
-  if(System::BitConverter::IsLittleEndian()) {
+  if (System::BitConverter::IsLittleEndian()) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
     ASSERT_EQ(b3, bytes[2]);
@@ -145,7 +145,7 @@ namespace {
   }
   
   TEST(IPAddress, HostToNetworkOrder) {
-    if(BitConverter::IsLittleEndian()) {
+    if (BitConverter::IsLittleEndian()) {
       ASSERT_EQ(int16(0x3412), IPAddress::HostToNetworkOrder(int16(0x1234)));
       ASSERT_EQ(int32(0x78563412), IPAddress::HostToNetworkOrder(int32(0x12345678)));
       ASSERT_EQ(int64(0xF0DEBC9A78563412), IPAddress::HostToNetworkOrder(int64(0x123456789ABCDEF0)));
@@ -165,7 +165,7 @@ namespace {
   }
   
   TEST(IPAddress, NetworkToHostOrder) {
-    if(BitConverter::IsLittleEndian()) {
+    if (BitConverter::IsLittleEndian()) {
       ASSERT_EQ(int16(0x3412), IPAddress::NetworkToHostOrder(int16(0x1234)));
       ASSERT_EQ(int32(0x78563412), IPAddress::NetworkToHostOrder(int32(0x12345678)));
       ASSERT_EQ(int64(0xF0DEBC9A78563412), IPAddress::NetworkToHostOrder(int64(0x123456789ABCDEF0)));

@@ -32,7 +32,7 @@ namespace Switch {
         /// @param mode One of the System::Threading::EventResetMode values that determines whether the event resets automatically or manually.
         /// @exception IO::IOException A Win32 error occurred.
         EventWaitHandle(bool initialState, EventResetMode mode) : mode(ref_new<EventResetMode>(mode)) {
-          if(initialState)
+          if (initialState)
             this->Set();
         }
         
@@ -82,7 +82,7 @@ namespace Switch {
         /// @brief Sets the state of the event to nonsignaled, causing threads to block.
         /// @return true if the operation succeeds; otherwise, false.
         bool Reset() {
-          if(this->guard == null)
+          if (this->guard == null)
             throw ObjectDisposedException(_caller);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = false;
@@ -92,7 +92,7 @@ namespace Switch {
         /// @brief Sets the state of the event to signaled, allowing one or more waiting threads to proceed.
         /// @return true if the operation succeeds; otherwise, false.
         bool Set() {
-          if(this->guard == null)
+          if (this->guard == null)
             throw ObjectDisposedException(_caller);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = true;
@@ -116,20 +116,20 @@ namespace Switch {
         bool Signal() override {return this->Set();}
         
         bool Wait(int32 millisecondsTimeOut) override {
-          if(this->guard == null)
+          if (this->guard == null)
             throw ObjectDisposedException(_caller);
-          if(millisecondsTimeOut < -1)
+          if (millisecondsTimeOut < -1)
             throw AbandonedMutexException(_caller);
             
           std::unique_lock<std::mutex> lock(*this->guard);
-          while(*this->event == false) {
-            if(millisecondsTimeOut == -1)
+          while (*this->event == false) {
+            if (millisecondsTimeOut == -1)
               this->signal->wait(lock);
-            else if(this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
+            else if (this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
               return false;
           }
           
-          if(*this->mode == EventResetMode::AutoReset)
+          if (*this->mode == EventResetMode::AutoReset)
             *this->event = false;
           return true;
         }

@@ -37,7 +37,7 @@ namespace Switch {
           /// @exception ArgumentNullException collection is a null reference.
           ConcurrentStack(const Generic::IEnumerable<T>& collection) {
             _lock(this->stack.SyncRoot) {
-              for(T item : collection)
+              for (T item : collection)
                 this->stack.Insert(0, item);
             }
           }
@@ -45,7 +45,7 @@ namespace Switch {
           /// @cond
           ConcurrentStack(InitializerList<T> il)  {
             _lock(this->stack.SyncRoot) {
-              for(T item : il)
+              for (T item : il)
                 this->stack.Insert(0, item);
             }
           }
@@ -79,14 +79,14 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException startIndex or count is negative. Or startIndex is greater than or equal to the length of items.
           /// @exception ArgumentException startIndex + count is greater than the length of items.
           void PushRange(const System::Array<T>& items, int32 startIndex, int32 count) {
-            if(startIndex < 0 || count < 0 || startIndex > items.Length)
+            if (startIndex < 0 || count < 0 || startIndex > items.Length)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(startIndex + count > items.Length)
+            if (startIndex + count > items.Length)
               throw ArgumentException(_caller);
               
             _lock(this->stack.SyncRoot) {
-              for(int32 i = startIndex; i < startIndex + count; i++)
+              for (int32 i = startIndex; i < startIndex + count; i++)
                 this->stack.Insert(0, items[i]);
             }
           }
@@ -126,7 +126,7 @@ namespace Switch {
           /// @return true if and object was returned successfully; otherwise, false.
           bool TryPeek(T& result) {
             _lock(this->stack.SyncRoot) {
-              if(this->stack.Count > 0) {
+              if (this->stack.Count > 0) {
                 result = this->stack[0];
                 return true;
               }
@@ -139,7 +139,7 @@ namespace Switch {
           /// @return true if an object was removed and returned successfully; otherwise, false.
           bool TryPop(T& result) {
             _lock(this->stack.SyncRoot) {
-              if(this->stack.Count > 0) {
+              if (this->stack.Count > 0) {
                 result = this->stack[0];
                 this->stack.RemoveAt(0);
                 return true;
@@ -163,16 +163,16 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException startIndex or count is negative. Or startIndex is greater than or equal to the length of items.
           /// @exception ArgumentException startIndex + count is greater than the length of items.
           int32 TryPopRange(System::Array<T>& results, int32 startIndex, int32 count) {
-            if(startIndex < 0 || count < 0 || startIndex > results.Length)
+            if (startIndex < 0 || count < 0 || startIndex > results.Length)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(startIndex + count > results.Length)
+            if (startIndex + count > results.Length)
               throw ArgumentException(_caller);
               
             int32 nbItemPoped = 0;
             _lock(this->stack.SyncRoot) {
-              for(int32 i = startIndex; i < startIndex + count; i++) {
-                if(this->stack.Count == 0)
+              for (int32 i = startIndex; i < startIndex + count; i++) {
+                if (this->stack.Count == 0)
                   break;
                   
                 results[i] = this->stack[0];
@@ -217,7 +217,7 @@ namespace Switch {
             
           protected:
             const T& GetCurrent() const {
-              if(this->index < 0 || this->index >= this->array.Length)
+              if (this->index < 0 || this->index >= this->array.Length)
                 throw InvalidOperationException(_caller);
               return this->array[this->index];
             }

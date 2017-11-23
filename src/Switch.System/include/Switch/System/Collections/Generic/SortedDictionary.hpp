@@ -55,7 +55,7 @@ public:
           /// @param dictionary The System::Collections::Generic::IDictionary<TKey,TValue> whose elements are  copied to the new System::Collections::Generic::SortedDictionary<TKey,TValue>.
           /// @exception System::ArgumentException dictionary contains one or more duplicate keys.
           SortedDictionary(const SortedDictionary& dictionary) : operationNumber(dictionary.operationNumber), comparer(dictionary.comparer), map(MapComparer(*this->comparer)) {
-            for(const auto& item : dictionary)
+            for (const auto& item : dictionary)
               Add(item);
           }
           
@@ -67,7 +67,7 @@ public:
           /// @endcond
           
           SortedDictionary(const IDictionary<TKey, TValue>& dictionary) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<TKey>()), map(MapComparer(*this->comparer)) {
-            for(const auto& item : dictionary)
+            for (const auto& item : dictionary)
               Add(item);
           }
           
@@ -77,7 +77,7 @@ public:
           /// @exception System::ArgumentNullException dictionary is null.
           /// @exception System::ArgumentException dictionary contains one or more duplicate keys.
           SortedDictionary(const IDictionary<TKey, TValue>& dictionary, refptr< IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {
-            for(auto p : dictionary)
+            for (auto p : dictionary)
               Add(p.Key(), p.Value());
           }
           
@@ -87,7 +87,7 @@ public:
           /// @exception ArgumentNullException The parameters array is null.
           /// @remarks The SortedDictionary<TKey, TValue> class is ! thread safe.
           SortedDictionary(const System::Array<KeyValuePair<TKey, TValue>>& array) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<TKey>()), map(MapComparer(*this->comparer)) {
-            for(auto elem : array)
+            for (auto elem : array)
               Add(elem.Key(), elem.Value());
           }
           
@@ -96,13 +96,13 @@ public:
           /// @remarks The SortedDictionary class is ! thread safe.
           template<int32 len>
           SortedDictionary(const Item(&array)[len]) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<TKey>()), map(MapComparer(*this->comparer)) {
-            for(int32 index = 0; index < len; index++)
+            for (int32 index = 0; index < len; index++)
                 this->Add(array[index].Key(), array[index].Value());
           }
           
           /// @cond
           SortedDictionary(InitializerList<KeyValuePair<TKey, TValue>> il) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<TKey>()), map(MapComparer(*this->comparer)) {
-            for(typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
+            for (typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
               this->Add(*iterator);
           }
           /// @endcond
@@ -125,7 +125,7 @@ public:
           /// @exception System::ArgumentNullException key is null.
           /// @exception System::ArgumentException An element with the same key already exists in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           void Add(const TKey& key, const TValue& value) override {
-            if(ContainsKey(key))
+            if (ContainsKey(key))
               throw System::ArgumentException(_caller);
               
             (*this)[key] = value;
@@ -139,7 +139,7 @@ public:
           /// @brief Determines whether an element is in the SortedDictionary<TKey,TValue>.
           /// @param keyValue The object to be added to the end of the SortedDictionary<TKey,TValue>. The value can ! be null for reference types.
           virtual bool Contains(const KeyValuePair<TKey, TValue>& keyValue) const override {
-            if(!ContainsKey(keyValue.Key()))
+            if (!ContainsKey(keyValue.Key()))
               return false;
               
             return keyValue.Value() == (*this)[keyValue.Key()];
@@ -157,8 +157,8 @@ public:
           /// @param value The value to locate in the System::Collections::Generic::SortedDictionary<TKey,TValue>. The value can be null for reference types.
           /// @return true if the System::Collections::Generic::SortedDictionary<TKey,TValue> contains an element with the specified value; otherwise, false.
           bool ContainsValue(const TValue& value) const {
-            for(auto p : *this) {
-              if(p.Value() == value)
+            for (auto p : *this) {
+              if (p.Value() == value)
                 return true;
             }
             
@@ -181,11 +181,11 @@ public:
           /// @exception System::ArgumentOutOfRangeException index is less than 0.
           /// @exception System::ArgumentException The number of elements in the source System::Collections::Generic::SortedDictionary<TKey,TValue> is greater than the available space from index to the end of the destination array.
           void CopyTo(System::Array<KeyValuePair<TKey, TValue>>& array, int32 index) const override {
-            if(index < 0 || array.Length < index + this->Count)
+            if (index < 0 || array.Length < index + this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
             int32 count = index;
-            for(auto elem : *this)
+            for (auto elem : *this)
               array[count++] = KeyValuePair<TKey, TValue>(elem.Key(), elem.Value());
               
             return;
@@ -202,7 +202,7 @@ public:
           /// @return true if the element is successfully removed; otherwise, false. This method also returns false if key is ! found in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           /// @exception System::ArgumentNullException key is null.
           bool Remove(const KeyValuePair<TKey, TValue>& kvp) override {
-            if(!Contains(kvp))
+            if (!Contains(kvp))
               return false;
               
             this->operationNumber++;
@@ -224,7 +224,7 @@ public:
           /// @return true if the System::Collections::Generic::SortedDictionary<TKey,TValue> contains an element with the specified key; otherwise, false.
           /// @exception System::ArgumentNullException key is null.
           virtual bool TryGetValue(const TKey& key, TValue& value) const override {
-            if(! ContainsKey(key)) {
+            if (! ContainsKey(key)) {
               value = TValue();
               return false;
             }
@@ -254,7 +254,7 @@ public:
           /// The following sample show how to use [] operators:
           /// @include SortedDictionaryOperators.cpp
           const TValue& operator[](const TKey& key) const override {
-            if(! ContainsKey(key))
+            if (! ContainsKey(key))
               throw ArgumentException(_caller);
               
             return const_cast<std::map<TKey, TValue, MapComparer, TAllocator>&>(this->map)[key];
@@ -338,18 +338,18 @@ public:
             
             virtual bool MoveNext() {
             
-              if(this->operationNumber != this->dictionary.operationNumber)
+              if (this->operationNumber != this->dictionary.operationNumber)
                 throw InvalidOperationException(_caller);
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
-              if(this->beforeFirst)
+              if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
                 
-              if(IsFinished()) return false;
+              if (IsFinished()) return false;
               
               this->currentKeyValuePair = KeyValuePair<TKey, TValue>((*this->iterator).first, (*this->iterator).second);
               
@@ -358,7 +358,7 @@ public:
             
           protected:
             const KeyValuePair<TKey, TValue>& GetCurrent() const  {
-              if(this->beforeFirst || IsFinished())
+              if (this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
               return this->currentKeyValuePair;
             }
@@ -387,14 +387,14 @@ private:
           
           KeyCollection GetKeys() const override {
             KeyCollection keys;
-            for(auto item : this->map)
+            for (auto item : this->map)
               keys.Add(item.first);
             return keys;
           }
           
           ValueCollection GetValues() const override {
             ValueCollection values;
-            for(auto item : this->map)
+            for (auto item : this->map)
               values.Add(item.second);
             return values;
           }

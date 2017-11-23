@@ -38,7 +38,7 @@ namespace Switch {
           /// @exception ArgumentNullException collection is a null reference.
           ConcurrentQueue(const Generic::IEnumerable<T>& collection) {
             _lock(this->queue.SyncRoot) {
-              for(T item : collection)
+              for (T item : collection)
                 this->queue.Add(item);
             }
           }
@@ -46,7 +46,7 @@ namespace Switch {
           /// @cond
           ConcurrentQueue(InitializerList<T> il)  {
             _lock(this->queue.SyncRoot) {
-              for(T item : il)
+              for (T item : il)
                 this->queue.Add(item);
             }
           }
@@ -77,12 +77,12 @@ namespace Switch {
           /// @param array TThe one-dimensional Array that is the destination of the elements copied from the IProducerConsumerCollection<T>. The array must have zero-based indexing.
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
-            if(index + this->queue.Count > array.Length)
+            if (index + this->queue.Count > array.Length)
               throw System::ArgumentOutOfRangeException(_caller);
               
             _lock(this->queue.SyncRoot) {
               System::Int32 pos = index;
-              for(T item : this->queue)
+              for (T item : this->queue)
                 array[pos++] = item;
             }
           }
@@ -110,7 +110,7 @@ namespace Switch {
           /// @return true if and object was returned successfully; otherwise, false.
           bool TryPeek(T& result) {
             _lock(this->queue.SyncRoot) {
-              if(this->queue.Count > 0) {
+              if (this->queue.Count > 0) {
                 result = this->queue[0];
                 return true;
               }
@@ -123,7 +123,7 @@ namespace Switch {
           /// @return true if an object was removed and returned successfully; otherwise, false.
           bool TryDequeue(T& result) {
             _lock(this->queue.SyncRoot) {
-              if(this->queue.Count > 0) {
+              if (this->queue.Count > 0) {
                 result = this->queue[0];
                 this->queue.RemoveAt(0);
                 return true;
@@ -166,7 +166,7 @@ namespace Switch {
             
           protected:
             const T& GetCurrent() const {
-              if(this->index < 0 || this->index >= this->array.Length)
+              if (this->index < 0 || this->index >= this->array.Length)
                 throw InvalidOperationException(_caller);
                 
               return this->array[this->index];

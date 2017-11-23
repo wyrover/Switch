@@ -370,7 +370,7 @@ namespace {
     // Encode the string.
     Bytes encodedBytes = ascii.GetBytes(unicodeString);
     int index = 0;
-    for(byte b : encodedBytes)
+    for (byte b : encodedBytes)
       ASSERT_EQ(reference[index++], b);
       
     ASSERT_EQ(unicodeString.Length(), ascii.GetCharCount(encodedBytes.Data, encodedBytes.Length, 0, encodedBytes.Length));

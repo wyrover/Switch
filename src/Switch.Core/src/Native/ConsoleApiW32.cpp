@@ -147,7 +147,7 @@ void Native::ConsoleApi::ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool
   do {
     DWORD nbEventsRead = 0;
     ReadConsoleInput(GetStdHandle(STD_INPUT_HANDLE), &inputRecord, 1, &nbEventsRead);
-  } while(!(inputRecord.EventType == KEY_EVENT && (inputRecord.Event.KeyEvent.bKeyDown == 1 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x10 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x11 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x12)));
+  } while (!(inputRecord.EventType == KEY_EVENT && (inputRecord.Event.KeyEvent.bKeyDown == 1 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x10 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x11 && inputRecord.Event.KeyEvent.wVirtualKeyCode != 0x12)));
   
   keyChar = inputRecord.Event.KeyEvent.uChar.AsciiChar;
   keyCode = inputRecord.Event.KeyEvent.wVirtualKeyCode;

@@ -37,7 +37,7 @@ namespace SwitchUnitTests {
     {
       try {
         throw InvalidOperationException();
-      } catch(...) {
+      } catch (...) {
         ep = ExceptionPtr::CurrentException();
       }
     }
@@ -51,7 +51,7 @@ namespace SwitchUnitTests {
     {
       try {
         throw MyException();
-      } catch(...) {
+      } catch (...) {
         ep = ExceptionPtr::CurrentException();
       }
     }

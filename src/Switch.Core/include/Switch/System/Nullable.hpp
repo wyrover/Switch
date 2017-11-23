@@ -67,7 +67,7 @@ namespace Switch {
       /// @remarks If a value of type T has not been assigned to the Nullable<T> object, you can compare it to null and retrieve its HasValue property, but you cannot access its Value property or call its other members.
       _property<T&, _readonly> Value {
         _get->T& {
-          if(!this->hasValue)
+          if (!this->hasValue)
             throw System::InvalidOperationException(_caller);
           return this->value;
         }
@@ -83,7 +83,7 @@ namespace Switch {
       /// | Zero              | This instance is equal to obj.     |
       /// | Greater than zero | This instance is greater than obj. |
       int32 CompareTo(const IComparable& obj) const override {
-        if(!is<Nullable>(obj)) return -1;
+        if (!is<Nullable>(obj)) return -1;
         return CompareTo(as<Nullable<T>>(obj));
       }
       
@@ -97,8 +97,8 @@ namespace Switch {
       /// | Zero              | This instance is equal to obj.     |
       /// | Greater than zero | This instance is greater than obj. |
       int32 CompareTo(const Nullable& obj) const {
-        if(this->value < obj.value) return -1;
-        if(this->value > obj.value) return 1;
+        if (this->value < obj.value) return -1;
+        if (this->value > obj.value) return 1;
         return 0;
       }
       
@@ -111,7 +111,7 @@ namespace Switch {
       /// @param value The Nullable<T> to compare with the current Object.
       /// @return true if the specified value is equal to the current Nullable<T>. otherwise, false.
       bool Equals(const Nullable& value) const {
-        if(this->hasValue == false && value.hasValue == false)
+        if (this->hasValue == false && value.hasValue == false)
           return true;
         return this->hasValue == value.hasValue && this->value == value.value;
       }
@@ -134,7 +134,7 @@ namespace Switch {
       /// @return The value of the Value property if the HasValue property is true; otherwise, the defaultValue parameter.
       /// @remarks The GetValueOrDefault method returns a value even if the HasValue property is false (unlike the Value property, which throws an exception).
       T GetValueOrDefault(T defaultValue) {
-        if(!this->hasValue)
+        if (!this->hasValue)
           return defaultValue;
         return this->value;
       }
@@ -143,7 +143,7 @@ namespace Switch {
       /// @return The text representation of the value of the current Nullable<T> object if the HasValue property is true, or an empty string ("") if the HasValue property is false.
       /// @remarks The ToString property returns the string yielded by calling the ToString property of the object returned by the Value property.
       String ToString() const override {
-        if(!this->hasValue)
+        if (!this->hasValue)
           return "";
         return Convert::ToString(this->value);
       }
@@ -163,14 +163,14 @@ namespace Switch {
   
   template<typename TT, typename T>
   bool is(const System::Nullable<T>& value) {
-    if(!value.HasValue)
+    if (!value.HasValue)
       return false;
     return is<TT>(value.Value());
   }
   
   template<typename TT, typename T>
   bool is(System::Nullable<T>& value) {
-    if(!value.HasValue)
+    if (!value.HasValue)
       return false;
     return is<TT>(value.Value());
   }

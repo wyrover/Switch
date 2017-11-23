@@ -44,11 +44,11 @@ namespace Switch {
       /// @remarks This type is not intended to be created by users. Instead, it is returned to the user in response to calling the Console::ReadKey method.
       /// @remarks The ConsoleKeyInfo type does not specify whether the left or right SHIFT, ALT, or CTRL modifier key was pressed
       ConsoleKeyInfo(char32 keyChar, ConsoleKey key, bool shift, bool alt, bool control) : keyChar(keyChar), key(key) {
-        if(shift == true)
+        if (shift == true)
           this->modifiers |= ConsoleModifiers::Shift;
-        if(alt == true)
+        if (alt == true)
           this->modifiers |= ConsoleModifiers::Alt;
-        if(control == true)
+        if (control == true)
           this->modifiers |= ConsoleModifiers::Control;
       }
       

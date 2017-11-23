@@ -36,7 +36,7 @@ namespace Switch {
     const_iterator begin = (const_iterator)&value;
     const_iterator end = begin + sizeof(T);
     int32 hash = 0;
-    for(const_iterator it = begin; it != end; ++it)
+    for (const_iterator it = begin; it != end; ++it)
       hash = 5 * hash + *it;
     return hash;
   }

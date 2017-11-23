@@ -19,7 +19,7 @@ void UnicodeEncoding::Encoder::Encode(char32 c, byte bytes[]) const {
 }
 
 String UnicodeEncoding::Encoder::ToString() const {
-  if(this->bigEndian)
+  if (this->bigEndian)
     return "UnicodeEncoder Big Endian";
   else
     return "UnicodeEncoder";
@@ -33,18 +33,18 @@ UnicodeEncoding::Decoder& UnicodeEncoding::Decoder::operator=(const UnicodeEncod
 
 void UnicodeEncoding::Decoder::Add(byte b) {
   Encoding::Decoder::Add(b);
-  if(count == 2) {
+  if (count == 2) {
     uint32 cp;
-    if(Native::UnicodeEncodingsApi::UTF16::Decode(bytes, count, bigEndian, cp) == 2) {
+    if (Native::UnicodeEncodingsApi::UTF16::Decode(bytes, count, bigEndian, cp) == 2) {
       codePoint = char32(cp);
       finished = true;
       return;
     }
   }
   
-  if(count == 4) {
+  if (count == 4) {
     uint32 cp;
-    if(Native::UnicodeEncodingsApi::UTF16::Decode(bytes, count, bigEndian, cp) == 4) {
+    if (Native::UnicodeEncodingsApi::UTF16::Decode(bytes, count, bigEndian, cp) == 4) {
       codePoint = char32(cp);
       finished = true;
       return;
@@ -54,7 +54,7 @@ void UnicodeEncoding::Decoder::Add(byte b) {
 }
 
 String UnicodeEncoding::Decoder::ToString() const {
-  if(bigEndian)
+  if (bigEndian)
     return "UnicodeDecoder Big Endian";
   else
     return "UnicodeDecoder";
@@ -104,25 +104,25 @@ int32 UnicodeEncoding::GetByteCount(char32 c) const {
 }
 
 int32 UnicodeEncoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if(bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
+  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
   ValidateGCC(bytesSize, index, count);
-  if(bytesSize == 0) return 0;
+  if (bytesSize == 0) return 0;
   return Native::UnicodeEncodingsApi::UTF16::GetLength(&bytes[index], count, this->bigEndian);
 }
 
 int32 UnicodeEncoding::GetMaxByteCount(int32 charCount) const {
-  if(charCount < 0 || charCount > Int32::MaxValue / 4) throw ArgumentOutOfRangeException(_caller);
+  if (charCount < 0 || charCount > Int32::MaxValue / 4) throw ArgumentOutOfRangeException(_caller);
   return 4 * charCount; // 4 is maximum bytes per char
 }
 
 int32 UnicodeEncoding::GetMaxCharCount(int32 byteCount) const {
-  if(byteCount < 0) throw ArgumentOutOfRangeException(_caller);
+  if (byteCount < 0) throw ArgumentOutOfRangeException(_caller);
   return byteCount / 2; // 2 is minimum bytes per char
 }
 
 Array<byte> UnicodeEncoding::GetPreamble() const {
-  if(this->shouldEmitPreamble)
-    if(this->bigEndian)
+  if (this->shouldEmitPreamble)
+    if (this->bigEndian)
       return {0xFE, 0xFF};
     else
       return {0xFF, 0xFE};
@@ -132,18 +132,18 @@ Array<byte> UnicodeEncoding::GetPreamble() const {
 
 bool UnicodeEncoding::Equals(const object& obj) const {
   const UnicodeEncoding* ue = dynamic_cast<const UnicodeEncoding*>(&obj);
-  if(ue == null)
+  if (ue == null)
     return false;
     
   return this->shouldEmitPreamble == ue->shouldEmitPreamble && this->bigEndian == ue->bigEndian;
 }
 
 int32 UnicodeEncoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if(bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if(index < 0) throw ArgumentOutOfRangeException(_caller);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
+  if (index < 0) throw ArgumentOutOfRangeException(_caller);
   
   int32 count = GetByteCount(c);
-  if(index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
   
   Encoder encoder(this->bigEndian);
   encoder.Encode(c, &bytes[index]);

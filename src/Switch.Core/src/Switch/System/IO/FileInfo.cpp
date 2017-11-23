@@ -39,25 +39,25 @@ string FileInfo::GetName() const {
 }
 
 void FileInfo::Delete() {
-  if(Native::DirectoryApi::RemoveFile(this->fullPath.ToCCharArray().Data()) != 0)
+  if (Native::DirectoryApi::RemoveFile(this->fullPath.ToCCharArray().Data()) != 0)
     throw System::Security::SecurityException(_caller);
 }
 
 FileInfo FileInfo::CopyTo(const string& destFileName) {
-  if(!Exists())
+  if (!Exists())
     throw FileNotFoundException(_caller);
     
-  if(File::Exists(destFileName))
+  if (File::Exists(destFileName))
     throw IOException(_caller);
     
   string fullPathDestFileName = Path::GetFullPath(destFileName);
   
   FILE* source = fopen(this->fullPath.ToCCharArray().Data(), "rb");
-  if(source == null)
+  if (source == null)
     throw IOException(_caller);
     
   FILE* target = fopen(fullPathDestFileName.ToCCharArray().Data(), "wb");
-  if(target == null) {
+  if (target == null) {
     fclose(source);
     throw IOException(_caller);
   }
@@ -66,9 +66,9 @@ FileInfo FileInfo::CopyTo(const string& destFileName) {
   do {
     byte buffer[1024];
     count = Convert::ToInt32(fread(buffer, 1, 1024, source));
-    if(count > 0)
+    if (count > 0)
       fwrite(buffer, 1, count, target);
-  } while(count == 1024);
+  } while (count == 1024);
   
   fclose(source);
   fclose(target);
@@ -77,23 +77,23 @@ FileInfo FileInfo::CopyTo(const string& destFileName) {
 }
 
 FileInfo FileInfo::CopyTo(const string& destFileName, bool overwrite) {
-  if(overwrite) {
+  if (overwrite) {
     FileInfo DestFileInfo(destFileName);
-    if(DestFileInfo.Exists())
+    if (DestFileInfo.Exists())
       DestFileInfo.Delete();
   }
   return CopyTo(destFileName);
 }
 
 void FileInfo::MoveTo(const string& destFileName) {
-  if(!Exists())
+  if (!Exists())
     throw FileNotFoundException(_caller);
     
-  if(!Path::HasExtension(destFileName))
+  if (!Path::HasExtension(destFileName))
     throw ArgumentException(_caller);
     
   string fullPathDestFileName = Path::GetFullPath(destFileName);
-  if(Native::DirectoryApi::RenameFile(this->fullPath, fullPathDestFileName) != 0)
+  if (Native::DirectoryApi::RenameFile(this->fullPath, fullPathDestFileName) != 0)
     throw IOException(_caller);
     
   this->fullPath = fullPathDestFileName;

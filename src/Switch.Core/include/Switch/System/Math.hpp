@@ -46,7 +46,7 @@ namespace Switch {
       /// @return int16 A 16-bit signed integer, x, such that 0 <= x <= int16::MaxValue
       /// @exception OverflowException value equals Int16::MinValue.
       static int16 Abs(int16 value) {
-        if(value == Int16::MinValue)
+        if (value == Int16::MinValue)
           throw OverflowException(_caller);
         return value < 0 ? -value : value;
       }
@@ -56,7 +56,7 @@ namespace Switch {
       /// @return int32 A 32-bit signed integer, x, such that 0 <= x <= int32::MaxValue
       /// @exception OverflowException value equals Int32::MinValue.
       static int32 Abs(int32 value) {
-        if(value == Int32::MinValue)
+        if (value == Int32::MinValue)
           throw OverflowException(_caller);
         return value < 0 ? -value : value;
       }
@@ -66,7 +66,7 @@ namespace Switch {
       /// @return int64 A 64-bit signed integer, x, such that 0 <= x <= int64::MaxValue
       /// @exception OverflowException value equals Int64::MinValue.
       static int64 Abs(int64 value) {
-        if(value == Int64::MinValue)
+        if (value == Int64::MinValue)
           throw OverflowException(_caller);
         return value < 0 ? -value : value;
       }
@@ -76,7 +76,7 @@ namespace Switch {
       /// @return sbyte A 8-bit signed integer, x, such that 0 <= x <= sbyte::MaxValue
       /// @exception OverflowException value equals SByte::MinValue.
       static sbyte Abs(sbyte value) {
-        if(value == SByte::MinValue)
+        if (value == SByte::MinValue)
           throw OverflowException(_caller);
         return value < 0 ? -value : value;
       }
@@ -226,11 +226,11 @@ namespace Switch {
       /// | a = 1         | newBase = 0                         | 0               |
       /// | a = 1         | newBase = +Infinity                 | 0               |
       static double Log(double a, double newBase) {
-        if(a < 0 || newBase < 0 || (a != 1 && newBase == 0) || (a != 1 && Double::IsPositiveInfinity(newBase)) || Double::IsNaN(a) || Double::IsNaN(newBase) || newBase == 1)
+        if (a < 0 || newBase < 0 || (a != 1 && newBase == 0) || (a != 1 && Double::IsPositiveInfinity(newBase)) || Double::IsNaN(a) || Double::IsNaN(newBase) || newBase == 1)
           return Double::NaN;
-        if((a == 0 && 0 < newBase && newBase < 1) || (Double::IsPositiveInfinity(a) && newBase > 1))
+        if ((a == 0 && 0 < newBase && newBase < 1) || (Double::IsPositiveInfinity(a) && newBase > 1))
           return Double::PositiveInfinity;
-        if((a == 0 && newBase > 1) || (Double::IsPositiveInfinity(a) && 0 < newBase && newBase < 1))
+        if ((a == 0 && newBase > 1) || (Double::IsPositiveInfinity(a) && 0 < newBase && newBase < 1))
           return Double::NegativeInfinity;
         return (Log(a) / Log(newBase));
       }
@@ -416,7 +416,7 @@ namespace Switch {
       /// @return The number nearest to d that contains a number of fractional digits equal to decimals.
       static decimal Round(decimal value, int32 decimals) {
         decimal muliplicator = 1;
-        for(int32 index = 0; index < decimals; index++)
+        for (int32 index = 0; index < decimals; index++)
           muliplicator *= 10;
         return Floor((value * muliplicator) + 0.5) / muliplicator;
       }
@@ -432,7 +432,7 @@ namespace Switch {
       /// @return The number nearest to d that contains a number of fractional digits equal to decimals.
       static double Round(double value, int32 decimals) {
         double muliplicator = 1;
-        for(int32 index = 0; index < decimals; index++)
+        for (int32 index = 0; index < decimals; index++)
           muliplicator *= 10;
         return Floor((value * muliplicator) + 0.5) / muliplicator;
       }
@@ -447,7 +447,7 @@ namespace Switch {
       /// | 1            | value is greater than zero. |
       /// @exception ArithmeticException value is equal to NaN.
       static int32 Sign(decimal value) {
-        if(Decimal::IsNaN(value))
+        if (Decimal::IsNaN(value))
           throw ArithmeticException(_caller);
         return value < 0 ? -1 : value == 0 ? 0 : 1;
       }
@@ -462,7 +462,7 @@ namespace Switch {
       /// | 1            | value is greater than zero. |
       /// @exception ArithmeticException value is equal to NaN.
       static int32 Sign(double value) {
-        if(Double::IsNaN(value))
+        if (Double::IsNaN(value))
           throw ArithmeticException(_caller);
         return value < 0 ? -1 : value == 0 ? 0 : 1;
       }
@@ -517,7 +517,7 @@ namespace Switch {
       /// | 1            | value is greater than zero. |
       /// @exception ArithmeticException value is equal to NaN.
       static int32 Sign(float value) {
-        if(Single::IsNaN(value))
+        if (Single::IsNaN(value))
           throw ArithmeticException(_caller);
         return value < 0 ? -1 : value == 0 ? 0 : 1;
       }

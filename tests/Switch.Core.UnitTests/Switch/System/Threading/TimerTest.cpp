@@ -12,7 +12,7 @@ namespace {
     
     void Run(object& State) {
       this->State = &State;
-      if(++this->Number == 10)
+      if (++this->Number == 10)
         this->Event.Set();
     }
     

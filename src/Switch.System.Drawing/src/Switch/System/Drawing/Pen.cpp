@@ -10,7 +10,7 @@ void Pen::Create() {
 }
 
 void Pen::Destroy() {
-  if(this->pen != IntPtr::Zero)
+  if (this->pen != IntPtr::Zero)
     Native::PenApi::DeletePen(this->pen);
   this->pen = IntPtr::Zero;
 }

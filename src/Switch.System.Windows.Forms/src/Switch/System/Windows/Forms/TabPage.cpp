@@ -16,7 +16,7 @@ void TabPage::CreateHandle() {
 }
 
 void TabPage::SetParent(ref<Control> parent) {
-  if(!is<TabControl>(parent))
+  if (!is<TabControl>(parent))
     throw ArgumentException(_caller);
   Control::SetParent(parent);
 }

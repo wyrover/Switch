@@ -44,7 +44,7 @@ intptr Native::PanelApi::Create(const System::Windows::Forms::Panel& panel) {
 }
 
 void Native::PanelApi::SetBorderStyle(const System::Windows::Forms::Panel& panel) {
-  switch(panel.BorderStyle) {
+  switch (panel.BorderStyle) {
   case System::Windows::Forms::BorderStyle::None: ((Native::Panel*)panel.Handle())->set_shadow_type(Gtk::SHADOW_NONE); break;
   case System::Windows::Forms::BorderStyle::FixedSingle: ((Native::Panel*)panel.Handle())->set_shadow_type(Gtk::SHADOW_IN); break;
   case System::Windows::Forms::BorderStyle::Fixed3D: ((Native::Panel*)panel.Handle())->set_shadow_type(Gtk::SHADOW_ETCHED_IN); break;

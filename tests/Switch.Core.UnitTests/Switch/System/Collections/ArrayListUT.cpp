@@ -416,7 +416,7 @@ namespace {
     int32 index = 0;
     
     Enumerator enumerator = arrayList.GetEnumerator();
-    while(enumerator.MoveNext())
+    while (enumerator.MoveNext())
       ASSERT_EQ(array[index++], as<String>(enumerator.Current()));
     ASSERT_EQ(5, index);
   }
@@ -431,7 +431,7 @@ namespace {
     
     const char* array[] = {"Tyrannosaurus", "Amargasaurus", "Mamenchisaurus", "Deinonychus", "Compsognathus"};
     int32 index = 0;
-    for(auto item : arrayList)
+    for (auto item : arrayList)
       ASSERT_EQ(array[index++], as<String>(item));
     ASSERT_EQ(5, index);
   }

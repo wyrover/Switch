@@ -331,7 +331,7 @@ namespace Switch {
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           template<typename TEndPoint>
           void Bind(const TEndPoint& localEndPoint) {
-            if(this->data->socket == 0)
+            if (this->data->socket == 0)
               throw ObjectDisposedException(_caller);
               
             this->data->localEndPoint = as<EndPoint>(localEndPoint.template MemberwiseClone<TEndPoint>());
@@ -360,9 +360,9 @@ namespace Switch {
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           template<typename TEndPoint>
           void Connect(const TEndPoint& endPoint) {
-            if(this->data->socket == 0)
+            if (this->data->socket == 0)
               throw ObjectDisposedException(_caller);
-            if(this->data->listening == true)
+            if (this->data->listening == true)
               throw InvalidOperationException(_caller);
               
             this->data->remoteEndPoint = as<EndPoint>(endPoint.template MemberwiseClone<TEndPoint>());

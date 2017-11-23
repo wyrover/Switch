@@ -32,10 +32,10 @@ namespace {
   template<typename T>
   void TestValues3(const Generic::LinkedList<T>& list, T v1, T v2, T v3) {
     int i = 0;
-    for(T item : list) {
-      if(i == 0)  EXPECT_EQ(v1, item);
-      if(i == 1)  EXPECT_EQ(v2, item);
-      if(i == 2)  EXPECT_EQ(v3, item);
+    for (T item : list) {
+      if (i == 0)  EXPECT_EQ(v1, item);
+      if (i == 1)  EXPECT_EQ(v2, item);
+      if (i == 2)  EXPECT_EQ(v3, item);
       i++;
     }
   }
@@ -135,10 +135,10 @@ namespace {
     list.Add(new String("1")); list.Add(new String("2")); list.Add(new String("3"));
     EXPECT_EQ(3, list.Count);
     int i = 0;
-    for(refptr<string> item : list) {
-      if(i == 0) EXPECT_EQ("1", *item);
-      if(i == 1) EXPECT_EQ("2", *item);
-      if(i == 2) EXPECT_EQ("3", *item);
+    for (refptr<string> item : list) {
+      if (i == 0) EXPECT_EQ("1", *item);
+      if (i == 1) EXPECT_EQ("2", *item);
+      if (i == 2) EXPECT_EQ("3", *item);
       i++;
     }
   }
@@ -148,7 +148,7 @@ namespace {
     EXPECT_EQ(9, list.Count);
     
     int i = 0;
-    for(string s : list)
+    for (string s : list)
       EXPECT_TRUE(array[i++].Equals(s));
   }
   
@@ -158,7 +158,7 @@ namespace {
     EXPECT_EQ(9, list.Count);
     
     int i = 0;
-    for(string s : list)
+    for (string s : list)
       EXPECT_TRUE(array[i++].Equals(s));
   }
   
@@ -175,13 +175,13 @@ namespace {
     EXPECT_EQ(9, list.Count);
     
     int i = 0;
-    for(string s : list)
+    for (string s : list)
       EXPECT_TRUE(names[i++].Equals(s));
   }
   
   TEST_F(LinkedList, Contains) {
     Generic::LinkedList<string> list(array);
-    for(string s : array)
+    for (string s : array)
       EXPECT_TRUE(list.Contains(s));
       
     EXPECT_FALSE(list.Contains(""));
@@ -196,7 +196,7 @@ namespace {
     Array<string> dest(9);
     list.CopyTo(dest);
     int i = 0;
-    for(string s : list)
+    for (string s : list)
       EXPECT_TRUE(array[i++].Equals(s));
   }
   
@@ -212,7 +212,7 @@ namespace {
     list.CopyTo(dest);
     
     int i = 0;
-    for(string s : list)
+    for (string s : list)
       EXPECT_TRUE(array[i++].Equals(s));
   }
   
@@ -362,9 +362,9 @@ namespace {
     results = list.FindAll(Match);
     EXPECT_EQ(2, results.Count);
     int i = 0;
-    for(string s : results) {
-      if(i == 0) EXPECT_EQ("Deinonychus", s);
-      if(i == 1) EXPECT_EQ("Dilophosaurus", s);
+    for (string s : results) {
+      if (i == 0) EXPECT_EQ("Deinonychus", s);
+      if (i == 1) EXPECT_EQ("Dilophosaurus", s);
       i++;
     }
     
@@ -373,7 +373,7 @@ namespace {
     
     results = list.FindAll(Predicate<const string&>(Matcher(), &Matcher::MemberMatch));
     EXPECT_EQ(1, results.Count);
-    for(string s : results)
+    for (string s : results)
       EXPECT_EQ("Oviraptor", s);
       
     results = list.FindAll(Predicate<const string&>(Matcher(), &Matcher::MemberMatchNegative));
@@ -718,7 +718,7 @@ namespace {
     Generic::LinkedList<string> list(array);
     Array<string> array2 = list.ToArray();
     int i = 0;
-    for(string s : array)
+    for (string s : array)
       EXPECT_TRUE(s.Equals(array2[i++]));
       
     list.Clear();
@@ -734,14 +734,14 @@ namespace {
     
     Generic::LinkedList<int32>::Enumerator e(ints);
     int expected = 1;
-    while(e.MoveNext())
+    while (e.MoveNext())
       EXPECT_EQ(expected++, e.Current);
   }
   
   TEST_F(LinkedList, Enumerator_Empty) {
     Generic::LinkedList<int32> ints;
     Generic::LinkedList<int32>::Enumerator e(ints);
-    while(e.MoveNext())
+    while (e.MoveNext())
       EXPECT_FALSE(true);
   }
   
@@ -756,11 +756,11 @@ namespace {
     EXPECT_TRUE(e1.MoveNext());
     Generic::LinkedList<int32>::Enumerator e2(e1);
     int expected = 2;
-    while(e1.MoveNext())
+    while (e1.MoveNext())
       EXPECT_EQ(expected++, e1.Current);
       
     expected = 2;
-    while(e2.MoveNext())
+    while (e2.MoveNext())
       EXPECT_EQ(expected++, e2.Current);
   }
   
@@ -773,14 +773,14 @@ namespace {
     
     Generic::LinkedList<int32>::ReverseEnumerator e(ints);
     int expected = 3;
-    while(e.MoveNext())
+    while (e.MoveNext())
       EXPECT_EQ(expected--, e.Current);
   }
   
   TEST_F(LinkedList, ReverseEnumerator_Empty) {
     Generic::LinkedList<int32> ints;
     Generic::LinkedList<int32>::ReverseEnumerator e(ints);
-    while(e.MoveNext())
+    while (e.MoveNext())
       EXPECT_FALSE(true);
   }
   
@@ -795,11 +795,11 @@ namespace {
     EXPECT_TRUE(e1.MoveNext());
     Generic::LinkedList<int32>::ReverseEnumerator e2(e1);
     int expected = 3;
-    while(e1.MoveNext())
+    while (e1.MoveNext())
       EXPECT_EQ(expected--, e1.Current);
       
     expected = 3;
-    while(e2.MoveNext())
+    while (e2.MoveNext())
       EXPECT_EQ(expected--, e2.Current);
   }
   

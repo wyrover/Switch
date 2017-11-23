@@ -21,7 +21,7 @@ ANSIEncoding& ANSIEncoding::operator=(const ANSIEncoding& encoding) {
 }
 
 Encoding& ANSIEncoding::operator=(const Encoding& encoding) {
-  if(!is<ANSIEncoding>(encoding))
+  if (!is<ANSIEncoding>(encoding))
     return Encoding::operator=(encoding);
   return operator= (static_cast<const ANSIEncoding&>(encoding));
 }
@@ -31,24 +31,24 @@ int32 ANSIEncoding::GetByteCount(char32) const {
 }
 
 int32 ANSIEncoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if(bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
+  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
   ValidateGCC(bytesSize, index, count);
   return count;
 }
 
 int32 ANSIEncoding::GetMaxByteCount(int32 charCount) const {
-  if(charCount < 0) throw ArgumentOutOfRangeException(_caller);
+  if (charCount < 0) throw ArgumentOutOfRangeException(_caller);
   return charCount;
 }
 
 int32 ANSIEncoding::GetMaxCharCount(int32 byteCount) const {
-  if(byteCount < 0) throw ArgumentOutOfRangeException(_caller);
+  if (byteCount < 0) throw ArgumentOutOfRangeException(_caller);
   return byteCount;
 }
 
 bool ANSIEncoding::Equals(const object& obj) const {
   const ANSIEncoding* enc = dynamic_cast<const ANSIEncoding*>(&obj);
-  if(enc == null)
+  if (enc == null)
     return false;
     
   return this->codePage == enc->codePage;
@@ -67,11 +67,11 @@ refptr<Encoding::Encoder> CodePage437Encoding::CreateEncoder() const {
 }
 
 int32 CodePage437Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if(bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if(index < 0) throw ArgumentOutOfRangeException(_caller);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
+  if (index < 0) throw ArgumentOutOfRangeException(_caller);
   
   int32 count = GetByteCount(c);
-  if(index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -91,11 +91,11 @@ refptr<Encoding::Encoder> CodePage28591Encoding::CreateEncoder() const {
 }
 
 int32 CodePage28591Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if(bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if(index < 0) throw ArgumentOutOfRangeException(_caller);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
+  if (index < 0) throw ArgumentOutOfRangeException(_caller);
   
   int32 count = GetByteCount(c);
-  if(index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -117,11 +117,11 @@ refptr<Encoding::Encoder> CodePage28592Encoding::CreateEncoder() const {
 }
 
 int32 CodePage28592Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if(bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if(index < 0) throw ArgumentOutOfRangeException(_caller);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
+  if (index < 0) throw ArgumentOutOfRangeException(_caller);
   
   int32 count = GetByteCount(c);
-  if(index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
   
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -156,8 +156,8 @@ String ANSIEncoding::Encoder::ToString() const {
 }
 
 byte CodePage437Encoding::Encoder::GetByte(char32 cp) {
-  if(cp < 0x80) return static_cast<byte>(cp);
-  switch(cp) {
+  if (cp < 0x80) return static_cast<byte>(cp);
+  switch (cp) {
   case 0x00c7: return 0x80; //LATIN CAPITAL LETTER C WITH CEDILLA
   case 0x00fc: return 0x81; //LATIN SMALL LETTER U WITH DIAERESIS
   case 0x00e9: return 0x82; //LATIN SMALL LETTER E WITH ACUTE
@@ -329,15 +329,15 @@ byte CodePage437Encoding::Encoder::GetByte(char32 cp) {
 }
 
 byte CodePage28591Encoding::Encoder::GetByte(char32 cp) {
-  if(cp > 0xFF)
+  if (cp > 0xFF)
     return '?';
   return static_cast<byte>(cp);
   
 }
 
 byte CodePage28592Encoding::Encoder::GetByte(char32 cp) {
-  if(cp < 0xA1) return static_cast<byte>(cp);
-  switch(cp) {
+  if (cp < 0xA1) return static_cast<byte>(cp);
+  switch (cp) {
   case 0x0104: return 0xA1; // LATIN CAPITAL LETTER A WITH OGONEK
   case 0x02D8: return 0xA2; // BREVE
   case 0x0141: return 0xA3; // LATIN CAPITAL LETTER L WITH STROKE
@@ -463,13 +463,13 @@ String ANSIEncoding::Decoder::ToString() const {
 
 char32 ANSIEncoding::Decoder::GetCodePoint(byte b, const std::vector<char32>& codePoints, uint32 unchanged) {
   // if 0 <= b < unchanged, codePoint corresponds to byte
-  if(static_cast<char32>(b) < unchanged) return b;
+  if (static_cast<char32>(b) < unchanged) return b;
   return codePoints[b - unchanged];
 }
 
 char32 CodePage437Encoding::Decoder::GetCodePoint(byte b) {
-  if(b < 0x80) return b;
-  switch(b) {
+  if (b < 0x80) return b;
+  switch (b) {
   case 0x80: return  0x00c7; //LATIN CAPITAL LETTER C WITH CEDILLA
   case 0x81: return  0x00fc; //LATIN SMALL LETTER U WITH DIAERESIS
   case 0x82: return  0x00e9; //LATIN SMALL LETTER E WITH ACUTE
@@ -607,8 +607,8 @@ char32 CodePage28591Encoding::Decoder::GetCodePoint(byte b) {
 }
 
 char32 CodePage28592Encoding::Decoder::GetCodePoint(byte b) {
-  if(b < 0xA1) return b;
-  switch(b) {
+  if (b < 0xA1) return b;
+  switch (b) {
   case 0xA1: return  0x0104; // LATIN CAPITAL LETTER A WITH OGONEK
   case 0xA2: return  0x02D8; // BREVE
   case 0xA3: return  0x0141; // LATIN CAPITAL LETTER L WITH STROKE

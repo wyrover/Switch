@@ -74,7 +74,7 @@ namespace Switch {
   const TT& as(const T& value) {
     try {
       return dynamic_cast<const TT&>(value);
-    } catch(...) {
+    } catch (...) {
       __throw_cast_exception__();
     }
     throw std::bad_cast();
@@ -92,7 +92,7 @@ namespace Switch {
   TT& as(T& value) {
     try {
       return dynamic_cast<TT&>(value);
-    } catch(...) {
+    } catch (...) {
       __throw_cast_exception__();
     }
     throw std::bad_cast();
@@ -108,7 +108,7 @@ namespace Switch {
   /// @ingroup Switch
   template<typename TT, typename T>
   const TT* as(const T* value) {
-    if(value == null)
+    if (value == null)
       return null;
     return &as<TT>(*value);
   }
@@ -123,7 +123,7 @@ namespace Switch {
   /// @ingroup Switch
   template<typename TT, typename T>
   TT* as(T* value) {
-    if(value == null)
+    if (value == null)
       return null;
     return &as<TT>(*value);
   }

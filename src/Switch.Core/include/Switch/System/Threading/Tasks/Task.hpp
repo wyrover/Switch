@@ -45,7 +45,7 @@ namespace Switch {
           Task(const Task& task) : data(task.data) {}
           Task& operator=(const Task& task) {this->data = task.data; return *this;}
           ~Task() {
-            if(this->data.GetUseCount() == 1 && this->data->status != TaskStatus::Created)
+            if (this->data.GetUseCount() == 1 && this->data->status != TaskStatus::Created)
               this->data->endEvent.WaitOne();
           }
           /// @endcond
@@ -181,7 +181,7 @@ namespace Switch {
           /// @remarks Ordinarily, tasks are executed asynchronously on a thread pool thread and do not block the calling thread. Tasks executed by calling the RunSynchronously() method are associated with the current TaskScheduler and are run on the calling thread. If the target scheduler does not support running this task on the calling thread, the task will be scheduled for execution on the scheduler, and the calling thread will block until the task has completed execution. Even though the task runs synchronously, the calling thread should still call Wait to handle any exceptions that the task might throw. For more information on exception handling, see Exception Handling (Task Parallel Library).
           /// @remarks Tasks executed by calling the RunSynchronously method are instantiated by calling a Task or Task<TResult> class constructor. The task to be run synchronously must be in the TaskStatus.Created state. A task may be started and run only once. Any attempts to schedule a task a second time results in an exception.
           void RunSynchronously() {
-            if(this->data->status != TaskStatus::Created)
+            if (this->data->status != TaskStatus::Created)
               throw InvalidOperationException(_caller);
             this->data->status = TaskStatus::WaitingToRun;
             this->data->waitOrTimerCallback(*this->data->state, false);
@@ -195,7 +195,7 @@ namespace Switch {
           /// @remarks The Start is used to execute a task that has been created by calling one of the Task constructors. Typically, you do this when you need to separate the task's creation from its execution, such as when you conditionally execute tasks that you've created. For the more common case in which you don't need to separate task instantiation from execution, we recommend that you call an overload of the Task.Run or TaskFactory.StartNew method.
           /// @remarks For information on handling exceptions thrown by task operations, see Exception Handling (Task Parallel Library).
           void Start() override {
-            if(this->data->status != TaskStatus::Created || (this->data->millisecondsDelay == -2 && this->data->task.IsEmpty() && this->data->parameterizedTask.IsEmpty() && this->data->constParameterizedTask.IsEmpty()))
+            if (this->data->status != TaskStatus::Created || (this->data->millisecondsDelay == -2 && this->data->task.IsEmpty() && this->data->parameterizedTask.IsEmpty() && this->data->constParameterizedTask.IsEmpty()))
               throw InvalidOperationException(_caller);
               
             this->data->status = TaskStatus::WaitingForActivation;
@@ -214,7 +214,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           bool Wait(int32 millisecondsTimeout) override {
             bool result = this->data->endEvent.WaitOne(millisecondsTimeout);
-            if(this->data->status == TaskStatus::Faulted)
+            if (this->data->status == TaskStatus::Faulted)
               throw this->data->aggregateException;
             this->data->status = TaskStatus::RanToCompletion;
             return result;
@@ -263,22 +263,22 @@ namespace Switch {
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static bool WaitAll(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
-            if(millisecondsTimeout < Timeout::Infinite)
+            if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(_caller);
               
-            if(millisecondsTimeout == Timeout::Infinite) {
-              for(auto& task : tasks)
+            if (millisecondsTimeout == Timeout::Infinite) {
+              for (auto& task : tasks)
                 task().Wait();
               return true;
             }
             
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
-            for(auto& item : tasks) {
-              if(item().Wait(timeout) == false)
+            for (auto& item : tasks) {
+              if (item().Wait(timeout) == false)
                 return false;
               timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start);
-              if(timeout < 0)
+              if (timeout < 0)
                 return false;
             }
             return true;
@@ -289,22 +289,22 @@ namespace Switch {
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static bool WaitAll(Array<Task<>> tasks, int32 millisecondsTimeout) {
-            if(millisecondsTimeout < Timeout::Infinite)
+            if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(_caller);
               
-            if(millisecondsTimeout == Timeout::Infinite) {
-              for(auto& task : tasks)
+            if (millisecondsTimeout == Timeout::Infinite) {
+              for (auto& task : tasks)
                 task.Wait();
               return true;
             }
             
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
-            for(auto& item : tasks) {
-              if(item.Wait(timeout) == false)
+            for (auto& item : tasks) {
+              if (item.Wait(timeout) == false)
                 return false;
               timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start);
-              if(timeout < 0)
+              if (timeout < 0)
                 return false;
             }
             return true;
@@ -316,22 +316,22 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           template<typename T>
           static bool WaitAll(Array<Task<T>> tasks, int32 millisecondsTimeout) {
-            if(millisecondsTimeout < Timeout::Infinite)
+            if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(System::Runtime::CompilerServices::Caller(__FILE__, __LINE__));
               
-            if(millisecondsTimeout == Timeout::Infinite) {
-              for(auto& task : tasks)
+            if (millisecondsTimeout == Timeout::Infinite) {
+              for (auto& task : tasks)
                 task.Wait();
               return true;
             }
             
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
-            for(auto& item : tasks) {
-              if(item.Wait(timeout) == false)
+            for (auto& item : tasks) {
+              if (item.Wait(timeout) == false)
                 return false;
               timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start);
-              if(timeout < 0)
+              if (timeout < 0)
                 return false;
             }
             return true;
@@ -374,12 +374,12 @@ namespace Switch {
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static int32 WaitAny(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
-            if(millisecondsTimeout < Timeout::Infinite)
+            if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(_caller);
               
-            if(millisecondsTimeout == Timeout::Infinite) {
-              for(int32 index = 0; index < tasks.Count; index++) {
-                if(tasks[index]().Wait(0) == true)
+            if (millisecondsTimeout == Timeout::Infinite) {
+              for (int32 index = 0; index < tasks.Count; index++) {
+                if (tasks[index]().Wait(0) == true)
                   return index;
                 Thread::Yield();
                 Thread::Sleep(1);
@@ -390,16 +390,16 @@ namespace Switch {
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
             do {
-              for(int32 index = 0; index < tasks.Count; index++) {
-                if(tasks[index]().Wait(0) == true)
+              for (int32 index = 0; index < tasks.Count; index++) {
+                if (tasks[index]().Wait(0) == true)
                   return index;
                 timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start);
-                if(timeout < 0)
+                if (timeout < 0)
                   return -1;
                 Thread::Yield();
                 Thread::Sleep(1);
               }
-            } while(timeout >= 0);
+            } while (timeout >= 0);
             return -1;
           }
           
@@ -408,12 +408,12 @@ namespace Switch {
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           static int32 WaitAny(Array<Task<>> tasks, int32 millisecondsTimeout) {
-            if(millisecondsTimeout < Timeout::Infinite)
+            if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(_caller);
               
-            if(millisecondsTimeout == Timeout::Infinite) {
-              for(int32 index = 0; index < tasks.Count; index++) {
-                if(tasks[index].Wait(0) == true)
+            if (millisecondsTimeout == Timeout::Infinite) {
+              for (int32 index = 0; index < tasks.Count; index++) {
+                if (tasks[index].Wait(0) == true)
                   return index;
                 Thread::Yield();
                 Thread::Sleep(1);
@@ -424,16 +424,16 @@ namespace Switch {
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
             do {
-              for(int32 index = 0; index < tasks.Count; index++) {
-                if(tasks[index].Wait(0) == true)
+              for (int32 index = 0; index < tasks.Count; index++) {
+                if (tasks[index].Wait(0) == true)
                   return index;
                 timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start);
-                if(timeout < 0)
+                if (timeout < 0)
                   return -1;
                 Thread::Yield();
                 Thread::Sleep(1);
               }
-            } while(timeout >= 0);
+            } while (timeout >= 0);
             return -1;
           }
           
@@ -443,12 +443,12 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
           template<typename T>
           static int32 WaitAny(Array<Task<T>> tasks, int32 millisecondsTimeout) {
-            if(millisecondsTimeout < Timeout::Infinite)
+            if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(System::Runtime::CompilerServices::Caller(__FILE__, __LINE__));
               
-            if(millisecondsTimeout == Timeout::Infinite) {
-              for(int32 index = 0; index < tasks.Count; index++) {
-                if(tasks[index].Wait(0) == true)
+            if (millisecondsTimeout == Timeout::Infinite) {
+              for (int32 index = 0; index < tasks.Count; index++) {
+                if (tasks[index].Wait(0) == true)
                   return index;
                 Thread::Yield();
                 Thread::Sleep(1);
@@ -459,16 +459,16 @@ namespace Switch {
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
             do {
-              for(int32 index = 0; index < tasks.Count; index++) {
-                if(tasks[index].Wait(0) == true)
+              for (int32 index = 0; index < tasks.Count; index++) {
+                if (tasks[index].Wait(0) == true)
                   return index;
                 timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start);
-                if(timeout < 0)
+                if (timeout < 0)
                   return -1;
                 Thread::Yield();
                 Thread::Sleep(1);
               }
-            } while(timeout >= 0);
+            } while (timeout >= 0);
             return -1;
           }
           
@@ -495,17 +495,17 @@ namespace Switch {
               __opaque_task_id_generator__::currentId = this->id;
               this->status = TaskStatus::Running;
               try {
-                if(this->millisecondsDelay != -2)
+                if (this->millisecondsDelay != -2)
                   Thread::Sleep(this->millisecondsDelay);
-                if(!this->task.IsEmpty())
+                if (!this->task.IsEmpty())
                   this->task();
-                else if(!this->parameterizedTask.IsEmpty())
+                else if (!this->parameterizedTask.IsEmpty())
                   this->parameterizedTask(*this->state);
-                else if(!this->constParameterizedTask.IsEmpty())
+                else if (!this->constParameterizedTask.IsEmpty())
                   this->constParameterizedTask(state);
                 this->status = TaskStatus::WaitingForChildrenToComplete;
                 this->endEvent.Set();
-              } catch(...) {
+              } catch (...) {
                 this->aggregateException = AggregateException(Array<ExceptionPtr> {excptr::CurrentException()}, _caller);
                 this->status = TaskStatus::Faulted;
                 this->endEvent.Set();

@@ -145,7 +145,7 @@ namespace Switch {
           void Run() {
             do {
               this->callback(*state);
-            } while(!executeOnlyOnce);
+            } while (!executeOnlyOnce);
           }
         };
         

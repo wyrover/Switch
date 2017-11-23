@@ -34,14 +34,14 @@ Array<char32> DirectorySeparatorChars = {'/', '\\'};
 
 string Path::ChangeExtension(const string& path, const string& extension) {
   string pathWithoutExtension = Combine(GetDirectoryName(path), GetFileNameWithoutExtension(path));
-  if(string::IsNullOrEmpty(pathWithoutExtension) && !string::IsNullOrEmpty(extension))
+  if (string::IsNullOrEmpty(pathWithoutExtension) && !string::IsNullOrEmpty(extension))
     return pathWithoutExtension;
   return string::Format("{0}{1}{2}", pathWithoutExtension, pathWithoutExtension.EndsWith('.')  || extension.StartsWith('.') ? "" : ".", extension);
 }
 
 string Path::GetDirectoryName(const string& path) {
   int32 index = path.LastIndexOfAny(DirectorySeparatorChars);
-  if(index == -1 || index == path.Length)
+  if (index == -1 || index == path.Length)
     return "";
   string directory = path.Remove(index + 1);
   return (directory.LastIndexOfAny(DirectorySeparatorChars) == directory.Length - 1) ? directory.Remove(directory.Length - 1) : directory;
@@ -65,7 +65,7 @@ string Path::GetFileNameWithoutExtension(const string& path) {
 }
 
 string Path::GetFullPath(const string& path) {
-  if(path.IndexOfAny(GetInvalidPathChars()) != -1)
+  if (path.IndexOfAny(GetInvalidPathChars()) != -1)
     throw ArgumentException(_caller);
     
   return Native::DirectoryApi::GetFullPath(path);
@@ -77,8 +77,8 @@ Array<char32> Path::GetInvalidPathChars() {
 
 namespace {
   bool IsDrive(const string& path) {
-    for(auto drive : DriveInfo::GetDrives())
-      if(drive.Name == path)
+    for (auto drive : DriveInfo::GetDrives())
+      if (drive.Name == path)
         return true;
     return false;
   }
@@ -98,9 +98,9 @@ string Path::GetRandomFileName() {
   static Random rand;
   string randomFileName;
   
-  for(int32 i = 0; i < 11; i++) {
+  for (int32 i = 0; i < 11; i++) {
     randomFileName += validChars[rand.Next(validChars.Length)];
-    if(i == 7)
+    if (i == 7)
       randomFileName += '.';
   }
   
@@ -118,17 +118,17 @@ string Path::GetTempFileName() {
     static Random rand;
     tempFileName = "tmp";
     
-    for(int32 i = 0; i < 8; i++) {
-      if(i == 0)
+    for (int32 i = 0; i < 8; i++) {
+      if (i == 0)
         tempFileName += validChars[rand.Next(10)];
       else
         tempFileName += validChars[rand.Next(validChars.Length)];
     }
     tempFileName += ".tmp";
-  } while(File::Exists(Combine(GetTempPath(), tempFileName)));
+  } while (File::Exists(Combine(GetTempPath(), tempFileName)));
   
   FILE* file = fopen(Combine(GetTempPath(), tempFileName).Data(), "w");
-  if(file != null)
+  if (file != null)
     fclose(file);
     
   return Combine(GetTempPath(), tempFileName);

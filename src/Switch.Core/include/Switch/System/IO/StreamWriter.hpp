@@ -27,7 +27,7 @@ namespace Switch {
         StreamWriter(const TStream& stream) {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
-          if(!stream.CanWrite())
+          if (!stream.CanWrite())
             throw ArgumentException(_caller);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
         }
@@ -36,7 +36,7 @@ namespace Switch {
         /// @param stream The stream pointer to write to.
         /// @exception ArgumentException stream is not writable.
         StreamWriter(refptr<Stream> stream) {
-          if(!stream->CanWrite())
+          if (!stream->CanWrite())
             throw ArgumentException(_caller);
           this->data->stream = stream;
         }
@@ -50,7 +50,7 @@ namespace Switch {
           struct CheckStreamType {void operator()(const Stream&) {}};
           CheckStreamType()(stream);
           
-          if(!stream.CanWrite())
+          if (!stream.CanWrite())
             throw ArgumentException(_caller);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
         }

@@ -10,9 +10,9 @@ namespace {
 
 Semaphore::Semaphore(int32 initialCount, int32 maximumCount, const string& name) {
   bool createdNew = true;
-  if(name != "")
+  if (name != "")
     this->operator =(semaphores.AddOrCreate(name, createdNew));
-  if(createdNew) {
+  if (createdNew) {
     *this->name = name;
     *this->count = initialCount;
     *this->maxCount = maximumCount;
@@ -21,9 +21,9 @@ Semaphore::Semaphore(int32 initialCount, int32 maximumCount, const string& name)
 
 Semaphore::Semaphore(int32 initialCount, int32 maximumCount, const string& name, bool& createdNew) {
   createdNew = true;
-  if(name != "")
+  if (name != "")
     this->operator =(semaphores.AddOrCreate(name, createdNew));
-  if(createdNew) {
+  if (createdNew) {
     *this->name = name;
     *this->count = initialCount;
     *this->maxCount = maximumCount;
@@ -31,9 +31,9 @@ Semaphore::Semaphore(int32 initialCount, int32 maximumCount, const string& name,
 }
 
 void Semaphore::Close() {
-  if(this->guard == null)
+  if (this->guard == null)
     return;
-  if(this->name() != "")
+  if (this->name() != "")
     ::semaphores.Remove(this->name());
   this->name.Reset();
   this->guard.Reset();
@@ -43,7 +43,7 @@ void Semaphore::Close() {
 }
 
 Semaphore Semaphore::OpenExisting(const string& name) {
-  if(!semaphores.Conatains(name))
+  if (!semaphores.Conatains(name))
     throw WaitHandleCannotBeOpenedException(_caller);
   bool createNew;
   Semaphore value = semaphores.AddOrCreate(name, createNew);
@@ -51,7 +51,7 @@ Semaphore Semaphore::OpenExisting(const string& name) {
 }
 
 bool Semaphore::TryOpenExisting(const string& name, Semaphore& result) {
-  if(!semaphores.Conatains(name))
+  if (!semaphores.Conatains(name))
     return false;
   bool createNew;
   result = semaphores.AddOrCreate(name, createNew);

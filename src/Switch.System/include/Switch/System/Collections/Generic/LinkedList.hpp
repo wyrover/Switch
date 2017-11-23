@@ -59,7 +59,7 @@ namespace Switch {
           /// The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           LinkedList(const IEnumerable<T>& collection) : operationNumber(0) {
-            for(T value : collection)
+            for (T value : collection)
               this->Add(value);
           }
           
@@ -76,13 +76,13 @@ namespace Switch {
           /// @remarks The LinkedList class is not thread safe.
           template<int32 len>
           LinkedList(const T(&array)[len]) : operationNumber(0) {
-            for(int32 index = 0; index < len; index++)
+            for (int32 index = 0; index < len; index++)
               this->Add(array[index]);
           }
           
           /// @cond
           LinkedList(InitializerList<T> il) : operationNumber(0) {
-            for(T item : il)
+            for (T item : il)
               this->Add(item);
           }
           /// @endcond
@@ -110,7 +110,7 @@ namespace Switch {
           /// The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(const IEnumerable<T>& enumerable) {
-            for(T value : enumerable)
+            for (T value : enumerable)
               this->list.push_back(value);
           }
           
@@ -124,7 +124,7 @@ namespace Switch {
           /// The following code example demonstrates the LinkedList<T> constructor and various methods of the LinkedList<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(InitializerList<T> il) {
-            for(T item : il)
+            for (T item : il)
               this->Add(item);
           }
           
@@ -146,8 +146,8 @@ namespace Switch {
           /// @remarks This method determines equality by using the default equality comparer, as defined by the object's implementation of the IEquatable<T>.Equals method for T (the type of values in the list).
           /// @remarks This method performs a linear search; therefore, this method is an O(n) operation, where n is Count.
           bool Contains(const T& value) const override {
-            for(T elem : *this)
-              if(elem == value)
+            for (T elem : *this)
+              if (elem == value)
                 return true;
                 
             return false;
@@ -199,17 +199,17 @@ namespace Switch {
           /// @include LinkedList.CopyTo.cpp
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
           
-            if(index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
+            if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
               throw System::ArgumentOutOfRangeException(_caller);
               
-            if(index + count > this->Count || arrayIndex + count > array.Length)
+            if (index + count > this->Count || arrayIndex + count > array.Length)
               throw System::ArgumentException(_caller);
               
             int32 i = 0, c = 0;
-            for(T item : *this) {
-              if(i >= index + count)
+            for (T item : *this) {
+              if (i >= index + count)
                 return;
-              if(i >= index) {
+              if (i >= index) {
                 array[arrayIndex + c] = item;
                 c += 1;
               }
@@ -230,8 +230,8 @@ namespace Switch {
           /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include LinkedList.Exists.cpp
           bool Exists(const Predicate<const T&>& match) const {
-            for(T elem : *this)
-              if(match(elem))
+            for (T elem : *this)
+              if (match(elem))
                 return true;
                 
             return false;
@@ -258,8 +258,8 @@ namespace Switch {
           /// @par Examples
           /// @include LinkedList.Find.cpp
           const T Find(const Predicate<const T&>& match) {
-            for(T elem : *this)
-              if(match(elem))
+            for (T elem : *this)
+              if (match(elem))
                 return elem;
                 
             return T();
@@ -286,8 +286,8 @@ namespace Switch {
           /// @include LinkedList.Find.cpp
           LinkedList FindAll(const Predicate<const T&>& match) {
             LinkedList list;
-            for(T elem : *this)
-              if(match(elem))
+            for (T elem : *this)
+              if (match(elem))
                 list.Add(elem);
                 
             return list;
@@ -359,19 +359,19 @@ namespace Switch {
           /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) {
-            if(startIndex < 0 || count < 0)
+            if (startIndex < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(startIndex + count > this->Count)
+            if (startIndex + count > this->Count)
               throw ArgumentException(_caller);
               
             Enumerator enumerator(*this);
-            for(int32 i = 0; i < startIndex; i += 1)
+            for (int32 i = 0; i < startIndex; i += 1)
               enumerator.MoveNext();
               
-            for(int32 i = 0; i < count; i += 1) {
+            for (int32 i = 0; i < count; i += 1) {
               enumerator.MoveNext();
-              if(match(enumerator.Current))
+              if (match(enumerator.Current))
                 return startIndex + i;
             }
             
@@ -399,8 +399,8 @@ namespace Switch {
           /// @include LinkedList.Find.cpp
           const T FindLast(const Predicate<const T&>& match) {
             Generic::Enumerator<T> reverseEnumerator(new ReverseEnumerator(*this));
-            while(reverseEnumerator.MoveNext())
-              if(match(reverseEnumerator.Current))
+            while (reverseEnumerator.MoveNext())
+              if (match(reverseEnumerator.Current))
                 return reverseEnumerator.Current;
             return T();
           }
@@ -471,19 +471,19 @@ namespace Switch {
           /// @par Examples
           /// @include LinkedList.Find.cpp
           int32 FindLastIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) {
-            if(startIndex < 0 || count < 0 || startIndex >= this->Count)
+            if (startIndex < 0 || count < 0 || startIndex >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(startIndex - count < -1)
+            if (startIndex - count < -1)
               throw ArgumentException(_caller);
               
             ReverseEnumerator enumerator(*this);
-            for(int32 i = this->Count - 1; i > startIndex; i -= 1)
+            for (int32 i = this->Count - 1; i > startIndex; i -= 1)
               enumerator.MoveNext();
               
-            for(int32 i = 0; i < count; i += 1) {
+            for (int32 i = 0; i < count; i += 1) {
               enumerator.MoveNext();
-              if(match(enumerator.Current))
+              if (match(enumerator.Current))
                 return startIndex - i;
             }
             
@@ -497,7 +497,7 @@ namespace Switch {
           /// @remarks The action is a pointer to a method that performs an action on the object passed to it. The elements of the current LinkedList<T> are individually passed to the pointer function.
           /// @remarks This method is an O(n) operation, where n is Count.
           void ForEach(const Action<const T&>& action) {
-            for(T elem : *this)
+            for (T elem : *this)
               action(elem);
           }
           
@@ -522,17 +522,17 @@ namespace Switch {
           /// @include List2.cpp
           LinkedList GetRange(int32 index, int32 count) {
           
-            if(index < 0 || count < 0)
+            if (index < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index + count > this->Count)
+            if (index + count > this->Count)
               throw ArgumentException(_caller);
               
             LinkedList list;
             
             typename std::list<T, TAllocator>::iterator position = this->list.begin();
             std::advance(position, index);
-            for(int32 i = 0; i < count; i++) {
+            for (int32 i = 0; i < count; i++) {
               list.Add(*position);
               position++;
             }
@@ -544,7 +544,7 @@ namespace Switch {
           /// @param value The object to locate in the LinkedList.
           /// @return int32 The index of value if found in the list; otherwise, -1.
           virtual int32 IndexOf(const T& value) const {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return -1;
             return this->IndexOf(value, 0, this->Count);
           }
@@ -566,16 +566,16 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0 or The parameters count is
           /// less than 0 or index and count do not specify a valid section in the LinkedList<T>.
           virtual int32 IndexOf(const T& value, int32 index, int32 count) const {
-            if(index < 0 || count < 0 || index >= this->Count || index + count > this->Count)
+            if (index < 0 || count < 0 || index >= this->Count || index + count > this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
             Enumerator enumerator(*const_cast<LinkedList*>(this));
-            for(int32 i = 0; i < index ; i += 1)
+            for (int32 i = 0; i < index ; i += 1)
               enumerator.MoveNext();
               
-            for(int32 i = 0; i < count; i++) {
+            for (int32 i = 0; i < count; i++) {
               enumerator.MoveNext();
-              if(enumerator.Current() == value)
+              if (enumerator.Current() == value)
                 return index + i;
             }
             
@@ -588,7 +588,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is greater than Count.
           /// @remarks LinkedList<T> allows duplicate elements.
           virtual void Insert(int32 index, const T& value) {
-            if(index < 0 || index > this->Count())
+            if (index < 0 || index > this->Count())
               throw ArgumentOutOfRangeException(_caller);
               
             this->operationNumber++;
@@ -605,12 +605,12 @@ namespace Switch {
           /// @remarks LinkedList<T> allows duplicate elements.
           /// @remarks The order of the elements in the collection is preserved in the LinkedList<T>.
           void InsertRange(int32 index, const IEnumerable<T>& enumerable) {
-            if(index < 0)
+            if (index < 0)
               throw ArgumentOutOfRangeException(_caller);
               
             this->operationNumber++;
             int32 i = index;
-            for(T value : enumerable) {
+            for (T value : enumerable) {
               typename std::list<T, TAllocator>::iterator position = this->list.begin();
               std::advance(position, i++);
               this->list.insert(position, value);
@@ -621,7 +621,7 @@ namespace Switch {
           /// @param value The object to locate in the LinkedList.
           /// @return Int32 The last index of value if found in the list; otherwise, -1.
           int32 LastIndexOf(const T& value) const {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return -1;
             return this->LastIndexOf(value, this->Count - 1, this->Count);
           }
@@ -642,19 +642,19 @@ namespace Switch {
           /// @return Int32 The last index of value if found in the list; otherwise, -1.
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0 or The parameters count is less than 0 or index and count do not specify a valid section in the LinkedList<T>.
           int32 LastIndexOf(const T& value, int32 index, int32 count) const {
-            if(index < 0 || count < 0 || index >= this->Count)
+            if (index < 0 || count < 0 || index >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index - count < -1)
+            if (index - count < -1)
               throw System::ArgumentException(_caller);
               
             ReverseEnumerator enumerator(*this);
-            for(int32 i = this->Count - 1; i > index; i -= 1)
+            for (int32 i = this->Count - 1; i > index; i -= 1)
               enumerator.MoveNext();
               
-            for(int32 i = 0; i < count; i += 1) {
+            for (int32 i = 0; i < count; i += 1) {
               enumerator.MoveNext();
-              if(value == enumerator.Current)
+              if (value == enumerator.Current)
                 return index - i;
             }
             
@@ -665,11 +665,11 @@ namespace Switch {
           /// @param item The object to remove from the LinkedList<(Of <(T>)>). The value can not be null.
           /// @return Boolean true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the LinkedList<T>.
           bool Remove(const T& item) override {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return false;
               
             int32 index = this->IndexOf(item);
-            if(index != -1) {
+            if (index != -1) {
               this->RemoveAt(index);
               return true;
             }
@@ -692,15 +692,15 @@ namespace Switch {
           int32 RemoveAll(const Predicate<const T&>& match) {
             int32 count = 0;
             typename std::list<T, TAllocator>::iterator it = this->list.begin();
-            while(it != this->list.end()) {
-              if(match(*it)) {
+            while (it != this->list.end()) {
+              if (match(*it)) {
                 it = this->list.erase(it);
                 count += 1;
               } else
                 it++;
             }
             
-            if(count) this->operationNumber++;
+            if (count) this->operationNumber++;
             return count;
           }
           
@@ -709,7 +709,7 @@ namespace Switch {
           /// @return None.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is greater than Count.
           virtual void RemoveAt(int32 index) {
-            if(index < 0 || index >= this->Count)
+            if (index < 0 || index >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
             this->operationNumber++;
@@ -725,7 +725,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException index or count is less than 0 or index + count is greater than Count.
           /// @remarks The items are removed and all the elements following them in the LinkedList<T> have their indexes reduced by count.
           void RemoveRange(int32 index, int32 count) {
-            if(index < 0 || index + count > this->Count)
+            if (index < 0 || index + count > this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
             this->operationNumber++;
@@ -758,10 +758,10 @@ namespace Switch {
           /// The following code example demonstrates both overloads of the Reverse method. The code example creates a LinkedList<T> of strings and adds six strings. The Reverse() method overload is used to reverse the list, and then the Reverse(int32, int32) method overload is used to reverse the middle of the list, beginning with element 1 and encompassing four elements.
           /// @include LinkedList.Reverse.cpp
           void Reverse(int32 index, int32 count) {
-            if(index < 0 || count < 0)
+            if (index < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index + count > this->Count)
+            if (index + count > this->Count)
               throw ArgumentException(_caller);
               
             int pos1 = index, pos2 = (index + count) - 1;
@@ -770,7 +770,7 @@ namespace Switch {
             std::advance(it1, pos1);
             std::advance(it2, pos2);
             
-            while(pos1++ < pos2--)
+            while (pos1++ < pos2--)
               std::iter_swap(it1++, it2--);
           }
           
@@ -809,13 +809,13 @@ namespace Switch {
             }
             
             virtual bool MoveNext() {
-              if(this->operationNumber != this->list.operationNumber)
+              if (this->operationNumber != this->list.operationNumber)
                 throw InvalidOperationException(_caller);
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
-              if(this->beforeFirst)
+              if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
@@ -825,7 +825,7 @@ namespace Switch {
             
           private:
             const T& GetCurrent() const {
-              if(this->beforeFirst || IsFinished())
+              if (this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
                 
               return *this->iterator;
@@ -850,13 +850,13 @@ namespace Switch {
             }
             
             virtual bool MoveNext() {
-              if(this->operationNumber != this->list.operationNumber)
+              if (this->operationNumber != this->list.operationNumber)
                 throw InvalidOperationException(_caller);
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
-              if(this->beforeFirst)
+              if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
@@ -866,7 +866,7 @@ namespace Switch {
             
           private:
             const T& GetCurrent() const {
-              if(this->beforeFirst || IsFinished())
+              if (this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
                 
               return *this->iterator;

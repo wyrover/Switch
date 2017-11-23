@@ -15,12 +15,12 @@ namespace {
     IO::StreamWriter writer(s);
     
     Array<int32> data = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    for(int32 item : data)
+    for (int32 item : data)
       writer.Write(item);
       
     IO::StreamReader reader(s);
     int32 index = 0;
-    for(int32 current = reader.Read(); current != -1; current = reader.Read())
+    for (int32 current = reader.Read(); current != -1; current = reader.Read())
       ASSERT_EQ(data[index++], Int32::Parse(Char(current).ToString()));
   }
   
@@ -34,7 +34,7 @@ namespace {
     StringReader sreader(unicodeString);
     IO::StreamReader reader(s, *encoding);
     
-    for(int32 data = sreader.Read(), current = reader.Read(); current != -1 && data != -1; data = sreader.Read(), current = reader.Read())
+    for (int32 data = sreader.Read(), current = reader.Read(); current != -1 && data != -1; data = sreader.Read(), current = reader.Read())
       ASSERT_EQ(data, current);
   }
   
@@ -56,7 +56,7 @@ namespace {
     StringReader sreader(unicodeString);
     IO::StreamReader reader(s, *encoding);
     
-    for(int32 data = sreader.Read(), current = reader.Read(); current != -1 && data != -1; data = sreader.Read(), current = reader.Read())
+    for (int32 data = sreader.Read(), current = reader.Read(); current != -1 && data != -1; data = sreader.Read(), current = reader.Read())
       ASSERT_EQ(data, current);
   }
   

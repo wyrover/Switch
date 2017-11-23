@@ -101,7 +101,7 @@ namespace Switch {
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const Array<ref<Exception>>& innerExceptions) {
         this->innerExceptions = Array<excptr>(innerExceptions.Count);
-        for(int index = 0; index < innerExceptions.Count; index++)
+        for (int index = 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
       
@@ -115,7 +115,7 @@ namespace Switch {
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       AggregateException(const Array<ref<Exception>>& innerExceptions, const System::Runtime::CompilerServices::Caller& information) : Exception(information) {
         this->innerExceptions = Array<excptr>(innerExceptions.Count);
-        for(int index = 0; index < innerExceptions.Count; index++)
+        for (int index = 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
       
@@ -170,7 +170,7 @@ namespace Switch {
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const System::String& message, const Array<ref<Exception>>& innerExceptions) {
         this->innerExceptions = Array<excptr>(innerExceptions.Count);
-        for(int index = 0; index < innerExceptions.Count; index++)
+        for (int index = 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
       
@@ -186,7 +186,7 @@ namespace Switch {
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       AggregateException(const System::String& message, const Array<ref<Exception>>& innerExceptions, const System::Runtime::CompilerServices::Caller& information) : Exception(message, information) {
         this->innerExceptions = Array<excptr>(innerExceptions.Count);
-        for(int index = 0; index < innerExceptions.Count; index++)
+        for (int index = 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
       
@@ -195,26 +195,26 @@ namespace Switch {
       /// @remarks Each invocation of the predicate returns true or false to indicate whether the Exception was handled. After all invocations, if any exceptions went unhandled, all unhandled exceptions will be put into a new AggregateException which will be thrown. Otherwise, the Handle method simply returns. If any invocations of the predicate throws an exception, it will halt the processing of any more exceptions and immediately propagate the thrown exception as-is.
       void Handle(const Func<const Exception&, bool>& predicate) const {
         System::Collections::Generic::List<excptr> notHandledExceptions;
-        for(int32 index = 0; index < this->innerExceptions.Count; ++index) {
+        for (int32 index = 0; index < this->innerExceptions.Count; ++index) {
           try {
             this->innerExceptions[index].Rethrow();
-          } catch(const Exception& innerException) {
-            if(!predicate(innerException))
+          } catch (const Exception& innerException) {
+            if (!predicate(innerException))
               notHandledExceptions.Add(this->innerExceptions[index]);
           }
         }
         
-        if(notHandledExceptions.Count != 0)
+        if (notHandledExceptions.Count != 0)
           throw AggregateException(notHandledExceptions, _caller);
       }
       
       String ToString() const override {
         string result = this->Exception::ToString();
         result += string::Format("   --- End of inner exception stack trace ---{0}", Environment::NewLine);
-        for(int32 index = 0; index < this->innerExceptions.Count; index++) {
+        for (int32 index = 0; index < this->innerExceptions.Count; index++) {
           try {
             this->innerExceptions[index].Rethrow();
-          } catch(const Exception& innerException) {
+          } catch (const Exception& innerException) {
             result += string::Format("---> (Inner Exception {0}) {1}", index, innerException.ToString());
           }
         }

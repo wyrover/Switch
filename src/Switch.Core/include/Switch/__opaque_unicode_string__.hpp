@@ -22,13 +22,13 @@ class _export __opaque_unicode_string__ {
   __opaque_unicode_string__(const char* str);
   __opaque_unicode_string__(const char32_t* str) {
     int i = 0;
-    while(str[i] != 0)
+    while (str[i] != 0)
       this->append(str[i++]);
     this->stringSize = i;
   }
   __opaque_unicode_string__(const __opaque_unicode_string__& str) : string(str.string), stringSize(str.stringSize) {}
   __opaque_unicode_string__(int length, char c) : stringSize(length) {
-    while(length--)
+    while (length--)
       this->string.push_back(c);
   }
   __opaque_unicode_string__(const char* str, int32_t startIndex) : __opaque_unicode_string__(str, startIndex, (int32_t)npos) {}

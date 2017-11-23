@@ -12,22 +12,22 @@ bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles) {
 }
 
 bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
-  if(millisecondsTimeout < Timeout::Infinite)
+  if (millisecondsTimeout < Timeout::Infinite)
     throw ArgumentException(_caller);
     
-  if(millisecondsTimeout == Timeout::Infinite) {
-    for(auto& item : waitHandles)
+  if (millisecondsTimeout == Timeout::Infinite) {
+    for (auto& item : waitHandles)
       item().WaitOne();
     return true;
   }
   
   int32 timeout = millisecondsTimeout;
   int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
-  for(auto& item : waitHandles) {
-    if(item().WaitOne(timeout) == false)
+  for (auto& item : waitHandles) {
+    if (item().WaitOne(timeout) == false)
       return false;
     timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start);
-    if(timeout < 0)
+    if (timeout < 0)
       return false;
   }
   return true;
@@ -42,12 +42,12 @@ int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles) {
 }
 
 int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
-  if(millisecondsTimeout < Timeout::Infinite)
+  if (millisecondsTimeout < Timeout::Infinite)
     throw ArgumentException(_caller);
     
-  if(millisecondsTimeout == Timeout::Infinite) {
-    for(int32 index = 0; index < waitHandles.Count; index++) {
-      if(waitHandles[index]().WaitOne(0) == true)
+  if (millisecondsTimeout == Timeout::Infinite) {
+    for (int32 index = 0; index < waitHandles.Count; index++) {
+      if (waitHandles[index]().WaitOne(0) == true)
         return index;
       Thread::Yield();
       Thread::Sleep(1);
@@ -58,16 +58,16 @@ int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles, int32 milliseconds
   int32 timeout = millisecondsTimeout;
   int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
   do {
-    for(int32 index = 0; index < waitHandles.Count; index++) {
-      if(waitHandles[index]().WaitOne(0) == true)
+    for (int32 index = 0; index < waitHandles.Count; index++) {
+      if (waitHandles[index]().WaitOne(0) == true)
         return index;
       timeout = millisecondsTimeout - (int32)(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start);
-      if(timeout < 0)
+      if (timeout < 0)
         return WaitTimeout;
       Thread::Yield();
       Thread::Sleep(1);
     }
-  } while(timeout >= 0);
+  } while (timeout >= 0);
   return WaitTimeout;
 }
 

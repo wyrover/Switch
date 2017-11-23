@@ -13,7 +13,7 @@ namespace {
 
 int32 Native::DateTimeApi::Ftime(int64& seconds, int32& milliseconds, int32& timeZone, bool& daylight) {
   TIME_ZONE_INFORMATION tzi = { 0 };
-  if(GetTimeZoneInformation(&tzi) == TIME_ZONE_ID_UNKNOWN)
+  if (GetTimeZoneInformation(&tzi) == TIME_ZONE_ID_UNKNOWN)
     return -1;
     
   SYSTEMTIME st = { 0 };
@@ -30,7 +30,7 @@ int32 Native::DateTimeApi::Gmtime(int64 time, int32& year, int32& month, int32& 
   uli.QuadPart = (time * 10000000UL) + dateFixOs;
   FILETIME ft = { uli.LowPart, uli.HighPart };
   SYSTEMTIME st = { 0 };
-  if(FileTimeToSystemTime(&ft, &st) == 0)
+  if (FileTimeToSystemTime(&ft, &st) == 0)
     return -1;
     
   year = st.wYear;
@@ -49,11 +49,11 @@ int32 Native::DateTimeApi::Localtime(int64 time, int32& year, int32& month, int3
   uli.QuadPart = (time * 10000000UL) + dateFixOs;
   FILETIME ft = { uli.LowPart, uli.HighPart };
   FILETIME locFt = { 0 };
-  if(FileTimeToLocalFileTime((const FILETIME*)&ft, &locFt) == 0)
+  if (FileTimeToLocalFileTime((const FILETIME*)&ft, &locFt) == 0)
     return -1;
     
   SYSTEMTIME st = { 0 };
-  if(FileTimeToSystemTime(&locFt, &st) == 0)
+  if (FileTimeToSystemTime(&locFt, &st) == 0)
     return -1;
     
   year = st.wYear;
@@ -70,7 +70,7 @@ int32 Native::DateTimeApi::Localtime(int64 time, int32& year, int32& month, int3
 int64 Native::DateTimeApi::Mkgmtime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) {
   SYSTEMTIME st = { (WORD)year, (WORD)month, 0, (WORD)day, (WORD)hour, (WORD)minute, (WORD)second, 0 };
   FILETIME ft = { 0 };
-  if(SystemTimeToFileTime(&st, &ft) == 0)
+  if (SystemTimeToFileTime(&st, &ft) == 0)
     return -1;
     
   ULARGE_INTEGER lt = { ft.dwLowDateTime, ft.dwHighDateTime };
@@ -82,11 +82,11 @@ int64 Native::DateTimeApi::Mkgmtime(int32 year, int32 month, int32 day, int32 ho
 int64 Native::DateTimeApi::Mktime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) {
   SYSTEMTIME st = { (WORD)year, (WORD)month, 0, (WORD)day, (WORD)hour, (WORD)minute, (WORD)second, 0 };
   FILETIME ft = { 0 };
-  if(SystemTimeToFileTime(&st, &ft) == 0)
+  if (SystemTimeToFileTime(&st, &ft) == 0)
     return -1;
     
   FILETIME ftUtc;
-  if(LocalFileTimeToFileTime((const FILETIME*)&ft, &ftUtc) == 0)
+  if (LocalFileTimeToFileTime((const FILETIME*)&ft, &ftUtc) == 0)
     return -1;
     
   ULARGE_INTEGER lt = { ftUtc.dwLowDateTime, ftUtc.dwHighDateTime };

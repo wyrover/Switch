@@ -80,7 +80,7 @@ namespace Switch {
         
         void Write(const String& message) override {
           #if defined(DEBUG) || defined(TRACE)
-          if(this->NeedIndent)
+          if (this->NeedIndent)
             this->WriteIndent();
           this->textWriter->Write(message);
           #endif
@@ -88,7 +88,7 @@ namespace Switch {
         
         void WriteLine(const String& message) override {
           #if defined(DEBUG) || defined(TRACE)
-          if(this->NeedIndent)
+          if (this->NeedIndent)
             this->WriteIndent();
           this->textWriter->WriteLine(message);
           this->NeedIndent = true;

@@ -8,13 +8,13 @@ using namespace System;
 bool Exception::stackTraceEnabled = true;
 
 const string& Exception::GetMessage() const {
-  if(string::IsNullOrEmpty(this->message))
+  if (string::IsNullOrEmpty(this->message))
     const_cast<Exception*>(this)->message = GetDefaultMessage();
   return this->message;
 }
 
 string Exception::GetStackTrace() const {
-  if(this->stackTrace == null || this->stackTrace().Length == 0)
+  if (this->stackTrace == null || this->stackTrace().Length == 0)
     return "";
     
   return string::Join("\n", this->stackTrace());
@@ -87,7 +87,7 @@ string Exception::GetDefaultMessage() const {
 }
 
 void Exception::SetStackTrace(const Exception& exception) {
-  if(Exception::stackTraceEnabled == false) {
+  if (Exception::stackTraceEnabled == false) {
     this->stackTrace = ref_new<Array<string>>(1);
     this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
     return;
@@ -96,13 +96,13 @@ void Exception::SetStackTrace(const Exception& exception) {
   Diagnostics::StackTrace stackTrace(1, true);
   this->stackTrace = ref_new<Array<string>>(stackTrace.FrameCount() + 1);
   
-  if(stackTrace.FrameCount() == 0)
+  if (stackTrace.FrameCount() == 0)
     this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
   else {
     this->stackTrace()[0] = String::Format("  at {0} [0x{1:X8}] in {2}:{3}{4}", stackTrace.GetFrame(0).GetMethod(), stackTrace.GetFrame(0).GetOffset(), this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
-    for(int32 index = 0; index < stackTrace.FrameCount(); index++) {
+    for (int32 index = 0; index < stackTrace.FrameCount(); index++) {
       this->stackTrace()[index + 1] = String::Format("  at {0}", stackTrace.GetFrame(index).GetMethod());
-      if(!string::IsNullOrEmpty(stackTrace.GetFrame(index).GetFileName()))
+      if (!string::IsNullOrEmpty(stackTrace.GetFrame(index).GetFileName()))
         this->stackTrace()[index + 1] += String::Format(" [0x{0:X8}] in {1}:{2}{3}", stackTrace.GetFrame(index).GetOffset(), stackTrace.GetFrame(index).GetFileName(), stackTrace.GetFrame(index).GetFileLineNumber(), Environment::NewLine);
     }
   }
@@ -114,18 +114,18 @@ const char* Exception::what() const noexcept {
 }
 
 string Exception::GetStackTrace(const string& filter) const {
-  if(this->stackTrace == null || this->stackTrace().Length == 0)
+  if (this->stackTrace == null || this->stackTrace().Length == 0)
     return "";
     
   int32 startIndex = 0;
-  for(int32 i = 0; i < this->stackTrace().Length; i++) {
-    if(this->stackTrace()[i].Contains(filter))
+  for (int32 i = 0; i < this->stackTrace().Length; i++) {
+    if (this->stackTrace()[i].Contains(filter))
       startIndex = i + 1;
   }
   
   string output;
-  for(int32 i = startIndex; i < this->stackTrace().Length; i++) {
-    if(i == startIndex)
+  for (int32 i = startIndex; i < this->stackTrace().Length; i++) {
+    if (i == startIndex)
       output = string::Format("{0} in {1}:{2}{3}", this->stackTrace()[i].Remove(this->stackTrace()[i].IndexOf(" in ")), this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
     else
       output += this->stackTrace()[i];

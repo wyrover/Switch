@@ -15,7 +15,7 @@ byte Byte::Parse(const String& str, const int32 base) {
 
 String Byte::ToString(const String& format, const IFormatProvider&) const {
   int32 precision;
-  switch(NumericalFormat::GetFormatType(format, precision)) {
+  switch (NumericalFormat::GetFormatType(format, precision)) {
   case 0: return NumericalFormat::Format_Custom(Convert::ToUInt64(this->value), format);
   case 'b': return NumericalFormat::Format_B(Convert::ToUInt64(this->value), precision);
   case 'd': return NumericalFormat::Format_D(Convert::ToUInt64(this->value), precision);

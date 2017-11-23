@@ -49,7 +49,7 @@ namespace Switch {
           /// @brief Initializes a new instance of the SortedSet<T> class that contains elements copied from a specified enumerable collection
           /// @param collection The elements to copy
           SortedSet(const IEnumerable<T>& collection) : comparer(new System::Collections::Generic::Comparer<T>()), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
-            for(T item : collection)
+            for (T item : collection)
               this->Add(item);
           }
           
@@ -57,7 +57,7 @@ namespace Switch {
           /// @param collection The elements to copy
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
           SortedSet(const IEnumerable<T>& collection, const refptr<IComparer<T>>& comparer) : comparer(comparer), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
-            for(const T& item : collection)
+            for (const T& item : collection)
               this->Add(item);
           }
           
@@ -66,13 +66,13 @@ namespace Switch {
           /// @remarks The SortedSet class is ! thread safe.
           template<int32 len>
           SortedSet(const T(&array)[len]) : comparer(new System::Collections::Generic::Comparer<T>()), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
-            for(int32 index = 0; index < len; index++)
+            for (int32 index = 0; index < len; index++)
               this->Add(array[index]);
           }
           
           /// @cond
           SortedSet(InitializerList<T> il) : comparer(new System::Collections::Generic::Comparer<T>()), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {
-            for(typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
+            for (typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
               this->Add(*iterator);
           }
           
@@ -135,16 +135,16 @@ namespace Switch {
           /// @exception ArgumentNullException  array is null.
           /// @exception ArgumentOutOfRangeException  index is less than zero or count is less than zero.
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
-            if(index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
+            if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index + count > this->Count || arrayIndex + count > array.Length)
+            if (index + count > this->Count || arrayIndex + count > array.Length)
               throw ArgumentException(_caller);
               
             int32 i = 0, c = 0;
-            for(T item : *this) {
-              if(i >= index + count) return;
-              if(i >= index) {
+            for (T item : *this) {
+              if (i >= index + count) return;
+              if (i >= index) {
                 array[arrayIndex + c] = item;
                 c += 1;
               }
@@ -157,11 +157,11 @@ namespace Switch {
           /// @exception ArgumentNullException  other is null.
           void ExceptWith(const IEnumerable<T>& other) override {
             this->operationNumber++;
-            if(&other == this) {
+            if (&other == this) {
               Clear();
               return;
             }
-            for(T item : other)
+            for (T item : other)
               Remove(item);
           }
           
@@ -172,8 +172,8 @@ namespace Switch {
           /// @exception ArgumentNullException lowerValue or upperValue is null.
           SortedSet GetViewBetween(const T& lowerValue, const T& upperValue) const {
             SortedSet set(this->comparer);
-            for(T item : *this) {
-              if(this->comparer->Compare(item, lowerValue) >= 0 && this->comparer->Compare(item, upperValue) <= 0)
+            for (T item : *this) {
+              if (this->comparer->Compare(item, lowerValue) >= 0 && this->comparer->Compare(item, upperValue) <= 0)
                 set.Add(item);
             }
             return set;
@@ -186,8 +186,8 @@ namespace Switch {
             SortedSet toKeep(other);
             SortedSet toRemove;
             
-            for(T item : *this)
-              if(!toKeep.Contains(item))
+            for (T item : *this)
+              if (!toKeep.Contains(item))
                 toRemove.Add(item);
                 
             ExceptWith(toRemove); // performs operationNumber++;
@@ -199,8 +199,8 @@ namespace Switch {
           /// @exception ArgumentNullException other is null.
           bool IsProperSubsetOf(const IEnumerable<T>& other) const  override {
             SortedSet set(other);
-            if(this->Count == 0) return set.Count > 0;
-            if(this->Count >= set.Count) return false;
+            if (this->Count == 0) return set.Count > 0;
+            if (this->Count >= set.Count) return false;
             return this->SubSet(set);
           }
           
@@ -210,8 +210,8 @@ namespace Switch {
           /// @exception ArgumentNullException  other is null.
           bool IsProperSupersetOf(const IEnumerable<T>& other) const override {
             SortedSet set(other);
-            if(set.Count == 0) return this->Count > 0;
-            if(set.Count >= this->Count) return false;
+            if (set.Count == 0) return this->Count > 0;
+            if (set.Count >= this->Count) return false;
             return this->SuperSet(set);
           }
           
@@ -238,11 +238,11 @@ namespace Switch {
           /// @return true if the SortedSet<T> object and other share at least one common element; otherwise, false.
           /// @exception ArgumentNullException  other is null.
           bool Overlaps(const IEnumerable<T>& other) const override {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return false;
               
-            for(T item : other)
-              if(Contains(item))
+            for (T item : other)
+              if (Contains(item))
                 return true;
                 
             return false;
@@ -262,7 +262,7 @@ namespace Switch {
             typename std::set< T, SetComparer, TAllocator>::iterator it = this->set->find(item);
             
             // if item is ! found, do ! alter the set and return false
-            if(it == this->set->end())
+            if (it == this->set->end())
               return false;
               
             this->operationNumber++;
@@ -276,8 +276,8 @@ namespace Switch {
           /// @exception ArgumentNullException match is null
           int32 RemoveWhere(const Predicate<const T&>& match) {
             int32 nbRemoved = 0;
-            for(T elem : *this)
-              if(match(elem) && Remove(elem))
+            for (T elem : *this)
+              if (match(elem) && Remove(elem))
                 nbRemoved++;
             return nbRemoved;
           }
@@ -287,11 +287,11 @@ namespace Switch {
           /// @return true if the two sets are equivalent.
           bool SetEquals(const IEnumerable<T>& other) const override {
             SortedSet set(other);
-            if(this->Count != set.Count)
+            if (this->Count != set.Count)
               return false;
               
-            for(T item : other)
-              if(!Contains(item))
+            for (T item : other)
+              if (!Contains(item))
                 return false;
                 
             return true;
@@ -301,8 +301,8 @@ namespace Switch {
           /// @param other The collection to compare to the current SortedSet<T> object.
           /// @exception ArgumentNullException  other is null.
           void SymmetricExceptWith(const IEnumerable<T>& other) override {
-            for(T item : other) {
-              if(Contains(item))
+            for (T item : other) {
+              if (Contains(item))
                 Remove(item);
               else
                 Add(item);
@@ -313,8 +313,8 @@ namespace Switch {
           /// @param other The collection to compare to the current SortedSet<T> object.
           /// @exception ArgumentNullException other is null.
           void UnionWith(const IEnumerable<T>& other) override {
-            for(T item : other)
-              if(!Contains(item))
+            for (T item : other)
+              if (!Contains(item))
                 this->set->insert(item); // avoid a second test
           }
           
@@ -337,28 +337,28 @@ namespace Switch {
           };
           
           bool SubSet(const SortedSet& set) const {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return true;
               
-            if(this->Count > set.Count)
+            if (this->Count > set.Count)
               return false;
               
-            for(T item : *this)
-              if(! set.Contains(item))
+            for (T item : *this)
+              if (! set.Contains(item))
                 return false;
                 
             return true;
           }
           
           bool SuperSet(const SortedSet& set) const {
-            if(set.Count == 0)
+            if (set.Count == 0)
               return true;
               
-            if(set.Count > this->Count)
+            if (set.Count > this->Count)
               return false;
               
-            for(T item : set)
-              if(! Contains(item))
+            for (T item : set)
+              if (! Contains(item))
                 return false;
                 
             return true;
@@ -377,13 +377,13 @@ namespace Switch {
             }
             
             virtual bool MoveNext() {
-              if(this->operationNumber != this->set.operationNumber)
+              if (this->operationNumber != this->set.operationNumber)
                 throw InvalidOperationException(_caller);
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
-              if(this->beforeFirst)
+              if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
@@ -393,7 +393,7 @@ namespace Switch {
             
           protected:
             const T& GetCurrent() const {
-              if(this->beforeFirst || IsFinished())
+              if (this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
                 
               return *this->iterator;
@@ -419,13 +419,13 @@ namespace Switch {
             }
             
             virtual bool MoveNext() {
-              if(this->operationNumber != this->set.operationNumber)
+              if (this->operationNumber != this->set.operationNumber)
                 throw InvalidOperationException(_caller);
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
-              if(this->beforeFirst)
+              if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
@@ -435,7 +435,7 @@ namespace Switch {
             
           private:
             const T& GetCurrent() const {
-              if(this->beforeFirst || IsFinished())
+              if (this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
                 
               return *this->iterator;

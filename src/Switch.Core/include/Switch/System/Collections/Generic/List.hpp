@@ -75,7 +75,7 @@ namespace Switch {
           /// The following code example demonstrates the List<T> constructor and various methods of the List<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           List(const IEnumerable<T>& collection) : operationNumber(0) {
-            for(const T& value : collection)
+            for (const T& value : collection)
               Add(value);
           }
           
@@ -91,7 +91,7 @@ namespace Switch {
           /// An element of the original list is set to "Coelophysis" using the Item property, and the contents of the read-only list are displayed again to demonstrate that it is just a wrapper for the original list.
           /// @include List3.cpp
           List(int32 capacity) : operationNumber(0) {
-            if(capacity < 0)
+            if (capacity < 0)
               throw System::ArgumentOutOfRangeException(_caller);
               
             this->list.reserve(capacity);
@@ -102,13 +102,13 @@ namespace Switch {
           /// @remarks The List class is ! thread safe.
           template<int32 len>
           List(const T(&array)[len]) : operationNumber(0) {
-            for(int32 index = 0; index < len; index++)
+            for (int32 index = 0; index < len; index++)
               this->Add(array[index]);
           }
           
           /// @cond
           List(InitializerList<T> il) : operationNumber(0) {
-            for(const T& item : il)
+            for (const T& item : il)
               this->Add(item);
           }
           
@@ -121,7 +121,7 @@ namespace Switch {
           _property<int32> Capacity {
             _get {return static_cast<int32>(this->list.capacity());},
             _set {
-              if(value < this->Count)
+              if (value < this->Count)
                 throw ArgumentOutOfRangeException(_caller);
               return this->list.reserve(value);
             }
@@ -156,14 +156,14 @@ namespace Switch {
           /// The following code example demonstrates the List<T> constructor and various methods of the List<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(const IEnumerable<T>& enumerable) {
-            if(&enumerable == this) {  // if enumerable is the same object : infinite loop
+            if (&enumerable == this) { // if enumerable is the same object : infinite loop
               Array<T> a(enumerable);
-              for(const T& value : a)
+              for (const T& value : a)
                 this->Add(value);
               return;
             }
             
-            for(const T& value : enumerable)
+            for (const T& value : enumerable)
               this->Add(value);
           }
           
@@ -177,7 +177,7 @@ namespace Switch {
           /// The following code example demonstrates the List<T> constructor and various methods of the List<T> class that act on ranges. An array of strings is created and passed to the constructor, populating the list with the elements of the array. The Capacity property is then displayed, to show that the initial capacity is exactly what is required to hold the input elements.
           /// @include List2.cpp
           void AddRange(InitializerList<T> il) {
-            for(const T& item : il)
+            for (const T& item : il)
               this->Add(item);
           }
           
@@ -241,9 +241,9 @@ namespace Switch {
           /// @remarks If the List<T> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operation (~) to this negative integer to get the index of the first element that is larger than the search value. When inserting the value into the List<T>, this index should be used as the insertion point to maintain the sort order.
           /// @remarks This method is an O(log n) operation, where n is the number of elements in the range.
           int32 BinarySearch(int32 index, int32 count, const T& item, const IComparer<T>& comparer) const {
-            if(index < 0 || count < 0)
+            if (index < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
-            if(index + count > this->Count)
+            if (index + count > this->Count)
               throw ArgumentException(_caller);
             typename std::vector<T, TAllocator>::iterator first = const_cast<List*>(this)->list.begin();
             typename std::vector<T, TAllocator>::iterator last = const_cast<List*>(this)->list.begin();
@@ -251,7 +251,7 @@ namespace Switch {
             std::advance(last, index + count);
             typename std::vector<T, TAllocator>::iterator position = std::lower_bound(first, last, item, List::Comparer(&comparer));
             
-            if(position != this->list.end() && !comparer.Compare(item, *position))
+            if (position != this->list.end() && !comparer.Compare(item, *position))
               return static_cast<int32>(std::distance(const_cast<List*>(this)->list.begin(), position));
               
             return static_cast<int32>(~std::distance(const_cast<List*>(this)->list.begin(), position));
@@ -266,7 +266,7 @@ namespace Switch {
           /// Other properties and methods are used to search for, insert, and remove elements from the list, and finally to clear the list.
           /// @include List.cpp
           void Clear() override {
-            while(this->Count)
+            while (this->Count)
               this->RemoveAt(this->Count - 1);
           }
           
@@ -276,8 +276,8 @@ namespace Switch {
           /// @remarks This method determines equality by using the default equality comparer, as defined by the object's implementation of the IEquatable<T>.Equals method for T (the type of values in the list).
           /// @remarks This method performs a linear search; therefore, this method is an O(n) operation, where n is Count.
           virtual bool Contains(const T& value) const override {
-            for(const T& elem : *this)
-              if(elem == value)
+            for (const T& elem : *this)
+              if (elem == value)
                 return true;
                 
             return false;
@@ -324,17 +324,17 @@ namespace Switch {
           /// The following code example demonstrates all three overloads of the CopyTo method. A List<T> of strings is created and populated with 5 strings. An empty string array of 15 elements is created, and the CopyTo(T[]) method overload is used to copy all the elements of the list to the array beginning at the first element of the array. The CopyTo(T[], Int32) method overload is used to copy all the elements of the list to the array beginning at array index 6 (leaving index 5 empty). Finally, the CopyTo(Int32, T[], Int32, Int32) method overload is used to copy 3 elements from the list, beginning with index 2, to the array beginning at array index 12 (leaving index 11 empty). The contents of the array are then displayed.
           /// @include ListCopyTo.cpp
           void CopyTo(int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
-            if(index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
+            if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index + count > this->Count || arrayIndex + count > array.Length)
+            if (index + count > this->Count || arrayIndex + count > array.Length)
               throw ArgumentException(_caller);
               
             int32 i = 0, c = 0;
-            for(const T& item : *this) {
-              if(i >= index + count)
+            for (const T& item : *this) {
+              if (i >= index + count)
                 return;
-              if(i >= index) {
+              if (i >= index) {
                 array[arrayIndex + c] = item;
                 c += 1;
               }
@@ -355,8 +355,8 @@ namespace Switch {
           /// The RemoveAll method is used to remove all entries ending with "saurus". It traverses the list from the beginning, passing each element in turn to the EndsWithSaurus method. The element is removed if the EndsWithSaurus method returns true.
           /// @include ListExists.cpp
           bool Exists(const Predicate<const T&>& match) const {
-            for(const T& elem : *this)
-              if(match(elem))
+            for (const T& elem : *this)
+              if (match(elem))
                 return true;
                 
             return false;
@@ -383,8 +383,8 @@ namespace Switch {
           /// @par Examples
           /// @include ListFind.cpp
           const T Find(const Predicate<const T&>& match) const {
-            for(const T& elem : *this)
-              if(match(elem))
+            for (const T& elem : *this)
+              if (match(elem))
                 return elem;
                 
             return T();
@@ -412,8 +412,8 @@ namespace Switch {
           List FindAll(const Predicate<const T&>& match) const {
             List list;
             
-            for(const T& elem : *this)
-              if(match(elem))
+            for (const T& elem : *this)
+              if (match(elem))
                 list.Add(elem);
                 
             return list;
@@ -481,13 +481,13 @@ namespace Switch {
           /// @par Examples
           /// @include ListFind.cpp
           int32 FindIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) const {
-            if(startIndex < 0 || count < 0)
+            if (startIndex < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
-            if(startIndex + count > this->Count)
+            if (startIndex + count > this->Count)
               throw ArgumentException(_caller);
               
-            for(int32 i = 0; i < count; i += 1)
-              if(match(this->list[i + startIndex]))
+            for (int32 i = 0; i < count; i += 1)
+              if (match(this->list[i + startIndex]))
                 return startIndex + i;
                 
             return -1;
@@ -513,9 +513,9 @@ namespace Switch {
           /// @par Examples
           /// @include ListFind.cpp
           const T FindLast(const Predicate<const T&>& match) const {
-            if(this->list.size() > 0) {
-              for(size_t index = this->list.size() - 1; index > 0; index--)
-                if(match(this->list[index]))
+            if (this->list.size() > 0) {
+              for (size_t index = this->list.size() - 1; index > 0; index--)
+                if (match(this->list[index]))
                   return this->list[index];
             }
             /*
@@ -588,15 +588,15 @@ namespace Switch {
           /// @par Examples
           /// @include ListFind.cpp
           int32 FindLastIndex(int32 startIndex, int32 count, const Predicate<const T&>& match) const {
-            if(startIndex < 0 || count < 0)
+            if (startIndex < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
-            if(startIndex >= this->Count)
+            if (startIndex >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
-            if(startIndex - count < -1)
+            if (startIndex - count < -1)
               throw ArgumentException(_caller);
               
-            for(int32 i = startIndex ; i >= startIndex - (count - 1) ; i -= 1)
-              if(match(this->list[i]) == true)
+            for (int32 i = startIndex ; i >= startIndex - (count - 1) ; i -= 1)
+              if (match(this->list[i]) == true)
                 return i;
                 
             return -1;
@@ -609,7 +609,7 @@ namespace Switch {
           /// @remarks The action is a pointer to a method that performs an action on the object passed to it. The elements of the current List<T> are individually passed to the pointer function.
           /// @remarks This method is an O(n) operation, where n is Count.
           void ForEach(const Action<const T&>& action) {
-            for(const T& elem : *this)
+            for (const T& elem : *this)
               action(elem);
           }
           
@@ -622,9 +622,9 @@ namespace Switch {
               void Reset() override {this->beforeFirst = true; this->operationNumber = this->list.operationNumber; this->iterator = this->list.list.begin();}
               
               bool MoveNext() override {
-                if(this->operationNumber != this->list.operationNumber) throw System::InvalidOperationException(_caller);
-                if(this->iterator == this->list.list.end()) return false;
-                if(this->beforeFirst) {
+                if (this->operationNumber != this->list.operationNumber) throw System::InvalidOperationException(_caller);
+                if (this->iterator == this->list.list.end()) return false;
+                if (this->beforeFirst) {
                   this->beforeFirst = false;
                   return this->iterator != this->list.list.end();
                 }
@@ -633,7 +633,7 @@ namespace Switch {
               
             protected:
               const T& GetCurrent() const override {
-                if(this->beforeFirst || this->iterator == this->list.list.end()) throw System::InvalidOperationException(_caller);
+                if (this->beforeFirst || this->iterator == this->list.list.end()) throw System::InvalidOperationException(_caller);
                 return *this->iterator;
               }
               
@@ -660,14 +660,14 @@ namespace Switch {
           /// The following code example demonstrates the GetRange method and other methods of the List<T> class that act on ranges. At the end of the code example, the GetRange method is used to get three items from the list, beginning with index location 2. The ToArray method is called on the resulting List<T>, creating an array of three elements. The elements of the array are displayed.
           /// @include List2.cpp
           List GetRange(int32 index, int32 count) {
-            if(index < 0 || count < 0)
+            if (index < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index + count > this->Count)
+            if (index + count > this->Count)
               throw ArgumentException(_caller);
               
             List list;
-            for(int32 i = index ; i < index + count ; i += 1)
+            for (int32 i = index ; i < index + count ; i += 1)
               list.Add(this->list[i]);
             return list;
           }
@@ -676,7 +676,7 @@ namespace Switch {
           /// @param value The object to locate in the List.
           /// @return Int32 The index of value if found in the list; otherwise, -1.
           virtual int32 IndexOf(const T& value) const override {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return -1;
             return this->IndexOf(value, 0, this->Count);
           }
@@ -697,14 +697,14 @@ namespace Switch {
           /// @return Int32 The index of value if found in the list; otherwise, -1.
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0 or The parameters count is less than 0 or index and count do ! specify a valid section in the List<T>.
           virtual int32 IndexOf(const T& value, int32 index, int32 count) const {
-            if(index < 0 || count < 0 || index >= this->Count)
+            if (index < 0 || count < 0 || index >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index + count > this->Count)
+            if (index + count > this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
-            for(int32 i = index; i < index + count; i++)
-              if(this->list[i] == value)
+            for (int32 i = index; i < index + count; i++)
+              if (this->list[i] == value)
                 return i;
                 
             return -1;
@@ -716,7 +716,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is greater than Count.
           /// @remarks List<T> allows duplicate elements.
           virtual void Insert(int32 index, const T& value) override {
-            if(index < 0)
+            if (index < 0)
               throw ArgumentOutOfRangeException(_caller);
               
             this->operationNumber++;
@@ -731,13 +731,13 @@ namespace Switch {
           /// @remarks List<T> allows duplicate elements.
           /// @remarks The order of the elements in the collection is preserved in the List<T>.
           void InsertRange(int32 index, const IEnumerable<T>& enumerable) {
-            if(index < 0)
+            if (index < 0)
               throw ArgumentOutOfRangeException(_caller);
               
             this->operationNumber++;
             
             typename std::vector<T, TAllocator>::iterator position = this->list.begin() + index;
-            for(const T& value : enumerable)
+            for (const T& value : enumerable)
               position = this->list.insert(position, value) + 1;
           }
           
@@ -745,7 +745,7 @@ namespace Switch {
           /// @param value The object to locate in the List.
           /// @return Int32 The last index of value if found in the list; otherwise, -1.
           int32 LastIndexOf(const T& value) const {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return -1;
             return this->LastIndexOf(value, this->Count - 1, this->Count);
           }
@@ -766,14 +766,14 @@ namespace Switch {
           /// @return Int32 The last index of value if found in the list; otherwise, -1.
           /// @exception ArgumentOutOfRangeException The parameters index is less than 0 or The parameters count is less than 0 or index and count do ! specify a valid section in the List<T>.
           int32 LastIndexOf(const T& value, int32 index, int32 count) const {
-            if(index < 0 || count < 0 || index >= this->Count)
+            if (index < 0 || count < 0 || index >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index - count < -1)
+            if (index - count < -1)
               throw System::ArgumentException(_caller);
               
-            for(int32 i = index; i >= index - (count - 1); i -= 1)
-              if(value == this->list[i])
+            for (int32 i = index; i >= index - (count - 1); i -= 1)
+              if (value == this->list[i])
                 return i;
                 
             return -1;
@@ -783,11 +783,11 @@ namespace Switch {
           /// @param item The object to remove from the List<(Of <(T>)>). The value can ! be null.
           /// @return Boolean true if item is successfully removed; otherwise, false. This method also returns false if item was ! found in the List<T>.
           virtual bool Remove(const T& item) override {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return false;
               
-            for(typename std::vector<T, TAllocator>::iterator it = this->list.begin(); it != this->list.end() ; it++) {
-              if(*it == item) {
+            for (typename std::vector<T, TAllocator>::iterator it = this->list.begin(); it != this->list.end() ; it++) {
+              if (*it == item) {
                 this->list.erase(it);
                 return true;
               }
@@ -811,15 +811,15 @@ namespace Switch {
           virtual int32 RemoveAll(const Predicate<const T&>& match) {
             int32 count = 0;
             typename std::vector<T, TAllocator>::const_iterator iterator = this->list.begin();
-            while(iterator != this->list.end())
-              if(!match(*iterator))
+            while (iterator != this->list.end())
+              if (!match(*iterator))
                 iterator++;
               else {
                 iterator = this->list.erase(iterator);
                 count += 1;
               }
               
-            if(count)
+            if (count)
               this->operationNumber++;
             return count;
           }
@@ -829,11 +829,11 @@ namespace Switch {
           /// @return None.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is greater than Count.
           virtual void RemoveAt(int32 index) override {
-            if(index < 0 || index >= this->Count)
+            if (index < 0 || index >= this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
             this->operationNumber++;
-            if(index == static_cast<int32>(this->list.size() - 1))
+            if (index == static_cast<int32>(this->list.size() - 1))
               this->list.pop_back();
             else
               this->list.erase(this->list.begin() + index);
@@ -846,7 +846,7 @@ namespace Switch {
           /// @exception ArgumentOutOfRangeException index or count is less than 0 or index + count is greater than Count.
           /// @remarks The items are removed and all the elements following them in the List<T> have their indexes reduced by count.
           virtual void RemoveRange(int32 index, int32 count) {
-            if(index < 0 || index + count > this->Count)
+            if (index < 0 || index + count > this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
             this->operationNumber++;
@@ -877,17 +877,17 @@ namespace Switch {
           /// The following code example demonstrates both overloads of the Reverse method. The code example creates a List<T> of strings and adds six strings. The Reverse() method overload is used to reverse the list, and then the Reverse(Int32, Int32) method overload is used to reverse the middle of the list, beginning with element 1 and encompassing four elements.
           /// @include ListReverse.cpp
           void Reverse(int32 index, int32 count) {
-            if(index < 0 || count < 0)
+            if (index < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index + count > this->Count)
+            if (index + count > this->Count)
               throw ArgumentException(_caller);
               
             this->operationNumber++;
             int pos1 = index, pos2 = (index + count) - 1;
             typename std::vector<T, TAllocator>::iterator it1 = this->list.begin() + pos1, it2 = this->list.begin() + pos2;
             
-            while(pos1++ < pos2--)
+            while (pos1++ < pos2--)
               std::iter_swap(it1++, it2--);
           }
           
@@ -945,8 +945,8 @@ namespace Switch {
           /// @remarks The Predicate is a pointer to a method that returns true if the object passed to it matches the conditions defined in the pointer function. The elements of the current List<T> are individually passed to the Predicate pointer function, and processing is stopped when a match is found.
           /// @remarks This method is an O(n) operation, where n is Count.
           bool TrueForAll(const Predicate<const T&>& match) {
-            for(const T& elem : *this)
-              if(!match(elem))
+            for (const T& elem : *this)
+              if (!match(elem))
                 return false;
                 
             return true;
@@ -959,7 +959,7 @@ namespace Switch {
           /// @exception
           /// @remarks ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
           const T& operator[](int32 index) const override {
-            if(index < 0 || index > this->Count)
+            if (index < 0 || index > this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
             return this->list[index];
@@ -970,7 +970,7 @@ namespace Switch {
           /// @return T The element at the specified index.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
           T& operator[](int32 index) override {
-            if(index < 0 || index > this->Count)
+            if (index < 0 || index > this->Count)
               throw ArgumentOutOfRangeException(_caller);
               
             return this->list[index];

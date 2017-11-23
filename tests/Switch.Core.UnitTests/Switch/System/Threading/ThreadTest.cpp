@@ -30,7 +30,7 @@ namespace {
   
   TEST(ThreadTest, GetMainThreadThenGetName) {
     Thread thread = Thread::CurrentThread();
-    if(!hasMainThreadNamedOnlyOnce)
+    if (!hasMainThreadNamedOnlyOnce)
       ASSERT_EQ("", thread.Name);
     else
       ASSERT_EQ("Main", thread.Name);
@@ -48,7 +48,7 @@ namespace {
   
   TEST(ThreadTest, GetMainThreadThenSetName) {
     Thread thread = Thread::CurrentThread();
-    if(!hasMainThreadNamedOnlyOnce) {
+    if (!hasMainThreadNamedOnlyOnce) {
       ASSERT_EQ("", thread.Name);
       ASSERT_NO_THROW(thread.Name = "Main");
       ASSERT_EQ("Main", thread.Name);

@@ -11,7 +11,7 @@ using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
 GroupBox::GroupBox() {
-  if(System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
+  if (System::Environment::OSVersion().Platform == System::PlatformID::MacOSX)
     this->backColor = System::Drawing::Color::FromArgb(255, 228, 228, 228);
 }
 

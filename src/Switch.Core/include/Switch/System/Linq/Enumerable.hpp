@@ -40,8 +40,8 @@ namespace Switch {
         static TSource Agregate(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, const TSource&, TSource>& func)  {
           int nb = 0;
           TSource agregated {};
-          for(TSource item : source) {
-            if(nb++ == 0)
+          for (TSource item : source) {
+            if (nb++ == 0)
               agregated = item;
             else
               agregated = func(agregated, item);
@@ -60,7 +60,7 @@ namespace Switch {
         template<typename TSource, typename TAccumulate>
         static TAccumulate Agregate(const Collections::Generic::IEnumerable<TSource>& source, const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func)  {
           TAccumulate agregated = seed;
-          for(TSource item : source)
+          for (TSource item : source)
             agregated = func(agregated, item);
           return agregated;
         }
@@ -79,7 +79,7 @@ namespace Switch {
         template<typename TSource, typename TAccumulate, typename TResult>
         static TResult Agregate(const Collections::Generic::IEnumerable<TSource>& source, const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector) {
           TAccumulate agregated = seed;
-          for(TSource item : source)
+          for (TSource item : source)
             agregated = func(agregated, item);
           return resultSelector(agregated);
         }
@@ -93,8 +93,8 @@ namespace Switch {
         /// @include EnumerableAll.cpp
         template<typename TSource>
         static bool All(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, bool>& func) {
-          for(TSource item : source)
-            if(func(item) == false)
+          for (TSource item : source)
+            if (func(item) == false)
               return false;
           return true;
         }
@@ -119,8 +119,8 @@ namespace Switch {
         /// @include EnumerableAny2.cpp
         template<typename TSource>
         static bool Any(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, bool>& predicate) {
-          for(TSource item : source)
-            if(predicate(item) == true)
+          for (TSource item : source)
+            if (predicate(item) == true)
               return true;
           return false;
         }
@@ -157,11 +157,11 @@ namespace Switch {
         static double Average(const Collections::Generic::IEnumerable<double>& source) {
           double average = 0;
           int32 count = 0;
-          for(double item : source) {
+          for (double item : source) {
             average += item;
             ++count;
           }
-          if(count == 0)
+          if (count == 0)
             throw InvalidOperationException(_caller);
           return average / count;
         }
@@ -176,11 +176,11 @@ namespace Switch {
         static double Average(const Collections::Generic::IEnumerable<float>& source) {
           double average = 0;
           int32 count = 0;
-          for(float item : source) {
+          for (float item : source) {
             average += item;
             ++count;
           }
-          if(count == 0)
+          if (count == 0)
             throw InvalidOperationException(_caller);
           return average / count;
         }
@@ -195,11 +195,11 @@ namespace Switch {
         static double Average(const Collections::Generic::IEnumerable<int32>& source) {
           double average = 0;
           int32 count = 0;
-          for(int32 item : source) {
+          for (int32 item : source) {
             average += item;
             ++count;
           }
-          if(count == 0)
+          if (count == 0)
             throw InvalidOperationException(_caller);
           return average / count;
         }
@@ -214,11 +214,11 @@ namespace Switch {
         static double Average(const Collections::Generic::IEnumerable<int64>& source) {
           double average = 0;
           int32 count = 0;
-          for(int64 item : source) {
+          for (int64 item : source) {
             average += item;
             ++count;
           }
-          if(count == 0)
+          if (count == 0)
             throw InvalidOperationException(_caller);
           return average / count;
         }
@@ -230,7 +230,7 @@ namespace Switch {
         template<typename TSource, typename TResult>
         static refptr<EnumerableCollection<TResult>> Cast(const Collections::Generic::IEnumerable<TSource>& source) {
           refptr<EnumerableCollection<TResult>> list = ref_new<EnumerableCollection<TResult>>();
-          for(TSource item : source)
+          for (TSource item : source)
             list->Add(as<TResult>(item));
           return list;
         }
@@ -245,9 +245,9 @@ namespace Switch {
         template<typename TSource>
         static refptr<EnumerableCollection<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
-          for(TSource item : first)
+          for (TSource item : first)
             list->Add(item);
-          for(TSource item : second)
+          for (TSource item : second)
             list->Add(item);
           return list;
         }
@@ -262,9 +262,9 @@ namespace Switch {
         template<typename TSource, int32 len>
         static refptr<EnumerableCollection<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const TSource(&second)[len]) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
-          for(TSource item : first)
+          for (TSource item : first)
             list->Add(item);
-          for(TSource item : second)
+          for (TSource item : second)
             list->Add(item);
           return list;
         }
@@ -279,9 +279,9 @@ namespace Switch {
         template<typename TSource>
         static refptr<EnumerableCollection<TSource>> Intersect(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
-          for(TSource item : first)
+          for (TSource item : first)
           
-            if(second.Contains(item))
+            if (second.Contains(item))
               list->Add(item);
           return list;
         }
@@ -297,8 +297,8 @@ namespace Switch {
         static refptr<EnumerableCollection<TSource>> Intersect(const Collections::Generic::IEnumerable<TSource>& first, const TSource(&second)[len]) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
           Array<TSource> array(second);
-          for(TSource item : first)
-            if(array.Contains(item))
+          for (TSource item : first)
+            if (array.Contains(item))
               list->Add(item);
           return list;
         }
@@ -313,8 +313,8 @@ namespace Switch {
         static const TSource& Max(const Collections::Generic::IEnumerable<TSource>& source) {
           const TSource* max = null;
           System::Collections::Generic::Enumerator<TSource> enumerator = source.GetEnumerator();
-          while(enumerator.MoveNext())
-            if(max == null || enumerator.Current() > *max)
+          while (enumerator.MoveNext())
+            if (max == null || enumerator.Current() > *max)
               max = &enumerator.Current();
           return *max;
         }
@@ -328,8 +328,8 @@ namespace Switch {
         static const TSource& Min(const Collections::Generic::IEnumerable<TSource>& source) {
           const TSource* min = null;
           System::Collections::Generic::Enumerator<TSource> enumerator = source.GetEnumerator();
-          while(enumerator.MoveNext())
-            if(min == null || enumerator.Current() < *min)
+          while (enumerator.MoveNext())
+            if (min == null || enumerator.Current() < *min)
               min = &enumerator.Current();
           return *min;
         }
@@ -344,8 +344,8 @@ namespace Switch {
         static refptr<EnumerableCollection<TSource>> OrderBy(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, TKey>& keySelector) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>(source);
           System::Comparison<const TSource&> comparer = _delegate(const TSource & x, const TSource & y) {
-            if(keySelector(x) < keySelector(y)) return -1;
-            if(keySelector(x) == keySelector(y)) return 0;
+            if (keySelector(x) < keySelector(y)) return -1;
+            if (keySelector(x) == keySelector(y)) return 0;
             return 1;
           };
           
@@ -359,8 +359,8 @@ namespace Switch {
         static refptr<EnumerableCollection<TSource>> OrderByDescending(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, TKey>& keySelector) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>(source);
           System::Comparison<const TSource&> comparer = _delegate(const TSource & x, const TSource & y) {
-            if(keySelector(x) < keySelector(y)) return 1;
-            if(keySelector(x) == keySelector(y)) return 0;
+            if (keySelector(x) < keySelector(y)) return 1;
+            if (keySelector(x) == keySelector(y)) return 0;
             return -1;
           };
           list->Sort(comparer);
@@ -374,7 +374,7 @@ namespace Switch {
         template<typename TSource>
         static refptr<EnumerableCollection<TSource>> Reverse(const Collections::Generic::IEnumerable<TSource>& source) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
-          for(TSource item : source)
+          for (TSource item : source)
             list->Insert(0, item);
           return list;
         }
@@ -384,7 +384,7 @@ namespace Switch {
         template<typename TSource, typename TResult>
         static refptr<EnumerableCollection<TResult>> Select(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, TResult>& selector) {
           refptr<EnumerableCollection<TResult>> list = ref_new<EnumerableCollection<TResult>>();
-          for(TSource item : source)
+          for (TSource item : source)
             list->Add(selector(item));
           return list;
         }
@@ -396,7 +396,7 @@ namespace Switch {
         template<typename TSource>
         static System::Array<TSource> ToArray(const Collections::Generic::IEnumerable<TSource>& source) {
           System::Array<TSource> array = new System::Array<TSource>();
-          for(TSource item : source) {
+          for (TSource item : source) {
             System::Array<TSource>::Resize(array, array.Length + 1);
             array[array.Length - 1] = item;
           }
@@ -408,8 +408,8 @@ namespace Switch {
         template<typename TSource>
         static refptr<EnumerableCollection<TSource>> Where(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, bool>& predicate) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
-          for(TSource item : source)
-            if(predicate(item))
+          for (TSource item : source)
+            if (predicate(item))
               list->Add(item);
           return list;
         }

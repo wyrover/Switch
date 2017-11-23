@@ -36,7 +36,7 @@ void Native::ControlApi::DefWndProc(Message& message) {
 }
 
 void Native::ControlApi::Destroy(const System::Windows::Forms::Control& control) {
-  if(control.Handle()) {
+  if (control.Handle()) {
     intptr handle = control.Handle();
     DestroyWindow((HWND)handle);
     WindowProcedure::DefWindowProcs.Remove(handle);
@@ -48,7 +48,7 @@ intptr Native::ControlApi::GetHandleWindowFromDeviceContext(intptr hdc) {
 }
 
 void Native::ControlApi::Invalidate(const System::Windows::Forms::Control& control, bool invalidateChildren) {
-  if(invalidateChildren)
+  if (invalidateChildren)
     RedrawWindow((HWND)control.Handle(), null, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
   else
     InvalidateRect((HWND)control.Handle(), null, true);
@@ -56,7 +56,7 @@ void Native::ControlApi::Invalidate(const System::Windows::Forms::Control& contr
 
 void Native::ControlApi::Invalidate(const System::Windows::Forms::Control& control, const System::Drawing::Rectangle& rect, bool invalidateChildren) {
   RECT invalidateRect {rect.Left, rect.Top, rect.Right, rect.Bottom};
-  if(invalidateChildren)
+  if (invalidateChildren)
     RedrawWindow((HWND)control.Handle(), &invalidateRect, null, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
   else
     InvalidateRect((HWND)control.Handle(), &invalidateRect, true);
@@ -80,7 +80,7 @@ intptr Native::ControlApi::SendMessage(intptr handle, int32 msg, intptr wparam, 
 
 void Native::ControlApi::SetBackColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
-  if(control != null) {
+  if (control != null) {
     SetBkMode((HDC)hdc, TRANSPARENT);
     SetBkColor((HDC)hdc, ColorToRgb(control().BackColor));
   }
@@ -89,7 +89,7 @@ void Native::ControlApi::SetBackColor(intptr hdc) {
 void Native::ControlApi::SetBackColor(const System::Windows::Forms::Control& control) {
   HDC hdc = GetDC((HWND)control.Handle());
   ref<System::Windows::Forms::Control> form = control;
-  while(form().Parent() != null)
+  while (form().Parent() != null)
     form = form().Parent();
   SendMessageW((HWND)form().Handle(), WM_ERASEBKGND, (WPARAM)hdc, 0);
   ReleaseDC((HWND)control.Handle(), hdc);
@@ -111,7 +111,7 @@ bool Native::ControlApi::SetFocus(const System::Windows::Forms::Control& control
 
 void Native::ControlApi::SetForeColor(intptr hdc) {
   ref<System::Windows::Forms::Control> control = System::Windows::Forms::Control::FromHandle(GetHandleWindowFromDeviceContext(hdc));
-  if(control != null)
+  if (control != null)
     SetTextColor((HDC)hdc, ColorToRgb(control().ForeColor));
 }
 
@@ -135,7 +135,7 @@ void Native::ControlApi::SetSize(System::Windows::Forms::Control& control) {
 }
 
 void Native::ControlApi::SetTabStop(const System::Windows::Forms::Control& control) {
-  if(control.TabStop)
+  if (control.TabStop)
     SetWindowLongPtr((HWND)control.Handle(), GWL_STYLE, GetWindowLongPtr((HWND)control.Handle(), GWL_STYLE) | WS_BORDER);
   else
     SetWindowLongPtr((HWND)control.Handle(), GWL_STYLE, GetWindowLongPtr((HWND)control.Handle(), GWL_STYLE) & ~WS_BORDER);

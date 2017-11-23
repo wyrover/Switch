@@ -50,10 +50,10 @@ void StreamWriter::Flush() {
 void StreamWriter::Write(const string& value) {
   Array<byte> bytes = Encoding().GetBytes(value);
   int32 length = bytes.Length;
-  if(length != 0)
+  if (length != 0)
     this->data->stream->Write(bytes, 0, length);
     
-  if(this->data->autoFlush)
+  if (this->data->autoFlush)
     Flush();
 }
 

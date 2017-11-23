@@ -37,9 +37,9 @@ namespace Switch {
       /// @exception ArgumentException blk1 or blk2 is ! primitive. - or - The number of bytes in blk1 is less than blk1Offset plus count -or- The number of bytes in blk2 is less than blk2Offset plus count.
       template<typename TSource, typename TDestination>
       static int32 BlockCompare(const Array<TSource>& blk1, int32 blk1Offset, const Array<TDestination>& blk2, int32 blk2Offset, int32 count) {
-        if(blk1Offset < 0 || blk2Offset < 0 || count < 0)
+        if (blk1Offset < 0 || blk2Offset < 0 || count < 0)
           throw ArgumentOutOfRangeException(_caller);
-        if(!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || blk1Offset + count > Buffer::ByteLength(blk1) || blk2Offset + count > Buffer::ByteLength(blk2))
+        if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || blk1Offset + count > Buffer::ByteLength(blk1) || blk2Offset + count > Buffer::ByteLength(blk2))
           throw ArgumentException(_caller);
           
         const byte* blk1Ptr = (const byte*)blk1.GetData();
@@ -81,9 +81,9 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException srcOffset, dstOffset, or count is less than 0.
       template<typename TSource, typename TDestination>
       static void BlockCopy(const Array<TSource>& src, int32 srcOffset, Array<TDestination>& dst, int32 dstOffset, int32 count) {
-        if(srcOffset < 0 || dstOffset < 0 || count < 0)
+        if (srcOffset < 0 || dstOffset < 0 || count < 0)
           throw ArgumentOutOfRangeException(_caller);
-        if(!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || srcOffset + count > Buffer::ByteLength(src) || dstOffset + count > Buffer::ByteLength(dst))
+        if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || srcOffset + count > Buffer::ByteLength(src) || dstOffset + count > Buffer::ByteLength(dst))
           throw ArgumentException(_caller);
           
         const byte* srcPtr = (const byte*)src.Data();
@@ -113,9 +113,9 @@ namespace Switch {
       /// @exception ArgumentException dst is ! primitive. - or - The number of bytes in dst is less than dstOffset plus count.
       template<typename TDestination>
       static void BlockFill(byte filler, Array<TDestination>& dst, int32 dstOffset, int32 count) {
-        if(dstOffset < 0 || count < 0)
+        if (dstOffset < 0 || count < 0)
           throw ArgumentOutOfRangeException(_caller);
-        if(!IsPrimitive<TDestination>() || dstOffset + count > Buffer::ByteLength(dst))
+        if (!IsPrimitive<TDestination>() || dstOffset + count > Buffer::ByteLength(dst))
           throw ArgumentException(_caller);
           
         byte* dstPtr = const_cast<byte*>((const byte*)dst.Data());
@@ -158,7 +158,7 @@ namespace Switch {
       /// @exception OverflowException array is larger than 2 gigabytes(GB).
       template<typename T>
       static int32 ByteLength(const Array<T>& array) {
-        if(!IsPrimitive<T>())
+        if (!IsPrimitive<T>())
           throw ArgumentException(_caller);
           
         return Convert::ToInt32((int64)sizeof(T) * array.Length);
@@ -173,9 +173,9 @@ namespace Switch {
       /// @exception OverflowException array is larger than 2 gigabytes(GB).
       template<typename T>
       static byte GetByte(const Array<T>& array, int32 index) {
-        if(!IsPrimitive<T>())
+        if (!IsPrimitive<T>())
           throw ArgumentException(_caller);
-        if(0 < index && index >= Buffer::ByteLength(array))
+        if (0 < index && index >= Buffer::ByteLength(array))
           throw ArgumentOutOfRangeException(_caller);
           
         const byte* bytePtr = (const byte*)array.Data();
@@ -191,9 +191,9 @@ namespace Switch {
       /// @exception OverflowException array is larger than 2 gigabytes(GB).
       template<typename T>
       static void SetByte(const Array<T>& array, int32 index, byte value) {
-        if(!IsPrimitive<T>())
+        if (!IsPrimitive<T>())
           throw ArgumentException(_caller);
-        if(0 < index && index >= Buffer::ByteLength(array))
+        if (0 < index && index >= Buffer::ByteLength(array))
           throw ArgumentOutOfRangeException(_caller);
           
         byte* bytePtr = const_cast<byte*>((const byte*)array.Data());

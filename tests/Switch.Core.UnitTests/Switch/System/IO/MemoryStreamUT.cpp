@@ -57,7 +57,7 @@ namespace {
     Array<byte> buffer = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
     IO::MemoryStream ms(buffer, false);
     ASSERT_EQ(buffer.Data(), ms.Buffer());
-    for(int32 i = 0; i < ms.Length(); i++)
+    for (int32 i = 0; i < ms.Length(); i++)
       ASSERT_EQ(buffer[i], ms.Buffer()[i]);
   }
   
@@ -69,7 +69,7 @@ namespace {
     ms.WriteByte(3);
     ms.WriteByte(4);
     const byte* buffer = ms.Buffer();
-    for(int32 i = 0; i < ms.Length(); i++)
+    for (int32 i = 0; i < ms.Length(); i++)
       ASSERT_EQ(i, buffer[i]);
   }
   
@@ -78,7 +78,7 @@ namespace {
     IO::MemoryStream ms(buffer, false);
     Array<byte> readBuffer(10);
     ASSERT_EQ(10, ms.Read(readBuffer, 0, 10));
-    for(int32 i = 0; i < 10; i++)
+    for (int32 i = 0; i < 10; i++)
       ASSERT_EQ(i, readBuffer[i]);
   }
   
@@ -90,7 +90,7 @@ namespace {
     ASSERT_EQ(1, ms.Position());
     ASSERT_EQ(4, ms.Read(readBuffer, 1, 4)); // 0 1 2 3 4
     ASSERT_EQ(5, ms.Position());
-    for(int32 i = 0; i < 5; i++)
+    for (int32 i = 0; i < 5; i++)
       ASSERT_EQ(i, readBuffer[i]);
   }
   
@@ -103,7 +103,7 @@ namespace {
     ASSERT_EQ(2, ms.Position());
     ASSERT_EQ(3, ms.Read(readBuffer, 0, 3));
     ASSERT_EQ(5, ms.Position());
-    for(int32 i = 0; i < 5; i++)
+    for (int32 i = 0; i < 5; i++)
       ASSERT_EQ(reference[i], readBuffer[i]);
   }
   
@@ -129,7 +129,7 @@ namespace {
     ASSERT_EQ(10, ms.Position());
     ASSERT_EQ(0, ms.Read(readBuffer, 10, 5));
     ASSERT_EQ(10, ms.Position());
-    for(int32 i = 0; i < 15; i++)
+    for (int32 i = 0; i < 15; i++)
       ASSERT_EQ(refBuffer[i], readBuffer[i]);
   }
   
@@ -146,8 +146,8 @@ namespace {
   TEST(MemoryStreamTest, ReadByte_NotDynamic) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, false);
-    for(int32 i = 0; i < 12; i++) {
-      if(i < 10) ASSERT_EQ(i, ms.ReadByte());
+    for (int32 i = 0; i < 12; i++) {
+      if (i < 10) ASSERT_EQ(i, ms.ReadByte());
       else ASSERT_EQ(-1, ms.ReadByte());
     }
   }
@@ -250,7 +250,7 @@ namespace {
     IO::MemoryStream ms(buffer, false);
     Array<byte> array = ms.ToArray();
     ASSERT_EQ(10, array.Length);
-    for(int32 i = 0; i < array.Length; i++)
+    for (int32 i = 0; i < array.Length; i++)
       ASSERT_EQ(i, array[i]);
   }
   
@@ -417,7 +417,7 @@ namespace {
   
   TEST(MemoryStreamTest, ReadMsdn) {
     IO::MemoryStream s;
-    for(int32 i = 0; i < 122; i++)
+    for (int32 i = 0; i < 122; i++)
       s.WriteByte((byte)i);
     s.Position = 0;
     
@@ -431,7 +431,7 @@ namespace {
       int n = s.Read(bytes, numBytesRead, 10);
       numBytesRead += n;
       numBytesToRead -= n;
-    } while(numBytesToRead > 0);
+    } while (numBytesToRead > 0);
     s.Close();
     ASSERT_EQ(0, numBytesToRead);
     ASSERT_EQ(122, numBytesRead);

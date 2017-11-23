@@ -28,11 +28,11 @@ namespace {
 using namespace System;
 
 void Console::StandardErrorOutput::Write(const System::String& s) {
-  if(outputEncoding->GetCodePage() == 65001)  // Utf8
+  if (outputEncoding->GetCodePage() == 65001) // Utf8
     std::cerr << (const char*)s.Data();
-  else if(outputEncoding->IsSingleByte())  // Ascii
+  else if (outputEncoding->IsSingleByte()) // Ascii
     std::cerr << s.ToCCharArray(outputEncoding->GetCodePage()).Data();
-  else if(outputEncoding->GetCodePage() == 1200) {  // Unicode
+  else if (outputEncoding->GetCodePage() == 1200) { // Unicode
     System::Array<byte> bytes = outputEncoding->GetBytes(s);
     System::Array<char16> str(bytes.Length + 1);
     Buffer::BlockCopy(bytes, 0, str, 0, bytes.Length);
@@ -48,11 +48,11 @@ void Console::StandardErrorOutput::Write(const System::String& s) {
 }
 
 void Console::StandardOutput::Write(const System::String& s) {
-  if(outputEncoding->GetCodePage() == 65001)  // Utf8
+  if (outputEncoding->GetCodePage() == 65001) // Utf8
     std::cout << (const char*)s.Data();
-  else if(outputEncoding->IsSingleByte())  // Ascii
+  else if (outputEncoding->IsSingleByte()) // Ascii
     std::cout << s.ToCCharArray(outputEncoding->GetCodePage()).Data();
-  else if(outputEncoding->GetCodePage() == 1200) {  // Unicode
+  else if (outputEncoding->GetCodePage() == 1200) { // Unicode
     int32 length = outputEncoding->GetByteCount(s);
     System::Array<char16> str(length + 1);
     outputEncoding->GetBytes(s, (byte*)str.Data(), length);
@@ -82,9 +82,9 @@ namespace {
 _property<ConsoleColor> Console::BackgroundColor {
   [] {return Native::ConsoleApi::GetBackgroundColor();},
   [](ConsoleColor value) {
-    if(!Enum<ConsoleColor>::IsDefined(value))
+    if (!Enum<ConsoleColor>::IsDefined(value))
       throw ArgumentException(_caller);
-    if(!Native::ConsoleApi::SetBackgroundColor(value))
+    if (!Native::ConsoleApi::SetBackgroundColor(value))
       throw System::IO::IOException(_caller);
   }
 };
@@ -110,7 +110,7 @@ _property<bool, _readonly> Console::CapsLock {
 _property<int32> Console::CursorLeft {
   [] {return Native::ConsoleApi::GetCursorTop();},
   [](int32 value) {
-    if(value < 0 || value >= Native::ConsoleApi::GetWindowWidth())
+    if (value < 0 || value >= Native::ConsoleApi::GetWindowWidth())
       throw ArgumentOutOfRangeException(_caller);
       
     Native::ConsoleApi::SetCursorLeft(value);
@@ -120,7 +120,7 @@ _property<int32> Console::CursorLeft {
 _property<int32> Console::CursorSize {
   [] {return Native::ConsoleApi::GetCursorSize();},
   [](int32 value) {
-    if(value < 1 || value > 100)
+    if (value < 1 || value > 100)
       throw ArgumentOutOfRangeException(_caller);
       
     Native::ConsoleApi::SetCursorSize(value);
@@ -130,7 +130,7 @@ _property<int32> Console::CursorSize {
 _property<int32> Console::CursorTop {
   [] {return Native::ConsoleApi::GetCursorTop();},
   [](int32 value) {
-    if(value < 0 || value >= Native::ConsoleApi::GetBufferHeight())
+    if (value < 0 || value >= Native::ConsoleApi::GetBufferHeight())
       throw ArgumentOutOfRangeException(_caller);
       
     Native::ConsoleApi::SetCursorTop(value);
@@ -152,7 +152,7 @@ _property<Console::StandardErrorOutput&, _readonly> Console::Error {
 _property<ConsoleColor> Console::ForegroundColor {
   [] {return Native::ConsoleApi::GetForegroundColor();},
   [](ConsoleColor value) {
-    if(!Enum<ConsoleColor>::IsDefined(value))
+    if (!Enum<ConsoleColor>::IsDefined(value))
       throw ArgumentException(_caller);
     Native::ConsoleApi::SetForegroundColor(value);
   }
@@ -260,7 +260,7 @@ _property<int32> Console::WindowWidth {
 ConsoleCancelEventHandler Console::CancelKeyPress;
 
 void Console::Beep(int32 frequency, int32 duration) {
-  if(frequency < 37 || frequency > 32767 || duration <= 0)
+  if (frequency < 37 || frequency > 32767 || duration <= 0)
     throw ArgumentOutOfRangeException(_caller);
     
   Native::ConsoleApi::Beep(frequency, duration);
@@ -307,7 +307,7 @@ ConsoleKeyInfo Console::ReadKey(bool intercept) {
   Native::ConsoleApi::ReadKey(KeyChar, KeyCode, alt, shift, ctrl);
   keyInfo = ConsoleKeyInfo(KeyChar, (ConsoleKey)KeyCode, shift, alt, ctrl);
   
-  if(intercept == false)
+  if (intercept == false)
     Write(Char(keyInfo.KeyChar()));
     
   return keyInfo;

@@ -40,8 +40,8 @@ namespace Switch {
       template<typename T> Byte& operator+=(T value) {this->value += value.value; return *this;}
       template<typename T> Byte& operator-=(T value) {this->value -= value; return *this;}
       template<typename T> Byte& operator*=(T value) {this->value *= value; return *this;}
-      template<typename T> Byte& operator/=(T value) {if(value.value == 0) throw DivideByZeroException(_caller); this->value /= value.value; return *this;}
-      template<typename T> Byte& operator%=(T value) {if(value.value == 0) throw DivideByZeroException(_caller); this->value %= value.value; return *this;}
+      template<typename T> Byte& operator/=(T value) {if (value.value == 0) throw DivideByZeroException(_caller); this->value /= value.value; return *this;}
+      template<typename T> Byte& operator%=(T value) {if (value.value == 0) throw DivideByZeroException(_caller); this->value %= value.value; return *this;}
       template<typename T> Byte& operator&=(T value) {this->value &= value; return *this;}
       template<typename T> Byte& operator|=(T value) {this->value |= value; return *this;}
       template<typename T> Byte& operator^=(T value) {this->value ^= value; return *this;}
@@ -82,7 +82,7 @@ namespace Switch {
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
       int32 CompareTo(const IComparable& obj) const override {
-        if(!is<Byte>(obj))
+        if (!is<Byte>(obj))
           return 1;
         return CompareTo(static_cast<const Byte&>(obj));
       }
@@ -153,7 +153,7 @@ namespace Switch {
         try {
           retValue = Parse(str, base);
           return true;
-        } catch(const Exception&) {
+        } catch (const Exception&) {
           return false;
         }
       }
@@ -171,7 +171,7 @@ namespace Switch {
       uint16 ToUInt16(const IFormatProvider& provider) const override {return this->value;}
       uint32 ToUInt32(const IFormatProvider& provider) const override {return this->value;}
       uint64 ToUInt64(const IFormatProvider& provider) const override {return this->value;}
-      sbyte ToSByte(const IFormatProvider& provider) const override {if(this->value > std::numeric_limits<sbyte>::max()) throw OverflowException(_caller); return this->value;}
+      sbyte ToSByte(const IFormatProvider& provider) const override {if (this->value > std::numeric_limits<sbyte>::max()) throw OverflowException(_caller); return this->value;}
       float ToSingle(const IFormatProvider& provider) const override {return this->value;}
       String ToString(const IFormatProvider& provider) const override {return ToString();}
       

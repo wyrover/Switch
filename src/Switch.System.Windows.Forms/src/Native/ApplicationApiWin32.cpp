@@ -22,13 +22,13 @@ void Native::ApplicationApi::Exit() {
 }
 
 void Native::ApplicationApi::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
-  while(true) {
+  while (true) {
     MSG msg;
-    if(idle.IsEmpty() || PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE) != 0) {
-      if(GetMessage(&msg, NULL, 0, 0) == 0) break;
+    if (idle.IsEmpty() || PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE) != 0) {
+      if (GetMessage(&msg, NULL, 0, 0) == 0) break;
       TranslateMessage(&msg);
       DispatchMessage(&msg);
-      if(msg.message == WM_QUIT) break;
+      if (msg.message == WM_QUIT) break;
     }
     idle(object(), EventArgs::Empty());
   }

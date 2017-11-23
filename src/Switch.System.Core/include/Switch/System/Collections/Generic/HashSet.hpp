@@ -38,12 +38,12 @@ namespace Switch {
           
           /// @cond
           HashSet(InitializerList<T> il) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
-            for(typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
+            for (typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
               this->Add(*iterator);
           }
           
           HashSet(const HashSet& s) : operationNumber(s.operationNumber), comparer(s.comparer) {
-            for(const T& item : s)
+            for (const T& item : s)
               Add(item);
           }
           
@@ -52,7 +52,7 @@ namespace Switch {
           HashSet& operator=(const HashSet& s) {
             this->operationNumber = s.operationNumber;
             this->comparer = s._comparer;
-            for(T elem : s)
+            for (T elem : s)
               Add(elem);
             return *this;
           }
@@ -61,7 +61,7 @@ namespace Switch {
           /// @brief Initializes a new instance of the HashSet<T> class that uses the default equality comparer for the set type, contains elements copied from the specified collection, and has sufficient capacity to accommodate the number of elements copied.
           /// @param collection The elements to copy
           HashSet(const IEnumerable<T>& collection) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
-            for(const T& item : collection)
+            for (const T& item : collection)
               Add(item);
           }
           
@@ -69,7 +69,7 @@ namespace Switch {
           /// @param collection The elements to copy
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
           HashSet(const IEnumerable<T>& collection, const refptr<IComparer<T>>& comparer) : operationNumber(0), comparer(comparer) {
-            for(T item : collection)
+            for (T item : collection)
               Add(item);
           }
           
@@ -78,7 +78,7 @@ namespace Switch {
           /// @remarks The HashSet class is ! thread safe.
           template<int32 len>
           HashSet(const T(&array)[len]) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
-            for(int32 index = 0; index < len; index++)
+            for (int32 index = 0; index < len; index++)
               this->Add(array[index]);
           }
           
@@ -134,17 +134,17 @@ namespace Switch {
           /// @exception ArgumentNullException array is null.
           /// @exception ArgumentOutOfRangeException index is less than zero or count is less than zero.
           void CopyTo(Int32 index, Array<T>& array, int32 arrayIndex, int32 count) const {
-            if(index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
+            if (index < 0 || array.Length < 0 || arrayIndex < 0 || count < 0)
               throw ArgumentOutOfRangeException(_caller);
               
-            if(index + count > this->Count || arrayIndex + count > array.Length)
+            if (index + count > this->Count || arrayIndex + count > array.Length)
               throw ArgumentException(_caller);
               
             int32 i = 0, c = 0;
-            for(T item : *this) {
-              if(i >= index + count)
+            for (T item : *this) {
+              if (i >= index + count)
                 return;
-              if(i >= index) {
+              if (i >= index) {
                 array[arrayIndex + c] = item;
                 c += 1;
               }
@@ -156,12 +156,12 @@ namespace Switch {
           /// @param other The collection of items to remove from the HashSet<T> object.
           /// @exception ArgumentNullException other is null.
           void ExceptWith(const IEnumerable<T>& other) override {
-            if(&other == this) {
+            if (&other == this) {
               Clear();
               return;
             }
             
-            for(T item : other)
+            for (T item : other)
               Remove(item);
           }
           
@@ -173,8 +173,8 @@ namespace Switch {
           HashSet GetViewBetween(const T& lowerValue, const T& upperValue) const {
             HashSet set(this->comparer);
             
-            for(T item : *this) {
-              if(this->comparer->Compare(item, lowerValue) >= 0 && this->comparer->Compare(item, upperValue) <= 0)
+            for (T item : *this) {
+              if (this->comparer->Compare(item, lowerValue) >= 0 && this->comparer->Compare(item, upperValue) <= 0)
                 set.Add(item);
             }
             return set;
@@ -187,8 +187,8 @@ namespace Switch {
             HashSet toKeep(other);
             HashSet toRemove;
             
-            for(T item : *this)
-              if(! toKeep.Contains(item))
+            for (T item : *this)
+              if (! toKeep.Contains(item))
                 toRemove.Add(item);
                 
             ExceptWith(toRemove);
@@ -200,10 +200,10 @@ namespace Switch {
           /// @exception ArgumentNullException other is null.
           bool IsProperSubsetOf(const IEnumerable<T>& other) const override {
             HashSet set(other);
-            if(this->Count == 0)
+            if (this->Count == 0)
               return set.Count > 0;
               
-            if(this->Count >= set.Count)
+            if (this->Count >= set.Count)
               return false;
               
             return this->SubSet(set);
@@ -216,10 +216,10 @@ namespace Switch {
           bool IsProperSupersetOf(const IEnumerable<T>& other) const override {
             HashSet set(other);
             
-            if(set.Count == 0)
+            if (set.Count == 0)
               return this->Count > 0;
               
-            if(set.Count >= this->Count)
+            if (set.Count >= this->Count)
               return false;
               
             return this->SuperSet(set);
@@ -248,11 +248,11 @@ namespace Switch {
           /// @return true if the HashSet<T> object and other share at least one common element; otherwise, false.
           /// @exception ArgumentNullException other is null.
           bool Overlaps(const IEnumerable<T>& other) const override {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return false;
               
-            for(T item : other)
-              if(Contains(item))
+            for (T item : other)
+              if (Contains(item))
                 return true;
                 
             return false;
@@ -272,8 +272,8 @@ namespace Switch {
           /// @exception ArgumentNullException match is null
           int32 RemoveWhere(const Predicate<const T&>& match) {
             int32 nbRemoved = 0;
-            for(T elem : *this)
-              if(match(elem) && Remove(elem))
+            for (T elem : *this)
+              if (match(elem) && Remove(elem))
                 nbRemoved++;
                 
             return nbRemoved;
@@ -285,11 +285,11 @@ namespace Switch {
           bool SetEquals(const IEnumerable<T>& other) const override {
             HashSet set(other);
             
-            if(this->Count != set.Count)
+            if (this->Count != set.Count)
               return false;
               
-            for(T item : other)
-              if(! Contains(item))
+            for (T item : other)
+              if (! Contains(item))
                 return false;
                 
             return true;
@@ -301,8 +301,8 @@ namespace Switch {
           /// @param other The collection to compare to the current HashSet<T> object.
           /// @exception ArgumentNullException other is null.
           void SymmetricExceptWith(const IEnumerable<T>& other) override {
-            for(T item : other) {
-              if(Contains(item))
+            for (T item : other) {
+              if (Contains(item))
                 Remove(item);
               else
                 Add(item);
@@ -313,8 +313,8 @@ namespace Switch {
           /// @param other The collection to compare to the current HashSet<T> object.
           /// @exception ArgumentNullException other is null.
           void UnionWith(const IEnumerable<T>& other) override {
-            for(T item : other)
-              if(! Contains(item))
+            for (T item : other)
+              if (! Contains(item))
                 this->hashset.insert(item); // avoid a second test
           }
           
@@ -333,28 +333,28 @@ namespace Switch {
           bool GetIsReadOnly() const override {return false;}
           
           bool SubSet(const HashSet& set) const {
-            if(this->Count == 0)
+            if (this->Count == 0)
               return true;
               
-            if(this->Count > set.Count)
+            if (this->Count > set.Count)
               return false;
               
-            for(T item : *this)
-              if(! set.Contains(item))
+            for (T item : *this)
+              if (! set.Contains(item))
                 return false;
                 
             return true;
           }
           
           bool SuperSet(const HashSet& set) const {
-            if(set.Count == 0)
+            if (set.Count == 0)
               return true;
               
-            if(set.Count > this->Count)
+            if (set.Count > this->Count)
               return false;
               
-            for(T item : set)
-              if(! Contains(item))
+            for (T item : set)
+              if (! Contains(item))
                 return false;
                 
             return true;
@@ -382,13 +382,13 @@ namespace Switch {
             }
             
             virtual bool MoveNext() {
-              if(this->operationNumber != this->set.operationNumber)
+              if (this->operationNumber != this->set.operationNumber)
                 throw InvalidOperationException(_caller);
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
-              if(this->beforeFirst)
+              if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
@@ -398,7 +398,7 @@ namespace Switch {
             
           protected:
             const T& GetCurrent() const {
-              if(this->beforeFirst || IsFinished())
+              if (this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
                 
               return *this->iterator;
@@ -423,13 +423,13 @@ namespace Switch {
             }
             
             virtual bool MoveNext() {
-              if(this->operationNumber != this->set.operationNumber)
+              if (this->operationNumber != this->set.operationNumber)
                 throw InvalidOperationException(_caller);
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
-              if(this->beforeFirst)
+              if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
@@ -439,7 +439,7 @@ namespace Switch {
             
           private:
             const T& GetCurrent() const {
-              if(this->beforeFirst || IsFinished())
+              if (this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
                 
               return *this->iterator;

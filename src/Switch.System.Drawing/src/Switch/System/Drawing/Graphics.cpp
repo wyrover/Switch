@@ -5,7 +5,7 @@ using namespace System;
 using namespace System::Drawing;
 
 Graphics::~Graphics() {
-  if(this->hwnd != IntPtr::Zero)
+  if (this->hwnd != IntPtr::Zero)
     //Native::GdiApi::EndPaint(this->hwnd, this->hdc);
     Native::GdiApi::ReleaseDeviceContext(this->hwnd, this->hdc);
 }

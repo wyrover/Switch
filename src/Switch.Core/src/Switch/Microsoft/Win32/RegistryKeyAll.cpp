@@ -18,29 +18,29 @@ namespace {
   }
   
   static bool ExistSubKey(const System::String& path, const System::String& subKey) {
-    if(path == "")
+    if (path == "")
       return false;
       
-    if(subKey == "")
+    if (subKey == "")
       return true;
       
     Array<DirectoryInfo> directories = DirectoryInfo(path).GetDirectories();
     System::String subKeyLowered = subKey.ToLower();
-    for(DirectoryInfo directory : directories) {
-      if(directory.Name().ToLower() == subKeyLowered)
+    for (DirectoryInfo directory : directories) {
+      if (directory.Name().ToLower() == subKeyLowered)
         return true;
     }
     return false;
   }
   
   static System::String MakePath(const System::String& path, const System::String& subKey) {
-    if(path == "" || subKey == "")
+    if (path == "" || subKey == "")
       return path;
       
     Array<DirectoryInfo> directories = DirectoryInfo(path).GetDirectories();
     System::String subKeyLowered = subKey.ToLower();
-    for(DirectoryInfo directory : directories) {
-      if(directory.Name().ToLower() == subKeyLowered)
+    for (DirectoryInfo directory : directories) {
+      if (directory.Name().ToLower() == subKeyLowered)
         return Path::Combine(path, directory.Name());
     }
     return Path::Combine(path, subKey);
@@ -61,7 +61,7 @@ RegistryKey::RegistryKey(): permission(RegistryKeyPermissionCheck::ReadWriteSubT
 
 RegistryKey::RegistryKey(RegistryHive rhive)  : name(ToName(rhive)), permission(RegistryKeyPermissionCheck::ReadWriteSubTree) {
   this->path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::UserProfile), ".Switch", "Registry", ToName(rhive));
-  if(not Directory::Exists(this->path)) {
+  if (not Directory::Exists(this->path)) {
     Directory::CreateDirectory(this->path);
     ::CreateDefaultFile(Path::Combine(this->path, "Values.xml"));
   }
@@ -83,10 +83,10 @@ void RegistryKey::Close() {
 
 RegistryKey RegistryKey::CreateSubKey(const System::String& subKey, RegistryKeyPermissionCheck permissionCheck) {
   RegistryKey key = OpenSubKey(subKey, permissionCheck);
-  if(key != RegistryKey::Null())
+  if (key != RegistryKey::Null())
     return key;
     
-  if(this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
+  if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
     throw UnauthorizedAccessException(_caller);
     
   key.handle = ref_new<RegistryHandle>();
@@ -100,42 +100,42 @@ RegistryKey RegistryKey::CreateSubKey(const System::String& subKey, RegistryKeyP
 }
 
 void  RegistryKey::DeleteSubKey(const System::String& subKey, bool throwOnMissingSubKey) {
-  if(subKey == "")
+  if (subKey == "")
     throw InvalidOperationException(_caller);
     
-  if(IsBaseKey(subKey))
+  if (IsBaseKey(subKey))
     throw ArgumentException(_caller);
     
   System::String path = ::MakePath(this->path, subKey);
-  if(::ExistSubKey(this->path, subKey)) {
-    if(DirectoryInfo(path).GetDirectories().Count != 0)
+  if (::ExistSubKey(this->path, subKey)) {
+    if (DirectoryInfo(path).GetDirectories().Count != 0)
       throw InvalidOperationException(_caller);
     Directory::Delete(path, true);
     return;
   }
   
-  if(throwOnMissingSubKey)
+  if (throwOnMissingSubKey)
     throw ArgumentException(_caller);
 }
 
 void  RegistryKey::DeleteSubKeyTree(const System::String& subKey, bool throwOnMissingSubKey) {
-  if(subKey == "" or IsBaseKey(subKey))
+  if (subKey == "" or IsBaseKey(subKey))
     throw ArgumentNullException(_caller);
     
   System::String path = ::MakePath(this->path, subKey);
-  if(::ExistSubKey(this->path, subKey)) {
+  if (::ExistSubKey(this->path, subKey)) {
     Directory::Delete(path, true);
     return;
   }
   
-  if(throwOnMissingSubKey)
+  if (throwOnMissingSubKey)
     throw ArgumentException(_caller);
 }
 
 Array<System::String> RegistryKey::GetSubKeyNames() {
   Array<IO::DirectoryInfo> dirInfo = DirectoryInfo(System::String::Format("{0}", this->path)).GetDirectories();
   System::Collections::Generic::List<System::String> subKeyNames;
-  for(IO::DirectoryInfo item : dirInfo)
+  for (IO::DirectoryInfo item : dirInfo)
     subKeyNames.Add(item.Name());
   subKeyNames.Sort();
   return subKeyNames.ToArray();
@@ -148,7 +148,7 @@ void RegistryKey::Flush() {
 
 RegistryKey RegistryKey::OpenSubKey(const System::String& subKeyName, RegistryKeyPermissionCheck permissionCheck) {
   System::String path = ::MakePath(this->path, subKeyName);
-  if(not ::ExistSubKey(this->path, subKeyName))
+  if (not ::ExistSubKey(this->path, subKeyName))
     return RegistryKey::Null();
     
   RegistryKey key;
@@ -166,12 +166,12 @@ void RegistryKey::Load() {
     
     System::String s = System::IO::File::ReadAllText(Path::Combine(this->path, "Values.xml"));
     System::String toParse = s.Remove(s.IndexOf("</Values>\n")).Substring(s.IndexOf("<Values>\n") + 9).Replace(System::Environment::NewLine, "");
-    while(!string::IsNullOrEmpty(toParse)) {
+    while (!string::IsNullOrEmpty(toParse)) {
       RegistryKeyValue rkv = RegistryKeyValue::Parse(toParse.Substring(0, toParse.IndexOf("</Value>") + 8));
       toParse = toParse.Remove(0, toParse.IndexOf("</Value>") + 8);
       this->values[rkv.Key().ToLower()] = rkv;
     }
-  } catch(const System::Exception& e) {
+  } catch (const System::Exception& e) {
     throw System::FormatException(_caller);
   }
 }

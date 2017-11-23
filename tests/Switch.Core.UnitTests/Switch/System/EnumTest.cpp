@@ -192,7 +192,7 @@ namespace SwitchUnitTests {
   
   TEST(EnumTest, SwitchCase) {
     Pet PetDog = Pet::Dog;
-    switch(PetDog) {
+    switch (PetDog) {
     case Pet::Dog : SUCCEED(); break;
     case Pet::Cat : FAIL(); break;
     case Pet::Bird : FAIL(); break;
@@ -200,7 +200,7 @@ namespace SwitchUnitTests {
     }
     
     Number number8 = Number::Eight;
-    switch(number8) {
+    switch (number8) {
     case Number::Zero : FAIL(); break;
     case Number::One : FAIL(); break;
     case Number::Two : FAIL(); break;

@@ -10,7 +10,7 @@
 
 int32 Native::DateTimeApi::Ftime(int64& seconds, int32& milliseconds, int32& timeZone, bool& daylight) {
   struct timeb value;
-  if(ftime(&value) != 0)
+  if (ftime(&value) != 0)
     return -1;
     
   seconds = value.time;
@@ -22,7 +22,7 @@ int32 Native::DateTimeApi::Ftime(int64& seconds, int32& milliseconds, int32& tim
 
 int32 Native::DateTimeApi::Gmtime(int64 time, int32& year, int32& month, int32& day, int32& hour, int32& minute, int32& second, int32& dayOfYear, int32& dayOfWeek) {
   struct tm value;
-  if(gmtime_r((const time_t*)&time, &value) == null)
+  if (gmtime_r((const time_t*)&time, &value) == null)
     return -1;
     
   year = value.tm_year + 1900;
@@ -38,7 +38,7 @@ int32 Native::DateTimeApi::Gmtime(int64 time, int32& year, int32& month, int32& 
 
 int32 Native::DateTimeApi::Localtime(int64 time, int32& year, int32& month, int32& day, int32& hour, int32& minute, int32& second, int32& dayOfYear, int32& dayOfWeek) {
   struct tm value;
-  if(localtime_r((const time_t*)&time, &value) == null)
+  if (localtime_r((const time_t*)&time, &value) == null)
     return -1;
     
   year = value.tm_year + 1900;
@@ -57,7 +57,7 @@ int64 Native::DateTimeApi::Mkgmtime(int32 year, int32 month, int32 day, int32 ho
   int64 localTime = mktime(&localValue);
   
   struct tm gmtValue;
-  if(gmtime_r((const time_t*)&localTime, &gmtValue) == 0)
+  if (gmtime_r((const time_t*)&localTime, &gmtValue) == 0)
     return -1;
     
   int64 gmtTime = mktime(&gmtValue);

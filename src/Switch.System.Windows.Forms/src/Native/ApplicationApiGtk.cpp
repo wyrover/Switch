@@ -33,7 +33,7 @@ void Native::ApplicationApi::MessageLoop(const System::Windows::Forms::Form& mai
 
 namespace {
   void AddButtons(Gtk::MessageDialog& dialog, MessageBoxButtons buttons) {
-    switch(buttons) {
+    switch (buttons) {
     case MessageBoxButtons::AbortRetryIgnore:
       dialog.add_button("Abort", (int)DialogResult::Abort);
       dialog.add_button("Retry", (int)DialogResult::Retry);
@@ -67,14 +67,14 @@ DialogResult Native::ApplicationApi::ShowMessageBox(const string& message, const
   static System::Collections::Generic::Dictionary<MessageBoxIcon, Gtk::MessageType> icons = {{MessageBoxIcon::None, Gtk::MESSAGE_OTHER}, {MessageBoxIcon::Error, Gtk::MESSAGE_ERROR}, {MessageBoxIcon::Question, Gtk::MESSAGE_QUESTION}, {MessageBoxIcon::Warning, Gtk::MESSAGE_WARNING}, {MessageBoxIcon::Information, Gtk::MESSAGE_INFO}};
   static refptr<Gtk::Window> emptyWindow = ref_new<Gtk::Window>();
   Gtk::Window* activeWindow = __application__->get_active_window();
-  if(activeWindow == null) activeWindow = emptyWindow.ToPointer();
+  if (activeWindow == null) activeWindow = emptyWindow.ToPointer();
   Gtk::MessageDialog dialog(*activeWindow, caption.c_str(), true /* use_markup */, icons[icon], Gtk::BUTTONS_NONE, true);
   AddButtons(dialog, buttons);
   dialog.set_secondary_text(message.c_str());
   dialog.set_modal();
   dialog.set_position(Gtk::WindowPosition::WIN_POS_CENTER);
   int result = dialog.run();
-  if(result < 0)
+  if (result < 0)
     return DialogResult::Cancel;
   return (DialogResult)result;
 }

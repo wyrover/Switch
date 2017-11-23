@@ -419,7 +419,7 @@ namespace {
     ASSERT_EQ(TypeParam::maxByteSize * 3, TypeParam::encoding.GetMaxByteCount(3));
     ASSERT_THROW(TypeParam::encoding.GetMaxByteCount(-1), ArgumentOutOfRangeException);
     
-    if(TypeParam::maxByteSize > 1)
+    if (TypeParam::maxByteSize > 1)
       ASSERT_THROW(TypeParam::encoding.GetMaxByteCount((Int32::MaxValue / 2) + 1), ArgumentOutOfRangeException);
   }
   
@@ -430,10 +430,10 @@ namespace {
     
     ASSERT_THROW(TypeParam::encoding.GetMaxCharCount(-1), ArgumentOutOfRangeException);
     
-    if(TypeParam::minByteSize == 2)
+    if (TypeParam::minByteSize == 2)
       ASSERT_EQ(0, TypeParam::encoding.GetMaxCharCount(1));
       
-    if(TypeParam::minByteSize == 4) {
+    if (TypeParam::minByteSize == 4) {
       ASSERT_EQ(0, TypeParam::encoding.GetMaxCharCount(1));
       ASSERT_EQ(0, TypeParam::encoding.GetMaxCharCount(2));
       ASSERT_EQ(0, TypeParam::encoding.GetMaxCharCount(3));
@@ -925,9 +925,9 @@ namespace {
   int32 GetCompleteChars(const UnicodeCharacters& chars, int32 index) {
     int32 completed = 0;
     int32 size = 0;
-    for(int32 i = 0; i < chars.Length; i++) {
+    for (int32 i = 0; i < chars.Length; i++) {
       size += chars[i].Size();
-      if(index < size)
+      if (index < size)
         return completed;
       completed += 1;
     }
@@ -958,7 +958,7 @@ namespace {
   TYPED_TEST(Encoding, GetCharCount_Bytes) {
     UnicodeCharacters chars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::charSpecialT, Encoding<TypeParam>::sigma, Encoding<TypeParam>::syriacSemkath, Encoding<TypeParam>::fullBlock, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(chars);
-    for(int32 i = 0; i <= sequence.Size(); i++)
+    for (int32 i = 0; i <= sequence.Size(); i++)
       ASSERT_EQ(GetCompleteChars(chars, i), TypeParam::encoding.GetCharCount(sequence.Bytes(), i));
   }
   
@@ -1085,7 +1085,7 @@ namespace {
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
     
-    for(int32 i = 0; i <= sequence.Size(); i += 1) {
+    for (int32 i = 0; i <= sequence.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(uchars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, i, (char32*)chars.Data(), nbChars));
       EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), expectedNbChars, chars.Data());
@@ -1100,7 +1100,7 @@ namespace {
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
     
-    for(int32 i = 0; i <= expected.Size(); i += 1) {
+    for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), uchars[0].Size(), i, (char32*)chars.Data(), nbChars));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
@@ -1118,7 +1118,7 @@ namespace {
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
     
-    for(int32 i = 0; i <= expected.Size(); i += 1) {
+    for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
@@ -1159,7 +1159,7 @@ namespace {
     EncodingUT::UnicodeSequence sequence(Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala);
     char32 chars[3];
     
-    for(int32 i = 0; i < sequence.Size(); i += 1)
+    for (int32 i = 0; i < sequence.Size(); i += 1)
       ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size() - i) + 1, chars, 3), ArgumentOutOfRangeException);
   }
   
@@ -1177,7 +1177,7 @@ namespace {
     UnicodeCharacters uchars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(uchars);
     
-    for(int32 i = 0; i <= sequence.Size(); i += 1) {
+    for (int32 i = 0; i <= sequence.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(uchars, i);
       EncodingUT::EXPECT_CHARS(sequence.DecodedChars(), expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, i));
     }
@@ -1189,7 +1189,7 @@ namespace {
     EncodingUT::UnicodeSequence sequence(uchars);
     EncodingUT::UnicodeSequence expected(expectedChars);
     
-    for(int32 i = 0; i <= expected.Size(); i += 1) {
+    for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars,
         TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), uchars[0].Size(), i));
@@ -1204,7 +1204,7 @@ namespace {
     EncodingUT::UnicodeSequence expected(expectedChars);
     EncodingUT::UnicodeSequence prefix(prefixChars);
     
-    for(int32 i = 0; i <= expected.Size(); i += 1) {
+    for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars,
         TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i));
@@ -1238,7 +1238,7 @@ namespace {
   
   TYPED_TEST(Encoding, GetChars_Bytes_Index_Count___Invalid_Range) {
     EncodingUT::UnicodeSequence sequence(Encoding<TypeParam>::charA + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala);
-    for(int32 i = 0; i < sequence.Size(); i += 1)
+    for (int32 i = 0; i < sequence.Size(); i += 1)
       ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size() - i) + 1), ArgumentOutOfRangeException);
   }
   
@@ -1284,7 +1284,7 @@ namespace {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
-    for(int32 i = 0; i < sequence.Size(); i += 1)
+    for (int32 i = 0; i < sequence.Size(); i += 1)
       ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), i, (sequence.Size() - i) + 1, (char32*)chars.Data(), nbChars, 0), ArgumentOutOfRangeException);
   }
   
@@ -1292,7 +1292,7 @@ namespace {
     EncodingUT::UnicodeSequence sequence = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT + Encoding<TypeParam>::sigma + Encoding<TypeParam>::syriacSemkath + Encoding<TypeParam>::fullBlock + Encoding<TypeParam>::cjk + Encoding<TypeParam>::koala;
     int32 nbChars = sequence.Count();
     Array<char32> chars(nbChars);
-    for(int32 i = 1; i <= nbChars; i += 1)
+    for (int32 i = 1; i <= nbChars; i += 1)
       ASSERT_THROW(TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), 0, sequence.Size(), (char32*)chars.Data(), nbChars, i), ArgumentException);
   }
   
@@ -1314,7 +1314,7 @@ namespace {
     int32 nbChars = expected.Count();
     Array<char32> chars(nbChars);
     
-    for(int32 i = 0; i <= expected.Size(); i += 1) {
+    for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars, 0));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
@@ -1332,7 +1332,7 @@ namespace {
     int32 nbChars = expected.Count() + 3;
     Array<char32> chars(nbChars);
     
-    for(int32 i = 0; i <= expected.Size(); i += 1) {
+    for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars, 3));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, &chars.Data()[3]);
@@ -1351,7 +1351,7 @@ namespace {
     int32 nbChars = expected.Count();
     Array<char32> chars(nbChars);
     
-    for(int32 i = 0; i <= expected.Size(); i += 1) {
+    for (int32 i = 0; i <= expected.Size(); i += 1) {
       int32 expectedNbChars = GetCompleteChars(expectedChars, i);
       ASSERT_EQ(expectedNbChars, TypeParam::encoding.GetChars(sequence.Bytes(), sequence.Size(), prefix.Size(), i, (char32*)chars.Data(), nbChars, 0));
       EncodingUT::EXPECT_CHARS(expected.DecodedChars(), expectedNbChars, chars.Data());
@@ -1360,10 +1360,10 @@ namespace {
   
   String FromCharactersToDecodedString(UnicodeCharacters& characters, int32 index, int32 count) {
     String concat;
-    for(EncodingUT::UnicodeCharacter character : characters) {
-      if(index > 0)
+    for (EncodingUT::UnicodeCharacter character : characters) {
+      if (index > 0)
         index -= 1;
-      else if(index == 0 && count > 0) {
+      else if (index == 0 && count > 0) {
         count -= 1;
         concat += character.DecodedCharacter();
       }
@@ -1394,7 +1394,7 @@ namespace {
   TYPED_TEST(Encoding, GetString_Bytes) {
     UnicodeCharacters chars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::charSpecialT, Encoding<TypeParam>::sigma, Encoding<TypeParam>::syriacSemkath, Encoding<TypeParam>::fullBlock, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(chars);
-    for(int32 i = 0; i <= sequence.Size(); i++)
+    for (int32 i = 0; i <= sequence.Size(); i++)
       ASSERT_EQ(FromCharactersToDecodedString(chars, 0, GetCompleteChars(chars, i)), TypeParam::encoding.GetString(sequence.Bytes(), i));
   }
   
@@ -1407,7 +1407,7 @@ namespace {
   TYPED_TEST(Encoding, GetString_Bytes_Index_Count___Index_Is_Zero) {
     UnicodeCharacters chars = {Encoding<TypeParam>::charA, Encoding<TypeParam>::charAE, Encoding<TypeParam>::charSpecialT, Encoding<TypeParam>::sigma, Encoding<TypeParam>::syriacSemkath, Encoding<TypeParam>::fullBlock, Encoding<TypeParam>::cjk, Encoding<TypeParam>::koala};
     EncodingUT::UnicodeSequence sequence(chars);
-    for(int32 i = 0; i <= sequence.Size(); i++)
+    for (int32 i = 0; i <= sequence.Size(); i++)
       ASSERT_EQ(FromCharactersToDecodedString(chars, 0, GetCompleteChars(chars, i)), TypeParam::encoding.GetString(sequence.Bytes(), sequence.Size(), 0, i));
   }
   
@@ -1417,7 +1417,7 @@ namespace {
     EncodingUT::UnicodeSequence sequence(chars);
     EncodingUT::UnicodeSequence prefix = Encoding<TypeParam>::charA + Encoding<TypeParam>::charAE + Encoding<TypeParam>::charSpecialT;
     EncodingUT::UnicodeSequence expected(expectedChars);
-    for(int32 i = 0; i < expected.Size(); i++) {
+    for (int32 i = 0; i < expected.Size(); i++) {
       ASSERT_EQ(
         FromCharactersToDecodedString(chars, 3, GetCompleteChars(expectedChars, i)),
         TypeParam::encoding.GetString(sequence.Bytes(), sequence.Size(), prefix.Size(), i));

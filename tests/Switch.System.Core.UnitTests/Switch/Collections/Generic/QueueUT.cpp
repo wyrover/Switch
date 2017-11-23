@@ -107,7 +107,7 @@ namespace {
     myQueue.Enqueue(12);
     Enumerator<int32> enumerator = myQueue.GetEnumerator();
     int32 index = 0;
-    while(enumerator.MoveNext())
+    while (enumerator.MoveNext())
       EXPECT_EQ(enumerator.Current, ++index);
     EXPECT_EQ(index, 12);
   }
@@ -123,7 +123,7 @@ namespace {
     string reference[5] = { "one", "two", "three", "four", "five" };
     
     int32 index = 0;
-    for(string s : words)
+    for (string s : words)
       ASSERT_EQ(reference[index++], s);
   }
   
@@ -138,11 +138,11 @@ namespace {
     string reference[5] = { "one 1", "two 2", "three 3", "four 4", "five 5" };
     
     int32 index = 1;
-    for(string& s : words)
+    for (string& s : words)
       s = String::Format("{0} {1}", s, index++);
       
     index = 0;
-    for(string s : words)
+    for (string s : words)
       ASSERT_EQ(reference[index++], s);
       
   }
@@ -166,14 +166,14 @@ namespace {
     }
     Enumerator<int32> enumerator = myQueue.GetEnumerator();
     int32 index = 0;
-    while(enumerator.MoveNext())
+    while (enumerator.MoveNext())
       EXPECT_EQ(enumerator.Current, ++index);
     EXPECT_EQ(index, 12);
   }
   
   TEST(Queue, Peek_Const) {
     Queue<string> words;
-    for(int32 i = 1; i <= 10 ; i++)
+    for (int32 i = 1; i <= 10 ; i++)
       words.Enqueue(Int32(i).ToString());
     EXPECT_EQ(words.Count, 10);
     const Queue<string>& const_words = words;
@@ -183,7 +183,7 @@ namespace {
   
   TEST(Queue, Peek_NonConst) {
     Queue<string> words;
-    for(int32 i = 1; i <= 10 ; i++)
+    for (int32 i = 1; i <= 10 ; i++)
       words.Enqueue(Int32(i).ToString());
     EXPECT_EQ(words.Count, 10);
     EXPECT_EQ(words.Peek(), "1");
@@ -205,7 +205,7 @@ namespace {
     
     Enumerator<int32> Enumerator = arrayDest.GetEnumerator();
     int32 index = 0;
-    while(Enumerator.MoveNext())
+    while (Enumerator.MoveNext())
       EXPECT_EQ(Enumerator.Current, ++index);
     EXPECT_EQ(index, 10);
   }

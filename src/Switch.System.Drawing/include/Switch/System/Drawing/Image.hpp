@@ -133,7 +133,7 @@ namespace Switch {
         static refptr<Image> FromData(const char* data[]);
         
         virtual int32 CompareTo(const IComparable& obj) const {
-          if(!is<Image>(obj))
+          if (!is<Image>(obj))
             return 1;
           return CompareTo(as<Image>(obj));
         }

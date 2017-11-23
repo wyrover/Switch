@@ -71,7 +71,7 @@ namespace Switch {
       /// @return The code of the underlying type, or Empty if type is null.
       template<typename T>
       static TypeCode GetTypeCode(const T& value) {
-        if(!is<IConvertible>(value))
+        if (!is<IConvertible>(value))
           return TypeCode::Object;
         return dynamic_cast<const IConvertible&>(value).GetTypeCode();
       }

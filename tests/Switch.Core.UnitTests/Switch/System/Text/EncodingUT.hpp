@@ -32,9 +32,9 @@ namespace EncodingUT {
     UnicodeCharacter() { }
     explicit UnicodeCharacter(char32 c, const byte b[], int32 byteCount) {
       character = c;
-      for(int32 i = 0; i < byteCount; i += 1)
+      for (int32 i = 0; i < byteCount; i += 1)
         bytes.Add(b[i]);
-      if(byteCount == 1 && b[0] == Switch::System::Text::Encoding::Unknown())
+      if (byteCount == 1 && b[0] == Switch::System::Text::Encoding::Unknown())
         decodedCharacter = Switch::System::Text::Encoding::Unknown();
       else
         decodedCharacter = character;
@@ -76,13 +76,13 @@ namespace EncodingUT {
     
     UnicodeSequence(const UnicodeCharacter& c) {
       chars.Add(c.Character());
-      for(int32  i = 0; i < c.Size(); i += 1)
+      for (int32  i = 0; i < c.Size(); i += 1)
         bytes.Add(c.Bytes()[i]);
       decodedChars.Add(c.DecodedCharacter());
     }
     
     UnicodeSequence(const Switch::System::Array<UnicodeCharacter>& chars) {
-      for(int32 i = 0; i < chars.Length; i++)
+      for (int32 i = 0; i < chars.Length; i++)
         *this += chars[i];
     }
     

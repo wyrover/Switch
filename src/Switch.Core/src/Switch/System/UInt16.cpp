@@ -30,7 +30,7 @@ bool UInt16::TryParse(const string& str, UInt16& value) {
 bool UInt16::TryParse(const string& str, int32 base, uint16& value) {
   try {
     value = Parse(str, base);
-  } catch(const Exception&) {
+  } catch (const Exception&) {
     return false;
   }
   return true;
@@ -56,25 +56,25 @@ string UInt16::ToString(const string& format, const IFormatProvider&) const {
   uint64 arg = Convert::ToUInt64(this->value);
   int32 precision;
   char32 type = NumericalFormat::GetFormatType(format, precision);
-  switch(type) {
+  switch (type) {
   case 0:   return NumericalFormat::Format_Custom(arg, format);
   case 'b': return NumericalFormat::Format_B(arg, precision);
   case 'd': return NumericalFormat::Format_D(arg, precision);
   case 'e': return NumericalFormat::Format_E(Convert::ToUInt64(this->value), precision == 0 ? 5 : precision, false);
   case 'E': return NumericalFormat::Format_E(Convert::ToUInt64(this->value), precision == 0 ? 5 : precision, true);
   case 'f':
-    if(format.Length() == 1) precision = 2;
+    if (format.Length() == 1) precision = 2;
     return NumericalFormat::Format_F(arg, precision);
   case 'g':
   case 'G': {
-    if(precision == 0) precision = 5;
+    if (precision == 0) precision = 5;
     return NumericalFormat::Format_G(arg, precision, type == 'G');
   }
   case 'n':
-    if(format.Length() == 1) precision = 2;
+    if (format.Length() == 1) precision = 2;
     return NumericalFormat::Format_N(arg, precision);
   case 'p':
-    if(format.Length() == 1) precision = 2;
+    if (format.Length() == 1) precision = 2;
     return NumericalFormat::Format_P(arg, precision);
   case 'x': return NumericalFormat::Format_X(arg, precision, false, 8);
   case 'X': return NumericalFormat::Format_X(arg, precision, true,  8);
@@ -87,7 +87,7 @@ int32 UInt16::CompareTo(const UInt16& value) const {
 }
 
 int32 UInt16::CompareTo(const IComparable& obj) const {
-  if(!is<UInt16>(obj))
+  if (!is<UInt16>(obj))
     return 1;
     
   return CompareTo(static_cast<const UInt16&>(obj));
@@ -102,7 +102,7 @@ bool UInt16::ToBoolean(const IFormatProvider&) const {
 }
 
 byte UInt16::ToByte(const IFormatProvider&) const {
-  if(this->value > Byte::MaxValue)
+  if (this->value > Byte::MaxValue)
     throw OverflowException(_caller);
     
   return (sbyte)this->value;
@@ -121,7 +121,7 @@ double UInt16::ToDouble(const IFormatProvider&) const {
 }
 
 int16 UInt16::ToInt16(const IFormatProvider&) const {
-  if(this->value > Int16::MaxValue)
+  if (this->value > Int16::MaxValue)
     throw OverflowException(_caller);
     
   return (int16)this->value;
@@ -148,7 +148,7 @@ uint64 UInt16::ToUInt64(const IFormatProvider&) const {
 }
 
 sbyte UInt16::ToSByte(const IFormatProvider&) const {
-  if(this->value > SByte::MaxValue)
+  if (this->value > SByte::MaxValue)
     throw OverflowException(_caller);
     
   return (sbyte)this->value;
@@ -187,7 +187,7 @@ UInt16& UInt16::operator *=(const UInt16& value) {
 }
 
 UInt16& UInt16::operator /=(const UInt16& value) {
-  if(value == 0)
+  if (value == 0)
     throw DivideByZeroException(_caller);
     
   this->value /= value.value;
@@ -195,7 +195,7 @@ UInt16& UInt16::operator /=(const UInt16& value) {
 }
 
 UInt16& UInt16::operator %=(const UInt16& value) {
-  if(value == 0)
+  if (value == 0)
     throw DivideByZeroException(_caller);
     
   this->value %= value;

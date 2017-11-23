@@ -13,10 +13,10 @@ NullTextReader& TextReader::Null() {
 string TextReader::ReadLine() {
   string line;
   refptr<Text::Encoding::Decoder> decoder = Text::Encoding::UTF8()->CreateDecoder();
-  for(int32 current = Read(); current != -1 && current != '\n'; current = Read()) {
-    if(current == '\r') continue;
+  for (int32 current = Read(); current != -1 && current != '\n'; current = Read()) {
+    if (current == '\r') continue;
     decoder->Add(Convert::ToByte(current));
-    if(decoder->CodePointDefined())
+    if (decoder->CodePointDefined())
       line += decoder->CodePoint();
   }
   return line;
@@ -25,10 +25,10 @@ string TextReader::ReadLine() {
 string TextReader::ReadToEnd() {
   string text;
   refptr<Text::Encoding::Decoder> decoder = Text::Encoding::UTF8()->CreateDecoder();
-  for(int32 current = Read(); current != -1; current = Read()) {
-    if(current == '\n') continue;
+  for (int32 current = Read(); current != -1; current = Read()) {
+    if (current == '\n') continue;
     decoder->Add(Convert::ToByte(current));
-    if(decoder->CodePointDefined())
+    if (decoder->CodePointDefined())
       text += decoder->CodePoint();
   }
   return text;

@@ -6,7 +6,7 @@ using namespace System;
 using namespace System::Diagnostics;
 
 void StackFrame::FillFrame(int32 skipFrames, bool needFileInfo) {
-  if(skipFrames < 0)
+  if (skipFrames < 0)
     throw ArgumentOutOfRangeException(_caller);
     
   stacktrace::call_stack st;
@@ -14,11 +14,11 @@ void StackFrame::FillFrame(int32 skipFrames, bool needFileInfo) {
 }
 
 void StackFrame::FillFrame(void* callStack, int32 skipFrames, bool needFileInfo) {
-  if(skipFrames < 0)
+  if (skipFrames < 0)
     throw ArgumentOutOfRangeException(_caller);
     
-  if(skipFrames < GetFrameCount(callStack)) {
-    if(needFileInfo) {
+  if (skipFrames < GetFrameCount(callStack)) {
+    if (needFileInfo) {
       this->fileName = reinterpret_cast<stacktrace::call_stack*>(callStack)->stack[skipFrames + StackFrameInternalMethodsToSkip].file.c_str();
       this->fileLineNumber = static_cast<int32>(reinterpret_cast<stacktrace::call_stack*>(callStack)->stack[skipFrames + StackFrameInternalMethodsToSkip].line);
       this->offset = static_cast<int32>(reinterpret_cast<stacktrace::call_stack*>(callStack)->stack[skipFrames + StackFrameInternalMethodsToSkip].offset);
@@ -29,7 +29,7 @@ void StackFrame::FillFrame(void* callStack, int32 skipFrames, bool needFileInfo)
 }
 
 int32 StackFrame::GetFrameCount(void* callStack) {
-  if(static_cast<int32>(reinterpret_cast<stacktrace::call_stack*>(callStack)->stack.size()) - StackFrameInternalMethodsToSkip > 0)
+  if (static_cast<int32>(reinterpret_cast<stacktrace::call_stack*>(callStack)->stack.size()) - StackFrameInternalMethodsToSkip > 0)
     return static_cast<int32>(reinterpret_cast<stacktrace::call_stack*>(callStack)->stack.size()) - StackFrameInternalMethodsToSkip;
   else
     return 0;

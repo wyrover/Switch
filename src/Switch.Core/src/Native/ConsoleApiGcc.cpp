@@ -36,23 +36,23 @@ namespace {
     
     int32 Getch() {
       sbyte character = this->peekCharacter;
-      if(this->peekCharacter != -1) {
+      if (this->peekCharacter != -1) {
         this->peekCharacter = -1;
         return character;
       }
       
-      while(read(0, &character, 1) != 1);
+      while (read(0, &character, 1) != 1);
       return character;
     }
     
     bool KeyAvailable() {
-      if(this->peekCharacter != -1)
+      if (this->peekCharacter != -1)
         return true;
         
       this->newSettings.c_cc[VMIN] = 0;
       tcsetattr(0, TCSANOW, &newSettings);
       
-      while(read(0, &this->peekCharacter, 1) != 1);
+      while (read(0, &this->peekCharacter, 1) != 1);
       
       this->newSettings.c_cc[VMIN] = 1;
       tcsetattr(0, TCSANOW, &this->newSettings);
@@ -116,8 +116,8 @@ namespace {
       std::string ToString() const {
         std::stringstream result;
         std::list<int32>::const_iterator iterator = this->chars.begin();
-        while(iterator != this->chars.end()) {
-          if(char(*iterator & 0xFF) == 27)
+        while (iterator != this->chars.end()) {
+          if (char(*iterator & 0xFF) == 27)
             result << "^[";
           else
             result << char(*iterator & 0xFF);
@@ -129,8 +129,8 @@ namespace {
       static InputList Parse(const std::string& value) {
         InputList result;
         std::string::const_iterator iterator = value.begin();
-        while(iterator != value.end()) {
-          if(*iterator == '^' &&  *(iterator + 1) == '[') {
+        while (iterator != value.end()) {
+          if (*iterator == '^' &&  *(iterator + 1) == '[') {
             result.chars.push_back(27);
             iterator++;
           } else
@@ -158,23 +158,23 @@ namespace {
     static bool KeyAvailable() {return !inputs.IsEmpty() || terminal.KeyAvailable();}
     
     static KeyInfo Read() {
-      if(!inputs.IsEmpty())
+      if (!inputs.IsEmpty())
         return ToKeyInfo(inputs.Pop());
         
       do
         inputs.Add(terminal.Getch());
-      while(terminal.KeyAvailable());
+      while (terminal.KeyAvailable());
       
-      if(KeyInfo::keys.find(inputs.ToString()) != KeyInfo::keys.end()) {
+      if (KeyInfo::keys.find(inputs.ToString()) != KeyInfo::keys.end()) {
         std::string str = inputs.ToString();
         inputs.Clear();
         return KeyInfo(KeyInfo::keys[str].key, KeyInfo::keys[str].keyChar, false, false, KeyInfo::keys[str].shift);
       }
       
-      if(inputs.Count() == 1)
+      if (inputs.Count() == 1)
         return ToKeyInfo(inputs.Pop());
         
-      if(inputs.Count() > 1 && *inputs.begin() != 27)
+      if (inputs.Count() > 1 && *inputs.begin() != 27)
         return ToKeyInfo(ToKey(inputs));
         
       inputs.Pop();
@@ -207,7 +207,7 @@ namespace {
     static int32 ToKey(InputList& inputs) {
       int32 key = 0;
       int32 index = 1;
-      for(auto c : inputs)
+      for (auto c : inputs)
         key |= (c & 0xFF) << (8 * index--);
       inputs.Clear();
       return key;
@@ -219,14 +219,14 @@ namespace {
     
     static KeyInfo ToKeyInfo(int32 key, bool alt) {
       // Ctrl + Space
-      if(key == 0)
+      if (key == 0)
         return KeyInfo(' ', ' ', false, true, false);
         
       // Ctrl + [a; z]
-      if((key >= 1 && key <= 7) || (key >= 10 && key <= 11) || (key >= 14 && key <= 18) || (key >= 20 && key <= 26))
+      if ((key >= 1 && key <= 7) || (key >= 10 && key <= 11) || (key >= 14 && key <= 18) || (key >= 20 && key <= 26))
         return KeyInfo(key + 'A' - 1, key, false, true, false);
         
-      switch(key) {
+      switch (key) {
       case 50086 : return KeyInfo(0, U'æ', alt, false, false);
       case 50054 : return KeyInfo(0, U'Æ', alt, false, false);
       case 50079 : return KeyInfo(0, U'ß', alt, false, false);
@@ -321,7 +321,7 @@ namespace {
       case 49841 : return KeyInfo(0, U'±', alt, false, false);
       }
       
-      if(KeyInfo::keys.find(std::string(1, toupper((char)key))) != KeyInfo::keys.end())
+      if (KeyInfo::keys.find(std::string(1, toupper((char)key))) != KeyInfo::keys.end())
         return KeyInfo(toupper(key), key, alt, false, key >= 'A' && key <= 'Z');
         
       return KeyInfo(0, key, alt, false, key >= 'A' && key <= 'Z');
@@ -503,10 +503,10 @@ const int32 KIOCSOUND = 0x4B2F;
 
 void Native::ConsoleApi::Beep(int32 frequency, int32 duration) {
   int32 fd = open("/dev/console", O_WRONLY);
-  if(fd == -1)
+  if (fd == -1)
     printf("\a");
   else {
-    if(ioctl(fd, KIOCSOUND, (int32)(1193180 / frequency)) < 0)
+    if (ioctl(fd, KIOCSOUND, (int32)(1193180 / frequency)) < 0)
       printf("\a");
     else {
       usleep(1000 * duration);
@@ -517,7 +517,7 @@ void Native::ConsoleApi::Beep(int32 frequency, int32 duration) {
 }
 
 void Native::ConsoleApi::Clrscr() {
-  if(Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported())
     printf("\x1b[H\x1b[2J");
 }
 
@@ -541,7 +541,7 @@ bool Native::ConsoleApi::GetCapsLock() {
 }
 
 int32 Native::ConsoleApi::GetCursorLeft() {
-  if(!Terminal::IsAnsiSupported())
+  if (!Terminal::IsAnsiSupported())
     return 0;
     
   printf("\x1b[6n");
@@ -550,10 +550,10 @@ int32 Native::ConsoleApi::GetCursorLeft() {
   terminal.Getch();
   
   char c;
-  while((c = terminal.Getch()) != ';');
+  while ((c = terminal.Getch()) != ';');
   
   std::string str;
-  while((c = terminal.Getch()) != 'R')
+  while ((c = terminal.Getch()) != 'R')
     str.push_back(c);
   return atoi(str.c_str()) - 1;
 }
@@ -563,7 +563,7 @@ int32 Native::ConsoleApi::GetCursorSize() {
 }
 
 int32 Native::ConsoleApi::GetCursorTop() {
-  if(!Terminal::IsAnsiSupported())
+  if (!Terminal::IsAnsiSupported())
     return 0;
     
   printf("\x1b[6n");
@@ -573,10 +573,10 @@ int32 Native::ConsoleApi::GetCursorTop() {
   
   char c;
   std::string str;
-  while((c = terminal.Getch()) != ';')
+  while ((c = terminal.Getch()) != ';')
     str.push_back(c);
     
-  while((c = terminal.Getch()) != 'R');
+  while ((c = terminal.Getch()) != 'R');
   
   return atoi(str.c_str()) - 1;
 }
@@ -626,7 +626,7 @@ int32 Native::ConsoleApi::GetWindowLeft() {
 }
 
 int32 Native::ConsoleApi::GetWindowHeight() {
-  if(!Terminal::IsAnsiSupported())
+  if (!Terminal::IsAnsiSupported())
     return 24;
   int32 top = GetCursorTop();
   SetCursorTop(999);
@@ -641,7 +641,7 @@ int32 Native::ConsoleApi::GetWindowTop() {
 }
 
 int32 Native::ConsoleApi::GetWindowWidth() {
-  if(!Terminal::IsAnsiSupported())
+  if (!Terminal::IsAnsiSupported())
     return 80;
   int32 left = GetCursorLeft();
   SetCursorLeft(999);
@@ -664,7 +664,7 @@ void Native::ConsoleApi::ReadKey(int32& keyChar, int32& keyCode, bool& alt, bool
 }
 
 bool Native::ConsoleApi::ResetColor() {
-  if(Terminal::IsAnsiSupported()) {
+  if (Terminal::IsAnsiSupported()) {
     printf("\033[49m");
     printf("\033[39m");
   }
@@ -674,7 +674,7 @@ bool Native::ConsoleApi::ResetColor() {
 bool Native::ConsoleApi::SetBackgroundColor(ConsoleColor color) {
   static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[40m"}, {(int32)ConsoleColor::DarkBlue, "\033[44m"}, {(int32)ConsoleColor::DarkGreen, "\033[42m"}, {(int32)ConsoleColor::DarkCyan, "\033[46m"}, {(int32)ConsoleColor::DarkRed, "\033[41m"}, {(int32)ConsoleColor::DarkMagenta, "\033[45m"}, {(int32)ConsoleColor::DarkYellow, "\033[43m"}, {(int32)ConsoleColor::Gray, "\033[47m"}, {(int32)ConsoleColor::DarkGray, "\033[100m"}, {(int32)ConsoleColor::Blue, "\033[104m"}, {(int32)ConsoleColor::Green, "\033[102m"}, {(int32)ConsoleColor::Cyan, "\033[106m"}, {(int32)ConsoleColor::Red, "\033[101m"}, {(int32)ConsoleColor::Magenta, "\033[105m"}, {(int32)ConsoleColor::Yellow, "\033[103m"}, {(int32)ConsoleColor::White, "\033[107m"}};
   backColor = color;
-  if(Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported())
     printf("%s", colors[(int32)backColor].c_str());
   return true;
 }
@@ -690,20 +690,20 @@ bool Native::ConsoleApi::SetBufferWidth(int32 width) {
 }
 
 bool Native::ConsoleApi::SetCursorLeft(int32 left) {
-  if(Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported())
     printf("\x1b[%d;%df", GetCursorTop() + 1, left + 1);
   return true;
 }
 
 bool Native::ConsoleApi::SetCursorTop(int32 top) {
-  if(Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported())
     printf("\x1b[%d;%df", top + 1, GetCursorLeft() + 1);
   return true;
 }
 
 void Native::ConsoleApi::SetCursorSize(int32 size) {
-  if(Terminal::IsAnsiSupported()) {
-    if(size < 50)
+  if (Terminal::IsAnsiSupported()) {
+    if (size < 50)
       printf("\x1b[4 q");
     else
       printf("\x1b[2 q");
@@ -712,14 +712,14 @@ void Native::ConsoleApi::SetCursorSize(int32 size) {
 
 void Native::ConsoleApi::SetCursorVisible(bool visible) {
   cursorVisible = visible;
-  if(Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported())
     printf(cursorVisible ? "\x1b[?25h" : "\x1b[?25l");
 }
 
 void Native::ConsoleApi::SetEchoVisible(bool visible) {
   termios settings;
   tcgetattr(0, &settings);
-  if(visible)
+  if (visible)
     settings.c_lflag |= (ICANON | ECHO);
   else
     settings.c_lflag &= ~(ICANON | ECHO);
@@ -729,7 +729,7 @@ void Native::ConsoleApi::SetEchoVisible(bool visible) {
 bool Native::ConsoleApi::SetForegroundColor(ConsoleColor color) {
   static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[30m"}, {(int32)ConsoleColor::DarkBlue, "\033[34m"}, {(int32)ConsoleColor::DarkGreen, "\033[32m"}, {(int32)ConsoleColor::DarkCyan, "\033[36m"}, {(int32)ConsoleColor::DarkRed, "\033[31m"}, {(int32)ConsoleColor::DarkMagenta, "\033[35m"}, {(int32)ConsoleColor::DarkYellow, "\033[33m"}, {(int32)ConsoleColor::Gray, "\033[37m"}, {(int32)ConsoleColor::DarkGray, "\033[90m"}, {(int32)ConsoleColor::Blue, "\033[94m"}, {(int32)ConsoleColor::Green, "\033[92m"}, {(int32)ConsoleColor::Cyan, "\033[96m"}, {(int32)ConsoleColor::Red, "\033[91m"}, {(int32)ConsoleColor::Magenta, "\033[95m"}, {(int32)ConsoleColor::Yellow, "\033[93m"}, {(int32)ConsoleColor::White, "\033[97m"}};
   foreColor = color;
-  if(Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported())
     printf("%s", colors[(int32)foreColor].c_str());
   return true;
 }
@@ -746,7 +746,7 @@ bool Native::ConsoleApi::SetOutputCodePage(int32 codePage) {
 
 bool Native::ConsoleApi::SetTitle(const string& title) {
   /// @todo set window title on linux and macOS
-  if(Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported())
     printf("\x1b[0;%s\x7", title.c_str());
   return true;
 }
@@ -757,7 +757,7 @@ bool Native::ConsoleApi::SetWindowLeft(int32 height) {
 }
 
 bool Native::ConsoleApi::SetWindowHeight(int32 height) {
-  if(Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported())
     printf("\x1b[8;%d;%dt", height, GetWindowWidth());
   return true;
 }
@@ -768,7 +768,7 @@ bool Native::ConsoleApi::SetWindowTop(int32 height) {
 }
 
 bool Native::ConsoleApi::SetWindowWidth(int32 width) {
-  if(Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported())
     printf("\x1b[8;%d;%dt", GetWindowHeight(), width);
   return true;
 }

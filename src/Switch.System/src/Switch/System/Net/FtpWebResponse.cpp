@@ -13,7 +13,7 @@ FtpWebResponse::FtpWebResponse(): WebResponse() {
 }
 
 WebResponse::WebResponseStream FtpWebResponse::GetResponseStream() {
-  if(this->webRequest->Method() == WebRequestMethods::Ftp::DownloadFile || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectory || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectoryDetails)
+  if (this->webRequest->Method() == WebRequestMethods::Ftp::DownloadFile || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectory || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectoryDetails)
     return WebResponse::GetResponseStream();
     
   throw InvalidOperationException(_caller);
@@ -27,7 +27,7 @@ const string FtpWebResponse::GetStatusDescription() const {
   string description;
   static Dictionary<int32, string> statusDescriptions;
   
-  if(statusDescriptions.Count == 0) {
+  if (statusDescriptions.Count == 0) {
     statusDescriptions[(int32)FtpStatusCode::RestartMarker] = "The response contains a restart marker reply.";
     statusDescriptions[(int32)FtpStatusCode::ServiceTemporarilyNotAvailable] = "The service is not available now; try your request later.";
     statusDescriptions[(int32)FtpStatusCode::DataAlreadyOpen] = "The data connection is already open and the requested transfer is starting.";
@@ -67,7 +67,7 @@ const string FtpWebResponse::GetStatusDescription() const {
   }
   
   FtpStatusCode statusCode = GetStatusCode();
-  if(statusDescriptions.ContainsKey((int32)statusCode))
+  if (statusDescriptions.ContainsKey((int32)statusCode))
     description = statusDescriptions[(int32)statusCode];
   else
     description = "Unknown status code.";

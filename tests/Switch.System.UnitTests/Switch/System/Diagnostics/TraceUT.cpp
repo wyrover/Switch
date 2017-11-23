@@ -21,7 +21,7 @@ namespace {
     
     void TraceEvent(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const string& message) {
       ASSERT_TRUE(src.Equals(Environment::CommandLine()));
-      switch(type) {
+      switch (type) {
       case TraceEventType::Error:
         ASSERT_TRUE(message.Equals("TestError"));
         break;
@@ -119,7 +119,7 @@ namespace {
     void TraceData(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const System::Object& data) override {
       ASSERT_TRUE(src.Equals("TraceUnittest"));
       ASSERT_EQ(1, id);
-      switch(type) {
+      switch (type) {
       case TraceEventType::Error:
         ASSERT_TRUE(data.ToString().Equals("Data object"));
         break;
@@ -131,7 +131,7 @@ namespace {
     void TraceData(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const System::Collections::ArrayList& data) override {
       ASSERT_TRUE(src.Equals("TraceUnittest"));
       ASSERT_EQ(1, id);
-      switch(type) {
+      switch (type) {
       case TraceEventType::Error:
         ASSERT_TRUE(data[0].ToString().Equals("Object 0"));
         ASSERT_TRUE(data[1].ToString().Equals("Object 1"));
@@ -149,7 +149,7 @@ namespace {
     
     void TraceEvent(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const string& message) override {
       ASSERT_TRUE(src.Equals("TraceUnittest"));
-      switch(type) {
+      switch (type) {
       case TraceEventType::Error:
         ASSERT_EQ(2, id);
         ASSERT_TRUE(message.Equals("ErrorTest"));

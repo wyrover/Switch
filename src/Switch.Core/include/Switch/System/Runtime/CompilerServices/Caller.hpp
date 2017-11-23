@@ -47,9 +47,9 @@ namespace Switch {
           };
           
           System::String ToString() const override {
-            if(string::IsNullOrEmpty(this->filePath) && this->lineNumber == 0 && string::IsNullOrEmpty(this->memberNamne))
+            if (string::IsNullOrEmpty(this->filePath) && this->lineNumber == 0 && string::IsNullOrEmpty(this->memberNamne))
               return "{Empty}";
-            if(string::IsNullOrEmpty(this->memberNamne))
+            if (string::IsNullOrEmpty(this->memberNamne))
               return System::String::Format("{{FilePath=\"{0}\", LineNumber={1}}}", this->filePath, this->lineNumber);
             return System::String::Format("{{MemberName=\"{0}\", FilePath=\"{1}\", LineNumber={2}}}", this->memberNamne, this->filePath, this->lineNumber);
           }

@@ -22,7 +22,7 @@ int32 Native::CurlApi::GetContentDownloadLength(intptr request, double& value) {
 int32 Native::CurlApi::GetContentType(intptr request, string& value) {
   char* str;
   int32 result = curl_easy_getinfo((CURL*)request, CURLINFO_CONTENT_TYPE, &str);
-  if(result == 0 && str != null)
+  if (result == 0 && str != null)
     value = str;
   return result;
 }
@@ -133,7 +133,7 @@ intptr Native::CurlApi::AppendToList(intptr list, const string& value) {
 }
 
 void Native::CurlApi::FreeList(intptr list) {
-  if(list != System::IntPtr::Zero)
+  if (list != System::IntPtr::Zero)
     curl_slist_free_all((curl_slist*)list);
 }
 

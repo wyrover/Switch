@@ -366,7 +366,7 @@ namespace Switch {
 inline System::IO::Stream& operator<<(System::IO::Stream& stream, const string& value) {
   static System::Text::UTF8Encoding utf8Encoding(false);
   System::Array<byte> bytes = utf8Encoding.GetBytes(value);
-  if(bytes.Length != 0)
+  if (bytes.Length != 0)
     stream.Write(bytes, 0,  bytes.Length);
   return stream;
 }

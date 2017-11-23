@@ -13,7 +13,7 @@ namespace SwitchUnitTests {
     const int results[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     
     int32 i = 0;
-    for(const auto& value : collection.values)
+    for (const auto& value : collection.values)
       ASSERT_EQ(value, results[i++]);
     ASSERT_EQ(10, i);
   }
@@ -21,7 +21,7 @@ namespace SwitchUnitTests {
   TEST(InitializerListTest, CreateCollectionWithInitializerListThenIterateIt) {
     struct MyCollection {
       MyCollection(InitializerList<int> il) {
-        for(int value : il)
+        for (int value : il)
           this->values.Add(value);
       }
       System::Collections::Generic::List<int> values;
@@ -29,7 +29,7 @@ namespace SwitchUnitTests {
     const int results[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     
     int32 i = 0;
-    for(const auto& value : collection.values)
+    for (const auto& value : collection.values)
       ASSERT_EQ(value, results[i++]);
     ASSERT_EQ(10, i);
   }

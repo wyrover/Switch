@@ -27,11 +27,11 @@ namespace EncodingUT {
   }
   
   UnicodeSequence& UnicodeSequence::operator+=(const UnicodeSequence& info) {
-    for(int32 index = 0; index < info.chars.Count; index += 1)
+    for (int32 index = 0; index < info.chars.Count; index += 1)
       chars.Add(info.chars[index]);
-    for(int32 index = 0; index < info.bytes.Count; index += 1)
+    for (int32 index = 0; index < info.bytes.Count; index += 1)
       bytes.Add(info.bytes[index]);
-    for(int32 index = 0; index < info.decodedChars.Count; index += 1)
+    for (int32 index = 0; index < info.decodedChars.Count; index += 1)
       decodedChars.Add(info.decodedChars[index]);
     return *this;
   }
@@ -43,23 +43,23 @@ namespace EncodingUT {
   
   void EXPECT_CHARS(const char32 expected[], int32 size, Array<char32> actual) {
     ASSERT_EQ(size, actual.Length);
-    for(int32 index = 0; index < size; index += 1)
+    for (int32 index = 0; index < size; index += 1)
       ASSERT_EQ(expected[index], actual[index]);
   }
   
   void EXPECT_CHARS(const char32 expected[], int32 size, const char32 actual[]) {
-    for(int32 index = 0; index < size; index += 1)
+    for (int32 index = 0; index < size; index += 1)
       ASSERT_EQ(expected[index], actual[index]);
   }
   
   void EXPECT_BYTES(const byte expected[], int32 size, Array<byte> actual) {
     ASSERT_EQ(size, actual.Length);
-    for(int32 index = 0; index < size; index += 1)
+    for (int32 index = 0; index < size; index += 1)
       ASSERT_EQ(expected[index], actual[index]);
   }
   
   void EXPECT_BYTES(const byte expected[], int32 size, const byte actual[]) {
-    for(int32 index = 0; index < size; index += 1)
+    for (int32 index = 0; index < size; index += 1)
       ASSERT_EQ(expected[index], actual[index]);
   }
   
@@ -196,7 +196,7 @@ namespace EncodingUT {
     ASSERT_EQ(charByteSize, encoding->GetBytes(unicodeChars.Data, unicodeChars.Count, 0, 1, (byte*)bytes.Data(), bytes.Length, 9 * charByteSize)); // "Pi Pi Pi P"
     
     Array<string> splits = unicodeBytes.Split(',');
-    for(string& s : splits)
+    for (string& s : splits)
       s = s.TrimStart(' ');
     string Pi_ = string::Join(", ", splits, 0, 3 * charByteSize);
     ExpectBytes(bytes, Pi_ + ", " + Pi_ + ", " + Pi_ + ", " + string::Join(", ", splits, 0, charByteSize));

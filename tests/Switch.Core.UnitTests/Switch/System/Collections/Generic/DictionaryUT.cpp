@@ -59,16 +59,16 @@ namespace {
     bool seen[6] = { false, false, false, false, false, false };
     
     Dictionary<int32, string>::Enumerator e(ints);
-    while(e.MoveNext()) {
+    while (e.MoveNext()) {
       KeyValuePair<int32, string> pair = e.Current;
       int32 key = pair.Key();
       ASSERT_GE(key, 0);
       ASSERT_LT(key, 6);
       ASSERT_FALSE(seen[key]);
       seen[key] = true;
-      if(key == 1) ASSERT_EQ("one", pair.Value());
-      if(key == 2) ASSERT_EQ("two", pair.Value());
-      if(key == 5) ASSERT_EQ("five", pair.Value());
+      if (key == 1) ASSERT_EQ("one", pair.Value());
+      if (key == 2) ASSERT_EQ("two", pair.Value());
+      if (key == 5) ASSERT_EQ("five", pair.Value());
     }
     ASSERT_FALSE(seen[0]);
     ASSERT_FALSE(seen[3]);
@@ -78,7 +78,7 @@ namespace {
   TEST(DictionaryTest, Enumerator_Empty) {
     Dictionary<int32, string> ints;
     Dictionary<int32, string>::Enumerator e(ints);
-    while(e.MoveNext())
+    while (e.MoveNext())
       ASSERT_FALSE(true);
   }
   

@@ -17,12 +17,12 @@ namespace {
   template<int32 length>
   static void FillSystemTimeZones(const Tzi(&nstz)[length], Collections::Generic::List<TimeZoneInfo>& stz) {
     stz.Clear();
-    for(int32 i = 0; i < length; i++)
+    for (int32 i = 0; i < length; i++)
       stz.Add(TimeZoneInfo(nstz[i].id, nstz[i].baseUtcOffset, nstz[i].daylightName, nstz[i].displayName, nstz[i].standardName, nstz[i].supportsDaylightSavingTime));
   }
   
   static void FillSystemTimeZones(Collections::Generic::List<TimeZoneInfo>& stz) {
-    if(stz.Count != 0)
+    if (stz.Count != 0)
       return;
       
     /* Generate by this c# code source :
@@ -66,12 +66,12 @@ char* tzname[2] = {"Local", "Local"};
 #endif
 
 const TimeZoneInfo& TimeZoneInfo::Local() {
-  if(local.id != (const char*)tzname[0]) {
+  if (local.id != (const char*)tzname[0]) {
     try {
       tzset();
       FillSystemTimeZones(systemTimeZones);
       local = TimeFindSystemTimeZoneById((const char*)tzname[0]);
-    } catch(...) {
+    } catch (...) {
       local.id = (const char*)tzname[0];
       local.baseUtcOffset = (int64) - timezone * 10000000;
       local.daylightName = (const char*)tzname[1];
@@ -93,14 +93,14 @@ const Collections::Generic::List<TimeZoneInfo>& TimeZoneInfo::GetSystemTimeZones
 }
 
 const TimeZoneInfo& TimeZoneInfo::TimeFindSystemTimeZoneById(const String& id) {
-  if(local.id == id)
+  if (local.id == id)
     return local;
     
-  if(utc.id == id)
+  if (utc.id == id)
     return utc;
     
-  for(const TimeZoneInfo& item : systemTimeZones)
-    if(item.id == id)
+  for (const TimeZoneInfo& item : systemTimeZones)
+    if (item.id == id)
       return item;
       
   throw TimeZoneNotFoundException(_caller);

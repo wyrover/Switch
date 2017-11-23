@@ -34,7 +34,7 @@ namespace Switch {
       /// @param minor The minor version number.
       /// @exception ArgumentOutOfRangeException major or minor is less than zero.
       Version(int32 major, int32 minor) : major(major), minor(minor) {
-        if(major < 0 || minor < 0)
+        if (major < 0 || minor < 0)
           throw ArgumentOutOfRangeException(_caller);
       }
       
@@ -44,7 +44,7 @@ namespace Switch {
       /// @param build The build version number.
       /// @exception ArgumentOutOfRangeException major, minor or build is less than zero.
       Version(int32 major, int32 minor, int32 build) : major(major), minor(minor), build(build) {
-        if(major < 0 || minor < 0 || build < 0)
+        if (major < 0 || minor < 0 || build < 0)
           throw ArgumentOutOfRangeException(_caller);
       }
       
@@ -55,7 +55,7 @@ namespace Switch {
       /// @param revision The revision version number.
       /// @exception ArgumentOutOfRangeException major, minor, build or revision is less than zero.
       Version(int32 major, int32 minor, int32 build, int32 revision) : major(major), minor(minor), build(build), revision(revision) {
-        if(major < 0 || minor < 0 || build < 0 || revision < 0)
+        if (major < 0 || minor < 0 || build < 0 || revision < 0)
           throw ArgumentOutOfRangeException(_caller);
       }
       
@@ -139,7 +139,7 @@ namespace Switch {
       /// Zero                This instance is equal to obj.
       /// Greater than zero   This instance is greater than obj.
       int32 CompareTo(const IComparable& obj) const override {
-        if(!is<Version>(obj))
+        if (!is<Version>(obj))
           return 1;
         return CompareTo((const Version&)obj);
       }
@@ -151,14 +151,14 @@ namespace Switch {
       /// Zero                This instance is equal to value.
       /// Greater than zero   This instance is greater than value.
       int32 CompareTo(const Version& value) const {
-        if(this->major < value.major) return -1;
-        if(this->major > value.major) return 1;
-        if(this->minor < value.minor) return -1;
-        if(this->minor > value.minor) return 1;
-        if(this->build < value.build) return -1;
-        if(this->build > value.build) return 1;
-        if(this->revision < value.revision) return -1;
-        if(this->revision > value.revision) return 1;
+        if (this->major < value.major) return -1;
+        if (this->major > value.major) return 1;
+        if (this->minor < value.minor) return -1;
+        if (this->minor > value.minor) return 1;
+        if (this->build < value.build) return -1;
+        if (this->build > value.build) return 1;
+        if (this->revision < value.revision) return -1;
+        if (this->revision > value.revision) return 1;
         return 0;
       }
       
@@ -171,7 +171,7 @@ namespace Switch {
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       bool Equals(const object& obj) const override {
-        if(!is<Version>(obj))
+        if (!is<Version>(obj))
           return false;
         return Equals((const Version&)obj);
       }
@@ -180,9 +180,9 @@ namespace Switch {
       /// @return int32 A hash code for the current object.
       int32 GetHashCode() const override {
         int32 hash = this->major ^ this->minor;
-        if(this->build != -1)
+        if (this->build != -1)
           hash ^= this->build;
-        if(this->revision != -1)
+        if (this->revision != -1)
           hash ^= this->revision;
         return hash;
       }
@@ -192,7 +192,7 @@ namespace Switch {
       /// @return Version a Version object
       static Version Parse(const String& version) {
         Array<String> versions = version.Split('.', StringSplitOptions(StringSplitOptions::RemoveEmptyEntries));
-        switch(versions.Length()) {
+        switch (versions.Length()) {
         case 2: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]));
         case 3: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]));;
         case 4: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]), Convert::ToInt32(versions[3]));
@@ -204,7 +204,7 @@ namespace Switch {
         try {
           result = Parse(version);
           return true;
-        } catch(...) {
+        } catch (...) {
           return false;
         }
       }
@@ -215,16 +215,16 @@ namespace Switch {
       String ToString() const override {return ToString(2 + (this->build != -1 ? 1 : 0) + (this->revision != -1 ? 1 : 0));}
       
       String ToString(int32 fieldCount) const {
-        if(fieldCount < 0 || fieldCount > 4 || (fieldCount >= 3 && this->build == -1) || (fieldCount == 4 && this->revision == -1))
+        if (fieldCount < 0 || fieldCount > 4 || (fieldCount >= 3 && this->build == -1) || (fieldCount == 4 && this->revision == -1))
           throw ArgumentOutOfRangeException(_caller);
         string result;
-        if(fieldCount >= 1)
+        if (fieldCount >= 1)
           result += string::Format("{0}", this->major);
-        if(fieldCount >= 2)
+        if (fieldCount >= 2)
           result += string::Format(".{0}", this->minor);
-        if(fieldCount >= 3)
+        if (fieldCount >= 3)
           result += string::Format(".{0}", this->build);
-        if(fieldCount == 4)
+        if (fieldCount == 4)
           result += string::Format(".{0}", this->revision);
         return result;
       }

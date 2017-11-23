@@ -63,7 +63,7 @@ namespace Switch {
           WebSocketCloseStatus GetCloseStatus() const override {return this->closeStatus;}
           
           string GetCloseStatusDescription() const override {
-            switch(this->closeStatus) {
+            switch (this->closeStatus) {
             case WebSocketCloseStatus::Empty: return "No error specified.";
             case WebSocketCloseStatus::InternalServerError: return "The connection will be closed by the server because of an error on the server.";
             case WebSocketCloseStatus::NormalClosure: return "(1000) The connection has closed after the request was fulfilled.";

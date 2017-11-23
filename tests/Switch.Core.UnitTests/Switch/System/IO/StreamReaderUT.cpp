@@ -14,7 +14,7 @@ namespace {
     
     int32 idx = 0;
     int32 current = reader.Read();
-    while(current != -1) {
+    while (current != -1) {
       ASSERT_EQ(buffer[idx], current);
       idx++;
       current = reader.Read();

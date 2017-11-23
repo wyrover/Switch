@@ -84,7 +84,7 @@ namespace Switch {
           
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override {
-            if(this->orientation == Forms::Orientation::Horizontal)
+            if (this->orientation == Forms::Orientation::Horizontal)
               return System::Drawing::Size(104, 45);
             return System::Drawing::Size(45, 104);
           }

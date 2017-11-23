@@ -31,7 +31,7 @@ namespace Switch {
         BinaryReader(const TStream& stream) : stream(stream.template MemberwiseClone<TStream>().template As<Stream>()) {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
-          if(!stream.CanRead())
+          if (!stream.CanRead())
             throw ArgumentException(_caller);
         }
         
@@ -40,7 +40,7 @@ namespace Switch {
         /// @exception ArgumentNullException stream is null.
         /// @exception ArgumentException stream is not readable.
         BinaryReader(refptr<Stream> stream) : stream(stream) {
-          if(!stream->CanRead())
+          if (!stream->CanRead())
             throw ArgumentException(_caller);
         }
         
@@ -62,9 +62,9 @@ namespace Switch {
         /// @return An integer representing the next character to be read, or -1 if no more characters are available or the stream does not support seeking.
         /// @return available.
         virtual int32 PeekChar() {
-          if(!this->stream->CanSeek()) return -1;
+          if (!this->stream->CanSeek()) return -1;
           int32 value = this->stream->ReadByte();
-          if(value != -1)
+          if (value != -1)
             this->stream->Seek(-1, SeekOrigin::Current);
           return value;
         }
@@ -112,7 +112,7 @@ namespace Switch {
         /// @exception IO::IOException An I/O error occurs.
         virtual Array<byte> ReadBytes(int32 count) {
           Array<byte> values(count);
-          if(Read(values, 0, count) != count)
+          if (Read(values, 0, count) != count)
             throw EndOfStreamException(_caller);
           return values;
         }
@@ -131,7 +131,7 @@ namespace Switch {
         /// @exception IO::IOException An I/O error occurs.
         virtual Array<char32> ReadChars(int32 count) {
           Array<char32> values(count);
-          for(int32 index = 0; index < count; index++)
+          for (int32 index = 0; index < count; index++)
             values[index] = BitConverter::ToChar(ReadBytes(sizeof(char32)), 0);
           return values;
         }

@@ -42,11 +42,11 @@ void Native::ProgressBarApi::SetMinimum(const System::Windows::Forms::ProgressBa
 }
 
 void Native::ProgressBarApi::SetMarquee(const System::Windows::Forms::ProgressBar& progressBar) {
-  if(progressBar.Style == ProgressBarStyle::Marquee) {
+  if (progressBar.Style == ProgressBarStyle::Marquee) {
     ((Native::ProgressBar*)progressBar.Handle())->isMarquee = true;
     ((Native::ProgressBar*)progressBar.Handle())->marquee = g_timeout_add(progressBar.MarqueeAnimationSpeed(), MarqueeProc, (gpointer)progressBar.Handle());
   } else {
-    if(((Native::ProgressBar*)progressBar.Handle())->isMarquee == true) {
+    if (((Native::ProgressBar*)progressBar.Handle())->isMarquee == true) {
       g_source_remove(((Native::ProgressBar*)progressBar.Handle())->marquee);
       ((Native::ProgressBar*)progressBar.Handle())->isMarquee = false;
     }

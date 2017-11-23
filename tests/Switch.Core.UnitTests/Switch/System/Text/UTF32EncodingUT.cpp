@@ -109,7 +109,7 @@ namespace {
     // Encode the string.
     EncodingUT::Bytes encodedBytes = unicode->GetBytes(unicodeString);
     int index = 0;
-    for(byte b : encodedBytes)
+    for (byte b : encodedBytes)
       ASSERT_EQ(reference[index++], b);
       
     ASSERT_EQ(unicodeString.Length(), unicode->GetCharCount(encodedBytes.Data, encodedBytes.Length, 0, encodedBytes.Length));
@@ -156,7 +156,7 @@ namespace {
     // Encode the string.
     EncodingUT::Bytes encodedBytes = unicode->GetBytes(unicodeString);
     int index = 0;
-    for(byte b : encodedBytes)
+    for (byte b : encodedBytes)
       ASSERT_EQ(reference[index++], b);
       
     ASSERT_EQ(unicodeString.Length(), unicode->GetCharCount(encodedBytes.Data, encodedBytes.Length, 0, encodedBytes.Length));

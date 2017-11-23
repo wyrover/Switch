@@ -56,7 +56,7 @@ public:
           /// @remarks Every key in a Dictionary<TKey, TValue> must be unique according to the default equality comparer.
           /// @remarks The Dictionary<TKey, TValue> class is ! thread safe.
           Dictionary(const Dictionary& dictionary) : comparer(dictionary.comparer), operationNumber(dictionary.operationNumber) {
-            for(const auto& item : dictionary)
+            for (const auto& item : dictionary)
               Add(item);
           }
           
@@ -73,7 +73,7 @@ public:
           /// @remarks Every key in a Dictionary<TKey, TValue> must be unique according to the default equality comparer.
           /// @remarks The Dictionary<TKey, TValue> class is ! thread safe.
           Dictionary(const IDictionary<TKey, TValue>& dictionary) : operationNumber(0) {
-            for(const auto& item : dictionary)
+            for (const auto& item : dictionary)
               Add(item);
           }
           
@@ -83,7 +83,7 @@ public:
           /// @exception ArgumentNullException The parameters array is null.
           /// @remarks The Dictionary<TKey, TValue> class is ! thread safe.
           Dictionary(const System::Array<Item>& array) : operationNumber(0) {
-            for(const auto& item : array)
+            for (const auto& item : array)
               Add(item);
           }
           
@@ -92,13 +92,13 @@ public:
           /// @remarks The Dictionary class is ! thread safe.
           template<int32 len>
           Dictionary(const Item(&array)[len]) : operationNumber(0) {
-            for(int32 index = 0; index < len; index++)
+            for (int32 index = 0; index < len; index++)
                 this->Add(array[index]);
           }
           
           /// @cond
           Dictionary(InitializerList<KeyValuePair<TKey, TValue>> il) : operationNumber(0) {
-            for(typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
+            for (typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
               this->Add(*iterator);
           }
           /// @endcond
@@ -122,7 +122,7 @@ public:
           /// The following sample show how to use Add function:
           /// @include DictionaryAdd.cpp
           void Add(const TKey& key, const TValue& value) override {
-            if(ContainsKey(key))
+            if (ContainsKey(key))
               throw ArgumentException(_caller);
             (*this)[key] = value;
           }
@@ -133,7 +133,7 @@ public:
           /// @brief Determines whether an element is in the Dictionary<TKey,TValue>.
           /// @param keyValue The object to be added to the end of the Dictionary<TKey,TValue>. The value can ! be null for reference types.
           bool Contains(const KeyValuePair<TKey, TValue>& item) const override {
-            if(!ContainsKey(item.Key()))
+            if (!ContainsKey(item.Key()))
               return false;
               
             return (*this)[item.Key()] == item.Value();
@@ -146,8 +146,8 @@ public:
           /// @brief Determines whether an element is in the Dictionary<TKey,TValue>.
           /// @param value The object to be added to the end of the Dictionary<TKey,TValue>. The value can ! be null for reference types.
           bool ContainsValue(const TValue& value) const {
-            for(const auto& item : *this)
-              if(value == item.Value)
+            for (const auto& item : *this)
+              if (value == item.Value)
                 return true;
             return false;
           }
@@ -168,10 +168,10 @@ public:
           /// @exception ArgumentOutOfRangeException The index is greater then number elements of Dictionary<TKey,TValue>
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           void CopyTo(System::Array<KeyValuePair<TKey, TValue>>& array, int32 index) const override {
-            if(index < 0 || array.Length < index + this->Count)
+            if (index < 0 || array.Length < index + this->Count)
               throw System::ArgumentOutOfRangeException(_caller);
             int32 count = 0;
-            for(const Item& item : *this)
+            for (const Item& item : *this)
               array[count++] = Item(item);
           }
           
@@ -188,7 +188,7 @@ public:
           /// @return true if item is successfully removed; otherwise, false. This method also returns false if item was ! found in the Dictionary<TKey, TValue>.
           /// @exception ArgumentNullException The parameters keyValue is null.
           bool Remove(const KeyValuePair<TKey, TValue>& item) override {
-            if(! Contains(item))
+            if (! Contains(item))
               return false;
             this->operationNumber++;
             this->hashmap.erase(item.Key());
@@ -200,7 +200,7 @@ public:
           /// @return Boolean true if item is successfully removed; otherwise, false. This method also returns false if item was ! found in the Dictionary<TKey, TValue>.
           /// @exception ArgumentNullException The parameters key is null.
           bool Remove(const TKey& key) override {
-            if(! ContainsKey(key))
+            if (! ContainsKey(key))
               return false;
             this->operationNumber++;
             this->hashmap.erase(key);
@@ -213,7 +213,7 @@ public:
           /// @return true if the System::Collections::Generic::Dictionary<TKey,TValue> contains an element with the specified key; otherwise, false.
           /// @exception System::ArgumentNullException key is null.
           bool TryGetValue(const TKey& key, TValue& value) const override {
-            if(!ContainsKey(key))
+            if (!ContainsKey(key))
               return false;
             value = (*this)[key];
             return true;
@@ -240,7 +240,7 @@ public:
           /// The following sample show how to use [] operators:
           /// @include DictionaryOperators.cpp
           const TValue& operator[](const TKey& key) const override {
-            if(! ContainsKey(key))
+            if (! ContainsKey(key))
               throw ArgumentException(_caller);
             return const_cast<std::unordered_map<TKey, TValue, Hasher, EqualTo, TAllocator>&>(this->hashmap)[key];
           }
@@ -316,18 +316,18 @@ public:
             }
             
             virtual bool MoveNext() {
-              if(this->operationNumber != this->dictionary.operationNumber)
+              if (this->operationNumber != this->dictionary.operationNumber)
                 throw System::InvalidOperationException(_caller);
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
-              if(this->beforeFirst)
+              if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
               this->currentKeyValuePair = ref_new<Item>((*this->iterator).first, (*this->iterator).second);
@@ -336,7 +336,7 @@ public:
             
           protected:
             const KeyValuePair<TKey, TValue>& GetCurrent() const {
-              if(this->beforeFirst || IsFinished())
+              if (this->beforeFirst || IsFinished())
                 throw System::InvalidOperationException(_caller);
               return *this->currentKeyValuePair;
             }
@@ -363,14 +363,14 @@ private:
           
           KeyCollection GetKeys() const override {
             KeyCollection keys;
-            for(auto item : this->hashmap)
+            for (auto item : this->hashmap)
               keys.Add(item.first);
             return keys;
           }
           
           ValueCollection GetValues() const override {
             ValueCollection values;
-            for(auto item : this->hashmap)
+            for (auto item : this->hashmap)
               values.Add(item.second);
             return values;
           }

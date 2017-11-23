@@ -43,7 +43,7 @@ namespace Switch {
         /// @remarks Use Enter to acquire the Monitor on the object passed as the parameter. If another thread has executed an Enter on the object, but has not yet executed the corresponding Exit, the current thread will block until the other thread releases the object. It is legal for the same thread to invoke Enter more than once without it blocking; however, an equal number of Exit calls must be invoked before other threads waiting on the object will unblock.
         /// @remarks Use Monitor to lock objects (that is, reference types), not value types. When you pass a value type variable to Enter, it is boxed as an object. If you pass the same variable to Enter again, the thread is block. The code that Monitor is supposedly protecting is not protected. Furthermore, when you pass the variable to Exit, still another separate object is created. Because the object passed to Exit is different from the object passed to Enter, Monitor throws SynchronizationLockException. For details, see the conceptual topic Monitors.
         static void Enter(const object& obj, bool& lockTaken) {
-          if(TryEnter(obj, lockTaken) == false)
+          if (TryEnter(obj, lockTaken) == false)
             throw InvalidOperationException(_caller);
         }
         
@@ -118,7 +118,7 @@ namespace Switch {
         /// @exception ArgumentNullException The obj parameter is null.
         /// @remarks If the millisecondsTimeout parameter equals Timeout::Infinite, this method is equivalent to Enter. If millisecondsTimeout equals 0, this method is equivalent to TryEnter.
         static bool TryEnter(const object& obj, int32 millisecondsTimeout, bool& lockTaken) {
-          if(millisecondsTimeout < -1)
+          if (millisecondsTimeout < -1)
             return false;
             
           lockTaken = Add(obj, millisecondsTimeout);
@@ -145,7 +145,7 @@ namespace Switch {
         /// @exception ArgumentNullException The obj parameter is null.
         /// @remarks If the millisecondsTimeout parameter equals Timeout::Infinite, this method is equivalent to Enter. If millisecondsTimeout equals 0, this method is equivalent to TryEnter.
         static bool TryEnter(const object& obj, int64 millisecondsTimeout, bool& lockTaken) {
-          if(millisecondsTimeout < -1)
+          if (millisecondsTimeout < -1)
             return false;
             
           lockTaken = Add(obj, (int32)millisecondsTimeout);
@@ -231,9 +231,9 @@ namespace Switch {
         };
         
         static const object* ToKey(const object& obj) {
-          if(is<string>(obj)) {
-            for(const auto& item : MonitorItems())
-              if(item.Value().name.HasValue && item.Value().name.Value().Equals((const string&)obj))
+          if (is<string>(obj)) {
+            for (const auto& item : MonitorItems())
+              if (item.Value().name.HasValue && item.Value().name.Value().Equals((const string&)obj))
                 return item.Key;
           }
           return &obj;

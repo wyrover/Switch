@@ -149,10 +149,10 @@ namespace Switch {
         /// @exception ArgumentException name is ! a valid reference to a value.
         /// @exception UnthorizedAccessException The RegistryKey being manipulated is read-only.
         void DeleteValue(const System::String& name, bool throwOnMissingValue) {
-          if(this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
+          if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
             throw System::UnauthorizedAccessException(_caller);
             
-          if((this->values.ContainsKey(name.ToLower()) == false || this->values.Remove(name.ToLower()) == false) && throwOnMissingValue == true)
+          if ((this->values.ContainsKey(name.ToLower()) == false || this->values.Remove(name.ToLower()) == false) && throwOnMissingValue == true)
             throw System::ArgumentException(_caller);
             
           this->Flush();
@@ -172,7 +172,7 @@ namespace Switch {
         System::Array<System::String> GetSubKeyNames();
         
         const object& GetValue(const System::String& name) const {
-          if(! this->values.ContainsKey(name.ToLower()))
+          if (! this->values.ContainsKey(name.ToLower()))
             return Null();
             
           return this->values[name.ToLower()].Value();
@@ -184,7 +184,7 @@ namespace Switch {
         }
         
         RegistryValueKind GetValueKind(const System::String& name) const  {
-          if(! values.ContainsKey(name.ToLower()))
+          if (! values.ContainsKey(name.ToLower()))
             throw System::InvalidOperationException(_caller);
             
           return values[name.ToLower()].Kind();
@@ -224,13 +224,13 @@ namespace Switch {
         /// @param value The data to be stored.
         template<typename T>
         void SetValue(const System::String& name, T value) {
-          if(this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
+          if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
             throw System::UnauthorizedAccessException(_caller);
-          if(is<System::Int32>(Switch::Box(value)))
+          if (is<System::Int32>(Switch::Box(value)))
             this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), Switch::Microsoft::Win32::RegistryValueKind::DWord);
-          else if(is<System::Array<System::String>>(Switch::Box(value)))
+          else if (is<System::Array<System::String>>(Switch::Box(value)))
             this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), Switch::Microsoft::Win32::RegistryValueKind::MultiString);
-          else if(is<System::Array<byte>>(Switch::Box(value)))
+          else if (is<System::Array<byte>>(Switch::Box(value)))
             this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), Switch::Microsoft::Win32::RegistryValueKind::Binary);
           else
             this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value).ToString(), Switch::Microsoft::Win32::RegistryValueKind::String);
@@ -243,9 +243,9 @@ namespace Switch {
         /// @param valueKind The registry data type to use when storing the data.
         template<typename T>
         void SetValue(const System::String& name, T value, Switch::Microsoft::Win32::RegistryValueKind valueKind) {
-          if(this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
+          if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
             throw System::UnauthorizedAccessException(_caller);
-          switch(valueKind) {
+          switch (valueKind) {
           case RegistryValueKind::Binary: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), valueKind); break;
           case RegistryValueKind::MultiString: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), valueKind); break;
           case RegistryValueKind::DWord: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(System::Convert::ToInt32(value)), valueKind); break;
@@ -264,7 +264,7 @@ namespace Switch {
         
         template<typename T>
         const object& GetValue(const System::String& name, const T& defaultValue, bool) const {
-          if(! this->values.ContainsKey(name.ToLower())) {
+          if (! this->values.ContainsKey(name.ToLower())) {
             static refptr<object> value;
             value = new T(defaultValue);
             return value.ToObject();
@@ -275,7 +275,7 @@ namespace Switch {
         static bool IsBaseKey(const System::String& subKey) { return subKey == "HKEY_CLASSES_ROOT" || subKey == "HKEY_CURRENT_USER" || subKey == "HKEY_LOCAL_MACHINE" || subKey == "HKEY_USERS" || subKey == "HKEY_PERFORMANCE_DATA" || subKey == "HKEY_CURRENT_CONFIG" || subKey == "HKEY_DYN_DATA"; }
         
         static System::String ToName(RegistryHive rhive) {
-          switch(rhive) {
+          switch (rhive) {
           case RegistryHive::ClassesRoot: return "HKEY_CLASSES_ROOT";
           case RegistryHive::CurrentUser: return "HKEY_CURRENT_USER";
           case RegistryHive::LocalMachine: return "HKEY_LOCAL_MACHINE";
@@ -293,12 +293,12 @@ namespace Switch {
           RegistryKeyValue(const RegistryKeyValue& rkv) : key(rkv.key), value(rkv.value), kind(rkv.kind) {}
           template<typename T>
           RegistryKeyValue(const System::String& key, T value, RegistryValueKind kind) : key(key), value(new T(value)), kind(kind) {
-            switch(kind) {
-            case RegistryValueKind::Binary : if(! is<System::Array<byte>>(value)) throw System::ArgumentException(_caller); break;
-            case RegistryValueKind::DWord : if(! is<System::Int32>(value)) throw System::ArgumentException(_caller); break;
-            case RegistryValueKind::MultiString : if(! is<System::Array<System::String>>(value)) throw System::ArgumentException(_caller); break;
-            case RegistryValueKind::QWord : if(! is<System::Int64>(value)) throw System::ArgumentException(_caller); break;
-            default: if(! is<System::String>(value)) throw System::ArgumentException(_caller); break;
+            switch (kind) {
+            case RegistryValueKind::Binary : if (! is<System::Array<byte>>(value)) throw System::ArgumentException(_caller); break;
+            case RegistryValueKind::DWord : if (! is<System::Int32>(value)) throw System::ArgumentException(_caller); break;
+            case RegistryValueKind::MultiString : if (! is<System::Array<System::String>>(value)) throw System::ArgumentException(_caller); break;
+            case RegistryValueKind::QWord : if (! is<System::Int64>(value)) throw System::ArgumentException(_caller); break;
+            default: if (! is<System::String>(value)) throw System::ArgumentException(_caller); break;
             }
           }
           
@@ -311,7 +311,7 @@ namespace Switch {
           
           const System::String& Key() const { return this->key; }
           const object& Value() const {
-            if(this->kind == RegistryValueKind::ExpandString) {
+            if (this->kind == RegistryValueKind::ExpandString) {
               static string expandedValue;
               expandedValue = System::Environment::ExpandEnvironmentVariables(as<string>(this->value)());
               return expandedValue;
@@ -332,7 +332,7 @@ namespace Switch {
               toParse = toParse.Remove(0, toParse.IndexOf("\">"));
               toParse = toParse.Substring(toParse.IndexOf("\">") + 2);
               
-              switch(rkv.kind) {
+              switch (rkv.kind) {
               case RegistryValueKind::DWord: rkv.value = ref_new<System::Int32>(System::Int32::Parse(toParse)); break;
               case RegistryValueKind::QWord: rkv.value = ref_new<System::Int64>(System::Int64::Parse(toParse)); break;
               case RegistryValueKind::String: rkv.value = ref_new<string>(toParse); break;
@@ -343,17 +343,17 @@ namespace Switch {
                 break;
               }
               return rkv;
-            } catch(const System::Exception&) {
+            } catch (const System::Exception&) {
               throw System::FormatException(_caller);
             }
           }
           
           System::String ToString() const {
             System::String value;
-            if(this->kind == RegistryValueKind::Binary) {
-              for(byte item : as<System::Array<byte>>(*this->value))
+            if (this->kind == RegistryValueKind::Binary) {
+              for (byte item : as<System::Array<byte>>(*this->value))
                 value = System::String::Format("{0}{1:X2}", value, item);
-            } else if(this->kind == RegistryValueKind::MultiString)
+            } else if (this->kind == RegistryValueKind::MultiString)
               value = System::String::Format("\n<String>{0}</String>\n", System::String::Join("</String>\n<String>", as<System::Array<System::String>>(*this->value)));
             else
               value = this->value->ToString();
@@ -369,13 +369,13 @@ namespace Switch {
             try {
               System::Array<byte> bytes;
               System::String toParse = s;
-              while(! string::IsNullOrEmpty(toParse)) {
+              while (! string::IsNullOrEmpty(toParse)) {
                 System::Array<>::Resize(bytes, bytes.Length + 1);
                 bytes[bytes.Length - 1] = System::Byte::Parse(toParse.Remove(2), 16);
                 toParse = toParse.Substring(2);
               }
               return bytes;
-            } catch(const System::Exception&) {
+            } catch (const System::Exception&) {
               throw System::FormatException(_caller);
             }
           }
@@ -384,13 +384,13 @@ namespace Switch {
             try {
               System::Array<System::String> strings;
               System::String toParse = s;
-              while(! string::IsNullOrEmpty(toParse)) {
+              while (! string::IsNullOrEmpty(toParse)) {
                 System::Array<>::Resize(strings, strings.Length + 1);
                 strings[strings.Length - 1] = toParse.Remove(toParse.IndexOf("</String>")).Substring(toParse.IndexOf("<String>") + 8);
                 toParse = toParse.Substring(toParse.IndexOf("</String>") + 9);
               }
               return strings;
-            } catch(const System::Exception&) {
+            } catch (const System::Exception&) {
               throw System::FormatException(_caller);
             }
           }

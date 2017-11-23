@@ -31,12 +31,12 @@ namespace Switch {
         StreamReader(const TStream& stream) {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
-          if(stream.CanRead() == false)
+          if (stream.CanRead() == false)
             throw ArgumentException(_caller);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
           this->data->encoding = utf8Encoding;
           
-          if(this->data->stream->CanSeek())
+          if (this->data->stream->CanSeek())
             this->data->stream->Seek(0, System::IO::SeekOrigin::Begin);
         }
         
@@ -44,12 +44,12 @@ namespace Switch {
         /// @param stream The stream pointer to be read.
         /// @exception ArgumentException The stream to be read.
         StreamReader(refptr<Stream> stream) {
-          if(stream->CanRead() == false)
+          if (stream->CanRead() == false)
             throw ArgumentException(_caller);
           this->data->stream = stream;
           this->data->encoding = utf8Encoding;
           
-          if(this->data->stream->CanSeek())
+          if (this->data->stream->CanSeek())
             this->data->stream->Seek(0, System::IO::SeekOrigin::Begin);
         }
         
@@ -61,12 +61,12 @@ namespace Switch {
         StreamReader(const TStream& stream, Text::Encoding& encoding) {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
-          if(stream.CanRead() == false)
+          if (stream.CanRead() == false)
             throw ArgumentException(_caller);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
           this->data->encoding = encoding;
           
-          if(this->data->stream->CanSeek())
+          if (this->data->stream->CanSeek())
             this->data->stream->Seek(0, System::IO::SeekOrigin::Begin);
         }
         

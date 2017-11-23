@@ -71,7 +71,7 @@ TEST(StringTest, Format_ConsoleBraceMismatch) {
     ASSERT_THROW(Console::WriteLine("{}{0{1}}", 5, 12u), FormatException);
     
     Console::SetOut(Console::Out);
-  } catch(Exception& x) {
+  } catch (Exception& x) {
     Console::SetOut(Console::Out);
     Console::WriteLine(x.ToString());
   }

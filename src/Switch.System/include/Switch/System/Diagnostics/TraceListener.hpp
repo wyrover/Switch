@@ -75,7 +75,7 @@ namespace Switch {
         _property<int32> IndentSize {
           _get {return this->data->indentSize;},
           _set {
-            if(value < 0)
+            if (value < 0)
               throw ArgumentOutOfRangeException(_caller);
             this->data->indentSize = value;
           }
@@ -302,23 +302,23 @@ namespace Switch {
         /// @remarks This method writes the indent and resets the NeedIndent property to false. Call this method if NeedIndent is true when you are overriding the Write and WriteLine methods. By default, this method uses blank spaces for indentation. The size of the indent is determined by the values of the IndentSize and IndentLevel properties. The IndentLevel property represents the number of times the indent of the size specified by the IndentSize property is applied. This method is called by the DefaultTraceListener and TextWriterTraceListener classes.
         virtual void WriteIndent() {
           this->data->needIndent = false;
-          for(int32 i = 0; i < this->data->indentLevel; ++i)
+          for (int32 i = 0; i < this->data->indentLevel; ++i)
             this->Write(String(' ', this->data->indentSize));
         }
         
       private:
         void WriteEventCache(const TraceEventCache& eventCache) {
-          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::ProcessId))
+          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::ProcessId))
             WriteLine(string::Format("{0}ProcessId={1}", String(' ', this->data->indentSize), eventCache.ProcessdId));
-          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::LogicalOperationStack))
+          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::LogicalOperationStack))
             WriteLine(string::Format("{0}LogicalOperationStack={1}", String(' ', this->data->indentSize), string::Join(", ", eventCache.LogicalOperationStack())));
-          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::ThreadId))
+          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::ThreadId))
             WriteLine(string::Format("{0}ThreadId={1}", String(' ', this->data->indentSize), eventCache.ThreadId));
-          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::DateTime))
+          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::DateTime))
             WriteLine(string::Format("{0}DateTime={1}T{2}.{3:D7}Z", String(' ', this->data->indentSize), eventCache.DateTime().ToShortDateString(), eventCache.DateTime().ToLongTimeString(), eventCache.DateTime().Ticks % 10000000));
-          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::Timestamp))
+          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::Timestamp))
             WriteLine(string::Format("{0}Timestamp={1}", String(' ', this->data->indentSize), eventCache.Timestamp));
-          if(Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::Callstack))
+          if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::Callstack))
             WriteLine(string::Format("{0}Callstack={1}", String(' ', this->data->indentSize), eventCache.CallStack));
         }
         

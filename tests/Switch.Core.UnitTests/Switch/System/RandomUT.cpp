@@ -9,7 +9,7 @@ namespace {
   TEST(RandomTest, Next) {
     System::Collections::Generic::List<int> values(100);
     _using(Random rand(1)) {
-      for(int i = 0; i < 100; i++) {
+      for (int i = 0; i < 100; i++) {
         int value = rand.Next();
         ASSERT_GE(value, 0);
         ASSERT_LE(value, Int32::MaxValue);
@@ -18,7 +18,7 @@ namespace {
     }
     
     _using(Random rand(1)) {
-      for(int i = 0; i < 100; i++)
+      for (int i = 0; i < 100; i++)
         ASSERT_EQ(values[i], rand.Next());
     }
   }
@@ -26,7 +26,7 @@ namespace {
   TEST(RandomTest, NextWithRange0To10) {
     System::Collections::Generic::List<int> values(100);
     _using(Random rand(5)) {
-      for(int i = 0; i < 100; i++) {
+      for (int i = 0; i < 100; i++) {
         int value = rand.Next(11);
         ASSERT_GE(value, 0);
         ASSERT_LE(value, Int32::MaxValue);
@@ -35,7 +35,7 @@ namespace {
     }
     
     _using(Random rand(5)) {
-      for(int i = 0; i < 100; i++)
+      for (int i = 0; i < 100; i++)
         ASSERT_EQ(values[i], rand.Next(0, 11));
     }
   }
@@ -46,7 +46,7 @@ namespace {
     rand.NextBytes(bytes);
     
     _using(Random rand(42)) {
-      for(int i = 0; i < 100; i++)
+      for (int i = 0; i < 100; i++)
         ASSERT_EQ(bytes[i], rand.Next(Byte::MaxValue + 1));
     }
   }

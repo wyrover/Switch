@@ -109,7 +109,7 @@ namespace Switch {
     Any(const _property<T, Attribute>& value) : value(ObjectOrEnumOrOtherToAny<T>()(value())) {}
     template <typename T>
     operator T() const {
-      if(!this->HasValue)
+      if (!this->HasValue)
         throw System::InvalidOperationException(_caller);
       return To<T>();
     }
@@ -151,7 +151,7 @@ namespace Switch {
     bool operator!=(const T& value) const {return !this->operator==(value);}
     
     bool operator==(const Any& value) const {
-      if(!this->HasValue && !value.HasValue) return true;
+      if (!this->HasValue && !value.HasValue) return true;
       return *this->value == *value.value;
     }
     bool operator!=(const Any& value) const {return !this->operator==(value);}
@@ -170,7 +170,7 @@ namespace Switch {
     /// @exception InvalidOperationException The HasValue property is false.
     _property<const object&, _readonly> Value {
       _get->const object& {
-        if(!this->HasValue)
+        if (!this->HasValue)
           throw System::InvalidOperationException(_caller);
         return this->value.ToObject();
       }
@@ -185,7 +185,7 @@ namespace Switch {
     /// @exception InvalidOperationException The parameters is null.
     template<typename T>
     T& As() {
-      if(!this->HasValue)
+      if (!this->HasValue)
         throw System::InvalidOperationException(_caller);
       return as<T>(this->value.ToObject());
     }
@@ -199,7 +199,7 @@ namespace Switch {
     /// @exception InvalidOperationException The parameters is null.
     template<typename T>
     const T& As() const {
-      if(!this->HasValue)
+      if (!this->HasValue)
         throw System::InvalidOperationException(_caller);
       return as<T>(this->value.ToObject());
     }
@@ -214,7 +214,7 @@ namespace Switch {
     /// | Zero              | This instance is equal to obj.     |
     /// | Greater than zero | This instance is greater than obj. |
     int32 CompareTo(const IComparable& obj) const override {
-      if(!is<Any>(obj)) return -1;
+      if (!is<Any>(obj)) return -1;
       return CompareTo(as<Any>(obj));
     }
     
@@ -228,15 +228,15 @@ namespace Switch {
     /// | Zero              | This instance is equal to obj.     |
     /// | Greater than zero | This instance is greater than obj. |
     int32 CompareTo(const Any& obj) const {
-      if(this->value < obj.value) return -1;
-      if(this->value > obj.value) return 1;
+      if (this->value < obj.value) return -1;
+      if (this->value > obj.value) return 1;
       return 0;
     }
     
     /// @brief Serves as a hash function for a particular type.
     /// @return Int32 A hash code for the current Object.
     int32 GetHashCode() const override {
-      if(!this->HasValue) return 0;
+      if (!this->HasValue) return 0;
       return As<object>().GetHashCode();
     }
     
@@ -244,7 +244,7 @@ namespace Switch {
     /// @param obj The Object to compare with the current Object.
     /// @return true if the specified Object is equal to the current Object. otherwise, false.
     bool Equals(const object& obj) const override {
-      if(is<Any>(obj))
+      if (is<Any>(obj))
         return Equals(as<Any>(obj));
       return *this->value == obj;
     }
@@ -253,7 +253,7 @@ namespace Switch {
     /// @param value The Any to compare with the current Object.
     /// @return true if the specified value is equal to the current Any. otherwise, false.
     bool Equals(const Any& value) const {
-      if(!this->HasValue && !value.HasValue) return true;
+      if (!this->HasValue && !value.HasValue) return true;
       return *this->value == *value.value;
     }
     
@@ -262,7 +262,7 @@ namespace Switch {
     /// @return true if the specified value is equal to the current Any. otherwise, false.
     template <typename T>
     bool Equals(T value) const {
-      if(!this->HasValue) return false;
+      if (!this->HasValue) return false;
       return *this->value == value;
     }
     
@@ -275,7 +275,7 @@ namespace Switch {
     /// @see Switch::System::Type
     template<typename T>
     bool Is() {
-      if(!this->HasValue) return false;
+      if (!this->HasValue) return false;
       return is<T>(this->value.ToObject());
     }
     
@@ -288,7 +288,7 @@ namespace Switch {
     /// @see Switch::System::Type
     template<typename T>
     bool Is() const {
-      if(!this->HasValue) return false;
+      if (!this->HasValue) return false;
       return is<T>(this->value.ToObject());
     }
     
@@ -296,7 +296,7 @@ namespace Switch {
     /// @return The text representation of the value of the current Nullable<T> object if the HasValue property is true, or an empty string ("") if the HasValue property is false.
     /// @remarks The ToString property returns the string yielded by calling the ToString property of the object returned by the Value property.
     string ToString() const override {
-      if(this->HasValue == false)
+      if (this->HasValue == false)
         return "";
       return value->ToString();
     }

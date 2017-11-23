@@ -94,9 +94,9 @@ namespace SwitchUnitTests {
     ASSERT_EQ(a6(4), 50);
     
     Array<int32> a8(10);
-    for(int32 index = 0; index < 10; index++)
+    for (int32 index = 0; index < 10; index++)
       a8(index) = index;
-    for(int32 index = 0; index < 10; index++)
+    for (int32 index = 0; index < 10; index++)
       ASSERT_EQ(a8(index), index);
       
     int32 a11[] = {100, 200, 300, 400, 500, 600, 700, 800, 900};
@@ -183,23 +183,23 @@ namespace SwitchUnitTests {
     ASSERT_THROW(a7(15, 5), IndexOutOfRangeException);
     
     Array<Int32, 2> a9(10, 8);
-    for(Int32 index1 = 0; index1 < 10; index1++)
-      for(Int32 index2 = 0; index2 < 8; index2++)
+    for (Int32 index1 = 0; index1 < 10; index1++)
+      for (Int32 index2 = 0; index2 < 8; index2++)
         a9(index1, index2) = (index1 * 10) + index2;
         
-    for(Int32 index1 = 0; index1 < 10; index1++)
-      for(Int32 index2 = 0; index2 < 8; index2++)
+    for (Int32 index1 = 0; index1 < 10; index1++)
+      for (Int32 index2 = 0; index2 < 8; index2++)
         ASSERT_EQ(a9(index1, index2), (index1 * 10) + index2);
         
     Array<Int32, 3> a10(10, 10, 10);
-    for(Int32 index1 = 0; index1 < 10; index1++)
-      for(Int32 index2 = 0; index2 < 10; index2++)
-        for(Int32 index3 = 0; index3 < 10; index3++)
+    for (Int32 index1 = 0; index1 < 10; index1++)
+      for (Int32 index2 = 0; index2 < 10; index2++)
+        for (Int32 index3 = 0; index3 < 10; index3++)
           a10(index1, index2, index3) = (index1 * 100) + (index2 * 10) + index3;
           
-    for(Int32 index1 = 0; index1 < 10; index1++)
-      for(Int32 index2 = 0; index2 < 10; index2++)
-        for(Int32 index3 = 0; index3 < 10; index3++)
+    for (Int32 index1 = 0; index1 < 10; index1++)
+      for (Int32 index2 = 0; index2 < 10; index2++)
+        for (Int32 index3 = 0; index3 < 10; index3++)
           ASSERT_EQ(a10(index1, index2, index3), (index1 * 100) + (index2 * 10) + index3);
   }
   
@@ -315,7 +315,7 @@ namespace SwitchUnitTests {
     
     Collections::Generic::Enumerator<string> enum1 = array1.GetEnumerator();
     Collections::Generic::Enumerator<string> enum2 = array2.GetEnumerator();
-    while(enum1.MoveNext() && enum2.MoveNext())
+    while (enum1.MoveNext() && enum2.MoveNext())
       ASSERT_EQ(enum1.Current(), enum2.Current());
       
     array1[3] = "Reset";
@@ -350,12 +350,12 @@ namespace SwitchUnitTests {
   
   TEST(Array, GetEnumerator) {
     Array<int32> array(10);
-    for(int32 index = 0; index < 10; index++)
+    for (int32 index = 0; index < 10; index++)
       array[index] = (index + 10) * 2;
       
     _using(System::Collections::Generic::Enumerator<int32> enumerator = array.GetEnumerator()) {
       int32 index = 0;
-      while(enumerator.MoveNext()) {
+      while (enumerator.MoveNext()) {
         ASSERT_EQ((index + 10) * 2, enumerator.Current);
         index++;
       }

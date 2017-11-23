@@ -47,7 +47,7 @@ namespace Switch {
           /// @param collection The collection whose elements are copied to the new System::Collections::Generic::Queue<T>.
           /// @exception System::ArgumentNullException collection is null.
           Queue(const IEnumerable<T>& collection) : capacity(0), operationNumber(0) {
-            for(const T& item : collection)
+            for (const T& item : collection)
               Enqueue(item);
           }
           
@@ -64,7 +64,7 @@ namespace Switch {
           
           /// @cond
           Queue(InitializerList<T> il) : operationNumber(0) {
-            for(const T& item : il)
+            for (const T& item : il)
               this->Enqueue(item);
           }
           
@@ -87,8 +87,8 @@ namespace Switch {
           ///         false.
           virtual bool Contains(const T& value) const override {
             typename std::list<T, TAllocator>::const_iterator it;
-            for(it = this->queue.begin(); it != this->queue.end() ; it++)
-              if(*it == value) return true;
+            for (it = this->queue.begin(); it != this->queue.end() ; it++)
+              if (*it == value) return true;
             return false;
           }
           
@@ -105,11 +105,11 @@ namespace Switch {
           ///            array.
           virtual void CopyTo(System::Array<T>& array, int32 arrayIndex) const override {
             //_list.CopyTo(array, arrayIndex);
-            if(arrayIndex < 0) throw ArgumentOutOfRangeException(_caller);
-            if(arrayIndex + this->Count > array.Length) throw ArgumentException(_caller);
+            if (arrayIndex < 0) throw ArgumentOutOfRangeException(_caller);
+            if (arrayIndex + this->Count > array.Length) throw ArgumentException(_caller);
             
             typename std::list<T, TAllocator>::const_iterator it;
-            for(it = this->queue.begin(); it != this->queue.end() ; it++)
+            for (it = this->queue.begin(); it != this->queue.end() ; it++)
               array[arrayIndex++] = *it;
           }
           
@@ -128,7 +128,7 @@ namespace Switch {
           void Enqueue(const T& value) {
             this->queue.push_back(value);
             this->operationNumber++;
-            if(this->capacity < static_cast<int32>(this->queue.size())) this->capacity = static_cast<int32>(this->queue.size());
+            if (this->capacity < static_cast<int32>(this->queue.size())) this->capacity = static_cast<int32>(this->queue.size());
           }
           
           /// @brief Returns an enumerator that iterates through the System::Collections::Generic::Queue<T>.
@@ -142,14 +142,14 @@ namespace Switch {
           /// @return The object at the beginning of the System::Collections::Generic::Queue<T>.
           /// @exception System::InvalidOperationException The System::Collections::Generic::Queue<T> is empty.
           const T& Peek() const {
-            if(this->queue.size() == 0)
+            if (this->queue.size() == 0)
               throw InvalidOperationException(_caller);
               
             return this->queue.front();
           }
           
           T& Peek() {
-            if(this->queue.size() == 0)
+            if (this->queue.size() == 0)
               throw InvalidOperationException(_caller);
               
             return this->queue.front();
@@ -161,7 +161,7 @@ namespace Switch {
             Array<T> array(this->Count);
             typename std::list<T, TAllocator>::const_iterator it;
             int32 index = 0;
-            for(it = this->queue.begin(); it != this->queue.end() ; it++)
+            for (it = this->queue.begin(); it != this->queue.end() ; it++)
               array[index++] = *it;
               
             return array;
@@ -179,7 +179,7 @@ namespace Switch {
             this->operationNumber++;
             this->queue.clear();
             typename std::list<T, TAllocator>::const_iterator it;
-            for(it = queue._list.begin(); it != queue._list.end() ; it++)
+            for (it = queue._list.begin(); it != queue._list.end() ; it++)
               this->queue.push_back(*it);
             return *this;
           }
@@ -221,13 +221,13 @@ namespace Switch {
             }
             
             virtual bool MoveNext() {
-              if(this->operationNumber != this->queue.operationNumber)
+              if (this->operationNumber != this->queue.operationNumber)
                 throw InvalidOperationException(_caller);
                 
-              if(IsFinished())
+              if (IsFinished())
                 return false;
                 
-              if(this->beforeFirst)
+              if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
@@ -237,7 +237,7 @@ namespace Switch {
             
           protected:
             const T& GetCurrent() const {
-              if(this->beforeFirst || IsFinished())
+              if (this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
                 
               return *this->iterator;

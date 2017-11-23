@@ -14,7 +14,7 @@ namespace {
   static string CreateProcess(const string& command) {
     FILE* fs = popen(command.Data(), "r");
     string result;
-    while(!feof(fs)) {
+    while (!feof(fs)) {
       char buf[513];
       int32 l = (int32)fread(buf, 1, 512, fs);
       buf[l] = 0;
@@ -43,13 +43,13 @@ int32 Native::EnvironmentApi::GetOsVersion(int32& major, int32& minor, int32& bu
   #else
   System::Array<string> numbers = CreateProcess("uname -r").Split({'.', '-', '\n'});
   #endif
-  if(numbers.Length() < 1 || !System::Int32::TryParse(numbers[0], major))
+  if (numbers.Length() < 1 || !System::Int32::TryParse(numbers[0], major))
     major = 0;
-  if(numbers.Length() < 2 || !System::Int32::TryParse(numbers[1], minor))
+  if (numbers.Length() < 2 || !System::Int32::TryParse(numbers[1], minor))
     minor = 0;
-  if(numbers.Length() < 3 || !System::Int32::TryParse(numbers[2], build))
+  if (numbers.Length() < 3 || !System::Int32::TryParse(numbers[2], build))
     build = 0;
-  if(numbers.Length() < 4 || !System::Int32::TryParse(numbers[3], revision))
+  if (numbers.Length() < 4 || !System::Int32::TryParse(numbers[3], revision))
     revision = 0;
   return 0;
 }
@@ -64,7 +64,7 @@ string Native::EnvironmentApi::GetMachineName() {
 
 int32 Native::EnvironmentApi::GetTickCount() {
   struct timeval tv;
-  if(gettimeofday(&tv, null) != 0)
+  if (gettimeofday(&tv, null) != 0)
     return 0;
   return int32((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

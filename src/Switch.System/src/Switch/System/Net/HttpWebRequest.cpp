@@ -21,18 +21,18 @@ HttpWebRequest::~HttpWebRequest() {
 }
 
 WebRequest::WebRequestStream HttpWebRequest::GetRequestStream() {
-  if(!string::IsNullOrEmpty(this->contentType)) {
+  if (!string::IsNullOrEmpty(this->contentType)) {
     string contentType = string::Format("Content-Type: {0}", this->contentType);
     this->header = Native::CurlApi::AppendToList(this->header, contentType);
     Native::CurlApi::SetHttpHeader(this->requestHandle, this->header);
   }
   
-  if(GetMethod() == WebRequestMethods::Http::Put) {
+  if (GetMethod() == WebRequestMethods::Http::Put) {
     Native::CurlApi::SetHttpPut(this->requestHandle, 1L);
     return WebRequest::GetRequestStream();
   }
   
-  if(GetMethod() == WebRequestMethods::Http::Post) {
+  if (GetMethod() == WebRequestMethods::Http::Post) {
     Native::CurlApi::SetHttpPost(this->requestHandle, 1L);
     return WebRequest::GetRequestStream();
   }
@@ -45,7 +45,7 @@ WebResponse& HttpWebRequest::GetInternalResponse() {
 }
 
 WebResponse& HttpWebRequest::GetResponse() {
-  if(IsResponseStreamNeeded())
+  if (IsResponseStreamNeeded())
     this->httpWebResponse.StartTransfert();
     
   return this->httpWebResponse;
@@ -56,14 +56,14 @@ void HttpWebRequest::Finished(int32 error) {
 }
 
 bool HttpWebRequest::GetAllowAutoRedirect() const {
-  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
     
   return this->allowAutoRedirect;
 }
 
 void HttpWebRequest::SetAllowAutoRedirect(bool autoRedirect) {
-  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
     
   this->allowAutoRedirect = autoRedirect;
@@ -71,14 +71,14 @@ void HttpWebRequest::SetAllowAutoRedirect(bool autoRedirect) {
 }
 
 const string& HttpWebRequest::GetContentType() const {
-  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
     
   return this->contentType;
 }
 
 void HttpWebRequest::SetContentType(const string& contentType) {
-  if(Native::CurlApi::GetOSSupportsWebOperations() == false)
+  if (Native::CurlApi::GetOSSupportsWebOperations() == false)
     throw NotSupportedException(_caller);
     
   this->contentType = contentType;

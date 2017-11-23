@@ -102,10 +102,10 @@ namespace Switch {
         /// @exception SemaphoreFullException The semaphore count is already at the maximum value.
         /// @exception IO::IOException An Io error occurred.
         int32 Release(int32 releaseCount) {
-          if(this->guard == null)
+          if (this->guard == null)
             throw ObjectDisposedException(_caller);
           std::unique_lock<std::mutex> lock(*this->guard);
-          if(*this->count + releaseCount > *this->maxCount)
+          if (*this->count + releaseCount > *this->maxCount)
             throw SemaphoreFullException(_caller);
           *this->count += releaseCount;
           this->signal->notify_all();
@@ -125,16 +125,16 @@ namespace Switch {
         }
         
         bool Wait(int32 millisecondsTimeOut) override {
-          if(this->guard == null)
+          if (this->guard == null)
             throw ObjectDisposedException(_caller);
-          if(millisecondsTimeOut < -1)
+          if (millisecondsTimeOut < -1)
             throw AbandonedMutexException(_caller);
             
           std::unique_lock<std::mutex> lock(*this->guard);
-          while(*this->count == 0) {
-            if(millisecondsTimeOut == -1)
+          while (*this->count == 0) {
+            if (millisecondsTimeOut == -1)
               this->signal->wait(lock);
-            else if(this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
+            else if (this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
               return false;
           }
           

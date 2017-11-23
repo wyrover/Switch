@@ -14,11 +14,11 @@ using namespace System::Threading;
 void Monitor::Pulse(const Object& obj) {
   MonitorItem* monitorItem = null;
   mutex.lock();
-  if(IsEntered(obj))
+  if (IsEntered(obj))
     monitorItem = &MonitorItems()[ToKey(obj)];
   mutex.unlock();
   
-  if(monitorItem == null)
+  if (monitorItem == null)
     throw InvalidOperationException(_caller);
     
   monitorItem->event.ReleaseMutex();
@@ -27,11 +27,11 @@ void Monitor::Pulse(const Object& obj) {
 void Monitor::PulseAll(const Object& obj) {
   MonitorItem* monitorItem = null;
   mutex.lock();
-  if(IsEntered(obj))
+  if (IsEntered(obj))
     monitorItem = &MonitorItems()[ToKey(obj)];
   mutex.unlock();
   
-  if(monitorItem == null)
+  if (monitorItem == null)
     throw InvalidOperationException(_caller);
     
   monitorItem->event.ReleaseMutex();
@@ -40,11 +40,11 @@ void Monitor::PulseAll(const Object& obj) {
 bool Monitor::Wait(const Object& obj, int32 millisecondsTimeout) {
   MonitorItem* monitorItem = null;
   mutex.lock();
-  if(IsEntered(obj))
+  if (IsEntered(obj))
     monitorItem = &MonitorItems()[ToKey(obj)];
   mutex.unlock();
   
-  if(monitorItem == null)
+  if (monitorItem == null)
     throw InvalidOperationException(_caller);
     
   return monitorItem->event.WaitOne(millisecondsTimeout);
@@ -52,7 +52,7 @@ bool Monitor::Wait(const Object& obj, int32 millisecondsTimeout) {
 
 bool Monitor::Add(const Object& obj, int32 millisecondsTimeout) {
   mutex.lock();
-  if(!IsEntered(obj))
+  if (!IsEntered(obj))
     MonitorItems()[ToKey(obj)] = is<string>(obj) ? MonitorItem((const string&)obj) : MonitorItem();
   MonitorItem& monitorData = MonitorItems()[ToKey(obj)];
   monitorData.usedCounter++;
@@ -63,13 +63,13 @@ bool Monitor::Add(const Object& obj, int32 millisecondsTimeout) {
 void Monitor::Remove(const Object& obj) {
   MonitorItem saved;
   mutex.lock();
-  if(!IsEntered(obj)) {
+  if (!IsEntered(obj)) {
     mutex.unlock();
     throw SynchronizationLockException(_caller);
   }
   
   MonitorItem* monitorData = &MonitorItems()[ToKey(obj)];
-  if(--monitorData->usedCounter == 0) {
+  if (--monitorData->usedCounter == 0) {
     saved = MonitorItems()[ToKey(obj)];
     MonitorItems().Remove(ToKey(obj));
     monitorData = &saved;

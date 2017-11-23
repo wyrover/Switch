@@ -56,20 +56,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return bool A new bool object converted from value
       static bool ToBoolean(const object& value) {
-        if(is<Boolean>(value)) return ToBoolean(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToBoolean(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToBoolean(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToBoolean(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToBoolean(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToBoolean(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToBoolean(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToBoolean(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToBoolean(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToBoolean(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToBoolean(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToBoolean(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToBoolean(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToBoolean(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToBoolean(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToBoolean(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToBoolean(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToBoolean(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToBoolean(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToBoolean(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToBoolean(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToBoolean(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToBoolean(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToBoolean(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToBoolean(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToBoolean(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToBoolean(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToBoolean(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -248,20 +248,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return bool A new bool object converted from value
       static byte ToByte(const object& value) {
-        if(is<Boolean>(value)) return ToByte(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToByte(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToByte(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToByte(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToByte(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToByte(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToByte(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToByte(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToByte(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToByte(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToByte(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToByte(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToByte(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToByte(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToByte(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToByte(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToByte(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToByte(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToByte(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToByte(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToByte(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToByte(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToByte(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToByte(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToByte(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToByte(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToByte(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToByte(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -308,7 +308,7 @@ namespace Switch {
       /// @return byte A new byte object converted from value
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
       static byte ToByte(char32 value) {
-        if(value > Byte::MaxValue)
+        if (value > Byte::MaxValue)
           throw OverflowException(_caller);
         return static_cast<byte>(value);
       }
@@ -318,7 +318,7 @@ namespace Switch {
       /// @return byte A new byte object converted from value
       /// @exception OverflowException value is less than System::Byte::MinValue or greater than System::Byte::MaxValue.
       static byte ToByte(const Char& value) {
-        if(static_cast<char32>(value) > Byte::MaxValue)
+        if (static_cast<char32>(value) > Byte::MaxValue)
           throw OverflowException(_caller);
         return static_cast<byte>(static_cast<char32>(value));
       }
@@ -501,20 +501,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return bool A new bool object converted from value
       static char32 ToChar(const object& value) {
-        if(is<Boolean>(value)) return ToChar(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToChar(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToChar(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToChar(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToChar(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToChar(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToChar(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToChar(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToChar(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToChar(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToChar(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToChar(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToChar(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToChar(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToChar(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToChar(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToChar(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToChar(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToChar(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToChar(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToChar(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToChar(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToChar(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToChar(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToChar(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToChar(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToChar(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToChar(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -933,20 +933,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return double A new double object converted from value
       static double ToDouble(const object& value) {
-        if(is<Boolean>(value)) return ToDouble(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToDouble(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToDouble(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToDouble(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToDouble(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToDouble(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToDouble(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToDouble(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToDouble(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToDouble(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToDouble(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToDouble(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToDouble(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToDouble(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToDouble(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToDouble(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToDouble(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToDouble(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToDouble(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToDouble(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToDouble(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToDouble(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToDouble(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToDouble(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToDouble(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToDouble(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToDouble(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToDouble(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -1142,20 +1142,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return int16 A new int16 object converted from value
       static int16 ToInt16(const object& value) {
-        if(is<Boolean>(value)) return ToInt16(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToInt16(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToInt16(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToInt16(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToInt16(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToInt16(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToInt16(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToInt16(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToInt16(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToInt16(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToInt16(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToInt16(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToInt16(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToInt16(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToInt16(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToInt16(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToInt16(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToInt16(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToInt16(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToInt16(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToInt16(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToInt16(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToInt16(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToInt16(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToInt16(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToInt16(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToInt16(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToInt16(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -1394,20 +1394,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return int32 A new int32 object converted from value
       static int32 ToInt32(const object& value) {
-        if(is<Boolean>(value)) return ToInt32(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToInt32(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToInt32(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToInt32(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToInt32(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToInt32(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToInt32(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToInt32(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToInt32(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToInt32(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToInt32(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToInt32(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToInt32(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToInt32(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToInt32(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToInt32(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToInt32(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToInt32(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToInt32(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToInt32(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToInt32(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToInt32(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToInt32(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToInt32(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToInt32(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToInt32(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToInt32(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToInt32(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -1635,20 +1635,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return int64 A new int64 object converted from value
       static int64 ToInt64(const object& value) {
-        if(is<Boolean>(value)) return ToInt64(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToInt64(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToInt64(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToInt64(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToInt64(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToInt64(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToInt64(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToInt64(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToInt64(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToInt64(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToInt64(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToInt64(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToInt64(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToInt64(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToInt64(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToInt64(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToInt64(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToInt64(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToInt64(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToInt64(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToInt64(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToInt64(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToInt64(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToInt64(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToInt64(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToInt64(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToInt64(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToInt64(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -1868,7 +1868,7 @@ namespace Switch {
       /// @return void* A new void* object converted from value
       static const void* ToIntPtr(int64 value) {
         size_t size = 4;
-        if(sizeof(void*) == size && (value < Int32::MinValue || value > Int32::MaxValue))
+        if (sizeof(void*) == size && (value < Int32::MinValue || value > Int32::MaxValue))
           throw OverflowException(_caller);
           
         return reinterpret_cast<void*>(value);
@@ -1896,20 +1896,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return sbyte A new sbyte object converted from value
       static sbyte ToSByte(const object& value) {
-        if(is<Boolean>(value)) return ToSByte(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToSByte(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToSByte(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToSByte(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToSByte(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToSByte(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToSByte(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToSByte(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToSByte(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToSByte(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToSByte(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToSByte(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToSByte(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToSByte(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToSByte(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToSByte(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToSByte(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToSByte(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToSByte(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToSByte(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToSByte(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToSByte(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToSByte(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToSByte(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToSByte(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToSByte(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToSByte(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToSByte(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -2140,20 +2140,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return float A new float object converted from value
       static float ToSingle(const object& value) {
-        if(is<Boolean>(value)) return ToSingle(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToSingle(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToSingle(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToSingle(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToSingle(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToSingle(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToSingle(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToSingle(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToSingle(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToSingle(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToSingle(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToSingle(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToSingle(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToSingle(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToSingle(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToSingle(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToSingle(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToSingle(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToSingle(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToSingle(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToSingle(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToSingle(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToSingle(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToSingle(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToSingle(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToSingle(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToSingle(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToSingle(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -2585,20 +2585,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return uint16 A new uint16 object converted from value
       static uint16 ToUInt16(const object& value) {
-        if(is<Boolean>(value)) return ToUInt16(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToUInt16(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToUInt16(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToUInt16(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToUInt16(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToUInt16(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToUInt16(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToUInt16(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToUInt16(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToUInt16(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToUInt16(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToUInt16(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToUInt16(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToUInt16(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToUInt16(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToUInt16(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToUInt16(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToUInt16(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToUInt16(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToUInt16(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToUInt16(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToUInt16(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToUInt16(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToUInt16(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToUInt16(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToUInt16(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToUInt16(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToUInt16(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -2764,20 +2764,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return uint32 A new uint32 object converted from value
       static uint32 ToUInt32(const object& value) {
-        if(is<Boolean>(value)) return ToUInt32(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToUInt32(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToUInt32(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToUInt32(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToUInt32(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToUInt32(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToUInt32(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToUInt32(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToUInt32(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToUInt32(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToUInt32(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToUInt32(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToUInt32(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToUInt32(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToUInt32(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToUInt32(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToUInt32(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToUInt32(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToUInt32(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToUInt32(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToUInt32(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToUInt32(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToUInt32(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToUInt32(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToUInt32(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToUInt32(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToUInt32(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToUInt32(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -3001,20 +3001,20 @@ namespace Switch {
       /// @param value object to convert
       /// @return uint64 A new uint64 object converted from value
       static uint64 ToUInt64(const object& value) {
-        if(is<Boolean>(value)) return ToUInt64(static_cast<const Boolean&>(value));
-        if(is<Byte>(value)) return ToUInt64(static_cast<const Byte&>(value));
-        if(is<Char>(value)) return ToUInt64(static_cast<const Char&>(value));
-        if(is<DateTime>(value)) return ToUInt64(static_cast<const DateTime&>(value));
-        if(is<Double>(value)) return ToUInt64(static_cast<const Double&>(value));
-        if(is<Int16>(value)) return ToUInt64(static_cast<const Int16&>(value));
-        if(is<Int32>(value)) return ToUInt64(static_cast<const Int32&>(value));
-        if(is<Int64>(value)) return ToUInt64(static_cast<const Int64&>(value));
-        if(is<SByte>(value)) return ToUInt64(static_cast<const SByte&>(value));
-        if(is<Single>(value)) return ToUInt64(static_cast<const Single&>(value));
-        if(is<String>(value)) return ToUInt64(static_cast<const String&>(value));
-        if(is<UInt16>(value)) return ToUInt64(static_cast<const UInt16&>(value));
-        if(is<UInt32>(value)) return ToUInt64(static_cast<const UInt32&>(value));
-        if(is<UInt64>(value)) return ToUInt64(static_cast<const UInt64&>(value));
+        if (is<Boolean>(value)) return ToUInt64(static_cast<const Boolean&>(value));
+        if (is<Byte>(value)) return ToUInt64(static_cast<const Byte&>(value));
+        if (is<Char>(value)) return ToUInt64(static_cast<const Char&>(value));
+        if (is<DateTime>(value)) return ToUInt64(static_cast<const DateTime&>(value));
+        if (is<Double>(value)) return ToUInt64(static_cast<const Double&>(value));
+        if (is<Int16>(value)) return ToUInt64(static_cast<const Int16&>(value));
+        if (is<Int32>(value)) return ToUInt64(static_cast<const Int32&>(value));
+        if (is<Int64>(value)) return ToUInt64(static_cast<const Int64&>(value));
+        if (is<SByte>(value)) return ToUInt64(static_cast<const SByte&>(value));
+        if (is<Single>(value)) return ToUInt64(static_cast<const Single&>(value));
+        if (is<String>(value)) return ToUInt64(static_cast<const String&>(value));
+        if (is<UInt16>(value)) return ToUInt64(static_cast<const UInt16&>(value));
+        if (is<UInt32>(value)) return ToUInt64(static_cast<const UInt32&>(value));
+        if (is<UInt64>(value)) return ToUInt64(static_cast<const UInt64&>(value));
         throw InvalidCastException(_caller);
       }
       
@@ -3239,19 +3239,19 @@ namespace Switch {
       
       template<typename T>
       static string ToStringTemplate(T value, int32 base) {
-        if(base == 2)
+        if (base == 2)
           return string::Format("{0:b}", value);
           
-        if(base == 8) {
+        if (base == 8) {
           std::stringstream ss;
           ss << std::oct << value;
           return ss.str();
         }
         
-        if(base == 10)
+        if (base == 10)
           return string::Format("{0:d}", value);
           
-        if(base == 16)
+        if (base == 16)
           return string::Format("{0:x}", value);
           
         throw ArgumentException(_caller);

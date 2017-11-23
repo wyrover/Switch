@@ -39,7 +39,7 @@ namespace Switch {
           }
           
           void SetValueMember(const string& valueMember) {
-            if(this->valueMember != valueMember) {
+            if (this->valueMember != valueMember) {
               this->valueMember = valueMember;
               ValueMemberChanged(*this, EventArgs::Empty());
             }

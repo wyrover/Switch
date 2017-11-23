@@ -55,6 +55,7 @@ list(APPEND ASTYLE_ARGS
   --indent-col1-comments
   --pad-oper
   --pad-comma
+  --pad-header
   --unpad-paren
   --fill-empty-lines
   --align-pointer=type

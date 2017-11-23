@@ -26,13 +26,13 @@ namespace {
     void Close() override  {this->isClosed = true;}
     
     int32 Read(Array<byte>& buffer, int32 offset, int32 count) override {
-      if(count < 0 || offset < 0)
+      if (count < 0 || offset < 0)
         throw ArgumentOutOfRangeException(_caller);
-      if(offset + count > buffer.Length)
+      if (offset + count > buffer.Length)
         throw ArgumentException(_caller);
-      if(IsClosed())
+      if (IsClosed())
         throw ObjectDisposedException(_caller);
-      if(feof(this->stream))
+      if (feof(this->stream))
         return -1;
       return (int32)fread((char*)&buffer.Data[offset], sizeof(char), count, this->stream);
     }
@@ -58,7 +58,7 @@ Process::~Process() {
 }
 
 void Process::Close() {
-  if(this->data.IsUnique()) {
+  if (this->data.IsUnique()) {
     Native::ProcessApi::Close(this->data->handle);
     this->data->handle = 0;
   }
@@ -75,8 +75,8 @@ Process Process::GetCurrentProcess() {
 Array<Process> Process::GetProcesses() {
   Array<intptr> ids = Native::ProcessApi::GetProcesses();
   System::Collections::Generic::List<Process> processes;
-  for(auto id : ids)
-    if(id != 0)
+  for (auto id : ids)
+    if (id != 0)
       processes.Add(Process(id));
   return processes.ToArray();
 }
@@ -106,7 +106,7 @@ Process Process::Start(const ProcessStartInfo& processStartInfo) {
 }
 
 void Process::WaitForExit() {
-  if(this->data->handle != 0)
+  if (this->data->handle != 0)
     Native::ProcessApi::WaitForExit(this->data->handle, this->data->exitCode);
 }
 

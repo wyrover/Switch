@@ -27,19 +27,19 @@ namespace Switch {
         /// @endcond
         
         void Flush() override {
-          if(!string::IsNullOrEmpty(this->data->messageLine))
+          if (!string::IsNullOrEmpty(this->data->messageLine))
             this->WriteLine("");
-          if(this->data->logWriter != null)
+          if (this->data->logWriter != null)
             this->data->logWriter->Flush();
         }
         
         /// @brief When overridden in a derived class, writes the specified msg to the listener you create in the derived class.
         void Write(const String& message) override {
           #if defined(DEBUG) || defined(TRACE)
-          if(this->NeedIndent == true)
+          if (this->NeedIndent == true)
             this->WriteIndent();
           this->data->messageLine += message;
-          if(this->data->logWriter != null)
+          if (this->data->logWriter != null)
             this->data->logWriter->Write(message);
           #endif
         }
@@ -47,11 +47,11 @@ namespace Switch {
         /// @brief When overridden in a derived class, writes a msg to the listener you create in the derived class, followed by a line terminator.
         void WriteLine(const String& message) override {
           #if defined(DEBUG) || defined(TRACE)
-          if(this->NeedIndent == true)
+          if (this->NeedIndent == true)
             this->WriteIndent();
           WriteToOutputDebug(string::Format("{0}{1}{2}", this->data->messageLine, message, Environment::NewLine));
           this->data->messageLine = "";
-          if(this->data->logWriter != null)
+          if (this->data->logWriter != null)
             this->data->logWriter->WriteLine(message);
           this->NeedIndent = true;
           #endif

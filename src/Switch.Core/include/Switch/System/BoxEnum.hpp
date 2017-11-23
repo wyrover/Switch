@@ -37,7 +37,7 @@ namespace Switch {
       /// Zero                This instance is equal to obj.
       /// Greater than zero   This instance is greater than obj.
       int32 CompareTo(const IComparable& obj) const override {
-        if(!is<BoxEnum<T>>(obj)) return 1;
+        if (!is<BoxEnum<T>>(obj)) return 1;
         return this->CompareTo(static_cast<const BoxEnum<T>&>(obj));
       }
       
@@ -100,8 +100,8 @@ namespace Switch {
       static System::Array<T> GetValues() {
         static System::Collections::Generic::List<T> keys;
         
-        if(keys.Count == 0)
-          for(auto key : Values().Keys())
+        if (keys.Count == 0)
+          for (auto key : Values().Keys())
             keys.Add(T(key));
             
         return keys.ToArray();
@@ -152,10 +152,10 @@ namespace Switch {
       
       String ToString() const override {
         Values();
-        if(flags)
+        if (flags)
           return ToStringFlags();
           
-        if(!Values().ContainsKey(int64(this->value)))
+        if (!Values().ContainsKey(int64(this->value)))
           return string::Format("{0}", int64(this->value));
           
         return Values()[int64(this->value)];
@@ -171,7 +171,7 @@ namespace Switch {
         try {
           result = Parse(value);
           return true;
-        } catch(...) {
+        } catch (...) {
           return false;
         }
       }
@@ -185,7 +185,7 @@ namespace Switch {
         try {
           result = Parse(value, ignoreCase);
           return true;
-        } catch(...) {
+        } catch (...) {
           return false;
         }
       }
@@ -199,7 +199,7 @@ namespace Switch {
       static Collections::Generic::Dictionary<int64, String>& Values();
       void LoadValues() {
         _lock(this->values) {
-          if(values.Count == 0)
+          if (values.Count == 0)
             this->InitValues(values);
         }
       }
@@ -208,28 +208,28 @@ namespace Switch {
       static T ParseFlags(const String& str, bool ignoreCase);
       
       String ToStringFlags() const {
-        if(int64(this->value) == 0 && !Values().ContainsKey(int64(this->value)))
+        if (int64(this->value) == 0 && !Values().ContainsKey(int64(this->value)))
           return "0";
           
-        if(int64(this->value) == 0)
+        if (int64(this->value) == 0)
           return Values()[0];
           
         String str;
         int64 rest = int64(this->value);
         System::Collections::Generic::List<Collections::Generic::KeyValuePair<int64, String>> reversed;
-        for(auto item : Values())
+        for (auto item : Values())
           reversed.Insert(0, item);
           
-        for(auto item : reversed) {
-          if(item.Key() != 0 && (rest & item.Key()) == item.Key()) {
+        for (auto item : reversed) {
+          if (item.Key() != 0 && (rest & item.Key()) == item.Key()) {
             rest -= item.Key();
-            if(str != String::Empty)
+            if (str != String::Empty)
               str = ", " + str;
             str = Values()[item.Key()] + str;
           }
         }
         
-        if(String::IsNullOrEmpty(str) || rest > 0)
+        if (String::IsNullOrEmpty(str) || rest > 0)
           return  Int64((int64)this->value).ToString();
           
         return str;

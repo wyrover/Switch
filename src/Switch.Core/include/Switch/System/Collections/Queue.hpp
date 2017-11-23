@@ -25,7 +25,7 @@ namespace Switch {
         /// @param collection The collection whose elements are copied to the new System::Collections::Generic::Queue<T>.
         /// @exception System::ArgumentNullException collection is null.
         Queue(const IEnumerable& collection) {
-          for(const any& item : collection)
+          for (const any& item : collection)
             Enqueue(item);
         }
         
@@ -42,7 +42,7 @@ namespace Switch {
         
         /// @cond
         Queue(InitializerList<any> il) {
-          for(const any& item : il)
+          for (const any& item : il)
             this->Enqueue(item);
         }
         
@@ -94,13 +94,13 @@ namespace Switch {
         /// @return The object at the beginning of the System::Collections::Generic::Queue<T>.
         /// @exception System::InvalidOperationException The System::Collections::Generic::Queue<T> is empty.
         const any& Peek() const {
-          if(this->queue.Count == 0)
+          if (this->queue.Count == 0)
             throw InvalidOperationException(_caller);
           return this->queue[0];
         }
         
         any& Peek() {
-          if(this->queue.Count == 0)
+          if (this->queue.Count == 0)
             throw InvalidOperationException(_caller);
           return this->queue[0];
         }

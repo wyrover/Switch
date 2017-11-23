@@ -53,20 +53,20 @@ namespace Switch {
             
             explicit Iterator(IEnumerator<T>* enumerator) : enumerator(enumerator), pos(0) {
               this->enumerator->Reset();
-              if(this->enumerator->MoveNext() == false)
+              if (this->enumerator->MoveNext() == false)
                 this->pos = -1;
             }
             
             Iterator(IEnumerator<T>* enumerator, bool end) : enumerator(enumerator), pos(0) {
               this->enumerator->Reset();
-              if(this->enumerator->MoveNext() == false || end == true)
+              if (this->enumerator->MoveNext() == false || end == true)
                 this->pos = -1;
             }
             
             Iterator& operator++() {
-              if(this->pos != -1) {
+              if (this->pos != -1) {
                 ++this->pos;
-                if(this->enumerator->MoveNext() == false)
+                if (this->enumerator->MoveNext() == false)
                   this->pos = -1;
               }
               return *this;
@@ -74,9 +74,9 @@ namespace Switch {
             
             Iterator operator++(int) {
               Iterator iterator(*this);
-              if(this->pos != -1) {
+              if (this->pos != -1) {
                 ++this->pos;
-                if(this->enumerator->MoveNext() == false)
+                if (this->enumerator->MoveNext() == false)
                   this->pos = -1;
               }
               return iterator;

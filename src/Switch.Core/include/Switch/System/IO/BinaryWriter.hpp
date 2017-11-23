@@ -29,7 +29,7 @@ namespace Switch {
         BinaryWriter(const TStream& stream) : stream(stream.template MemberwiseClone<TStream>().template As<Stream>()) {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
-          if(!stream.CanWrite())
+          if (!stream.CanWrite())
             throw ArgumentException(_caller);
         }
         
@@ -38,7 +38,7 @@ namespace Switch {
         /// @exception ArgumentException stream is null.
         /// @exception ArgumentException stream is not writable.
         BinaryWriter(refptr<Stream> stream) : stream(stream) {
-          if(!stream->CanWrite())
+          if (!stream->CanWrite())
             throw ArgumentException(_caller);
         }
         
@@ -108,7 +108,7 @@ namespace Switch {
         /// @exception ArgumentNullException param is null.
         /// @exception IO::IOException An I/O error occurs.
         virtual void Write(const Array<char32>& value) {
-          for(char32 c : value)
+          for (char32 c : value)
             Write(BitConverter::GetBytes(c));
         }
         

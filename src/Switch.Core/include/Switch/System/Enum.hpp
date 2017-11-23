@@ -101,11 +101,11 @@ namespace Switch {
     template<typename T>
     T BoxEnum<T>::Parse(const String& value, bool ignoreCase) {
       Values();
-      if(flags)
+      if (flags)
         return ParseFlags(value, ignoreCase);
         
-      for(auto item : Values()) {
-        if(String::Compare(value, item.Value(), ignoreCase) == 0)
+      for (auto item : Values()) {
+        if (String::Compare(value, item.Value(), ignoreCase) == 0)
           return (T)item.Key();
       }
       
@@ -115,28 +115,28 @@ namespace Switch {
     template<typename T>
     T BoxEnum<T>::ParseFlags(const String& value, bool ignoreCase) {
       Array<String> values = value.Split(',');
-      for(String& str : values)
+      for (String& str : values)
         str = str.TrimStart(' ').TrimEnd(' ');
         
-      if(values.Count == 1) {
-        for(auto item : Values()) {
-          if(String::Compare(value, item.Value(), ignoreCase) == 0)
+      if (values.Count == 1) {
+        for (auto item : Values()) {
+          if (String::Compare(value, item.Value(), ignoreCase) == 0)
             return (T)item.Key();
         }
         return (T)Int64::Parse(value);
       }
       
       int64 result = 0;
-      for(String str : values) {
+      for (String str : values) {
         bool found = false;
-        for(auto item : Values()) {
-          if(String::Compare(str, item.Value(), ignoreCase) == 0) {
+        for (auto item : Values()) {
+          if (String::Compare(str, item.Value(), ignoreCase) == 0) {
             found = true;
             result |= item.Key();
             break;
           }
         }
-        if(found == false)
+        if (found == false)
           throw FormatException(_caller);
       }
       

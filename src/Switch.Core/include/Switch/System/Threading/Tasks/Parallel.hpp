@@ -24,7 +24,7 @@ namespace Switch {
           /// @include ParallelInvoke.cpp
           static void Invoke(const Array<Action<>>& actions) {
             System::Collections::Generic::List<Task<>> tasks;
-            for(const auto& action : actions)
+            for (const auto& action : actions)
               tasks.Add(Task<>::Factory().StartNew(action));
             Task<>::WaitAll(tasks.ToArray());
           }

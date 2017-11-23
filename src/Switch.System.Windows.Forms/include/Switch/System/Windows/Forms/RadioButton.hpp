@@ -25,7 +25,7 @@ namespace Switch {
           _property<bool> AutoCheck {
             _get {return this->autoCheck;},
             _set {
-              if(this->autoCheck != value)
+              if (this->autoCheck != value)
                 this->autoCheck = value;
             }
           };
@@ -46,7 +46,7 @@ namespace Switch {
           virtual void OnCheckedChanged(const EventArgs& e) {this->CheckedChanged(*this, e);}
           
           void OnClick(const EventArgs& e) override {
-            if(this->AutoCheck)
+            if (this->AutoCheck)
               this->Checked = true;
             this->Control::OnClick(e);
           }

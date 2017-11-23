@@ -67,7 +67,7 @@ namespace Switch {
         /// StringBuilder stringBuilder(capacity);
         /// @endcode
         explicit StringBuilder(int32 capacity) {
-          if(capacity < 0)
+          if (capacity < 0)
             throw ArgumentOutOfRangeException(_caller);
           this->string.reserve(capacity);
         }
@@ -84,7 +84,7 @@ namespace Switch {
         /// StringBuilder stringBuilder(capacity, maxCapacity);
         /// @endcode
         StringBuilder(int32 capacity, int32 maxCapacity) : maxCapacity(maxCapacity) {
-          if(maxCapacity < 1 || capacity < 0 || maxCapacity < capacity)
+          if (maxCapacity < 1 || capacity < 0 || maxCapacity < capacity)
             throw ArgumentOutOfRangeException(_caller);
           this->string.reserve(capacity);
         }
@@ -111,7 +111,7 @@ namespace Switch {
         /// StringBuilder stringBuilder(initialString, capacity);
         /// @endcode
         StringBuilder(const String& value, int32 capacity) : string((const char32*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().from_bytes(value.Data()).c_str()) {
-          if(capacity < 0)
+          if (capacity < 0)
             throw ArgumentOutOfRangeException(_caller);
           this->string.reserve(capacity);
         }
@@ -131,11 +131,11 @@ namespace Switch {
         /// StringBuilder stringBuilder(initialString, startIndex, substringLength, capacity);
         /// @endcode
         StringBuilder(const String& value, int32 startIndex, int32 length, int32 capacity) {
-          if(startIndex < 0 || length < 0)
+          if (startIndex < 0 || length < 0)
             throw ArgumentOutOfRangeException(_caller);
-          if(startIndex + length > value.Length())
+          if (startIndex + length > value.Length())
             throw ArgumentOutOfRangeException(_caller);
-          if(capacity < 0)
+          if (capacity < 0)
             throw ArgumentOutOfRangeException(_caller);
             
           this->string = std::u32string((const char32*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().from_bytes(value.Data()).c_str(), startIndex, length);
@@ -152,7 +152,7 @@ namespace Switch {
         /// Chars is the default property of the StringBuilder class. In C++, it is an indexer. This means that individual characters can be retrieved from the Chars property as shown in the following example, which counts the number of alphabetic, white-space, and punctuation characters in a string.
         /// @include StringBuilder.cpp
         char32 operator [](int32 index) const {
-          if(index < 0 || index >= static_cast<int32>(this->string.size()))
+          if (index < 0 || index >= static_cast<int32>(this->string.size()))
             throw IndexOutOfRangeException(_caller);
           return this->string[index];
         }
@@ -167,7 +167,7 @@ namespace Switch {
         /// Chars is the default property of the StringBuilder class. In C++, it is an indexer. This means that individual characters can be retrieved from the Chars property as shown in the following example, which counts the number of alphabetic, white-space, and punctuation characters in a string.
         /// @include StringBuilder.cpp
         char32& operator [](int32 index) {
-          if(index < 0 || index >= static_cast<int32>(this->string.size()))
+          if (index < 0 || index >= static_cast<int32>(this->string.size()))
             throw ArgumentOutOfRangeException(_caller);
           return this->string[index];
         }
@@ -183,7 +183,7 @@ namespace Switch {
         _property<int32> Capacity {
           _get {return static_cast<int32>(this->string.capacity());},
           _set {
-            if(value < static_cast<int32>(this->string.size()) || value > this->maxCapacity)
+            if (value < static_cast<int32>(this->string.size()) || value > this->maxCapacity)
               throw ArgumentOutOfRangeException(_caller);
             this->string.reserve(value);
           }
@@ -202,9 +202,9 @@ namespace Switch {
         _property<int32> Length {
           _get {return static_cast<int32>(this->string.size());},
           _set {
-            if(value < 0 || value >= MaxCapacity())
+            if (value < 0 || value >= MaxCapacity())
               throw ArgumentOutOfRangeException(_caller);
-            if(value > static_cast<int32>(this->string.size()))
+            if (value > static_cast<int32>(this->string.size()))
               this->string.append(value - static_cast<int32>(this->string.size()), 0);
             else
               this->string.resize(value);
@@ -306,9 +306,9 @@ namespace Switch {
         /// @remarks The Append(Char*, Int32) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object.
         /// @remarks The capacity of this instance is adjusted as needed.
         StringBuilder& Append(const char* value, int32 valueCount) {
-          if(valueCount < 0)
+          if (valueCount < 0)
             throw ArgumentOutOfRangeException(_caller);
-          for(int index = 0; index < valueCount; index++)
+          for (int index = 0; index < valueCount; index++)
             this->Append(Char(value[index]).ToString());
           return *this;
         }
@@ -322,9 +322,9 @@ namespace Switch {
         /// @remarks The Append(Char*, Int32) method modifies the existing instance of this class; it does not return a new class instance. Because of this, you can call a method or property on the existing reference and you do not have to assign the return value to a StringBuilder object.
         /// @remarks The capacity of this instance is adjusted as needed.
         StringBuilder& Append(const char32* value, int32 valueCount) {
-          if(valueCount < 0)
+          if (valueCount < 0)
             throw ArgumentOutOfRangeException(_caller);
-          for(int index = 0; index < valueCount; index++)
+          for (int index = 0; index < valueCount; index++)
             this->Append(Char(value[index]).ToString());
           return *this;
         }
@@ -348,7 +348,7 @@ namespace Switch {
         /// // *****$1,346.19*****
         /// @endcode
         StringBuilder& Append(char32 value, int32 repeatCount) {
-          if(repeatCount < 0)
+          if (repeatCount < 0)
             throw ArgumentOutOfRangeException(_caller);
           this->Capacity += repeatCount;
           this->string.append(repeatCount, value);
@@ -392,10 +392,10 @@ namespace Switch {
         /// // The characters in the array: aeiou
         /// @endcode
         StringBuilder& Append(const Array<char32>& value, int32 startIndex, int32 count) {
-          if(startIndex < 0 || count < 0 || startIndex + count > value.Length)
+          if (startIndex < 0 || count < 0 || startIndex + count > value.Length)
             throw ArgumentOutOfRangeException(_caller);
           this->Capacity += value.Count();
-          for(int i = startIndex; i < startIndex + count; i++)
+          for (int i = startIndex; i < startIndex + count; i++)
             this->Append(value[i]);
           return *this;
         }
@@ -551,7 +551,7 @@ namespace Switch {
         /// // The value of the flag is False.
         /// @endcode
         StringBuilder& Append(const String& value) {
-          if(this->Length() + value.Length() > this->MaxCapacity())
+          if (this->Length() + value.Length() > this->MaxCapacity())
             throw ArgumentOutOfRangeException(_caller);
           this->string.append((const char32*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().from_bytes(value.Data()).c_str());
           return *this;
@@ -695,7 +695,7 @@ namespace Switch {
         bool Equals(const StringBuilder& value) const {return this->string == value.string;}
         
         int EnsureCapacity(int capacity) {
-          if(this->Capacity < capacity)
+          if (this->Capacity < capacity)
             this->Capacity = capacity;
           return this->Capacity;
         }

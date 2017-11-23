@@ -81,7 +81,7 @@ namespace Switch {
       private:
         const T& GetValue() const {
           _lock(this->values.SyncRoot) {
-            if(!this->valueFactory.IsEmpty() && !this->IsValueCreated)
+            if (!this->valueFactory.IsEmpty() && !this->IsValueCreated)
               this->values[Thread::CurrentThread().ManagedThreadId] = this->valueFactory();
             return this->values[Thread::CurrentThread().ManagedThreadId];
           }
@@ -95,7 +95,7 @@ namespace Switch {
         }
         
         Array<T> GetValues() const {
-          if(!trackAllValues)
+          if (!trackAllValues)
             throw InvalidOperationException(_caller);
           _lock(this->values.SyncRoot) {
             return Array<T>(this->values.Values());

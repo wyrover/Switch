@@ -108,7 +108,7 @@ namespace Switch {
       /// @exception ArgumentNullException dateTime is null.
       /// @exception ArgumentException TimeZoneInfo::Local().IsInvalidDateTime(dateTime) returns true.
       static DateTime ConvertTimeToUtc(const DateTime& dateTime) {
-        if(dateTime.Kind() == DateTimeKind::Utc)
+        if (dateTime.Kind() == DateTimeKind::Utc)
           return dateTime;
           
         return DateTime::SpecifyKind(dateTime.ToUniversalTime(), DateTimeKind::Utc);

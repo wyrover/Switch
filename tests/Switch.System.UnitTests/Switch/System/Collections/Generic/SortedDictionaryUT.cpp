@@ -62,7 +62,7 @@ namespace {
     ASSERT_EQ(5, values.Count);
     
     int k = 0;
-    for(string s : values)
+    for (string s : values)
       ASSERT_TRUE(sorted[k++].Equals(s));
   }
   
@@ -83,7 +83,7 @@ namespace {
     ASSERT_EQ(5, keys.Count);
     
     int k = 0;
-    for(string s : keys)
+    for (string s : keys)
       ASSERT_TRUE(sorted[k++].Equals(s));
   }
   
@@ -99,7 +99,7 @@ namespace {
     
     int k = 0;
     SortedDictionary<string, string>::Enumerator e(dic);
-    while(e.MoveNext()) {
+    while (e.MoveNext()) {
       KeyValuePair<string, string> pair(e.Current);
       ASSERT_EQ(sorted[k++], pair.Key());
     }
@@ -109,7 +109,7 @@ namespace {
     SortedDictionary<string, string> dic;
     
     SortedDictionary<string, string>::Enumerator e(dic);
-    while(e.MoveNext())
+    while (e.MoveNext())
       ASSERT_FALSE(true);
   }
   
@@ -128,13 +128,13 @@ namespace {
     SortedDictionary<string, string>::Enumerator e2(e1);
     
     int k = 1;
-    while(e1.MoveNext()) {
+    while (e1.MoveNext()) {
       KeyValuePair<string, string> pair(e1.Current);
       ASSERT_EQ(sorted[k++], pair.Key());
     }
     
     k = 1;
-    while(e2.MoveNext()) {
+    while (e2.MoveNext()) {
       KeyValuePair<string, string> pair(e2.Current);
       ASSERT_EQ(sorted[k++], pair.Key());
     }

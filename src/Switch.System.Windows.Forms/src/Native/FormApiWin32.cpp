@@ -20,7 +20,7 @@ void Native::FormApi::Close(System::Windows::Forms::Form& form) {
 
 intptr Native::FormApi::Create(System::Windows::Forms::Form& form) {
   System::Drawing::Rectangle bounds = form.Bounds;
-  switch(form.StartPosition) {
+  switch (form.StartPosition) {
   case FormStartPosition::WindowsDefaultBounds: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT); break;
   case FormStartPosition::WindowsDefaultLocation: bounds = Drawing::Rectangle(CW_USEDEFAULT, CW_USEDEFAULT, form.Width, form.Height); break;
   }

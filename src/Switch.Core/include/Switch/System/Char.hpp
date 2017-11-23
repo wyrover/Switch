@@ -222,7 +222,7 @@ namespace Switch {
       /// | Zero              | This instance and obj are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and obj is false.  -or- obj is null reference.      |
       int32 CompareTo(const IComparable& obj) const override {
-        if(!is<Char>(obj)) return 1;
+        if (!is<Char>(obj)) return 1;
         return CompareTo(static_cast<const Char&>(obj));
       }
       

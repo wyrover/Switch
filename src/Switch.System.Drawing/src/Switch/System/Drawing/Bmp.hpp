@@ -51,11 +51,11 @@ namespace Switch {
           this->reader.BaseStream().Seek(bmpInfo.size - (bmpInfo.size < 40 ? 12 : 40), Switch::System::IO::SeekOrigin::Current);
           
           Array<Color> colors;
-          if(bmpInfo.compression == bitmapInfoCompressionRgb && bmpInfo.bitCount <= 8)
+          if (bmpInfo.compression == bitmapInfoCompressionRgb && bmpInfo.bitCount <= 8)
             colors = ReadColorTable(bmpInfo.colorUsed ? bmpInfo.colorUsed : 1 << bmpInfo.bitCount);
             
           int32 pixelFormatInfo = 0;
-          if(bmpInfo.bitCount == 16)
+          if (bmpInfo.bitCount == 16)
             pixelFormatInfo = this->reader.ReadInt32();
             
           this->reader.BaseStream().Seek(bmpFile.offBits, Switch::System::IO::SeekOrigin::Begin);
@@ -89,7 +89,7 @@ namespace Switch {
           bmpInfo.planes = this->reader.ReadInt16();
           bmpInfo.bitCount = this->reader.ReadInt16();
           
-          if(bmpInfo.size < 40) {
+          if (bmpInfo.size < 40) {
             bmpInfo.compression = bitmapInfoCompressionRgb;
             bmpInfo.sizeImage = 0;
             bmpInfo.xPixelsPerMeter = 2835; // To check
@@ -109,7 +109,7 @@ namespace Switch {
         
         Array<Color> ReadColorTable(int32 length) {
           Array<Color> colors(length);
-          for(int32 i  = 0; i < colors.Length(); i++) {
+          for (int32 i  = 0; i < colors.Length(); i++) {
             RgbQuad rgbQuad = ReadRgbQuad();
             colors[i] = Color::FromArgb(0xFF, rgbQuad.red, rgbQuad.green, rgbQuad.blue);
           }
@@ -123,15 +123,15 @@ namespace Switch {
           int32 start = Math::Abs(height) - 1;
           int32 end = -1;
           
-          if(height < 0) {
+          if (height < 0) {
             start = 0;
             end = Math::Abs(height);
           }
           
-          for(int32 y = start; y != end; y -= height / Math::Abs(height)) {
+          for (int32 y = start; y != end; y -= height / Math::Abs(height)) {
             byte* ptr = &rawData[y * width * (bitCount == 32 ? 4 : 3)];
             
-            switch(bitCount) {
+            switch (bitCount) {
             case 1: ReadLine1Bit(ptr, width, colors); break;
             case 4: ReadLine4Bits(ptr, width, compression, colors); break;
             case 8: ReadLine8Bits(ptr, width, compression, colors); break;
@@ -147,11 +147,11 @@ namespace Switch {
         
         void ReadLine1Bit(byte* ptr, int32 width, const Array<Color>& colors) {
           byte value = 0;
-          for(int x = width, bit = 128; x > 0; x --) {
-            if(bit == 128)
+          for (int x = width, bit = 128; x > 0; x --) {
+            if (bit == 128)
               value = this->reader.ReadByte();
               
-            if(value & bit) {
+            if (value & bit) {
               ptr[0] = colors[1].R();
               ptr[1] = colors[1].G();
               ptr[2] = colors[1].B();
@@ -162,21 +162,21 @@ namespace Switch {
             }
             ptr += 3;
             
-            if(bit > 1)
+            if (bit > 1)
               bit >>= 1;
             else
               bit = 128;
           }
           
-          for(int32 align = (width + 7) / 8; align & 3; align ++)
+          for (int32 align = (width + 7) / 8; align & 3; align ++)
             this->reader.ReadByte();
         }
         
         void ReadLine4Bits(byte* ptr, int32 width, int32 compression, const Array<Color>& colors) {
-          if(compression != bitmapInfoCompressionRle4) {
+          if (compression != bitmapInfoCompressionRle4) {
             byte value = 0;
-            for(int x = width, bit = 0xf0; x > 0; x--) {
-              if(bit == 0xf0) {
+            for (int x = width, bit = 0xf0; x > 0; x--) {
+              if (bit == 0xf0) {
                 value = this->reader.ReadByte();
                 
                 ptr[0] = colors[(value >> 4) & 15].R();
@@ -193,15 +193,15 @@ namespace Switch {
               }
               ptr += 3;
               
-              for(int32 align = (width + 1) / 2; align & 3; align ++)
+              for (int32 align = (width + 1) / 2; align & 3; align ++)
                 this->reader.ReadByte();
             }
           }
         }
         
         void ReadLine8Bits(byte* ptr, int32 width, int32 compression, const Array<Color>& colors) {
-          if(compression != bitmapInfoCompressionRle8) {
-            for(int32 x = width; x > 0; x--) {
+          if (compression != bitmapInfoCompressionRle8) {
+            for (int32 x = width; x > 0; x--) {
               int32 color = 0;
               
               color = this->reader.ReadByte();
@@ -212,16 +212,16 @@ namespace Switch {
               ptr += 3;
             }
             
-            for(int32 align = width; align & 3; align ++)
+            for (int32 align = width; align & 3; align ++)
               this->reader.ReadByte();
           }
         }
         
         void ReadLine16Bits(byte* ptr, int32 width, int32 pixelFormatInfo) {
-          for(int32 x = width; x > 0; x--) {
+          for (int32 x = width; x > 0; x--) {
             byte b = this->reader.ReadByte();
             byte a = this->reader.ReadByte();
-            if(pixelFormatInfo == 0xF800) {
+            if (pixelFormatInfo == 0xF800) {
               ptr[2] = (byte)((b << 3) & 0xf8);
               ptr[1] = (byte)(((a << 5) & 0xe0) | ((b >> 3) & 0x1c));
               ptr[0] = (byte)(a & 0xf8);
@@ -234,25 +234,25 @@ namespace Switch {
             
           }
           
-          for(int32 align = width * 2; align & 3; align ++)
+          for (int32 align = width * 2; align & 3; align ++)
             this->reader.ReadByte();
         }
         
         void ReadLine24Bits(byte* ptr, int32 width, int32 pixelFormatInfo) {
-          for(int32 x = width; x > 0; x--) {
+          for (int32 x = width; x > 0; x--) {
             ptr[2] = this->reader.ReadByte();
             ptr[1] = this->reader.ReadByte();
             ptr[0] = this->reader.ReadByte();
             ptr += 3;
           }
           
-          for(int32 align = width * 3; align & 3; align ++)
+          for (int32 align = width * 3; align & 3; align ++)
             this->reader.ReadByte();
             
         }
         
         void ReadLine32Bits(byte* ptr, int32 width) {
-          for(int32 x = width; x > 0; x--) {
+          for (int32 x = width; x > 0; x--) {
             this->reader.ReadByte(); // Read unsed value...
             ptr[3] = 0xFF; // alpha value is always equal to 0xFF
             ptr[2] = this->reader.ReadByte();
@@ -279,7 +279,7 @@ namespace Switch {
           image.horizontalResolution = Convert::ToSingle(bmpInfo.xPixelsPerMeter) / inchesPerMeter;
           image.palette.entries = colors;
           
-          switch(bmpInfo.bitCount) {
+          switch (bmpInfo.bitCount) {
           case 8: image.pixelFormat = Imaging::PixelFormat::Format8bppIndexed; break;
           case 16: image.pixelFormat = pixelFormatInfo == 0xF800 ? Imaging::PixelFormat::Format16bppRgb565 : Imaging::PixelFormat::Format16bppRgb555; break;
           case 24: image.pixelFormat = Imaging::PixelFormat::Format24bppRgb; break;

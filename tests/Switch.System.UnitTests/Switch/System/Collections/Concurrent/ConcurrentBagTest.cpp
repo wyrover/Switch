@@ -15,7 +15,7 @@ namespace SwitchUnitTests {
     bag.Add(4);
     bag.Add(5);
     int index = 0;
-    for(int item : bag)
+    for (int item : bag)
       ASSERT_EQ(values[index++], item);
     ASSERT_EQ(6, index);
   }
@@ -26,7 +26,7 @@ namespace SwitchUnitTests {
     auto enumerator = bag.GetEnumerator();
     bag.Add(6);
     int index = 0;
-    while(enumerator.MoveNext())
+    while (enumerator.MoveNext())
       ASSERT_EQ(values[index++], enumerator.Current());
     ASSERT_EQ(6, index);
   }

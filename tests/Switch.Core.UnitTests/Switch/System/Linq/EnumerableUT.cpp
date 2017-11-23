@@ -11,18 +11,18 @@ using namespace System::Linq;
 namespace {
   static bool IsApproximatelyEquals(double value1, double value2, double epsilon) {
     // If they are equal anyway, just return True.
-    if(value1 == value2)
+    if (value1 == value2)
       return true;
       
     // Handle NaN, Infinity.
-    if(Double::IsInfinity(value1) || Double::IsNaN(value1))
+    if (Double::IsInfinity(value1) || Double::IsNaN(value1))
       return value1 == value2;
-    else if(Double::IsInfinity(value2) || Double::IsNaN(value2))
+    else if (Double::IsInfinity(value2) || Double::IsNaN(value2))
       return value1 == value2;
       
     // Handle zero to avoid division by zero
     double divisor = Math::Max(value1, value2);
-    if(divisor == 0.0)
+    if (divisor == 0.0)
       divisor = Math::Min(value1, value2);
       
     return Math::Abs(value1 - value2) / divisor <= epsilon;
@@ -46,16 +46,16 @@ namespace {
     }
     
     int32 CompareTo(const IComparable& other) const override {
-      if(!is<Pet>(other))
+      if (!is<Pet>(other))
         return 1;
         
       int sumOther = as<Pet>(other).age + as<Pet>(other).name.Length();
       int sumThis = age + name.Length();
       
-      if(sumOther > sumThis)
+      if (sumOther > sumThis)
         return -1;
         
-      if(sumOther == sumThis)
+      if (sumOther == sumThis)
         return 0;
         
       return 1;

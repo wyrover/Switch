@@ -10,37 +10,37 @@ namespace {
 
 Mutex::Mutex(bool initiallyOwned, const string& name) {
   bool createdNew = true;
-  if(name != "")
+  if (name != "")
     this->operator=(mutexes.AddOrCreate(name, createdNew));
-  if(createdNew) {
+  if (createdNew) {
     *this->name = name;
-    if(initiallyOwned)
+    if (initiallyOwned)
       this->WaitOne();
   }
 }
 
 Mutex::Mutex(bool initiallyOwned, const string& name, bool& createdNew) {
   createdNew = true;
-  if(name != "")
+  if (name != "")
     this->operator=(mutexes.AddOrCreate(name, createdNew));
-  if(createdNew) {
+  if (createdNew) {
     *this->name = name;
-    if(initiallyOwned)
+    if (initiallyOwned)
       this->WaitOne();
   }
 }
 
 void Mutex::Close() {
-  if(this->mutex == null)
+  if (this->mutex == null)
     return;
-  if(*this->name != "")
+  if (*this->name != "")
     mutexes.Remove(*this->name);
   this->name.Reset();
   this->mutex.Reset();
 }
 
 Mutex Mutex::OpenExisting(const string& name) {
-  if(!mutexes.Conatains(name))
+  if (!mutexes.Conatains(name))
     throw WaitHandleCannotBeOpenedException(_caller);
   bool createNew;
   Mutex value = mutexes.AddOrCreate(name, createNew);
@@ -48,7 +48,7 @@ Mutex Mutex::OpenExisting(const string& name) {
 }
 
 bool Mutex::TryOpenExisting(const string& name, Mutex& result) {
-  if(!mutexes.Conatains(name))
+  if (!mutexes.Conatains(name))
     return false;
   bool createNew;
   result = mutexes.AddOrCreate(name, createNew);

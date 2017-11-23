@@ -13,7 +13,7 @@ namespace SwitchUnitTests {
     Array<byte> bytes(512);
     try {
       socket.Receive(bytes);
-    } catch(const SocketException& e) {
+    } catch (const SocketException& e) {
       ASSERT_EQ(SocketError::TimedOut, e.SocketErrorCode());
     }
   }

@@ -9,7 +9,7 @@ namespace SwitchUnitTests {
     const char chars[] = "Test string";
     
     int32 index = 0;
-    for(auto c : str)
+    for (auto c : str)
       ASSERT_EQ(c, char32_t(chars[index++]));
   }
   
@@ -18,7 +18,7 @@ namespace SwitchUnitTests {
     const int results[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     
     int32 index = 0;
-    for(const auto& value : values)
+    for (const auto& value : values)
       ASSERT_EQ(value, results[index++]);
     ASSERT_EQ(10, index);
   }

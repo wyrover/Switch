@@ -17,9 +17,9 @@ void Panel::CreateHandle() {
 }
 
 void Panel::SetBorderStyle(System::Windows::Forms::BorderStyle borderStyle) {
-  if(this->borderStyle != borderStyle) {
+  if (this->borderStyle != borderStyle) {
     this->borderStyle = borderStyle;
-    if(this->IsHandleCreated)
+    if (this->IsHandleCreated)
       Native::PanelApi::SetBorderStyle(*this);
   }
 }

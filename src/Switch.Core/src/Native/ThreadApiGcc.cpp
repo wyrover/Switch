@@ -27,7 +27,7 @@ void Native::ThreadApi::SetNameOfCurrentThread(const string& name) {
 bool Native::ThreadApi::SetPriority(intptr handle, int32 priority) {
   int32 policy;
   sched_param schedParam;
-  if(::pthread_getschedparam((pthread_t)handle, &policy, &schedParam) != 0)
+  if (::pthread_getschedparam((pthread_t)handle, &policy, &schedParam) != 0)
     return false;
     
   schedParam.sched_priority = (int32)ceil(((double)priority * (sched_get_priority_max(policy) - sched_get_priority_min(policy)) / 4) + sched_get_priority_min(policy));

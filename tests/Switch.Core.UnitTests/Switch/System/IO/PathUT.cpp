@@ -260,7 +260,7 @@ namespace {
   }
   
   TEST_F(PathTest, DirectorySeparatorChar) {
-    if(Environment::OSVersion().Platform() == PlatformID::Unix || Environment::OSVersion().Platform() == PlatformID::MacOSX || Environment::OSVersion().Platform() == PlatformID::IOs || Environment::OSVersion().Platform() == PlatformID::Android)
+    if (Environment::OSVersion().Platform() == PlatformID::Unix || Environment::OSVersion().Platform() == PlatformID::MacOSX || Environment::OSVersion().Platform() == PlatformID::IOs || Environment::OSVersion().Platform() == PlatformID::Android)
       ASSERT_EQ(char32('/'), System::IO::Path::DirectorySeparatorChar());
     else
       ASSERT_EQ(char32('\\'), System::IO::Path::DirectorySeparatorChar());

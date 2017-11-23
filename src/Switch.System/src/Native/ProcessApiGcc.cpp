@@ -40,14 +40,14 @@ namespace {
   
   string GetProcessPath(pid_t id) {
     char path[PROC_PIDPATHINFO_SIZE + 1] = {0};
-    if(proc_pidinfo(id, PROC_PIDPATHINFO, 0, &path, PROC_PIDPATHINFO_SIZE) != 0)
+    if (proc_pidinfo(id, PROC_PIDPATHINFO, 0, &path, PROC_PIDPATHINFO_SIZE) != 0)
       throw System::InvalidOperationException(_caller);
     return path;
   }
   
   string GetProcessName(pid_t id) {
     char name[1024] = {0};
-    if(proc_name(id, name, 1024) != 0 || string::IsNullOrEmpty(name))
+    if (proc_name(id, name, 1024) != 0 || string::IsNullOrEmpty(name))
       return System::IO::Path::GetFileNameWithoutExtension(GetProcessPath(id));
     return name;
   }
@@ -62,8 +62,8 @@ namespace {
     
     pid_t pids[16384];
     int count = proc_listallpids(&pids, 16384 * sizeof(pid_t));
-    for(int index = 0; index < count; index++)
-      if(pids[index] != 0)
+    for (int index = 0; index < count; index++)
+      if (pids[index] != 0)
         processes.Add(pids[index]);
     return processes.ToArray();
   }
@@ -90,10 +90,10 @@ System::Array<intptr> GetProcesses() {
 
 intptr Native::ProcessApi::Start(const System::Diagnostics::ProcessStartInfo& processStartInfo) {
   pid_t processId = fork();
-  if(processId == 0) {
+  if (processId == 0) {
     System::Array<string> subStrings = string::Format("{0}{1}{2}", processStartInfo.FileName, string::IsNullOrEmpty(processStartInfo.Arguments) ? "" : " ", processStartInfo.Arguments()).Split(' ');
     System::Array<const char*> arguments(subStrings.Length + 1);
-    for(int i = 0; i < subStrings.Length; i++)
+    for (int i = 0; i < subStrings.Length; i++)
       arguments[i] = subStrings[i].Data();
     arguments[subStrings.Length] = null;
     execv(processStartInfo.FileName().Data(), (char* const*)arguments.Data());

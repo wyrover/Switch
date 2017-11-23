@@ -29,7 +29,7 @@ _property<int32> Trace::IndentLevel {
   [] {return indentLevel;},
   [](int32 value) {
     indentLevel = value;
-    for(auto& listener : __get_listeners__())
+    for (auto& listener : __get_listeners__())
       listener.IndentLevel = indentLevel;
   }
 };
@@ -38,7 +38,7 @@ _property<int32> Trace::IndentSize {
   [] {return indentSize;},
   [](int32 value) {
     indentSize = value;
-    for(auto& listener : __get_listeners__())
+    for (auto& listener : __get_listeners__())
       listener.IndentSize = indentSize;
   }
 };

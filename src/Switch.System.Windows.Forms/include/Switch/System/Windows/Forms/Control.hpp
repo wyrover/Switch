@@ -132,9 +132,9 @@ namespace Switch {
             defaultForeColor(control.defaultForeColor), enabled(control.enabled), foreColor(control.foreColor), /*handle(control.handle),*/ location(control.location), messageActions(control.messageActions),
             name(control.name), parent(control.parent), size(control.size), state(control.state), style(control.style), tabStop(control.tabStop), text(control.text), visible(control.visible) {}
           ~Control() {
-            if(this->Parent() != null)
+            if (this->Parent() != null)
               this->Parent()().controls.Remove(*this);
-            if(this->IsHandleCreated)
+            if (this->IsHandleCreated)
               this->DestroyHandle();
           }
           /// @endcond
@@ -146,7 +146,7 @@ namespace Switch {
           _property<System::Drawing::Color> BackColor {
             _get { return (!this->backColor.HasValue && this->parent != null) ? this->parent().BackColor : this->backColor.GetValueOrDefault(DefaultBackColor); },
             _set {
-              if(this->backColor != value) {
+              if (this->backColor != value) {
                 this->backColor = value;
                 this->OnBackColorChanged(EventArgs::Empty());
               }
@@ -175,7 +175,7 @@ namespace Switch {
           _property<System::Drawing::Size> ClientSize {
             _get{ return this->clientSize; },
             _set{
-              if(this->clientSize != value) {
+              if (this->clientSize != value) {
                 this->clientSize = value;
                 this->OnClientSizeChanged(EventArgs::Empty());
               }
@@ -198,7 +198,7 @@ namespace Switch {
           _property<bool> Enabled{
             _get {return this->enabled; },
             _set {
-              if(this->enabled != value) {
+              if (this->enabled != value) {
                 this->enabled = value;
                 this->OnEnabledChanged(EventArgs::Empty());
               }
@@ -208,7 +208,7 @@ namespace Switch {
           _property<System::Drawing::Color> ForeColor {
             _get{ return (!this->foreColor.HasValue && this->parent != null) ? this->parent().ForeColor : this->foreColor.GetValueOrDefault(DefaultForeColor); },
             _set {
-              if(this->foreColor != value) {
+              if (this->foreColor != value) {
                 this->foreColor = value;
                 this->OnForeColorChanged(EventArgs::Empty());
               }
@@ -220,7 +220,7 @@ namespace Switch {
           /// @remarks The value of the Handle property is a Windows HWND. If the handle has not yet been created, referencing this property will force the handle to be created.
           _property<intptr, _readonly> Handle {
             _get {
-              if(!this->IsHandleCreated)
+              if (!this->IsHandleCreated)
                 CreateHandle();
               return this->handle;
             }
@@ -251,7 +251,7 @@ namespace Switch {
           _property<System::Drawing::Point> Location {
             _get { return this->location; },
             _set {
-              if(this->location != value) {
+              if (this->location != value) {
                 this->location = value;
                 this->OnLocationChanged(EventArgs::Empty());
               }
@@ -264,7 +264,7 @@ namespace Switch {
           _property<string> Name {
             _get { return this->name; },
             _set {
-              if(this->name != value) {
+              if (this->name != value) {
                 this->name = value;
                 this->OnNameChanged(EventArgs::Empty());
               }
@@ -290,7 +290,7 @@ namespace Switch {
           _property<System::Drawing::Size> Size {
             _get { return this->size; },
             _set {
-              if(this->size != value) {
+              if (this->size != value) {
                 this->size = value;
                 this->OnSizeChanged(EventArgs::Empty());
               }
@@ -300,7 +300,7 @@ namespace Switch {
           _property<bool> TabStop {
             _get {return this->tabStop;},
             _set {
-              if(this->tabStop != value) {
+              if (this->tabStop != value) {
                 this->tabStop = value;
                 this->OnTabStopChanged(EventArgs::Empty());
               }
@@ -314,7 +314,7 @@ namespace Switch {
           _property<const string&> Text {
             _get->const string& { return this->text; },
             _set {
-              if(this->text != value) {
+              if (this->text != value) {
                 this->text = value;
                 this->OnTextChanged(EventArgs::Empty());
               }
@@ -329,7 +329,7 @@ namespace Switch {
           _property<bool> Visible {
             _get { return this->visible; },
             _set {
-              if(this->visible != value) {
+              if (this->visible != value) {
                 this->visible = value;
                 this->OnVisibleChanged(EventArgs::Empty());
               }
@@ -348,7 +348,7 @@ namespace Switch {
           static ref<Control> FromHandle(intptr handle) {
             try {
               return handles[handle];
-            } catch(...) {
+            } catch (...) {
               return ref<Control>::Null();
             }
           }
@@ -425,8 +425,8 @@ namespace Switch {
           virtual System::Drawing::Size GetDefaultSize() const { return System::Drawing::Size(0, 0); }
           
           virtual void SetParent(ref<Control> parent) {
-            if(this->parent != parent) {
-              if(parent == null && this->parent != null)
+            if (this->parent != parent) {
+              if (parent == null && this->parent != null)
                 this->parent().controls.Remove(*this);
               else
                 const_cast<Control&>(parent()).controls.Add(*this);

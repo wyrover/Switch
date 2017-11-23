@@ -57,10 +57,10 @@ namespace Switch {
           *max_finish_decompress_err = 10;
           *max_destroy_decompress_err = 10;
           
-          if(setjmp(jerr.errhand_)) {
-            if(((*max_finish_decompress_err)-- > 0))
+          if (setjmp(jerr.errhand_)) {
+            if (((*max_finish_decompress_err)-- > 0))
               jpeg_finish_decompress(&dinfo);
-            if((*max_destroy_decompress_err)-- > 0)
+            if ((*max_destroy_decompress_err)-- > 0)
               jpeg_destroy_decompress(&dinfo);
               
             free(max_destroy_decompress_err);
@@ -85,7 +85,7 @@ namespace Switch {
           
           jpeg_start_decompress(&dinfo);
           
-          while(dinfo.output_scanline < dinfo.output_height) {
+          while (dinfo.output_scanline < dinfo.output_height) {
             row = (JSAMPROW)(rawData.Data() + dinfo.output_scanline * dinfo.output_width * dinfo.output_components);
             jpeg_read_scanlines(&dinfo, &row, (JDIMENSION)1);
           }

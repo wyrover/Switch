@@ -30,7 +30,7 @@ bool SByte::TryParse(const string& str, SByte& value) {
 bool SByte::TryParse(const string& str, int32 base, sbyte& value) {
   try {
     value = Parse(str, base);
-  } catch(const Exception&) {
+  } catch (const Exception&) {
     return false;
   }
   return true;
@@ -56,25 +56,25 @@ string SByte::ToString(const string& format, const IFormatProvider&) const {
   int64 arg = Convert::ToInt64(this->value);
   int32 precision;
   char32 type = NumericalFormat::GetFormatType(format, precision);
-  switch(type) {
+  switch (type) {
   case 0:   return NumericalFormat::Format_Custom(arg, format);
   case 'b': return NumericalFormat::Format_B(arg, precision, 8);
   case 'd': return NumericalFormat::Format_D(arg, precision);
   case 'e': return NumericalFormat::Format_E(Convert::ToInt64(this->value), precision == 0 ? 3 : precision, false);
   case 'E': return NumericalFormat::Format_E(Convert::ToInt64(this->value), precision == 0 ? 3 : precision, true);
   case 'f':
-    if(format.Length() == 1) precision = 2;
+    if (format.Length() == 1) precision = 2;
     return NumericalFormat::Format_F(arg, precision);
   case 'g':
   case 'G': {
-    if(precision == 0) precision = 3;
+    if (precision == 0) precision = 3;
     return NumericalFormat::Format_G(arg, precision, type == 'G');
   }
   case 'n':
-    if(format.Length() == 1) precision = 2;
+    if (format.Length() == 1) precision = 2;
     return NumericalFormat::Format_N(arg, precision);
   case 'p':
-    if(format.Length() == 1) precision = 2;
+    if (format.Length() == 1) precision = 2;
     return NumericalFormat::Format_P(arg, precision);
   case 'x': return NumericalFormat::Format_X(arg, precision, false, 2);
   case 'X': return NumericalFormat::Format_X(arg, precision, true,  2);
@@ -87,7 +87,7 @@ int32 SByte::CompareTo(const SByte& value) const {
 }
 
 int32 SByte::CompareTo(const IComparable& obj) const {
-  if(!is<SByte>(obj))
+  if (!is<SByte>(obj))
     return 1;
   return CompareTo(static_cast<const SByte&>(obj));
 }
@@ -101,7 +101,7 @@ bool SByte::ToBoolean(const IFormatProvider&) const {
 }
 
 byte SByte::ToByte(const IFormatProvider&) const {
-  if(this->value < Byte::MinValue)
+  if (this->value < Byte::MinValue)
     throw OverflowException(_caller);
     
   return (sbyte)this->value;
@@ -132,21 +132,21 @@ int64 SByte::ToInt64(const IFormatProvider&) const {
 }
 
 uint16 SByte::ToUInt16(const IFormatProvider&) const {
-  if(this->value < UInt16::MinValue)
+  if (this->value < UInt16::MinValue)
     throw OverflowException(_caller);
     
   return (uint16)this->value;
 }
 
 uint32 SByte::ToUInt32(const IFormatProvider&) const {
-  if(this->value < 0)
+  if (this->value < 0)
     throw OverflowException(_caller);
     
   return (uint32)this->value;
 }
 
 uint64 SByte::ToUInt64(const IFormatProvider&) const {
-  if(this->value < 0)
+  if (this->value < 0)
     throw OverflowException(_caller);
     
   return (uint64)this->value;
@@ -189,7 +189,7 @@ SByte& SByte::operator *=(const SByte& value) {
 }
 
 SByte& SByte::operator /=(const SByte& value) {
-  if(value == 0)
+  if (value == 0)
     throw DivideByZeroException(_caller);
     
   this->value /= value.value;
@@ -197,7 +197,7 @@ SByte& SByte::operator /=(const SByte& value) {
 }
 
 SByte& SByte::operator %=(const SByte& value) {
-  if(value == 0)
+  if (value == 0)
     throw DivideByZeroException(_caller);
     
   this->value %= value;

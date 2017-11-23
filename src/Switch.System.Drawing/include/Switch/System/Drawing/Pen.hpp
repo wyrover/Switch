@@ -67,7 +67,7 @@ namespace Switch {
         _property<System::Drawing::Drawing2D::DashStyle> DashStyle {
           _get {return this->dashStyle;},
           _set {
-            if(this->dashStyle != value) {
+            if (this->dashStyle != value) {
               this->dashStyle = value;
               this->Create();
             }

@@ -31,7 +31,7 @@ namespace Switch {
           _property<bool> Checked {
             _get {return this->CheckState != System::Windows::Forms::CheckState::Unchecked;},
             _set {
-              if(this->Checked != value)
+              if (this->Checked != value)
                 this->CheckState = value ? System::Windows::Forms::CheckState::Checked : System::Windows::Forms::CheckState::Unchecked;
             }
           };
@@ -56,7 +56,7 @@ namespace Switch {
           virtual void OnCheckStateChanged(const EventArgs& e) {this->CheckedChanged(*this, e);}
           
           void OnClick(const EventArgs& e) override {
-            if(this->AutoCheck)
+            if (this->AutoCheck)
               this->Checked = !this->Checked;
             this->Control::OnClick(e);
           }

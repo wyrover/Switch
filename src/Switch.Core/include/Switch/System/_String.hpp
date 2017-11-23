@@ -153,22 +153,22 @@ namespace Switch {
       
       /// @cond
       String(InitializerList<char> il) {
-        for(auto c : il)
+        for (auto c : il)
           this->string.append(c);
       }
       
       String(InitializerList<char16> il) {
-        for(auto c : il)
+        for (auto c : il)
           this->string.append(c);
       }
       
       String(InitializerList<char32> il) {
-        for(auto c : il)
+        for (auto c : il)
           this->string.append(c);
       }
       
       String(InitializerList<wchar> il) {
-        for(auto c : il)
+        for (auto c : il)
           this->string.append(c);
       }
       

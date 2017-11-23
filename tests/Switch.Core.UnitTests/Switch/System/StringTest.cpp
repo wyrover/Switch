@@ -158,7 +158,7 @@ namespace SwitchUnitTests {
   TEST(StringTest, SubscriptOperatorWithChar) {
     Array<char> chars = {'T', 'e', 's', 't'};
     string s = "Test";
-    for(int i = 0; i < chars.Length; i++)
+    for (int i = 0; i < chars.Length; i++)
       ASSERT_EQ(chars[i], static_cast<char>(s[i]));
   }
   
@@ -166,7 +166,7 @@ namespace SwitchUnitTests {
     Array<char32> chars = {U'こ', U'ん', U'に', U'ち', U'は', U'世', U'界', U'!'};
     string s = U"こんにちは世界!";
     int i = 0;
-    for(char32 c : chars)
+    for (char32 c : chars)
       ASSERT_EQ(c, s[i++]);
     ASSERT_EQ(chars.Length, i);
   }
@@ -482,7 +482,7 @@ namespace SwitchUnitTests {
     string str = "This is a test for enumerator";
     string output;
     System::Collections::Generic::Enumerator<char32> enumerator = str.GetEnumerator();
-    while(enumerator.MoveNext())
+    while (enumerator.MoveNext())
       output += enumerator.Current;
     ASSERT_EQ("This is a test for enumerator", output);
   }
@@ -490,7 +490,7 @@ namespace SwitchUnitTests {
   TEST(StringTest, ForeachOnString) {
     string str = "This is a test for foreach";
     string output;
-    for(char32 item : str)
+    for (char32 item : str)
       output += item;
     ASSERT_EQ("This is a test for foreach", output);
   }
@@ -498,7 +498,7 @@ namespace SwitchUnitTests {
   TEST(StringTest, IteratorOnString) {
     string str = "This is a test for iterator";
     string output;
-    for(string::const_iterator iterator = str.cbegin(); iterator != str.cend(); ++iterator)
+    for (string::const_iterator iterator = str.cbegin(); iterator != str.cend(); ++iterator)
       output += *iterator;
     ASSERT_EQ("This is a test for iterator", output);
   }
@@ -506,7 +506,7 @@ namespace SwitchUnitTests {
   TEST(StringTest, ForOnString) {
     string str = "This is a test for for";
     string output;
-    for(int32 index = 0; index < str.Length; ++index)
+    for (int32 index = 0; index < str.Length; ++index)
       output += str[index];
     ASSERT_EQ("This is a test for for", output);
   }

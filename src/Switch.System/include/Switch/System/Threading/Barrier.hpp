@@ -80,9 +80,9 @@ namespace Switch {
         /// @remarks If the barrier is currently executing a post phase action, this call is blocked until the post phase action completes and the barrier has moved on to the next phase.
         int64 AddParticipants(int32 participantCount) {
           _lock(*this) {
-            if(participantCount < 0 || as<int64>(this->data->participantCount) + participantCount > as<int64>(Int32::MaxValue))
+            if (participantCount < 0 || as<int64>(this->data->participantCount) + participantCount > as<int64>(Int32::MaxValue))
               throw ArgumentOutOfRangeException(_caller);
-            if(this->data->runPostPhaseAction)
+            if (this->data->runPostPhaseAction)
               throw InvalidOperationException(_caller);
             this->data->participantCount += participantCount;
             this->data->participantsRemaining += participantCount;
@@ -106,11 +106,11 @@ namespace Switch {
         /// @remarks If the barrier is currently executing a post phase action, this call is blocked until the post phase action completes and the barrier has moved on to the next phase.
         int64 RemoveParticipants(int32 participantCount) {
           _lock(*this) {
-            if(participantCount < 0)
+            if (participantCount < 0)
               throw ArgumentOutOfRangeException(_caller);
-            if(this->data->participantCount == 0 || this->data->runPostPhaseAction || this->data->participantsRemaining < this->data->participantCount - participantCount)
+            if (this->data->participantCount == 0 || this->data->runPostPhaseAction || this->data->participantsRemaining < this->data->participantCount - participantCount)
               throw InvalidOperationException(_caller);
-            if(this->data->participantCount < participantCount)
+            if (this->data->participantCount < participantCount)
               throw ArgumentOutOfRangeException(_caller);
             this->data->participantCount -= participantCount;
             this->data->participantsRemaining -= participantCount;
@@ -131,24 +131,24 @@ namespace Switch {
         /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite(-1) to wait indefinitely.
         /// @return if all participants reached the barrier within the specified time; otherwise false.
         bool SignalAndWait(int32 millisecondsTimeout) {
-          if(millisecondsTimeout < -1)
+          if (millisecondsTimeout < -1)
             throw ArgumentOutOfRangeException(_caller);
             
           std::unique_lock<std::mutex> lock(this->data->mutex);
           int64 currentPhaseNumber = this->data->currentPhaseNumber;
           
-          if(Signal())
+          if (Signal())
             return true;
             
           bool result = false;
-          while(currentPhaseNumber == this->data->currentPhaseNumber) {
-            if(millisecondsTimeout == -1) {
+          while (currentPhaseNumber == this->data->currentPhaseNumber) {
+            if (millisecondsTimeout == -1) {
               this->data->cond.wait(lock);
               result = true;
             } else
               result = this->data->cond.wait_for(lock, std::chrono::milliseconds(millisecondsTimeout)) == std::cv_status::no_timeout;
               
-            if(this->data->participantsPostPhaseExceptionRemainin-- > 0)
+            if (this->data->participantsPostPhaseExceptionRemainin-- > 0)
               throw BarrierPostPhaseException(_caller);
           }
           return result;
@@ -157,11 +157,11 @@ namespace Switch {
       private:
         bool Signal() {
           _lock(*this) {
-            if(--this->data->participantsRemaining == 0) {
+            if (--this->data->participantsRemaining == 0) {
               this->data->runPostPhaseAction = true;
               try {
                 this->data->postPhaseAction(*this);
-              } catch(...) {
+              } catch (...) {
                 this->data->runPostPhaseAction = false;
                 this->data->currentPhaseNumber++;
                 this->data->participantsRemaining = this->data->participantCount;

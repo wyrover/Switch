@@ -77,7 +77,7 @@ namespace Switch {
         intptr ToHFont() const {return this->data().hfont;}
         
         bool IsStyleAvaible(const System::Drawing::FontStyle& style) const {
-          if(style == System::Drawing::FontStyle::Regular)
+          if (style == System::Drawing::FontStyle::Regular)
             return true;
           return System::Drawing::FontStyle(int(this->data().fontStyle) & int(style)) == style;
         }

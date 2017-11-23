@@ -21,7 +21,7 @@ namespace Switch {
       struct _export SpinLock : public Object {
       public:
         void Enter(bool lockTaken) {
-          while(this->lock.test_and_set(std::memory_order_acquire));
+          while (this->lock.test_and_set(std::memory_order_acquire));
         }
         
         void Exit() {this->Exit(false);}

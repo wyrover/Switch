@@ -109,7 +109,7 @@ namespace {
     stack.Push(12);
     Enumerator<Int32> enumerator = stack.GetEnumerator();
     Int32 index = 0;
-    while(enumerator.MoveNext())
+    while (enumerator.MoveNext())
       EXPECT_EQ(enumerator.Current(), 12 - index++);
     EXPECT_EQ(index, 12);
   }
@@ -133,7 +133,7 @@ namespace {
     
     Enumerator<Int32> enumerator = stack.GetEnumerator();
     Int32 index = 0;
-    while(enumerator.MoveNext())
+    while (enumerator.MoveNext())
       EXPECT_EQ(enumerator.Current(), 12 - index++);
     EXPECT_EQ(index, 12);
   }
@@ -157,7 +157,7 @@ namespace {
     
     Enumerator<Int32> Enumerator = arrayDest.GetEnumerator();
     Int32 index = 0;
-    while(Enumerator.MoveNext())
+    while (Enumerator.MoveNext())
       EXPECT_EQ(Enumerator.Current(), 10 - index++);
     EXPECT_EQ(index, 10);
   }

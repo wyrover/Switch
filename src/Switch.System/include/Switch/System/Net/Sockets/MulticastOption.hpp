@@ -68,7 +68,7 @@ namespace Switch {
           _property<int32> InterfaceIndex {
             _get {return this->interfaceIndex;},
             _set {
-              if(value < 0)
+              if (value < 0)
                 throw ArgumentOutOfRangeException(_caller);
               this->interfaceIndex = value;
             }

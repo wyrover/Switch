@@ -6,7 +6,7 @@
 
 namespace {
   int32 LevelToNative(int32 level) {
-    switch(level) {
+    switch (level) {
     case 0: return LOG_EMERG;
     case 1: return LOG_ALERT;
     case 2: return LOG_CRIT;
@@ -21,7 +21,7 @@ namespace {
 }
 
 void Native::DebuggerApi::Log(int32 level, const string& category, const string& message) {
-  if(string::IsNullOrEmpty(category))
+  if (string::IsNullOrEmpty(category))
     syslog(LevelToNative(level) | LOG_USER, "%s", message.Data());
   else
     syslog(LevelToNative(level) | LOG_USER, "%.256s: %s", category.Data(), message.Data());

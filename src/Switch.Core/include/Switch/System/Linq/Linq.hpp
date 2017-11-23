@@ -102,14 +102,14 @@ namespace Switch {
   
   template<__order__ order, typename TSource, typename TKey>
   auto orderby(System::Func<const TSource&, TKey> keySelector) {
-    if(order == descending)
+    if (order == descending)
       return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderByDescending(keySelector);
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderBy(keySelector);
   }
   
   template<__order__ order, typename TSource>
   auto orderby(System::Func<const TSource&, TSource> keySelector) {
-    if(order == descending)
+    if (order == descending)
       return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderByDescending(keySelector);
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderBy(keySelector);
   }

@@ -69,8 +69,8 @@ namespace Switch {
         }
         
         int32 IndexOf(const TraceListener& value) const override {
-          for(int32 index = 0; index < this->list.Count; index++) {
-            if(*this->list[index] == value)
+          for (int32 index = 0; index < this->list.Count; index++) {
+            if (*this->list[index] == value)
               return index;
           }
           return -1;
@@ -91,16 +91,16 @@ namespace Switch {
         
         const TraceListener& operator[](const string& name) const {
           static NullTraceListener nullTraceListener;
-          for(const auto& item : this->list)
-            if(item->Name == name)
+          for (const auto& item : this->list)
+            if (item->Name == name)
               return *item;
           return nullTraceListener;
         }
         
         TraceListener& operator[](const string& name) {
           static NullTraceListener nullTraceListener;
-          for(auto& item : this->list)
-            if(item->Name == name)
+          for (auto& item : this->list)
+            if (item->Name == name)
               return *item;
           return nullTraceListener;
         }
@@ -108,7 +108,7 @@ namespace Switch {
         bool Remove(const TraceListener& value) override {
           _lock(this->SyncRoot()) {
             int32 index = IndexOf(value);
-            if(index == -1)return false;
+            if (index == -1)return false;
             this->RemoveAt(index);
           }
           return true;

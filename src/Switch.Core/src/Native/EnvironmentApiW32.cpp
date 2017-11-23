@@ -14,7 +14,7 @@
 static string CreateProcess(const string& command) {
   FILE* fs = _popen(command.Data(), "r");
   string result;
-  while(!feof(fs)) {
+  while (!feof(fs)) {
     char buf[512];
     int32 bufLength = static_cast<int>(fread(buf, 1, 512, fs));
     buf[bufLength] = 0;
@@ -35,13 +35,13 @@ string Native::EnvironmentApi::NewLine() {
 int32 Native::EnvironmentApi::GetOsVersion(int32& major, int32& minor, int32& build, int32& revision) {
   string result = CreateProcess("ver");
   System::Array<string> numbers = result.Substring(result.LastIndexOf(" ")).Replace("]", "").Split({ '.', '\n' });
-  if(numbers.Length() < 1 || !System::Int32::TryParse(numbers[0], major))
+  if (numbers.Length() < 1 || !System::Int32::TryParse(numbers[0], major))
     major = 0;
-  if(numbers.Length() < 2 || !System::Int32::TryParse(numbers[1], minor))
+  if (numbers.Length() < 2 || !System::Int32::TryParse(numbers[1], minor))
     minor = 0;
-  if(numbers.Length() < 3 || !System::Int32::TryParse(numbers[2], build))
+  if (numbers.Length() < 3 || !System::Int32::TryParse(numbers[2], build))
     build = 0;
-  if(numbers.Length() < 4 || !System::Int32::TryParse(numbers[3], revision))
+  if (numbers.Length() < 4 || !System::Int32::TryParse(numbers[3], revision))
     revision = 0;
   return 0;
 }

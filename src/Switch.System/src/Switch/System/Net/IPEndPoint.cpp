@@ -31,7 +31,7 @@ refptr<EndPoint> IPEndPoint::Create(const SocketAddress& socketAddress) const {
   endPoint->addressFamily = socketAddress.GetAddressFamily();
   endPoint->port = IPAddress::NetworkToHostOrder(BitConverter::ToUInt16(socketAddress.bytes, 2));
   endPoint->address = IPAddress(socketAddress[4], socketAddress[5], socketAddress[6], socketAddress[7]);
-  if(endPoint->addressFamily != Sockets::AddressFamily::InterNetwork)
+  if (endPoint->addressFamily != Sockets::AddressFamily::InterNetwork)
     endPoint->address.ScopeId = IPAddress::NetworkToHostOrder(BitConverter::ToInt64(socketAddress.bytes, 8));
   return endPoint;
 }
@@ -41,14 +41,14 @@ SocketAddress IPEndPoint::Serialize() const {
   Array<byte> portByes =  BitConverter::GetBytes(IPAddress::HostToNetworkOrder(Convert::ToUInt16(this->port)));
   SocketAddress socketAddress(this->addressFamily, addressBytes.Length + 8 + 4);
   int32 index = 2;
-  for(byte b : portByes)
+  for (byte b : portByes)
     socketAddress[index++] = b;
-  for(byte b : addressBytes)
+  for (byte b : addressBytes)
     socketAddress[index++] = b;
     
-  if(AddressFamily != Sockets::AddressFamily::InterNetwork) {
+  if (AddressFamily != Sockets::AddressFamily::InterNetwork) {
     Array<byte> scopeIdBytes = BitConverter::GetBytes(IPAddress::HostToNetworkOrder(this->address.ScopeId));
-    for(byte b : scopeIdBytes)
+    for (byte b : scopeIdBytes)
       socketAddress[index++] = b;
   }
   return socketAddress;
@@ -60,7 +60,7 @@ void IPEndPoint::SetAddress(const IPAddress& address) {
 }
 
 void IPEndPoint::SetPort(int32 port) {
-  if(port < MinPort || port > MaxPort)
+  if (port < MinPort || port > MaxPort)
     throw ArgumentOutOfRangeException(_caller);
     
   this->port = port;

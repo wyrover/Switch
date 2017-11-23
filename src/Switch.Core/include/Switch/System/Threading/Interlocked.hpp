@@ -81,7 +81,7 @@ namespace Switch {
         static T CompareExchange(object& location, const object& value, const object& comparand) {
           T retValue = location;
           std::lock_guard<std::mutex> lock(guard);
-          if(location == comparand)
+          if (location == comparand)
             location = value;
           return retValue;
         }
@@ -95,7 +95,7 @@ namespace Switch {
         static T CompareExchange(T& location, T value, T comparand) {
           T retValue = location;
           std::lock_guard<std::mutex> lock(guard);
-          if(location == comparand)
+          if (location == comparand)
             location = value;
           return retValue;
         }

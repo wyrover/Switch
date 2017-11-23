@@ -62,13 +62,13 @@ namespace Switch {
         /// @return an absolute path, this method returns path2.
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string Combine(const string& path1, const string& path2) {
-          if(path1.IndexOfAny(GetInvalidPathChars()) != -1 || path2.IndexOfAny(GetInvalidPathChars()) != -1)
+          if (path1.IndexOfAny(GetInvalidPathChars()) != -1 || path2.IndexOfAny(GetInvalidPathChars()) != -1)
             throw ArgumentException(_caller);
             
-          if(string::IsNullOrEmpty(path2))
+          if (string::IsNullOrEmpty(path2))
             return path1;
             
-          if(string::IsNullOrEmpty(path1) || IsPathRooted(path2))
+          if (string::IsNullOrEmpty(path1) || IsPathRooted(path2))
             return path2;
             
           return string::Concat(path1, path1.EndsWith(DirectorySeparatorChar()) ? string::Empty : Char(DirectorySeparatorChar()).ToString(), path2);
@@ -101,7 +101,7 @@ namespace Switch {
         /// @exception ArgumentException path contains one or more of the invalid characters
         static string Combine(const Array<string>& paths) {
           string result;
-          for(auto path : paths)
+          for (auto path : paths)
             result = Combine(result, path);
           return result;
         }

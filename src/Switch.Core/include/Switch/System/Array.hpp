@@ -71,11 +71,11 @@ namespace Switch {
       }
       
       friend std::ostream& operator<<(std::ostream& output, const GenericArrayObject& value) {
-        if(value.Length == 0)
+        if (value.Length == 0)
           return output << "{empty}";
           
         output << "{";
-        for(int index = 0; index < value.Length; index++)
+        for (int index = 0; index < value.Length; index++)
           output << (index != 0 ? ", " : "") << value[index];
         return output << "}";
       }
@@ -125,9 +125,9 @@ namespace Switch {
           void Reset() override {this->beforeFirst = true; this->operationNumber = this->array.operationNumber; this->iterator = this->array.array.begin();}
           
           bool MoveNext() override {
-            if(this->operationNumber != this->array.operationNumber) throw System::InvalidOperationException(_caller);
-            if(this->iterator == this->array.array.end()) return false;
-            if(this->beforeFirst) {
+            if (this->operationNumber != this->array.operationNumber) throw System::InvalidOperationException(_caller);
+            if (this->iterator == this->array.array.end()) return false;
+            if (this->beforeFirst) {
               this->beforeFirst = false;
               return this->iterator != this->array.array.end();
             }
@@ -141,7 +141,7 @@ namespace Switch {
 #pragma warning(disable:4800)
           #endif
           const T& GetCurrent() const override {
-            if(this->beforeFirst || this->iterator == this->array.array.end()) throw System::InvalidOperationException(_caller);
+            if (this->beforeFirst || this->iterator == this->array.array.end()) throw System::InvalidOperationException(_caller);
             return (const T&) * this->iterator;
           }
           #if defined(_WIN32)
@@ -182,7 +182,7 @@ namespace Switch {
       /// The following code example uses GetLowerBound and GetUpperBound to initialize a one-dimensional array and a multidimensional array.
       /// @include ArrayGetLowerBound.cpp
       int32 GetLowerBound(int32 dimension) const {
-        if(dimension < 0 || dimension >= this->Rank) throw System::ArgumentOutOfRangeException(_caller);
+        if (dimension < 0 || dimension >= this->Rank) throw System::ArgumentOutOfRangeException(_caller);
         
         return this->lowerBound[dimension];
       }
@@ -195,7 +195,7 @@ namespace Switch {
       /// The following code example uses GetLowerBound and GetUpperBound to initialize a one-dimensional array and a multidimensional array.
       /// @include ArrayGetLowerBound.cpp
       int32 GetUpperBound(int32 dimension) const {
-        if(dimension < 0 || dimension >= this->Rank) throw System::ArgumentOutOfRangeException(_caller);
+        if (dimension < 0 || dimension >= this->Rank) throw System::ArgumentOutOfRangeException(_caller);
         
         return this->upperBound[dimension];
       }
@@ -236,13 +236,13 @@ namespace Switch {
       /// The following code example shows how to determine the index of the first occurrence of a specified element.
       /// @include ArrayIndexOf.cpp
       static int32 IndexOf(const GenericArrayObject& array, const T& value, int32 index, int32 count) {
-        if(index < 0 || count < 0)
+        if (index < 0 || count < 0)
           throw System::ArgumentOutOfRangeException(_caller);
-        if(index + count > array.Length)
+        if (index + count > array.Length)
           throw System::ArgumentException(_caller);
           
-        for(int32 increment = 0; increment < count; increment++) {
-          if(array[index + increment] == value)
+        for (int32 increment = 0; increment < count; increment++) {
+          if (array[index + increment] == value)
             return index + increment;
         }
         return -1;
@@ -263,33 +263,33 @@ namespace Switch {
     protected:
       /// @cond
       T& operator[](int32 index) override {
-        if(index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(_caller);
+        if (index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(_caller);
         
         return (T&)this->array[index];
       }
       
       const T& operator[](int32 index) const override {
-        if(index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(_caller);
+        if (index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(_caller);
         
         return (T&)this->array[index];
       }
       
       void CopyTo(Array<T>& array, int32 index) const override {
-        if(index < 0) throw System::ArgumentOutOfRangeException(_caller);
-        if(index + this->Length > array.Length) throw System::ArgumentException(_caller);
+        if (index < 0) throw System::ArgumentOutOfRangeException(_caller);
+        if (index + this->Length > array.Length) throw System::ArgumentException(_caller);
         
-        for(int32 increment = 0; increment < this->Length; increment++)
+        for (int32 increment = 0; increment < this->Length; increment++)
           array[index + increment] = (*this)[increment];
       }
       void Resize(int32 newSize) {
-        if(newSize < 0) throw System::ArgumentOutOfRangeException(_caller);
-        if(newSize == this->length) return;
+        if (newSize < 0) throw System::ArgumentOutOfRangeException(_caller);
+        if (newSize == this->length) return;
         
         this->operationNumber += 1;
-        if(newSize < this->length)
+        if (newSize < this->length)
           this->array.resize(newSize);
         else
-          for(int32 i = this->length; i < newSize; ++i)
+          for (int32 i = this->length; i < newSize; ++i)
             this->array.push_back(T());
         this->length = newSize;
         this->upperBound[0] = newSize - 1;
@@ -301,14 +301,14 @@ namespace Switch {
       }
       
       void Reverse(int32 index, int32 count) {
-        if(index < 0 || count < 0) throw ArgumentOutOfRangeException(_caller);
-        if(index + count > this->Count) throw ArgumentException(_caller);
+        if (index < 0 || count < 0) throw ArgumentOutOfRangeException(_caller);
+        if (index + count > this->Count) throw ArgumentException(_caller);
         
         this->operationNumber++;
         int pos1 = index, pos2 = (index + count) - 1;
         typename std::vector<T, TAllocator>::iterator it1 = this->array.begin() + pos1, it2 = this->array.begin() + pos2;
         
-        while(pos1++ < pos2--)
+        while (pos1++ < pos2--)
           std::iter_swap(it1++, it2--);
       }
       /// @endcond
@@ -325,17 +325,17 @@ namespace Switch {
       GenericArrayObject(const Array<int32, 1>& lengths);
       
       GenericArrayObject(const T* array, int32 length) : length(length), array(length) {
-        if(array == null) throw System::ArgumentNullException(_caller);
-        if(length < 0) throw System::ArgumentOutOfRangeException(_caller);
+        if (array == null) throw System::ArgumentNullException(_caller);
+        if (length < 0) throw System::ArgumentOutOfRangeException(_caller);
         
-        for(int32 index = 0; index < length; index++)
+        for (int32 index = 0; index < length; index++)
           this->array[index] = array[index];
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length - 1);
       }
       
       explicit GenericArrayObject(const Collections::Generic::IEnumerable<T>& enumerable) {
-        for(const auto& value : enumerable)
+        for (const auto& value : enumerable)
           this->array.push_back(value);
         this->length = (int32)this->array.size();
         this->lowerBound.push_back(0);
@@ -343,7 +343,7 @@ namespace Switch {
       }
       
       explicit GenericArrayObject(const std::vector<T>& array) : length((int32)array.size()) {
-        for(T value : array)
+        for (T value : array)
           this->array.push_back(value);
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length - 1);
@@ -351,15 +351,15 @@ namespace Switch {
       
       
       GenericArrayObject(InitializerList<T> il) : length((int32)il.size()) {
-        for(T value : il)
+        for (T value : il)
           this->array.push_back(value);
         this->lowerBound.push_back(0);
         this->upperBound.push_back((int32)il.size() - 1);
       }
       
       GenericArrayObject(InitializerList<InitializerList<T>> il)  {
-        for(const InitializerList<T>& il1 : il)
-          for(T value : il1)
+        for (const InitializerList<T>& il1 : il)
+          for (T value : il1)
             this->array.push_back(value);
         this->lowerBound.push_back(0);
         this->upperBound.push_back((int32)il.size() - 1);
@@ -368,9 +368,9 @@ namespace Switch {
       }
       
       GenericArrayObject(InitializerList<InitializerList<InitializerList<T>>> il)  {
-        for(const InitializerList<InitializerList<T>>& il1 : il)
-          for(const InitializerList<T>& il2 : il1)
-            for(T value : il2)
+        for (const InitializerList<InitializerList<T>>& il1 : il)
+          for (const InitializerList<T>& il2 : il1)
+            for (T value : il2)
               this->array.push_back(value);
         this->lowerBound.push_back(0);
         this->upperBound.push_back((int32)il.size() - 1);
@@ -467,11 +467,11 @@ namespace Switch {
       }
       
       friend std::ostream& operator<<(std::ostream& output, const Array& value) {
-        if(value.Length == 0)
+        if (value.Length == 0)
           return output << "{empty}";
           
         output << "{";
-        for(int index = 0; index < value.Length; index++)
+        for (int index = 0; index < value.Length; index++)
           output << (index != 0 ? ", " : "") << value(index);
         return output << "}";
       }
@@ -603,11 +603,11 @@ namespace Switch {
       }
       
       friend std::ostream& operator<<(std::ostream& output, const Array& value) {
-        if(value.Length == 0)
+        if (value.Length == 0)
           return output << "{empty}";
           
         output << "{";
-        for(int index = 0; index < value.Length; index++)
+        for (int index = 0; index < value.Length; index++)
           output << (index != 0 ? ", " : "") << value(index);
         return output << "}";
       }
@@ -683,10 +683,10 @@ namespace Switch {
       /// @remarks If this method throws an exception while copying, the state of array is undefined.
       /// @remarks This method is an O(n) operation, where n is Length.It performs a shallow copy only.
       void CopyTo(Array<T>& array, int64 index) const {
-        if(index < 0) throw System::ArgumentOutOfRangeException(_caller);
-        if(index + this->Length > array.Length) throw System::ArgumentException(_caller);
+        if (index < 0) throw System::ArgumentOutOfRangeException(_caller);
+        if (index + this->Length > array.Length) throw System::ArgumentException(_caller);
         
-        for(int32 increment = 0; increment < this->Length; increment++)
+        for (int32 increment = 0; increment < this->Length; increment++)
           array[index + increment] = (*this)[increment];
       }
       
@@ -764,13 +764,13 @@ namespace Switch {
       }
       
       friend std::ostream& operator<<(std::ostream& output, const Array& value) {
-        if(value.Length == 0)
+        if (value.Length == 0)
           return output << "{empty}";
           
         output << "{";
-        for(int index1 = 0; index1 < value.GetLength(0); index1++) {
+        for (int index1 = 0; index1 < value.GetLength(0); index1++) {
           output << (index1 == 0 ? "{" : ", {");
-          for(int index2 = 0; index2 < value.GetLength(1); index2++)
+          for (int index2 = 0; index2 < value.GetLength(1); index2++)
             output << (index2 != 0 ? ", " : "") << value(index1, index2);
           output << "}";
         }
@@ -786,8 +786,8 @@ namespace Switch {
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       T& operator()(int32 index1, int32 index2) {
-        if(index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(_caller);
-        if(index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(_caller);
+        if (index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(_caller);
+        if (index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(_caller);
         
         return this->array[index2 + (index1 * this->GetLength(1))];
       }
@@ -802,8 +802,8 @@ namespace Switch {
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       const T& operator()(int32 index1, int32 index2) const {
-        if(index2 >= this->GetLength(1) || index2 < 0) throw System::ArgumentOutOfRangeException(_caller);
-        if(index1 >= this->GetLength(0) || index1 < 0) throw System::ArgumentOutOfRangeException(_caller);
+        if (index2 >= this->GetLength(1) || index2 < 0) throw System::ArgumentOutOfRangeException(_caller);
+        if (index1 >= this->GetLength(0) || index1 < 0) throw System::ArgumentOutOfRangeException(_caller);
         
         return this->array[index2 + (index1 * this->GetLength(1))];
       }
@@ -885,15 +885,15 @@ namespace Switch {
       }
       
       friend std::ostream& operator<<(std::ostream& output, const Array& value) {
-        if(value.Length == 0)
+        if (value.Length == 0)
           return output << "{empty}";
           
         output << "{";
-        for(int index1 = 0; index1 < value.GetLength(0); index1++) {
+        for (int index1 = 0; index1 < value.GetLength(0); index1++) {
           output << (index1 == 0 ? "{" : ", {");
-          for(int index2 = 0; index2 < value.GetLength(1); index2++) {
+          for (int index2 = 0; index2 < value.GetLength(1); index2++) {
             output << (index2 == 0 ? "{" : ", {");
-            for(int index3 = 0; index3 < value.GetLength(2); index3++)
+            for (int index3 = 0; index3 < value.GetLength(2); index3++)
               output << (index3 != 0 ? ", " : "") << value(index1, index2, index3);
             output << "}";
           }
@@ -911,9 +911,9 @@ namespace Switch {
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       T& operator()(int32 index1, int32 index2, int32 index3) {
-        if(index3 >= this->GetLength(2) || index3 < 0) throw System::IndexOutOfRangeException(_caller);
-        if(index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(_caller);
-        if(index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(_caller);
+        if (index3 >= this->GetLength(2) || index3 < 0) throw System::IndexOutOfRangeException(_caller);
+        if (index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(_caller);
+        if (index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(_caller);
         
         return this->array[index3 + (index2 * this->GetLength(2)) + (index1 * this->GetLength(2) * this->GetLength(1))];
       }
@@ -929,9 +929,9 @@ namespace Switch {
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       const T& operator()(int32 index1, int32 index2, int32 index3) const {
-        if(index3 >= this->GetLength(2) || index3 < 0) throw System::IndexOutOfRangeException(_caller);
-        if(index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(_caller);
-        if(index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(_caller);
+        if (index3 >= this->GetLength(2) || index3 < 0) throw System::IndexOutOfRangeException(_caller);
+        if (index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(_caller);
+        if (index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(_caller);
         
         return this->array[index3 + (index2 * this->GetLength(2)) + (index1 * this->GetLength(2) * this->GetLength(1))];
       }
@@ -1043,8 +1043,8 @@ namespace Switch {
       /// @remarks This method is an O(log n) operation, where n is length.
       template<typename T, typename TAllocator>
       static int32 BinarySearch(const Array<T, 1, TAllocator>& array, int32 index, int32 count, const T& value, const System::Collections::Generic::IComparer<T>& comparer) {
-        if(index < 0 || count < 0) throw ArgumentOutOfRangeException(_caller);
-        if(index + count > array->Length) throw ArgumentException(_caller);
+        if (index < 0 || count < 0) throw ArgumentOutOfRangeException(_caller);
+        if (index + count > array->Length) throw ArgumentException(_caller);
         
         typename std::vector<T>::const_iterator first = array.array.begin();
         typename std::vector<T>::const_iterator last = array.array.begin();
@@ -1052,7 +1052,7 @@ namespace Switch {
         std::advance(last, index + count);
         typename std::vector<T>::const_iterator position = std::lower_bound(first, last, value, Array<T>::Comparer(&comparer));
         
-        if(position != array.array.end() && !comparer->Compare(value, *position))
+        if (position != array.array.end() && !comparer->Compare(value, *position))
           return (int32)std::distance(array.array.begin(), position);
         return (int32)~std::distance(array.array.begin(), position);
       }
@@ -1115,10 +1115,10 @@ namespace Switch {
       /// @remarks This method is an O(n) operation, where n is length.
       template<typename T, typename TAllocator>
       static void Clear(GenericArrayObject<T, TAllocator>& array, int32 index, int32 length) {
-        if(index < 0 || length < 0 || index + length > array.Length) throw ArgumentOutOfRangeException(_caller);
-        if(index + length > array.Length) throw ArgumentException(_caller);
+        if (index < 0 || length < 0 || index + length > array.Length) throw ArgumentOutOfRangeException(_caller);
+        if (index + length > array.Length) throw ArgumentException(_caller);
         
-        for(int32 increment = 0; increment < length; increment++)
+        for (int32 increment = 0; increment < length; increment++)
           array[index + increment] = T();
       }
       
@@ -1141,12 +1141,12 @@ namespace Switch {
       /// @remarks This method is an O(n) operation, where n is length.
       template<typename T1, typename TAllocator1 = Allocator<T1>, typename T2, typename TAllocator2 = Allocator<T2>>
       static void ConstrainedCopy(const GenericArrayObject<T1, TAllocator1>& sourceArray, int32 sourceIndex, GenericArrayObject<T2, TAllocator2>& destinationArray, int32 destinationIndex, int32 length) {
-        if(sourceArray.Rank != destinationArray.Rank) throw RankException(_caller);
-        if(!std::is_base_of<T1, T2>::value) throw ArrayTypeMismatchException(_caller);
-        if(sourceIndex < 0 || destinationArray < 0 || length < 0) throw ArgumentOutOfRangeException(_caller);
-        if(sourceIndex + length > sourceArray.Length || destinationIndex + length > destinationArray.Length) throw ArgumentException(_caller);
+        if (sourceArray.Rank != destinationArray.Rank) throw RankException(_caller);
+        if (!std::is_base_of<T1, T2>::value) throw ArrayTypeMismatchException(_caller);
+        if (sourceIndex < 0 || destinationArray < 0 || length < 0) throw ArgumentOutOfRangeException(_caller);
+        if (sourceIndex + length > sourceArray.Length || destinationIndex + length > destinationArray.Length) throw ArgumentException(_caller);
         
-        for(int32 increment = 0; increment < length; increment++)
+        for (int32 increment = 0; increment < length; increment++)
           destinationArray[destinationIndex + increment] = as<T2>(sourceArray[sourceIndex + increment]);
       }
       
@@ -1161,10 +1161,10 @@ namespace Switch {
       static Array<TOutput, Rank, TAllocatorOutput> ConvertAll(const Array<TInput, Rank, TAllocatorInput>& array, Converter<TInput, TOutput> converter) {
         //Array<int32, 1, TAllocatorOutput> lengths(Rank);
         Array<int32> lengths(Rank);
-        for(int32 index = 0; index < Rank; index++)
+        for (int32 index = 0; index < Rank; index++)
           lengths[index] = array.GetLength(index);
         Array<TOutput, Rank, TAllocatorOutput> result = CreateInstance<TOutput, Rank, TAllocatorOutput>(lengths);
-        for(int32 index = 0; index < array.Length; index++)
+        for (int32 index = 0; index < array.Length; index++)
           result[index] = converter(array[index]);
         return result;
       }
@@ -1235,8 +1235,8 @@ namespace Switch {
       /// @include ListExists.cpp
       template<typename T, typename TAllocator = Allocator<T>>
       static bool Exists(const GenericArrayObject<T, TAllocator>& array, Predicate<T> match) {
-        for(const T& elem : array)
-          if(match(elem))
+        for (const T& elem : array)
+          if (match(elem))
             return true;
             
         return false;
@@ -1279,7 +1279,7 @@ namespace Switch {
     inline GenericArrayObject<T, TAllocator>::GenericArrayObject(const Array<int32, 1>& lengths) {
       this->length = lengths.Agregate(_delegate(const int32 & accumulator, const int32 & value) {return accumulator * value;});
       this->array = std::vector<T, TAllocator>(this->length);
-      for(int32 length : lengths) {
+      for (int32 length : lengths) {
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length - 1);
       }

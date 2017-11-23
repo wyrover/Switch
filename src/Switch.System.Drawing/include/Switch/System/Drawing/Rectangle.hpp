@@ -202,7 +202,7 @@ namespace Switch {
         /// @param b A rectangle to intersect.
         /// @return A Rectangle that represents the intersection of a and b.
         static Rectangle Intersect(const Rectangle& a, const Rectangle& b) {
-          if(! a.IntersectWith(b))
+          if (! a.IntersectWith(b))
             return Rectangle::Empty;
           return Rectangle(Math::Max(a.x, b.x), Math::Max(a.y, b.y), Math::Min(a.width, b.width), Math::Min(a.height, b.height));
         }

@@ -578,7 +578,7 @@ namespace Switch {
         String ToString() const override;
         
         int32 CompareTo(const IComparable& obj) const override {
-          if(!is<Color>(obj))
+          if (!is<Color>(obj))
             return 1;
             
           return CompareTo(as<Color>(obj));

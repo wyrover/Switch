@@ -32,7 +32,7 @@ void Encoding::Decoder::Reset() {
 }
 
 void Encoding::Decoder::Add(byte b) {
-  if(finished)
+  if (finished)
     Reset();
   bytes[count++] = b;
 }

@@ -7,25 +7,25 @@ using namespace System::IO;
 
 void File::AppendAllLines(const string& path, const Collections::Generic::IEnumerable<string>& contents) {
   StreamWriter sw(path, true);
-  for(const auto& line : contents)
+  for (const auto& line : contents)
     sw.WriteLine(line);
 }
 
 void File::AppendAllLines(const string& path, const Array<string>& contents) {
   StreamWriter sw(path, true);
-  for(const auto& line : contents)
+  for (const auto& line : contents)
     sw.WriteLine(line);
 }
 
 void File::AppendAllLines(const string& path, const Collections::Generic::IEnumerable<string>& contents, Text::Encoding& encoding) {
   StreamWriter sw(path, true, encoding);
-  for(const auto& line : contents)
+  for (const auto& line : contents)
     sw.WriteLine(line);
 }
 
 void File::AppendAllLines(const string& path, const Array<string>& contents, Text::Encoding& encoding) {
   StreamWriter sw(path, true, encoding);
-  for(const auto& line : contents)
+  for (const auto& line : contents)
     sw.WriteLine(line);
 }
 
@@ -58,7 +58,7 @@ void File::Delete(const string& path) {
 bool File::Exists(const string& path) {
   try {
     return FileInfo(path).Exists();
-  } catch(const Exception&) {
+  } catch (const Exception&) {
     return false;
   }
 }
@@ -94,7 +94,7 @@ void File::Move(const string& src, const string& dest) {
 Array<string> File::ReadAllLines(const string& path) {
   System::Collections::Generic::List<string> lines;
   StreamReader reader(path);
-  while(!reader.EndOfStream())
+  while (!reader.EndOfStream())
     lines.Add(reader.ReadLine());
   return lines.ToArray();
 }
@@ -102,7 +102,7 @@ Array<string> File::ReadAllLines(const string& path) {
 Array<string> File::ReadAllLines(const string& path, Text::Encoding& encoding) {
   System::Collections::Generic::List<string> lines;
   StreamReader reader(path, encoding);
-  while(!reader.EndOfStream())
+  while (!reader.EndOfStream())
     lines.Add(reader.ReadLine());
   return lines.ToArray();
 }
@@ -117,25 +117,25 @@ string File::ReadAllText(const string& path, Text::Encoding& encoding) {
 
 void File::WriteAllLines(const string& path, const Array<string>& contents) {
   StreamWriter sw(path);
-  for(string line : contents)
+  for (string line : contents)
     sw.WriteLine(line);
 }
 
 void File::WriteAllLines(const string& path, const Collections::Generic::IEnumerable<string>& contents) {
   StreamWriter sw(path);
-  for(string line : contents)
+  for (string line : contents)
     sw.WriteLine(line);
 }
 
 void File::WriteAllLines(const string& path, const Array<string>& contents, Text::Encoding& encoding) {
   StreamWriter sw(path, false, encoding);
-  for(string line : contents)
+  for (string line : contents)
     sw.WriteLine(line);
 }
 
 void File::WriteAllLines(const string& path, const Collections::Generic::IEnumerable<string>& contents, Text::Encoding& encoding) {
   StreamWriter sw(path, false, encoding);
-  for(string line : contents)
+  for (string line : contents)
     sw.WriteLine(line);
 }
 

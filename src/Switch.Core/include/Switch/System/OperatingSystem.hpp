@@ -69,7 +69,7 @@ namespace Switch {
         _get {
           String operatingSystem;
           
-          switch(this->platform) {
+          switch (this->platform) {
           case PlatformID::Win32S: operatingSystem = "Microsoft Win32S"; break;
           case PlatformID::Win32Windows: operatingSystem = "Microsoft Windows 98"; break;
           case PlatformID::Win32NT: operatingSystem = "Microsoft Windows NT"; break;

@@ -27,7 +27,7 @@ namespace Switch {
       /// @exception System::ArgumentNullException bytes is null.
       /// @exception System::ArgumentException bytes is not 16 bytes long.
       explicit Guid(const Array<byte>& bytes) {
-        if(bytes.Length != this->data.Length)
+        if (bytes.Length != this->data.Length)
           throw ArgumentException(_caller);
         this->data = bytes;
       }
@@ -37,9 +37,9 @@ namespace Switch {
       /// @exception System::ArgumentNullException bytes is null.
       template<int32 dataSize>
       Guid(const byte bytes[dataSize]) {
-        if(bytes == null)
+        if (bytes == null)
           throw ArgumentNullException(_caller);
-        if(dataSize != this->data.Length)
+        if (dataSize != this->data.Length)
           throw ArgumentException(_caller);
         this->data = Array<byte>(bytes);
       }
@@ -48,7 +48,7 @@ namespace Switch {
       /// @param bytes A 16-element byte array containing values with which to initialize the GUID.
       /// @exception System::ArgumentNullException bytes is null.
       Guid(const byte bytes[16]) {
-        if(bytes == null)
+        if (bytes == null)
           throw ArgumentNullException(_caller);
         this->data = Array<byte>(bytes, 16);
       }
@@ -57,9 +57,9 @@ namespace Switch {
       /// @param bytes A 16-element byte array containing values with which to initialize the GUID.
       /// @exception System::ArgumentNullException bytes is null.
       Guid(const byte* bytes, int32 dataSize) {
-        if(bytes == null)
+        if (bytes == null)
           throw ArgumentNullException(_caller);
-        if(dataSize != this->data.Length)
+        if (dataSize != this->data.Length)
           throw ArgumentException(_caller);
         this->data = Array<byte>(bytes, dataSize);
       }
@@ -71,7 +71,7 @@ namespace Switch {
       /// @param d The remaining 8 bytes of the GUID.
       /// @exception ArgumentException bytes is not 16 bytes long.
       Guid(int32 a, int16 b, int16 c, const Array<byte>& d) {
-        if(d.Length != 8)
+        if (d.Length != 8)
           throw ArgumentException(_caller);
           
         this->data[0] = (byte)((a & 0xFF000000) >> 24);
@@ -83,7 +83,7 @@ namespace Switch {
         this->data[6] = (byte)((c & 0xFF00) >> 8);
         this->data[7] = (byte)((c & 0x00FF) >> 0);
         
-        for(int32 i = 0; i < 8; i++)
+        for (int32 i = 0; i < 8; i++)
           this->data[8 + i] = d[i];
       }
       
@@ -96,9 +96,9 @@ namespace Switch {
       /// @exception Pf::System::ArgumentException bytes is not 8 bytes long.
       template<int32 dataSize>
       Guid(int32 a, int16 b, int16 c, const byte d[dataSize]) {
-        if(d == null)
+        if (d == null)
           throw ArgumentNullException(_caller);
-        if(dataSize != 8)
+        if (dataSize != 8)
           throw ArgumentException(_caller);
           
         this->data[0] = (byte)((a & 0xFF000000) >> 24);
@@ -110,7 +110,7 @@ namespace Switch {
         this->data[6] = (byte)((c & 0xFF00) >> 8);
         this->data[7] = (byte)((c & 0x00FF) >> 0);
         
-        for(int32 i = 0; i < 8; i++)
+        for (int32 i = 0; i < 8; i++)
           this->data[8 + i] = d[i];
       }
       
@@ -122,7 +122,7 @@ namespace Switch {
       /// @exception Pf::System::ArgumentNullException  bytes is null.
       /// @exception Pf::System::ArgumentException bytes is not 8 bytes long.
       Guid(int32 a, int16 b, int16 c, const byte d[8]) {
-        if(d == null)
+        if (d == null)
           throw ArgumentNullException(_caller);
           
         this->data[0] = (byte)((a & 0xFF000000) >> 24);
@@ -134,7 +134,7 @@ namespace Switch {
         this->data[6] = (byte)((c & 0xFF00) >> 8);
         this->data[7] = (byte)((c & 0x00FF) >> 0);
         
-        for(int32 i = 0; i < 8; i++)
+        for (int32 i = 0; i < 8; i++)
           this->data[8 + i] = d[i];
       }
       
@@ -227,21 +227,21 @@ namespace Switch {
       /// @remarks "{0xCA761232, 0xED42, 0x11CE, {0xBA, 0xCD, 0x00, 0xAA, 0x00, 0x57, 0xB2, 0x23}}"
       Guid(const string& guid) {
         string simple = guid.Replace("0x", "").Replace(",", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace("{", "").Replace("}", "");
-        for(int32 i = 0; i < this->data.Length; i ++) {
+        for (int32 i = 0; i < this->data.Length; i ++) {
           this->data[i] = Byte::Parse(simple.Substring(0, 2), 16);
           simple = simple.Remove(0, 2);
         }
       }
       
       int32 CompareTo(const Guid& value) const {
-        for(int32 i = 0; i < this->data.Length; i++)
-          if(this->data[i] > value.data[i]) return 1;
-          else if(this->data[i] < value.data[i]) return -1;
+        for (int32 i = 0; i < this->data.Length; i++)
+          if (this->data[i] > value.data[i]) return 1;
+          else if (this->data[i] < value.data[i]) return -1;
         return 0;
       }
       
       int32 CompareTo(const IComparable& obj) const override {
-        if(!is<Guid>(obj)) return 1;
+        if (!is<Guid>(obj)) return 1;
         return CompareTo(static_cast<const Guid&>(obj));
       }
       
@@ -249,7 +249,7 @@ namespace Switch {
       /// @return Int32 A hash code for the current object.
       int32 GetHashCode() const override {
         int32 hashCode = 0;
-        for(int32 i = 0; i < this->data.Length; i++)
+        for (int32 i = 0; i < this->data.Length; i++)
           hashCode ^= this->data[i];
         return hashCode;
       }
@@ -297,7 +297,7 @@ namespace Switch {
         string fmt = (string::IsNullOrEmpty(format) ? "d" : format.ToLower());
         string result;
         
-        if(fmt.Length() != 1 || formats.IndexOf(fmt) == -1)
+        if (fmt.Length() != 1 || formats.IndexOf(fmt) == -1)
           throw FormatException(_caller);
           
         bool hyphens = fmt != "n" && fmt != "x";
@@ -305,23 +305,23 @@ namespace Switch {
         bool parentheses = fmt == "p";
         bool hexadecimal = fmt == "x";
         
-        for(int32 index = 0; index < this->data.Length; index++) {
-          if(hexadecimal && (index == 4 || index == 6 || (index >= 8 && index <= 15)))
+        for (int32 index = 0; index < this->data.Length; index++) {
+          if (hexadecimal && (index == 4 || index == 6 || (index >= 8 && index <= 15)))
             result += ",";
-          if(hexadecimal && (index == 0 || index == 8))
+          if (hexadecimal && (index == 0 || index == 8))
             result += "{";
-          if(hexadecimal && (index == 0 || index == 4 || index == 6 || (index >= 8 && index <= 15)))
+          if (hexadecimal && (index == 0 || index == 4 || index == 6 || (index >= 8 && index <= 15)))
             result += "0x";
           result += Byte(this->data[index]).ToString("x2");
-          if(hexadecimal && index == 15)
+          if (hexadecimal && index == 15)
             result += "}}";
-          if(hyphens && (index == 3 || index == 5 || index == 7 || index == 9))
+          if (hyphens && (index == 3 || index == 5 || index == 7 || index == 9))
             result += "-";
         }
         
-        if(braces)
+        if (braces)
           result = "{" + result + "}";
-        if(parentheses)
+        if (parentheses)
           result = "(" + result + ")";
           
         return result;

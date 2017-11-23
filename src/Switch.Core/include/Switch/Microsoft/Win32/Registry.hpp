@@ -18,19 +18,19 @@ namespace Switch {
         Registry() {}
         
         static RegistryHive ToRegistryHive(const System::String& name) {
-          if(name == "HKEY_CLASSES_ROOT")
+          if (name == "HKEY_CLASSES_ROOT")
             return RegistryHive::ClassesRoot;
-          if(name == "HKEY_CURRENT_USER")
+          if (name == "HKEY_CURRENT_USER")
             return RegistryHive::CurrentUser;
-          if(name == "HKEY_LOCAL_MACHINE")
+          if (name == "HKEY_LOCAL_MACHINE")
             return RegistryHive::LocalMachine;
-          if(name == "HKEY_USERS")
+          if (name == "HKEY_USERS")
             return RegistryHive::Users;
-          if(name == "HKEY_PERFORMANCE_DATA")
+          if (name == "HKEY_PERFORMANCE_DATA")
             return RegistryHive::PerformanceData;
-          if(name == "HKEY_CURRENT_CONFIG")
+          if (name == "HKEY_CURRENT_CONFIG")
             return RegistryHive::CurrentConfig;
-          if(name == "HKEY_DYN_DATA")
+          if (name == "HKEY_DYN_DATA")
             return RegistryHive::DynData;
             
           throw System::ArgumentException(_caller);
@@ -46,7 +46,7 @@ namespace Switch {
           static System::Threading::ThreadLocal<RegistryKey> key;
           System::Array<System::String> subKeys = keyName.Split('\\');
           key.Value =  RegistryKey::OpenBaseKey(ToRegistryHive(subKeys[0]));
-          for(int i = 1; i < subKeys.Length; ++i)
+          for (int i = 1; i < subKeys.Length; ++i)
             key.Value = key.Value().OpenSubKey(subKeys[i]);
           return key.Value().GetValue(valueName, defaultValue);
         }

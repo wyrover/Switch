@@ -12,7 +12,7 @@ intptr Native::ProcessApi::Start(const System::Diagnostics::ProcessStartInfo& pr
   System::Array<string> variables(processStartInfo.EnvironmentVariables().Count + 1);
   System::Array<const char*> environmentVariables(processStartInfo.EnvironmentVariables().Count + 1);
   int32 index = 0;
-  for(const auto& keyValue : processStartInfo.EnvironmentVariables()) {
+  for (const auto& keyValue : processStartInfo.EnvironmentVariables()) {
     variables[index] = string::Format("{0}={1}", keyValue.Key, keyValue.Value);
     environmentVariables[index] = variables[index].c_str();
     index++;
@@ -55,21 +55,21 @@ intptr Native::ProcessApi::GetParent() {
   
   hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
   __try {
-    if(hSnapshot == INVALID_HANDLE_VALUE) __leave;
+    if (hSnapshot == INVALID_HANDLE_VALUE) __leave;
     
     ZeroMemory(&pe32, sizeof(pe32));
     pe32.dwSize = sizeof(pe32);
-    if(!Process32First(hSnapshot, &pe32)) __leave;
+    if (!Process32First(hSnapshot, &pe32)) __leave;
     
     do {
-      if(pe32.th32ProcessID == pid) {
+      if (pe32.th32ProcessID == pid) {
         ppid = pe32.th32ParentProcessID;
         break;
       }
-    } while(Process32Next(hSnapshot, &pe32));
+    } while (Process32Next(hSnapshot, &pe32));
     
   } __finally {
-    if(hSnapshot != INVALID_HANDLE_VALUE) CloseHandle(hSnapshot);
+    if (hSnapshot != INVALID_HANDLE_VALUE) CloseHandle(hSnapshot);
   }
   return ppid;
 }

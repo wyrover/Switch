@@ -29,23 +29,23 @@ namespace {
   }*/
   
   MouseButtons MessageToMouseButtons(Message message) {
-    if(message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_LBUTTONDOWN || message.Msg == WM_LBUTTONUP)
+    if (message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_LBUTTONDOWN || message.Msg == WM_LBUTTONUP)
       return MouseButtons::Left;
-    else if(message.Msg == WM_RBUTTONDBLCLK || message.Msg == WM_RBUTTONDOWN || message.Msg == WM_RBUTTONUP)
+    else if (message.Msg == WM_RBUTTONDBLCLK || message.Msg == WM_RBUTTONDOWN || message.Msg == WM_RBUTTONUP)
       return MouseButtons::Right;
-    else if(message.Msg == WM_MBUTTONDBLCLK || message.Msg == WM_MBUTTONDOWN || message.Msg == WM_MBUTTONUP)
+    else if (message.Msg == WM_MBUTTONDBLCLK || message.Msg == WM_MBUTTONDOWN || message.Msg == WM_MBUTTONUP)
       return MouseButtons::Middle;
-    else if(message.Msg == WM_XBUTTONDBLCLK || message.Msg == WM_XBUTTONDOWN || message.Msg == WM_XBUTTONUP)
+    else if (message.Msg == WM_XBUTTONDBLCLK || message.Msg == WM_XBUTTONDOWN || message.Msg == WM_XBUTTONUP)
       return (message.WParam() & MK_XBUTTON2) == MK_XBUTTON2 ? MouseButtons::XButton2 : MouseButtons::XButton1;
     return MouseButtons::None;
   }
   
   MouseButtons WParamToMouseButtons(Message message) {
-    if((message.WParam & MK_LBUTTON) == MK_LBUTTON)
+    if ((message.WParam & MK_LBUTTON) == MK_LBUTTON)
       return MouseButtons::Left;
-    else if((message.WParam & MK_RBUTTON) == MK_RBUTTON)
+    else if ((message.WParam & MK_RBUTTON) == MK_RBUTTON)
       return MouseButtons::Right;
-    else if((message.WParam & MK_MBUTTON) == MK_MBUTTON)
+    else if ((message.WParam & MK_MBUTTON) == MK_MBUTTON)
       return MouseButtons::Middle;
     return MouseButtons::None;
   }
@@ -59,10 +59,10 @@ namespace {
 ref<Control> Control::controlEntered;
 
 void Control::ControlCollection::ChangeParent(ref<Control> value) {
-  if(value().parent != null)
+  if (value().parent != null)
     value().parent().controls.Remove(value);
   value().parent = this->controlContainer;
-  if(this->controlContainer().Visible && this->controlContainer().handle != IntPtr::Zero && value().handle == IntPtr::Zero)
+  if (this->controlContainer().Visible && this->controlContainer().handle != IntPtr::Zero && value().handle == IntPtr::Zero)
     value().CreateControl();
 }
 
@@ -88,42 +88,42 @@ _property<System::Drawing::Color, _readonly> Control::DefaultForeColor {
 };
 
 void Control::CreateControl() {
-  if(this->size.IsEmpty())
+  if (this->size.IsEmpty())
     this->size = this->DefaultSize;
-  if(this->parent != null || is<Form>(*this)) {
-    if(this->visible && !this->IsHandleCreated)
+  if (this->parent != null || is<Form>(*this)) {
+    if (this->visible && !this->IsHandleCreated)
       CreateHandle();
-    for(ref<Control> control : this->controls)
+    for (ref<Control> control : this->controls)
       control().CreateControl();
     OnCreateControl();
   }
 }
 
 void Control::CreateHandle() {
-  if(!this->IsHandleCreated)
+  if (!this->IsHandleCreated)
     this->handle = Native::ControlApi::Create(*this);
   handles.Add(this->handle, *this);
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
   Native::ControlApi::SetParent(*this); // Must be first
-  if(this->setClientSizeAfterHandleCreated)
+  if (this->setClientSizeAfterHandleCreated)
     Native::ControlApi::SetClientSize(*this);
   else
     Native::ControlApi::SetSize(*this);
   Native::ControlApi::SetLocation(*this); // Must be after SetClientSize or SetSize
-  if(this->backColor.HasValue)
+  if (this->backColor.HasValue)
     Native::ControlApi::SetBackColor(*this);
   Native::ControlApi::SetEnabled(*this);
-  if(this->foreColor.HasValue)
+  if (this->foreColor.HasValue)
     Native::ControlApi::SetForeColor(*this);
   Native::ControlApi::SetTabStop(*this);
   Native::ControlApi::SetText(*this);
-  if(this->setFocusAfterHandleCreated)
+  if (this->setFocusAfterHandleCreated)
     Native::ControlApi::SetFocus(*this);
   Native::ControlApi::SetVisible(*this); // Must be last
 }
 
 void Control::DestroyHandle() {
-  if(this->IsHandleCreated) {
+  if (this->IsHandleCreated) {
     Native::ControlApi::Destroy(*this);
     handles.Remove(this->handle);
     this->handle = 0;
@@ -135,33 +135,33 @@ void Control::DefWndProc(Message& message) {
 }
 
 bool Control::Focus() {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     return Native::ControlApi::SetFocus(*this);
   this->setFocusAfterHandleCreated = true;
   return true;
 }
 
 void Control::Invalidate(bool invalidateChildren) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::Invalidate(*this, invalidateChildren);
   this->OnInvalidated(InvalidateEventArgs(Rectangle(Point(0, 0), this->ClientSize)));
 }
 
 void Control::Invalidate(const System::Drawing::Rectangle& rect, bool invalidateChildren) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::Invalidate(*this, rect, invalidateChildren);
   this->OnInvalidated(InvalidateEventArgs(rect));
 }
 
 void Control::OnBackColorChanged(const EventArgs& e) {
   this->backBrush = System::Drawing::SolidBrush(this->BackColor);
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetBackColor(*this);
   this->BackColorChanged(*this, e);
 }
 
 void Control::OnClientSizeChanged(const EventArgs& e) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetClientSize(*this);
   else
     setClientSizeAfterHandleCreated = true;
@@ -169,31 +169,31 @@ void Control::OnClientSizeChanged(const EventArgs& e) {
 }
 
 void Control::OnEnabledChanged(const EventArgs& e) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetEnabled(*this);
   this->ForeColorChanged(*this, e);
 }
 
 void Control::OnForeColorChanged(const EventArgs& e) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetForeColor(*this);
   this->ForeColorChanged(*this, e);
 }
 
 void Control::OnLocationChanged(const EventArgs& e) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetLocation(*this);
   this->LocationChanged(*this, e);
 }
 
 void Control::OnParentChanged(const EventArgs& e) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetParent(*this);
   this->ParentChanged(*this, e);
 }
 
 void Control::OnSizeChanged(const EventArgs& e) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetSize(*this);
   else
     setClientSizeAfterHandleCreated = false;
@@ -201,21 +201,21 @@ void Control::OnSizeChanged(const EventArgs& e) {
 }
 
 void Control::OnTabStopChanged(const EventArgs& e) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetTabStop(*this);
   this->TabStopChanged(*this, e);
 }
 
 void Control::OnTextChanged(const EventArgs& e) {
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetText(*this);
   this->TextChanged(*this, e);
 }
 
 void Control::OnVisibleChanged(const EventArgs& e) {
-  if(this->visible == true)
+  if (this->visible == true)
     CreateControl();
-  if(this->IsHandleCreated)
+  if (this->IsHandleCreated)
     Native::ControlApi::SetVisible(*this);
   this->VisibleChanged(*this, e);
 }
@@ -234,7 +234,7 @@ bool Control::PreProcessMessage(const Message& msg) {
 
 bool Control::ReflectMessage(intptr hWnd, Message& message) {
   ref<Control> control = FromHandle(hWnd);
-  if(control == null) return false;
+  if (control == null) return false;
   message.Result = control().SendMessage(WM_REFLECT + message.Msg, message.WParam, message.LParam);
   return true;
 }
@@ -244,20 +244,20 @@ intptr Control::SendMessage(int32 msg, intptr wparam, intptr lparam) const {
 }
 
 void Control::WndProc(Message& message) {
-  if(this->messageActions.ContainsKey(message.Msg)) {
+  if (this->messageActions.ContainsKey(message.Msg)) {
     //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "Control::WndProc message=" + message + ", name=" + this->name);
     this->messageActions[message.Msg](message);
   } else {
     // For message : WM_CTLCOLOR, WM_CTLCOLORBTN, WM_CTLCOLORDLG, WM_CTLCOLORMSGBOX, WM_CTLCOLORSCROLLBAR, WM_CTLCOLOREDIT, WM_CTLCOLORLISTBOX, WM_CTLCOLORSTATIC do create reflect message internal ?
     // For message : WM_NOTIFYFORMAT do create reflect message internal ?
-    switch(message.Msg) {
+    switch (message.Msg) {
     case WM_HSCROLL:
     case WM_VSCROLL:
     case WM_DELETEITEM:
     case WM_VKEYTOITEM:
     case WM_CHARTOITEM:
     case WM_COMPAREITEM:
-      if(!ReflectMessage(message.LParam, message))
+      if (!ReflectMessage(message.LParam, message))
         DefWndProc(message);
       break;
       
@@ -299,7 +299,7 @@ void Control::WmCreate(Message& message) {
 void Control::WmCtlColorControl(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCtlColorControl message=" + message + ", name=" + this->name);
   ref<Control> control = FromHandle(message.LParam);
-  if(control == null)
+  if (control == null)
     this->DefWndProc(message);
   else {
     Native::ControlApi::SetBackColor(message.WParam());
@@ -376,13 +376,13 @@ void Control::WmInputLangChangeRequest(Message& message) {
 
 void Control::WmKeyChar(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmKeyChar message=" + message + ", name=" + this->name);
-  if(message.Msg == WM_KEYDOWN || message.Msg == WM_SYSKEYDOWN) {
+  if (message.Msg == WM_KEYDOWN || message.Msg == WM_SYSKEYDOWN) {
     KeyEventArgs keyEventArgs((Keys)message.WParam());
     OnKeyDown(keyEventArgs);
-  } else if(message.Msg == WM_CHAR || message.Msg == WM_SYSCHAR) {
+  } else if (message.Msg == WM_CHAR || message.Msg == WM_SYSCHAR) {
     KeyPressEventArgs keyPressEventArgs((char32)message.WParam());
     OnKeyPress(keyPressEventArgs);
-  } else if(message.Msg == WM_KEYUP || message.Msg == WM_SYSKEYUP) {
+  } else if (message.Msg == WM_KEYUP || message.Msg == WM_SYSKEYUP) {
     KeyEventArgs keyEventArgs((Keys)message.WParam());
     OnKeyUp(keyEventArgs);
   }
@@ -419,8 +419,8 @@ void Control::WmMouseDown(Message& message) {
 }
 
 void Control::WmMouseEnter(Message& message) {
-  if(controlEntered != *this) {
-    if(controlEntered) {
+  if (controlEntered != *this) {
+    if (controlEntered) {
       Message messageMouseLeave = Message::Create(controlEntered().Handle, WM_MOUSELEAVE, message.WParam, message.LParam, 0);
       controlEntered().WmMouseLeave(messageMouseLeave);
     }
@@ -459,7 +459,7 @@ void Control::WmMouseMove(Message& message) {
 
 void Control::WmMouseUp(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseUp message=" + message + ", name=" + this->name);
-  if(this->GetState(State::DoubleClickFired)) {
+  if (this->GetState(State::DoubleClickFired)) {
     this->OnDoubleClick(EventArgs::Empty());
     this->OnMouseDoubleClick(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), 2, 0));
   } else {
@@ -490,7 +490,7 @@ void Control::WmNotifyFormat(Message& message) {
 
 void Control::WmPaint(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmPaint message=" + message + ", name=" + this->name);
-  if(this->GetStyle(ControlStyles::UserPaint)) {
+  if (this->GetStyle(ControlStyles::UserPaint)) {
   } else
     this->DefWndProc(message);
   Graphics graphics = Graphics::FromHwndInternal(this->handle);

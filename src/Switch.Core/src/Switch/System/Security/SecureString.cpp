@@ -8,7 +8,7 @@ SecureString::SecureString(const char32 value[], int32 length) : data(System::Co
 }
 
 void SecureString::AppendChar(char32 c) {
-  if(this->readOnly)
+  if (this->readOnly)
     throw InvalidOperationException(_caller);
   System::Collections::Generic::List<char32> unsecureString = System::Collections::Generic::List<char32>(Native::SecurityApi::ToUnsecureString(string(this->data.ToArray())));
   unsecureString.Add(c);
@@ -16,15 +16,15 @@ void SecureString::AppendChar(char32 c) {
 }
 
 void SecureString::Clear() {
-  if(this->readOnly)
+  if (this->readOnly)
     throw InvalidOperationException(_caller);
-  for(auto& c : this->data)
+  for (auto& c : this->data)
     c = 0;
   this->data.Clear();
 }
 
 void SecureString::InsertAt(int32 index, char32 c) {
-  if(this->readOnly)
+  if (this->readOnly)
     throw InvalidOperationException(_caller);
   System::Collections::Generic::List<char32> unsecureString = System::Collections::Generic::List<char32>(Native::SecurityApi::ToUnsecureString(string(this->data.ToArray())));
   unsecureString.Insert(index, c);
@@ -32,7 +32,7 @@ void SecureString::InsertAt(int32 index, char32 c) {
 }
 
 void SecureString::RemoveAt(int32 index) {
-  if(this->readOnly)
+  if (this->readOnly)
     throw InvalidOperationException(_caller);
   System::Collections::Generic::List<char32> unsecureString = System::Collections::Generic::List<char32>(Native::SecurityApi::ToUnsecureString(string(this->data.ToArray())));
   unsecureString.RemoveAt(index);
@@ -40,7 +40,7 @@ void SecureString::RemoveAt(int32 index) {
 }
 
 void SecureString::SetAt(int32 index, char32 c) {
-  if(this->readOnly)
+  if (this->readOnly)
     throw InvalidOperationException(_caller);
   System::Collections::Generic::List<char32> unsecureString = System::Collections::Generic::List<char32>(Native::SecurityApi::ToUnsecureString(string(this->data.ToArray())));
   unsecureString[index] = c;

@@ -81,7 +81,7 @@ namespace Switch {
     /// @return The UseCount.
     /// @remarks return 0 if the current object is Empty or Null.
     int32 GetUseCount() const {
-      if(this->subObject == null)
+      if (this->subObject == null)
         return 0;
         
       return this->subObject->UseCount;
@@ -96,7 +96,7 @@ namespace Switch {
     /// @return Return true if the current SharePointer is unique; otherwise false.
     /// @remarks An Empty SharePointer are never unique, it always return true.
     bool IsUnique() const {
-      if(this->subObject == null)
+      if (this->subObject == null)
         return true;
         
       return this->subObject->UseCount == 1;
@@ -111,12 +111,12 @@ namespace Switch {
     /// @remarks Before set, if the current object is not empty UseCount is decremented. If UseCount equal 0 the object T is deleted.
     /// @remarks The obj pointer must be create by operator new. If obj is a pointer on the stack, a error will occured at used.
     void Reset(T* obj) {
-      if(this->subObject != null && --this->subObject->UseCount == 0) {
+      if (this->subObject != null && --this->subObject->UseCount == 0) {
         delete this->subObject;
         delete this->ptr;
       }
       
-      if(obj == null) {
+      if (obj == null) {
         this->subObject = null;
         this->ptr = null;
         return;
@@ -129,12 +129,12 @@ namespace Switch {
     
     template<typename TT>
     void Reset(_<TT> obj) {
-      if(this->subObject != null && --this->subObject->UseCount == 0) {
+      if (this->subObject != null && --this->subObject->UseCount == 0) {
         delete this->subObject;
         delete this->ptr;
       }
       
-      if(obj == null) {
+      if (obj == null) {
         this->subObject = null;
         this->ptr = null;
         return;
@@ -162,7 +162,7 @@ namespace Switch {
     /// @return Reference on object T.
     /// @exception NullPointerException If the current object is Empty.
     T& ToObject() {
-      if(this->subObject == null)
+      if (this->subObject == null)
         throw std::exception();
         
       return *this->ptr;
@@ -172,7 +172,7 @@ namespace Switch {
     /// @return Reference on object T.
     /// @exception NullPointerException If the current object is Empty.
     const T& ToObject() const {
-      if(this->subObject == null)
+      if (this->subObject == null)
         throw std::exception();
         
       return *this->ptr;
@@ -222,7 +222,7 @@ namespace Switch {
     /// @return Pointer on object T.
     /// @exception InvalidCastException if T is not a TT type.
     T* ToPointer() {
-      if(this->subObject == null)
+      if (this->subObject == null)
         throw std::exception();
         
       return this->ptr;
@@ -232,7 +232,7 @@ namespace Switch {
     /// @return Pointer on object T.
     /// @exception NullPointerException If the current object is Empty.
     const T* ToPointer() const {
-      if(this->subObject == null)
+      if (this->subObject == null)
         throw std::exception();
         
       return this->ptr;
@@ -243,11 +243,11 @@ namespace Switch {
     /// @exception NullPointerException If the current object is Empty.
     template<typename TT>
     TT* ToPointer() {
-      if(this->subObject == null)
+      if (this->subObject == null)
         throw std::exception();
         
       TT* cast = dynamic_cast<TT*>(this->ptr);
-      if(cast == null)
+      if (cast == null)
         throw std::exception();
       return cast;
     }
@@ -257,11 +257,11 @@ namespace Switch {
     /// @exception InvalidCastException if T is not a TT type.
     template<typename TT>
     const TT* ToPointer() const {
-      if(this->subObject == null)
+      if (this->subObject == null)
         throw std::exception();
         
       const TT* cast = dynamic_cast<const TT*>(this->ptr);
-      if(cast == null)
+      if (cast == null)
         throw std::exception();
       return cast;
     }
@@ -271,18 +271,18 @@ namespace Switch {
     template<typename TT>
     _<TT> StaticCast() const {
       try {
-        if(this->ptr == null)
+        if (this->ptr == null)
           return _<TT>::Null();
           
         TT* ptr = static_cast<TT*>(this->ptr);
-        if(ptr == null)
+        if (ptr == null)
           return _<TT>::Null();
         _<TT> sp;
         sp.subObject = this->subObject;
         sp.ptr = ptr;
         ++this->subObject->UseCount;
         return sp;
-      } catch(const std::bad_cast&) {
+      } catch (const std::bad_cast&) {
         return _<TT>::Null();
       }
     }
@@ -292,18 +292,18 @@ namespace Switch {
     template<typename TT>
     _<TT> DynamicCast() const {
       try {
-        if(this->ptr == null)
+        if (this->ptr == null)
           return _<TT>::Null();
           
         TT* ptr = dynamic_cast<TT*>(this->ptr);
-        if(ptr == null)
+        if (ptr == null)
           return _<TT>::Null();
         _<TT> sp;
         sp.subObject = this->subObject;
         sp.ptr = ptr;
         ++this->subObject->UseCount;
         return sp;
-      } catch(const std::bad_cast&) {
+      } catch (const std::bad_cast&) {
         return _<TT>::Null();
       }
     }
@@ -313,18 +313,18 @@ namespace Switch {
     template<typename TT>
     _<TT> As() const {
       try {
-        if(this->ptr == null)
+        if (this->ptr == null)
           return _<TT>::Null();
           
         TT* ptr = dynamic_cast<TT*>(this->ptr);
-        if(ptr == null)
+        if (ptr == null)
           return _<TT>::Null();
         _<TT> sp;
         sp.subObject = this->subObject;
         sp.ptr = ptr;
         ++this->subObject->UseCount;
         return sp;
-      } catch(const std::bad_cast&) {
+      } catch (const std::bad_cast&) {
         return _<TT>::Null();
       }
     }
@@ -352,10 +352,10 @@ namespace Switch {
     template<typename TT>
     bool Is() const {
       try {
-        if(this->ptr == null)
+        if (this->ptr == null)
           return false;
         return dynamic_cast<TT*>(this->ptr) != null;
-      } catch(const std::bad_cast&) {
+      } catch (const std::bad_cast&) {
         return false;
       }
     }
@@ -370,7 +370,7 @@ namespace Switch {
     /// @return _ of type TT.
     template<typename TT>
     _<TT> ChangeType() const {
-      if(dynamic_cast<TT*>(this->ptr) == null)
+      if (dynamic_cast<TT*>(this->ptr) == null)
         throw std::exception();
         
       _<TT> sp;
@@ -389,7 +389,7 @@ namespace Switch {
     /// @brief Returns a string that represents the current _.
     /// @return string A string that represents the current _.
     std::string ToString() const {
-      if(this->ptr == null)
+      if (this->ptr == null)
         return "Switch::_ [Pointer=null]";
       std::stringstream s;
       s << "Switch::_ [Pointer=" << this->ptr << ", UseCount=" << this->GetUseCount() << "]";
@@ -450,7 +450,7 @@ namespace Switch {
       Reset(null);
       this->subObject = sp.subObject;
       this->ptr = sp.ptr;
-      if(this->subObject != null)
+      if (this->subObject != null)
         ++this->subObject->UseCount;
     }
     

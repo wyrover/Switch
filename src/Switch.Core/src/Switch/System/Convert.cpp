@@ -127,20 +127,20 @@ DateTime Convert::ToDateTime(object& value) {
 }
 
 DateTime Convert::ToDateTime(const object& value) {
-  if(is<Boolean>(value)) return ToDateTime(static_cast<const Boolean&>(value));
-  if(is<Byte>(value)) return ToDateTime(static_cast<const Byte&>(value));
-  if(is<Char>(value)) return ToDateTime(static_cast<const Char&>(value));
-  if(is<DateTime>(value)) return ToDateTime(static_cast<const DateTime&>(value));
-  if(is<Double>(value)) return ToDateTime(static_cast<const Double&>(value));
-  if(is<Int16>(value)) return ToDateTime(static_cast<const Int16&>(value));
-  if(is<Int32>(value)) return ToDateTime(static_cast<const Int32&>(value));
-  if(is<Int64>(value)) return ToDateTime(static_cast<const Int64&>(value));
-  if(is<SByte>(value)) return ToDateTime(static_cast<const SByte&>(value));
-  if(is<Single>(value)) return ToDateTime(static_cast<const Single&>(value));
-  if(is<String>(value)) return ToDateTime(static_cast<const String&>(value));
-  if(is<UInt16>(value)) return ToDateTime(static_cast<const UInt16&>(value));
-  if(is<UInt32>(value)) return ToDateTime(static_cast<const UInt32&>(value));
-  if(is<UInt64>(value)) return ToDateTime(static_cast<const UInt64&>(value));
+  if (is<Boolean>(value)) return ToDateTime(static_cast<const Boolean&>(value));
+  if (is<Byte>(value)) return ToDateTime(static_cast<const Byte&>(value));
+  if (is<Char>(value)) return ToDateTime(static_cast<const Char&>(value));
+  if (is<DateTime>(value)) return ToDateTime(static_cast<const DateTime&>(value));
+  if (is<Double>(value)) return ToDateTime(static_cast<const Double&>(value));
+  if (is<Int16>(value)) return ToDateTime(static_cast<const Int16&>(value));
+  if (is<Int32>(value)) return ToDateTime(static_cast<const Int32&>(value));
+  if (is<Int64>(value)) return ToDateTime(static_cast<const Int64&>(value));
+  if (is<SByte>(value)) return ToDateTime(static_cast<const SByte&>(value));
+  if (is<Single>(value)) return ToDateTime(static_cast<const Single&>(value));
+  if (is<String>(value)) return ToDateTime(static_cast<const String&>(value));
+  if (is<UInt16>(value)) return ToDateTime(static_cast<const UInt16&>(value));
+  if (is<UInt32>(value)) return ToDateTime(static_cast<const UInt32&>(value));
+  if (is<UInt64>(value)) return ToDateTime(static_cast<const UInt64&>(value));
   throw InvalidCastException(_caller);
 }
 

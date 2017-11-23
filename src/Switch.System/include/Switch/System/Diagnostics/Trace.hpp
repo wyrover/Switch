@@ -81,7 +81,7 @@ namespace Switch {
         static void Assert(bool condition, const string& message) {
           #if defined(TRACE)
           assert(condition);
-          if(!condition)
+          if (!condition)
             Fail(message);
           #endif
         }
@@ -91,7 +91,7 @@ namespace Switch {
         /// @remarks Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or Close. Setting AutoFlush to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.
         static void Close() {
           TraceEventCache eventCache;
-          for(auto& listener : Listeners()) {
+          for (auto& listener : Listeners()) {
             listener.Flush();
             listener.Close();
           }
@@ -103,14 +103,14 @@ namespace Switch {
         static void Fail(const string& message) {
           #if defined(TRACE)
           TraceEventCache eventCache;
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Fail(message);
             } else
               listener.Fail(message);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -122,14 +122,14 @@ namespace Switch {
         static void Fail(const string& message, const string& detailMessage) {
           #if defined(TRACE)
           TraceEventCache eventCache;
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Fail(message, detailMessage);
             } else
               listener.Fail(message, detailMessage);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -139,16 +139,16 @@ namespace Switch {
         static void Flush() {
           #if defined(TRACE)
           TraceEventCache eventCache;
-          for(auto& listener : Listeners())
+          for (auto& listener : Listeners())
             listener.Flush();
           #endif
         }
         
         /// @brief Increases the current IndentLevel by one.
         static void Indent() {
-          if(IndentLevel < Int32::MaxValue) {
+          if (IndentLevel < Int32::MaxValue) {
             IndentLevel += 1;
-            for(auto& listener : listeners)
+            for (auto& listener : listeners)
               listener.IndentLevel = IndentLevel();
           }
         }
@@ -195,9 +195,9 @@ namespace Switch {
         
         /// @brief Decreases the current IndentLevel by one.
         static void Unindent() {
-          if(IndentLevel > 0) {
+          if (IndentLevel > 0) {
             IndentLevel -= 1;
-            for(auto& listener : listeners)
+            for (auto& listener : listeners)
               listener.IndentLevel = IndentLevel();
           }
         }
@@ -208,13 +208,13 @@ namespace Switch {
         /// @remarks This method calls the Write method of the trace listener.
         static void Write(const object& value) {
           #if defined(TRACE)
-          for(auto& listener : Listeners())
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners())
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Write(value);
             } else
               listener.Write(value);
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -227,14 +227,14 @@ namespace Switch {
         /// @remarks This method calls the Write method of the trace listener.
         static void Write(const object& value, const string& category) {
           #if defined(TRACE)
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Write(value, category);
             } else
               listener.Write(value, category);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -245,14 +245,14 @@ namespace Switch {
         /// @remarks This method calls the Write method of the trace listener.
         static void Write(const string& message) {
           #if defined(TRACE)
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Write(message);
             } else
               listener.Write(message);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -265,14 +265,14 @@ namespace Switch {
         /// @remarks This method calls the Write method of the trace listener.
         static void Write(const string& message, const string& category) {
           #if defined(TRACE)
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.Write(message, category);
             } else
               listener.Write(message, category);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -283,14 +283,14 @@ namespace Switch {
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLine(const object& value) {
           #if defined(TRACE)
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.WriteLine(value);
             } else
               listener.WriteLine(value);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -303,14 +303,14 @@ namespace Switch {
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLine(const object& value, const string& category) {
           #if defined(TRACE)
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.WriteLine(value, category);
             } else
               listener.WriteLine(value, category);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -321,14 +321,14 @@ namespace Switch {
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLine(const string& message) {
           #if defined(TRACE)
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.WriteLine(message);
             } else
               listener.WriteLine(message);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -341,14 +341,14 @@ namespace Switch {
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLine(const string& message, const string& category) {
           #if defined(TRACE)
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.WriteLine(message, category);
             } else
               listener.WriteLine(message, category);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }
@@ -360,7 +360,7 @@ namespace Switch {
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLineIf(bool condition, const object& value) {
           #if defined(TRACE)
-          if(condition)
+          if (condition)
             WriteLine(value);
           #endif
         }
@@ -374,7 +374,7 @@ namespace Switch {
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLineIf(bool condition, const object& value, const string& category) {
           #if defined(TRACE)
-          if(condition)
+          if (condition)
             WriteLine(value, category);
           #endif
         }
@@ -386,7 +386,7 @@ namespace Switch {
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLineIf(bool condition, const string& message) {
           #if defined(TRACE)
-          if(condition)
+          if (condition)
             WriteLine(message);
           #endif
         }
@@ -400,7 +400,7 @@ namespace Switch {
         /// @remarks This method calls the WriteLine method of the trace listener.
         static void WriteLineIf(bool condition, const string& message, const string& category) {
           #if defined(TRACE)
-          if(condition)
+          if (condition)
             WriteLine(message, category);
           #endif
         }
@@ -415,14 +415,14 @@ namespace Switch {
           #if defined(TRACE)
           TraceEventCache eventCache;
           static string sourceName = System::IO::Path::GetFileName(Environment::GetCommandLineArgs()[0]);
-          for(auto& listener : Listeners()) {
-            if(!listener.IsThreadSafe && UseGlobalLock) {
+          for (auto& listener : Listeners()) {
+            if (!listener.IsThreadSafe && UseGlobalLock) {
               _lock(lock)
               listener.TraceEvent(eventCache, sourceName, traceEventType, 0, message);
             } else
               listener.TraceEvent(eventCache, sourceName, traceEventType, 0, message);
           }
-          if(AutoFlush)
+          if (AutoFlush)
             Flush();
           #endif
         }

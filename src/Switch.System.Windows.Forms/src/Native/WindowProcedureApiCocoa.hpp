@@ -17,9 +17,9 @@ namespace Native {
     
     static int32 GetMouseButtonState(NSEvent* event) {
       int32 state = 0;
-      if([event buttonNumber] == 1) state &= MK_LBUTTON;
-      if([event buttonNumber] == 2) state &= MK_MBUTTON;
-      if([event buttonNumber] == 3) state &= MK_RBUTTON;
+      if ([event buttonNumber] == 1) state &= MK_LBUTTON;
+      if ([event buttonNumber] == 2) state &= MK_MBUTTON;
+      if ([event buttonNumber] == 3) state &= MK_RBUTTON;
       return state;
     }
     
@@ -29,7 +29,7 @@ namespace Native {
         {NSEventTypeMouseEntered, WindowProcedure::MouseEnterEvent}, {NSEventTypeMouseExited, WindowProcedure::MouseLeaveEvent}, {NSEventTypeLeftMouseDown, WindowProcedure::LeftMouseDownEvent}, {NSEventTypeLeftMouseUp, WindowProcedure::LeftMouseUpEvent}, {NSEventTypeRightMouseDown, WindowProcedure::RightMouseDownEvent}, {NSEventTypeRightMouseUp, WindowProcedure::RightMouseUpEvent}, {NSEventTypeMouseMoved, WindowProcedure::MouseMoveEvent}, {NSEventTypeOtherMouseDown, WindowProcedure::OtherMouseDownEvent}, {NSEventTypeOtherMouseUp, WindowProcedure::OtherMouseUpEvent}
       };
       @autoreleasepool {
-        if(events.ContainsKey([event type]) && Controls.ContainsKey((intptr)[event window]))
+        if (events.ContainsKey([event type]) && Controls.ContainsKey((intptr)[event window]))
           events[[event type]](event, Controls[(intptr)[event window]]);
         else
           [NSApp sendEvent:event];
@@ -92,7 +92,7 @@ namespace Native {
     }
     
     static void MouseMoveEvent(NSEvent* event, System::Windows::Forms::Control& control) {
-      if(hover) {
+      if (hover) {
         System::Windows::Forms::Message message = System::Windows::Forms::Message::Create((intptr)event.window, WM_MOUSEHOVER, GetMouseButtonState(event), (GetMouseYCoordinateRelativeToClientArea(event, control) << 16) + GetMouseXCoordinateRelativeToClientArea(event, control), 0, (intptr)event);
         control.WndProc(message);
       }

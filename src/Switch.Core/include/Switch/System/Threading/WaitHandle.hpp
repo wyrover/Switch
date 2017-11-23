@@ -80,7 +80,7 @@ namespace Switch {
         /// @exception ObjectDisposedException the handle is invalid
         /// @exception ArgumentException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         virtual bool WaitOne(int32 millisecondsTimeOut) {
-          if(millisecondsTimeOut < Timeout::Infinite)
+          if (millisecondsTimeOut < Timeout::Infinite)
             throw ArgumentException(_caller);
           return Wait(millisecondsTimeOut);
         }

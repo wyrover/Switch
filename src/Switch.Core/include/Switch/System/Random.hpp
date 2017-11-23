@@ -63,7 +63,7 @@ namespace Switch {
       /// @exception ArgumentNullException buffer is null.
       /// @remarks Each element of the array of bytes is set to a random number greater than or equal to zero, and less than or equal to Byte::MaxValue.
       virtual void NextBytes(Array<byte>& buffer) const {
-        for(int32 i = 0; i < buffer.Length; i++)
+        for (int32 i = 0; i < buffer.Length; i++)
           buffer[i] = Convert::ToByte(Next(0, Byte::MaxValue + 1));
       }
       

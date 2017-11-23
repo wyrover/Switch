@@ -15,7 +15,7 @@ IntPtr::IntPtr(const Int32& value) {
 }
 
 IntPtr::IntPtr(const Int64& value) {
-  if(Size == 4 && (value < Int32::MinValue || value > Int32::MaxValue))
+  if (Size == 4 && (value < Int32::MinValue || value > Int32::MaxValue))
     throw OverflowException(_caller);
     
   this->value = (intptr)value;
@@ -48,20 +48,20 @@ int32 IntPtr::CompareTo(const IntPtr& value) const {
 }
 
 int32 IntPtr::CompareTo(const IComparable& obj) const {
-  if(!is<IntPtr>(obj))
+  if (!is<IntPtr>(obj))
     return 1;
   return CompareTo(static_cast<const IntPtr&>(obj));
 }
 
 int32 IntPtr::ToInt32() const {
-  if(Size == 8 && (this->value < Int32::MinValue || this->value > Int32::MaxValue))
+  if (Size == 8 && (this->value < Int32::MinValue || this->value > Int32::MaxValue))
     throw OverflowException(_caller);
     
   return *((int32*)&this->value);
 }
 
 int64 IntPtr::ToInt64() const {
-  if(IntPtr::Size == 4)
+  if (IntPtr::Size == 4)
     return *((int32*)&value);
   return int64(value);
 }

@@ -26,9 +26,9 @@ namespace {
     }
     
     void Close() override {
-      if(this->guard == null)
+      if (this->guard == null)
         return;
-      if(this->name() != "")
+      if (this->name() != "")
         this->name.Reset();
       this->guard.Reset();
       this->signal.Reset();
@@ -41,10 +41,10 @@ namespace {
     
     int32 Release() {return this->Release(1);}
     int32 Release(int32 releaseCount) {
-      if(this->guard == null)
+      if (this->guard == null)
         throw ObjectDisposedException(_caller);
       std::unique_lock<std::mutex> lock(*this->guard);
-      if(*this->count + releaseCount > *this->maxCount)
+      if (*this->count + releaseCount > *this->maxCount)
         throw InvalidOperationException(_caller);
       *this->count += releaseCount;
       this->signal->notify_all();
@@ -58,16 +58,16 @@ namespace {
     }
     
     bool Wait(int32 millisecondsTimeOut) override {
-      if(this->guard == null)
+      if (this->guard == null)
         throw ObjectDisposedException(_caller);
-      if(millisecondsTimeOut < -1)
+      if (millisecondsTimeOut < -1)
         throw AbandonedMutexException(_caller);
         
       std::unique_lock<std::mutex> lock(*this->guard);
-      while(*this->count == 0) {
-        if(millisecondsTimeOut == -1)
+      while (*this->count == 0) {
+        if (millisecondsTimeOut == -1)
           this->signal->wait(lock);
-        else if(this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
+        else if (this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
           return false;
       }
       
@@ -98,24 +98,24 @@ ThreadPool::AsynchronousThreadArray ThreadPool::asynchronousIOThreads;
 
 ThreadPool::ThreadArray::~ThreadArray() {
   closed = true;
-  for(Thread& thread : *this)
-    if(thread.ThreadState != ThreadState::Unstarted)
+  for (Thread& thread : *this)
+    if (thread.ThreadState != ThreadState::Unstarted)
       semaphore.Release();
       
-  for(Thread& thread : *this)
-    if(thread.ThreadState != ThreadState::Unstarted)
+  for (Thread& thread : *this)
+    if (thread.ThreadState != ThreadState::Unstarted)
       thread.Join();
   closed = false;
 }
 
 ThreadPool::AsynchronousThreadArray::~AsynchronousThreadArray() {
   closed = true;
-  for(Thread& thread : *this)
-    if(thread.ThreadState != ThreadState::Unstarted)
+  for (Thread& thread : *this)
+    if (thread.ThreadState != ThreadState::Unstarted)
       asynchronousIOSemaphore.Release();
       
-  for(Thread& thread : *this)
-    if(thread.ThreadState != ThreadState::Unstarted)
+  for (Thread& thread : *this)
+    if (thread.ThreadState != ThreadState::Unstarted)
       thread.Join();
   closed = false;
 }
@@ -136,10 +136,10 @@ void ThreadPool::GetMinThreads(int32& workerThreads, int32& completionPortThread
 }
 
 bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack) {
-  if(threads.Count == 0)
+  if (threads.Count == 0)
     CreateThreads();
   _lock(threadPoolItems.SyncRoot) {
-    if(threadPoolItems.Count() == maxThreads)
+    if (threadPoolItems.Count() == maxThreads)
       return false;
     threadPoolItems.Add(new ThreadPoolItem(callBack));
     semaphore.Release();
@@ -148,10 +148,10 @@ bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack) {
 }
 
 bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack, object& state) {
-  if(threads.Count == 0)
+  if (threads.Count == 0)
     CreateThreads();
   _lock(threadPoolItems.SyncRoot) {
-    if(threadPoolItems.Count() == maxThreads)
+    if (threadPoolItems.Count() == maxThreads)
       return false;
     threadPoolItems.Add(new ThreadPoolItem(callBack, state));
     semaphore.Release();
@@ -160,11 +160,11 @@ bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack, object& state) 
 }
 
 RegisteredWaitHandle ThreadPool::RegisterWaitForSingleObject(WaitHandle& waitObject, const WaitOrTimerCallback& callBack, object& state, int32 millisecondsTimeoutInterval, bool executeOnlyOnce) {
-  if(asynchronousIOThreads.Count == 0)
+  if (asynchronousIOThreads.Count == 0)
     CreateAsynchronousIOThreads();
   RegisteredWaitHandle result;
   _lock(threadPoolAsynchronousIOItems.SyncRoot) {
-    if(threadPoolAsynchronousIOItems.Count() == maxAsynchronousIOThreads)
+    if (threadPoolAsynchronousIOItems.Count() == maxAsynchronousIOThreads)
       return result;
     refptr<ThreadPoolAsynchronousIOItem> item = new ThreadPoolAsynchronousIOItem(callBack, state, waitObject, millisecondsTimeoutInterval, executeOnlyOnce);
     result.item = item.ToPointer();
@@ -175,7 +175,7 @@ RegisteredWaitHandle ThreadPool::RegisterWaitForSingleObject(WaitHandle& waitObj
 }
 
 bool ThreadPool::SetMaxThreads(int32 workerThreads, int32 completionPortThreads) {
-  if(workerThreads < Environment::ProcessorCount || completionPortThreads < Environment::ProcessorCount)
+  if (workerThreads < Environment::ProcessorCount || completionPortThreads < Environment::ProcessorCount)
     return false;
     
   maxThreads = workerThreads;
@@ -190,16 +190,16 @@ bool ThreadPool::SetMaxThreads(int32 workerThreads, int32 completionPortThreads)
 }
 
 bool ThreadPool::SetMinThreads(int32 workerThreads, int32 completionPortThreads) {
-  if(workerThreads < 0 || completionPortThreads < 0 || workerThreads >= maxThreads || completionPortThreads >= maxAsynchronousIOThreads)
+  if (workerThreads < 0 || completionPortThreads < 0 || workerThreads >= maxThreads || completionPortThreads >= maxAsynchronousIOThreads)
     return false;
     
   minThreads = workerThreads;
   minAsynchronousIOThreads = completionPortThreads;
   
-  if(threads.Count != 0)
+  if (threads.Count != 0)
     CreateThreads();
     
-  if(asynchronousIOThreads.Count != 0)
+  if (asynchronousIOThreads.Count != 0)
     CreateAsynchronousIOThreads();
     
   return true;
@@ -207,7 +207,7 @@ bool ThreadPool::SetMinThreads(int32 workerThreads, int32 completionPortThreads)
 
 void ThreadPool::CreateThreads() {
   threads = ThreadArray(minThreads);
-  for(int32 i = 0; i < minThreads; i++) {
+  for (int32 i = 0; i < minThreads; i++) {
     threads[i] = Thread(ThreadStart(&ThreadPool::Run));
     threads[i].Name = "Thread Pool";
     threads[i].data->isThreadPoolThread = true;
@@ -218,7 +218,7 @@ void ThreadPool::CreateThreads() {
 
 void ThreadPool::CreateAsynchronousIOThreads() {
   asynchronousIOThreads = AsynchronousThreadArray(minAsynchronousIOThreads);
-  for(int32 i = 0; i < minAsynchronousIOThreads; i++) {
+  for (int32 i = 0; i < minAsynchronousIOThreads; i++) {
     asynchronousIOThreads[i] = Thread(ThreadStart(&ThreadPool::AsynchronousIORun));
     asynchronousIOThreads[i].Name = "Thread Pool";
     asynchronousIOThreads[i].data->isThreadPoolThread = true;
@@ -228,9 +228,9 @@ void ThreadPool::CreateAsynchronousIOThreads() {
 }
 
 void ThreadPool::Run() {
-  while(!closed) {
+  while (!closed) {
     semaphore.WaitOne();
-    if(!closed) {
+    if (!closed) {
       refptr<ThreadPoolItem> item;
       _lock(threadPoolItems.SyncRoot)
       item = threadPoolItems[0];
@@ -241,9 +241,9 @@ void ThreadPool::Run() {
 }
 
 void ThreadPool::AsynchronousIORun() {
-  while(!closed) {
+  while (!closed) {
     asynchronousIOSemaphore.WaitOne();
-    if(!closed) {
+    if (!closed) {
       refptr<ThreadPoolAsynchronousIOItem> item;
       _lock(threadPoolAsynchronousIOItems.SyncRoot)
       item = threadPoolAsynchronousIOItems[0];
@@ -251,15 +251,15 @@ void ThreadPool::AsynchronousIORun() {
       
       do {
         bool timeout = !item->waitObject->WaitOne(item->millisecondsTimeoutInterval);
-        if(!item->unregistered)
+        if (!item->unregistered)
           item->callback(*item->state, timeout);
-      } while(!item->executeOnlyOnce && !item->unregistered);
+      } while (!item->executeOnlyOnce && !item->unregistered);
     }
   }
 }
 
 bool RegisteredWaitHandle::Unregister() {
-  if(item == null)
+  if (item == null)
     return false;
     
   ThreadPool::ThreadPoolAsynchronousIOItem& item = *((ThreadPool::ThreadPoolAsynchronousIOItem*)this->item);
@@ -268,7 +268,7 @@ bool RegisteredWaitHandle::Unregister() {
 }
 
 bool RegisteredWaitHandle::Unregister(WaitHandle& waitObject) {
-  if(item == null)
+  if (item == null)
     return false;
     
   ThreadPool::ThreadPoolAsynchronousIOItem& item = *((ThreadPool::ThreadPoolAsynchronousIOItem*)this->item);

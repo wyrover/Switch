@@ -19,7 +19,7 @@ namespace Switch {
         /// @param components An array of IComponent objects to initialize the collection with.
         /// @remarks This method adds each IComponent in the specified IComponent array to the collection.
         ComponentCollection(const Array<Any>& components) {
-          for(auto component : components)
+          for (auto component : components)
             this->components.Add(component);
         }
         

@@ -205,7 +205,7 @@ namespace Switch {
       /// The following code example converts elements of Byte arrays to Boolean values with the ToBoolean method.
       /// @include BitConverterToBoolean.cpp
       static bool ToBoolean(const Array<byte>& value, int32 startIndex) {
-        if(startIndex < 0 || startIndex >= value.Length)
+        if (startIndex < 0 || startIndex >= value.Length)
           throw ArgumentOutOfRangeException(_caller);
         return Convert::ToBoolean(value[startIndex]);
       }
@@ -279,9 +279,9 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException startIndex is less than zero or greater than the length of value minus 1.
       /// @remarks The ToUInt16 method converts the bytes from index startIndex to startIndex + 1 to an UInt16 value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the BitConverter class topic.
       static uint16 ToUInt16(const Array<byte>& value, int32 startIndex) {
-        if(startIndex == value.Length - 1)
+        if (startIndex == value.Length - 1)
           throw ArgumentException(_caller);
-        if(startIndex < 0 || startIndex > value.Length - 1)
+        if (startIndex < 0 || startIndex > value.Length - 1)
           throw ArgumentOutOfRangeException(_caller);
         return Convert::ToUInt16(value[startIndex]) + (Convert::ToUInt16(value[startIndex + 1]) << 8);
       }
@@ -295,9 +295,9 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException startIndex is less than zero or greater than the length of value minus 1.
       /// @remarks The ToUInt32 method converts the bytes from index startIndex to startIndex + 3 to an UInt32 value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the BitConverter class topic.
       static uint32 ToUInt32(const Array<byte>& value, int32 startIndex) {
-        if(startIndex == value.Length - 3)
+        if (startIndex == value.Length - 3)
           throw ArgumentException(_caller);
-        if(startIndex < 0 || startIndex > value.Length - 3)
+        if (startIndex < 0 || startIndex > value.Length - 3)
           throw ArgumentOutOfRangeException(_caller);
         return Convert::ToUInt32(value[startIndex]) + (Convert::ToUInt32(value[startIndex + 1]) << 8) + (Convert::ToUInt32(value[startIndex + 2]) << 16) + (Convert::ToUInt32(value[startIndex + 3]) << 24);
       }
@@ -311,9 +311,9 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException startIndex is less than zero or greater than the length of value minus 1.
       /// @remarks The ToUInt64 method converts the bytes from index startIndex to startIndex + 7 to an UInt64 value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the BitConverter class topic.
       static uint64 ToUInt64(const Array<byte>& value, int32 startIndex) {
-        if(startIndex == value.Length - 7)
+        if (startIndex == value.Length - 7)
           throw ArgumentException(_caller);
-        if(startIndex < 0 || startIndex > value.Length - 7)
+        if (startIndex < 0 || startIndex > value.Length - 7)
           throw ArgumentOutOfRangeException(_caller);
         return Convert::ToUInt64(value[startIndex]) + (Convert::ToUInt64(value[startIndex + 1]) << 8) + (Convert::ToUInt64(value[startIndex + 2]) << 16) + (Convert::ToUInt64(value[startIndex + 3]) << 24) + (Convert::ToUInt64(value[startIndex + 4]) << 32) + (Convert::ToUInt64(value[startIndex + 5]) << 40) + (Convert::ToUInt64(value[startIndex + 6]) << 48) + (Convert::ToUInt64(value[startIndex + 7]) << 56);
       }
@@ -354,12 +354,12 @@ namespace Switch {
       /// The following code example converts Byte arrays to String objects with the ToString method.
       /// @include BitConverterToString3.cpp
       static String ToString(const Array<byte>& value, int32 startIndex, int32 length) {
-        if(value.Length == 0 && startIndex == 0 && length == 0) return "";
-        if(startIndex < 0 || length < 0 || startIndex >= value.Length) throw ArgumentOutOfRangeException(_caller);
-        if(startIndex + length > value.Length) throw ArgumentException(_caller);
+        if (value.Length == 0 && startIndex == 0 && length == 0) return "";
+        if (startIndex < 0 || length < 0 || startIndex >= value.Length) throw ArgumentOutOfRangeException(_caller);
+        if (startIndex + length > value.Length) throw ArgumentException(_caller);
         
         System::Text::StringBuilder str((startIndex + length) * 3);
-        for(int32 index = startIndex; index < startIndex + length; index++)
+        for (int32 index = startIndex; index < startIndex + length; index++)
           str.Append(Byte(value[index]).ToString("X2")).Append(index < startIndex + length - 1 ? "-" : "");
         return str.ToString();
       }

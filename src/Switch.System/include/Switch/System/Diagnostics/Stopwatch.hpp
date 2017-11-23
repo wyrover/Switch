@@ -129,12 +129,12 @@ namespace Switch {
         
       private:
         Stopwatch(bool start) {
-          if(start)
+          if (start)
             Start();
         }
         
         int64 GetElapsedTicks() const {
-          if(this->running)
+          if (this->running)
             return this->GetTimestamp() - this->start;
           return (this->stop - this->start);
         }

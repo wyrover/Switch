@@ -15,7 +15,7 @@ HttpWebResponse::~HttpWebResponse() {
 }
 
 WebResponse::WebResponseStream HttpWebResponse::GetResponseStream() {
-  if(this->webRequest->Method() == WebRequestMethods::Http::Get || this->webRequest->Method() == WebRequestMethods::Http::Post)
+  if (this->webRequest->Method() == WebRequestMethods::Http::Get || this->webRequest->Method() == WebRequestMethods::Http::Post)
     return WebResponse::GetResponseStream();
   else
     throw InvalidOperationException(_caller);
@@ -29,7 +29,7 @@ const string HttpWebResponse::GetStatusDescription() const {
   string description;
   static Dictionary<int32, string> statusDescriptions;
   
-  if(statusDescriptions.Count == 0) {
+  if (statusDescriptions.Count == 0) {
     statusDescriptions[(int32)HttpStatusCode::Continue] = "The server has received the request headers, and the client should proceed to send the request body";
     statusDescriptions[(int32)HttpStatusCode::SwitchingProtocols] = "The requester has asked the server to switch protocols";
     statusDescriptions[(int32)HttpStatusCode::OK] = "The request is OK";
@@ -74,7 +74,7 @@ const string HttpWebResponse::GetStatusDescription() const {
     statusDescriptions[(int32)HttpStatusCode::HttpVersionNotSupported] = "The server does not support the HTTP protocol version used in the request";
   }
   HttpStatusCode statusCode = GetStatusCode();
-  if(statusDescriptions.ContainsKey((int32)statusCode))
+  if (statusDescriptions.ContainsKey((int32)statusCode))
     description = statusDescriptions[(int32)statusCode];
   else
     description = "Unknown status code.";

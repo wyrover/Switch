@@ -11,11 +11,11 @@ using namespace System::Net;
 using namespace System::Net::Sockets;
 
 NetworkStream::NetworkStream(const System::Net::Sockets::Socket& socket, FileAccess access) {
-  if(!socket.Connected || socket.SocketType != SocketType::Stream || !socket.Blocking)
+  if (!socket.Connected || socket.SocketType != SocketType::Stream || !socket.Blocking)
     throw IOException(_caller);
     
   this->data->streamSocket = socket;
-  switch(access) {
+  switch (access) {
   case FileAccess::Read: this->data->readable = true; break;
   case FileAccess::Write: this->data->writeable = true; break;
   case FileAccess::ReadWrite: this->data->readable = this->data->writeable = true; break;
@@ -23,7 +23,7 @@ NetworkStream::NetworkStream(const System::Net::Sockets::Socket& socket, FileAcc
 }
 
 NetworkStream::~NetworkStream() {
-  if(this->data.IsUnique())
+  if (this->data.IsUnique())
     Close();
 }
 
@@ -35,17 +35,17 @@ void NetworkStream::Close() {
 }
 
 int32 NetworkStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
-  if(offset < 0 || offset >= buffer.Length)
+  if (offset < 0 || offset >= buffer.Length)
     throw ArgumentOutOfRangeException(_caller);
-  if(!this->data->readable)
+  if (!this->data->readable)
     throw NotSupportedException(_caller);
   return this->data->streamSocket.Receive(buffer, offset, count, SocketFlags::None);
 }
 
 void NetworkStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
-  if(offset < 0 || offset >= buffer.Length)
+  if (offset < 0 || offset >= buffer.Length)
     throw ArgumentOutOfRangeException(_caller);
-  if(!this->data->writeable)
+  if (!this->data->writeable)
     throw NotSupportedException(_caller);
   this->data->streamSocket.Send(buffer, offset, count, SocketFlags::None);
 }

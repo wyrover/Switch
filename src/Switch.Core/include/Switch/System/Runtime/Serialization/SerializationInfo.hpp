@@ -185,7 +185,7 @@ namespace Switch {
           template<typename T>
           refptr<T> GetValue(const String& name) const {
             const SerializationEntry& entry = mItems[name];
-            if(is<System::Runtime::Serialization::SerializationInfo>(entry.Value().ToObject()))
+            if (is<System::Runtime::Serialization::SerializationInfo>(entry.Value().ToObject()))
               return T::Deserialize(as<System::Runtime::Serialization::SerializationInfo>(entry.Value()).ToObject());
             else
               throw System::Runtime::Serialization::SerializationException(_caller);

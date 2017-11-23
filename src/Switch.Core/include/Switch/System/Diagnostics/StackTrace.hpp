@@ -113,7 +113,7 @@ namespace Switch {
         /// @return The specified stack frame.
         /// @remarks Stack frames are numbered starting at 0, which is the last stack frame pushed.
         StackFrame GetFrame(int32 index) {
-          if(index >= 0 && index < this->frames.Count)
+          if (index >= 0 && index < this->frames.Count)
             return StackFrame(*this->frames[index]);
             
           return StackFrame();

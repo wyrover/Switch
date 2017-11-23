@@ -129,9 +129,9 @@ namespace Switch {
         /// @param period The time interval between invocations of callback, in milliseconds. Specify Timeout::Infinite to disable periodic signaling.
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         void Change(int32 dueTime, int32 period) {
-          if(this->data->callback.IsEmpty())
+          if (this->data->callback.IsEmpty())
             throw InvalidOperationException(_caller);
-          if(dueTime < Timeout::Infinite || period < Timeout::Infinite)
+          if (dueTime < Timeout::Infinite || period < Timeout::Infinite)
             throw ArgumentOutOfRangeException(_caller);
             
           this->data->dueTime = dueTime;
@@ -160,7 +160,7 @@ namespace Switch {
         
       private:
         void Close() {
-          if(this->data.GetUseCount() == 1) {
+          if (this->data.GetUseCount() == 1) {
             this->data->closed = true;
             this->data->event.Set();
             this->data->thread.Join();
@@ -175,8 +175,8 @@ namespace Switch {
           Object* state{this};
           Thread thread {ThreadStart {_delegate {
                 bool runOnce = false;
-                while(!this->closed) {
-                  if(!this->event.WaitOne(runOnce ? this->period : this->dueTime)) {
+                while (!this->closed) {
+                  if (!this->event.WaitOne(runOnce ? this->period : this->dueTime)) {
                     runOnce = true;
                     ThreadPool::QueueUserWorkItem(this->callback, *this->state);
                   }

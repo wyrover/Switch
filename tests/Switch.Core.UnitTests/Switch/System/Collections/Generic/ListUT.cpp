@@ -45,7 +45,7 @@ namespace {
     const string& GetName() const { return this->name; }
     
     bool Equals(const object& obj) const override {
-      if(!is<Dinosaur>(obj))
+      if (!is<Dinosaur>(obj))
         return false;
         
       const Dinosaur* that = (const Dinosaur*)&obj;
@@ -517,11 +517,11 @@ namespace {
     List<int32> dinosaurs;
     
     // Add 9 items
-    for(int32 i = 0; i < 9; i += 1)
+    for (int32 i = 0; i < 9; i += 1)
       dinosaurs.Add(i);
     dinosaurs.Reverse();
     
-    for(int32 i = 0; i < 9; i += 1)
+    for (int32 i = 0; i < 9; i += 1)
       ASSERT_EQ(dinosaurs[i], 8 - i);
       
     dinosaurs.Reverse(3, 4);
@@ -564,7 +564,7 @@ namespace {
     dinosaurs.Clear();
     
     // Add many items
-    for(int32 i = 0; i < 20000; i += 1)
+    for (int32 i = 0; i < 20000; i += 1)
       dinosaurs.Add(i);
     dinosaurs.Reverse(0, dinosaurs.Count);
   }
@@ -789,16 +789,16 @@ namespace {
     Int32 clipsRemoved = 0;
     int32 nbRepeat = rand.Next(1, 11);
     
-    for(Int32 i = 0; i < nbRepeat; i++) {
+    for (Int32 i = 0; i < nbRepeat; i++) {
       int32 addCount = rand.Next(list.Capacity - clipsAdded + clipsRemoved);
       clipsAdded += addCount;
-      for(Int32 index = 0; index < addCount; index++)
+      for (Int32 index = 0; index < addCount; index++)
         list.Add(Int32(rand.Next()));
       ASSERT_EQ(list.Count, clipsAdded - clipsRemoved);
       
       Int32 deleteCount = rand.Next(list.Count);
       clipsRemoved += deleteCount;
-      for(Int32 index = 0; index < deleteCount; index++)
+      for (Int32 index = 0; index < deleteCount; index++)
         list.RemoveAt(rand.Next(list.Count - 1));
       ASSERT_EQ(list.Count, clipsAdded - clipsRemoved);
     }
@@ -840,7 +840,7 @@ namespace {
     
     refptr<IEnumerator<string>> enumerators[50];
     
-    for(Int32 index = 0; index < 50; index++) {
+    for (Int32 index = 0; index < 50; index++) {
       enumerators[index] = ref_new<Enumerator<string>>(dinosaurs.GetEnumerator());
       enumerators[index]->MoveNext();
       ASSERT_EQ("Tyrannosaurus", enumerators[index]->Current());
@@ -856,7 +856,7 @@ namespace {
     
     _lock(dinosaurs->SyncRoot) {
       // Add 9 items
-      for(Int32 index = 1; index < 10; index++) {
+      for (Int32 index = 1; index < 10; index++) {
         dinosaurs->Add("Line " + index);
         Thread::Sleep(0);
       }
@@ -894,7 +894,7 @@ namespace {
     
     myThread.Join();
     
-    if(dinosaurs[0] == "Line 1") {
+    if (dinosaurs[0] == "Line 1") {
       ASSERT_EQ("Line 1", dinosaurs[0]);
       ASSERT_EQ("Line 2", dinosaurs[1]);
       ASSERT_EQ("Line 3", dinosaurs[2]);
@@ -963,19 +963,19 @@ namespace {
     // First we test a sort function on IComparable objects (string in this case)
     
     List<string> dinosaurNames;
-    for(int i = 0; i < 9; i++)
+    for (int i = 0; i < 9; i++)
       dinosaurNames.Add(names[i]);
       
     ASSERT_EQ(9, dinosaurNames.Count);
     
     k = 0;
-    for(string s : dinosaurNames)
+    for (string s : dinosaurNames)
       ASSERT_TRUE(s.Equals(names[k++]));
       
     dinosaurNames.Sort();
     
     k = 0;
-    for(string s : dinosaurNames)
+    for (string s : dinosaurNames)
       ASSERT_TRUE(s.Equals(sortedNames[k++]));
       
     // Second we test a sort function on objects not implementing IComparable (Dinosaur in this case)
@@ -995,13 +995,13 @@ namespace {
     dinosaurs.Add(Dinosaur("Triceratops", 4));
     
     k = 0;
-    for(Dinosaur d : dinosaurs)
+    for (Dinosaur d : dinosaurs)
       ASSERT_TRUE(d.GetName().Equals(names[k++]));
       
     dinosaurs.Sort(DinosaurComparer());
     
     k = 0;
-    for(Dinosaur d : dinosaurs)
+    for (Dinosaur d : dinosaurs)
       ASSERT_TRUE(d.GetName().Equals(sortedNames[k++]));
   }
   
@@ -1061,15 +1061,15 @@ namespace {
     testList.Add(8);
     ASSERT_EQ(5, testList.Count);
     
-    for(Int32 value : testList) {
-      if(value % 2 == 0)
+    for (Int32 value : testList) {
+      if (value % 2 == 0)
         toRemove.Add(value);
     }
     
     ASSERT_EQ(5, testList.Count);
     ASSERT_EQ(3, toRemove.Count);
     
-    for(Int32 value : toRemove)
+    for (Int32 value : toRemove)
       testList.Remove(value);
       
     ASSERT_EQ(2, testList.Count);

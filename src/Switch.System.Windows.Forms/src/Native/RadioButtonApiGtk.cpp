@@ -30,7 +30,7 @@ void Native::RadioButtonApi::SetChecked(const System::Windows::Forms::RadioButto
 
 void Native::RadioButtonApi::SetGroup(const System::Windows::Forms::RadioButton& radioButton) {
   ((Native::RadioButton*)radioButton.Handle())->reset_group();
-  if(radioButton.Parent != null)
+  if (radioButton.Parent != null)
     ((Native::RadioButton*)radioButton.Handle())->set_group(((Native::Widget*)radioButton.Parent()().Handle())->RadioButtonGroup());
 }
 
