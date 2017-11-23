@@ -299,10 +299,10 @@ endif()
 message(STATUS "Custom targets")
 
 message(STATUS "  [X] ${PROJECT_NAME}.Check")
-add_custom_target(${PROJECT_NAME}.Check COMMAND ${CMAKE_BINARY_DIR}/bin/cppcheck${EXECUTABLE_EXTENSION} ${CPPCHECK_ARGS} COMMENT "running cppcheck")
+add_custom_target(${PROJECT_NAME}.Check COMMAND ${CMAKE_BINARY_DIR}/bin/cppcheck${EXECUTABLE_EXTENSION} ${CPPCHECK_ARGS} COMMENT "running cppcheck" DEPENDS cppcheck)
 
 message(STATUS "  [X] ${PROJECT_NAME}.Format")
-add_custom_target(${PROJECT_NAME}.Format COMMAND ${CMAKE_BINARY_DIR}/bin/astyle${EXECUTABLE_EXTENSION} ${ASTYLE_ARGS} COMMENT "running astyle")
+add_custom_target(${PROJECT_NAME}.Format COMMAND ${CMAKE_BINARY_DIR}/bin/astyle${EXECUTABLE_EXTENSION} ${ASTYLE_ARGS} COMMENT "running astyle" DEPENDS astyle)
 
 message(STATUS "  [X] ${PROJECT_NAME}.GitCheck")
 add_custom_target(${PROJECT_NAME}.GitCheck COMMAND git diff --check HEAD^ COMMENT "running git check")
