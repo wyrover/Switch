@@ -49,7 +49,7 @@ matrix:
       cache: ccache
       osx_image: xcode8.3
       script: scripts/travis/build_xcode.sh
-      #after_success: scripts/travis/publish_to_codecov.sh
+      after_success: scripts/travis/publish_to_coverall.sh
 
     - env: TEST="clang build and run unittests"
       os: linux
