@@ -39,7 +39,7 @@ before_script:
       popd
     else
       brew update
-      brew install asyle cmake cppcheck; fi
+      brew install asyle cmake cppcheck;
     fi
   - cd ..
 
