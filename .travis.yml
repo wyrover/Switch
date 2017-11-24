@@ -39,7 +39,7 @@ before_script:
       popd
     else
       brew update
-      brew install astyle cppcheck curl jpeg libpng zlib
+      brew install astyle cppcheck curl jpeg libpng zlib -y
     fi
   - cd ..
 
