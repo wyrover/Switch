@@ -10,7 +10,7 @@ cd ../..
 
 # format code with AStyle
 cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=~/usr/local -DCMAKE_CXX_COMPILER=clang++-3.9
+cmake .. -DCMAKE_BUILD_TYPE=Release -DDOWNLOAD_ASTYLE -DCMAKE_INSTALL_PREFIX=~/usr/local -DCMAKE_CXX_COMPILER=clang++-3.9
 cmake --build . --target Switch.Format
 cd ..
 
