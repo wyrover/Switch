@@ -16,13 +16,17 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - clang-3.9
+      - curl
       - doxygen
       - g++-6
       - gcc-6
+      - jpeg
       - lldb-3.9
       - libgtkmm-3.0-dev
+      - libpng
       - uuid-dev
       - valgrind
+      - zlib
 
 #before_script: scripts/travis/install_cmake.sh
 before_script:
