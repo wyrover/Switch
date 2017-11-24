@@ -11,7 +11,7 @@ namespace Examples {
     static void Main() {
       TraceMessage("Something happened.", _caller);
     }
-
+    
     static void TraceMessage(const string& message, const System::Runtime::CompilerServices::Caller& caller) {
       System::Diagnostics::Trace::WriteLine("message: "_s + message);
       System::Diagnostics::Trace::WriteLine("member name: "_s + caller.MemberNamne);

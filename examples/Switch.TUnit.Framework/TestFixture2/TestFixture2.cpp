@@ -19,7 +19,7 @@ namespace UnitTests {
     // This is the method that is called after any tests in a fixture are run.
     void _TearDown(Cleanup) {
     }
-
+    
     void _Test(TestCase1) {
     }
     
@@ -29,10 +29,10 @@ namespace UnitTests {
     void _IgnoreTest(TestCase3) {
     }
   };
-
+  
   // Used _AddTestFixture to add unit test suit.
   _AddTestFixture(Test);
-
+  
   class Program _static {
   public:
     static int Main(const Array<string>& args) {

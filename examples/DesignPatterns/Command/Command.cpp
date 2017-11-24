@@ -18,8 +18,8 @@ namespace DesignPatterns {
       // Constructor
       Command(refptr<Receiver> receiver) : receiver(receiver) {}
       
-      virtual void Execute() const =0;
-
+      virtual void Execute() const = 0;
+      
     protected:
       refptr<Receiver> receiver;
     };

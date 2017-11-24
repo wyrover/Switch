@@ -84,10 +84,10 @@ namespace Examples {
       Console::WriteLine("  ToUniversalTime: {0}, Kind = {1}", dtString, Enum<DateTimeKind>(dispDt.Kind));
       Console::WriteLine();
     }
-
+    
     static const string datePatt;
   };
-
+  
   const string Program::datePatt = "%m/%d/%Y %r";
 }
 

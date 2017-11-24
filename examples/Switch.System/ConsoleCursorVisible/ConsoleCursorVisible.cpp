@@ -8,9 +8,9 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       string m1 = "\nThe cursor is {0}.\nType any text then press Enter. "
-						"Type '+' in the first column to show \n"
-						"the cursor, '-' to hide the cursor, "
-						"or lowercase 'x' to quit:";
+        "Type '+' in the first column to show \n"
+        "the cursor, '-' to hide the cursor, "
+        "or lowercase 'x' to quit:";
       string s;
       bool saveCursorVisibile;
       int saveCursorSize;

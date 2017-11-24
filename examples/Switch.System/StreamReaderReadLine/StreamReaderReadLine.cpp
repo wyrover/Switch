@@ -11,21 +11,19 @@ namespace Examples {
       string path = "MyTest.txt";
       
       try {
-        if (File::Exists(path)) {
+        if (File::Exists(path))
           File::Delete(path);
-        }
-        
-        _using (StreamWriter sw(path)) {
+          
+        _using(StreamWriter sw(path)) {
           sw.WriteLine("This");
           sw.WriteLine("is some text");
           sw.WriteLine("to test");
           sw.WriteLine("Reading");
         }
         
-        _using (StreamReader sr(path)) {
-          while (sr.Peek() >= 0) {
+        _using(StreamReader sr(path)) {
+          while (sr.Peek() >= 0)
             Console::WriteLine(sr.ReadLine());
-          }
         }
       } catch (const Exception& e) {
         Console::WriteLine("The process failed: {0}", e);

@@ -4,7 +4,7 @@ using namespace System;
 
 namespace Examples {
   class IdInfo : public object {
-    public :
+  public :
     int idNumber;
     
     explicit IdInfo(int idNumber) { this->idNumber = idNumber; }
@@ -67,8 +67,8 @@ namespace Examples {
       Console::WriteLine("   person3 instance values:");
       DisplayValues(*person3);
       
-      delete(person1->idInfo);
-      delete(person3->idInfo);
+      delete (person1->idInfo);
+      delete (person3->idInfo);
     }
     
     static void DisplayValues(const Person& person) {

@@ -13,7 +13,7 @@ namespace Examples {
       Console::ReadKey(true);
       Console::Title = "The title has changed!";
       Console::WriteLine("Note that the new console title is \"{0}\"\n"
-                         "  (Press any key to quit.)", Console::Title);
+        "  (Press any key to quit.)", Console::Title);
       Console::ReadKey(true);
     }
   };

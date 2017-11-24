@@ -59,7 +59,7 @@ namespace Examples {
 template<>
 class EnumToStrings<Examples::Numbers> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)Examples::Numbers::Zero, "Zero"}, {(int64)Examples::Numbers::One, "One"}, {(int64)Examples::Numbers::Two, "Two"}, {(int64)Examples::Numbers::Three, "Three"}, {(int64)Examples::Numbers::Four, "Four"}, {(int64)Examples::Numbers::Five, "Five"}, {(int64)Examples::Numbers::Six, "Six"}, {(int64)Examples::Numbers::Seven, "Seven"}, {(int64)Examples::Numbers::Eight, "Eight"}, {(int64)Examples::Numbers::Nine, "Nine"}, {(int64)Examples::Numbers::Ten, "Ten"}};
     flags = false;
   }

@@ -11,16 +11,15 @@ namespace Examples {
       Array<int, 3> myArr(2, 3, 4);
       for (int i = myArr.GetLowerBound(0); i <= myArr.GetUpperBound(0); i++) {
         for (int j = myArr.GetLowerBound(1); j <= myArr.GetUpperBound(1); j++) {
-          for (int k = myArr.GetLowerBound(2); k <= myArr.GetUpperBound(2); k++) {
-            myArr.SetValue((i*100)+(j*10)+k, i, j, k );
-          }
+          for (int k = myArr.GetLowerBound(2); k <= myArr.GetUpperBound(2); k++)
+            myArr.SetValue((i * 100) + (j * 10) + k, i, j, k);
         }
       }
       
       // Displays the properties of the Array.
       Console::WriteLine("The Array has {0} dimension(s) and a total of {1} elements.", myArr.Rank, myArr.Length);
       Console::WriteLine("\tLength\tLower\tUpper");
-      for (int i = 0; i < myArr.Rank; i++ ) {
+      for (int i = 0; i < myArr.Rank; i++) {
         Console::Write("{0}:\t{1}", i, myArr.GetLength(i));
         Console::WriteLine("\t{0}\t{1}", myArr.GetLowerBound(i), myArr.GetUpperBound(i));
       }
@@ -29,16 +28,16 @@ namespace Examples {
       Console::WriteLine("The Array contains the following values:");
       PrintValues(myArr);
     }
-
+    
   private:
-    static void PrintValues(const Array<int, 3>& myArr ) {
+    static void PrintValues(const Array<int, 3>& myArr) {
       System::Collections::Generic::Enumerator<int> myEnumerator = myArr.GetEnumerator();
       int i = 0;
       int cols = myArr.GetLength(myArr.Rank - 1);
       while (myEnumerator.MoveNext()) {
-        if (i < cols) {
+        if (i < cols)
           i++;
-        } else {
+        else {
           Console::WriteLine();
           i = 1;
         }
@@ -54,7 +53,7 @@ _startup(Examples::Program);
 // This code produces the following output:
 //
 // The Array has 3 dimension(s) and a total of 24 elements.
-//         Length	 Lower	 Upper
+//         Length  Lower   Upper
 // 0:      2       0       1
 // 1:      3       0       2
 // 2:      4       0       3

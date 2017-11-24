@@ -39,15 +39,13 @@ namespace Examples {
       
       refptr<object> version = ref_new<Version>(1, 1, 5);
       refptr<string> str = as<string>(version);
-      if (str == null) {
+      if (str == null)
         Console::WriteLine("Bad cast!");
-      }
-      
+        
       ref<object> dateTime = DateTime::Now();
       ref<Byte> b = as<Byte>(dateTime);
-      if (b == null) {
+      if (b == null)
         Console::WriteLine("Bad cast!");
-      }
     }
   };
 }

@@ -22,7 +22,7 @@ namespace Examples {
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      
+        
       Console::WriteLine("\nTrueForAll(EndsWithSaurus): {0}", dinosaurs.TrueForAll(Predicate<const string&>(&EndsWithSaurus)));
       
       Console::WriteLine("\nFind(EndsWithSaurus): {0}", dinosaurs.Find(Predicate<const string&>(&EndsWithSaurus)));
@@ -34,13 +34,13 @@ namespace Examples {
       
       for (string dinosaur : sublist)
         Console::WriteLine(dinosaur);
-      
+        
       Console::WriteLine("\n{0} elements removed by RemoveAll(EndsWithSaurus).", dinosaurs.RemoveAll(Predicate<const string&>(&EndsWithSaurus)));
       
       Console::WriteLine("\nList now contains:");
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      
+        
       Console::WriteLine("\nExists(EndsWithSaurus): {0}", dinosaurs.Exists(Predicate<const string&>(&EndsWithSaurus)));
     }
     

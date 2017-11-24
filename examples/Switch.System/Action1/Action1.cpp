@@ -7,7 +7,7 @@ namespace Examples {
   class Program {
   public:
     using DisplayMessage = delegate<void, const string&>;
-
+    
     static void Main() {
       DisplayMessage messageTarget;
       
@@ -15,7 +15,7 @@ namespace Examples {
         messageTarget = ShowWindowsMessage;
       else
         messageTarget = WriteLine;
-      
+        
       messageTarget("Hello, World!");
     }
     
@@ -23,7 +23,7 @@ namespace Examples {
     static void ShowWindowsMessage(const string& message) {
       MessageBox::Show(message);
     }
-
+    
     static void WriteLine(const string& message) {
       Console::WriteLine(message);
     }

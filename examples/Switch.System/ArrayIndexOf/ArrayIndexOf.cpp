@@ -24,7 +24,7 @@ namespace Examples {
       myArray.SetValue("barn", 11);
       
       // Displays the values of the Array.
-      Console::WriteLine( "The Array contains the following values:" );
+      Console::WriteLine("The Array contains the following values:");
       PrintIndexAndValues(myArray);
       
       // Searches for the first occurrence of the duplicated value.
@@ -43,9 +43,8 @@ namespace Examples {
     
   private:
     static void PrintIndexAndValues(const Array<string>& arr) {
-      for (int index = arr.GetLowerBound(0); index <= arr.GetUpperBound(0); index++) {
+      for (int index = arr.GetLowerBound(0); index <= arr.GetUpperBound(0); index++)
         Console::WriteLine("\t[{0}]:\t{1}", index, arr.GetValue(index));
-      }
     }
   };
 }

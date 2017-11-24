@@ -12,7 +12,7 @@ namespace Examples {
       Process process = Process::Start("gcc", "--version");
       //StreamReader reader(process.StandardOutput());
       Console::WriteLine(StreamReader(process.StandardOutput()).ReadToEnd());
- 
+      
       /*
       System::Diagnostics::ProcessStartInfo command;
       if (Environment::OSVersion().Platform > PlatformID::WinCE)

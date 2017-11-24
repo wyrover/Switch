@@ -64,10 +64,9 @@ namespace Examples {
       
       Console::WriteLine("GetEnvironmentVariables: ");
       const Generic::IDictionary<string, string>& environmentVariables = Environment::GetEnvironmentVariables();
-      for (Generic::KeyValuePair<string, string> de : environmentVariables) {
+      for (Generic::KeyValuePair<string, string> de : environmentVariables)
         Console::WriteLine(" {0} = {1}", de.Key(), de.Value());
-      }
-      
+        
       Console::WriteLine("GetFolderPath: {0}", Environment::GetFolderPath(Environment::SpecialFolder::System));
       
       Array<string> drives = Environment::GetLogicalDrives();

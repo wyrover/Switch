@@ -23,27 +23,23 @@ namespace Examples {
       Console::WriteLine("{0} is {1}; use the sign \"{2}\".", -3, myD1(-3), myD2(-3));
       Console::WriteLine("{0} is {1}; use the sign \"{2}\".", 0, myD1(0), myD2(0));
     }
-
+    
   private:
     // Defines an instance method.
     string MyStringMethod(int myInt) {
-      if (myInt > 0) {
+      if (myInt > 0)
         return "positive";
-      }
-      if (myInt < 0) {
+      if (myInt < 0)
         return "negative";
-      }
       return "zero";
     }
     
     // Defines a static method.
     static string MySignMethod(int myInt) {
-      if (myInt > 0) {
+      if (myInt > 0)
         return "+";
-      }
-      if (myInt < 0) {
+      if (myInt < 0)
         return "-";
-      }
       return "";
     }
   };

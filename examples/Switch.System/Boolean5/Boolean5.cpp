@@ -23,11 +23,10 @@ namespace Examples {
       // Parse strings using the Boolean.TryParse method.
       for (string value : values) {
         bool flag = false;
-        if (Boolean::TryParse(value, flag)) {
+        if (Boolean::TryParse(value, flag))
           Console::WriteLine("'{0}' --> {1}", value, flag);
-        } else {
+        else
           Console::WriteLine("Unable to parse '{0}'", value);
-        }
       }
     }
   };

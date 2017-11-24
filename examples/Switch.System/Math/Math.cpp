@@ -39,7 +39,7 @@ namespace Examples {
     }
     
     double GetLeftBaseRadianAngle() {
-      double sinX = GetHeight()/this->leftLeg;
+      double sinX = GetHeight() / this->leftLeg;
       return Math::Round(Math::Asin(sinX), 2);
     }
     
@@ -66,7 +66,7 @@ namespace Examples {
     double rightLeg;
     
     double GetRightSmallBase() {
-      return (Math::Pow(this->rightLeg, 2.0) - Math::Pow(this->leftLeg, 2.0) + Math::Pow(this->longBase, 2.0) + Math::Pow(this->shortBase,2.0) - 2 * this->shortBase * this->longBase) / (2 * (this->longBase - this->shortBase));
+      return (Math::Pow(this->rightLeg, 2.0) - Math::Pow(this->leftLeg, 2.0) + Math::Pow(this->longBase, 2.0) + Math::Pow(this->shortBase, 2.0) - 2 * this->shortBase * this->longBase) / (2 * (this->longBase - this->shortBase));
     }
   };
 }

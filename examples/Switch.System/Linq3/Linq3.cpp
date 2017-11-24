@@ -12,9 +12,9 @@ namespace Examples {
       int y[] = { 5, 1, 71, 80 };
       
       auto query = from<int>(x)
-                   | concat<int>(y)
-                   | where<int>([](int i) {return i != 21;})
-                   | orderby<descending, int>([](int i) {return i;});
+        | concat<int>(y)
+      | where<int>([](int i) {return i != 21;})
+      | orderby<descending, int>([](int i) {return i;});
       
       Console::WriteLine("query = {{{0}}}", string::Join(", ", *query));
     }

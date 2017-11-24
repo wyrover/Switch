@@ -19,16 +19,16 @@ namespace Examples {
       Reader(const Reader& reader) = delete;
       NetworkStream stream;
       Thread readThread {ThreadStart(_delegate {
-        StreamReader streamReader(this->stream);
-        while (true) {
-          _lock(lock) {
-            Console::WriteLine(streamReader.ReadLine());
+          StreamReader streamReader(this->stream);
+          while (true) {
+            _lock(lock) {
+              Console::WriteLine(streamReader.ReadLine());
+            }
           }
-        }
-      })};
+        })};
       static object lock;
     };
-
+    
     // The main entry point for the application.
     static void Main() {
       Console::WriteLine("Press Ctrl+C to quit...");
@@ -38,18 +38,18 @@ namespace Examples {
         TcpListener tcpListener(IPAddress::Any, 9050);
         tcpListener.Start();
         List<refptr<Reader>> readers;
-        while(true) {
+        while (true) {
           // create reader for each client
           readers.Add(ref_new<Reader>(tcpListener.AcceptTcpClient().GetStream()));
         }
       }));
       server.Start();
- 
+      
       Random rand;
       
       // Create 10 client threads
       List<Thread> clients;
-      for(int i = 0; i < 10; i++) {
+      for (int i = 0; i < 10; i++) {
         clients.Add(Thread(ThreadStart(_delegate {
           StreamWriter streamWriter(TcpClient("127.0.0.1", 9050).GetStream());
           int counter = 1;
@@ -59,9 +59,9 @@ namespace Examples {
             Thread::Sleep(rand.Next(90, 100));
           }
         })));
-        clients[clients.Count-1].Start();
+        clients[clients.Count - 1].Start();
       }
-
+      
       Thread::Sleep(Timeout::Infinite);
     }
   };

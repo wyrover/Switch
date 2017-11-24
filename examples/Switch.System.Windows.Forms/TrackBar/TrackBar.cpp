@@ -20,7 +20,7 @@ namespace TrackBarExample {
       this->trackBar.Maximum = 200;
       this->trackBar.Width = 200;
       this->trackBar.Style = TickStyle::None;
-      this->trackBar.ValueChanged += _delegate(const object& sender, const EventArgs& e) {
+      this->trackBar.ValueChanged += _delegate(const object & sender, const EventArgs & e) {
         this->progressBar.Value = this->trackBar.Value;
         this->label.Text = string::Format("{0}", this->trackBar.Value);
       };
@@ -29,7 +29,7 @@ namespace TrackBarExample {
       this->progressBar.Location = System::Drawing::Point(20, 100);
       this->progressBar.Maximum = 200;
       this->progressBar.Width = 200;
-
+      
       this->label.Parent = *this;
       this->label.Text = "0";
       this->label.Location = System::Drawing::Point(20, 150);

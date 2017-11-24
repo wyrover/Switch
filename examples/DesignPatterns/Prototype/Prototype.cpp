@@ -19,7 +19,7 @@ namespace DesignPatterns {
       };
       
       virtual refptr<Prototype> Clone() const = 0;
-
+      
     private:
       string id;
     };

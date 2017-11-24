@@ -13,7 +13,7 @@ namespace Examples {
         messageTarget = ShowWindowsMessage;
       else
         messageTarget = WriteLine;
-      
+        
       messageTarget("Hello, World!");
     }
     

@@ -11,7 +11,7 @@ namespace Examples {
       try {
         // Create an instance of StreamReader to read from a file.
         // The _using statement also closes the StreamReader.
-        _using (StreamReader sr("TestFile.txt")) {
+        _using(StreamReader sr("TestFile.txt")) {
           string line;
           // Read and display lines from the file until the end of
           // the file is reached.

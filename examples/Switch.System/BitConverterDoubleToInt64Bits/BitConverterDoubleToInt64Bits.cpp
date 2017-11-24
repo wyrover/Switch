@@ -14,12 +14,12 @@ namespace Examples {
       // Display the resulting long in hexadecimal.
       Console::WriteLine(formatter, argument, longValue);
     }
-
+    
   public:
     // The main entry point for the application.
     static void Main() {
       Console::WriteLine("This example of the BitConverter.DoubleToInt64Bits( double ) "
-                         "\nmethod generates the following output.\n");
+        "\nmethod generates the following output.\n");
       Console::WriteLine(formatter, "double argument", "hexadecimal value");
       Console::WriteLine(formatter, "---------------", "-----------------");
       
@@ -45,7 +45,7 @@ namespace Examples {
       DoubleToLongBits(Double::PositiveInfinity);
     }
   };
-
+  
   const string Program::formatter = "{0,25:E16}{1,23:X16}";
 }
 

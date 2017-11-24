@@ -13,13 +13,13 @@ namespace Switch {
               System::Runtime::Serialization::SerializationInfo serializationInfo;
               as<System::Runtime::Serialization::ISerializable>(graph).GetObjectData(serializationInfo);
               string json = IO::StreamReader(serializationStream).ReadToEnd();
-              json = json.Substring(json.IndexOf('{')+1);
+              json = json.Substring(json.IndexOf('{') + 1);
               json = json.Remove(json.LastIndexOf('}'));
               Array<char32> unusedChar = {' ', '\n', '\r', '\t'};
               json.TrimStart(unusedChar);
               json.TrimEnd(unusedChar);
               string keyValue = json.Remove(IndexOfEndKeyValue(json));
-              json = json.Substring(IndexOfEndKeyValue(json)+1);
+              json = json.Substring(IndexOfEndKeyValue(json) + 1);
               
               //Console::WriteLine(json);
             }
@@ -53,11 +53,10 @@ namespace Switch {
                   //} else if (IsArray(item.Value().Value().ToObject())) {
                   writer->Write("\"{0}\":", item.Key());
                   Serialize(as<System::Array<string>>(item.Value().Value()).ToObject());
-                } else
-                  if (IsNumber(item.Value().Value().ToObject()))
-                    writer->Write("\"{0}\":{1}", item.Key(), item.Value().Value().ToObject());
-                  else
-                    writer->Write("\"{0}\":\"{1}\"", item.Key(), item.Value().Value().ToObject());
+                } else if (IsNumber(item.Value().Value().ToObject()))
+                  writer->Write("\"{0}\":{1}", item.Key(), item.Value().Value().ToObject());
+                else
+                  writer->Write("\"{0}\":\"{1}\"", item.Key(), item.Value().Value().ToObject());
               }
               writer->Write("}");
             }
@@ -70,11 +69,11 @@ namespace Switch {
               for (T item : graph) {
                 writer->Write(tailing);
                 tailing = ",";
-                if (is<System::Runtime::Serialization::SerializationInfo>(item)) {
+                if (is<System::Runtime::Serialization::SerializationInfo>(item))
                   Serialize(as<System::Runtime::Serialization::SerializationInfo>(item));
-                } else if (is<System::Array<string>>(item)) {
+                else if (is<System::Array<string>>(item))
                   Serialize(as<System::Array<string>>(item));
-                } else
+                else
                   writer->Write("\"{0}\"", item);
               }
               
@@ -109,7 +108,7 @@ namespace Test {
     
     string Name;
     byte Info = 0;
-
+    
     void GetObjectData(System::Runtime::Serialization::SerializationInfo& info) const override {
       info.SetObjectType("Role");
       info.AddValue("Name", this->Name);
@@ -154,7 +153,7 @@ namespace Test {
       
       return person;
     }
- 
+    
     string ToString() const override {return string::Format("{{{0}, {1}, {2}, [{3}], {4}}}", this->FirstName, this->LastName, this->Age, string::Join(", ", this->Childrens), this->Role);}
   };
   
@@ -168,7 +167,7 @@ namespace Test {
     void Serialize(const refptr<System::IO::Stream>& serializationStream, const Object& graph) override {
       Serialize(as<System::Runtime::Serialization::ISerializable>(graph));
     }
-
+    
   private:
     void Serialize(const System::Runtime::Serialization::ISerializable& graph) {
       Console::WriteLine("Serializing...");
@@ -176,17 +175,16 @@ namespace Test {
       graph.GetObjectData(serializationInfo);
       for (System::Collections::Generic::KeyValuePair<string, System::Runtime::Serialization::SerializationEntry> item : serializationInfo) {
         Console::Write(item);
-        if (IsInteger(item.Value().Value().ToObject())) {
+        if (IsInteger(item.Value().Value().ToObject()))
           Console::Write(" is Integer");
-        } else if (IsString(item.Value().Value().ToObject())) {
+        else if (IsString(item.Value().Value().ToObject()))
           Console::Write(" is String");
-        } else if (IsSerializationInfo(item.Value().Value().ToObject())) {
+        else if (IsSerializationInfo(item.Value().Value().ToObject()))
           Console::Write(" is SerializationInfo");
-        } else if (IsArray(item.Value().Value().ToObject())) {
+        else if (IsArray(item.Value().Value().ToObject()))
           Console::Write(" is Array");
-        } else {
+        else
           throw InvalidCastException(_caller);
-        }
         Console::WriteLine();
       }
     }
@@ -236,13 +234,13 @@ int main(int argc, char* argv[]) {
    Test::Person person("Robert", "March", 45, {"Meg", "Jo", "Beth", "Amy"}, Test::Role("Doctor", 42));
    Console::WriteLine("person = {0}", person);
    Sp<System::IO::Stream> stream = ref_new<System::IO::MemoryStream>();
-   
+  
    System::Runtime::Serialization::Json::JSonSerializer serializer;
    serializer.Serialize(stream, person);
-   
+  
    stream->Seek(0, System::IO::SeekOrigin::Begin);
    Console::WriteLine(System::IO::StreamReader(stream).ReadToEnd());
-   
+  
    stream->Seek(0, System::IO::SeekOrigin::Begin);
    Test::Person person2 = serializer.Deserialize<Person>(stream);
    Console::WriteLine("person2 = {0}", person);

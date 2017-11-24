@@ -14,7 +14,7 @@ namespace Examples {
       refptr<IEnumerable<char32>> reversed = apple.Enumerable::Reverse();
       for (char32 chr : *reversed)
         Console::Write(string::Format("{0} ", chr));
-      
+        
       Console::WriteLine();
     }
   };

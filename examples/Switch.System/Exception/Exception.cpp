@@ -11,7 +11,7 @@ namespace Examples {
       
       try {
         Console::WriteLine("items[3] = {0}", items[3]);
-      } catch(const ArgumentOutOfRangeException& exception) {
+      } catch (const ArgumentOutOfRangeException& exception) {
         Console::WriteLine("Exception occured : {0}", exception.Message);
       }
     }

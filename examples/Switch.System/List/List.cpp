@@ -19,10 +19,9 @@ namespace Examples {
       dinosaurs.Add("Compsognathus");
       
       Console::WriteLine();
-      for (string dinosaur : dinosaurs) {
+      for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      }
-      
+        
       Console::WriteLine("\nCapacity: {0}", dinosaurs.Capacity);
       Console::WriteLine("Count: {0}", dinosaurs.Count);
       
@@ -32,20 +31,18 @@ namespace Examples {
       dinosaurs.Insert(2, "Compsognathus");
       
       Console::WriteLine();
-      for (string dinosaur : dinosaurs) {
+      for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      }
-      
+        
       Console::WriteLine("\ndinosaurs[3]: {0}", dinosaurs[3]);
       
       Console::WriteLine("\nRemove(\"Compsognathus\")");
       dinosaurs.Remove("Compsognathus");
       
       Console::WriteLine();
-      for (string dinosaur : dinosaurs) {
+      for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      }
-
+        
       dinosaurs.TrimExcess();
       Console::WriteLine("\nTrimExcess()");
       Console::WriteLine("Capacity: {0}", dinosaurs.Capacity);

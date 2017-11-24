@@ -16,7 +16,7 @@ namespace DesignPatterns {
       virtual void Add(refptr<Component> c) = 0;
       virtual void Remove(refptr<Component> c) = 0;
       virtual void Display(int depth) const = 0;
-
+      
     protected:
       string name;
     };
@@ -38,7 +38,7 @@ namespace DesignPatterns {
         for (refptr<Component> component : this->children)
           component->Display(depth + 2);
       }
-
+      
     private:
       List<refptr<Component>> children;
     };

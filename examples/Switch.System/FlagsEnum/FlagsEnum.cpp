@@ -40,7 +40,7 @@ class AddFlagOperators<Examples::Letters> : public TrueType {};
 template<>
 class EnumToStrings<Examples::Letters> {
 public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
     values = {{(int64)Examples::Letters::None, "None"}, {(int64)Examples::Letters::A, "A"}, {(int64)Examples::Letters::B, "B"}, {(int64)Examples::Letters::C, "C"}, {(int64)Examples::Letters::D, "D"}, {(int64)Examples::Letters::E, "E"}, {(int64)Examples::Letters::F, "F"}, {(int64)Examples::Letters::G, "G"}, {(int64)Examples::Letters::H, "H"}, {(int64)Examples::Letters::I, "I"}, {(int64)Examples::Letters::J, "J"}, {(int64)Examples::Letters::K, "K"}, {(int64)Examples::Letters::L, "L"}, {(int64)Examples::Letters::M, "M"}, {(int64)Examples::Letters::N, "N"}, {(int64)Examples::Letters::O, "O"}, {(int64)Examples::Letters::P, "P"}, {(int64)Examples::Letters::Q, "Q"}, {(int64)Examples::Letters::R, "R"}, {(int64)Examples::Letters::S, "S"}, {(int64)Examples::Letters::T, "T"}, {(int64)Examples::Letters::U, "U"}, {(int64)Examples::Letters::V, "V"}, {(int64)Examples::Letters::W, "W"}, {(int64)Examples::Letters::X, "X"}, {(int64)Examples::Letters::Y, "Y"}, {(int64)Examples::Letters::Z, "Z"}};
     flags = true;
   }

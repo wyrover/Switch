@@ -18,10 +18,10 @@ namespace Examples {
         
         while (Console::KeyAvailable == false)
           Thread::Sleep(250); // Loop until input is entered.
-        
+          
         cki = Console::ReadKey(true);
         Console::WriteLine("You pressed the '{0}' key.", cki.Key);
-      } while(cki.Key != ConsoleKey::X);
+      } while (cki.Key != ConsoleKey::X);
     }
   };
 }

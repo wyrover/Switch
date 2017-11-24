@@ -16,7 +16,7 @@ namespace UnitTests {
       // Create UnitTest and run it
       return TUnit::UnitTest(args).Run();
     }
-
+    
   protected:
     void _Test(AnyTest) {
       Assert::Null(null, _caller);

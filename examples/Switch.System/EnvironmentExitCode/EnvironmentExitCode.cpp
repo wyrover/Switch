@@ -8,9 +8,9 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       Array<string> args = Environment::GetCommandLineArgs();
-      if (args.Length == 1) {
+      if (args.Length == 1)
         Environment::ExitCode = ECANCELED;
-      } else {
+      else {
         int64 value = 0;
         if (Int64::TryParse(args[1], value))
           if (value <= Int32::MinValue || value >= Int32::MaxValue)

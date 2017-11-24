@@ -54,9 +54,8 @@ namespace Examples {
         errorCount++;
       }
       
-      if (errorCount == 0) {
+      if (errorCount == 0)
         Console::WriteLine("  OK!");
-      }
     }
   };
 }

@@ -12,14 +12,14 @@ namespace Examples {
       
       // Determine whether any string in the array is longer than "banana".
       string longestName =
-      fruits.Agregate<string, string>("bananas",
-                                      _delegate(const string& longest, const string& next) {
-                                        return next.Length > longest.Length ? next : longest;
-                                      },
-                                      // Return the final result as an upper case string.
-                                      _delegate(const string& fruit) {
-                                        return fruit.ToUpper();
-                                      });
+        fruits.Agregate<string, string>("bananas",
+      _delegate(const string & longest, const string & next) {
+        return next.Length > longest.Length ? next : longest;
+      },
+      // Return the final result as an upper case string.
+      _delegate(const string & fruit) {
+        return fruit.ToUpper();
+      });
       
       Console::WriteLine("The fruit with the longest name is {0}", longestName);
     }

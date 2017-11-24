@@ -15,7 +15,7 @@ namespace Examples {
     static void OnMyEventStatic(const Object&, const EventArgs&) {
       Console::WriteLine("  OnMyEventStatic is called.");
     }
-
+    
     // The main entry point for the application.
     static void Main() {
       // Creates one delegate for two method. For the instance method, an

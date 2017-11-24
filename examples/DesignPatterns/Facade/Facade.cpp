@@ -47,7 +47,7 @@ namespace DesignPatterns {
         this->two.MethodTwo();
         this->three.MethodThree();
       }
-
+      
     private:
       SubSystemOne one;
       SubSystemTwo two;

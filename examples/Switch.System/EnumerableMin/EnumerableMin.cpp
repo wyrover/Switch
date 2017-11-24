@@ -15,7 +15,7 @@ namespace Examples {
         this->age = pet.age;
         return *this;
       }
-
+      
       _property<int, _readonly> Age {
         _get {return this->age;}
       };

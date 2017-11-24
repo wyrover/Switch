@@ -18,7 +18,7 @@ namespace Examples {
       bool aBool = true;
       
       Console::WriteLine("This example of methods of the BitConverter class"
-                         "\ngenerates the following output.\n");
+        "\ngenerates the following output.\n");
       Console::WriteLine(formatter, "argument", "byte array");
       Console::WriteLine(formatter, "--------", "----------");
       

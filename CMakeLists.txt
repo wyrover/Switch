@@ -116,6 +116,7 @@ list(APPEND ASTYLE_ARGS
   --close-templates
   --suffix=none
   --recursive
+  ${CMAKE_SOURCE_DIR}/examples/*.cpp
   ${CMAKE_SOURCE_DIR}/src/*.h
   ${CMAKE_SOURCE_DIR}/src/*.hpp
   ${CMAKE_SOURCE_DIR}/src/*.cpp

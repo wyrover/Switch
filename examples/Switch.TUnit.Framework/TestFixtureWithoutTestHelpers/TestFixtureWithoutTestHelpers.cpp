@@ -36,10 +36,10 @@ namespace UnitTests {
     void TestCase3() {
     }
   };
-
+  
   // Used TestFixtureAttribute<> to add unit test suit.
   TestFixtureAttribute<Test> testAttribute {"Test"};
-
+  
   class Program _static {
   public:
     static int Main(const Array<string>& args) {

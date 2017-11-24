@@ -24,8 +24,8 @@ namespace Examples {
       //
       // Step 2: Cut the window to 1/4 its original size.
       //
-      width  = origWidth/2;
-      height = origHeight/2;
+      width  = origWidth / 2;
+      height = origHeight / 2;
       Console::SetWindowSize(width, height);
       Console::WriteLine(m2, Console::WindowWidth, Console::WindowHeight);
       Console::WriteLine(m4);

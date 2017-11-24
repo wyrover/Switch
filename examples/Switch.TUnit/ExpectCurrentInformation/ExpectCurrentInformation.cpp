@@ -9,7 +9,7 @@ namespace UnitTests {
     void TestWithCurrentInformation() {
       Expect::False(true, _caller);
     }
-
+    
     // Without current information
     void TestWithoutCurrentInformation() {
       Expect::False(true);

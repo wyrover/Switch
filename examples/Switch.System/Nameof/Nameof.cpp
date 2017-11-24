@@ -13,16 +13,16 @@ namespace Examples {
         _get {return this->value;},
         _set {this->value = value;}
       };
-      static int Method1 (const string &x, int y) {return 0;}
-      static int Method1 (const string& x, const string& y) {return 0;}
-      int Method2 (int z) {return 0;}
+      static int Method1(const string& x, int y) {return 0;}
+      static int Method1(const string& x, const string& y) {return 0;}
+      int Method2(int z) {return 0;}
       template<typename T>
       string f(const T& value) {return _nameof(value);}
       
     private:
       int value = 0;
     };
-
+    
     // The main entry point for the application.
     static void Main(const Array<string>& args) {
       C c;

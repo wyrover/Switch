@@ -48,7 +48,7 @@ namespace Examples {
         Console::WriteLine("For key = \"tif\", value = {0}.", value);
       else
         Console::WriteLine("Key = \"tif\" is not found.");
-      
+        
       // ContainsKey can be used to test keys before inserting
       // them.
       if (!openWith.ContainsKey("ht")) {
@@ -61,7 +61,7 @@ namespace Examples {
       Console::WriteLine();
       for (KeyValuePair<string, string> kvp : openWith)
         Console::WriteLine("Key = {0}, Value = {1}", kvp.Key(), kvp.Value());
-      
+        
       // To get the values alone, use the Values property.
       SortedDictionary<string, string>::ValueCollection valueColl = openWith.Values;
       
@@ -70,7 +70,7 @@ namespace Examples {
       Console::WriteLine();
       for (string s : valueColl)
         Console::WriteLine("Value = {0}", s);
-      
+        
       // To get the keys alone, use the Keys property.
       SortedDictionary<string, string>::KeyCollection keyColl = openWith.Keys;
       
@@ -79,7 +79,7 @@ namespace Examples {
       Console::WriteLine();
       for (string s : keyColl)
         Console::WriteLine("Key = {0}", s);
-      
+        
       // Use the Remove method to remove a key/value pair.
       Console::WriteLine("\nRemove(\"doc\")");
       openWith.Remove("doc");

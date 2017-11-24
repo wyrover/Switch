@@ -9,7 +9,7 @@ namespace UnitTests {
     void _Test(TestWithUserMessage) {
       Assert::False(true, "true can never be equal to false", _caller);
     }
-
+    
     // Without your own message
     void _Test(TestWithoutUserMessage) {
       Assert::False(true, _caller);

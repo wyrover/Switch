@@ -12,7 +12,7 @@ public:
     this->age = person.age;
     return *this;
   }
-
+  
   // Declare a Name property of type string:
   _property<string> Name {
     _get {return this->name;},
@@ -34,7 +34,7 @@ public:
     
     // Create a new Person object:
     Person person;
-  
+    
     // Print out the name and the age associated with the person:
     Console::WriteLine("Person details - {0}", person);
     

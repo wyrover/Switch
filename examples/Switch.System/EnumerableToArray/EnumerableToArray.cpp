@@ -16,7 +16,7 @@ namespace Examples {
         this->weight = package.weight;
         return *this;
       }
-
+      
       _property<string, _readonly> Company {
         [&] { return this->company; }
       };

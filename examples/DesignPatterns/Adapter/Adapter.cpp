@@ -21,7 +21,7 @@ namespace DesignPatterns {
         Console::WriteLine("Called SpecificRequest()");
       }
     };
-
+    
     // The 'Adapter' class
     class Adapter : public Target {
     public:

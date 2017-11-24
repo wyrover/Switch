@@ -12,7 +12,7 @@ namespace DesignPatterns {
     public:
       virtual void Handle(Context& context) = 0;
     };
-
+    
     // The 'Context' class
     class Context : public object {
     public:
@@ -33,7 +33,7 @@ namespace DesignPatterns {
       void Request() {
         this->state->Handle(*this);
       }
-
+      
     private:
       refptr<DesignPatterns::Behavioral::State> state;
     };
@@ -49,15 +49,15 @@ namespace DesignPatterns {
     public:
       void Handle(Context& context) override;
     };
-
+    
     inline void ConcreteStateA::Handle(Context& context) {
       context.State = ref_new<ConcreteStateB>();
     }
-
+    
     inline void ConcreteStateB::Handle(Context& context) {
       context.State = ref_new<ConcreteStateA>();
     }
-
+    
     // MainApp _startup class for Behavioral
     // State Design Pattern.
     class MainApp {

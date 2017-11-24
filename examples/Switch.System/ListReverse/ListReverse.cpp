@@ -20,13 +20,13 @@ namespace Examples {
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      
+        
       dinosaurs.Reverse();
       
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      
+        
       dinosaurs.Reverse(1, 4);
       
       Console::WriteLine();

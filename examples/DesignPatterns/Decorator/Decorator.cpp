@@ -24,9 +24,8 @@ namespace DesignPatterns {
       void SetComponent(refptr<Component> component) {this->component = component;}
       
       void Operation() const override {
-        if (component != null) {
+        if (component != null)
           component->Operation();
-        }
       }
       
     protected:

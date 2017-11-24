@@ -32,7 +32,7 @@ namespace DesignPatterns {
       }
       
       refptr<Flyweight> GetFlyweight(const string& key) const {return flyweights[key];}
-
+      
     private:
       Dictionary<string, refptr<Flyweight>> flyweights;
     };

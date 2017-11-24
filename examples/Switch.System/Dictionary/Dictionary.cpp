@@ -23,8 +23,7 @@ namespace Examples {
       // already in the dictionary.
       try {
         openWith.Add("txt", "winword.exe");
-      }
-      catch (const ArgumentException&) {
+      } catch (const ArgumentException&) {
         Console::WriteLine("An element with Key = \"txt\" already exists.");
       }
       
@@ -45,12 +44,11 @@ namespace Examples {
       // be in the dictionary, TryGetValue can be a more efficient
       // way to retrieve values.
       string value = string::Empty;
-      if (openWith.TryGetValue("tif", value)) {
+      if (openWith.TryGetValue("tif", value))
         Console::WriteLine("For key = \"tif\", value = {0}.", value);
-      } else {
+      else
         Console::WriteLine("Key = \"tif\" is not found.");
-      }
-      
+        
       // ContainsKey can be used to test keys before inserting
       // them.
       if (!openWith.ContainsKey("ht")) {
@@ -61,37 +59,33 @@ namespace Examples {
       // When you use foreach to enumerate dictionary elements,
       // the elements are retrieved as KeyValuePair objects.
       Console::WriteLine();
-      for (KeyValuePair<string, string> kvp : openWith) {
+      for (KeyValuePair<string, string> kvp : openWith)
         Console::WriteLine("Key = {0}, Value = {1}", kvp.Key(), kvp.Value());
-      }
-      
+        
       // To get the values alone, use the Values property.
       Dictionary<string, string>::ValueCollection valueColl = openWith.Values;
       
       // The elements of the ValueCollection are strongly typed
       // with the type that was specified for dictionary values.
       Console::WriteLine();
-      for (string s : valueColl) {
+      for (string s : valueColl)
         Console::WriteLine("Value = {0}", s);
-      }
-      
+        
       // To get the keys alone, use the Keys property.
       Dictionary<string, string>::KeyCollection keyColl = openWith.Keys;
       
       // The elements of the KeyCollection are strongly typed
       // with the type that was specified for dictionary keys.
       Console::WriteLine();
-      for (string s : keyColl) {
+      for (string s : keyColl)
         Console::WriteLine("Key = {0}", s);
-      }
-      
+        
       // Use the Remove method to remove a key/value pair.
       Console::WriteLine("\nRemove(\"doc\")");
       openWith.Remove("doc");
       
-      if (!openWith.ContainsKey("doc")) {
+      if (!openWith.ContainsKey("doc"))
         Console::WriteLine("Key \"doc\" is not found.");
-      }
     }
   };
 }

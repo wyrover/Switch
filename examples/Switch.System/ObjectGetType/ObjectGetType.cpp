@@ -11,7 +11,7 @@ namespace Examples {
   
   class ObjectClass : public object {
   };
-
+  
   class Program {
   public:
     // The main entry point for the application.

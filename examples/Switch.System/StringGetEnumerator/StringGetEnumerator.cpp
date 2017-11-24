@@ -34,7 +34,7 @@ namespace Examples {
     static void Main() {
       EnumerateAndDisplay("Test Case");
       EnumerateAndDisplay("This is a sentence.");
-      EnumerateAndDisplay("Has\ttwo\ttabs" );
+      EnumerateAndDisplay("Has\ttwo\ttabs");
       EnumerateAndDisplay("Two\nnew\nlines");
     }
   };
@@ -58,7 +58,7 @@ _startup(Examples::Program);
 //    Punctuation characters:    1
 //    Control Characters:        0
 //
-// The characters in the string "Has	two	tabs" are:
+// The characters in the string "Has  two tabs" are:
 // 'H' 'a' 's' '0x0009' 't' 'w' 'o' '0x0009' 't' 'a' 'b' 's'
 //    Total characters:         12
 //    Alphanumeric characters:  10

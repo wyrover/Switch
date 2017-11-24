@@ -18,9 +18,8 @@ namespace Examples {
           // The method throws no exceptions.
           result = Convert::ToBoolean(number);
           Console::WriteLine("Converted '{0}' to {1}", value, result);
-        } else {
+        } else
           Console::WriteLine("Unable to convert '{0}'", value);
-        }
       }
     }
   };

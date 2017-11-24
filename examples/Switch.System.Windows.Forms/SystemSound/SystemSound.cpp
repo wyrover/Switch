@@ -16,34 +16,34 @@ namespace SystemSoundExample {
     Form1() {
       this->buttonAsterisk.Bounds = System::Drawing::Rectangle(60, 50, 180, 40);
       this->buttonAsterisk.Text = "Asterisk";
-      this->buttonAsterisk.Click += _delegate(const object& sender, const EventArgs& e) {
+      this->buttonAsterisk.Click += _delegate(const object & sender, const EventArgs & e) {
         SystemSounds::Asterisk().Play();
       };
       
       this->buttonBeep.Bounds = System::Drawing::Rectangle(60, 90, 180, 40);
       this->buttonBeep.Text = "Beep";
-      this->buttonBeep.Click += _delegate(const object& sender, const EventArgs& e) {
+      this->buttonBeep.Click += _delegate(const object & sender, const EventArgs & e) {
         SystemSounds::Beep().Play();
       };
       
       this->buttonExclamation.Bounds = System::Drawing::Rectangle(60, 130, 180, 40);
       this->buttonExclamation.Text = "Exclamation";
-      this->buttonExclamation.Click += _delegate(const object& sender, const EventArgs& e) {
+      this->buttonExclamation.Click += _delegate(const object & sender, const EventArgs & e) {
         SystemSounds::Exclamation().Play();
       };
       
       this->buttonHand.Bounds = System::Drawing::Rectangle(60, 170, 180, 40);
       this->buttonHand.Text = "Hand";
-      this->buttonHand.Click += _delegate(const object& sender, const EventArgs& e) {
+      this->buttonHand.Click += _delegate(const object & sender, const EventArgs & e) {
         SystemSounds::Hand().Play();
       };
       
       this->buttonQuestion.Bounds = System::Drawing::Rectangle(60, 210, 180, 40);
       this->buttonQuestion.Text = "Question";
-      this->buttonQuestion.Click += _delegate(const object& sender, const EventArgs& e) {
+      this->buttonQuestion.Click += _delegate(const object & sender, const EventArgs & e) {
         SystemSounds::Question().Play();
       };
-
+      
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(400, 200);
       this->ClientSize = System::Drawing::Size(300, 300);

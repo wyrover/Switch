@@ -23,7 +23,7 @@ namespace DesignPatterns {
       virtual void Operation() const {
         this->implementor->Operation();
       }
-
+      
     protected:
       refptr<DesignPatterns::Structural::Implementor> implementor;
     };

@@ -13,7 +13,7 @@ namespace DesignPatterns {
     public:
       // Constructor
       Colleague(Mediator& mediator) : mediator(mediator)  {}
-
+      
     protected:
       ref<Mediator> mediator;
     };
@@ -66,17 +66,16 @@ namespace DesignPatterns {
       };
       
       void Send(const string& message, Colleague& colleague) override {
-        if (colleague == this->colleague1) {
+        if (colleague == this->colleague1)
           this->colleague2().Notify(message);
-        } else {
+        else
           this->colleague1().Notify(message);
-        }
       }
-
+      
     private:
       ref<ConcreteColleague1> colleague1;
       ref<ConcreteColleague2> colleague2;
-
+      
     };
     
     // MainApp _startup class for Behavioral

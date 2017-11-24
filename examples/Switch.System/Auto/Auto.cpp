@@ -18,9 +18,8 @@ namespace Examples {
       
       // you can use auto type insted :
       // System::Collections::Specialized::StringKeyValuePair item
-      for (auto item : pets) {
+      for (auto item : pets)
         Console::WriteLine(item);
-      }
     }
   };
 }

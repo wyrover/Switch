@@ -17,24 +17,24 @@ namespace Examples {
         ConsoleColor newForeColor = ConsoleColor::White;
         ConsoleColor newBackColor = ConsoleColor::Black;
         
-        char32 foreColorSelection = GetKeyPress("Select Text Color (B for Blue, R for Red, Y for Yellow): ", Array<char32> { 'B', 'R', 'Y' } );
+        char32 foreColorSelection = GetKeyPress("Select Text Color (B for Blue, R for Red, Y for Yellow): ", Array<char32> { 'B', 'R', 'Y' });
         switch (foreColorSelection) {
-          case 'B':
-          case 'b': newForeColor = ConsoleColor::DarkBlue; break;
-          case 'R':
-          case 'r': newForeColor = ConsoleColor::DarkRed; break;
-          case 'Y':
-          case 'y': newForeColor = ConsoleColor::DarkYellow; break;
+        case 'B':
+        case 'b': newForeColor = ConsoleColor::DarkBlue; break;
+        case 'R':
+        case 'r': newForeColor = ConsoleColor::DarkRed; break;
+        case 'Y':
+        case 'y': newForeColor = ConsoleColor::DarkYellow; break;
         }
         
         Char backColorSelection = GetKeyPress("Select Background Color (W for White, G for Green, M for Magenta): ", Array<char32> { 'W', 'G', 'M' });
         switch (backColorSelection) {
-          case 'W':
-          case 'w': newBackColor = ConsoleColor::White; break;
-          case 'G':
-          case 'g': newBackColor = ConsoleColor::Green; break;
-          case 'M':
-          case 'm': newBackColor = ConsoleColor::Magenta; break;
+        case 'W':
+        case 'w': newBackColor = ConsoleColor::White; break;
+        case 'G':
+        case 'g': newBackColor = ConsoleColor::Green; break;
+        case 'M':
+        case 'm': newBackColor = ConsoleColor::Magenta; break;
         }
         
         Console::WriteLine();
@@ -45,9 +45,9 @@ namespace Examples {
         Console::BackgroundColor = newBackColor;
         Console::WriteLine(textToDisplay);
         Console::WriteLine();
-        if (Char::ToUpper(GetKeyPress("Display another message (Y/N): ", Array<char32> { 'Y', 'N' } )) == 'N')
+        if (Char::ToUpper(GetKeyPress("Display another message (Y/N): ", Array<char32> { 'Y', 'N' })) == 'N')
           continueFlag = false;
-        
+          
         // Restore the default settings and clear the screen.
         Console::ForegroundColor = dftForeColor;
         Console::BackgroundColor = dftBackColor;
@@ -65,8 +65,8 @@ namespace Examples {
         Console::Write(msg);
         keyPressed = Console::ReadKey();
         Console::WriteLine();
-        if (Array<>::Exists<char32>(validChars, _delegate(const char32& ch) {return Char(ch).Equals(Char::ToUpper(keyPressed.KeyChar));}))
-          valid = true;
+        if (Array<>::Exists<char32>(validChars, _delegate(const char32 & ch) {return Char(ch).Equals(Char::ToUpper(keyPressed.KeyChar));}))
+        valid = true;
         
       } while (! valid);
       return keyPressed.KeyChar;

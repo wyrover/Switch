@@ -13,7 +13,7 @@ namespace Examples {
       Thread thread(ThreadStart(_delegate {
         try {
           throw ArgumentNullException("Ouch there are an error !", _caller);
-        } catch(...) {
+        } catch (...) {
           exceptionPtr = ExceptionPtr::CurrentException();
         }
       }));
@@ -23,7 +23,7 @@ namespace Examples {
       if (exceptionPtr) {
         try {
           exceptionPtr.Rethrow();
-        } catch(const ArgumentNullException& exception) {
+        } catch (const ArgumentNullException& exception) {
           Console::WriteLine(exception.Message);
         }
       }

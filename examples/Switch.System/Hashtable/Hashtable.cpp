@@ -50,37 +50,33 @@ namespace Examples {
       // When you use foreach to enumerate hash table elements,
       // the elements are retrieved as KeyValuePair objects.
       Console::WriteLine();
-      for (DictionaryEntry de : openWith) {
+      for (DictionaryEntry de : openWith)
         Console::WriteLine("Key = {0}, Value = {1}", de.Key, de.Value);
-      }
-      
+        
       // To get the values alone, use the Values property.
       Hashtable::ValueCollection valueColl = openWith.Values;
       
       // The elements of the ValueCollection are strongly typed
       // with the type that was specified for hash table values.
       Console::WriteLine();
-      for (string s : valueColl) {
+      for (string s : valueColl)
         Console::WriteLine("Value = {0}", s);
-      }
-      
+        
       // To get the keys alone, use the Keys property.
       Hashtable::KeyCollection keyColl = openWith.Keys;
       
       // The elements of the KeyCollection are strongly typed
       // with the type that was specified for hash table keys.
       Console::WriteLine();
-      for (string s : keyColl) {
+      for (string s : keyColl)
         Console::WriteLine("Key = {0}", s);
-      }
-      
+        
       // Use the Remove method to remove a key/value pair.
       Console::WriteLine("\nRemove(\"doc\")");
       openWith.Remove("doc");
       
-      if (!openWith.ContainsKey("doc")) {
+      if (!openWith.ContainsKey("doc"))
         Console::WriteLine("Key \"doc\" is not found.");
-      }
     }
   };
 }

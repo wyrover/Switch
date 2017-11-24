@@ -27,10 +27,10 @@ public:
     int v = y;
     int a = 0;
     int c = 1;
-
+    
     do {
       int q = v / u;
-
+      
       int t = c;
       c = a - q * c;
       a = t;

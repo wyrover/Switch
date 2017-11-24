@@ -71,7 +71,7 @@ namespace DesignPatterns {
       }
       
       void Run() {this->abstractProductB->Interact(*this->abstractProductA);}
-
+      
     private:
       refptr<AbstractProductA> abstractProductA;
       refptr<AbstractProductB> abstractProductB;

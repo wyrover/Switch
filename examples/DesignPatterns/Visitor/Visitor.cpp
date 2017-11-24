@@ -39,11 +39,11 @@ namespace DesignPatterns {
       virtual void VisitConcreteElementA(const ConcreteElementA& concreteElementA) = 0;
       virtual void VisitConcreteElementB(const ConcreteElementB& concreteElementB) = 0;
     };
-
+    
     inline void ConcreteElementA::Accept(refptr<Visitor> visitor) {
       visitor->VisitConcreteElementA(*this);
     }
-
+    
     inline void ConcreteElementB::Accept(refptr<Visitor> visitor) {
       visitor->VisitConcreteElementB(*this);
     }
@@ -84,14 +84,13 @@ namespace DesignPatterns {
       }
       
       void Accept(refptr<Visitor> visitor) {
-        for (refptr<Element> element : this->elements) {
+        for (refptr<Element> element : this->elements)
           element->Accept(visitor);
-        }
       }
     private:
       List<refptr<Element>> elements;
     };
-
+    
     // MainApp _startup class for Behavioral
     // Visitor Design Pattern.
     class MainApp {

@@ -21,17 +21,15 @@ namespace Examples {
       // Consume the items in the bag
       int item;
       while (!cb.IsEmpty) {
-        if (cb.TryTake(item)) {
+        if (cb.TryTake(item))
           Console::WriteLine(item);
-        } else {
+        else
           Console::WriteLine("TryTake failed for non-empty bag");
-        }
       }
       
       // Bag should be empty at this point
-      if (cb.TryPeek(item)) {
+      if (cb.TryPeek(item))
         Console::WriteLine("TryPeek succeeded for empty bag!");
-      }
     }
   };
 }

@@ -9,9 +9,8 @@ namespace Examples {
     static void Main() {
       string colors[] = {"Red", "Blue", "Green", "Yellow", "Gray"};
       
-      for (string item : colors) {
+      for (string item : colors)
         Console::WriteLine(item);
-      }
     }
   };
 }

@@ -17,7 +17,7 @@ namespace UnitTests {
       Assert::IsEmpty("", _caller);
     }
   };
-
+  
   class _TestFixture(TeastCase2) {
     void _Test(TestOne) {
       Assert::IsTrue(true, _caller);
@@ -35,7 +35,7 @@ namespace UnitTests {
       Assert::IsEmpty({}, _caller);
     }
   };
-
+  
   class _TestFixture(TeastCase3) {
     void _Test(TestOne) {
       Assert::IsNull(null, _caller);
@@ -46,7 +46,7 @@ namespace UnitTests {
       Assert::IsNull(str, _caller);
     }
   };
-
+  
   // Used _Test to add unit test to execute at the unit test suit.
   _AddTestFixture(TeastCase1);
   _AddTest(TeastCase1, TestOne);

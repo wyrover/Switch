@@ -12,9 +12,9 @@ namespace Examples {
       Array<string> names = { "Burke", "Connor", "Frank", "Everett", "Albert", "George", "Harris", "David" };
       
       refptr<IEnumerable<string>> query = from<string>(names)
-                                          | where<string>(_delegate(string s) {return s.Length == 5;})
-                                          | orderby<string>(_delegate(string s) {return s;})
-                                          | select<string>(_delegate(string s) {return s.ToUpper();});
+      | where<string>(_delegate(string s) {return s.Length == 5;})
+      | orderby<string>(_delegate(string s) {return s;})
+      | select<string>(_delegate(string s) {return s.ToUpper();});
       
       for (string item : *query)
         Console::WriteLine(item);

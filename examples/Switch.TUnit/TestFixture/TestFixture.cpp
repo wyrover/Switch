@@ -15,7 +15,7 @@ namespace UnitTests {
     void _TearDown(Cleanup) {
       Environment::CurrentDirectory = savedCurrentDirecory;
     }
-
+    
     void _Test(ChangeCurrentDirectoryWithDownloads) {
       Assert::DoesNotThrows(_delegate {Environment::CurrentDirectory = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Personal), "Downloads");}, _caller);
     }
@@ -27,7 +27,7 @@ namespace UnitTests {
   private:
     string savedCurrentDirecory;
   };
-
+  
   // Used _Test to add unit test to execute at the unit test suit.
   _AddTestFixture(DirectoryTest);
   _AddTest(DirectoryTest, ChangeCurrentDirectoryWithDownloads);

@@ -12,7 +12,7 @@ namespace Examples {
       Console::WriteLine("arrayList = [{0}]", string::Join(", ", arrayList));
       Console::WriteLine();
       
-      for(auto item : arrayList)
+      for (auto item : arrayList)
         if (is<string>(item))
           Console::WriteLine("\"{0}\"", as<string>(item).ToUpper());
         else

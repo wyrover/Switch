@@ -17,15 +17,15 @@ namespace Examples {
       
       // Display the contents of the collection using foreach. This is the preferred method.
       Console::WriteLine("Displays the elements using foreach:");
-      PrintValues1( myCol );
+      PrintValues1(myCol);
       
       // Display the contents of the collection using the enumerator.
       Console::WriteLine("Displays the elements using the IEnumerator:");
-      PrintValues2( myCol );
+      PrintValues2(myCol);
       
       // Display the contents of the collection using the Count and Item properties.
       Console::WriteLine("Displays the elements using the Count and Item properties:");
-      PrintValues3( myCol );
+      PrintValues3(myCol);
       
       // Add one element to the end of the StringCollection and insert another at index 3.
       myCol.Add("* white");
@@ -42,7 +42,7 @@ namespace Examples {
       
       // Remove all occurrences of a value from the StringCollection.
       int i = myCol.IndexOf("RED");
-      while ( i > -1 ) {
+      while (i > -1) {
         myCol.RemoveAt(i);
         i = myCol.IndexOf("RED");
       }
@@ -50,9 +50,9 @@ namespace Examples {
       // Verify that all occurrences of "RED" are gone.
       if (myCol.Contains("RED"))
         Console::WriteLine("*** The collection still contains \"RED\".");
-      
+        
       Console::WriteLine("After removing all occurrences of \"RED\":");
-      PrintValues1( myCol );
+      PrintValues1(myCol);
       
       // Copy the collection to a new array starting at index 0.
       Array<string> myArr2(myCol.Count);
@@ -91,7 +91,7 @@ namespace Examples {
     // Uses the Count and Item properties.
     static void PrintValues3(const StringCollection& myCol) {
       for (int i = 0; i < myCol.Count; i++)
-        Console::WriteLine( "   {0}", myCol[i]);
+        Console::WriteLine("   {0}", myCol[i]);
       Console::WriteLine();
     }
   };

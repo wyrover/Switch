@@ -11,16 +11,17 @@ namespace Examples {
     static void Main() {
       try {
         Parallel::Invoke(
-                         BasicAction,  // Param #0 - static method
-                         _delegate {     // Param #1 - lambda expression
-                           _lock(lck)
-                             Console::WriteLine("Method=beta, Thread={0}", Thread::CurrentThread().ManagedThreadId);
-                         },
-                         delegate<void> {_delegate {    // Param #2 - in-line delegate
-                           _lock(lck)
-                             Console::WriteLine("Method=gamma, Thread={0}", Thread::CurrentThread().ManagedThreadId);
-                           }}
-                         );
+          BasicAction,  // Param #0 - static method
+        _delegate {     // Param #1 - lambda expression
+          _lock(lck)
+          Console::WriteLine("Method=beta, Thread={0}", Thread::CurrentThread().ManagedThreadId);
+        },
+        delegate<void> {_delegate {    // Param #2 - in-line delegate
+            _lock(lck)
+            Console::WriteLine("Method=gamma, Thread={0}", Thread::CurrentThread().ManagedThreadId);
+          }
+        }
+        );
       }
       // No exception is expected in this example, but if one is still thrown from a task,
       // it will be wrapped in AggregateException and propagated to the main thread.
@@ -31,7 +32,7 @@ namespace Examples {
     
     static void BasicAction() {
       _lock(lck)
-        Console::WriteLine("Method=alpha, Thread={0}", Thread::CurrentThread().ManagedThreadId);
+      Console::WriteLine("Method=alpha, Thread={0}", Thread::CurrentThread().ManagedThreadId);
     }
     
     static object lck;

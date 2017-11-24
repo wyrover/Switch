@@ -39,7 +39,7 @@ namespace Examples {
       } catch (const UnauthorizedAccessException&) {
         Console::WriteLine("Unauthorized access !");
       }
-
+      
       // Remove the "HKEY_CURRENT_USER\SwitchRegistryKeyTest" sub key
       Registry::CurrentUser().DeleteSubKeyTree("SwitchRegistryKeyTest");
       

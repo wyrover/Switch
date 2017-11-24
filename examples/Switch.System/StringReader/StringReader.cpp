@@ -9,17 +9,17 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       string textReaderText = "TextReader is the abstract base "
-      "class of StreamReader and StringReader, which read "
-      "characters from streams and strings, respectively.\n\n"
-      
-      "Create an instance of TextReader to open a text file "
-      "for reading a specified range of characters, or to "
-      "create a reader based on an existing stream.\n\n"
-      
-      "You can also use an instance of TextReader to read "
-      "text from a custom backing store using the same "
-      "APIs you would use for a string or a stream.\n\n";
-      
+        "class of StreamReader and StringReader, which read "
+        "characters from streams and strings, respectively.\n\n"
+        
+        "Create an instance of TextReader to open a text file "
+        "for reading a specified range of characters, or to "
+        "create a reader based on an existing stream.\n\n"
+        
+        "You can also use an instance of TextReader to read "
+        "text from a custom backing store using the same "
+        "APIs you would use for a string or a stream.\n\n";
+        
       Console::WriteLine("Original text:\n\n{0}", textReaderText);
       
       // From textReaderText, create a continuous paragraph
@@ -28,11 +28,10 @@ namespace Examples {
       StringReader strReader(textReaderText);
       while (strReader.Peek() != -1) {
         line = strReader.ReadLine();
-        if (line != "") {
+        if (line != "")
           paragraph = paragraph + line + " ";
-        } else {
+        else
           paragraph = paragraph + "\n";
-        }
       }
       Console::WriteLine("Modified text:\n\n{0}", paragraph);
       
@@ -54,9 +53,8 @@ namespace Examples {
           // Bypass the spaces between sentences.
           strReader.Read();
           strReader.Read();
-        } else  {
+        } else
           strWriter.Write(convertedCharacter);
-        }
       }
       Console::WriteLine("\nOriginal text:\n\n{0}", strWriter.ToString());
     }

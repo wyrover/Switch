@@ -12,11 +12,11 @@ namespace Examples {
       Array<byte> byteArray = BitConverter::GetBytes(argument);
       Console::WriteLine(formatter, argument, BitConverter::ToString(byteArray));
     }
-
+    
     // The main entry point for the application.
     static void Main() {
       Console::WriteLine("This example of the BitConverter.GetBytes(double) "
-                         "\nmethod generates the following output.\n");
+        "\nmethod generates the following output.\n");
       Console::WriteLine(formatter, "double", "byte array");
       Console::WriteLine(formatter, "------", "----------");
       

@@ -19,7 +19,7 @@ namespace Examples {
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      
+        
       // Declare an array with 15 elements.
       Array<string> array(15);
       
@@ -30,7 +30,7 @@ namespace Examples {
       Console::WriteLine("\nContents of the array:");
       for (string dinosaur : array)
         Console::WriteLine(dinosaur);
-
+        
     }
   };
 }

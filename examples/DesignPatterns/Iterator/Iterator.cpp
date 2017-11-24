@@ -38,7 +38,7 @@ namespace DesignPatterns {
       
       // Gets current iteration item
       any CurrentItem() const override;
-    
+      
       // Gets whether iterations are complete
       bool IsDone() const override;
       
@@ -76,7 +76,7 @@ namespace DesignPatterns {
     private:
       ArrayList items;
     };
-
+    
     // Gets first iteration item
     inline any ConcreteIterator::First() const {
       return this->aggregate[0];
@@ -84,10 +84,9 @@ namespace DesignPatterns {
     
     // Gets next iteration item
     any ConcreteIterator::Next() const {
-      if (this->current < this->aggregate.Count - 1) {
+      if (this->current < this->aggregate.Count - 1)
         return this->aggregate[++this->current];
-      }
-      
+        
       return null;
     }
     
@@ -100,7 +99,7 @@ namespace DesignPatterns {
     bool ConcreteIterator::IsDone() const {
       return this->current >= this->aggregate.Count;
     }
-
+    
     // MainApp _startup class for Behavioral
     // Iterator Design Pattern.
     class MainApp {

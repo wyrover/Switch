@@ -9,13 +9,13 @@ namespace UnitTests {
       string s = "One";
       Expect::AreEqual("One", s, _caller);
     }
-
+    
     void _Test(FailedTestAreEqual) {
       int32 i = 42;
       Expect::AreEqual(123, i, _caller);
     }
   };
-
+  
   _AddTestFixture(UserTest);
   _AddTest(UserTest, PassedTestAreEqual);
   _AddTest(UserTest, FailedTestAreEqual);

@@ -12,7 +12,7 @@ namespace Examples {
       Array<byte> arrayThree = {15, 0, 0, 128, 16, 39, 240, 216, 241, 255, 127};
       Array<byte> arrayFour = {15, 0, 0, 0, 0, 16, 0, 255, 3, 0, 0, 202, 154, 59, 255, 255, 255, 255, 127};
       Console::WriteLine("This example of the BitConverter::ToString( unsigned char[ ] ) \n"
-                         "method generates the following output.\n" );
+        "method generates the following output.\n");
       WriteByteArray(arrayOne, "arrayOne");
       WriteByteArray(arrayTwo, "arrayTwo");
       WriteByteArray(arrayThree, "arrayThree");
@@ -21,11 +21,11 @@ namespace Examples {
     
   private:
     // Display a byte array with a name.
-    static void WriteByteArray(const Array<byte>& bytes, const String& name ) {
+    static void WriteByteArray(const Array<byte>& bytes, const String& name) {
       string underLine = "--------------------------------";
       Console::WriteLine(name);
       Console::WriteLine(underLine.Substring(0, Math::Min(name.Length, underLine.Length)));
-      Console::WriteLine(BitConverter::ToString( bytes ));
+      Console::WriteLine(BitConverter::ToString(bytes));
       Console::WriteLine();
     }
   };

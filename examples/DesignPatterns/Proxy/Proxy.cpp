@@ -24,7 +24,7 @@ namespace DesignPatterns {
       void Request() const override  {
         this->realSubject.Request();
       }
-
+      
     private:
       RealSubject realSubject;
     };

@@ -10,7 +10,7 @@ namespace Examples {
       // Write arguments to the console output
       for (string arg : Environment::GetCommandLineArgs())
         Console::WriteLine(arg);
-      
+        
       // return 42
       Environment::ExitCode = 42;
     }

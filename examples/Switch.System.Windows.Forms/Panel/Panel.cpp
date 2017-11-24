@@ -20,7 +20,7 @@ namespace PanelExample {
       this->panel2.BorderStyle = BorderStyle::Fixed3D;
       //this->panel2.Anchor = AnchorStyles::Left | AnchorStyles::Top | AnchorStyles::Right | AnchorStyles::Bottom;
       this->panel2.Bounds = System::Drawing::Rectangle(325, 10, 305, 460);
-
+      
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(200, 200);
       this->ClientSize = System::Drawing::Size(640, 480);

@@ -27,10 +27,10 @@ namespace Examples {
     // Define the duration of a note in units of milliseconds.
     enum class Duration {
       WHOLE     = 1600,
-      HALF      = WHOLE/2,
-      QUARTER   = HALF/2,
-      EIGHTH    = QUARTER/2,
-      SIXTEENTH = EIGHTH/2,
+      HALF      = WHOLE / 2,
+      QUARTER   = HALF / 2,
+      EIGHTH    = QUARTER / 2,
+      SIXTEENTH = EIGHTH / 2,
     };
     
     // Define a note as a frequency (tone) and the amount of
@@ -44,7 +44,7 @@ namespace Examples {
         toneVal = frequency;
         durVal  = time;
       };
-
+      
       Note() : toneVal((Tone)0), durVal((Duration)0) {}
       Note(const Note& note) : toneVal(note.toneVal), durVal(note.durVal) {}
       Note& operator=(const Note& note) {
@@ -52,7 +52,7 @@ namespace Examples {
         this->durVal = note.durVal;
         return *this;
       }
-
+      
       // Define properties to return the note's tone and duration.
       _property<Tone, _readonly> NoteTone { _get{ return toneVal; } };
       _property<Duration, _readonly> NoteDuration { _get{ return durVal; } };
@@ -75,12 +75,12 @@ namespace Examples {
         Note(Tone::A, Duration::HALF),
         Note(Tone::B, Duration::QUARTER),
         Note(Tone::D, Duration::QUARTER),
-         Note(Tone::D, Duration::HALF)
+        Note(Tone::D, Duration::HALF)
       };
       // Play the song
       Play(Mary);
     }
-   
+    
   protected:
     // Play the notes in a song.
     static void Play(const Array<Note>& tune) {

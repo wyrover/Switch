@@ -12,7 +12,7 @@ namespace Examples {
       
       // Convert each integer to a byte array.
       Console::WriteLine("{0,16}{1,10}{2,17}", "Integer", "Endian", "Byte Array");
-      Console::WriteLine("{0,16}{1,10}{2,17}", "-------", "------", "----------" );
+      Console::WriteLine("{0,16}{1,10}{2,17}", "-------", "------", "----------");
       for (auto value : values) {
         Array<byte> byteArray = BitConverter::GetBytes(value);
         Console::WriteLine("{0,16}{1,10}{2,17}", value, BitConverter::IsLittleEndian() ? "Little" : " Big", BitConverter::ToString(byteArray));

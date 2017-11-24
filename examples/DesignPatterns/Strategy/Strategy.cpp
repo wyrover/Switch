@@ -47,11 +47,11 @@ namespace DesignPatterns {
         this->strategy = context.strategy;
         return *this;
       }
-
+      
       void ContextInterface() {
         this->strategy->AlgorithmInterface();
       }
-
+      
     private:
       refptr<Strategy> strategy;
     };

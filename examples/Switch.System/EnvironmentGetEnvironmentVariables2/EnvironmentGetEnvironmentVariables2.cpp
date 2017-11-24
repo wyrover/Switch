@@ -137,23 +137,23 @@ namespace Examples {
       // Messages:
       //-------------------------------------------------------------------------------------
       string msg1  = "Step 1:\n"
-      "  Check whether the environment variables already exist in \n"
-      "  the various targets...\n";
+        "  Check whether the environment variables already exist in \n"
+        "  the various targets...\n";
       string msg2  = "Step 2:\n"
-      "  Set the environment variable for each target...\n";
+        "  Set the environment variable for each target...\n";
       string msg31 = "Step 3, part 1:\n"
-      "  Display the environment variables in each target...\n";
+        "  Display the environment variables in each target...\n";
       string msg32 = "Step 3, part 2:\n"
-      "  Check whether the User and Machine environment variables \n"
-      "  were created in the Windows operating system registry...\n";
+        "  Check whether the User and Machine environment variables \n"
+        "  were created in the Windows operating system registry...\n";
       string msg41 = "Step 4, part 1:\n"
-      "  Delete the environment variables created for this sample...\n";
+        "  Delete the environment variables created for this sample...\n";
       string msg42 = "Step 4, part 2:\n"
-      "  Check whether the environment variables were deleted \n"
-      "  in each target...\n";
+        "  Check whether the environment variables were deleted \n"
+        "  in each target...\n";
       string msg43 = "Step 4, part 3:\n"
-      "  Check whether the User and Machine environment variables \n"
-      "  were deleted from the Windows operating system registry...\n";
+        "  Check whether the User and Machine environment variables \n"
+        "  were deleted from the Windows operating system registry...\n";
       string fmt2x   = "  {0,9}: Set {1} = \"{2}\"";
       //-------------------------------------------------------------------------------------
       // Step 1:

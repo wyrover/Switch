@@ -22,7 +22,7 @@ namespace DesignPatterns {
       _property<string, _readonly> State {
         _get { return this->state; }
       };
-
+      
     private:
       string state;
     };
@@ -49,7 +49,7 @@ namespace DesignPatterns {
         Console::WriteLine("Restoring state...");
         State = memento.State;
       }
-
+      
     private:
       string state;
     };
@@ -64,11 +64,11 @@ namespace DesignPatterns {
         _get { return this->memento; },
         _set { this->memento = value; }
       };
-
+      
     private:
       DesignPatterns::Behavioral::Memento memento;
     };
-
+    
     // MainApp _startup class for Behavioral
     // Memento Design Pattern.
     class MainApp {

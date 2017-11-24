@@ -14,7 +14,7 @@ namespace Examples {
       // Create a barrier with three participants
       // Provide a post-phase action that will print out certain information
       // And the third time through, it will throw an exception
-      Barrier barrier = Barrier(3, _delegate(const Barrier& b) {
+      Barrier barrier = Barrier(3, _delegate(const Barrier & b) {
         Console::WriteLine("Post-Phase action: count={0}, phase={1}", count, b.CurrentPhaseNumber);
         if (b.CurrentPhaseNumber() == 2) throw Exception("D'oh!");
       });

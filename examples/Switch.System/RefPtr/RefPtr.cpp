@@ -11,11 +11,11 @@ namespace Test {
       
       if (p1 == null)
         Console::WriteLine("p1 == null");
-      
+        
       Console::WriteLine("*p1 = {0}", *p1);
       Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
       
-      _using (refptr<string> p2 = p1) {
+      _using(refptr<string> p2 = p1) {
         Console::WriteLine("*p2 = {0}", *p2);
         Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
         

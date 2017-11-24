@@ -11,8 +11,8 @@ namespace DesignPatterns {
     public:
       void SetSuccessor(refptr<Handler> successor) {this->successor = successor;}
       
-      virtual void HandleRequest(int request) const =0;
-
+      virtual void HandleRequest(int request) const = 0;
+      
     protected:
       refptr<Handler> successor;
     };
@@ -21,11 +21,10 @@ namespace DesignPatterns {
     class ConcreteHandler1 : public Handler {
     public:
       void HandleRequest(int request) const override {
-        if (request >= 0 && request < 10) {
+        if (request >= 0 && request < 10)
           Console::WriteLine("{0} handled request {1}", this->GetType().Name, request);
-        } else if (this->successor != null) {
+        else if (this->successor != null)
           successor->HandleRequest(request);
-        }
       }
     };
     
@@ -33,11 +32,10 @@ namespace DesignPatterns {
     class ConcreteHandler2 : public Handler {
     public:
       void HandleRequest(int request) const override {
-        if (request >= 10 && request < 20) {
+        if (request >= 10 && request < 20)
           Console::WriteLine("{0} handled request {1}", this->GetType().Name, request);
-        } else if (this->successor != null) {
+        else if (this->successor != null)
           successor->HandleRequest(request);
-        }
       }
     };
     
@@ -45,11 +43,10 @@ namespace DesignPatterns {
     class ConcreteHandler3 : public Handler {
     public:
       void HandleRequest(int request) const override {
-        if (request >= 20 && request < 30) {
+        if (request >= 20 && request < 30)
           Console::WriteLine("{0} handled request {1}", this->GetType().Name, request);
-        } else if (this->successor != null) {
+        else if (this->successor != null)
           successor->HandleRequest(request);
-        }
       }
     };
     
@@ -69,9 +66,8 @@ namespace DesignPatterns {
         // Generate and process request
         int requests[] = { 2, 5, 14, 22, 18, 3, 27, 20 };
         
-        for (int request : requests) {
+        for (int request : requests)
           h1->HandleRequest(request);
-        }
       }
     };
   }

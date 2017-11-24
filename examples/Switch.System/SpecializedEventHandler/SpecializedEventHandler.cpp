@@ -13,7 +13,7 @@ namespace Examples {
       this->message = e.message;
       return *this;
     }
-
+    
     const string& GetMessage() const { return this->message; }
     
   private:
@@ -36,7 +36,7 @@ namespace Examples {
       Console::WriteLine("  OnMyEventStatic is called - {0}", e.GetMessage());
     }
   };
-
+  
   class Program {
   public:
     // The main entry point for the application.

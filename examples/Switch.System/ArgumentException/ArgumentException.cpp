@@ -12,8 +12,7 @@ namespace Examples {
       try {
         // ArgumentException is thrown because 7 is not an even number.
         Console::WriteLine("7 divided by 2 is {0}", DivideByTwo(7));
-      }
-      catch (const ArgumentException&) {
+      } catch (const ArgumentException&) {
         // Show the user that 7 cannot be divided by 2.
         Console::WriteLine("7 is not divided by 2 integrally.");
       }
@@ -24,7 +23,7 @@ namespace Examples {
       // If num is an odd number, throw an ArgumentException.
       if ((num & 1) == 1)
         throw ArgumentException("Number must be even");
-      
+        
       // num is even, return half of its value.
       return num / 2;
     }

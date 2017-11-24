@@ -9,7 +9,7 @@ namespace UnitTests {
     void _Test(TestWithCurrentInformation) {
       Assert::False(true, _caller);
     }
-
+    
     // Without current information
     void TestWithoutCurrentInformation() {
       Assert::False(true);

@@ -8,7 +8,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       string m1 = "\nType a string of text then press Enter. "
-      "Type '+' anywhere in the text to quit:\n";
+        "Type '+' anywhere in the text to quit:\n";
       string m2 = "Character '{0}' is hexadecimal 0x{1:x4}.";
       string m3 = "Character     is hexadecimal 0x{0:x4}.";
       char32 ch;

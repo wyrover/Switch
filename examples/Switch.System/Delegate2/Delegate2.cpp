@@ -16,25 +16,25 @@ namespace Examples {
       
       // Add static method to writers delegate
       writers += StaticMethod;
-
+      
       // Add const member method to writers delegate
       writers += {program, &Program::ConstMemberMethod};
-
+      
       // Add member method to writers delegate
       writers += {program, &Program::MemberMethod};
-
+      
       // Add functor to delegate
       writers += Functor();
-
+      
       // Add another functor to writers delegate
       writers += AnotherFunctor();
-
+      
       // Add lambda expression to writers delegate
-      writers += [](const string& value) {Console::WriteLine("Lambda expression write : {0}", value);};
+      writers += [](const string & value) {Console::WriteLine("Lambda expression write : {0}", value);};
       
       // Remove another functor from writers delegate
       writers -= AnotherFunctor();
-
+      
       // Invoke writers delegate.
       writers("This example is beautyfull.");
     }

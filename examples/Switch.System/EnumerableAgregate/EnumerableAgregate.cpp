@@ -15,7 +15,7 @@ namespace Examples {
       
       // Prepend each word to the beginning of the
       // new sentence to reverse the word order.
-      string reversed = words.Agregate(_delegate(const string& workingSentence, const string& next) {
+      string reversed = words.Agregate(_delegate(const string & workingSentence, const string & next) {
         return next + " " + workingSentence;
       });
       

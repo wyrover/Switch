@@ -16,7 +16,7 @@ namespace Examples {
       // Royalty Percent is nullable.
       Nullable<int> royaltyPercent;
     };
-
+    
     // The main entry point for the application.
     static void Main(const Array<string>& args) {
       // Declare and initialize the titleAuthor array.

@@ -17,9 +17,8 @@ namespace Examples {
       
       refptr<IEnumerable<string>> query = fruits.Cast<string>();
       
-      for (string fruit : *query) {
+      for (string fruit : *query)
         Console::WriteLine(fruit);
-      }
     }
   };
 }

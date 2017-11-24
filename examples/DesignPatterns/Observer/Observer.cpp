@@ -12,24 +12,23 @@ namespace DesignPatterns {
     public:
       virtual void Update() = 0;
     };
-
+    
     // The 'Subject' abstract class
     class Subject _abstract {
     public:
       void Attach(refptr<Observer> observer) {this->observers.Add(observer);}
-
+      
       void Detach(refptr<Observer> observer) {this->observers.Remove(observer);}
-
+      
       void Notify() {
-        for(refptr<Observer> o : this->observers) {
+        for (refptr<Observer> o : this->observers)
           o->Update();
-        }
       }
-
+      
     private:
       List<refptr<Observer>> observers;
     };
-
+    
     // The 'ConcreteSubject' class
     class ConcreteSubject : public Subject {
     public:
@@ -38,28 +37,28 @@ namespace DesignPatterns {
         _get { return this->subjectState; },
         _set { this->subjectState = value; }
       };
-
+      
     private:
       string subjectState;
     };
-
+    
     // The 'ConcreteObserver' class
     class ConcreteObserver : public Observer {
     public:
       // Constructor
       ConcreteObserver(refptr<ConcreteSubject> subject, const string& name) : subject(subject), name(name) {}
-
+      
       void Update() override {
         this->observerState = this->subject->SubjectState;
         Console::WriteLine("Observer {0}'s new state is {1}", this->name, this->observerState);
       }
-
+      
       // Gets or sets subject
       _property<refptr<ConcreteSubject>> Subject {
         _get { return this->subject; },
         _set { this->subject = value; }
       };
-
+      
     private:
       string observerState;
       refptr<ConcreteSubject> subject;

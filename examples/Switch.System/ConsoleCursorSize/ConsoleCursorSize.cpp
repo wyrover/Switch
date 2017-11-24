@@ -14,7 +14,7 @@ namespace Examples {
       //
       saveCursorSize = Console::CursorSize;
       Console::WriteLine(m0);
-      for(int size : sizes) {
+      for (int size : sizes) {
         Console::CursorSize = size;
         Console::WriteLine(m1, size);
         Console::ReadKey();

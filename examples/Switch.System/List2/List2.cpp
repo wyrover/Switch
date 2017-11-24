@@ -16,21 +16,21 @@ namespace Examples {
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      
+        
       Console::WriteLine("\nAddRange(dinosaurs)");
       dinosaurs.AddRange(dinosaurs);
       
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      
+        
       Console::WriteLine("\nRemoveRange(2, 2)");
       dinosaurs.RemoveRange(2, 2);
       
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      
+        
       input = {"Tyrannosaurus", "Deinonychus", "Velociraptor"};
       
       Console::WriteLine("\nInsertRange(3, input)");
@@ -39,7 +39,7 @@ namespace Examples {
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-      
+        
       Console::WriteLine("\noutput = dinosaurs.GetRange(2, 3).ToArray()");
       Array<string> output = dinosaurs.GetRange(2, 3).ToArray();
       

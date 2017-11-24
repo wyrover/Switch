@@ -14,7 +14,7 @@ namespace DesignPatterns {
     // The 'AbstractExpression' abstract class
     class AbstractExpression _abstract {
     public:
-      virtual void Interpret(const Context& context) const =0;
+      virtual void Interpret(const Context& context) const = 0;
     };
     
     // The 'TerminalExpression' class
@@ -47,9 +47,8 @@ namespace DesignPatterns {
         list.Add(TerminalExpression());
         
         // Interpret
-        for (auto exp : list) {
+        for (auto exp : list)
           as<AbstractExpression&>(exp).Interpret(context);
-        }
       }
     };
   }

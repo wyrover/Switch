@@ -13,7 +13,7 @@ namespace Examples {
       Thread::Sleep(1000);
       Console::WriteLine("Main thread ({0}) exiting...", Thread::CurrentThread().ManagedThreadId);
     }
-
+    
   private:
     static void ExecuteInForeground() {
       DateTime start = DateTime::Now();

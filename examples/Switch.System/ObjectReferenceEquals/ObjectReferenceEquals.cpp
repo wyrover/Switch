@@ -15,7 +15,7 @@ namespace Examples {
       p = q;
       Console::WriteLine(Object::ReferenceEquals(*p, *q));
       Console::WriteLine(Object::ReferenceEquals(*o, *p));
-      delete(q);
+      delete (q);
     }
   };
 }

@@ -16,7 +16,7 @@ namespace Examples {
       
       // Display the contents of the collection using foreach. This is the preferred method.
       Console::WriteLine("Displays the elements using foreach:");
-      PrintKeysAndValues1( myCol );
+      PrintKeysAndValues1(myCol);
       
       // Display the contents of the collection using the enumerator.
       Console::WriteLine("Displays the elements using the IEnumerator:");
@@ -34,7 +34,7 @@ namespace Examples {
       Console::WriteLine("Displays the elements in the array:");
       Console::WriteLine("   KEY        VALUE");
       for (int i = 0; i < myArr.Length; i++)
-        Console::WriteLine( "   {0,-10} {1}", myArr[i].Key(), myArr[i].Value());
+        Console::WriteLine("   {0,-10} {1}", myArr[i].Key(), myArr[i].Value());
       Console::WriteLine();
       
       // Searches for a value.
@@ -45,7 +45,7 @@ namespace Examples {
       Console::WriteLine();
       
       // Searches for a key and deletes it.
-      if ( myCol.ContainsKey("green"))
+      if (myCol.ContainsKey("green"))
         myCol.Remove("green");
       Console::WriteLine("The collection contains the following elements after removing \"green\":");
       PrintKeysAndValues1(myCol);
@@ -61,9 +61,8 @@ namespace Examples {
     // NOTE: The foreach statement is the preferred way of enumerating the contents of a collection.
     static void PrintKeysAndValues1(const StringDictionary& myCol)  {
       Console::WriteLine("   KEY                       VALUE");
-      for (StringKeyValuePair de : myCol ) {
+      for (StringKeyValuePair de : myCol)
         Console::WriteLine("   {0,-25} {1}",  de.Key(), de.Value());
-      }
       Console::WriteLine();
     }
     
@@ -85,9 +84,8 @@ namespace Examples {
       Array<string> myKeys = myCol.Keys().ToArray();
       
       Console::WriteLine("   INDEX KEY                       VALUE");
-      for (int i = 0; i < myCol.Count; i++) {
+      for (int i = 0; i < myCol.Count; i++)
         Console::WriteLine("   {0:%-5d} {1,-25} {2}", i,  myKeys[i], myCol[myKeys[i]]);
-      }
       Console::WriteLine();
     }
   };

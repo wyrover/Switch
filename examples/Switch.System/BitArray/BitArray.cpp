@@ -32,19 +32,19 @@ namespace Examples {
       Console::WriteLine("myBA2");
       Console::WriteLine("   Count:    {0}", myBA2.Count);
       Console::WriteLine("   Length:   {0}", myBA2.Length);
-      Console::WriteLine("   Values:" );
+      Console::WriteLine("   Values:");
       PrintValues(myBA2, 8);
       
-      Console::WriteLine("myBA3" );
+      Console::WriteLine("myBA3");
       Console::WriteLine("   Count:    {0}", myBA3.Count);
       Console::WriteLine("   Length:   {0}", myBA3.Length);
-      Console::WriteLine("   Values:" );
+      Console::WriteLine("   Values:");
       PrintValues(myBA3, 8);
       
-      Console::WriteLine("myBA4" );
+      Console::WriteLine("myBA4");
       Console::WriteLine("   Count:    {0}", myBA4.Count);
       Console::WriteLine("   Length:   {0}", myBA4.Length);
-      Console::WriteLine("   Values:" );
+      Console::WriteLine("   Values:");
       PrintValues(myBA4, 8);
       
       Console::WriteLine("myBA5");
@@ -58,7 +58,7 @@ namespace Examples {
     static void PrintValues(const Generic::IEnumerable<bool>& myList, int myWidth) {
       int i = myWidth;
       for (bool b : myList) {
-        if ( i <= 0 ) {
+        if (i <= 0) {
           i = myWidth;
           Console::WriteLine();
         }

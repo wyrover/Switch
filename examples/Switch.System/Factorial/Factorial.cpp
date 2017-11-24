@@ -6,7 +6,7 @@ namespace FactorialExample {
   template<int64 number>
   struct Factorial {
   public:
-    static int64 Value() { return Factorial<number-1>::Value() * number; }
+    static int64 Value() { return Factorial < number - 1 >::Value() * number; }
   };
   
   template<>

@@ -13,7 +13,7 @@ namespace Examples {
       
       if (BitConverter::IsLittleEndian())
         Array<>::Reverse(bytes);
-      
+        
       Console::WriteLine(BitConverter::ToString(bytes));
       // Call method to send byte stream across machine boundaries.
       
@@ -21,7 +21,7 @@ namespace Examples {
       Console::WriteLine(BitConverter::ToString(bytes));
       if (BitConverter::IsLittleEndian())
         Array<>::Reverse(bytes);
-      
+        
       Console::WriteLine(BitConverter::ToString(bytes));
       int result = BitConverter::ToInt32(bytes, 0);
       Console::WriteLine("Original value: {0}", value);

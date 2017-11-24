@@ -8,7 +8,7 @@ namespace Examples {
   class Program {
   public:
     static Object obj;
-
+    
     static void Main() {
       Thread::CurrentThread().Name = "Main";
       ThreadPool::QueueUserWorkItem(ShowThreadInformation);
@@ -20,10 +20,10 @@ namespace Examples {
       Thread::Sleep(500);
       ShowThreadInformation(object());
     }
-
+    
   private:
     static void ShowThreadInformation(const Object& state) {
-      _lock (obj) {
+      _lock(obj) {
         auto th  = Thread::CurrentThread();
         Console::WriteLine("Managed thread #{0}: ", th.ManagedThreadId);
         Console::WriteLine("   Background thread: {0}", th.IsBackground);
@@ -34,7 +34,7 @@ namespace Examples {
       }
     }
   };
-
+  
   Object Program::obj;
 }
 

@@ -16,14 +16,14 @@ namespace MessageBoxExample {
       this->buttonShowMessage.Location = System::Drawing::Point(10, 10);
       this->buttonShowMessage.Width = 100;
       this->buttonShowMessage.Text = "MessageBox";
-      this->buttonShowMessage.Click += _delegate(const object& sender, const EventArgs& e) {
+      this->buttonShowMessage.Click += _delegate(const object & sender, const EventArgs & e) {
         DialogResult result = MessageBox::Show("Hello, World!", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Asterisk);
         labelDialogResult.Text = string::Format("DialogResult = {0}", result);
       };
       
       this->labelDialogResult.Location = System::Drawing::Point(10, 45);
       this->labelDialogResult.Width = 200;
-
+      
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(400, 200);
       this->Text = "MessageBox example";

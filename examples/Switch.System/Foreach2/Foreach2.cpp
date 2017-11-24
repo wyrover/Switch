@@ -16,9 +16,8 @@ namespace Examples {
       colors.Add("Yellow");
       colors.Add("Gray");
       
-      for (string item : colors) {
+      for (string item : colors)
         Console::WriteLine(item);
-      }
     }
   };
 }

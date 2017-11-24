@@ -19,7 +19,7 @@ namespace Examples {
       System::Console::SetCursorPosition(x, y);
       System::Console::Write(str);
     }
-
+    
     int x;
     int y;
     System::ConsoleColor color;
@@ -109,7 +109,7 @@ namespace Examples {
       Write(this->x - 2, this->y + 2, " # # ");
     }
   };
-
+  
   class FireworkEnd : public Firework {
   public:
     FireworkEnd(int x, int y, ConsoleColor color, int speed) : Firework(x, y, color, speed) {}
@@ -135,8 +135,8 @@ namespace Examples {
       Random rand;
       System::Collections::Generic::List<_<Firework>> fireworks;
       Array<ConsoleColor> colors = {ConsoleColor::Blue, ConsoleColor::Green, ConsoleColor::Cyan, ConsoleColor::Red, ConsoleColor::Magenta, ConsoleColor::Yellow, ConsoleColor::White};
-     
-      while(!Console::KeyAvailable) {
+      
+      while (!Console::KeyAvailable) {
         fireworks.Add(_new<FireworkStart>(rand.Next(2, Console::WindowWidth - 2), rand.Next(2, Console::WindowHeight - 2), colors[rand.Next(colors.Length)], rand.Next(1, 5)));
         
         System::Collections::Generic::List<_<Firework>> fireworksToRemove;
@@ -149,7 +149,7 @@ namespace Examples {
         
         System::Threading::Thread::Sleep(100);
       }
-
+      
       Console::ResetColor();
       Console::Clear();
       Console::CursorVisible = true;

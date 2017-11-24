@@ -16,7 +16,7 @@ namespace FormExample {
       this->button1.Parent = *this;
       this->button1.Text = "button1";
       this->button1.Location = System::Drawing::Point(50, 50);
-      this->button1.Click += _delegate(const object& dender, const EventArgs& e) {
+      this->button1.Click += _delegate(const object & dender, const EventArgs & e) {
         static int clicked = 0;
         this->label1.Text = string::Format("button1 clicked {0} times", ++clicked);
       };
@@ -25,7 +25,7 @@ namespace FormExample {
       this->button2.Text = "button2";
       this->button2.Location = System::Drawing::Point(50, 100);
       this->button2.Size = System::Drawing::Size(200, 75);
-      this->button2.Click += _delegate(const object& dender, const EventArgs& e) {
+      this->button2.Click += _delegate(const object & dender, const EventArgs & e) {
         static int clicked = 0;
         this->label2.Text = string::Format("button2 clicked {0} times", ++clicked);
       };

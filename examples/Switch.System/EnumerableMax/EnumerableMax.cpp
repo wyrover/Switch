@@ -15,7 +15,7 @@ namespace Examples {
         this->age = pet.age;
         return *this;
       }
-
+      
       _property<int, _readonly> Age {
         _get {return this->age;}
       };
@@ -31,16 +31,16 @@ namespace Examples {
       virtual int CompareTo(const IComparable& other) const {
         if (!is<Pet>(other))
           return 1;
-        
+          
         int sumOther = as<Pet>(other).age + as<Pet>(other).name.Length;
         int sumThis = this->age + this->name.Length;
         
         if (sumOther > sumThis)
           return -1;
-        
+          
         if (sumOther == sumThis)
           return 0;
-        
+          
         return 1;
       }
       
@@ -48,7 +48,7 @@ namespace Examples {
       string name;
       int age;
     };
-
+    
   public:
     // The main entry point for the application.
     static void Main() {

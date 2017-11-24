@@ -41,7 +41,7 @@ namespace Examples {
       
       // Determine whether all pet names
       // in the array start with 'B'.
-      bool allStartWithB = pets.All(_delegate(const Pet& pet)->bool {
+      bool allStartWithB = pets.All(_delegate(const Pet & pet)->bool {
         return pet.Name().StartsWith("B");
       });
       

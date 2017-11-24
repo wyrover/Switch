@@ -15,9 +15,8 @@ namespace Examples {
       
       refptr<IEnumerable<string>> query = cats.Concat(dogs);
       
-      for (string name : *query) {
+      for (string name : *query)
         Console::WriteLine(name);
-      }
     }
   };
 }

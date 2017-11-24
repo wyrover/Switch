@@ -49,7 +49,7 @@ namespace SwitchEvents {
       
       // Format the string to send inside the CustomEventArgs parameter
       e.Message += String::Format(" at {0}", DateTime::Now().ToString());
-        
+      
       // Use the () operator to raise the event.
       handler(*this, e);
     }
@@ -67,16 +67,16 @@ namespace SwitchEvents {
     void HandleCustomEvent(const object& sender, const CustomEventArgs& e) const {
       Console::WriteLine(id + " received this message: {0}", e.Message);
     }
-
+    
   private:
     string id;
   };
-
+  
   class Program : public object {
   public:
     // The main entry point for the application.
     static void Main() {
-      
+    
       Publisher pub;
       Subscriber sub1("sub1", pub);
       Subscriber sub2("sub2", pub);

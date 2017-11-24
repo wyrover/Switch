@@ -42,7 +42,7 @@ namespace ProgressBarExample {
       
       this->timer.Interval = 50;
       this->timer.Enabled = true;
-      this->timer.Tick += _delegate(const object& sender, const EventArgs& e) {
+      this->timer.Tick += _delegate(const object & sender, const EventArgs & e) {
         this->progressBar4.Value = this->progressBar4.Value < this->progressBar4.Maximum ? this->progressBar4.Value + 1 : this->progressBar4.Minimum;
       };
     }

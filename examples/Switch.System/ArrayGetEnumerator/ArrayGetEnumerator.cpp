@@ -23,12 +23,12 @@ namespace Examples {
       // Displays the values of the Array.
       int index = 0;
       System::Collections::Generic::Enumerator<string> myEnumerator = myArray.GetEnumerator();
-      Console::WriteLine( "The Array contains the following values:" );
+      Console::WriteLine("The Array contains the following values:");
       while (myEnumerator.MoveNext())
         Console::WriteLine("[{0}] {1}", index++, myEnumerator.Current);
     }
   };
-
+  
 }
 
 _startup(Examples::Program);

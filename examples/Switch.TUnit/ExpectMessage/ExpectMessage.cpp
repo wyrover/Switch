@@ -9,7 +9,7 @@ namespace UnitTests {
     void TestWithUserMessage() {
       Expect::False(true, "true can never be equal to false", _caller);
     }
-
+    
     // Without your own message
     void TestWithoutUserMessage() {
       Expect::False(true, _caller);
