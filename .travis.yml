@@ -29,7 +29,6 @@ addons:
       - valgrind
       - zlibc
 
-#before_script: scripts/travis/install_cmake.sh
 before_script:
   - mkdir -p build/3rdparty
   - cd build
@@ -55,8 +54,7 @@ matrix:
       cache: ccache
       osx_image: xcode9.1
       script: scripts/travis/build_xcode.sh
-      #after_success: scripts/travis/publish_to_codecov.sh
-      #after_success: scripts/travis/publish_to_coverall.sh
+      after_success: scripts/travis/publish_to_codecov.sh
 
     - env: TEST="Xcode build, run unittests with Google Address Sanitizer"
       os: osx
