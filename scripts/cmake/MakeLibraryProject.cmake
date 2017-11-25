@@ -30,7 +30,6 @@ macro(MakeLibraryProject)
   target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
   target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES})
   set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER src)
-  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> ${CMAKE_HOME_DIRECTORY}/lib/$<TARGET_FILE_NAME:${PROJECT_NAME}>)
 
   install(TARGETS ${PROJECT_NAME} EXPORT Switch DESTINATION lib)
 
