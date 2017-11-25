@@ -286,7 +286,7 @@ Curl_he2ai(const struct hostent *he, int port)
 
   DEBUGASSERT((he->h_name != NULL) && (he->h_addr_list != NULL));
 
-  for(i=0; (curr = he->h_addr_list[i]) != NULL; i++) {
+  for(i = 0; (curr = he->h_addr_list[i]) != NULL; i++) {
 
     size_t ss_size;
 #ifdef ENABLE_IPV6
@@ -469,7 +469,7 @@ Curl_addrinfo *Curl_str2addr(char *address, int port)
     /* This is a dotted IP address 123.123.123.123-style */
     return Curl_ip2addr(AF_INET, &in, address, port);
 #ifdef ENABLE_IPV6
-  else {
+  {
     struct in6_addr in6;
     if(Curl_inet_pton(AF_INET6, address, &in6) > 0)
       /* This is a dotted IPv6 address ::1-style */
@@ -570,9 +570,9 @@ curl_dogetaddrinfo(const char *hostname,
                    int line, const char *source)
 {
 #ifdef USE_LWIPSOCK
-  int res=lwip_getaddrinfo(hostname, service, hints, result);
+  int res = lwip_getaddrinfo(hostname, service, hints, result);
 #else
-  int res=(getaddrinfo)(hostname, service, hints, result);
+  int res = (getaddrinfo)(hostname, service, hints, result);
 #endif
   if(0 == res)
     /* success */

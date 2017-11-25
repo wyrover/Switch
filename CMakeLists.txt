@@ -243,12 +243,15 @@ find_package(Doxygen QUIET)
 if (Doxygen_FOUND)
   message(STATUS "  [X] Doxygen ${DOXYGEN_VERSION}")
 else()
-  message(STATUS "  [ ] Doxygen")
+  ExternalProject_Add(doxygen GIT_REPOSITORY https://github.com/doxygen/doxygen.git GIT_TAG Release_1_8_13 GIT_SHALLOW 1 CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR})
+  set(DOXYGEN_EXECUTABLE ${CMAKE_BINARY_DIR}/bin/doxygen${EXECUTABLE_EXTENSION})
+  set(DOXYGEN_PROJECT doxygen)
+  message(STATUS "  [X] Doxygen 1.8.13")
 endif()
 
 message(STATUS "3rd parties")
 
-find_package(CURL QUIET)
+#find_package(CURL QUIET)
 if (CURL_FOUND)
   message(STATUS "  [X] curl ${CURL_VERSION_STRING}")
 else()
@@ -430,13 +433,8 @@ else(UNIX)
 endif()
 
 # add custom target ${PROJECT_NAME}.ReferenceGuide to generate doxygen project reference guide.
-find_package(Doxygen)
-if(DOXYGEN_FOUND)
-  message(STATUS "  [X] ${PROJECT_NAME}.ReferenceGuide")
-  add_custom_target(${PROJECT_NAME}.ReferenceGuide ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxygen.txt WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/ReferenceGuide COMMENT "Doxygen Reference Guide generation" VERBATIM)
-else()
-  message(STATUS "  [ ] ${PROJECT_NAME}.ReferenceGuide")
-endif(DOXYGEN_FOUND)
+message(STATUS "  [X] ${PROJECT_NAME}.ReferenceGuide")
+add_custom_target(${PROJECT_NAME}.ReferenceGuide ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxygen.txt WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/ReferenceGuide COMMENT "Doxygen Reference Guide generation" DEPENDS ${DOXYGEN_PROJECT} VERBATIM)
 
 # add custom target ${PROJECT_NAME}.Tests to run project tests.
 message(STATUS "  [X] ${PROJECT_NAME}.Tests")

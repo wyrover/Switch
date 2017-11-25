@@ -13,28 +13,6 @@ if (NOT call_stack_FOUND)
 endif()
 
 #________________________________________________________________________________
-#                                                                            curl
-find_package(CURL QUIET)
-message(STATUS "Found CURL : " ${CURL_FOUND})
-if (NOT CURL_FOUND)
-  message(STATUS "Add ThirdParty curl")
-  option(BUILD_TESTING "Build the testing tree" OFF)
-  option(ENABLE_MANUAL "to provie the built-in manual" OFF)
-  add_subdirectory(curl)
-  set_target_properties(libcurl PROPERTIES FOLDER ThirdParty)
-endif()
-
-#________________________________________________________________________________
-#                                                                    easywsclient
-find_package(easywsclient QUIET)
-message(STATUS "Found easywsclient : " ${easywsclient_FOUND})
-if (NOT easywsclient_FOUND)
-  message(STATUS "Add ThirdParty easywsclient")
-  add_subdirectory(easywsclient)
-  set_target_properties(easywsclient PROPERTIES FOLDER ThirdParty)
-endif()
-
-#________________________________________________________________________________
 #                                                                           Rs232
 find_package(Rs232 QUIET)
 message(STATUS "Found Rs232 : " ${Rs232_FOUND})
