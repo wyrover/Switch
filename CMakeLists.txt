@@ -251,15 +251,15 @@ endif()
 
 message(STATUS "3rd parties")
 
-#find_package(CURL QUIET)
+find_package(CURL QUIET)
 if (CURL_FOUND)
   message(STATUS "  [X] curl ${CURL_VERSION_STRING}")
 else()
-  include_directories(3rdparty/curl)
+  add_subdirectory(3rdparty/curl)
   message(STATUS "  [X] curl 7.56.1")
 endif()
 
-include_directories(3rdparty/easywsclient)
+add_subdirectory(3rdparty/easywsclient)
 message(STATUS "  [X] easywsclient master")
 
 include_directories(SYSTEM ${CMAKE_INSTALL_PREFIX}/include)
