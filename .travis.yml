@@ -62,17 +62,17 @@ matrix:
       osx_image: xcode9.1
       script: scripts/travis/build_xcode_with_asan.sh
 
-    - env: TEST="Xcode build, run unittests with Google Undefined Sanitizer"
-      os: osx
-      cache: ccache
-      osx_image: xcode9.1
-      script: scripts/travis/build_xcode_with_usan.sh
-
     - env: TEST="Xcode build, run unittests with Google Thread Sanitizer"
       os: osx
       cache: ccache
       osx_image: xcode9.1
       script: scripts/travis/build_xcode_with_tsan.sh
+
+    - env: TEST="Xcode build, run unittests with Google Undefined Sanitizer"
+      os: osx
+      cache: ccache
+      osx_image: xcode9.1
+      script: scripts/travis/build_xcode_with_usan.sh
 
     - env: TEST="clang build and run unittests"
       os: linux
