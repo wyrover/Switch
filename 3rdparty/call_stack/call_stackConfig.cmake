@@ -6,3 +6,4 @@ get_filename_component(call_stack_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/../l
 SET(call_stack_LIBRARIES call_stack)    
 
 set(call_stack_FOUND TRUE)
+set(CALL_STACK_FOUND TRUE)

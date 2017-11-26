@@ -6,3 +6,4 @@ get_filename_component(JPEG_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/../lib" AB
 SET(JPEG_LIBRARIES jpeg)    
 
 set(jpeg_FOUND TRUE)
+set(JPEG_FOUND TRUE)

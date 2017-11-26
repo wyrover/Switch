@@ -1,11 +1,7 @@
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(call_stack REQUIRED)
-find_package(JPEG REQUIRED)
-find_package(PNG REQUIRED)
 find_package(Threads REQUIRED)
-find_package(ZLIB REQUIRED)
 
 if(MSVC)
   set(SWITCH_GUI WIN32)
