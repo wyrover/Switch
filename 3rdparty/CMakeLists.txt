@@ -56,18 +56,4 @@ if (NOT PNG_FOUND)
 endif()
 
 #________________________________________________________________________________
-#                                                                      googletest
-find_package(GTest QUIET)
-message(STATUS "Found GTest : " ${GTEST_FOUND})
-if (NOT GTEST_FOUND)
-  message(STATUS "Add ThirdParty googletest")
-  option(BUILD_GMOCK "Build the google mock subproject" OFF)
-  option(BUILD_GTEST "Build the google test subproject" ON)
-  option(gtest_force_shared_crt "Use shared (DLL) run-time lib even when Google Test is built as static lib." ON)
-  add_subdirectory(googletest)
-  set_target_properties(gtest PROPERTIES FOLDER ThirdParty)
-  set_target_properties(gtest_main PROPERTIES FOLDER ThirdParty)
-endif()
-
-#________________________________________________________________________________
 #

@@ -262,6 +262,18 @@ endif()
 add_subdirectory(3rdparty/easywsclient)
 message(STATUS "  [X] easywsclient master")
 
+find_package(GTest QUIET)
+if (GTEST_FOUND)
+  message(STATUS "  [X] GTest")
+else()
+  set(BUILD_GMOCK OFF)
+  set(BUILD_GTEST ON)
+  set(gtest_force_shared_crt ON)
+  add_subdirectory(3rdparty/googletest)
+  set(GTEST_LIBRARIES gtest)
+  message(STATUS "  [X] gtest 1.8.0")
+endif()
+
 include_directories(SYSTEM ${CMAKE_INSTALL_PREFIX}/include)
 link_directories(${CMAKE_INSTALL_PREFIX}/lib)
 

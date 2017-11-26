@@ -1,2 +1,5 @@
 # Ignore CI build directory
 build/
+
+# macOS files
+.DS_Store

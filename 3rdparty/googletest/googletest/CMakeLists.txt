@@ -45,7 +45,7 @@ endif()
 # ${gtest_BINARY_DIR}.
 # Language "C" is required for find_package(Threads).
 project(gtest CXX C)
-cmake_minimum_required(VERSION 2.6.4)
+cmake_minimum_required(VERSION 2.6.2)
 
 if (COMMAND set_up_hermetic_build)
   set_up_hermetic_build()
@@ -95,22 +95,18 @@ target_link_libraries(gtest_main gtest)
 # to the targets for when we are part of a parent build (ie being pulled
 # in via add_subdirectory() rather than being a standalone build).
 if (DEFINED CMAKE_VERSION AND NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.11")
-  target_include_directories(gtest      INTERFACE "${gtest_SOURCE_DIR}/include")
-  target_include_directories(gtest_main INTERFACE "${gtest_SOURCE_DIR}/include")
+  target_include_directories(gtest PUBLIC $<BUILD_INTERFACE:${gtest_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
+  target_include_directories(gtest_main PUBLIC $<BUILD_INTERFACE:${gtest_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
 endif()
 
 ########################################################################
 #
 # Install rules
-install(TARGETS gtest gtest_main DESTINATION lib)
-install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest DESTINATION include)
-
-if (MSVC)
-  target_compile_options(${PROJECT_NAME} PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}${CMAKE_DEBUG_POSTFIX}.pdb>")
-  target_compile_options(${PROJECT_NAME} PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}.pdb>")
-  install(FILES $<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}${CMAKE_DEBUG_POSTFIX}.pdb DESTINATION lib CONFIGURATIONS Debug OPTIONAL)
-  install(FILES $<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}.pdb DESTINATION lib CONFIGURATIONS Release OPTIONAL)
-endif()
+install(TARGETS gtest gtest_main
+  DESTINATION lib)
+install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
+  DESTINATION include)
+install(TARGETS gtest EXPORT Switch DESTINATION lib)
 
 ########################################################################
 #
