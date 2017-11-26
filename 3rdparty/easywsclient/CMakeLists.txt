@@ -12,8 +12,8 @@ add_custom_command(TARGET easywsclient POST_BUILD COMMAND ${CMAKE_COMMAND} -E co
 
 install(EXPORT easywsclient DESTINATION cmake)  
 install(FILES easywsclientConfig.cmake DESTINATION cmake)
-install(TARGETS easywsclient EXPORT Switch DESTINATION lib)
-install (FILES easywsclient.hpp DESTINATION include/easywsclient)
+install(FILES easywsclient.hpp DESTINATION include/easywsclient)
+install(TARGETS easywsclient EXPORT easywsclient DESTINATION lib)
 if(MSVC)
   target_compile_options(easywsclient PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:easywsclient>/easywsclient${CMAKE_DEBUG_POSTFIX}.pdb>")
   target_compile_options(easywsclient PRIVATE "$<$<CONFIG:Release>:/Fd$<TARGET_FILE_DIR:easywsclient>/easywsclient.pdb>")
