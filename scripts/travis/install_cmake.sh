@@ -3,7 +3,7 @@
 set -ev
 
 # create build folder
-mkdir -p build/3rdparty
+mkdir build
 
 #install CMake 3.8 or later
 cd build

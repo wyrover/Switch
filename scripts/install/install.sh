@@ -22,15 +22,7 @@ export CC=clang
 export CXX=clang++
 
 # create build folders
-mkdir -p build/3rdparty
 mkdir -p build/examples
-
-# generate, build and install 3rdparty
-cd build/3rdparty
-cmake ../../3rdparty -DCMAKE_BUILD_TYPE=Release
-cmake --build . -- -j8
-sudo cmake --build . --target install
-cd ../..
 
 # generate, build and install Switch
 cd build
