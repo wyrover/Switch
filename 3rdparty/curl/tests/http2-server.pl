@@ -28,7 +28,6 @@ my $pidfile = "log/nghttpx.pid";
 my $logfile = "log/http2.log";
 my $nghttpx = "nghttpx";
 my $listenport = 9015;
-my $connect = "127.0.0.1,8990";
 
 #***************************************************************************
 # Process command line options
@@ -55,13 +54,6 @@ while(@ARGV) {
             shift @ARGV;
         }
     }
-    elsif($ARGV[0] eq '--connect') {
-        if($ARGV[1]) {
-            $connect = $ARGV[1];
-            $connect =~ s/:/,/;
-            shift @ARGV;
-        }
-    }
     elsif($ARGV[0] eq '--logfile') {
         if($ARGV[1]) {
             $logfile = $ARGV[1];
@@ -74,7 +66,7 @@ while(@ARGV) {
     shift @ARGV;
 }
 
-my $cmdline="$nghttpx --backend=$connect ".
+my $cmdline="$nghttpx --backend=127.0.0.1,8990 ".
     "--frontend=\"*,$listenport;no-tls\" ".
     "--log-level=INFO ".
     "--pid-file=$pidfile ".

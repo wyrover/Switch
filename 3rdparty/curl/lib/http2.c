@@ -28,7 +28,6 @@
 #include "http2.h"
 #include "http.h"
 #include "sendf.h"
-#include "select.h"
 #include "curl_base64.h"
 #include "strcase.h"
 #include "multiif.h"
@@ -117,11 +116,18 @@ static int http2_getsock(struct connectdata *conn,
   return http2_perform_getsock(conn, sock, numsocks);
 }
 
-/*
- * http2_stream_free() free HTTP2 stream related data
- */
-static void http2_stream_free(struct HTTP *http)
+static CURLcode http2_disconnect(struct connectdata *conn,
+                                 bool dead_connection)
 {
+  struct HTTP *http = conn->data->req.protop;
+  struct http_conn *c = &conn->proto.httpc;
+  (void)dead_connection;
+
+  DEBUGF(infof(conn->data, "HTTP/2 DISCONNECT starts now\n"));
+
+  nghttp2_session_del(c->h2);
+  Curl_safefree(c->inbuf);
+
   if(http) {
     Curl_add_buffer_free(http->header_recvbuf);
     http->header_recvbuf = NULL; /* clear the pointer */
@@ -133,66 +139,10 @@ static void http2_stream_free(struct HTTP *http)
     free(http->push_headers);
     http->push_headers = NULL;
   }
-}
-
-static CURLcode http2_disconnect(struct connectdata *conn,
-                                 bool dead_connection)
-{
-  struct http_conn *c = &conn->proto.httpc;
-  (void)dead_connection;
-
-  DEBUGF(infof(conn->data, "HTTP/2 DISCONNECT starts now\n"));
-
-  nghttp2_session_del(c->h2);
-  Curl_safefree(c->inbuf);
-  http2_stream_free(conn->data->req.protop);
 
   DEBUGF(infof(conn->data, "HTTP/2 DISCONNECT done\n"));
 
   return CURLE_OK;
-}
-
-/*
- * The server may send us data at any point (e.g. PING frames). Therefore,
- * we cannot assume that an HTTP/2 socket is dead just because it is readable.
- *
- * Instead, if it is readable, run Curl_connalive() to peek at the socket
- * and distinguish between closed and data.
- */
-static bool http2_connisdead(struct connectdata *check)
-{
-  int sval;
-  bool ret_val = TRUE;
-
-  sval = SOCKET_READABLE(check->sock[FIRSTSOCKET], 0);
-  if(sval == 0) {
-    /* timeout */
-    ret_val = FALSE;
-  }
-  else if(sval & CURL_CSELECT_ERR) {
-    /* socket is in an error state */
-    ret_val = TRUE;
-  }
-  else if(sval & CURL_CSELECT_IN) {
-    /* readable with no error. could still be closed */
-    ret_val = !Curl_connalive(check);
-  }
-
-  return ret_val;
-}
-
-
-static unsigned int http2_conncheck(struct connectdata *check,
-                                    unsigned int checks_to_perform)
-{
-  unsigned int ret_val = CONNRESULT_NONE;
-
-  if(checks_to_perform & CONNCHECK_ISDEAD) {
-    if(http2_connisdead(check))
-      ret_val |= CONNRESULT_DEAD;
-  }
-
-  return ret_val;
 }
 
 /* called from Curl_http_setup_conn */
@@ -209,7 +159,7 @@ void Curl_http2_setup_req(struct Curl_easy *data)
   http->closed = FALSE;
   http->close_handled = FALSE;
   http->mem = data->state.buffer;
-  http->len = data->set.buffer_size;
+  http->len = BUFSIZE;
   http->memlen = 0;
 }
 
@@ -225,7 +175,7 @@ void Curl_http2_setup_conn(struct connectdata *conn)
  * but will be used at run-time when the protocol is dynamically switched from
  * HTTP to HTTP2.
  */
-static const struct Curl_handler Curl_handler_http2 = {
+const struct Curl_handler Curl_handler_http2 = {
   "HTTP",                               /* scheme */
   ZERO_NULL,                            /* setup_connection */
   Curl_http,                            /* do_it */
@@ -240,13 +190,12 @@ static const struct Curl_handler Curl_handler_http2 = {
   http2_perform_getsock,                /* perform_getsock */
   http2_disconnect,                     /* disconnect */
   ZERO_NULL,                            /* readwrite */
-  http2_conncheck,                      /* connection_check */
   PORT_HTTP,                            /* defport */
   CURLPROTO_HTTP,                       /* protocol */
   PROTOPT_STREAM                        /* flags */
 };
 
-static const struct Curl_handler Curl_handler_http2_ssl = {
+const struct Curl_handler Curl_handler_http2_ssl = {
   "HTTPS",                              /* scheme */
   ZERO_NULL,                            /* setup_connection */
   Curl_http,                            /* do_it */
@@ -261,7 +210,6 @@ static const struct Curl_handler Curl_handler_http2_ssl = {
   http2_perform_getsock,                /* perform_getsock */
   http2_disconnect,                     /* disconnect */
   ZERO_NULL,                            /* readwrite */
-  http2_conncheck,                      /* connection_check */
   PORT_HTTP,                            /* defport */
   CURLPROTO_HTTPS,                      /* protocol */
   PROTOPT_SSL | PROTOPT_STREAM          /* flags */
@@ -384,12 +332,12 @@ char *curl_pushheader_byname(struct curl_pushheaders *h, const char *header)
     struct HTTP *stream = h->data->req.protop;
     size_t len = strlen(header);
     size_t i;
-    for(i = 0; i<stream->push_headers_used; i++) {
+    for(i=0; i<stream->push_headers_used; i++) {
       if(!strncmp(header, stream->push_headers[i], len)) {
         /* sub-match, make sure that it is followed by a colon */
         if(stream->push_headers[i][len] != ':')
           continue;
-        return &stream->push_headers[i][len + 1];
+        return &stream->push_headers[i][len+1];
       }
     }
   }
@@ -454,7 +402,6 @@ static int push_promise(struct Curl_easy *data,
     stream = data->req.protop;
     if(!stream) {
       failf(data, "Internal NULL stream!\n");
-      (void)Curl_close(newhandle);
       rv = 1;
       goto fail;
     }
@@ -464,15 +411,13 @@ static int push_promise(struct Curl_easy *data,
                               data->multi->push_userp);
 
     /* free the headers again */
-    for(i = 0; i<stream->push_headers_used; i++)
+    for(i=0; i<stream->push_headers_used; i++)
       free(stream->push_headers[i]);
     free(stream->push_headers);
     stream->push_headers = NULL;
-    stream->push_headers_used = 0;
 
     if(rv) {
       /* denied, kill off the new handle again */
-      http2_stream_free(newhandle->req.protop);
       (void)Curl_close(newhandle);
       goto fail;
     }
@@ -487,7 +432,6 @@ static int push_promise(struct Curl_easy *data,
     rc = Curl_multi_add_perform(data->multi, newhandle, conn);
     if(rc) {
       infof(data, "failed to add handle to multi\n");
-      http2_stream_free(newhandle->req.protop);
       Curl_close(newhandle);
       rv = 1;
       goto fail;
@@ -615,7 +559,7 @@ static int on_frame_recv(nghttp2_session *session, const nghttp2_frame *frame,
 
       /* if we receive data for another handle, wake that up */
       if(conn_s->data != data_s)
-        Curl_expire(data_s, 0, EXPIRE_RUN_NOW);
+        Curl_expire(data_s, 0);
     }
     break;
   case NGHTTP2_PUSH_PROMISE:
@@ -643,9 +587,6 @@ static int on_invalid_frame_recv(nghttp2_session *session,
 {
   struct Curl_easy *data_s = NULL;
   (void)userp;
-#if !defined(DEBUGBUILD) || defined(CURL_DISABLE_VERBOSE_STRINGS)
-  (void)lib_error_code;
-#endif
 
   data_s = nghttp2_session_get_stream_user_data(session, frame->hd.stream_id);
   if(data_s) {
@@ -692,7 +633,7 @@ static int on_data_chunk_recv(nghttp2_session *session, uint8_t flags,
 
   /* if we receive data for another handle, wake that up */
   if(conn->data != data_s)
-    Curl_expire(data_s, 0, EXPIRE_RUN_NOW);
+    Curl_expire(data_s, 0);
 
   DEBUGF(infof(data_s, "%zu data received for stream %u "
                "(%zu left in buffer %p, total %zu)\n",
@@ -756,9 +697,6 @@ static int on_frame_not_send(nghttp2_session *session,
 {
   struct Curl_easy *data_s;
   (void)userp;
-#if !defined(DEBUGBUILD) || defined(CURL_DISABLE_VERBOSE_STRINGS)
-  (void)lib_error_code;
-#endif
 
   data_s = nghttp2_session_get_stream_user_data(session, frame->hd.stream_id);
   if(data_s) {
@@ -830,7 +768,7 @@ static int on_begin_headers(nghttp2_session *session,
   /* This is trailer HEADERS started.  Allocate buffer for them. */
   DEBUGF(infof(data_s, "trailer field started\n"));
 
-  DEBUGASSERT(stream->trailer_recvbuf == NULL);
+  assert(stream->trailer_recvbuf == NULL);
 
   stream->trailer_recvbuf = Curl_add_buffer_init();
   if(!stream->trailer_recvbuf) {
@@ -955,7 +893,7 @@ static int on_header(nghttp2_session *session, const nghttp2_frame *frame,
     Curl_add_buffer(stream->header_recvbuf, " \r\n", 3);
     /* if we receive data for another handle, wake that up */
     if(conn->data != data_s)
-      Curl_expire(data_s, 0, EXPIRE_RUN_NOW);
+      Curl_expire(data_s, 0);
 
     DEBUGF(infof(data_s, "h2 status: HTTP/2 %03d (easy %p)\n",
                  stream->status_code, data_s));
@@ -971,7 +909,7 @@ static int on_header(nghttp2_session *session, const nghttp2_frame *frame,
   Curl_add_buffer(stream->header_recvbuf, "\r\n", 2);
   /* if we receive data for another handle, wake that up */
   if(conn->data != data_s)
-    Curl_expire(data_s, 0, EXPIRE_RUN_NOW);
+    Curl_expire(data_s, 0);
 
   DEBUGF(infof(data_s, "h2 header: %.*s: %.*s\n", namelen, name, valuelen,
                value));
@@ -1499,7 +1437,7 @@ static ssize_t http2_recv(struct connectdata *conn, int sockindex,
     infof(data, "%zu data bytes written\n", nread);
     if(stream->pauselen == 0) {
       DEBUGF(infof(data, "Unpaused by stream %u\n", stream->stream_id));
-      DEBUGASSERT(httpc->pause_stream_id == stream->stream_id);
+      assert(httpc->pause_stream_id == stream->stream_id);
       httpc->pause_stream_id = 0;
 
       stream->pausedata = NULL;
@@ -1582,7 +1520,7 @@ static ssize_t http2_recv(struct connectdata *conn, int sockindex,
       failf(data, "nghttp2_session_mem_recv() returned %d:%s\n",
             rv, nghttp2_strerror((int)rv));
       *err = CURLE_RECV_ERROR;
-      return -1;
+      return 0;
     }
     DEBUGF(infof(data, "nghttp2_session_mem_recv() returns %zd\n", rv));
     if(nread == rv) {
@@ -1600,7 +1538,7 @@ static ssize_t http2_recv(struct connectdata *conn, int sockindex,
     rv = h2_session_send(data, httpc->h2);
     if(rv != 0) {
       *err = CURLE_SEND_ERROR;
-      return -1;
+      return 0;
     }
 
     if(should_close_session(httpc)) {
@@ -1955,7 +1893,6 @@ static ssize_t http2_send(struct connectdata *conn, int sockindex,
   switch(conn->data->set.httpreq) {
   case HTTPREQ_POST:
   case HTTPREQ_POST_FORM:
-  case HTTPREQ_POST_MIME:
   case HTTPREQ_PUT:
     if(conn->data->state.infilesize != -1)
       stream->upload_left = conn->data->state.infilesize;
@@ -2181,46 +2118,40 @@ CURLcode Curl_http2_switched(struct connectdata *conn,
   return CURLE_OK;
 }
 
-CURLcode Curl_http2_add_child(struct Curl_easy *parent,
-                              struct Curl_easy *child,
-                              bool exclusive)
+void Curl_http2_add_child(struct Curl_easy *parent, struct Curl_easy *child,
+                          bool exclusive)
 {
-  if(parent) {
-    struct Curl_http2_dep **tail;
-    struct Curl_http2_dep *dep = calloc(1, sizeof(struct Curl_http2_dep));
-    if(!dep)
-      return CURLE_OUT_OF_MEMORY;
-    dep->data = child;
+  struct Curl_http2_dep **tail;
+  struct Curl_http2_dep *dep = calloc(1, sizeof(struct Curl_http2_dep));
+  dep->data = child;
 
-    if(parent->set.stream_dependents && exclusive) {
-      struct Curl_http2_dep *node = parent->set.stream_dependents;
-      while(node) {
-        node->data->set.stream_depends_on = child;
-        node = node->next;
-      }
-
-      tail = &child->set.stream_dependents;
-      while(*tail)
-        tail = &(*tail)->next;
-
-      DEBUGASSERT(!*tail);
-      *tail = parent->set.stream_dependents;
-      parent->set.stream_dependents = 0;
+  if(parent->set.stream_dependents && exclusive) {
+    struct Curl_http2_dep *node = parent->set.stream_dependents;
+    while(node) {
+      node->data->set.stream_depends_on = child;
+      node = node->next;
     }
 
-    tail = &parent->set.stream_dependents;
-    while(*tail) {
-      (*tail)->data->set.stream_depends_e = FALSE;
+    tail = &child->set.stream_dependents;
+    while(*tail)
       tail = &(*tail)->next;
-    }
 
     DEBUGASSERT(!*tail);
-    *tail = dep;
+    *tail = parent->set.stream_dependents;
+    parent->set.stream_dependents = 0;
   }
+
+  tail = &parent->set.stream_dependents;
+  while(*tail) {
+    (*tail)->data->set.stream_depends_e = FALSE;
+    tail = &(*tail)->next;
+  }
+
+  DEBUGASSERT(!*tail);
+  *tail = dep;
 
   child->set.stream_depends_on = parent;
   child->set.stream_depends_e = exclusive;
-  return CURLE_OK;
 }
 
 void Curl_http2_remove_child(struct Curl_easy *parent, struct Curl_easy *child)

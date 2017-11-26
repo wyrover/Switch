@@ -23,8 +23,8 @@ hello
 # Client-side
 <client>
 <server>
-http
 ftp
+http
 </server>
 <tool>
 lib562

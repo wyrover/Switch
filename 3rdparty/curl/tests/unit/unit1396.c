@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -21,21 +21,17 @@
  ***************************************************************************/
 #include "curlcheck.h"
 
-static CURL *hnd;
+CURL *hnd;
 
 static CURLcode unit_setup(void)
 {
-  int res = CURLE_OK;
-
-  global_init(CURL_GLOBAL_ALL);
-  return res;
+  return CURLE_OK;
 }
 
 static void unit_stop(void)
 {
   if(hnd)
     curl_easy_cleanup(hnd);
-  curl_global_cleanup();
 }
 
 struct test {
@@ -81,7 +77,7 @@ UNITTEST_START
 
   hnd = curl_easy_init();
   abort_unless(hnd != NULL, "returned NULL!");
-  for(i = 0; list1[i].in; i++) {
+  for(i=0; list1[i].in; i++) {
     int outlen;
     char *out = curl_easy_unescape(hnd,
                                    list1[i].in, list1[i].inlen,
@@ -97,7 +93,7 @@ UNITTEST_START
     curl_free(out);
   }
 
-  for(i = 0; list2[i].in; i++) {
+  for(i=0; list2[i].in; i++) {
     int outlen;
     char *out = curl_easy_escape(hnd, list2[i].in, list2[i].inlen);
     abort_unless(out != NULL, "returned NULL!");

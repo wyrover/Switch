@@ -53,6 +53,8 @@ endif
 
 EX_LIBS += $(WATT32_ROOT)/lib/libwatt.a
 
+CFLAGS += -DUSE_ENVIRONMENT
+
 PROGRAM  = curl.exe
 OBJECTS += $(addprefix $(OBJ_DIR)/, $(CSOURCES:.c=.o))
 

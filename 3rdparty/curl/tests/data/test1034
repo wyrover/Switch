@@ -6,7 +6,6 @@ HTTP GET
 HTTP proxy
 IDN
 FAILURE
-config file
 </keywords>
 </info>
 
@@ -33,23 +32,16 @@ http
 idn
 </features>
 <setenv>
-LC_ALL=
-LC_CTYPE=en_US.UTF-8
+CHARSET=UTF-8
 </setenv>
-<precheck>
-perl -MI18N::Langinfo=langinfo,CODESET -e 'die "Needs a UTF-8 locale" if (lc(langinfo(CODESET())) ne "utf-8");'
-</precheck>
  <name>
 HTTP over proxy with malformatted IDN host name
  </name>
 
 # This host name contains an invalid UTF-8 byte sequence that can't be
 # converted into an IDN name
-<stdin>
-url = "http://invalid-utf8-‚ê.local/page/1034"
-</stdin>
  <command>
--K - -x %HOSTIP:%HTTPPORT
+http://invalid-utf8-‚ê.local/page/1034 -x %HOSTIP:%HTTPPORT
 </command>
 </client>
 

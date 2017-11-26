@@ -54,11 +54,10 @@ sub parse_main_opts {
         $option .= '}' if defined $short;
         $option .= '\'[' . trim($desc) . ']\'' if defined $desc;
 
-        $option .= ":'$arg'" if defined $arg;
+        $option .= ":$arg" if defined $arg;
 
         $option .= ':_files'
-            if defined $arg and ($arg eq '<file>' || $arg eq '<filename>'
-                || $arg eq '<dir>');
+            if defined $arg and ($arg eq 'FILE' || $arg eq 'DIR');
 
         push @list, $option;
     }

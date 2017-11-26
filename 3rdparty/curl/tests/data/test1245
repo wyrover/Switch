@@ -28,8 +28,8 @@ Connection: close
 # Client-side
 <client>
 <server>
-http
 ftp
+http
 </server>
 <name>
 --proto deny must override --proto-redir allow

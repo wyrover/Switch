@@ -1,6 +1,4 @@
 <testcase>
-# Warning: if this test fails to start the SSH server, check that none of
-# the user's shell profiles sends output to stdout of a non-interactive shell.
 <info>
 <keywords>
 FTP

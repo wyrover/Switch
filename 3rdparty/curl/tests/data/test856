@@ -10,9 +10,6 @@ FAILURE
 #
 # Server-side
 <reply>
-<servercmd>
-REPLY PASS -ERR Login failure
-</servercmd>
 </reply>
 
 #

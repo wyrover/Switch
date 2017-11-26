@@ -43,9 +43,9 @@ lib1900
 HTTP GET using pipelining, penalized on content-length
  </name>
  <command>
-http://%HOSTIP:%HTTPPIPEPORT/ log/urls1903.txt
+http://%HOSTIP:%HTTPPIPEPORT/
 </command>
-<file name="log/urls1903.txt">
+<file name="log/urls.txt">
 0 1k.txt
 1000 100k.txt
 550 alphabet.txt

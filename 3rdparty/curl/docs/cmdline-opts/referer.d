@@ -2,7 +2,7 @@ Long: referer
 Short: e
 Arg: <URL>
 Protocols: HTTP
-Help: Referrer URL
+Help: Referer URL
 See-also: user-agent header
 ---
 Sends the "Referrer Page" information to the HTTP server. This can also be set

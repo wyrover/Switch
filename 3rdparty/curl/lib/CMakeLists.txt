@@ -1,5 +1,7 @@
 set(LIB_NAME libcurl)
 
+configure_file(${CURL_SOURCE_DIR}/include/curl/curlbuild.h.cmake
+  ${CURL_BINARY_DIR}/include/curl/curlbuild.h)
 configure_file(curl_config.h.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/curl_config.h)
 
@@ -8,11 +10,11 @@ include(${CMAKE_CURRENT_BINARY_DIR}/Makefile.inc.cmake)
 
 list(APPEND HHEADERS
   ${CMAKE_CURRENT_BINARY_DIR}/curl_config.h
+  ${CURL_BINARY_DIR}/include/curl/curlbuild.h
   )
 
 if(MSVC)
   list(APPEND CSOURCES libcurl.rc)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /wd4127")
 endif()
 
 # SET(CSOURCES
@@ -78,6 +80,7 @@ if(MSVC AND CURL_STATICLIB)
 endif()
 
 target_link_libraries(${LIB_NAME} ${CURL_LIBS})
+add_custom_command(TARGET ${LIB_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${LIB_NAME}> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:${LIB_NAME}>)
 
 if(WIN32)
   add_definitions( -D_USRDLL )
@@ -98,13 +101,6 @@ if(WIN32)
   if(NOT CURL_STATICLIB)
     # Add "_imp" as a suffix before the extension to avoid conflicting with the statically linked "libcurl.lib"
     set_target_properties(${LIB_NAME} PROPERTIES IMPORT_SUFFIX "_imp.lib")
-
-    set_target_properties (${LIB_NAME} PROPERTIES
-       DEBUG_POSTFIX "-d"
-       # Note: no postfix for release variants, let user choose what style of release he wants
-       # MINSIZEREL_POSTFIX "-z"
-       # RELWITHDEBINFO_POSTFIX "-g"
-       )
   endif()
 endif()
 

@@ -23,7 +23,9 @@
 use File::Basename;
 
 sub valgrindparse {
-    my ($file) = @_;
+    my ($srcdir,     # the dir in which the runtests script resides
+        $sslenabled,
+        $file) = @_;
     my @o;
     open(VAL, "<$file");
     @o = <VAL>;

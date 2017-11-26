@@ -28,7 +28,7 @@
 size_t WriteOutput(void *ptr, size_t size, size_t nmemb, void *stream);
 size_t WriteHeader(void *ptr, size_t size, size_t nmemb, void *stream);
 
-static unsigned long realHeaderSize = 0;
+unsigned long realHeaderSize = 0;
 
 int test(char *URL)
 {

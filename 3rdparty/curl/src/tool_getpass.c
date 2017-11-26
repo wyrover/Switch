@@ -207,16 +207,18 @@ static bool ttyecho(bool enable, int fd)
 #endif
     return TRUE; /* disabled */
   }
-  /* re-enable echo, assumes we disabled it before (and set the structs we
-     now use to reset the terminal status) */
+  else {
+    /* re-enable echo, assumes we disabled it before (and set the structs we
+       now use to reset the terminal status) */
 #ifdef HAVE_TERMIOS_H
-  tcsetattr(fd, TCSAFLUSH, &withecho);
+    tcsetattr(fd, TCSAFLUSH, &withecho);
 #elif defined(HAVE_TERMIO_H)
-  ioctl(fd, TCSETA, &withecho);
+    ioctl(fd, TCSETA, &withecho);
 #else
-  return FALSE; /* not enabled */
+    return FALSE; /* not enabled */
 #endif
-  return TRUE; /* enabled */
+    return TRUE; /* enabled */
+  }
 }
 
 char *getpass_r(const char *prompt, /* prompt to display */

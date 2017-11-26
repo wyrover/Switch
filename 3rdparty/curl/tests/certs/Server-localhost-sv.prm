@@ -21,5 +21,5 @@ commonName_value              = localhost
 
 [something]
 # The key
-# the certificate
+# the certficate
 # some dhparam

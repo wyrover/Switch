@@ -70,7 +70,6 @@ smtp-multi
 smtp-ssl
 smtp-tls
 smtp-vrfy
-sslbackend
 url2file
 usercertinmem
 xmlstream

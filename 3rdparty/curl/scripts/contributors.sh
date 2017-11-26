@@ -44,7 +44,7 @@ fi
 # sort all unique names
 # awk them into RELEASE-NOTES format
 (
-git log --use-mailmap $start..HEAD | \
+git log $start..HEAD | \
 egrep -ai '(^Author|^Commit|by):' | \
 cut -d: -f2- | \
 cut '-d(' -f1 | \

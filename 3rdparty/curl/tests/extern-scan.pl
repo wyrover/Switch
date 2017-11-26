@@ -49,9 +49,7 @@ sub scanheader {
     open H, "<$f" || die;
     while(<H>) {
         if (/^(CURL_EXTERN.*)/) {
-            my $decl = $1;
-            $decl =~ s/\r$//;
-            print "$decl\n";
+            print "$1\n";
         }
     }
     close H;

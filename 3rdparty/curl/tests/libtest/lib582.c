@@ -174,8 +174,8 @@ static int getMicroSecondTimeout(struct timeval* timeout)
   struct timeval now;
   ssize_t result;
   now = tutil_tvnow();
-  result = (ssize_t)((timeout->tv_sec - now.tv_sec) * 1000000 +
-    timeout->tv_usec - now.tv_usec);
+  result = (timeout->tv_sec - now.tv_sec) * 1000000 +
+    timeout->tv_usec - now.tv_usec;
   if(result < 0)
     result = 0;
 
@@ -228,6 +228,7 @@ int test(char *URL)
   CURL *curl = NULL;
   FILE *hd_src = NULL;
   int hd;
+  int error;
   struct_stat file_info;
   CURLM *m = NULL;
   struct ReadWriteSockets sockets = {{NULL, 0, 0}, {NULL, 0, 0}};
@@ -243,8 +244,9 @@ int test(char *URL)
 
   hd_src = fopen(libtest_arg2, "rb");
   if(NULL == hd_src) {
+    error = ERRNO;
     fprintf(stderr, "fopen() failed with error: %d (%s)\n",
-            errno, strerror(errno));
+            error, strerror(error));
     fprintf(stderr, "Error opening file: (%s)\n", libtest_arg2);
     return TEST_ERR_FOPEN;
   }
@@ -253,8 +255,9 @@ int test(char *URL)
   hd = fstat(fileno(hd_src), &file_info);
   if(hd == -1) {
     /* can't open file, bail out */
+    error = ERRNO;
     fprintf(stderr, "fstat() failed with error: %d (%s)\n",
-            errno, strerror(errno));
+            error, strerror(error));
     fprintf(stderr, "ERROR: cannot open file (%s)\n", libtest_arg2);
     fclose(hd_src);
     return TEST_ERR_FSTAT;
@@ -317,7 +320,7 @@ int test(char *URL)
       tv.tv_usec = 100000;
     }
 
-    select_test((int)maxFd, &readSet, &writeSet, NULL, &tv);
+    select_test(maxFd, &readSet, &writeSet, NULL, &tv);
 
     /* Check the sockets for reading / writing */
     checkFdSet(m, &sockets.read, &readSet, CURL_CSELECT_IN, "read");

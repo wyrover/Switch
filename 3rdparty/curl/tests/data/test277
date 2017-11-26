@@ -45,11 +45,12 @@ POST /want/277 HTTP/1.1
 User-Agent: curl/7.10.4 (i686-pc-linux-gnu) libcurl/7.10.4 OpenSSL/0.9.7a ipv6 zlib/1.1.3
 Host: %HOSTIP:%HTTPPORT
 Accept: */*
-Content-Length: 146
+Content-Length: 145
+Expect: 100-continue
 Content-Type: text/info; boundary=------------------------
 
 --------------------------
-Content-Disposition: attachment; name="name"
+Content-Disposition: form-data; name="name"
 
 daniel
 ----------------------------

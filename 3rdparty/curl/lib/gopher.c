@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -65,7 +65,6 @@ const struct Curl_handler Curl_handler_gopher = {
   ZERO_NULL,                            /* perform_getsock */
   ZERO_NULL,                            /* disconnect */
   ZERO_NULL,                            /* readwrite */
-  ZERO_NULL,                            /* connection_check */
   PORT_GOPHER,                          /* defport */
   CURLPROTO_GOPHER,                     /* protocol */
   PROTOPT_NONE                          /* flags */
@@ -73,13 +72,13 @@ const struct Curl_handler Curl_handler_gopher = {
 
 static CURLcode gopher_do(struct connectdata *conn, bool *done)
 {
-  CURLcode result = CURLE_OK;
-  struct Curl_easy *data = conn->data;
+  CURLcode result=CURLE_OK;
+  struct Curl_easy *data=conn->data;
   curl_socket_t sockfd = conn->sock[FIRSTSOCKET];
 
   curl_off_t *bytecount = &data->req.bytecount;
   char *path = data->state.path;
-  char *sel = NULL;
+  char *sel;
   char *sel_org = NULL;
   ssize_t amount, k;
   size_t len;
@@ -97,18 +96,18 @@ static CURLcode gopher_do(struct connectdata *conn, bool *done)
 
     /* Otherwise, drop / and the first character (i.e., item type) ... */
     newp = path;
-    newp += 2;
+    newp+=2;
 
     /* ... then turn ? into TAB for search servers, Veronica, etc. ... */
     j = strlen(newp);
-    for(i = 0; i<j; i++)
+    for(i=0; i<j; i++)
       if(newp[i] == '?')
         newp[i] = '\x09';
 
     /* ... and finally unescape */
     result = Curl_urldecode(data, newp, 0, &sel, &len, FALSE);
-    if(result)
-      return result;
+    if(!sel)
+      return CURLE_OUT_OF_MEMORY;
     sel_org = sel;
   }
 

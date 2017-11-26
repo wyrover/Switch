@@ -16,7 +16,7 @@ tftp
 TFTP send
  </name>
  <command>
--T log/test285.txt tftp://%HOSTIP:%TFTPPORT//
+-T log/test285.txt tftp://%HOSTIP:%TFTPPORT// --trace-ascii log/traceit
 </command>
 <file name="log/test285.txt">
 a chunk of

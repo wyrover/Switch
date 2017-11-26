@@ -533,19 +533,3 @@ main () {
     return 0;
 }
 #endif
-#ifdef HAVE_FSETXATTR_6
-#include <sys/xattr.h> /* header from libc, not from libattr */
-int
-main() {
-  fsetxattr(0, 0, 0, 0, 0, 0);
-  return 0;
-}
-#endif
-#ifdef HAVE_FSETXATTR_5
-#include <sys/xattr.h> /* header from libc, not from libattr */
-int
-main() {
-  fsetxattr(0, 0, 0, 0, 0);
-  return 0;
-}
-#endif

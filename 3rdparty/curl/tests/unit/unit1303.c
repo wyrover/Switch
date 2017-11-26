@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -29,19 +29,15 @@ static struct Curl_easy *data;
 
 static CURLcode unit_setup(void)
 {
-  int res = CURLE_OK;
-
-  global_init(CURL_GLOBAL_ALL);
   data = curl_easy_init();
   if(!data)
     return CURLE_OUT_OF_MEMORY;
-  return res;
+  return CURLE_OK;
 }
 
 static void unit_stop(void)
 {
   curl_easy_cleanup(data);
-  curl_global_cleanup();
 }
 
 /* BASE is just a define to make us fool around with decently large number so
@@ -68,14 +64,14 @@ struct timetest {
   int timeout_ms;
   int connecttimeout_ms;
   bool connecting;
-  time_t result;
+  long result;
   const char *comment;
 };
 
 UNITTEST_START
 {
-  struct curltime now;
-  time_t timeout;
+  struct timeval now;
+  long timeout;
   unsigned int i;
 
   const struct timetest run[] = {
@@ -138,7 +134,7 @@ UNITTEST_START
   data->progress.t_startop.tv_sec = BASE;
   data->progress.t_startop.tv_usec = 0;
 
-  for(i = 0; i < sizeof(run)/sizeof(run[0]); i++) {
+  for(i=0; i < sizeof(run)/sizeof(run[0]); i++) {
     NOW(run[i].now_s, run[i].now_us);
     TIMEOUTS(run[i].timeout_ms, run[i].connecttimeout_ms);
     timeout =  Curl_timeleft(data, &now, run[i].connecting);

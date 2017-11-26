@@ -7,7 +7,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2015, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -40,6 +40,8 @@ bool Curl_compareheader(const char *headerline,  /* line to check */
                         const char *header,   /* header keyword _with_ colon */
                         const char *content); /* content string to find */
 
+char *Curl_checkheaders(const struct connectdata *conn,
+                        const char *thisheader);
 char *Curl_copy_header_value(const char *header);
 
 char *Curl_checkProxyheaders(const struct connectdata *conn,
@@ -113,13 +115,8 @@ CURLcode Curl_http_perhapsrewind(struct connectdata *conn);
 #define MAX_INITIAL_POST_SIZE (64*1024)
 #endif
 
-/* EXPECT_100_THRESHOLD is the request body size limit for when libcurl will
- * automatically add an "Expect: 100-continue" header in HTTP requests. When
- * the size is unknown, it will always add it.
- *
- */
-#ifndef EXPECT_100_THRESHOLD
-#define EXPECT_100_THRESHOLD 1024
+#ifndef TINY_INITIAL_POST_SIZE
+#define TINY_INITIAL_POST_SIZE 1024
 #endif
 
 #endif /* CURL_DISABLE_HTTP */
@@ -128,7 +125,7 @@ CURLcode Curl_http_perhapsrewind(struct connectdata *conn);
  * HTTP unique setup
  ***************************************************************************/
 struct HTTP {
-  curl_mimepart *sendit;
+  struct FormData *sendit;
   curl_off_t postsize; /* off_t to handle large file sizes */
   const char *postdata;
 
@@ -138,7 +135,7 @@ struct HTTP {
   curl_off_t writebytecount;
 
   /* For FORM posting */
-  curl_mimepart form;
+  struct Form form;
 
   struct back {
     curl_read_callback fread_func; /* backup storage for fread pointer */

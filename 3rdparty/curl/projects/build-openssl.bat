@@ -138,9 +138,6 @@ rem ***************************************************************************
   rem Check the start directory exists
   if not exist "%START_DIR%" goto noopenssl
 
-  rem Check that OpenSSL is not unsupported version 1.1.0
-  if not exist "%START_DIR%\ms\do_ms.bat" goto unsupported
-
 :configure
   if "%BUILD_PLATFORM%" == "" (
     if "%VC_VER%" == "6.0" (
@@ -356,14 +353,6 @@ rem ***************************************************************************
 :noopenssl
   echo.
   echo Error: Cannot locate OpenSSL source directory
-  goto error
-
-:unsupported
-  echo.
-  echo Error: Unsupported OpenSSL version.
-  echo The pre-generated project files and this build script only support the
-  echo LTS version of OpenSSL ^(v1.0.2^). The next version of this build script
-  echo will support OpenSSL v1.1.0.
   goto error
 
 :error

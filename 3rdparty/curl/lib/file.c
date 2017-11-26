@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -108,7 +108,6 @@ const struct Curl_handler Curl_handler_file = {
   ZERO_NULL,                            /* perform_getsock */
   file_disconnect,                      /* disconnect */
   ZERO_NULL,                            /* readwrite */
-  ZERO_NULL,                            /* connection_check */
   0,                                    /* defport */
   CURLPROTO_FILE,                       /* protocol */
   PROTOPT_NONETWORK | PROTOPT_NOURLQUERY /* flags */
@@ -133,42 +132,37 @@ static CURLcode file_setup_connection(struct connectdata *conn)
 static CURLcode file_range(struct connectdata *conn)
 {
   curl_off_t from, to;
-  curl_off_t totalsize = -1;
+  curl_off_t totalsize=-1;
   char *ptr;
   char *ptr2;
   struct Curl_easy *data = conn->data;
 
   if(data->state.use_range && data->state.range) {
-    CURLofft from_t;
-    CURLofft to_t;
-    from_t = curlx_strtoofft(data->state.range, &ptr, 0, &from);
-    if(from_t == CURL_OFFT_FLOW)
-      return CURLE_RANGE_ERROR;
-    while(*ptr && (ISSPACE(*ptr) || (*ptr == '-')))
+    from=curlx_strtoofft(data->state.range, &ptr, 0);
+    while(*ptr && (ISSPACE(*ptr) || (*ptr=='-')))
       ptr++;
-    to_t = curlx_strtoofft(ptr, &ptr2, 0, &to);
-    if(to_t == CURL_OFFT_FLOW)
-      return CURLE_RANGE_ERROR;
-    if((to_t == CURL_OFFT_INVAL) && !from_t) {
+    to=curlx_strtoofft(ptr, &ptr2, 0);
+    if(ptr == ptr2) {
+      /* we didn't get any digit */
+      to=-1;
+    }
+    if((-1 == to) && (from>=0)) {
       /* X - */
       data->state.resume_from = from;
       DEBUGF(infof(data, "RANGE %" CURL_FORMAT_CURL_OFF_T " to end of file\n",
                    from));
     }
-    else if((from_t == CURL_OFFT_INVAL) && !to_t) {
+    else if(from < 0) {
       /* -Y */
-      data->req.maxdownload = to;
-      data->state.resume_from = -to;
+      data->req.maxdownload = -from;
+      data->state.resume_from = from;
       DEBUGF(infof(data, "RANGE the last %" CURL_FORMAT_CURL_OFF_T " bytes\n",
-                   to));
+                   -from));
     }
     else {
       /* X-Y */
       totalsize = to-from;
-      if(totalsize == CURL_OFF_T_MAX)
-        /* this is too big to increase, so bail out */
-        return CURLE_RANGE_ERROR;
-      data->req.maxdownload = totalsize + 1; /* include last byte */
+      data->req.maxdownload = totalsize+1; /* include last byte */
       data->state.resume_from = from;
       DEBUGF(infof(data, "RANGE from %" CURL_FORMAT_CURL_OFF_T
                    " getting %" CURL_FORMAT_CURL_OFF_T " bytes\n",
@@ -231,7 +225,7 @@ static CURLcode file_connect(struct connectdata *conn, bool *done)
   }
 
   /* change path separators from '/' to '\\' for DOS, Windows and OS/2 */
-  for(i = 0; i < real_path_len; ++i)
+  for(i=0; i < real_path_len; ++i)
     if(actual_path[i] == '/')
       actual_path[i] = '\\';
     else if(!actual_path[i]) { /* binary zero */
@@ -317,6 +311,7 @@ static CURLcode file_upload(struct connectdata *conn)
   size_t nread;
   size_t nwrite;
   curl_off_t bytecount = 0;
+  struct timeval now = Curl_tvnow();
   struct_stat file_stat;
   const char *buf2;
 
@@ -360,12 +355,13 @@ static CURLcode file_upload(struct connectdata *conn)
       failf(data, "Can't get the size of %s", file->path);
       return CURLE_WRITE_ERROR;
     }
-    data->state.resume_from = (curl_off_t)file_stat.st_size;
+    else
+      data->state.resume_from = (curl_off_t)file_stat.st_size;
   }
 
   while(!result) {
     int readcount;
-    result = Curl_fillreadbuffer(conn, (int)data->set.buffer_size, &readcount);
+    result = Curl_fillreadbuffer(conn, BUFSIZE, &readcount);
     if(result)
       break;
 
@@ -404,7 +400,7 @@ static CURLcode file_upload(struct connectdata *conn)
     if(Curl_pgrsUpdate(conn))
       result = CURLE_ABORTED_BY_CALLBACK;
     else
-      result = Curl_speedcheck(data, Curl_tvnow());
+      result = Curl_speedcheck(data, now);
   }
   if(!result && Curl_pgrsUpdate(conn))
     result = CURLE_ABORTED_BY_CALLBACK;
@@ -433,14 +429,15 @@ static CURLcode file_do(struct connectdata *conn, bool *done)
   struct_stat statbuf; /* struct_stat instead of struct stat just to allow the
                           Windows version to have a different struct without
                           having to redefine the simple word 'stat' */
-  curl_off_t expected_size = 0;
+  curl_off_t expected_size=0;
   bool size_known;
-  bool fstated = FALSE;
+  bool fstated=FALSE;
   ssize_t nread;
   struct Curl_easy *data = conn->data;
   char *buf = data->state.buffer;
   curl_off_t bytecount = 0;
   int fd;
+  struct timeval now = Curl_tvnow();
   struct FILEPROTO *file;
 
   *done = TRUE; /* unconditionally */
@@ -479,10 +476,9 @@ static CURLcode file_do(struct connectdata *conn, bool *done)
     time_t filetime;
     struct tm buffer;
     const struct tm *tm = &buffer;
-    char header[80];
-    snprintf(header, sizeof(header),
+    snprintf(buf, CURL_BUFSIZE(data->set.buffer_size),
              "Content-Length: %" CURL_FORMAT_CURL_OFF_T "\r\n", expected_size);
-    result = Curl_client_write(conn, CLIENTWRITE_BOTH, header, 0);
+    result = Curl_client_write(conn, CLIENTWRITE_BOTH, buf, 0);
     if(result)
       return result;
 
@@ -497,7 +493,7 @@ static CURLcode file_do(struct connectdata *conn, bool *done)
       return result;
 
     /* format: "Tue, 15 Nov 1994 12:45:26 GMT" */
-    snprintf(header, sizeof(header),
+    snprintf(buf, BUFSIZE-1,
              "Last-Modified: %s, %02d %s %4d %02d:%02d:%02d GMT\r\n",
              Curl_wkday[tm->tm_wday?tm->tm_wday-1:6],
              tm->tm_mday,
@@ -506,7 +502,7 @@ static CURLcode file_do(struct connectdata *conn, bool *done)
              tm->tm_hour,
              tm->tm_min,
              tm->tm_sec);
-    result = Curl_client_write(conn, CLIENTWRITE_BOTH, header, 0);
+    result = Curl_client_write(conn, CLIENTWRITE_BOTH, buf, 0);
     if(!result)
       /* set the file size to make it available post transfer */
       Curl_pgrsSetDownloadSize(data, expected_size);
@@ -523,7 +519,8 @@ static CURLcode file_do(struct connectdata *conn, bool *done)
       failf(data, "Can't get the size of file.");
       return CURLE_READ_ERROR;
     }
-    data->state.resume_from += (curl_off_t)statbuf.st_size;
+    else
+      data->state.resume_from += (curl_off_t)statbuf.st_size;
   }
 
   if(data->state.resume_from <= expected_size)
@@ -562,11 +559,12 @@ static CURLcode file_do(struct connectdata *conn, bool *done)
     size_t bytestoread;
 
     if(size_known) {
-      bytestoread = (expected_size < data->set.buffer_size) ?
-        curlx_sotouz(expected_size) : (size_t)data->set.buffer_size;
+      bytestoread =
+        (expected_size < CURL_OFF_T_C(BUFSIZE) - CURL_OFF_T_C(1)) ?
+        curlx_sotouz(expected_size) : BUFSIZE - 1;
     }
     else
-      bytestoread = data->set.buffer_size-1;
+      bytestoread = BUFSIZE-1;
 
     nread = read(fd, buf, bytestoread);
 
@@ -589,7 +587,7 @@ static CURLcode file_do(struct connectdata *conn, bool *done)
     if(Curl_pgrsUpdate(conn))
       result = CURLE_ABORTED_BY_CALLBACK;
     else
-      result = Curl_speedcheck(data, Curl_tvnow());
+      result = Curl_speedcheck(data, now);
   }
   if(Curl_pgrsUpdate(conn))
     result = CURLE_ABORTED_BY_CALLBACK;

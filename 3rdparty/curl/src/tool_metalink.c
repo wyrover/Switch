@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -30,8 +30,6 @@
 #  include <fcntl.h>
 #endif
 
-#undef HAVE_NSS_CONTEXT
-
 #ifdef USE_OPENSSL
 #  include <openssl/md5.h>
 #  include <openssl/sha.h>
@@ -52,7 +50,6 @@
 #  define MD5_CTX    void *
 #  define SHA_CTX    void *
 #  define SHA256_CTX void *
-#  define HAVE_NSS_CONTEXT
    static NSSInitContext *nss_context;
 #elif defined(USE_POLARSSL)
 #  include <polarssl/md5.h>
@@ -120,9 +117,7 @@ struct win32_crypto_hash {
     return PARAM_NO_MEM; \
 } WHILE_FALSE
 
-#if defined(USE_OPENSSL)
-/* Functions are already defined */
-#elif defined(USE_GNUTLS_NETTLE)
+#ifdef USE_GNUTLS_NETTLE
 
 static int MD5_Init(MD5_CTX *ctx)
 {
@@ -380,7 +375,7 @@ static void SHA256_Final(unsigned char digest[32], SHA256_CTX *ctx)
   sha256_finish(ctx, digest);
 }
 
-#elif defined(_WIN32)
+#elif defined(_WIN32) && !defined(USE_OPENSSL)
 
 static void win32_crypto_final(struct win32_crypto_hash *ctx,
                                unsigned char *digest,
@@ -683,7 +678,7 @@ static metalink_checksum *new_metalink_checksum_from_hex_digest
     return 0;
 
   for(i = 0; i < len; i += 2) {
-    digest[i/2] = hex_to_uint(hex_digest + i);
+    digest[i/2] = hex_to_uint(hex_digest+i);
   }
   chksum = malloc(sizeof(metalink_checksum));
   if(chksum) {
@@ -817,7 +812,7 @@ int parse_metalink(struct OperationConfig *config, struct OutStruct *outs,
     if(!(*files)->resources) {
       fprintf(config->global->errors, "Metalink: parsing (%s) WARNING "
               "(missing or invalid resource)\n",
-              metalink_url);
+              metalink_url, (*files)->name);
       continue;
     }
     if(config->url_get ||
@@ -880,12 +875,12 @@ size_t metalink_write_cb(void *buffer, size_t sz, size_t nmemb,
    * it does not match then it fails with CURLE_WRITE_ERROR. So at this
    * point returning a value different from sz*nmemb indicates failure.
    */
-  const size_t failure = (sz && nmemb) ? 0 : 1;
+  const size_t failure = (sz * nmemb) ? 0 : 1;
 
   if(!config)
     return failure;
 
-  rv = metalink_parse_update(outs->metalink_parser, buffer, sz * nmemb);
+  rv = metalink_parse_update(outs->metalink_parser, buffer, sz *nmemb);
   if(rv == 0)
     return sz * nmemb;
   else {
@@ -906,8 +901,8 @@ static int check_content_type(const char *content_type, const char *media_type)
     return 0;
   }
   return curl_strnequal(ptr, media_type, media_type_len) &&
-    (*(ptr + media_type_len) == '\0' || *(ptr + media_type_len) == ' ' ||
-     *(ptr + media_type_len) == '\t' || *(ptr + media_type_len) == ';');
+    (*(ptr+media_type_len) == '\0' || *(ptr+media_type_len) == ' ' ||
+     *(ptr+media_type_len) == '\t' || *(ptr+media_type_len) == ';');
 }
 
 int check_metalink_content_type(const char *content_type)
@@ -970,7 +965,7 @@ void clean_metalink(struct OperationConfig *config)
 
 void metalink_cleanup(void)
 {
-#ifdef HAVE_NSS_CONTEXT
+#ifdef USE_NSS
   if(nss_context) {
     NSS_ShutdownContext(nss_context);
     nss_context = NULL;

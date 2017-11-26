@@ -1,5 +1,5 @@
 Long: cacert
-Arg: <file>
+Arg: <CA certificate>
 Help: CA certificate to verify peer against
 Protocols: TLS
 ---

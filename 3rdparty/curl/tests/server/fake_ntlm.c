@@ -37,9 +37,11 @@
 /* include memdebug.h last */
 #include "memdebug.h"
 
-#define LOGFILE "log/fake_ntlm%d.log"
+#ifndef DEFAULT_LOGFILE
+#define DEFAULT_LOGFILE "log/fake_ntlm.log"
+#endif
 
-const char *serverlogfile;
+const char *serverlogfile = DEFAULT_LOGFILE;
 
 /*
  * Returns an allocated buffer with printable representation of input
@@ -63,8 +65,7 @@ static char *printable(char *inbuf, size_t inlength)
     inlength = strlen(inbuf);
 
   if(inlength) {
-    outincr = ((inlength/2) < (HEX_STR_LEN + 1)) ?
-      HEX_STR_LEN + 1 : inlength/2;
+    outincr = ((inlength/2) < (HEX_STR_LEN+1)) ? HEX_STR_LEN+1 : inlength/2;
     outsize = inlength + outincr;
   }
   else
@@ -79,7 +80,7 @@ static char *printable(char *inbuf, size_t inlength)
     return outbuf;
   }
 
-  for(i = 0; i<inlength; i++) {
+  for(i=0; i<inlength; i++) {
 
     if(o > outsize - (HEX_STR_LEN + 1)) {
       newsize = outsize + outincr;
@@ -110,7 +111,6 @@ static char *printable(char *inbuf, size_t inlength)
 int main(int argc, char *argv[])
 {
   char buf[1024];
-  char logfilename[256];
   FILE *stream;
   char *filename;
   int error;
@@ -120,9 +120,9 @@ int main(int argc, char *argv[])
   long testnum;
   const char *env;
   int arg = 1;
-  const char *helper_user = "unknown";
-  const char *helper_proto = "unknown";
-  const char *helper_domain = "unknown";
+  char *helper_user = (char *)"unknown";
+  char *helper_proto = (char *)"unknown";
+  char *helper_domain = (char *)"unknown";
   bool use_cached_creds = FALSE;
   char *msgbuf;
 
@@ -158,28 +158,24 @@ int main(int argc, char *argv[])
     }
   }
 
+  logmsg("fake_ntlm (user: %s) (proto: %s) (domain: %s) (cached creds: %s)",
+         helper_user, helper_proto, helper_domain,
+         (use_cached_creds) ? "yes" : "no");
+
   env = getenv("CURL_NTLM_AUTH_TESTNUM");
   if(env) {
     char *endptr;
     long lnum = strtol(env, &endptr, 10);
     if((endptr != env + strlen(env)) || (lnum < 1L)) {
-      fprintf(stderr, "Test number not valid in CURL_NTLM_AUTH_TESTNUM");
+      logmsg("Test number not valid in CURL_NTLM_AUTH_TESTNUM");
       exit(1);
     }
     testnum = lnum;
   }
   else {
-    fprintf(stderr, "Test number not specified in CURL_NTLM_AUTH_TESTNUM");
+    logmsg("Test number not specified in CURL_NTLM_AUTH_TESTNUM");
     exit(1);
   }
-
-  /* logmsg cannot be used until this file name is set */
-  snprintf(logfilename, sizeof(logfilename), LOGFILE, testnum);
-  serverlogfile = logfilename;
-
-  logmsg("fake_ntlm (user: %s) (proto: %s) (domain: %s) (cached creds: %s)",
-         helper_user, helper_proto, helper_domain,
-         (use_cached_creds) ? "yes" : "no");
 
   env = getenv("CURL_NTLM_AUTH_SRCDIR");
   if(env) {
@@ -187,7 +183,7 @@ int main(int argc, char *argv[])
   }
 
   filename = test2file(testnum);
-  stream = fopen(filename, "rb");
+  stream=fopen(filename, "rb");
   if(!stream) {
     error = errno;
     logmsg("fopen() failed with error: %d %s", error, strerror(error));
@@ -205,7 +201,7 @@ int main(int argc, char *argv[])
     }
   }
 
-  stream = fopen(filename, "rb");
+  stream=fopen(filename, "rb");
   if(!stream) {
     error = errno;
     logmsg("fopen() failed with error: %d %s", error, strerror(error));
@@ -225,7 +221,7 @@ int main(int argc, char *argv[])
 
   while(fgets(buf, sizeof(buf), stdin)) {
     if(strcmp(buf, type1_input) == 0) {
-      stream = fopen(filename, "rb");
+      stream=fopen(filename, "rb");
       if(!stream) {
         error = errno;
         logmsg("fopen() failed with error: %d %s", error, strerror(error));
@@ -247,7 +243,7 @@ int main(int argc, char *argv[])
       fflush(stdout);
     }
     else if(strncmp(buf, type3_input, strlen(type3_input)) == 0) {
-      stream = fopen(filename, "rb");
+      stream=fopen(filename, "rb");
       if(!stream) {
         error = errno;
         logmsg("fopen() failed with error: %d %s", error, strerror(error));
@@ -280,6 +276,5 @@ int main(int argc, char *argv[])
       exit(1);
     }
   }
-  logmsg("Exit");
   return 1;
 }
