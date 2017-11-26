@@ -279,6 +279,14 @@ else()
   message(STATUS "  [X] gtest 1.8.0")
 endif()
 
+find_package(RS232 QUIET)
+if (RS232_FOUND)
+  message(STATUS "  [X] RS232")
+else()
+  add_subdirectory(3rdparty/RS-232)
+  message(STATUS "  [X] RS232 master")
+endif()
+
 message(STATUS "Generating Switch ${Switch_VERSION}")
 
 if (BUILD_SWITCH_CORE)

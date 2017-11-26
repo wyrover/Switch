@@ -37,7 +37,6 @@ int main()
 
   strcpy(str[1], "Happy serial programming!\n");
 
-
   if(RS232_OpenComport(cport_nr, bdrate, mode))
   {
     printf("Can not open comport\n");

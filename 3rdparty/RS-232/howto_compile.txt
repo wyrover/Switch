@@ -5,6 +5,8 @@ gcc demo_rx.c rs232.c -Wall -Wextra -o2 -o test_rx
 
 gcc demo_tx.c rs232.c -Wall -Wextra -o2 -o test_tx
 
+or use the makefile by entering "make"
+
 Run the demo by typing:
 
 ./test_rx

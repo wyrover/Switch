@@ -1,10 +1,11 @@
 
-Library: rs-232
+Library: RS-232
 Author:  Teunis van Beelen
 Url:     http://www.teuniz.net/RS-232/
 E-mail:  teuniz@gmail.com
+License: GPLv3
 
-Last revision: October 11, 2015
+Last revision: August 5, 2017
 
 
 
@@ -22,12 +23,16 @@ int RS232_PollComport(int comport_number, unsigned char *buf, int size)
 
   Gets characters from the serial port (if any). Buf is a pointer to a buffer
   and size the size of the buffer in bytes.
-  Returns the amount of received characters into the buffer.
+  Returns the amount of received characters into the buffer. This can be less than size or zero!
+  It does not block or wait, it returns immediately, no matter if any characters have been received or not.
   After succesfully opening the COM-port, connect this function to a timer.
-  The timer should have an interval of approx. 100 milliSeconds.
+  The timer should have an interval of approx. 20 to 100 milliSeconds.
   Do not forget to stop the timer before closing the COM-port.
+  Allways check the return value! The return value tells you how many bytes
+  are actually received and present in your buffer!
 
 int RS232_SendByte(int comport_number, unsigned char byte)
+
   Sends a byte via the serial port. Returns 1 in case of an error.
 
 int RS232_SendBuf(int comport_number, unsigned char *buf, int size)
@@ -45,7 +50,15 @@ void RS232_cputs(int comport_number, const char *text)
 
   Sends a string via the serial port. String must be null-terminated.
 
+int RS232_GetPortnr(const char *devname)
+
+  Returns the comport number based on the device name e.g. "ttyS0" or "COM1".
+  (Doesn't mean the device actually exists!)
+  Returns -1 when not found.
+
+
 The following functions are normally not needed but can be used to set or check the status of the control-lines:
+================================================================================================================
 
 void RS232_enableDTR(int comport_number)
 
@@ -76,12 +89,32 @@ int RS232_IsDCDEnabled(int comport_number)
   Checks the status of the DCD-pin. Returns 1 when the the DCD line is high (active state), otherwise 0.
 
 
+The following functions are normally not needed but can be used to empty the rx/tx buffers:
+===========================================================================================
+
+("discards data written to the serial port but not transmitted, or data received but not read")
+
+void RS232_flushRX(int comport_number)
+
+  Flushes data received but not read.
+
+void RS232_flushTX(int comport_number)
+
+  Flushes data written but not transmitted.
+
+void RS232_flushRXTX(int comport_number)
+
+  Flushes both data received but not read, and data written but not transmitted.
+
+
+
 Notes:
 
 You don't need to call RS232_PollComport() when you only want to send characters.
 Sending and receiving do not influence eachother.
 
-The os (kernel) has an internal buffer of 4096 bytes.
+The os (kernel) has an internal buffer of 4096 bytes (for traditional onboard serial ports).
+USB/Serial-converter drivers use much bigger buffers (multiples of 4096).
 If this buffer is full and a new character arrives on the serial port,
 the oldest character in the buffer will be overwritten and thus will be lost.
 

@@ -13,16 +13,6 @@ if (NOT call_stack_FOUND)
 endif()
 
 #________________________________________________________________________________
-#                                                                           Rs232
-find_package(Rs232 QUIET)
-message(STATUS "Found Rs232 : " ${Rs232_FOUND})
-if (NOT Rs232_FOUND)
-  message(STATUS "Add ThirdParty Rs232")
-  add_subdirectory(Rs232)
-  set_target_properties(Rs232 PROPERTIES FOLDER ThirdParty)
-endif()
-
-#________________________________________________________________________________
 #                                                                            zlib
 find_package(ZLIB QUIET)
   message(STATUS "Found ZLIB : " ${ZLIB_FOUND})

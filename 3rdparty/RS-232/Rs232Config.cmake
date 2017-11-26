@@ -1,8 +1,8 @@
-include(${CMAKE_CURRENT_LIST_DIR}/Rs232.cmake)  
+include(${CMAKE_CURRENT_LIST_DIR}/RS232.cmake)  
 
-get_filename_component(ZLIB_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/../include" ABSOLUTE)
-get_filename_component(ZLIB_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/../lib" ABSOLUTE)
+get_filename_component(RS232_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/../include" ABSOLUTE)
+get_filename_component(RS232_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/../lib" ABSOLUTE)
 
-SET(RS232_LIBRARIES Rs232)    
+SET(RS232_LIBRARIES RS232)    
 
-set(Rs232_FOUND TRUE)
+set(RS232_FOUND TRUE)
