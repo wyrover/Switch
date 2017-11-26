@@ -6,3 +6,4 @@ get_filename_component(easywsclient_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/..
 SET(easywsclient_LIBRARIES easywsclient)
 
 set(easywsclient_FOUND TRUE)
+set(EASYWSCLIENT_FOUND TRUE)

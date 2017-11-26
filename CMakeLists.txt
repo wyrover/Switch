@@ -259,8 +259,14 @@ else()
   message(STATUS "  [X] curl 7.56.1")
 endif()
 
-add_subdirectory(3rdparty/easywsclient)
-message(STATUS "  [X] easywsclient master")
+find_package(easywsclient QUIET)
+if (EASYWSCLIENT_FOUND)
+  message(STATUS "  [X] easywsclient")
+else()
+  include_directories(SYSTEM ${CMAKE_INSTALL_PREFIX}/include)
+  link_directories(${CMAKE_INSTALL_PREFIX}/lib)
+  message(STATUS "  [X] easywsclient master")
+endif()
 
 find_package(GTest QUIET)
 if (GTEST_FOUND)
@@ -273,9 +279,6 @@ else()
   set(GTEST_LIBRARIES gtest)
   message(STATUS "  [X] gtest 1.8.0")
 endif()
-
-include_directories(SYSTEM ${CMAKE_INSTALL_PREFIX}/include)
-link_directories(${CMAKE_INSTALL_PREFIX}/lib)
 
 message(STATUS "Generating Switch ${Switch_VERSION}")
 
