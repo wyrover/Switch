@@ -82,7 +82,6 @@ list(APPEND BUILD_SRCS "${compression_SRCS};${decompression_SRCS}")
 
 add_library(jpeg STATIC "${BUILD_SRCS}")
 target_include_directories(jpeg PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include>)
-add_custom_command(TARGET jpeg POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:jpeg> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:jpeg>)
 
 install(EXPORT jpeg DESTINATION cmake)  
 install(FILES jpegConfig.cmake DESTINATION cmake)

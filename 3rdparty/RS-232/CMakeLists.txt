@@ -8,7 +8,6 @@ endif()
 
 add_library(RS232 STATIC rs232.h rs232.c) 
 target_include_directories(RS232 PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..> $<INSTALL_INTERFACE:include>)
-add_custom_command(TARGET RS232 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:RS232> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:RS232>)
 
 install(EXPORT RS232 DESTINATION cmake)
 install(FILES RS232Config.cmake DESTINATION cmake)

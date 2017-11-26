@@ -38,7 +38,6 @@ zutil.c
 add_library(${PROJECT_NAME} STATIC ${include_files} ${source_files})
 target_include_directories(zlib PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include>)
 target_link_libraries(${PROJECT_NAME} ${STANDARD_LINK_LIBRARIES})
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:${PROJECT_NAME}>)
 
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME} DESTINATION lib)
 install(FILES zconf.h zlib.h DESTINATION include)
