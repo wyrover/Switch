@@ -266,7 +266,7 @@ else()
   message(STATUS "  [X] call_stack master")
 endif()
 
-#find_package(CURL QUIET)
+find_package(CURL QUIET)
 if (CURL_FOUND)
   message(STATUS "  [X] curl ${CURL_VERSION_STRING}")
 else()
