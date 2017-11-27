@@ -26,7 +26,7 @@ mkdir -p build/examples
 
 # generate, build and install Switch
 cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug
+cmake .. -DCMAKE_BUILD_TYPE=Debug "$@"
 cmake --build . -- -j8
 sudo cmake --build . --target install
 cmake -DCMAKE_BUILD_TYPE=Release ..
@@ -37,10 +37,10 @@ cd ..
 # generate and launch examples
 cd build/examples
 if [[ "$OSTYPE" == *"Darwin"* ]]; then 
-  cmake ../../examples -G "Xcode"
+  cmake ../../examples -G "Xcode" "$@"
   open build/examples/Examples.xcodeproj
 else
-  cmake ../../examples -DCMAKE_BUILD_TYPE=Debug
+  cmake ../../examples -DCMAKE_BUILD_TYPE=Debug "$@"
   cd build/examples
   echo 
   echo You can now build and execute examples.

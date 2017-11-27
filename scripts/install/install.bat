@@ -7,13 +7,13 @@ mkdir build\examples
 
 rem generate, build and install Switch
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local %*
 cmake --build . --target install --config Debug
 cmake --build . --target install --config Release
 cd ..
 
 rem generate and launch examples
 cd build\examples
-cmake -DCMAKE_INSTALL_PREFIX:STRING=/usr/local ../../examples
+cmake ../../examples -DCMAKE_INSTALL_PREFIX:STRING=/usr/local %*
 start Examples.sln
 cd ..\..
