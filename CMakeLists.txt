@@ -330,6 +330,8 @@ else()
   set(ZLIB_LIBRARIES ${ZLIB_LIBRARIES_BACKUP})
   add_subdirectory(3rdparty/libpng)
   set(PNG_LIBRARIES png_static)
+  set(PNG_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libpng" "${CMAKE_CURRENT_BINARY_DIR}/3rdparty/libpng")
+  include_directories(${PNG_INCLUDE_DIRS})
   message(STATUS "  [X] PNG 1.6.34 (*)")
 endif()
 
