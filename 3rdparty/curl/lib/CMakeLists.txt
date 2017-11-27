@@ -104,7 +104,7 @@ if(WIN32)
   endif()
 endif()
 
-install(TARGETS ${LIB_NAME}﻿ EXPORT Switch
+install(TARGETS ${LIB_NAME} EXPORT Switch
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)
