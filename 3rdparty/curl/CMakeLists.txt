@@ -1170,7 +1170,7 @@ set(REQUIRE_LIB_DEPS        "no")
 # SUPPORT_PROTOCOLS
 set(VERSIONNUM              "${CURL_VERSION_NUM}")
 
-install(EXPORT CURL DESTINATION cmake)
+install(EXPORT ${CMAKE_PROJECT_NAME} DESTINATION cmake)
 
 # Finally generate a "curl-config" matching this config
 configure_file("${CURL_SOURCE_DIR}/curl-config.in"
