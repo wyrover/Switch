@@ -68,10 +68,8 @@ endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# set CMAKE_DEBUG_POSTFIX if not set
-if(NOT CMAKE_DEBUG_POSTFIX)
-  set(CMAKE_DEBUG_POSTFIX d)
-endif()
+# set CMAKE_DEBUG_POSTFIX to d
+set(CMAKE_DEBUG_POSTFIX d)
 
 # set executable output path
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
@@ -317,7 +315,7 @@ if (ZLIB_FOUND)
   message(STATUS "  [X] ZLIB ${ZLIB_VERSION_STRING}")
 else()
   add_subdirectory(3rdparty/zlib)
-  set(ZLIB_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/zlib")
+  set(ZLIB_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/zlib/zlib")
   set(ZLIB_INCLUDE_DIRS ${ZLIB_INCLUDE_DIR})
   set(ZLIB_LIBRARY zlib)
   set(ZLIB_LIBRARIES ${ZLIB_LIBRARY})
