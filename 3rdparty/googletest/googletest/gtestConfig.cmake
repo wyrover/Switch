@@ -1,7 +1,9 @@
 include(${CMAKE_CURRENT_LIST_DIR}/gtest.cmake)
 
-get_filename_component(GTEST_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/../include" ABSOLUTE)
-get_filename_component(GTEST_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/../lib" ABSOLUTE)
+get_filename_component(GTEST_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../include" ABSOLUTE)
+get_filename_component(GTEST_INCLUDE_DIRS ${GTEST_INCLUDE_DIR})
+get_filename_component(GTEST_LIBRARIES_DIR "${CMAKE_CURRENT_LIST_DIR}/../lib" ABSOLUTE)
+get_filename_component(GTEST_LIBRARIES_DIRS ${GTEST_LIBRARIES_DIR})
 
 SET(GTEST_LIBRARY gtest)
 SET(GTEST_MAIN_LIBRARY gtest_main)
