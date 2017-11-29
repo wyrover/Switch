@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(Switch VERSION 0.4.1)
+project(Switch VERSION 0.5.0)
 set(PROJECT_DESCRIPTION "Native C++ port of .Net Framework on Windows, macOS and Linux.")
 
 # options default value

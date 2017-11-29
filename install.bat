@@ -1,2 +1,2 @@
-@set switch_version=0.4.1
+@set switch_version=0.5.0
 @call scripts\install\install.bat %*
