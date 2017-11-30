@@ -20,7 +20,7 @@ class _export __opaque_unicode_string__ {
   friend class Switch::System::String;
   __opaque_unicode_string__() {}
   explicit __opaque_unicode_string__(const char* str);
-  __opaque_unicode_string__(const char32_t* str) {
+  explicit __opaque_unicode_string__(const char32_t* str) {
     int i = 0;
     while (str[i] != 0)
       this->append(str[i++]);

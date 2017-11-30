@@ -139,10 +139,10 @@ _property<String, _readonly> Environment::CommandLine {
       throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", _caller);
       
     string commandLine = string::Format("\"{0}\" ", commandLineArgs.ToObject()[0]);
+    int32 index = 1;
     int32 length = commandLineArgs->Length;
-    for (int32 i = 1; i < length; ++i) {
-      commandLine += string::Format(" {0}", (commandLineArgs.ToObject()[i].Contains(" ") ? string::Format("\"{0}\"", commandLineArgs.ToObject()[i]) : commandLineArgs.ToObject()[i]));
-    }
+    for (index = 1; index < length; ++index)
+      commandLine += string::Format(" {0}", (commandLineArgs.ToObject()[index].Contains(" ") ? string::Format("\"{0}\"", commandLineArgs.ToObject()[index]) : commandLineArgs.ToObject()[index]));
     return commandLine;
   }
 };

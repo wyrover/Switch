@@ -2,7 +2,6 @@ operatorEqToSelf:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/__opaque_func
 operatorEqVarError:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/Collections/ObjectModel/ReadOnlyCollection.hpp:136
 
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/Collections/Generic/KeyValuePair.hpp:39
-noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/RefPtr.hpp:78
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:55
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:60
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:65
@@ -39,3 +38,4 @@ noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/U
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/UIntPtr.hpp:46
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/Ref.hpp:29
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/Ref.hpp:35
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/RefPtr.hpp:78

@@ -66,6 +66,7 @@ list(APPEND ASTYLE_ARGS
   --close-templates
   --suffix=none
   --recursive
+  --report-progress
   ${CMAKE_SOURCE_DIR}/examples/*.cpp
   ${CMAKE_SOURCE_DIR}/src/*.h
   ${CMAKE_SOURCE_DIR}/src/*.hpp
@@ -151,7 +152,7 @@ endif()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 #_______________________________________________________________________________________________________________________
-#                                                                                        library name prefix and postfix
+#                                                                                      libraries name prefix and postfix
 set(CMAKE_DEBUG_POSTFIX d)
 
 #_______________________________________________________________________________________________________________________
@@ -415,7 +416,7 @@ endif()
 
 #_______________________________________________________________________________________________________________________
 #                                                                                                                  GTest
-if (BUILD_SWITCH_TUNIT_CORE OR BUILD_TESTS)
+if (BUILD_TESTS OR BUILD_SWITCH_TUNIT_CORE)
   find_package(GTEST QUIET)
   if (GTEST_FOUND)
     print("  [X] GTest")
@@ -428,7 +429,6 @@ if (BUILD_SWITCH_TUNIT_CORE OR BUILD_TESTS)
     set(GTEST_MAIN_LIBRARIES ${GTEST_MAIN_LIBRARY})
   endif()
 endif()
-
 
 #_______________________________________________________________________________________________________________________
 #                                                                                                            Switch Init
