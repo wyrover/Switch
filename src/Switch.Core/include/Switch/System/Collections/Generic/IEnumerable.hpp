@@ -28,6 +28,11 @@ namespace Switch {
           class Iterator : public std::iterator<std::input_iterator_tag, T> {
           public:
             Iterator(const Iterator& value) : enumerator(value.enumerator), pos(value.pos) {}
+            Iterator& operator=(const Iterator& value) {
+              this->enumerator = value.enumerator;
+              this->pos = value.pos;
+              return *this;
+            }
             
             explicit Iterator(const Enumerator<T>& enumerator) : enumerator(enumerator) {
               this->enumerator.Reset();

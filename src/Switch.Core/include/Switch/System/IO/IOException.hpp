@@ -25,11 +25,11 @@ namespace Switch {
         /// @brief Create a new instance of class IOException
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
         /// @remarks Message is set with the default message associate to the error.
-        IOException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
+        explicit IOException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
         
         /// @brief Create a new instance of class IOException
         /// @param message Message string associate to the error.
-        IOException(const System::String& message) : SystemException(message) {}
+        explicit IOException(const System::String& message) : SystemException(message) {}
         
         /// @brief Create a new instance of class IOException
         /// @param message Message string associate to the error.

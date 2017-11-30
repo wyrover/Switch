@@ -23,11 +23,11 @@ namespace Switch {
       /// @brief Create a new instance of class RankException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      RankException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
+      explicit RankException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
       
       /// @brief Create a new instance of class RankException
       /// @param message Message string associate to the error.
-      RankException(const System::String& message) : SystemException(message) {}
+      explicit RankException(const System::String& message) : SystemException(message) {}
       
       /// @brief Create a new instance of class RankException
       /// @param message Message string associate to the error.

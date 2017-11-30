@@ -773,6 +773,10 @@ namespace Switch {
       /// @cond
       Tuple() {}
       Tuple(const Tuple& tuple) : tuple(tuple.tuple) {}
+      Tuple& operator=(const Tuple& tuple) {
+        this->tuple = tuple.tuple;
+        return *this;
+      }
       Tuple(const std::tuple<T1>& tuple) : tuple(tuple) {}
       /// @endcond
       

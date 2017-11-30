@@ -23,11 +23,11 @@ namespace Switch {
       /// @brief Create a new instance of class SystemException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      SystemException(const System::Runtime::CompilerServices::Caller& information) : Exception(information) {}
+      explicit SystemException(const System::Runtime::CompilerServices::Caller& information) : Exception(information) {}
       
       /// @brief Create a new instance of class SystemException
       /// @param message Message string associate to the error.
-      SystemException(const System::String& message) : Exception(message) {}
+      explicit SystemException(const System::String& message) : Exception(message) {}
       
       /// @brief Create a new instance of class SystemException
       /// @param message Message string associate to the error.

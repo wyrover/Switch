@@ -26,11 +26,11 @@ namespace Switch {
       /// @brief Create a new instance of class ArgumentException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      ArgumentException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
+      explicit ArgumentException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
       
       /// @brief Create a new instance of class ArgumentException
       /// @param message Message string associate to the error.
-      ArgumentException(const System::String& message) : SystemException(message) {}
+      explicit ArgumentException(const System::String& message) : SystemException(message) {}
       
       /// @brief Create a new instance of class ArgumentException
       /// @param message Message string associate to the error.

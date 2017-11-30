@@ -148,8 +148,12 @@ namespace Switch {
     template <typename Other>
     int32 operator()(const Other& value) {return int32(int64(&value) & 0x00000000FFFFFFFF) ^ int32((int64(&value) >> 32) & 0x00000000FFFFFFFF);}
   };
-  /// @cond
-  
+  /// @endcond
+
+  /// @brief Generate a hash code for generic type T.
+  /// @param[in] value For which the hashcode is generated.
+  /// @return int32 An integer value being the generated hashcode.
+  /// @exception System::ArgumentNullException The parameters converter is null.
   template<typename TValue>
   int32 GetHashCode(const TValue* value) {
     using Hasher = typename std::conditional<std::is_base_of<object, TValue>::value, HasherFromObject, typename std::conditional<std::is_enum<TValue>::value, HasherFromEnum, HasherFromOther>::type>::type;

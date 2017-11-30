@@ -139,7 +139,7 @@ _property<String, _readonly> Environment::CommandLine {
       throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", _caller);
       
     string commandLine = string::Format("\"{0}\" ", commandLineArgs.ToObject()[0]);
-    for (int i = 1; i < commandLineArgs->Length; i++)
+    for (int i = 1; i < commandLineArgs->Length(); i++)
       commandLine += string::Format(" {0}", (commandLineArgs.ToObject()[i].Contains(" ") ? string::Format("\"{0}\"", commandLineArgs.ToObject()[i]) : commandLineArgs.ToObject()[i]));
     return commandLine;
   }

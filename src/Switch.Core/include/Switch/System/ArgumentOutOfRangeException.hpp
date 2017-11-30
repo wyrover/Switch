@@ -23,11 +23,11 @@ namespace Switch {
       /// @brief Create a new instance of class ArgumentOutOfRangeException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      ArgumentOutOfRangeException(const System::Runtime::CompilerServices::Caller& information) : ArgumentException(information) {}
+      explicit ArgumentOutOfRangeException(const System::Runtime::CompilerServices::Caller& information) : ArgumentException(information) {}
       
       /// @brief Create a new instance of class ArgumentOutOfRangeException
       /// @param message Message string associate to the error.
-      ArgumentOutOfRangeException(const System::String& message) : ArgumentException(message) {}
+      explicit ArgumentOutOfRangeException(const System::String& message) : ArgumentException(message) {}
       
       /// @brief Create a new instance of class ArgumentOutOfRangeException
       /// @param message Message string associate to the error.

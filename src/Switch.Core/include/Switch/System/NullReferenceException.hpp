@@ -23,11 +23,11 @@ namespace Switch {
       /// @brief Create a new instance of class NullReferenceException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      NullReferenceException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
+      explicit NullReferenceException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
       
       /// @brief Create a new instance of class NullReferenceException
       /// @param message Message string associate to the error.
-      NullReferenceException(const System::String& message) : SystemException(message) {}
+      explicit NullReferenceException(const System::String& message) : SystemException(message) {}
       
       /// @brief Create a new instance of class NullReferenceException
       /// @param message Message string associate to the error.

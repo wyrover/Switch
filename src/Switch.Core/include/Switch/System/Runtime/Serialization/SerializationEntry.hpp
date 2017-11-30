@@ -43,7 +43,7 @@ namespace Switch {
             this->typeName = entry.typeName;
             return *this;
           }
-          /// @endocnd
+          /// @endcond
           
         protected:
           /// @brief Initializes a new instance of the SerializationEntry

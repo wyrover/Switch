@@ -45,7 +45,7 @@ namespace Switch {
           this->Create();
           return *this;
         }
-        /// @endconds
+        /// @endcond
         
         Pen(const Brush& brush) : brush(as<System::Drawing::Brush>(brush.Clone())) { this->Create(); }
         

@@ -50,6 +50,11 @@ namespace Switch {
           class Iterator : public std::iterator<std::input_iterator_tag, T> {
           public:
             Iterator(const Iterator& value) : enumerator(value.enumerator), pos(value.pos) {}
+            Iterator& operator=(const Iterator& value) {
+              this->enumerator = value.enumerator;
+              this->pos = value.pos;
+              return *this;
+            }
             
             explicit Iterator(IEnumerator<T>* enumerator) : enumerator(enumerator), pos(0) {
               this->enumerator->Reset();
@@ -117,8 +122,12 @@ namespace Switch {
         class Enumerator : public object, public IEnumerator<T> {
         public:
           /// @cond
-          Enumerator(refptr<IEnumerator<T>> enumerator) : enumerator(enumerator) {}
+          explicit Enumerator(refptr<IEnumerator<T>> enumerator) : enumerator(enumerator) {}
           Enumerator(const Enumerator& enumerator) : enumerator(enumerator.enumerator) {}
+          Enumerator& operator=(const Enumerator& enumerator) {
+            this->enumerator = enumerator.enumerator;
+            return *this;
+          }
           /// @endcond
           
           /// @brief Advances the enumerator to the next element of the collection.

@@ -45,6 +45,6 @@ public:
     flags = false;
   }
 };
-/// @endocnd
+/// @endcond
 
 using namespace Switch;

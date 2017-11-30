@@ -23,11 +23,11 @@ namespace Switch {
       /// @brief Create a new instance of class OverflowException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      OverflowException(const System::Runtime::CompilerServices::Caller& information) : ArithmeticException(information) {}
+      explicit OverflowException(const System::Runtime::CompilerServices::Caller& information) : ArithmeticException(information) {}
       
       /// @brief Create a new instance of class OverflowException
       /// @param message Message string associate to the error.
-      OverflowException(const System::String& message) : ArithmeticException(message) {}
+      explicit OverflowException(const System::String& message) : ArithmeticException(message) {}
       
       /// @brief Create a new instance of class OverflowException
       /// @param message Message string associate to the error.

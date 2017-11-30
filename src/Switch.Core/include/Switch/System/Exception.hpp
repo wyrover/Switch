@@ -27,11 +27,11 @@ namespace Switch {
       /// @brief Create a new instance of class Exception
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      Exception(const System::Runtime::CompilerServices::Caller& information);
+      explicit Exception(const System::Runtime::CompilerServices::Caller& information);
       
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
-      Exception(const String& message);
+      explicit Exception(const String& message);
       
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.

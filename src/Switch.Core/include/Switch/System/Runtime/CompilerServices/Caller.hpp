@@ -26,6 +26,12 @@ namespace Switch {
           
           /// @cond
           Caller(const Caller& caller) : memberNamne(caller.memberNamne), filePath(caller.filePath),  lineNumber(caller.lineNumber) {}
+          Caller& operator=(const Caller caller) {
+            this->memberNamne = caller.memberNamne;
+            this->filePath = caller.filePath;
+            this->lineNumber = caller.lineNumber;
+            return *this;
+          }
           /// @endcond
           
           /// @brief Gets the member name

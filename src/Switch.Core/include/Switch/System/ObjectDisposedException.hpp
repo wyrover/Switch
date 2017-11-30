@@ -23,11 +23,11 @@ namespace Switch {
       /// @brief Create a new instance of class ObjectDisposedException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
-      ObjectDisposedException(const System::Runtime::CompilerServices::Caller& information) : InvalidOperationException(information) {}
+      explicit ObjectDisposedException(const System::Runtime::CompilerServices::Caller& information) : InvalidOperationException(information) {}
       
       /// @brief Create a new instance of class ObjectDisposedException
       /// @param message Message string associate to the error.
-      ObjectDisposedException(const System::String& message) : InvalidOperationException(message) {}
+      explicit ObjectDisposedException(const System::String& message) : InvalidOperationException(message) {}
       
       /// @brief Create a new instance of class ObjectDisposedException
       /// @param message Message string associate to the error.

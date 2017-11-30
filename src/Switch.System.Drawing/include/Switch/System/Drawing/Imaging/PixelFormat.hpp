@@ -80,3 +80,4 @@ public:
     flags = false;
   }
 };
+/// @endcond

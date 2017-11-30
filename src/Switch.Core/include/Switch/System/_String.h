@@ -179,7 +179,7 @@ private:
   
   refobj value;
 };
-/// @cond
+/// @endcond
 
 template<typename T>
 System::String System::String::Concat(const System::Collections::Generic::IEnumerable<T>& objs) {
