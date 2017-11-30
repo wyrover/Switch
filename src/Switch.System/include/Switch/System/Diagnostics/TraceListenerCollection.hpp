@@ -24,7 +24,7 @@ namespace Switch {
       class _export TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
         friend class Trace;
         friend class TraceSource;
-        TraceListenerCollection() {}
+        TraceListenerCollection() = default;
         TraceListenerCollection(const DefaultTraceListener& defaultTraceListener) {
           this->list.Add(defaultTraceListener.template MemberwiseClone<DefaultTraceListener>().template As<System::Diagnostics::TraceListener>());
         }

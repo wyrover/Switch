@@ -25,7 +25,7 @@ namespace Switch {
         static _property<PointF, _readonly> Empty;
         
         /// @brief Initializes a new instance of the PointF class that has a X and Y value of 0.0f.
-        PointF() {}
+        PointF() = default;
         
         /// @brief Initializes a new instance of the PointF class from the specified PointF class.
         /// @param point The PointF class from which to initialize this PointF class

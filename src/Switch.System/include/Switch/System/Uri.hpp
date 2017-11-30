@@ -111,7 +111,7 @@ namespace Switch {
       static _property<string, _readonly> UriSchemeNntp;
       
       /// @brief Initializes a new instance of the Uri class.
-      Uri() {}
+      Uri() = default;
       
       /// @brief Initializes a new instance of the Uri class by copy.
       Uri(const Uri& uri) : originalUri(uri.originalUri), scheme(uri.scheme), schemeDelimiter(uri.schemeDelimiter), userInfo(uri.userInfo), host(uri.host), port(uri.port), path(uri.path), query(uri.query), fragment(uri.fragment), kind(uri.kind) {}
@@ -119,7 +119,7 @@ namespace Switch {
       /// @brief Initializes a new instance of the Uri class with the specified URI.
       /// @param uri : A URI.
       /// @exception ArgumentNullException uri is null.
-      Uri(const String& uri) {
+      explicit Uri(const String& uri) {
         SetUri(uri, UriKind::Absolute);
       }
       
@@ -770,7 +770,7 @@ namespace Switch {
         bool wellFormedUriString = true;
         
         try {
-          Uri uri(uriString, uriString);
+          Uri uri(uriString, uriKind);
           wellFormedUriString = uri.IsWellFormedOriginalString();
         } catch (...) {
           wellFormedUriString = false;

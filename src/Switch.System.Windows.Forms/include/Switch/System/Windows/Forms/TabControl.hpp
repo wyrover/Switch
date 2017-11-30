@@ -19,9 +19,7 @@ namespace Switch {
         public:
           using TabPageCollection = ControlCollection;
           
-          TabControl() {
-            this->SetStyle(ControlStyles::UserPaint, false);
-          }
+          TabControl() {this->SetStyle(ControlStyles::UserPaint, false);}
           
           /// @cond
           TabControl(const TabControl& tabControl) : ContainerControl(tabControl), alignment(tabControl.alignment) {}

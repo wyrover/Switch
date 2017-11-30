@@ -214,7 +214,7 @@ bool IPAddress::GetIsIPv6LinkLocal() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return false;
   int32 num = int32(NetworkToHostOrder(int16(this->numbers[0]))) & 0xFFF0;
-  return 0xFE80 <= num && num >= 0xFEC0;
+  return 0xFE80 <= num && num <= 0xFEC0;
 }
 
 bool IPAddress::GetIsIPv6Multicast() const {
@@ -225,7 +225,7 @@ bool IPAddress::GetIsIPv6SiteLocal() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return false;
   int32 num = int32(NetworkToHostOrder(int16(this->numbers[0]))) & 0xFFF0;
-  return 0xFEC0 <= num && num >= 0xFF00;
+  return 0xFEC0 <= num && num <= 0xFF00;
 }
 
 bool IPAddress::IsLoopback(const IPAddress& address) {

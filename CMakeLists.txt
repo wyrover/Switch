@@ -66,7 +66,6 @@ list(APPEND ASTYLE_ARGS
   --close-templates
   --suffix=none
   --recursive
-  --report-progress
   ${CMAKE_SOURCE_DIR}/examples/*.cpp
   ${CMAKE_SOURCE_DIR}/src/*.h
   ${CMAKE_SOURCE_DIR}/src/*.hpp
@@ -86,17 +85,45 @@ list(APPEND CPPCHECK_ARGS
   --std=c++14
   --suppressions-list=${CMAKE_CURRENT_BINARY_DIR}/cppcheck_false_positive.txt
   --template='[{file}:{line}]: ({severity}) {{id}} {message}'
-  --verbose
+  --report-progress
   ${CMAKE_SOURCE_DIR}/src/Switch/src
-  ${CMAKE_SOURCE_DIR}/src/Switch.Core/src
-  #${CMAKE_SOURCE_DIR}/src/Switch.System/src
-  #${CMAKE_SOURCE_DIR}/src/Switch.System.Core/src
-  #${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/src
-  #${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/src
-  #${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/src
-  #${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Core/src
-  #${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.framework/src
   )
+
+if (BUILD_SWITCH_CORE)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.Core/src)
+endif()
+
+if (BUILD_SWITCH_SYSTEM)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System/src)
+endif()
+
+if (BUILD_SWITCH_SYSTEM_CORE)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/src)
+endif()
+
+if (BUILD_SWITCH_SYSTEM_DRAWING)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/src)
+endif()
+
+if (BUILD_SWITCH_SYSTEM_SERVICEMODEL)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/src)
+endif()
+
+if (BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/src)
+endif()
+
+if (BUILD_SWITCH_TUNIT_CORE)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Core/src)
+endif()
+
+if (BUILD_SWITCH_TUNIT_FRAMEWORK)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Framework/src)
+endif()
+
+if (BUILD_SWITCH_TUNIT_MAIN)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Main/src)
+endif()
 
 #_______________________________________________________________________________________________________________________
 #                                                                                                           standard C++

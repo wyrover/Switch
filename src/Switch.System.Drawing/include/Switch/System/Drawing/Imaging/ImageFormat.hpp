@@ -36,7 +36,7 @@ namespace Switch {
           
           static _property<ImageFormat, _readonly> Wmf;
           
-          ImageFormat() {}
+          ImageFormat() = default;
           ImageFormat(const Guid& guid) : guid(guid) {}
           ImageFormat(const string name, const Guid& guid) : name(name), guid(guid) {}
           ImageFormat(const string name, const string& guid) : name(name), guid(guid) {}

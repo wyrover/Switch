@@ -25,7 +25,7 @@ namespace Switch {
         static _property<Size, _readonly> Empty;
         
         /// @brief Initializes a new instance of the Size class that has a Height and Width value of 0.
-        Size() {}
+        Size() = default;
         
         /// @brief Initializes a new instance of the Size class from the specified Size class.
         /// @param size The Size class from which to initialize this Size class

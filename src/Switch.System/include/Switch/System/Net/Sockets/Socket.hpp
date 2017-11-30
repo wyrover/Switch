@@ -64,7 +64,7 @@ namespace Switch {
           /// @brief Initializes a new instance of the Socket class using the specified value returned from DuplicateAndClose.
           /// @param socketInformation The socket information returned by DuplicateAndClose.
           /// @remarks If you call the Socket constructor multiple times with the same byte array as the argument for each call, you will create multiple managed Sockets with the same underlying socket. This practice is strongly discouraged.
-          Socket(const SocketInformation& socketInformation)  {}
+          explicit Socket(const SocketInformation& socketInformation)  {}
           
           /// @cond
           Socket() {}

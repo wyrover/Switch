@@ -444,7 +444,7 @@ namespace Switch {
         static _property<Color, _readonly> YellowGreen;
         
         /// @brief Create a new instance of class Color. The default value is Black.
-        Color() {}
+        Color() = default;
         
         /// @cond
         Color(const Color& color) : argb(color.argb), knownColor(color.knownColor) {}

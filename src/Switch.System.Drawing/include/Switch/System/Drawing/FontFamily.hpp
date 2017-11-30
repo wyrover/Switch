@@ -22,7 +22,7 @@ namespace Switch {
         FontFamily(System::Drawing::Text::GenericFontFamilies genericFamily);
         
         /// @cond
-        FontFamily() {}
+        FontFamily()  = default;
         FontFamily(const FontFamily& fontFamily) : data(fontFamily.data) {}
         FontFamily(intptr handle) { this->data().handle = handle; }
         ~FontFamily();

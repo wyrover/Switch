@@ -39,7 +39,7 @@ namespace Switch {
         /// @brief Initializes a new instance of the Stopwatch class.
         /// @remarks The returned Stopwatch instance is stopped, and the elapsed time property of the instance is zero.
         /// @remarks Use the Start method to begin measuring elapsed time with the new Stopwatch instance. Use the StartNew method to initialize a new Stopwatch instance and immediately start it.
-        Stopwatch() {}
+        Stopwatch() = default;
         
         /// @cond
         Stopwatch(const Stopwatch& sw) : running(sw.running), start(sw.start), stop(sw.stop) {}

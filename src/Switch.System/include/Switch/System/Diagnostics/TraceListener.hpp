@@ -46,7 +46,7 @@ namespace Switch {
         
         /// @brief Initializes a new instance of the TraceListener class using the specified name as the listener.
         /// @param name The name of the TraceListener.
-        TraceListener(const string& name) {this->data->name = name;}
+        explicit TraceListener(const string& name) {this->data->name = name;}
         
         /// @brief Gets the custom trace listener attributes defined in the application configuration file.
         /// @return A StringDictionary containing the custom attributes for the trace listener.

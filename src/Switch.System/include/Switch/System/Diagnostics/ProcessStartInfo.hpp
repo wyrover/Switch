@@ -37,7 +37,7 @@ namespace Switch {
         /// @param fileName An application or document with which to start a process.
         /// @remarks The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the Folder Options dialog box, which is available through the operating system. The Advanced button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.
         /// @remarks You can change the FileName property after you call this constructor, up to the time that the process starts. After you start the process, changing these values has no effect.
-        ProcessStartInfo(const String& fileName) {this->data->fileName = fileName;}
+        explicit ProcessStartInfo(const String& fileName) {this->data->fileName = fileName;}
         
         /// @brief Initializes a new instance of the ProcessStartInfo class, specifies an application file name with which to start the process, and specifies a set of command-line arguments to pass to the application.
         /// @param fileName  An application with which to start a process.

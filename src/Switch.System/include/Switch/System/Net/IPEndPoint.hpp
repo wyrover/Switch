@@ -38,7 +38,7 @@ namespace Switch {
         IPEndPoint(const IPAddress& address, int32 port);
         
         /// @cond
-        IPEndPoint() {}
+        IPEndPoint() = default;
         IPEndPoint(const IPEndPoint& ipEndPoint) : EndPoint(ipEndPoint), address(ipEndPoint.address), port(ipEndPoint.port) {}
         /// @endcond
         
