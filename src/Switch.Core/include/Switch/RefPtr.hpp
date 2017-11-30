@@ -21,6 +21,10 @@ class _export __opaque_sub_object__ {
   friend class Switch::_;
   __opaque_sub_object__() : UseCount(0) {}
   __opaque_sub_object__(const __opaque_sub_object__& so) : UseCount(so.UseCount.load()) {}
+  __opaque_sub_object__& operator=(const __opaque_sub_object__& value) {
+    this->UseCount = value.UseCount.load();
+    return *this;
+  }
   
   std::atomic<int32> UseCount;
 };

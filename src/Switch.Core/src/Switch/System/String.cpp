@@ -29,7 +29,7 @@ String::String(const char* str) {
   if (str == null)
     throw ArgumentNullException(_caller);
     
-  this->string = str;
+  this->string = StringType(str);
 }
 
 //String::String(const char16* str) : string(std::wstring_convert<std::codecvt_utf8<__char16>, __char16>().to_bytes((const __char16*)str).c_str()) {}
@@ -67,7 +67,7 @@ String::String(const sbyte* str) {
   if (str == null)
     throw ArgumentNullException(_caller);
     
-  this->string = reinterpret_cast<const char*>(str);
+  this->string = StringType(reinterpret_cast<const char*>(str));
 }
 
 String::String(const Array<sbyte>& str) : string(reinterpret_cast<const char*>(str.Data())) {
@@ -1104,7 +1104,7 @@ String& String::operator=(const char str[]) {
   if (str == null)
     throw ArgumentNullException(_caller);
     
-  this->string = str;
+  this->string = StringType(str);
   return *this;
 }
 
@@ -1178,7 +1178,7 @@ String& String::operator+=(const char str[]) {
   if (str == null)
     throw ArgumentNullException(_caller);
     
-  this->string.append(str);
+  this->string.append(StringType(str));
   return *this;
 }
 

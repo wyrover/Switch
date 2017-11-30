@@ -28,11 +28,11 @@ private:
       memcpy(this->value, rhs.value, this->size);
     }
   }
-  
-  __opaque_inner_function_ptr__(NullPtr) : value(null), size(0) {}
+
+  explicit __opaque_inner_function_ptr__(NullPtr) : value(null), size(0) {}
   
   template<typename T>
-  __opaque_inner_function_ptr__(T* value) {
+  explicit __opaque_inner_function_ptr__(T* value) {
     if (value == null) {
       this->value = null;
       this->size = 0;
@@ -44,7 +44,7 @@ private:
   }
   
   template<typename T>
-  __opaque_inner_function_ptr__(const T* value) {
+  explicit __opaque_inner_function_ptr__(const T* value) {
     if (value == null) {
       this->value = null;
       this->size = 0;
@@ -56,14 +56,14 @@ private:
   }
   
   template<typename T>
-  __opaque_inner_function_ptr__(T& value) {
+  explicit __opaque_inner_function_ptr__(T& value) {
     this->size = sizeof(T);
     this->value = malloc(this->size);
     new (this->value) T(value);
   }
   
   template<typename T>
-  __opaque_inner_function_ptr__(const T& value) {
+  explicit __opaque_inner_function_ptr__(const T& value) {
     this->size = sizeof(T);
     this->value = malloc(this->size);
     new (this->value) T(value);
@@ -108,7 +108,6 @@ private:
     return *reinterpret_cast<T**>(this->value);
   }
   
-  bool IsEmpty() const {return this->value == null;}
   bool IsNull() const {return this->value == null;}
   
   void* value = null;
@@ -134,12 +133,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -148,7 +147,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -224,8 +223,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16) = StaticFunctionInvoker::Invoke;
 };
 
@@ -248,12 +247,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -262,7 +261,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -338,8 +337,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15) = StaticFunctionInvoker::Invoke;
 };
 
@@ -362,12 +361,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -376,7 +375,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -452,8 +451,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14) = StaticFunctionInvoker::Invoke;
 };
 
@@ -476,12 +475,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -490,7 +489,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -566,8 +565,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13) = StaticFunctionInvoker::Invoke;
 };
 
@@ -590,12 +589,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -604,7 +603,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -680,8 +679,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12) = StaticFunctionInvoker::Invoke;
 };
 
@@ -704,12 +703,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -718,7 +717,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -794,8 +793,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11) = StaticFunctionInvoker::Invoke;
 };
 
@@ -818,12 +817,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -832,7 +831,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -908,8 +907,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10) = StaticFunctionInvoker::Invoke;
 };
 
@@ -932,13 +931,13 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
-  
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
+
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
   
@@ -946,7 +945,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -1022,8 +1021,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7, T8, T9) = StaticFunctionInvoker::Invoke;
 };
 
@@ -1045,12 +1044,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -1059,7 +1058,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -1135,8 +1134,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7, T8) = StaticFunctionInvoker::Invoke;
 };
 
@@ -1159,12 +1158,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -1173,7 +1172,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -1249,8 +1248,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6, T7) = StaticFunctionInvoker::Invoke;
 };
 
@@ -1272,12 +1271,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method), invoker(StaticFunctionInvoker::Invoke) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method), invoker(StaticFunctionInvoker::Invoke) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -1286,7 +1285,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -1362,8 +1361,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5, T6) = StaticFunctionInvoker::Invoke;
 };
 
@@ -1386,12 +1385,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -1400,7 +1399,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -1457,8 +1456,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4, T5) = StaticFunctionInvoker::Invoke;
 };
 
@@ -1481,12 +1480,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -1495,7 +1494,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -1571,8 +1570,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3, T4) = StaticFunctionInvoker::Invoke;
 };
 
@@ -1595,12 +1594,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -1609,7 +1608,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -1685,8 +1684,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2, T3) = StaticFunctionInvoker::Invoke;
 };
 
@@ -1709,12 +1708,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -1723,7 +1722,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -1796,8 +1795,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1, T2) = StaticFunctionInvoker::Invoke;
 };
 
@@ -1820,12 +1819,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit  __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -1834,7 +1833,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -1909,8 +1908,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&, T1) = StaticFunctionInvoker::Invoke;
 };
 
@@ -1933,12 +1932,12 @@ public:
   };
   
   __opaque_function_pointer__() {}
-  
-  __opaque_function_pointer__(NullPtr) {}
-  
-  __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-  
-  __opaque_function_pointer__(Function method) : method(method) {}
+
+  explicit __opaque_function_pointer__(NullPtr) {}
+
+  explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
+
+  explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
@@ -1947,7 +1946,7 @@ public:
   __opaque_function_pointer__(const T& target, typename ConstMember<T>::Type method) : target(&target), method(method), invoker(ConstMemberFunctionInvoker<T>::Invoke) {}
   
   template<typename T>
-  __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
+  explicit __opaque_function_pointer__(const T& target) : target(target), invoker(FunctorInvoker<T>::Invoke) {}
   
   FunctionType& operator=(const FunctionType& function) {
     this->target = function.target;
@@ -2022,8 +2021,8 @@ private:
     }
   };
   
-  __opaque_inner_function_ptr__ target = null;
-  __opaque_inner_function_ptr__ method = null;
+  __opaque_inner_function_ptr__ target {null};
+  __opaque_inner_function_ptr__ method {null};
   TResult(*invoker)(const __opaque_inner_function_ptr__&, const __opaque_inner_function_ptr__&) = StaticFunctionInvoker::Invoke;
 };
 /// @endcond

@@ -31,7 +31,7 @@ namespace Switch {
           /// @param List The IList whose elements are copied to the new Collection.
           /// @exception ArgumentNullException The parameters List is null or element reference null in collection.
           /// @remarks The ReadOnlyCollection<T> class is not thread safe.
-          ReadOnlyCollection(const Generic::IList<T>& list) : list(list) {}
+          explicit ReadOnlyCollection(const Generic::IList<T>& list) : list(list) {}
           
           /// @brief Initializes a new instance of the ReadOnlyCollection<T> class that with items specified.
           /// @remarks The Collection<T> class is not thread safe.

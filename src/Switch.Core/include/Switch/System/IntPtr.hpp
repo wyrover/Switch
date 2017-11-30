@@ -34,12 +34,12 @@ namespace Switch {
       
       /// @brief Create a new instance of class IntPtr
       /// @param value A pointer or handle contained in a 32-bit signed integer.
-      IntPtr(const Int32& value);
+      explicit IntPtr(const Int32& value);
       
       /// @brief Create a new instance of class IntPtr
       /// @param value A pointer or handle contained in a 64-bit signed integer.
       /// @exception OverflowException On a 32-bit platform, value is too large or too small to represent as an IntPtr
-      IntPtr(const Int64& value);
+      explicit IntPtr(const Int64& value);
       
       /// @brief Create a new instance of class IntPtr
       /// @param value A pointer to an unspecified type.

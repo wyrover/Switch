@@ -19,27 +19,27 @@ namespace SwitchUnitTests {
   }
   
   TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaThenInvoke) {
-    __opaque_function_pointer__<> fct = _delegate {
+    __opaque_function_pointer__<> fct(_delegate {
       result = "fct called";
-    };
+    });
     ASSERT_FALSE(fct.IsEmpty());
     fct.Invoke();
     ASSERT_EQ("fct called", result);
   }
   
   TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaAndWithArgumentThenInvoke) {
-    __opaque_function_pointer__<void, const string&> fct = _delegate(const string & value) {
+    __opaque_function_pointer__<void, const string&> fct(_delegate(const string & value) {
       result = value;
-    };
+    });
     ASSERT_FALSE(fct.IsEmpty());
     fct.Invoke("fct called");
     ASSERT_EQ("fct called", result);
   }
   
   TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaAndWithReturnThenInvoke) {
-    __opaque_function_pointer__<string> fct = _delegate {
+    __opaque_function_pointer__<string> fct(_delegate {
       return "fct called";
-    };
+    });
     ASSERT_FALSE(fct.IsEmpty());
     result = fct.Invoke();
     ASSERT_EQ("fct called", result);
@@ -52,7 +52,7 @@ namespace SwitchUnitTests {
         result = "fct called";
       }
     };
-    __opaque_function_pointer__<> fct = TestStatic::StaticFunc;
+    __opaque_function_pointer__<> fct(TestStatic::StaticFunc);
     ASSERT_FALSE(fct.IsEmpty());
     fct.Invoke();
     ASSERT_EQ("fct called", result);
@@ -65,7 +65,7 @@ namespace SwitchUnitTests {
         result = value;
       }
     };
-    __opaque_function_pointer__<void, const string&> fct = TestStatic::StaticFunc;
+    __opaque_function_pointer__<void, const string&> fct(TestStatic::StaticFunc);
     ASSERT_FALSE(fct.IsEmpty());
     fct.Invoke("fct called");
     ASSERT_EQ("fct called", result);
@@ -78,7 +78,7 @@ namespace SwitchUnitTests {
         return "fct called";
       }
     };
-    __opaque_function_pointer__<string> fct = TestStatic::StaticFunc;
+    __opaque_function_pointer__<string> fct(TestStatic::StaticFunc);
     ASSERT_FALSE(fct.IsEmpty());
     result = fct.Invoke();
     ASSERT_EQ("fct called", result);
@@ -91,7 +91,7 @@ namespace SwitchUnitTests {
       }
     };
     TestMember testMember;
-    __opaque_function_pointer__<> fct = __opaque_function_pointer__<>(testMember, &TestMember::MemberFunc);
+    __opaque_function_pointer__<> fct(__opaque_function_pointer__<>(testMember, &TestMember::MemberFunc));
     ASSERT_FALSE(fct.IsEmpty());
     fct.Invoke();
     ASSERT_EQ("fct called", result);
@@ -104,7 +104,7 @@ namespace SwitchUnitTests {
       }
     };
     TestMember testMember;
-    __opaque_function_pointer__<void, const string&> fct = __opaque_function_pointer__<void, const string&>(testMember, &TestMember::MemberFunc);
+    __opaque_function_pointer__<void, const string&> fct(__opaque_function_pointer__<void, const string&>(testMember, &TestMember::MemberFunc));
     ASSERT_FALSE(fct.IsEmpty());
     fct.Invoke("fct called");
     ASSERT_EQ("fct called", result);
@@ -117,7 +117,7 @@ namespace SwitchUnitTests {
       }
     };
     TestMember testMember;
-    __opaque_function_pointer__<string> fct = __opaque_function_pointer__<string>(testMember, &TestMember::MemberFunc);
+    __opaque_function_pointer__<string> fct(__opaque_function_pointer__<string>(testMember, &TestMember::MemberFunc));
     ASSERT_FALSE(fct.IsEmpty());
     result = fct.Invoke();
     ASSERT_EQ("fct called", result);
@@ -130,7 +130,7 @@ namespace SwitchUnitTests {
       }
     };
     TestFunctor testFunctor;
-    __opaque_function_pointer__<> fct = testFunctor;
+    __opaque_function_pointer__<> fct(testFunctor);
     ASSERT_FALSE(fct.IsEmpty());
     fct.Invoke();
     ASSERT_EQ("fct called", result);
@@ -143,7 +143,7 @@ namespace SwitchUnitTests {
       }
     };
     TestFunctor testFunctor;
-    __opaque_function_pointer__<void, const string&> fct = testFunctor;
+    __opaque_function_pointer__<void, const string&> fct(testFunctor);
     ASSERT_FALSE(fct.IsEmpty());
     fct.Invoke("fct called");
     ASSERT_EQ("fct called", result);
@@ -156,7 +156,7 @@ namespace SwitchUnitTests {
       }
     };
     TestFunctor testFunctor;
-    __opaque_function_pointer__<string> fct = testFunctor;
+    __opaque_function_pointer__<string> fct(testFunctor);
     ASSERT_FALSE(fct.IsEmpty());
     result = fct.Invoke();
     ASSERT_EQ("fct called", result);

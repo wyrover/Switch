@@ -35,6 +35,10 @@ namespace Switch {
       
       /// @cond
       Byte(const Byte& value) : value(value.value) {}
+      Byte& operator=(const Byte& value) {
+        this->value = value.value;
+        return *this;
+      }
       operator const byte& () const {return this->value;}
       template<typename T> Byte& operator=(T value) {this->value = value; return *this;}
       template<typename T> Byte& operator+=(T value) {this->value += value.value; return *this;}

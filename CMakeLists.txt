@@ -78,24 +78,15 @@ list(APPEND ASTYLE_ARGS
 #                                                                                        cppcheck command line arguments
 list(APPEND CPPCHECK_ARGS
   #--enable=warning,style,performance,portability,unusedFunction
-  --enable=warning
+  --enable=warning,style
   --error-exitcode=1
-  #-I ${CMAKE_SOURCE_DIR}/src/Switch/include
-  -I ${CMAKE_SOURCE_DIR}/src/Switch.Core/include
-  #-I ${CMAKE_SOURCE_DIR}/src/Switch.System/include
-  #-I ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/include
-  #-I ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/include
-  #-I ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/include
-  #-I ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/include
-  #-I ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Core/include
-  #-I ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.framework/include
   -j 8
   --language=c++
   --std=c++14
   --suppressions-list=${CMAKE_CURRENT_BINARY_DIR}/cppcheck_false_positive.txt
   --template='[{file}:{line}]: ({severity}) {{id}} {message}'
   --verbose
-  #${CMAKE_SOURCE_DIR}/src/Switch/src
+  ${CMAKE_SOURCE_DIR}/src/Switch/src
   ${CMAKE_SOURCE_DIR}/src/Switch.Core/src
   #${CMAKE_SOURCE_DIR}/src/Switch.System/src
   #${CMAKE_SOURCE_DIR}/src/Switch.System.Core/src
@@ -104,8 +95,6 @@ list(APPEND CPPCHECK_ARGS
   #${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/src
   #${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Core/src
   #${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.framework/src
-  #${CMAKE_SOURCE_DIR}/examples
-  #${CMAKE_SOURCE_DIR}/tests
   )
 
 #_______________________________________________________________________________________________________________________

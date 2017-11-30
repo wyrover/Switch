@@ -19,7 +19,7 @@ namespace Switch {
 class _export __opaque_unicode_string__ {
   friend class Switch::System::String;
   __opaque_unicode_string__() {}
-  __opaque_unicode_string__(const char* str);
+  explicit __opaque_unicode_string__(const char* str);
   __opaque_unicode_string__(const char32_t* str) {
     int i = 0;
     while (str[i] != 0)

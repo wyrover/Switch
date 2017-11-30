@@ -22,7 +22,8 @@ class _property : public Attribute {
   using Setter = __opaque_function_pointer__<void, T>;
   
 public:
-  _property(const Getter& getter, const Setter& setter) : getter(getter), setter(setter) {}
+  template<typename TGetter, typename TSetter>
+  _property(TGetter getter, TSetter setter) : getter(getter), setter(setter) {}
   
   T Get() const {return this->getter();}
   T operator()() const {return this->getter();}
@@ -60,7 +61,8 @@ class _property<T, _readonly> : public _readonly {
   using Getter = __opaque_function_pointer__<T>;
   
 public:
-  explicit _property(const Getter& getter) : getter(getter) {}
+  template<typename TGetter>
+  explicit _property(TGetter getter) : getter(getter) {}
   _property& operator=(const _property& _property) {return *this;}
   
   T Get() const {return this->getter();}
@@ -82,7 +84,8 @@ class _property<T, _writeonly> : public _writeonly {
   using Setter = __opaque_function_pointer__<void, T>;
   
 public:
-  explicit _property(const Setter& setter) : setter(setter) {}
+  template<typename TSetter>
+  explicit _property(TSetter setter) : setter(setter) {}
   _property& operator=(const _property& _property) {return *this;}
   
   void Set(T value) {this->setter(value);}

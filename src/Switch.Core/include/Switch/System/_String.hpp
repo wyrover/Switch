@@ -152,22 +152,22 @@ namespace Switch {
       explicit String(const String& strA, const String& strB);
       
       /// @cond
-      String(InitializerList<char> il) {
+      explicit String(InitializerList<char> il) {
         for (auto c : il)
           this->string.append(c);
       }
-      
-      String(InitializerList<char16> il) {
+
+      explicit String(InitializerList<char16> il) {
         for (auto c : il)
           this->string.append(c);
       }
-      
-      String(InitializerList<char32> il) {
+
+      explicit String(InitializerList<char32> il) {
         for (auto c : il)
           this->string.append(c);
       }
-      
-      String(InitializerList<wchar> il) {
+
+      explicit String(InitializerList<wchar> il) {
         for (auto c : il)
           this->string.append(c);
       }
