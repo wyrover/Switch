@@ -11,4 +11,6 @@
 !LICENSE
 !Makefile
 !README.md
+!CMakeLists.txt
+!RS232Config.cmake
 #

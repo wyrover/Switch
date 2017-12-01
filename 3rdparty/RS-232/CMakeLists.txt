@@ -11,7 +11,7 @@ target_include_directories(RS232 PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE
 
 install(EXPORT RS232 DESTINATION cmake)
 install(FILES RS232Config.cmake DESTINATION cmake)
-install (FILES rs232.h DESTINATION include/Rs232)
+install (FILES rs232.h DESTINATION include/RS232)
 install(TARGETS RS232 EXPORT RS232 DESTINATION lib)
 if(MSVC)
   target_compile_options(RS232 PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:RS232>/RS232${CMAKE_DEBUG_POSTFIX}.pdb>")
