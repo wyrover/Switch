@@ -66,13 +66,47 @@ list(APPEND ASTYLE_ARGS
   --close-templates
   --suffix=none
   --recursive
-  ${CMAKE_SOURCE_DIR}/examples/*.cpp
-  ${CMAKE_SOURCE_DIR}/src/*.h
-  ${CMAKE_SOURCE_DIR}/src/*.hpp
-  ${CMAKE_SOURCE_DIR}/src/*.cpp
-  ${CMAKE_SOURCE_DIR}/tests/*.hpp
-  ${CMAKE_SOURCE_DIR}/tests/*.cpp
   )
+
+if (BUILD_SWITCH_CORE)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.Core/*.cpp ${CMAKE_SOURCE_DIR}/src/Switch.Core/*.h ${CMAKE_SOURCE_DIR}/src/Switch.Core/*.hpp)
+endif()
+
+if (BUILD_SWITCH_SYSTEM)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System/*.cpp ${CMAKE_SOURCE_DIR}/src/Switch.System/*.hpp ${CMAKE_SOURCE_DIR}/examples/Switch.System/*.cpp)
+endif()
+
+if (BUILD_SWITCH_SYSTEM_CORE)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/*.cpp ${CMAKE_SOURCE_DIR}/src/Switch.System.Core/*.hpp)
+endif()
+
+if (BUILD_SWITCH_SYSTEM_DRAWING)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/*.cpp ${CMAKE_SOURCE_DIR}/src/Switch.System.Drawing/*.hpp ${CMAKE_SOURCE_DIR}/examples/Switch.System.Drawing/*.cpp)
+endif()
+
+if (BUILD_SWITCH_SYSTEM_SERVICEMODEL)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/*.cpp ${CMAKE_SOURCE_DIR}/src/Switch.System.ServiceModel/*.hpp)
+endif()
+
+if (BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/*.cpp ${CMAKE_SOURCE_DIR}/src/Switch.System.Windows.Forms/*.hpp ${CMAKE_SOURCE_DIR}/examples/Switch.System.Windows.Forms/*.cpp)
+endif()
+
+if (BUILD_SWITCH_TUNIT_CORE)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Core/*.cpp ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Core/*.hpp ${CMAKE_SOURCE_DIR}/examples/Switch.TUnit/*.cpp)
+endif()
+
+if (BUILD_SWITCH_TUNIT_FRAMEWORK)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Framework/*.cpp ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Framework/*.hpp ${CMAKE_SOURCE_DIR}/examples/Switch.TUnit.Framework/*.cpp)
+endif()
+
+if (BUILD_SWITCH_TUNIT_MAIN)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Main/*.cpp)
+endif()
+
+if (BUILD_TESTS)
+  list(APPEND ASTYLE_ARGS ${CMAKE_SOURCE_DIR}/tests/*.cpp ${CMAKE_SOURCE_DIR}/tests/*.hpp)
+endif()
 
 #_______________________________________________________________________________________________________________________
 #                                                                                        cppcheck command line arguments
@@ -114,15 +148,15 @@ if (BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
 endif()
 
 if (BUILD_SWITCH_TUNIT_CORE)
-  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Core/src)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.TUnit.Core/src)
 endif()
 
 if (BUILD_SWITCH_TUNIT_FRAMEWORK)
-  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Framework/src)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Framework/src)
 endif()
 
 if (BUILD_SWITCH_TUNIT_MAIN)
-  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.System.Unit.Main/src)
+  list(APPEND CPPCHECK_ARGS ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Main/src)
 endif()
 
 #_______________________________________________________________________________________________________________________
