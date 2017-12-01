@@ -123,14 +123,14 @@ int32 Native::DirectoryApi::GetFileAttributes(const string& path, System::IO::Fi
       return fileAttributes;
     }
   };
-  struct stat status;
+  struct stat status {0};
   int32 retValue = stat(path.Data(), &status);
   attributes = IntToFileAttributeConverter()(status.st_mode);
   return retValue;
 }
 
 int32 Native::DirectoryApi::GetFileTime(const string& path, int64& creationTime, int64& lastAccessTime, int64& lastWriteTime) {
-  struct stat status;
+  struct stat status {0};
   if (stat(path.Data(), &status) != 0)
     return -1;
     
