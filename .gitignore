@@ -8,6 +8,9 @@ lib
 # CLion files
 .idea
 
+# CLion build files
+cmake-build-*
+
 # QT files
 CMakeLists.txt.user
 
