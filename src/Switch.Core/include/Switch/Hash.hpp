@@ -149,7 +149,7 @@ namespace Switch {
     int32 operator()(const Other& value) {return int32(int64(&value) & 0x00000000FFFFFFFF) ^ int32((int64(&value) >> 32) & 0x00000000FFFFFFFF);}
   };
   /// @endcond
-
+  
   /// @brief Generate a hash code for generic type T.
   /// @param[in] value For which the hashcode is generated.
   /// @return int32 An integer value being the generated hashcode.

@@ -156,17 +156,17 @@ namespace Switch {
         for (auto c : il)
           this->string.append(c);
       }
-
+      
       explicit String(InitializerList<char16> il) {
         for (auto c : il)
           this->string.append(c);
       }
-
+      
       explicit String(InitializerList<char32> il) {
         for (auto c : il)
           this->string.append(c);
       }
-
+      
       explicit String(InitializerList<wchar> il) {
         for (auto c : il)
           this->string.append(c);

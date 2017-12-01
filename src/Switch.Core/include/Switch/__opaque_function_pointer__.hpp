@@ -28,7 +28,7 @@ private:
       memcpy(this->value, rhs.value, this->size);
     }
   }
-
+  
   explicit __opaque_inner_function_ptr__(NullPtr) : value(null), size(0) {}
   
   template<typename T>
@@ -133,11 +133,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -247,11 +247,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -361,11 +361,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -475,11 +475,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -589,11 +589,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -703,11 +703,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -817,11 +817,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -931,13 +931,13 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
-
+  
   template<typename T>
   __opaque_function_pointer__(const T& target, typename Member<T>::Type method) : target(&target), method(method), invoker(MemberFunctionInvoker<T>::Invoke) {}
   
@@ -1044,11 +1044,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -1158,11 +1158,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -1271,11 +1271,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method), invoker(StaticFunctionInvoker::Invoke) {}
   
   template<typename T>
@@ -1385,11 +1385,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -1480,11 +1480,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -1594,11 +1594,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -1708,11 +1708,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -1819,11 +1819,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit  __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
@@ -1932,11 +1932,11 @@ public:
   };
   
   __opaque_function_pointer__() {}
-
+  
   explicit __opaque_function_pointer__(NullPtr) {}
-
+  
   explicit __opaque_function_pointer__(const FunctionType& function) : target(function.target), method(function.method), invoker(function.invoker) {}
-
+  
   explicit __opaque_function_pointer__(Function method) : method(method) {}
   
   template<typename T>
