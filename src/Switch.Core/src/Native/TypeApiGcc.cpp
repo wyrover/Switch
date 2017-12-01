@@ -6,7 +6,7 @@
 string Native::TypeApi::Demangle(const string& name) {
   struct AutoDeleteCharPointer {
     AutoDeleteCharPointer(char* value) : value(value) {}
-    ~AutoDeleteCharPointer() {delete value;}
+    ~AutoDeleteCharPointer() {free(value);}
     char* operator()() const {return this->value;}
   private:
     char* value;

@@ -364,7 +364,7 @@ print("3rd parties")
 #_______________________________________________________________________________________________________________________
 #                                                                                                             call_stack
 if (BUILD_SWITCH_CORE)
-  find_package(CALL_STACK QUIET)
+  find_package(call_stack QUIET)
   if (CALL_STACK_FOUND)
     print("  [X] call_stack")
   else()
@@ -380,7 +380,7 @@ endif()
 #_______________________________________________________________________________________________________________________
 #                                                                                                           easywsclient
 if (BUILD_SWITCH_CORE)
-  find_package(EASYWSCLIENT QUIET)
+  find_package(easywsclient QUIET)
   if (EASYWSCLIENT_FOUND)
     print("  [X] easywsclient")
   else()
@@ -478,7 +478,7 @@ endif()
 #_______________________________________________________________________________________________________________________
 #                                                                                                                  GTest
 if (BUILD_TESTS OR BUILD_SWITCH_TUNIT_CORE)
-  find_package(GTEST QUIET)
+  find_package(GTest QUIET)
   if (GTEST_FOUND)
     print("  [X] GTest")
   else()
