@@ -26,7 +26,7 @@ namespace Switch {
   /// @endcode
   /// @ingroup Keywords
 #define _static \
-  final : Static
+final : Static
 }
 
 using namespace Switch;

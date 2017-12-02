@@ -1,0 +1,5 @@
+macro(print)
+  if (ENABLE_VERBOSE)
+    message(STATUS ${ARGN})
+  endif()
+endmacro()
