@@ -1,4 +1,4 @@
-include(${CMAKE_CURRENT_LIST_DIR}/Switch.cmake)  
+include(${CMAKE_CURRENT_LIST_DIR}/Switch.cmake)
 
 get_filename_component(SWITCH_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/../include" ABSOLUTE)
 get_filename_component(SWITCH_LIBRARIES_DIRS "${CMAKE_CURRENT_LIST_DIR}/../lib" ABSOLUTE)
