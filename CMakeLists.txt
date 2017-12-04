@@ -161,11 +161,11 @@ set(CMAKE_DEBUG_POSTFIX d)
 
 #_______________________________________________________________________________________________________________________
 #                                                                                                 executable output path
-#if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
-#  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
-#else()
-#  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
-#endif()
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
+  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
+else()
+  set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
+endif()
 
 #_______________________________________________________________________________________________________________________
 #                                                                                                   executable extension
