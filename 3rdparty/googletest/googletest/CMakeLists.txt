@@ -102,13 +102,13 @@ endif()
 ########################################################################
 #
 # Install rules
-install(EXPORT gtest DESTINATION cmake)
+#install(EXPORT gtest DESTINATION cmake)
 install(FILES gtestConfig.cmake DESTINATION cmake)
 install(TARGETS gtest gtest_main
   DESTINATION lib)
 install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
   DESTINATION include)
-install(TARGETS gtest EXPORT gtest DESTINATION lib)
+install(TARGETS gtest EXPORT Switch DESTINATION lib)
 
 ########################################################################
 #
