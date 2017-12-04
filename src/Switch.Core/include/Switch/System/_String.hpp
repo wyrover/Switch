@@ -81,11 +81,11 @@ namespace Switch {
       
       /// @brief Create a new instance of class String
       /// @param chars char array.
-      explicit String(const Array<char>& chars);
+      String(const Array<char>& chars);
       
       /// @brief Create a new instance of class String
       /// @param chars char32 array.
-      explicit String(const Array<char32>& chars);
+      String(const Array<char32>& chars);
       
       /// @brief Initializes a new instance of the String class to the value indicated by a specified pointer to an array of characters, a starting character position within that array, and a length.
       /// @param str Value for the String (not null terminated).
