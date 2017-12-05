@@ -38,7 +38,7 @@ cd ..
 cd build/examples
 if [[ "$OSTYPE" == *"Darwin"* ]]; then 
   cmake ../../examples -G "Xcode" "$@"
-  open build/examples/Examples.xcodeproj
+  open Examples.xcodeproj
 else
   cmake ../../examples -DCMAKE_BUILD_TYPE=Debug "$@"
   cd build/examples
