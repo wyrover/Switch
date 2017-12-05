@@ -6,12 +6,14 @@ noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:60
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:65
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:70
-noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:84
-noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:88
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:127
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:132
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:137
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:142
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:155
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:160
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:165
+noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/_String.hpp:170
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/Boolean.hpp:55
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/Byte.hpp:34
 noExplicitConstructor:@CMAKE_SOURCE_DIR@/src/Switch.Core/include/Switch/System/Char.hpp:26

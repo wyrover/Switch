@@ -81,11 +81,11 @@ namespace Switch {
       
       /// @brief Create a new instance of class String
       /// @param chars char array.
-      String(const Array<char>& chars);
+      explicit String(const Array<char>& chars);
       
       /// @brief Create a new instance of class String
       /// @param chars char32 array.
-      String(const Array<char32>& chars);
+      explicit String(const Array<char32>& chars);
       
       /// @brief Initializes a new instance of the String class to the value indicated by a specified pointer to an array of characters, a starting character position within that array, and a length.
       /// @param str Value for the String (not null terminated).
@@ -152,22 +152,22 @@ namespace Switch {
       explicit String(const String& strA, const String& strB);
       
       /// @cond
-      explicit String(InitializerList<char> il) {
+      String(InitializerList<char> il) {
         for (auto c : il)
           this->string.append(c);
       }
       
-      explicit String(InitializerList<char16> il) {
+      String(InitializerList<char16> il) {
         for (auto c : il)
           this->string.append(c);
       }
       
-      explicit String(InitializerList<char32> il) {
+      String(InitializerList<char32> il) {
         for (auto c : il)
           this->string.append(c);
       }
       
-      explicit String(InitializerList<wchar> il) {
+      String(InitializerList<wchar> il) {
         for (auto c : il)
           this->string.append(c);
       }
