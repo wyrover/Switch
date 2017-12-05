@@ -14,6 +14,6 @@ cd ..
 
 rem generate and launch examples
 cd build\examples
-cmake ../../examples -DCMAKE_INSTALL_PREFIX:STRING=/usr/local %*
+cmake ../../examples -DCMAKE_INSTALL_PREFIX=/usr/local %*
 start Examples.sln
 cd ..\..

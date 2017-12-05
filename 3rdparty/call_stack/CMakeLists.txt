@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(call_stack  VERSION 1.0.0)
+project(call_stack VERSION 1.0.0)
 
 if(NOT CMAKE_DEBUG_POSTFIX)
   set(CMAKE_DEBUG_POSTFIX d)
@@ -33,10 +33,9 @@ add_library(call_stack STATIC ${INCLUDE_FILES} ${SOURCE_FILES})
 target_link_libraries(call_stack)
 target_include_directories(call_stack PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include>)
 
-#install(EXPORT call_stack DESTINATION cmake)  
+install(EXPORT call_stack DESTINATION cmake)
 install(FILES ./call_stackConfig.cmake DESTINATION cmake)
-#install(TARGETS call_stack EXPORT call_stack DESTINATION lib)
-install(TARGETS call_stack EXPORT Switch DESTINATION lib)
+install(TARGETS call_stack EXPORT call_stack DESTINATION lib)
 install (FILES ${INCLUDE_FILES} DESTINATION include/call_stack)
 if(MSVC)
   target_compile_options(call_stack PRIVATE "$<$<CONFIG:Debug>:/Fd$<TARGET_FILE_DIR:call_stack>/call_stack${CMAKE_DEBUG_POSTFIX}.pdb>")
