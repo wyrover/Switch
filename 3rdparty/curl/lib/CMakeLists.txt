@@ -80,7 +80,6 @@ if(MSVC AND CURL_STATICLIB)
 endif()
 
 target_link_libraries(${LIB_NAME} ${CURL_LIBS})
-add_custom_command(TARGET ${LIB_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${LIB_NAME}> ${CMAKE_HOME_DIRECTORY}/../lib/$<TARGET_FILE_NAME:${LIB_NAME}>)
 
 if(WIN32)
   add_definitions( -D_USRDLL )
