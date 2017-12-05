@@ -17,7 +17,7 @@ option(BUILD_SWITCH_SYSTEM_WINDOWS_FORMS "Build Switch.System.Windows.Forms libr
 option(BUILD_SWITCH_TUNIT_CORE "Build Switch.TUnit.Core library" ON)
 option(BUILD_SWITCH_TUNIT_FRAMEWORK "Build Switch.TUnit.Framework library" OFF)
 option(BUILD_SWITCH_TUNIT_MAIN "Build Switch.TUnit.Main library" ON)
-option(BUILD_SWITCH_TESTS "Build Switch tests" OFF)
+option(BUILD_TESTS "Build Switch tests" OFF)
 
 #_______________________________________________________________________________________________________________________
 #                                                                                                          Tools Options
