@@ -52,7 +52,7 @@ namespace {
       this->newSettings.c_cc[VMIN] = 0;
       tcsetattr(0, TCSANOW, &newSettings);
       
-      while (read(0, &this->peekCharacter, 1) != 1);
+      read(0, &this->peekCharacter, 1);
       
       this->newSettings.c_cc[VMIN] = 1;
       tcsetattr(0, TCSANOW, &this->newSettings);
