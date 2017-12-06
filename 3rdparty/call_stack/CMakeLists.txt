@@ -9,7 +9,7 @@ endif()
 set(INCLUDE_FILES
   call_stack/call_stack.hpp
   call_stack/stack_exception.hpp
-  call_stack/StackWalker/StackWalker.h 
+  call_stack/StackWalker/StackWalker.h
   call_stack/ModuleInformation.h
   call_stack/StackFrame.h
   call_stack/ThreadInformation.h
@@ -18,7 +18,7 @@ set(INCLUDE_FILES
 
 set(SOURCE_FILES
   call_stack/call_stack_gcc.cpp 
-  call_stack/call_stack_msvc.cpp 
+  call_stack/call_stack_msvc.cpp
   call_stack/StackWalker/StackWalker.cpp
   call_stack/ModuleInformation.cpp
   call_stack/StackFrame.cpp
