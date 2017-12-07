@@ -17,7 +17,7 @@ set(INCLUDE_FILES
 )
 
 set(SOURCE_FILES
-  call_stack/call_stack_gcc.cpp 
+  call_stack/call_stack_gcc.cpp
   call_stack/call_stack_msvc.cpp
   call_stack/StackWalker/StackWalker.cpp
   call_stack/ModuleInformation.cpp
