@@ -74,14 +74,14 @@ System::Array<string> Directory::GetDirectories(const string& path, const string
 
 System::Array<string> Directory::GetFiles(const string& path) {
   System::Collections::Generic::List<string> files;
-  for (const auto& item : EnumerateDirectories(path))
+  for (const auto& item : EnumerateFiles(path))
     files.Add(item);
   return files.ToArray();
 }
 
 System::Array<string> Directory::GetFiles(const string& path, const string& pattern) {
   System::Collections::Generic::List<string> files;
-  for (const auto& item : EnumerateDirectories(path, pattern))
+  for (const auto& item : EnumerateFiles(path, pattern))
     files.Add(item);
   return files.ToArray();
 }
