@@ -6,7 +6,15 @@
 
 #include <time.h>
 #include <uuid/uuid.h>
+
 #include <sys/time.h>
+
+#if defined(__APPLE__)
+#include <time.h>
+#include <sys/sysctl.h>
+#else
+#include <sys/sysinfo.h>
+#endif
 
 #include "Api.hpp"
 
@@ -63,10 +71,20 @@ string Native::EnvironmentApi::GetMachineName() {
 }
 
 int32 Native::EnvironmentApi::GetTickCount() {
-  struct timeval tv;
-  if (gettimeofday(&tv, null) != 0)
-    return 0;
-  return int32((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+#if defined (__APPLE__)
+  // https://stackoverflow.com/questions/3269321/osx-programmatically-get-uptime
+  struct timeval boottime, nowtime;
+  size_t len = sizeof(boottime);
+  int mib[2] = { CTL_KERN, KERN_BOOTTIME };
+  sysctl(mib, 2, &boottime, &len, NULL, 0);
+  gettimeofday(&nowtime, NULL);
+  return ((nowtime.tv_sec - boottime.tv_sec) * 1000) + ((nowtime.tv_usec - boottime.tv_usec) / 1000);
+#else
+  // https://stackoverflow.com/questions/1540627/what-api-do-i-call-to-get-the-system-uptime
+  struct sysinfo info;
+  sysinfo(&info);
+  return info.uptime * 1000;
+#endif
 }
 
 string Native::EnvironmentApi::GetUserDomainName() {
