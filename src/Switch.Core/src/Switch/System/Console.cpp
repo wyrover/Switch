@@ -108,7 +108,7 @@ _property<bool, _readonly> Console::CapsLock {
 };
 
 _property<int32> Console::CursorLeft {
-  [] {return Native::ConsoleApi::GetCursorTop();},
+  [] {return Native::ConsoleApi::GetCursorLeft();},
   [](int32 value) {
     if (value < 0 || value >= Native::ConsoleApi::GetWindowWidth())
       throw ArgumentOutOfRangeException(_caller);
