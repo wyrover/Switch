@@ -30,7 +30,7 @@ namespace Switch {
           using Item = T;
         public:
           /// @brief Initializes a new instance of the HashSet<T> class that is empty and uses the default equality comparer for the set type.
-          HashSet() : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {}
+          HashSet() : operationNumber(0), comparer(new System::Collections::Generic::EmptyComparer<T>()) {}
           
           /// @brief Initializes a new instance of the HashSet<T> class that uses a specified comparer
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
@@ -51,7 +51,7 @@ namespace Switch {
           
           HashSet& operator=(const HashSet& s) {
             this->operationNumber = s.operationNumber;
-            this->comparer = s._comparer;
+            this->comparer = s.comparer;
             for (T elem : s)
               Add(elem);
             return *this;
@@ -60,7 +60,7 @@ namespace Switch {
           
           /// @brief Initializes a new instance of the HashSet<T> class that uses the default equality comparer for the set type, contains elements copied from the specified collection, and has sufficient capacity to accommodate the number of elements copied.
           /// @param collection The elements to copy
-          HashSet(const IEnumerable<T>& collection) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
+          HashSet(const IEnumerable<T>& collection) : operationNumber(0), comparer(new System::Collections::Generic::EmptyComparer<T>()) {
             for (const T& item : collection)
               Add(item);
           }
@@ -77,7 +77,7 @@ namespace Switch {
           /// @param array the Array to copy.
           /// @remarks The HashSet class is ! thread safe.
           template<int32 len>
-          HashSet(const T(&array)[len]) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
+          HashSet(const T(&array)[len]) : operationNumber(0), comparer(new System::Collections::Generic::EmptyComparer<T>()) {
             for (int32 index = 0; index < len; index++)
               this->Add(array[index]);
           }
