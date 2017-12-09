@@ -36,7 +36,7 @@ namespace Switch {
           /// - Greater than zero   x is greater than y.
           virtual int32 Compare(const T& x, const T& y) const {return x < y ? -1 : (x == y ? 0 : 1);}
         };
-
+        
         /// @cond
         template<typename T>
         class EmptyComparer : public Object, public IComparer<T> {

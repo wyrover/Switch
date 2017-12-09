@@ -71,7 +71,7 @@ string Native::EnvironmentApi::GetMachineName() {
 }
 
 int32 Native::EnvironmentApi::GetTickCount() {
-#if defined (__APPLE__)
+  #if defined (__APPLE__)
   // https://stackoverflow.com/questions/3269321/osx-programmatically-get-uptime
   struct timeval boottime, nowtime;
   size_t len = sizeof(boottime);
@@ -79,12 +79,12 @@ int32 Native::EnvironmentApi::GetTickCount() {
   sysctl(mib, 2, &boottime, &len, NULL, 0);
   gettimeofday(&nowtime, NULL);
   return ((nowtime.tv_sec - boottime.tv_sec) * 1000) + ((nowtime.tv_usec - boottime.tv_usec) / 1000);
-#else
+  #else
   // https://stackoverflow.com/questions/1540627/what-api-do-i-call-to-get-the-system-uptime
   struct sysinfo info;
   sysinfo(&info);
   return info.uptime * 1000;
-#endif
+  #endif
 }
 
 string Native::EnvironmentApi::GetUserDomainName() {
