@@ -22,26 +22,38 @@ using namespace System;
 namespace {
   class Terminal {
   public:
-    Terminal() : peekCharacter(-1) {
-      tcgetattr(0, &this->initialSettings);
-      
-      this->newSettings = this->initialSettings;
-      this->newSettings.c_lflag &= ~(ICANON | ECHO);
-      this->newSettings.c_cc[VMIN] = 1;
-      this->newSettings.c_cc[VTIME] = 0;
-      tcsetattr(0, TCSANOW, &this->newSettings);
+    Terminal() {
+      termios termioAttributes;
+      tcgetattr(0, &termioAttributes);
+      this->backupedTermioAttributes = termioAttributes;
+      termioAttributes.c_lflag &= ~ECHO;
+      tcsetattr(0, TCSANOW, &termioAttributes);
     }
     
-    ~Terminal() {tcsetattr(0, TCSANOW, &this->initialSettings);}
+    ~Terminal() {
+      tcsetattr(0, TCSANOW, &this->backupedTermioAttributes);
+    }
     
     int32 Getch() {
-      sbyte character = this->peekCharacter;
       if (this->peekCharacter != -1) {
+        sbyte character = this->peekCharacter;
         this->peekCharacter = -1;
         return character;
       }
       
+      termios termioAttributes;
+      tcgetattr(0, &termioAttributes);
+      termios backupedTermioAttributes = termioAttributes;
+      termioAttributes.c_lflag &= ~ICANON;
+      termioAttributes.c_cc[VTIME] = 0;
+      termioAttributes.c_cc[VMIN] = 1;
+      tcsetattr(0, TCSANOW, &termioAttributes);
+      
+      sbyte character = 0;
       while (read(0, &character, 1) != 1);
+      
+      tcsetattr(0, TCSANOW, &backupedTermioAttributes);
+      
       return character;
     }
     
@@ -49,13 +61,17 @@ namespace {
       if (this->peekCharacter != -1)
         return true;
         
-      this->newSettings.c_cc[VMIN] = 0;
-      tcsetattr(0, TCSANOW, &newSettings);
+      termios termioAttributes;
+      tcgetattr(0, &termioAttributes);
+      termios backupedTermioAttributes = termioAttributes;
+      termioAttributes.c_lflag &= ~ICANON;
+      termioAttributes.c_cc[VTIME] = 0;
+      termioAttributes.c_cc[VMIN] = 0;
+      tcsetattr(0, TCSANOW, &termioAttributes);
       
       read(0, &this->peekCharacter, 1);
       
-      this->newSettings.c_cc[VMIN] = 1;
-      tcsetattr(0, TCSANOW, &this->newSettings);
+      tcsetattr(0, TCSANOW, &backupedTermioAttributes);
       
       return this->peekCharacter != -1;
     }
@@ -66,9 +82,8 @@ namespace {
     }
     
   private:
-    termios initialSettings;
-    termios newSettings;
-    sbyte peekCharacter;
+    sbyte peekCharacter {-1};
+    termios backupedTermioAttributes;
   };
   
   static Terminal terminal;
@@ -548,14 +563,11 @@ int32 Native::ConsoleApi::GetCursorLeft() {
   fflush(stdout);
   terminal.Getch();
   terminal.Getch();
-  
-  char c;
-  while ((c = terminal.Getch()) != ';');
-  
-  std::string str;
-  while ((c = terminal.Getch()) != 'R')
-    str.push_back(c);
-  return atoi(str.c_str()) - 1;
+  for (char c = terminal.Getch(); c != ';'; c = terminal.Getch());
+  std::string left;
+  for (char c = terminal.Getch(); c != 'R'; c = terminal.Getch())
+    left.push_back(c);
+  return atoi(left.c_str()) - 1;
 }
 
 int32 Native::ConsoleApi::GetCursorSize() {
@@ -570,15 +582,11 @@ int32 Native::ConsoleApi::GetCursorTop() {
   fflush(stdout);
   terminal.Getch();
   terminal.Getch();
-  
-  char c;
-  std::string str;
-  while ((c = terminal.Getch()) != ';')
-    str.push_back(c);
-    
-  while ((c = terminal.Getch()) != 'R');
-  
-  return atoi(str.c_str()) - 1;
+  std::string top;
+  for (char c = terminal.Getch(); c != ';'; c = terminal.Getch())
+    top.push_back(c);
+  for (char c = terminal.Getch(); c != 'R'; c = terminal.Getch());
+  return atoi(top.c_str()) - 1;
 }
 
 bool Native::ConsoleApi::GetCursorVisible() {
@@ -629,9 +637,9 @@ int32 Native::ConsoleApi::GetWindowHeight() {
   if (!Terminal::IsAnsiSupported())
     return 24;
   int32 top = GetCursorTop();
-  SetCursorTop(999);
+  SetCursorPosition(GetCursorLeft(), 999);
   int32 height = GetCursorTop() + 1;
-  SetCursorTop(top);
+  SetCursorPosition(GetCursorLeft(), top);
   return height;
 }
 
@@ -644,9 +652,9 @@ int32 Native::ConsoleApi::GetWindowWidth() {
   if (!Terminal::IsAnsiSupported())
     return 80;
   int32 left = GetCursorLeft();
-  SetCursorLeft(999);
+  SetCursorPosition(999, GetCursorTop());
   int32 width = GetCursorLeft() + 1;
-  SetCursorLeft(left);
+  SetCursorPosition(left, GetCursorTop());
   return width;
 }
 
@@ -689,15 +697,10 @@ bool Native::ConsoleApi::SetBufferWidth(int32 width) {
   return true;
 }
 
-bool Native::ConsoleApi::SetCursorLeft(int32 left) {
-  if (Terminal::IsAnsiSupported())
-    printf("\x1b[%d;%df", GetCursorTop() + 1, left + 1);
-  return true;
-}
-
-bool Native::ConsoleApi::SetCursorTop(int32 top) {
-  if (Terminal::IsAnsiSupported())
-    printf("\x1b[%d;%df", top + 1, GetCursorLeft() + 1);
+bool Native::ConsoleApi::SetCursorPosition(int32 left, int32 top) {
+  if (Terminal::IsAnsiSupported()) {
+    printf("\x1b[%d;%df", top + 1, left + 1);
+  }
   return true;
 }
 

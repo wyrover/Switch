@@ -113,7 +113,7 @@ _property<int32> Console::CursorLeft {
     if (value < 0 || value >= Native::ConsoleApi::GetWindowWidth())
       throw ArgumentOutOfRangeException(_caller);
       
-    Native::ConsoleApi::SetCursorLeft(value);
+    SetCursorPosition(value, Native::ConsoleApi::GetCursorTop());
   }
 };
 
@@ -133,7 +133,7 @@ _property<int32> Console::CursorTop {
     if (value < 0 || value >= Native::ConsoleApi::GetBufferHeight())
       throw ArgumentOutOfRangeException(_caller);
       
-    Native::ConsoleApi::SetCursorTop(value);
+      SetCursorPosition(Native::ConsoleApi::GetCursorLeft(), value);
   }
 };
 
@@ -274,7 +274,6 @@ void Console::MoveBufferArea(int32 sourceLeft, int32 sourceTop, int32 sourceWidt
 
 }
 
-
 int32 Console::Read() {
   out->Flush();
   return in->Read();
@@ -317,12 +316,21 @@ void Console::ResetColor() {
   Native::ConsoleApi::ResetColor();
 }
 
-void Console::SetError(System::IO::TextWriter& e) { error = &e; }
+void Console::SetCursorPosition(int32 left, int32 top) {
+  Native::ConsoleApi::SetCursorPosition(left, top);
+}
 
-void Console::SetInt(System::IO::TextReader& i) { in = &i; }
+void Console::SetError(System::IO::TextWriter& e) {
+  error = &e;
+}
 
-void Console::SetOut(System::IO::TextWriter& o) { out = &o; }
+void Console::SetInt(System::IO::TextReader& i) {
+  in = &i;
+}
 
+void Console::SetOut(System::IO::TextWriter& o) {
+  out = &o;
+}
 
 void Console::Write(bool value) {
   Write(string::Format("{0}", value));

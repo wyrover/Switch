@@ -48,8 +48,7 @@ namespace Native {
     static bool SetBackgroundColor(System::ConsoleColor color);
     static bool SetBufferHeight(int32 height);
     static bool SetBufferWidth(int32 width);
-    static bool SetCursorLeft(int32 left);
-    static bool SetCursorTop(int32 top);
+    static bool SetCursorPosition(int32 left, int32 top);
     static void SetCursorSize(int32 size);
     static void SetCursorVisible(bool visible);
     static void SetEchoVisible(bool visible);

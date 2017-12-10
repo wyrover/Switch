@@ -289,10 +289,7 @@ namespace Switch {
       /// @par Example
       /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
       /// @include ConsoleCursor.cpp
-      static void SetCursorPosition(int32 left, int32 top) {
-        Console::CursorLeft = left;
-        Console::CursorTop = top;
-      }
+      static void SetCursorPosition(int32 left, int32 top);
       
       /// @brief Sets the position of the console window relative to the screen buffer.
       /// @param left The column position of the upper left corner of the console window.
