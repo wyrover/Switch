@@ -133,7 +133,7 @@ _property<int32> Console::CursorTop {
     if (value < 0 || value >= Native::ConsoleApi::GetBufferHeight())
       throw ArgumentOutOfRangeException(_caller);
       
-      SetCursorPosition(Native::ConsoleApi::GetCursorLeft(), value);
+    SetCursorPosition(Native::ConsoleApi::GetCursorLeft(), value);
   }
 };
 

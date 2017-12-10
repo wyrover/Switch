@@ -698,9 +698,8 @@ bool Native::ConsoleApi::SetBufferWidth(int32 width) {
 }
 
 bool Native::ConsoleApi::SetCursorPosition(int32 left, int32 top) {
-  if (Terminal::IsAnsiSupported()) {
+  if (Terminal::IsAnsiSupported())
     printf("\x1b[%d;%df", top + 1, left + 1);
-  }
   return true;
 }
 
