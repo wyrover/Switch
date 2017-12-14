@@ -55,11 +55,11 @@ namespace Switch {
           ~Stack() {}
           
           /// @brief Removes all elements from the Stack<T>.
-          void Clear() {this->stack.Clear();}
+          void Clear() override {this->stack.Clear();}
           
           /// @brief Determines whether an element is in the Stack<T>.
           /// @param value The object to be added to the end of the Stack<T>. The value can not be null for reference types.
-          virtual bool Contains(const T& value) const {return this->stack.Contains(value);}
+          virtual bool Contains(const T& value) const override {return this->stack.Contains(value);}
           
           /// @brief Copies the entire Stack<T> to a compatible Nhu-dimensional array.
           /// @param array The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.
@@ -77,7 +77,7 @@ namespace Switch {
           /// @exception ArgumentException arrayIndex is equal to or greater than the length of array -or-
           /// The number of elements in the source Stack<T> is greater than the available space from arrayIndex to the end of the destination array.
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the Stack<T>.
-          virtual void CopyTo(System::Array<T>& array, int32 arrayIndex) const {this->stack.CopyTo(array, arrayIndex);}
+          virtual void CopyTo(System::Array<T>& array, int32 arrayIndex) const override {this->stack.CopyTo(array, arrayIndex);}
           
           /// @brief Copies the entire Stack<T> to a compatible one-dimensional array, starting at the specified index of the target array.
           /// @param index The zero-based index in the source List<T> at which copying begins.
@@ -110,7 +110,7 @@ namespace Switch {
           /// @brief Returns an enumerator that iterates through the Stack<T>.
           /// @return Int32 A Stack<T>::Enumerator for the Stack<T>.
           
-          Enumerator<T> GetEnumerator() const {return this->stack.GetEnumerator();}
+          Enumerator<T> GetEnumerator() const override {return this->stack.GetEnumerator();}
           
           /// @brief Returns the object at the top of the Stack<T> without removing it.
           /// @return refptr<T> The object to peek from the Stack<T>. The value can not be null.
