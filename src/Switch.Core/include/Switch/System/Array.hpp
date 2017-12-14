@@ -263,7 +263,7 @@ namespace Switch {
       void Resize(int32 newSize) {
         if (newSize < 0) throw System::ArgumentOutOfRangeException(_caller);
         if (newSize == this->length) return;
-        
+
         this->operationNumber += 1;
         if (newSize < this->length)
           this->array.resize(newSize);
@@ -273,7 +273,7 @@ namespace Switch {
         this->length = newSize;
         this->upperBound[0] = newSize - 1;
       }
-      
+
     protected:
       /// @cond
       T& operator[](int32 index) override {

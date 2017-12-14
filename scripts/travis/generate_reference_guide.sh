@@ -28,6 +28,6 @@ cd ..
 cd build/ReferenceGuide
 if [[ -e doxygen_warnings.txt ]]; then rm doxygen_warnings.txt; fi
 git add --all
-git commit -m "Generate Reference Guide [$TRAVIS_BUILD_NUMBER]"
+git commit -m "Travis CI - Generate Reference Guide - build [$TRAVIS_BUILD_NUMBER]"
 git push "https://${GH_TOKEN}@github.com/gammasoft71/Switch-doc.git" master > /dev/null 2>&1 
 cd ../..
