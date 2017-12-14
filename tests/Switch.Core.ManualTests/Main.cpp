@@ -10,7 +10,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      std::cout << Boolean {true} << std::endl;
+      Console::WriteLine("Time since boot : {0}", TimeSpan::FromMilliseconds(Environment::TickCount & Int32::MaxValue));
     }
   };
 }
