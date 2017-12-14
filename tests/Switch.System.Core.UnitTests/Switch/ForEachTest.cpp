@@ -12,7 +12,7 @@ namespace SwitchUnitTests {
     int32 index = 0;
     for (Int32& item : collection)
       item = 100 + index++;
-    
+      
     index = 0;
     int32 checksum1 = 0;
     int32 checksum2 = 0;
@@ -30,7 +30,7 @@ namespace SwitchUnitTests {
     int32 index = 0;
     for (int32& item : collection)
       item = 100 + index++;
-    
+      
     index = 0;
     int32 checksum1 = 0;
     int32 checksum2 = 0;
@@ -48,7 +48,7 @@ namespace SwitchUnitTests {
     int32 index = 0;
     for (int32& item : collection)
       item = 100 + index++;
-    
+      
     index = 0;
     int32 checksum1 = 0;
     int32 checksum2 = 0;
@@ -117,7 +117,7 @@ namespace SwitchUnitTests {
     index = 1;
     for (Int32 i : testList)
       ASSERT_EQ(index++, i);
-    
+      
     ASSERT_EQ(index, 6);
     
     // test full enumeration
@@ -143,7 +143,7 @@ namespace SwitchUnitTests {
     // test modification
     for (Int32& i : testList)
       i++;
-    
+      
     index = 1;
     for (Int32 i : testList)
       ASSERT_EQ(++index, i);
@@ -154,7 +154,7 @@ namespace SwitchUnitTests {
     int32 index = 0;
     for (int32& item : collection)
       item = 100 + index++;
-    
+      
     index = 0;
     int32 checksum1 = 0;
     int32 checksum2 = 0;
@@ -180,7 +180,7 @@ namespace SwitchUnitTests {
     // test foreach without scope
     for (uint32 i : testArray)
       index = i;
-    
+      
     ASSERT_EQ(index, 5u);
     
     // test full enumeration
@@ -206,7 +206,7 @@ namespace SwitchUnitTests {
     // test modification
     for (uint32& i : testArray)
       i++;
-    
+      
     index = 1;
     for (uint32 i : testArray)
       ASSERT_EQ(++index, i);
