@@ -395,9 +395,9 @@ namespace Switch {
         /// @include EnumerableToArray.cpp
         template<typename TSource>
         static System::Array<TSource> ToArray(const Collections::Generic::IEnumerable<TSource>& source) {
-          System::Array<TSource> array = new System::Array<TSource>();
+          System::Array<TSource> array;
           for (TSource item : source) {
-            System::Array<TSource>::Resize(array, array.Length + 1);
+            array.Resize(array.Length + 1);
             array[array.Length - 1] = item;
           }
           return array;

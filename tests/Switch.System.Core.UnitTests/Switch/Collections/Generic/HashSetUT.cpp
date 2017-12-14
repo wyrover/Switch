@@ -1,10 +1,8 @@
 #include <Switch/System/Collections/Generic/HashSet.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Collections::Generic;
-using namespace TUnit;
 
 namespace {
   HashSet<char> cset(const char* s) {

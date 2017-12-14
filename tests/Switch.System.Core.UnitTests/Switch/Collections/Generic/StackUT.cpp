@@ -1,13 +1,11 @@
 #include <Switch/System/Collections/Generic/Stack.hpp>
 #include <Switch/System/Threading/AutoResetEvent.hpp>
 #include <Switch/System/Threading/Thread.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace System::Threading;
-using namespace TUnit;
 
 namespace {
 

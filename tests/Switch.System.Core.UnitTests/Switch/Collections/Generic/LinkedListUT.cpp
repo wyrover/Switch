@@ -1,10 +1,8 @@
 #include <Switch/System/Collections/Generic/LinkedList.hpp>
-#include <Switch/TUnit/Assert.hpp>
-#include <Switch/TUnit/TestFixture.hpp>
+#include <gtest/gtest.h>
 
 using namespace System;
 using namespace System::Collections;
-using namespace TUnit;
 
 namespace {
 

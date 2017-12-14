@@ -260,6 +260,20 @@ namespace Switch {
       const_iterator end() const {return this->array.end();}
       /// @endcond
 
+      void Resize(int32 newSize) {
+        if (newSize < 0) throw System::ArgumentOutOfRangeException(_caller);
+        if (newSize == this->length) return;
+        
+        this->operationNumber += 1;
+        if (newSize < this->length)
+          this->array.resize(newSize);
+        else
+          for (int32 i = this->length; i < newSize; ++i)
+            this->array.push_back(T());
+        this->length = newSize;
+        this->upperBound[0] = newSize - 1;
+      }
+      
     protected:
       /// @cond
       T& operator[](int32 index) override {
@@ -280,19 +294,6 @@ namespace Switch {
 
         for (int32 increment = 0; increment < this->Length; increment++)
           array[index + increment] = (*this)[increment];
-      }
-      void Resize(int32 newSize) {
-        if (newSize < 0) throw System::ArgumentOutOfRangeException(_caller);
-        if (newSize == this->length) return;
-
-        this->operationNumber += 1;
-        if (newSize < this->length)
-          this->array.resize(newSize);
-        else
-          for (int32 i = this->length; i < newSize; ++i)
-            this->array.push_back(T());
-        this->length = newSize;
-        this->upperBound[0] = newSize - 1;
       }
 
       void Reverse() {
