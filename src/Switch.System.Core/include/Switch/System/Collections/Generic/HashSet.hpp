@@ -37,7 +37,7 @@ namespace Switch {
           HashSet(const refptr< IComparer<T>>& comparer) : comparer(comparer) {}
           
           /// @cond
-          HashSet(InitializerList<T> il) : operationNumber(0), comparer(new System::Collections::Generic::Comparer<T>()) {
+          HashSet(InitializerList<T> il) : operationNumber(0), comparer(new System::Collections::Generic::EmptyComparer<T>()) {
             for (typename InitializerList<Item>::const_iterator iterator = il.begin(); iterator != il.end(); ++iterator)
               this->Add(*iterator);
           }
@@ -97,7 +97,6 @@ namespace Switch {
           /// @brief Determines whether the set contains a specific element.
           /// @param item The element to test.
           /// @return Boolean true if the set contains the element, false otherwise.
-          
           bool Contains(const T& item) const override {
             return this->hashset.find(item) != this->hashset.end();
           }
@@ -319,14 +318,16 @@ namespace Switch {
           }
           
         private:
+          template<typename THasher>
           class Hasher {
           public:
-            size_t operator()(const T& value) const { return Switch::GetHashCode(value); }
+            size_t operator()(const THasher& value) const { return Switch::GetHashCode(value); }
           };
           
+          template<typename TEqual>
           class EqualTo {
           public:
-            bool operator()(const T& a, const T& b) const {return a == b; }
+            constexpr bool operator()(const TEqual& a, const TEqual& b) const {return a == b; }
           };
           
           int32 GetCount() const override {return static_cast<int32>(this->hashset.size());}
@@ -360,14 +361,14 @@ namespace Switch {
             return true;
           }
           
-          std::unordered_set<T, Hasher, EqualTo, TAllocator> hashset;
+          std::unordered_set<T, Hasher<T>, EqualTo<T>, TAllocator> hashset;
           int64 operationNumber;
           refptr< IComparer<T>> comparer;
           
         public:
           /// @cond
-          using const_iterator = typename std::unordered_set<T, Hasher, EqualTo, TAllocator>::const_iterator;
-          using iterator = typename std::unordered_set<T, Hasher, EqualTo, TAllocator>::iterator;
+          using const_iterator = typename std::unordered_set<T, Hasher<T>, EqualTo<T>, TAllocator>::const_iterator;
+          using iterator = typename std::unordered_set<T, Hasher<T>, EqualTo<T>, TAllocator>::iterator;
           /// @endcond
           
           class Enumerator : public object, public IEnumerator<T> {
@@ -408,7 +409,7 @@ namespace Switch {
             int64 operationNumber;
             bool beforeFirst;
             HashSet& set;
-            typename std::unordered_set<T, Hasher, EqualTo, TAllocator>::iterator iterator;
+            typename std::unordered_set<T, Hasher<T>, EqualTo<T>, TAllocator>::iterator iterator;
           };
           
           class ReverseEnumerator : public object, public IEnumerator<T> {
@@ -449,7 +450,7 @@ namespace Switch {
             int64 operationNumber;
             bool beforeFirst;
             HashSet& set;
-            typename std::unordered_set<T, Hasher, EqualTo, TAllocator>::reverse_iterator iterator;
+            typename std::unordered_set<T, Hasher<T>, EqualTo<T>, TAllocator>::reverse_iterator iterator;
           };
         };
       }
