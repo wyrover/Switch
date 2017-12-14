@@ -3,7 +3,6 @@
 
 using namespace System;
 using namespace System::Collections::Generic;
-using namespace TUnit;
 
 namespace {
   SortedSet<char> cset(const char* s) {
