@@ -7,7 +7,7 @@
 #include <Switch/System/Collections/Generic/Comparer.hpp>
 #include <Switch/System/Collections/Generic/IComparer.hpp>
 #include <Switch/System/Collections/Generic/ICollection.hpp>
-#include "GenericException.hpp"
+#include <Switch/System/Collections/Generic/GenericException.hpp>
 #include <Switch/Allocator.hpp>
 #include <Switch/InitializerList.hpp>
 #include <Switch/System/Action.hpp>
