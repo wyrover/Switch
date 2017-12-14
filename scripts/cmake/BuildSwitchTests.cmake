@@ -44,6 +44,15 @@ macro(BuildSwitchTests)
   endif()
 
   #_____________________________________________________________________________________________________________________
+  #                                                                                              Switch.System.UnitTests
+  if (BUILD_TESTS AND BUILD_SWITCH_SYSTEM_CORE)
+    print("  [X] Switch.System.Core.UnitTests")
+    add_subdirectory("tests/Switch.System.Core.UnitTests")
+  else()
+    print("  [ ] Switch.System.Core.UnitTests")
+  endif()
+
+  #_____________________________________________________________________________________________________________________
   #                                                                                    Switch.System.Drawing.ManualTests
   if (BUILD_TESTS AND BUILD_SWITCH_SYSTEM_DRAWING)
     print("  [X] Switch.System.Drawing.ManualTests")
