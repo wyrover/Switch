@@ -16,21 +16,21 @@ namespace Switch {
           /// @brief Initializes a new instance of the HelpEventArgs class.
           /// @param mousePos The coordinates of the mouse pointer.
           HelpEventArgs(const Switch::System::Drawing::Point& mousePos) : handled(false), mousePos(mousePos) {}
-          
+
           /// @brief Gets a value indicating whether the help event was handled.
           /// @return true if the event is handled; otherwise, false. The default is false.
           bool Handled() const { return this->handled; }
-          
+
           /// @brief Gets the screen coordinates of the mouse pointer.
           /// @return A Point representing the screen coordinates of the mouse pointer.
           const Switch::System::Drawing::Point& MousePos() const { return this->mousePos; }
-          
+
           /// @brief Sets a value indicating whether the help event was handled.
           /// @param handled true if the event is handled; otherwise, false. The default is false.
           void Handled(bool handled) {
             this->handled = handled;
           }
-          
+
         private:
           bool handled;
           Switch::System::Drawing::Point mousePos;

@@ -27,17 +27,17 @@ namespace Switch {
           /// @cond
           Button(const Button& button) : ButtonBase(button), isDefault(button.isDefault) {};
           /// @endcond
-          
+
           _property<bool> IsDefault {
             _get {return this->isDefault;},
             _set {this->SetIsDefault(value);}
           };
-          
+
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(75, 25); }
           void SetIsDefault(bool isDefault);
-          
+
           /// @cond
           bool isDefault = false;
           /// @endcond

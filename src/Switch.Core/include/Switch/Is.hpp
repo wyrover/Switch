@@ -19,7 +19,7 @@ namespace Switch {
   bool is(const ref<T>& value) {
     return value.template Is<TT>();
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -32,7 +32,7 @@ namespace Switch {
   bool is(ref<T>& value) {
     return value.template Is<TT>();
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -45,7 +45,7 @@ namespace Switch {
   bool is(const refptr<T>& value) {
     return value.template Is<TT>();
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -58,7 +58,7 @@ namespace Switch {
   bool is(refptr<T>& value) {
     return value.template Is<TT>();
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -77,7 +77,7 @@ namespace Switch {
       return false;
     }
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -95,7 +95,7 @@ namespace Switch {
       return false;
     }
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -108,7 +108,7 @@ namespace Switch {
   bool is(const T& value) {
     return is<TT>(&value);
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -121,32 +121,32 @@ namespace Switch {
   bool is(T& value) {
     return is<TT>(&value);
   }
-  
+
   template<typename T>
   inline bool is(int32 value) {
     return false;
   }
-  
+
   template<>
   inline bool is<int32>(int32 value) {
     return true;
   }
-  
+
   template<typename T>
   inline bool is(double value) {
     return false;
   }
-  
+
   template<>
   inline bool is<double>(double value) {
     return true;
   }
-  
+
   template<typename T>
   inline bool is(float value) {
     return false;
   }
-  
+
   template<>
   inline bool is<float>(float value) {
     return true;

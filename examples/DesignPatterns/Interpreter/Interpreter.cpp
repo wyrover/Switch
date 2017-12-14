@@ -10,25 +10,25 @@ namespace DesignPatterns {
     // The 'Context' class
     class Context: public object {
     };
-    
+
     // The 'AbstractExpression' abstract class
     class AbstractExpression _abstract {
     public:
       virtual void Interpret(const Context& context) const = 0;
     };
-    
+
     // The 'TerminalExpression' class
     class TerminalExpression : public AbstractExpression {
     public:
       void Interpret(const Context& context) const override {Console::WriteLine("Called Terminal.Interpret()");}
     };
-    
+
     // The 'NonterminalExpression' class
     class NonterminalExpression : public AbstractExpression {
     public:
       void Interpret(const Context& context) const override {Console::WriteLine("Called Nonterminal.Interpret()");}
     };
-    
+
     // MainApp _startup class for Behavioral
     // Interpreter Design Pattern.
     class MainApp {
@@ -36,16 +36,16 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         Context context;
-        
+
         // Usually a tree
         ArrayList list;
-        
+
         // Populate 'abstract syntax tree'
         list.Add(TerminalExpression());
         list.Add(NonterminalExpression());
         list.Add(TerminalExpression());
         list.Add(TerminalExpression());
-        
+
         // Interpret
         for (auto exp : list)
           as<AbstractExpression&>(exp).Interpret(context);

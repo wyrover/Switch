@@ -21,7 +21,7 @@ namespace UnitTests {
     ASSERT_FALSE(psi.RedirectStandardInput);
     ASSERT_FALSE(psi.RedirectStandardOutput);
   }
-  
+
   TEST(ProcessStartInfoUnitTest, ConstructorWithFileName) {
     ProcessStartInfo psi("FileName");
     ASSERT_EQ(string::Empty, psi.Arguments);
@@ -37,7 +37,7 @@ namespace UnitTests {
     ASSERT_FALSE(psi.RedirectStandardInput);
     ASSERT_FALSE(psi.RedirectStandardOutput);
   }
-  
+
   TEST(ProcessStartInfoUnitTest, ConstructorWithFileNameAndArgument) {
     ProcessStartInfo psi("FileName", "Arguments");
     ASSERT_EQ("Arguments", psi.Arguments);
@@ -53,7 +53,7 @@ namespace UnitTests {
     ASSERT_FALSE(psi.RedirectStandardInput);
     ASSERT_FALSE(psi.RedirectStandardOutput);
   }
-  
+
   TEST(ProcessStartInfoUnitTest, ConstructorByCopy) {
     ProcessStartInfo psiOriginal("FileName", "Arguments");
     ProcessStartInfo psi = psiOriginal;
@@ -65,14 +65,14 @@ namespace UnitTests {
     ASSERT_EQ(psiOriginal.ErrorDialogParamHandle, psi.ErrorDialogParamHandle);
     ASSERT_EQ(psiOriginal.FileName, psi.FileName);
   }
-  
+
   TEST(ProcessStartInfoUnitTest, SetPasswordThenCheckPasswordInClearText) {
     ProcessStartInfo psi;
     char32 password[] = {'M', 'y', ' ', 'p', 'a', 's', 's', 'w', 'o', 'r', 'd'};
     psi.Pasword = System::Security::SecureString(password, 11);
     ASSERT_EQ("My password", psi.PasswordInClearText);
   }
-  
+
   TEST(ProcessStartInfoUnitTest, SetPasswordInClearTextThenCheckPasswordInClearText) {
     ProcessStartInfo psi;
     psi.PasswordInClearText = "My password";

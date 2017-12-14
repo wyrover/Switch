@@ -13,23 +13,23 @@ namespace Examples {
         for (int counter = 1; counter <= 5; counter++)
           Console::WriteLine("counter = {0}", counter);
       });
-      
+
       // Create a string result task
       Task<string> stringResultTask = Task<>::Run<string>(_delegate() {
         return "This is a string result";
       });
-      
+
       // Wait the two tasks
       Task<>::WaitAll({counterTask, stringResultTask});
-      
+
       // Write on console the result of the second task
       Console::WriteLine(stringResultTask.Result);
-      
+
       // Create action
       Action<> parallelAction = _delegate {
         Console::WriteLine("[TaskId {0}] Run this action in parallel!", Task<>::CurrentId);
       };
-      
+
       // Run 6 actions in parallel.
       Parallel::Invoke(parallelAction, parallelAction, parallelAction, parallelAction, parallelAction, parallelAction);
     }

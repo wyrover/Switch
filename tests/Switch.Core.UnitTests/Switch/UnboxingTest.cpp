@@ -49,91 +49,91 @@ namespace SwitchUnitTests {
   template<typename T> bool IsUIntPtr(T) {return false;}
   bool IsVoidPointer(void*) {return true;}
   template<typename T> bool IsVoidPointer(T) {return false;}
-  
+
   TEST(UnboxTest, UnboxingBoolean) {
     ASSERT_TRUE(IsBool(Unbox(Boolean(true))));
   }
-  
+
   TEST(UnboxTest, UnboxingByte) {
     ASSERT_TRUE(IsByte(Unbox(Byte(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingChar) {
     ASSERT_TRUE(IsChar32(Unbox(Char('c'))));
   }
-  
+
   TEST(UnboxTest, UnboxingDouble) {
     ASSERT_TRUE(IsDouble(Unbox(Double(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingInt16) {
     ASSERT_TRUE(IsInt16(Unbox(Int16(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingInt32) {
     ASSERT_TRUE(IsInt32(Unbox(Int32(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingInt64) {
     ASSERT_TRUE(IsInt64(Unbox(Int64(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingIntPtr) {
     ASSERT_TRUE(IsIntPtr(Unbox(IntPtr((intptr)42))));
   }
-  
+
   TEST(UnboxTest, UnboxingSByte) {
     ASSERT_TRUE(IsSByte(Unbox(SByte(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingSingle) {
     ASSERT_TRUE(IsSingle(Unbox(Single(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingString) {
     ASSERT_TRUE(IsConstCharPointer(Unbox(string("Forty two"))));
   }
-  
+
   TEST(UnboxTest, UnboxingUInt16) {
     ASSERT_TRUE(IsUInt16(Unbox(UInt16(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingUInt32) {
     ASSERT_TRUE(IsUInt32(Unbox(UInt32(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingUInt64) {
     ASSERT_TRUE(IsUInt64(Unbox(UInt64(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingUIntPtr) {
     ASSERT_TRUE(IsUIntPtr(Unbox(UIntPtr((uintptr)42))));
   }
-  
+
   TEST(UnboxTest, UnboxingConstCharPointer) {
     ASSERT_TRUE(IsConstCharPointer(Unbox("Forty two")));
   }
-  
+
   TEST(UnboxTest, UnboxingConstWCharPointer) {
     ASSERT_TRUE(IsConstWCharPointer(Unbox(L"Forty two")));
   }
-  
+
   TEST(UnboxTest, UnboxingConstChar16Pointer) {
     ASSERT_TRUE(IsConstChar16Pointer(Unbox(u"Forty two")));
   }
-  
+
   TEST(UnboxTest, UnboxingConstChar32Pointer) {
     ASSERT_TRUE(IsConstChar32Pointer(Unbox(U"Forty two")));
   }
-  
+
   TEST(UnboxTest, UnboxingTimeSpan) {
     ASSERT_TRUE(is<TimeSpan>(Unbox(12_h + 24_min + 32_s)));
   }
-  
+
   TEST(UnboxTest, UnboxingAny) {
     ASSERT_TRUE(is<Int32>(Unbox(Any(42))));
   }
-  
+
   TEST(UnboxTest, UnboxingMyStruct) {
     struct MyStruct {};
     ASSERT_TRUE(is<MyStruct>(Unbox(MyStruct())));

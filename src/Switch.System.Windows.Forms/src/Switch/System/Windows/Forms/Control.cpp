@@ -20,14 +20,14 @@ namespace {
     static constexpr bool MouseWindowMessage = true;
     static constexpr bool WindowMessage = true;
   };
-  
+
   bool AllWindowMessagesFilter(const Message& message) {
     //return false;
     return true;
     //return message.Msg != WM_TIMER && message.Msg != WM_PAINT && message.Msg != WM_ERASEBKGND;
     //return !message.ToString().Contains("WM_NULL");
   }*/
-  
+
   MouseButtons MessageToMouseButtons(Message message) {
     if (message.Msg == WM_LBUTTONDBLCLK || message.Msg == WM_LBUTTONDOWN || message.Msg == WM_LBUTTONUP)
       return MouseButtons::Left;
@@ -39,7 +39,7 @@ namespace {
       return (message.WParam() & MK_XBUTTON2) == MK_XBUTTON2 ? MouseButtons::XButton2 : MouseButtons::XButton1;
     return MouseButtons::None;
   }
-  
+
   MouseButtons WParamToMouseButtons(Message message) {
     if ((message.WParam & MK_LBUTTON) == MK_LBUTTON)
       return MouseButtons::Left;
@@ -49,7 +49,7 @@ namespace {
       return MouseButtons::Middle;
     return MouseButtons::None;
   }
-  
+
   System::Drawing::Point MakePoint(intptr param) {
     Array<byte> bytes = BitConverter::GetBytes(param);
     return System::Drawing::Point(BitConverter::ToInt16(bytes, 0), BitConverter::ToInt16(bytes, 2));
@@ -260,7 +260,7 @@ void Control::WndProc(Message& message) {
       if (!ReflectMessage(message.LParam, message))
         DefWndProc(message);
       break;
-      
+
     default:
       //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::AllWindowMessages && AllWindowMessagesFilter(message), "DefWndProc message=" + message + ", name=" + this->name);
       this->DefWndProc(message);
@@ -386,7 +386,7 @@ void Control::WmKeyChar(Message& message) {
     KeyEventArgs keyEventArgs((Keys)message.WParam());
     OnKeyUp(keyEventArgs);
   }
-  
+
   this->DefWndProc(message);
 }
 

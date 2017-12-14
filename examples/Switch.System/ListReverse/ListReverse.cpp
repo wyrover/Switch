@@ -9,26 +9,26 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       List<string> dinosaurs;
-      
+
       dinosaurs.Add("Pachycephalosaurus");
       dinosaurs.Add("Parasauralophus");
       dinosaurs.Add("Mamenchisaurus");
       dinosaurs.Add("Amargasaurus");
       dinosaurs.Add("Coelophysis");
       dinosaurs.Add("Oviraptor");
-      
+
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-        
+
       dinosaurs.Reverse();
-      
+
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-        
+
       dinosaurs.Reverse(1, 4);
-      
+
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);

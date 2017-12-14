@@ -15,7 +15,7 @@ namespace Examples {
       // Populate the queue.
       for (int i = 0; i < 10000; i++)
         cq.Enqueue(i);
-        
+
       // Peek at the first element.
       int result;
       if (!cq.TryPeek(result))
@@ -24,24 +24,24 @@ namespace Examples {
         if (result != 0)
           Console::WriteLine("CQ: Expected TryPeek result of 0, got {0}", result);
       }
-      
+
       // An action to consume the ConcurrentQueue.
       Array<refptr<Thread>> actions(4);
-      
+
       for (int i = 0; i < 4; i++)
         actions[i] = ref_new<Thread>((ThreadStart)&Program::ActionTryDequeue);
-        
+
       // Start 4 concurrent consuming actions.
       for (int i = 0; i < 4; i++)
         actions[i]->Start();
-        
+
       // Join 4 concurrent consuming actions.
       for (int i = 0; i < 4; i++)
         actions[i]->Join();
-        
+
       Console::WriteLine("outerSum = {0}, should be 49995000", outerSum);
     }
-    
+
   private:
     static void ActionTryDequeue() {
       int localSum = 0;
@@ -50,11 +50,11 @@ namespace Examples {
         localSum += localValue;
       Interlocked::Add(outerSum, localSum);
     };
-    
+
     static ConcurrentQueue<int> cq;
     static int outerSum;
   };
-  
+
   ConcurrentQueue<int> Program::cq;
   int Program::outerSum = 0;
 }

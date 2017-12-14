@@ -13,7 +13,7 @@ namespace Examples {
       myAL.Add("Hello");
       myAL.Add("World");
       myAL.Add("!");
-      
+
       // Displays the properties and values of the ArrayList.
       Console::WriteLine("myAL");
       Console::WriteLine("    Count:    {0}", myAL.Count);
@@ -21,7 +21,7 @@ namespace Examples {
       Console::Write("    Values:");
       PrintValues(myAL);
     }
-    
+
   private:
     static void PrintValues(const IEnumerable& myList) {
       for (Any obj : myList)

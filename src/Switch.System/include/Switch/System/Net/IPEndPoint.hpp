@@ -20,34 +20,34 @@ namespace Switch {
       public:
         /// @brief Specifies the minimum value that can be assigned to the Port property. The MinPort value is set to 0x00000000. This field is read-only.
         static _property<int32, _readonly> MinPort;
-        
+
         /// @brief Specifies the maximum value that can be assigned to the Port property. The MaxPort value is set to 0x0000FFFF. This field is read-only.
         static _property<int32, _readonly> MaxPort;
-        
+
         /// @brief Initializes a new instance of the EndPoint class.
         /// @param address The IP address of the Internet host.
         /// @param port The port number associated with the address, or 0 to specify any available port. port is in host order.
         /// @exception ArgumentOutOfRangeException port is less than IPEndPoint::MinPort. -or- port is greater than IPEndPoint::MaxPort.
         IPEndPoint(int64 address, int32 port);
-        
+
         /// @brief Initializes a new instance of the EndPoint class.
         /// @param address An IPAddress.
         /// @param port The port number associated with the address, or 0 to specify any available port. port is in host order.
         /// @exception ArgumentNullException The address parameter is a null.
         /// @exception ArgumentOutOfRangeException port is less than IPEndPoint::MinPort. -or- port is greater than IPEndPoint::MaxPort.
         IPEndPoint(const IPAddress& address, int32 port);
-        
+
         /// @cond
         IPEndPoint() = default;
         IPEndPoint(const IPEndPoint& ipEndPoint) : EndPoint(ipEndPoint), address(ipEndPoint.address), port(ipEndPoint.port) {}
         /// @endcond
-        
+
         /// @brief Creates an EndPoint instance from a SocketAddress instance.
         /// @param socketAddress The socket address that serves as the endpoint for a connection.
         /// @return A new EndPoint instance that is initialized from the specified SocketAddress instance.
         /// @exception NotSupportedException Any attempt is made to access the method when the method is not overridden in a descendant class.
         refptr<EndPoint> Create(const SocketAddress& socketAddress) const override;
-        
+
         /// @brief Gets the IP address of the endpoint.
         /// @param value An IPAddress instance containing the IP address of the endpoint.
         /// @exception ArgumentNullException The address parameter is a null.
@@ -55,7 +55,7 @@ namespace Switch {
           _get->const IPAddress& { return this->address; },
           _set {this->SetAddress(value);}
         };
-        
+
         /// @brief Gets or sets the port number of the endpoint.
         /// @param value An integer value in the range MinPort to MaxPort indicating the port number of the endpoint.
         /// @exception ArgumentOutOfRangeException port is less than IPEndPoint::MinPort. -or- port is greater than IPEndPoint::MaxPort.
@@ -63,19 +63,19 @@ namespace Switch {
           _get { return this->port; },
           _set {this->SetPort(value);}
         };
-        
+
         /// @brief Serializes endpoint information into a SocketAddress instance.
         /// @return A new SocketAddress instance that contains the endpoint information.
         SocketAddress Serialize() const override;
-        
+
         /// @brief Returns a string that represents the current object.
         /// @return string A string that represents the current object.
         String ToString() const override;
-        
+
       private :
         void SetAddress(const IPAddress& address);
         void SetPort(int32 port);
-        
+
         IPAddress address;
         int32 port = 0;
       };

@@ -17,39 +17,39 @@ namespace Switch {
         class _export ImageFormat : public object {
         public:
           static _property<ImageFormat, _readonly> Bmp;
-          
+
           static _property<ImageFormat, _readonly> Emf;
-          
+
           static _property<ImageFormat, _readonly> Exif;
-          
+
           static _property<ImageFormat, _readonly> Gif;
-          
+
           static _property<ImageFormat, _readonly> Icon;
-          
+
           static _property<ImageFormat, _readonly> Jpeg;
-          
+
           static _property<ImageFormat, _readonly> MemoryBmp;
-          
+
           static _property<ImageFormat, _readonly> Png;
-          
+
           static  _property<ImageFormat, _readonly> Tiff;
-          
+
           static _property<ImageFormat, _readonly> Wmf;
-          
+
           ImageFormat() = default;
           ImageFormat(const Guid& guid) : guid(guid) {}
           ImageFormat(const string name, const Guid& guid) : name(name), guid(guid) {}
           ImageFormat(const string name, const string& guid) : name(name), guid(guid) {}
           ImageFormat(const ImageFormat& format) : name(format.name), guid(format.guid) {}
-          
+
           _property<System::Guid, _readonly> Guid {
             _get {return this->guid;}
           };
-          
+
           _property<string, _readonly> Name {
             _get {return this->name;}
           };
-          
+
         private:
           string name;
           System::Guid guid;

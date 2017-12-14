@@ -50,14 +50,14 @@ DirectoryInfo DirectoryInfo::CreateSubdirectory(const string& path) {
 void DirectoryInfo::Delete(bool recursive) {
   if (!this->Exists())
     throw Security::SecurityException(_caller);
-    
+
   if (recursive) {
     for (string item : Native::DirectoryApi::EnumerateFiles(this->fullPath, "*"))
       File::Delete(Path::Combine(this->fullPath, item));
     for (string item : Native::DirectoryApi::EnumerateDirectories(this->fullPath, "*"))
       Directory::Delete(Path::Combine(this->fullPath, item), true);
   }
-  
+
   if (Native::DirectoryApi::RemoveDirectory(this->fullPath) != 0)
     throw IOException(_caller);
 }
@@ -78,21 +78,21 @@ Array<DirectoryInfo> DirectoryInfo::GetDirectories(const string& searchPattern) 
 
 void DirectoryInfo::MoveTo(const string& destDirName) {
   DirectoryInfo destDirInfo(destDirName);
-  
+
   if (destDirName == "" || destDirInfo.Exists() || Equals(destDirInfo) || !Path::GetPathRoot(this->FullName).Equals(Path::GetPathRoot(destDirInfo.FullName)) || destDirInfo.FullName().StartsWith(this->FullName))
     throw IOException(_caller);
-    
+
   if (!destDirInfo.Exists())
     throw DirectoryNotFoundException(_caller);
-    
+
   string targetDirName = Path::Combine(destDirName, this->fullPath.Substring(this->fullPath.LastIndexOf(Path::DirectorySeparatorChar()) + 1));
   Directory::CreateDirectory(targetDirName);
-  
+
   for (string item : Native::DirectoryApi::EnumerateFiles(this->fullPath, "*"))
     File::Move(Path::Combine(this->fullPath, item), Path::Combine(targetDirName, item));
   for (string item : Native::DirectoryApi::EnumerateDirectories(this->fullPath, "*"))
     Directory::Move(Path::Combine(this->fullPath, item), Path::Combine(targetDirName, item));
-    
+
   Delete();
   this->fullPath = targetDirName;
 }

@@ -8,7 +8,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       string str = string::Join(Environment::NewLine, {"Red", "Blue", "Green", "Yellow", "Gray"});
-      
+
       for (char32 item : str)
         Console::Write(item);
     }

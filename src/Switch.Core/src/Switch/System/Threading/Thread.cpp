@@ -22,7 +22,7 @@ void Thread::ThreadItem::RunWithOrWithoutParam(const object* obj, bool withParam
     this->parameterizedThreadStart(*obj);
   else
     this->threadStart();
-    
+
   this->state |= System::Threading::ThreadState::Stopped;
   this->endThreadEvent.Set();
   if (Enum<System::Threading::ThreadState>(this->state).HasFlag(System::Threading::ThreadState::Background)) {
@@ -59,7 +59,7 @@ Thread& Thread::CurrentThread() {
     if (item.data->thread.get_id() == id || item.data->detachedThreadId == id || item.data->mainThreadId == id)
       return item;
   }
-  
+
   static Thread thread;
   thread.data->state &= ~System::Threading::ThreadState::Unstarted;
   thread.data->state |= System::Threading::ThreadState::Background;
@@ -69,15 +69,15 @@ Thread& Thread::CurrentThread() {
 void Thread::Abort() {
   if (this->data->managedThreadId == NoneManagedThreadId)
     throw InvalidOperationException(_caller);
-    
+
   if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) || Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Suspended))
     throw ThreadStateException(_caller);
-    
+
   this->data->state |= System::Threading::ThreadState::AbortRequested;
-  
+
   if (this->data->managedThreadId == MainManagedThreadId && CurrentThread().MainManagedThreadId == MainManagedThreadId)
     Environment::Exit(0);
-    
+
   if (Cancel() == true) {
     this->data->state |= System::Threading::ThreadState::Aborted;
     this->data->state &= ~System::Threading::ThreadState::AbortRequested;
@@ -113,7 +113,7 @@ void Thread::Close() {
 bool Thread::DoWait(WaitHandle& waitHandle, int32 millisecondsTimeOut) {
   if (millisecondsTimeOut < -1)
     throw ArgumentException(_caller);
-    
+
   CurrentThread().data->state |= System::Threading::ThreadState::WaitSleepJoin;
   if (CurrentThread().data->interrupted)
     CurrentThread().Interrupt();
@@ -132,17 +132,17 @@ bool Thread::DoWait(WaitHandle& waitHandle, int32 millisecondsTimeOut) {
 void Thread::Interrupt() {
   if (this->data->managedThreadId == NoneManagedThreadId || this->data->managedThreadId == MainManagedThreadId)
     throw InvalidOperationException(_caller);
-    
+
   if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted))
     throw ThreadStateException(_caller);
-    
+
   if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::WaitSleepJoin) && Cancel() == true) {
     this->data->state &= ~System::Threading::ThreadState::WaitSleepJoin;
     this->data->interrupted = false;
     this->data->endThreadEvent.Set();
     throw ThreadInterruptedException(_caller);
   }
-  
+
   this->data->interrupted = true;
 }
 
@@ -151,7 +151,7 @@ void Thread::Resume() {
     throw InvalidOperationException(_caller);
   if (!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Suspended))
     throw ThreadStateException(_caller);
-    
+
   Native::ThreadApi::Resume((intptr)this->data->thread.native_handle());
   this->data->state &= ~System::Threading::ThreadState::Suspended;
 }
@@ -159,7 +159,7 @@ void Thread::Resume() {
 void Thread::SetName(const string& name) {
   if (!string::IsNullOrEmpty(this->data->name))
     throw InvalidOperationException(_caller);
-    
+
   this->data->name = name;
   if (this->data->managedThreadId == CurrentThread().ManagedThreadId)
     this->data->SetNameThreadForDebugger();
@@ -168,14 +168,14 @@ void Thread::SetName(const string& name) {
 void Thread::SetPriority(ThreadPriority priority) {
   if (Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Aborted) || Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Stopped))
     throw ThreadStateException(_caller);
-    
+
   this->data->priority = priority;
   if (this->data->managedThreadId == MainManagedThreadId && CurrentThread().ManagedThreadId == MainManagedThreadId) {
     if (ThreadItem::SetPriority((Thread::NativeHandle)Native::ThreadApi::GetCurrent(), priority) != true)
       throw ThreadStateException(_caller);
     return;
   }
-  
+
   if (!Enum<System::Threading::ThreadState>(this->data->state).HasFlag(System::Threading::ThreadState::Unstarted) && this->data->SetPriority() != true)
     throw ThreadStateException(_caller);
 }
@@ -185,7 +185,7 @@ void Thread::Suspend() {
     throw InvalidOperationException(_caller);
   if (!this->IsAlive())
     throw ThreadStateException(_caller);
-    
+
   this->data->state |= System::Threading::ThreadState::SuspendRequested;
   Native::ThreadApi::Suspend((intptr)this->data->thread.native_handle());
   this->data->state |= System::Threading::ThreadState::Suspended;

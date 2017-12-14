@@ -11,7 +11,7 @@ namespace Examples {
         Console::WriteLine("Signal {0} intercepted !", e.SpecialKey);
         e.Cancel = true;
       };
-      
+
       while (true) {
         if (Console::KeyAvailable) {
           ConsoleKeyInfo keyInfo = Console::ReadKey(true);

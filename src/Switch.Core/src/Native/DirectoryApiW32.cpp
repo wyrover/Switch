@@ -22,35 +22,35 @@ namespace {
       File,
       Directory
     };
-    
+
     Enumerator(const string& path, const string& pattern, FileType fileType) : path(path), pattern(pattern), fileType(fileType) {}
     ~Enumerator() { Reset(); }
-    
+
     bool MoveNext() override {
       WIN32_FIND_DATAA item;
       string searchPattern = string::Format("{0}{1}{2}", this->path, this->path.EndsWith('\\') ? "" : System::Char('\\').ToString(), this->pattern);
       bool result = this->handle == null ? (this->handle = FindFirstFileA(searchPattern.Data(), &item)) != null : FindNextFileA(this->handle, &item) != FALSE;
       while (result == true && (((this->fileType == FileType::Directory && (item.dwFileAttributes & 0x0010) != 0x0010) || (this->fileType == FileType::File && (item.dwFileAttributes & 0x0010) == 0x0010)) || string(item.cFileName) == "." || string(item.cFileName) == ".."))
         result = FindNextFileA(this->handle, &item) != FALSE;
-        
+
       if (result)
         this->current = string::Format("{0}{1}{2}", this->path, this->path.EndsWith('\\') ? "" : System::Char('\\').ToString(), item.cFileName);
       return result;
     }
-    
+
     void Reset() override {
       if (this->handle != null)
         FindClose(this->handle);
       this->handle = null;
     }
-    
+
   protected:
     const string& GetCurrent() const override {
       if (this->handle == null)
         throw System::InvalidOperationException(_caller);
       return this->current;
     }
-    
+
   private:
     string path;
     string pattern;
@@ -129,7 +129,7 @@ int64 Native::DirectoryApi::GetFileSize(const string& path) {
   void* handle = FindFirstFileA(path.Data(), &file);
   if (handle == INVALID_HANDLE_VALUE)
     return 0;
-    
+
   ULARGE_INTEGER size;
   size.HighPart = file.nFileSizeHigh;
   size.LowPart = file.nFileSizeLow;
@@ -166,13 +166,13 @@ string Native::DirectoryApi::GetKnowFolderPath(System::Environment::SpecialFolde
 string Native::DirectoryApi::GetTempPath() {
   if (getenv("TMP") != null)
     return getenv("TMP");
-    
+
   if (getenv("TEMP") != null)
     return getenv("TEMP");
-    
+
   if (getenv("USERPROFILE") != null)
     return getenv("USERPROFILE");
-    
+
   return getenv("WINDIR");
 }
 

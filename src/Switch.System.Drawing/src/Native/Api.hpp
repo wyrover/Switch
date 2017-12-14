@@ -15,13 +15,13 @@ namespace Native {
     static intptr CreateSolidBrush(const System::Drawing::Color& color);
     static void DeleteBrush(intptr handle);
   };
-  
+
   class PenApi _static {
   public:
     static intptr CreatePen(const System::Drawing::Drawing2D::DashStyle& dashStyle, int32 width, const System::Drawing::Color& color);
     static void DeletePen(intptr handle);
   };
-  
+
   class FontFamilyApi _static {
   public:
     static System::Array<System::Drawing::FontFamily> GetInstalledFontFamilies();
@@ -30,7 +30,7 @@ namespace Native {
     static bool IsStyleAvailable(intptr handle, System::Drawing::FontStyle style);
     static void ReleaseResource(intptr handle);
   };
-  
+
   class GdiApi _static {
   public:
     //static intptr BeginPaint(intptr hwnd, System::Drawing::Rectangle& clipRectangle);
@@ -43,7 +43,7 @@ namespace Native {
     static void FillPie(intptr hdc, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h, float startAngle, float sweepAngle);
     static void FillRectangle(intptr hdc, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h);
   };
-  
+
   class SystemColorsApi _static {
   public:
     static int32 GetActiveBorder();

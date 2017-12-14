@@ -27,39 +27,39 @@ namespace Switch {
           SerialPort(const SerialPort& serialPort) = delete;
           SerialPort& operator=(const SerialPort& serialPort) = delete;
           /// @endcond
-          
+
           SerialPort(const String& port) : port(port) {}
-          
+
           SerialPort(const String& port, int32 baudRate) : port(port), baudRate(baudRate) {}
-          
+
           SerialPort(const String& port, int32 baudRate, Parity parity) : port(port), baudRate(baudRate), parity(parity) {}
-          
+
           SerialPort(const String& port, int32 baudRate, Parity parity, int32 dataBits) : port(port), baudRate(baudRate), parity(parity), dataBits(dataBits) {}
-          
+
           SerialPort(const String& port, int32 baudRate, Parity parity, int32 dataBits, StopBits stopBits) : port(port), baudRate(baudRate), parity(parity), dataBits(dataBits), stopBits(stopBits) {}
-          
+
           static Array<String> GetPortNames();
-          
+
           _property<int32, _readonly> BaudRate {
             _get {return this->baudRate;}
           };
-          
+
           _property<int32, _readonly> DataBits {
             _get {return this->dataBits;}
           };
-          
+
           _property<System::IO::Ports::Parity, _readonly> Parity {
             _get {return this->parity;}
           };
-          
+
           _property<const string&, _readonly> Port {
             _get->const string& {return this->port;}
           };
-          
+
           _property<System::IO::Ports::StopBits, _readonly> StopBits {
             _get {return this->stopBits;}
           };
-          
+
         private:
           String port;
           int32 baudRate = 9600;

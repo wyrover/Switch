@@ -23,7 +23,7 @@ namespace Switch {
       /// | Zero              | This instance is equal to obj.     |
       /// | Greater than zero | This instance is greater than obj. |
       virtual int32 CompareTo(const IComparable& obj) const = 0;
-      
+
       ///@cond
       // Not correct for an interface but necessary for C++ language.
       bool operator<(const IComparable& obj) const { return CompareTo(obj) < 0; }

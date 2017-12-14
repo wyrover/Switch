@@ -12,7 +12,7 @@ namespace Examples {
       Console::WriteLine("a {0} value", a.HasValue ? "has" : "hasn't");
       Console::WriteLine("a = {0}", a);
       Console::WriteLine();
-      
+
       // Assign integer to a
       a = 42;
       Console::WriteLine("a = {0}", a);
@@ -21,7 +21,7 @@ namespace Examples {
       int i = a;
       Console::WriteLine("i = {0}", i);
       Console::WriteLine();
-      
+
       // Assign string to a
       a = "Hello, World!";
       Console::WriteLine("a = {0}", a);
@@ -30,7 +30,7 @@ namespace Examples {
       string s = a;
       Console::WriteLine("s = {0}", s);
       Console::WriteLine();
-      
+
       // Cast any of type string into a int
       try {
         int i2 = a;

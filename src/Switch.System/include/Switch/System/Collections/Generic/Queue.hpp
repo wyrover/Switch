@@ -40,7 +40,7 @@ namespace Switch {
         public:
           /// @brief Initializes a new instance of the Queue<T> class that is empty and has the default initial capacity.
           Queue() : capacity(0), operationNumber(0) {}
-          
+
           /// @brief Initializes a new instance of the System::Collections::Generic::Queue<T> class
           /// that contains elements copied from the specified collection and has sufficient
           /// capacity to accommodate the number of elements copied.
@@ -50,36 +50,36 @@ namespace Switch {
             for (const T& item : collection)
               Enqueue(item);
           }
-          
+
           /// @brief Initializes a new instance of the System::Collections::Generic::Queue<T> class
           /// that is empty and has the specified initial capacity.
           /// @param capacity The initial number of elements that the System::Collections::Generic::Queue<T>
           ///                 can contain.
           /// @exception System::ArgumentOutOfRangeException capacity is less than zero.
           Queue(int32 capacity) : capacity(capacity), operationNumber(0) {}
-          
+
           /// @brief Default copy constructor
           /// @param queue the Queue<T> which elements will be inserted from
           Queue(const Queue& queue) : queue(queue.queue), capacity(queue.capacity), operationNumber(queue.operationNumber) {}
-          
+
           /// @cond
           Queue(InitializerList<T> il) : operationNumber(0) {
             for (const T& item : il)
               this->Enqueue(item);
           }
-          
+
           Queue(Queue&& queue) : queue(Move(queue.queue)), capacity(queue.capacity), operationNumber(queue.operationNumber) {
             queue.capacity = 0;
             queue.operationNumber = 0;
           }
           /// @endcond
-          
+
           /// @brief Removes all elements from the Queue<T>.
           void Clear() override {
             this->operationNumber++;
             this->queue.clear();
           }
-          
+
           /// @brief Determines whether an element is in the System::Collections::Generic::Queue<T>.
           /// @param item The object to locate in the System::Collections::Generic::Queue<T>. The value
           ///             can be null for reference types.
@@ -91,7 +91,7 @@ namespace Switch {
               if (*it == value) return true;
             return false;
           }
-          
+
           /// @brief Copies the System::Collections::Generic::Queue<T> elements to an existing one-dimensional
           /// System::Array, starting at the specified array index.
           /// @param array The one-dimensional System::Array that is the destination of the elements
@@ -107,12 +107,12 @@ namespace Switch {
             //_list.CopyTo(array, arrayIndex);
             if (arrayIndex < 0) throw ArgumentOutOfRangeException(_caller);
             if (arrayIndex + this->Count > array.Length) throw ArgumentException(_caller);
-            
+
             typename std::list<T, TAllocator>::const_iterator it;
             for (it = this->queue.begin(); it != this->queue.end() ; it++)
               array[arrayIndex++] = *it;
           }
-          
+
           /// @brief Removes and returns the object at the beginning of the System::Collections::Generic::Queue<T>.
           /// @return The object that is removed from the beginning of the System::Collections::Generic::Queue<T>.
           /// @exception System::InvalidOperationException The System::Collections::Generic::Queue<T> is empty.
@@ -122,7 +122,7 @@ namespace Switch {
             this->operationNumber++;
             return copy;
           }
-          
+
           /// @brief Adds an object to the end of the System::Collections::Generic::Queue<T>.
           /// @param item The object to add to the System::Collections::Generic::Queue<T>. The value can be null for reference types.
           void Enqueue(const T& value) {
@@ -130,13 +130,13 @@ namespace Switch {
             this->operationNumber++;
             if (this->capacity < static_cast<int32>(this->queue.size())) this->capacity = static_cast<int32>(this->queue.size());
           }
-          
+
           /// @brief Returns an enumerator that iterates through the System::Collections::Generic::Queue<T>.
           /// @return An System::Collections::Generic::Queue<T>.Enumerator for the System::Collections::Generic::Queue<T>.
           System::Collections::Generic::Enumerator<T> GetEnumerator() const override {
             return System::Collections::Generic::Enumerator<T>(new Queue::Enumerator(*const_cast<Queue*>(this)));
           }
-          
+
           /// @brief Returns the object at the beginning of the System::Collections::Generic::Queue<T>
           /// without removing it.
           /// @return The object at the beginning of the System::Collections::Generic::Queue<T>.
@@ -144,17 +144,17 @@ namespace Switch {
           const T& Peek() const {
             if (this->queue.size() == 0)
               throw InvalidOperationException(_caller);
-              
+
             return this->queue.front();
           }
-          
+
           T& Peek() {
             if (this->queue.size() == 0)
               throw InvalidOperationException(_caller);
-              
+
             return this->queue.front();
           }
-          
+
           /// @brief Copies the System::Collections::Generic::Queue<T> elements to a new array.
           /// @return A new array containing elements copied from the System::Collections::Generic::Queue<T>.
           Array<T> ToArray() const {
@@ -163,16 +163,16 @@ namespace Switch {
             int32 index = 0;
             for (it = this->queue.begin(); it != this->queue.end() ; it++)
               array[index++] = *it;
-              
+
             return array;
           }
-          
+
           /// @brief Sets the capacity to the actual number of elements in the System::Collections::Generic::Queue<T>,
           /// if that number is less than 90 percent of current capacity.
           void TrimExcess() {
             // capacity is not supported by STL
           }
-          
+
           /// @brief Copies the elements in queue to the current queue (they are equal after this operation).
           /// @return a reference to the current queue.
           Queue& operator=(const Queue& queue) {
@@ -183,11 +183,11 @@ namespace Switch {
               this->queue.push_back(*it);
             return *this;
           }
-          
+
           /// @cond
           using const_iterator = typename std::list<T, TAllocator>::const_iterator;
           using iterator = typename std::list<T, TAllocator>::iterator;
-          
+
           const_iterator cbegin() const {return this->queue.begin();}
           const_iterator cend() const {return this->queue.end();}
           iterator begin() {return this->queue.begin();}
@@ -195,7 +195,7 @@ namespace Switch {
           iterator end() {return this->queue.end();}
           const_iterator end() const {return this->queue.end();}
           /// @endcond
-          
+
         protected:
           /// @cond
           std::list<T, TAllocator> queue;
@@ -203,53 +203,53 @@ namespace Switch {
           int32 operationNumber;
           Object syncRoot;
           /// @endcond
-          
+
         private:
           int32 GetCount() const override {return static_cast<int32>(this->queue.size());}
           bool GetIsReadOnly() const override {return false;}
           bool GetIsSynchronized() const override {return false;}
           const Object& GetSyncRoot() const override {return this->syncRoot;}
-          
+
           class Enumerator : public Object, public IEnumerator<T> {
           public:
             Enumerator(Queue& queue) : queue(queue) {Reset();}
-            
+
             void Reset() {
               this->beforeFirst = true;
               this->operationNumber = this->queue.operationNumber;
               this->iterator = this->queue.queue.begin();
             }
-            
+
             virtual bool MoveNext() {
               if (this->operationNumber != this->queue.operationNumber)
                 throw InvalidOperationException(_caller);
-                
+
               if (IsFinished())
                 return false;
-                
+
               if (this->beforeFirst)
                 this->beforeFirst = false;
               else
                 this->iterator++;
-                
+
               return !IsFinished();
             }
-            
+
           protected:
             const T& GetCurrent() const {
               if (this->beforeFirst || IsFinished())
                 throw InvalidOperationException(_caller);
-                
+
               return *this->iterator;
             }
-            
+
             bool IsFinished() const {return this->iterator == this->queue.queue.end();}
             int64 operationNumber;
             bool beforeFirst;
             Queue& queue;
             typename std::list<T, TAllocator>::iterator iterator;
           };
-          
+
           void Add(const T&) override {}
           bool Remove(const T&) override {return false;}
         };

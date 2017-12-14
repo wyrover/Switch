@@ -18,7 +18,7 @@ namespace Switch {
       class _export FileSystemEventArgs : public EventArgs {
       public:
         FileSystemEventArgs(WatcherChangeTypes changeType, const string directory, const string name) : changeType(changeType), directory(directory), name(name) {}
-        
+
         /// @cond
         FileSystemEventArgs(const FileSystemEventArgs& fsea) : changeType(fsea.changeType), directory(fsea.directory), name(fsea.name) {}
         FileSystemEventArgs& operator=(const FileSystemEventArgs& fsea) {
@@ -28,19 +28,19 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-        
+
         _property<WatcherChangeTypes, _readonly> ChangeType {
           _get {return this->changeType;}
         };
-        
+
         _property<string, _readonly> Directory {
           _get {return this->directory;}
         };
-        
+
         _property<string, _readonly> Name {
           _get {return this->name;}
         };
-        
+
       private:
         WatcherChangeTypes changeType;
         string directory;

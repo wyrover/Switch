@@ -13,11 +13,11 @@ namespace Switch {
       struct RegisteredMethod : public object {
         RegisteredMethod(const string& name, delegate<void> method, const System::Runtime::CompilerServices::Caller& caller) : RegisteredMethod(name, method, false, caller) {}
         RegisteredMethod(const string& name, delegate<void> method, bool ignore, const System::Runtime::CompilerServices::Caller& caller) : name(name), method(method), ignore(ignore), caller(caller) {}
-        
+
       private:
         friend struct TestFixture;
         friend class UnitTest;
-        
+
         string name;
         delegate<void> method;
         bool ignore = false;

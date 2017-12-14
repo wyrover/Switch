@@ -147,7 +147,7 @@ namespace Switch {
         /// @brief The file system directory that acts as a staging area for files waiting to be written to a CD.
         CDBurning = 59
       };
-      
+
       /// @brief Specifies options to use for getting the path to a special folder.
       /// @remarks The System.Environment.SpecialFolderOption enumeration is used to define the precise behavior of the Environment.GetFolderPath method.
       enum class SpecialFolderOption {
@@ -158,7 +158,7 @@ namespace Switch {
         /// @brief The path to the folder is created if it does not already exist.
         Create = 32768
       };
-      
+
       /// @brief Gets the command line for this process.
       /// @return string A string represented the command line for this process.
       /// @remarks This property provides access to the program name and any arguments specified on the command line when the current process was started.
@@ -168,7 +168,7 @@ namespace Switch {
       /// The following example displays its own command line.
       /// @include EnvironmentCommandLine.cpp
       static _property<String, _readonly> CommandLine;
-      
+
       /// @brief Gets or sets the current working directory.
       /// @param The current working directory. An empty string return value indicates an error,
       /// @exception IO::IOError An I/O error occurred.
@@ -182,11 +182,11 @@ namespace Switch {
       /// The following example demonstrates setting the CurrentDirectory property.
       /// @include EnvironmentCurrentDirectory.cpp
       static _property<string> CurrentDirectory;
-      
+
       /// @brief Gets a unique identifier for the current managed thread.
       /// @return int32 An integer that represents a unique identifier for this managed thread.
       static _property<int32, _readonly> CurrentManagedThreadId;
-      
+
       /// @brief Gets or sets the exit code of the process.
       /// @return Int32 A 32-bit signed integer containing the exit code. The default value is zero.
       /// @remarks If the Main method returns void, you can use this property to set the exit code that will be returned to the calling environment. If Main does not return void, this property is ignored. The initial value of this property is zero.
@@ -243,20 +243,20 @@ namespace Switch {
       /// Note that code for EnvironmentExitCode is identical in function to the following example, except that the former defines an entry point named Main that has no return value, whereas this example defines an entry point named Main that returns an integer.
       /// @include EnvironmentExitCode2.cpp
       static _property<int32> ExitCode;
-      
+
       /// @brief Gets a value that indicates whether the current application domain is shutting down.
       /// @return bool true if the current application domain is shutting down; otherwise, false.
       /// @remarks At this time the return value is always false.
       static _property<bool, _readonly> HasShutdownStarted;
-      
+
       /// @brief Determines whether the current operating system is a 64-bit operating system.
       /// @return bool true if the operating system is 64-bit; otherwise, false.
       static _property<bool, _readonly> Is64BitOperatingSystem;
-      
+
       /// @brief Determines whether the current process is a 64-bit process.
       /// @return bool true if the process is 64-bit; otherwise, false.
       static _property<bool, _readonly> Is64BitProcess;
-      
+
       /// @brief Gets the NetBIOS name of this local computer.
       /// @return string A string containing the name of this computer.
       /// @exception InvalidOperationException The name of this computer cannot be obtained.
@@ -265,7 +265,7 @@ namespace Switch {
       /// The following example displays the name of the computer that runs the code example. (The machine name is omitted from the example output for security reasons.)
       /// @include EnvironmentMachineName.cpp
       static _property<String, _readonly> MachineName;
-      
+
       /// @brief Gets the newline string defined for this environment.
       /// @return string A string containing "\r\n" for non-Unix platforms, or a string containing "\n" for Unix platforms.
       /// @remarks The property value of NewLine is a constant customized specifically for the current platform and implementation of the Switch. For more information about the escape characters in the property value, see Character Escapes in Regular Expressions.
@@ -275,7 +275,7 @@ namespace Switch {
       /// The following example displays three lines separated by newlines.
       /// @include EnvironmentNewLine.cpp
       static _property<String, _readonly> NewLine;
-      
+
       /// @brief Gets an OperatingSystem object that contains the current platform identifier and version number.
       /// @return OperatingSystem An object that contains the platform identifier and version number.
       /// @note Starting with Windows 8, the OSVersion property returns the same major and minor version numbers for all Windows platforms. Therefore, we do not recommend that you retrieve the value of this property to determine the operating system version.
@@ -287,7 +287,7 @@ namespace Switch {
       /// The following example displays the platform identifier and version number of the computer that runs the code example.
       /// @include EnvironmentOSVersion.cpp
       static _property<const OperatingSystem&, _readonly> OSVersion;
-      
+
       /// @brief Gets the number of processors on the current machine.
       /// @return int32 The 32-bit signed integer that specifies the number of processors on the current machine. There is no default. If the current machine contains multiple processor groups, this property returns the number of logical processors.
       /// @remarks For more information about processor groups and logical processors, see Processor Groups.
@@ -295,7 +295,7 @@ namespace Switch {
       /// The following example demonstrates the ProcessorCount property.
       /// @include EnvironmentProcessorCount.cpp
       static _property<int32, _readonly> ProcessorCount;
-      
+
       /// @brief Gets current stack trace information.
       /// @return string A string containing stack trace information. This value can be string.Empty.
       /// @remarks The StackTrace property lists method calls in reverse chronological order, that is, the most recent method call is described first, and one line of stack trace information is listed for each method call on the stack. However, the StackTrace property might not report as many method calls as expected due to code transformations that occur during optimization.
@@ -313,7 +313,7 @@ namespace Switch {
       /// The following example demonstrates the StackTrace property.
       /// @include EnvironmentStackTrace.cpp
       static _property<String, _readonly> StackTrace;
-      
+
       /// @brief Gets the fully qualified path of the system directory.
       /// @return string A string containing a directory path.
       /// @remarks An example of the value returned is the string "C:\WinNT\System32".
@@ -321,14 +321,14 @@ namespace Switch {
       /// The following example displays the system directory of the computer that runs the code example. (The system directory is omitted from the example output for security reasons.)
       /// @include EnvironmentsystemDirectory.cpp
       static _property<String, _readonly> SystemDirectory;
-      
+
       /// @brief Gets the number of bytes in the operating system's memory page.
       /// @return The number of bytes in the system memory page.
       /// @remarks This information can be useful when determining whether to use the MemoryMappedFileOptions.DelayAllocatePages option when you work with memory-mapped files.
       /// @remarks In Windows, this value is the dwPageSize member in the SYSTEM_INFO structure.
       /// @remarks At this time the return value is always 4096.
       static _property<int32, _readonly> SystemPageSize;
-      
+
       /// @brief Gets the number of milliseconds elapsed since the system started.
       /// @return Int32 A 32-bit signed integer containing the amount of time in milliseconds that has passed since the last time the computer was started.
       /// @remarks The value of this property is derived from the system timer and is stored as a 32-bit signed integer. Consequently, if the system runs continuously, TickCount will increment from zero to Int32.MaxValue for approximately 24.9 days, then jump to Int32.MinValue, which is a negative number, then increment back to zero during the next 24.9 days.
@@ -338,13 +338,13 @@ namespace Switch {
       /// The following example demonstrates how to retrieve the positive range of values returned by the TickCount property. The TickCount property cycles between Int32.MinValue, which is a negative number, and Int32.MaxValue once every 49.8 days. This code sample removes the sign bit to yield a nonnegative number that cycles between zero and MaxValue once every 24.9 days.
       /// @include EnvironmentTickCount.cpp
       static _property<int32, _readonly> TickCount;
-      
+
       /// @brief Gets the network domain name associated with the current user.
       /// @return string The network domain name associated with the current user.
       /// @remarks The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the UserDomainName property to obtain the user's domain name without the user name, and the UserName property to obtain the user name without the domain name. For example, if a user's domain name and user name are CORPORATENETWORK\john, the UserDomainName property returns "CORPORATENETWORK".
       /// @remarks The UserDomainName property first attempts to get the domain name component of the Windows account name for the current user. If that attempt fails, this property attempts to get the domain name associated with the user name provided by the UserName property. If that attempt fails because the host computer is not joined to a domain, then the host computer name is returned.
       static _property<String, _readonly> UserDomainName;
-      
+
       /// @brief Gets a value indicating whether the current process is running in user interactive mode.
       /// @return bool true if the current process is running in user interactive mode; otherwise, false.
       /// @remarks The UserInteractive property reports false for a Os process or a service like IIS that runs without a user interface. If this property is false, do not display modal dialogs or message boxes because there is no graphical user interface for the user to interact with.
@@ -352,7 +352,7 @@ namespace Switch {
       /// The following example displays whether the current process is running in user interactive mode.
       /// @include EnvironmentUserInteractive.cpp
       static _property<bool, _readonly> UserInteractive;
-      
+
       /// @brief Gets the user name of the person who is currently logged on to the Windows operating system.
       /// @return string The user name of the person who is logged on to Windows/Linux/macOS/... .
       /// @remarks You can use the UserName property to identify the user on the current thread, to the system and application for security or access purposes. It can also be used to customize a particular application for each user.
@@ -361,14 +361,14 @@ namespace Switch {
       /// The following example displays the user name of the person who started the current thread.
       /// @include EnvironmentUserName.cpp
       static _property<String, _readonly> UserName;
-      
+
       /// @brief Gets a Version object that describes the major, minor, build, and revision numbers of the Switch.
       /// @return Version An object that displays the version of the Switch.
       /// @par Example
       /// The following example displays the version of the Switch.
       /// @include EnvironmentVersion.cpp
       static _property<const System::Version, _readonly> Version;
-      
+
       /// @brief Gets the amount of physical memory mapped to the process context.
       /// @return Int64 A 64-bit signed integer containing the number of bytes of physical memory mapped to the process context.
       /// @remarks Windows 98, Windows Millennium Edition, Linux, macOS, Android,... Platform Note: This property always returns zero.
@@ -376,7 +376,7 @@ namespace Switch {
       /// The following example displays the size of the working set of the computer that runs the code example.
       /// @include EnvironmentWorkingSet.cpp
       static _property<int64, _readonly> WorkingSet;
-      
+
       /// @brief Terminates this process and gives the underlying operating system the specified exit code.
       /// @param exitCode Exit code to be given to the operating system.
       /// @remarks For the exitCode parameter, use a non-zero number to indicate an error. In your application, you can define your own error codes in an enumeration, and return the appropriate error code based on the scenario. For example, return a value of 1 to indicate that the required file is not present, and a value of 2 to indicate that the file is in the wrong format. For a list of exit codes used by macOS, Linux or Windows, see errno error code documentation (http://en.cppreference.com/w/cpp/error/errno_macros).
@@ -384,7 +384,7 @@ namespace Switch {
       /// * Exit always terminates an application. Using the return statement may terminate an application only if it is used in the application entry point, such as in the Main method.
       /// * Exit terminates an application immediately, even if other threads are running. If the return statement is called in the application entry point, it causes an application to terminate only after all foreground threads have terminated.
       static void Exit(int32 exitCode);
-      
+
       /// @brief Replaces the name of each environment variable embedded in the specified string with the string equivalent of the value of the variable, then returns the resulting string.
       /// @param name A string containing the names of zero or more environment variables. Each environment variable is quoted with the percent sign character (%).
       /// @return A string with each environment variable replaced by its value.
@@ -394,7 +394,7 @@ namespace Switch {
       /// The following example shows how to obtain the system drive and system root variables.
       /// @include EnvironmentExpandEnvironmentVariables.cpp
       static String ExpandEnvironmentVariables(const String& name);
-      
+
       /// @brief Immediately terminates a process after writing a message to the Windows Application event log, and then includes the message in error reporting to Microsoft.
       /// @param message A message that explains why the process was terminated, or null if no explanation is provided.
       /// @remarks This method terminates a process without running any active try/catch blocks or finalizers.
@@ -403,7 +403,7 @@ namespace Switch {
       /// @remarks Information is reported to Microsoft by using Windows Error Reporting. For more information, see Windows Error Reporting: Getting Started.
       /// @exception NotImplementedException This method always throw NotImplementedException.
       static void FailFast(const string& message) {throw NotImplementedException("Use System::Environment::Exit method instead", _caller);}
-      
+
       /// @brief Returns a string array containing the command-line arguments for the current process.
       /// @return Array<string> An array of string where each element contains a command-line argument. The first element is the executable file name, and the following zero or more elements contain the remaining command-line arguments.
       /// @remarks The first element in the array contains the file name of the executing program. If the file name is not available, the first element is equal to String.Empty. The remaining elements contain any additional tokens entered on the command line.
@@ -423,7 +423,7 @@ namespace Switch {
       /// The following example displays the application's command line arguments.
       /// @include EnvironmentGetCommandLineArgs.cpp
       static const Array<String>& GetCommandLineArgs();
-      
+
       /// @brief Retrieves the value of an environment variable from the current process.
       /// @param variable The name of the environment variable.
       /// @return String The value of the environment variable specified by variable, or String::Empty if the environment variable is not found.
@@ -441,7 +441,7 @@ namespace Switch {
       /// The following example attempts to retrieve the value of an environment variable named Test1 from the process environment block. If the variable doesn't exist, the example creates its and retrieves its value. The example displays the value of the variable. If the example created the variable, it also calls the GetEnvironmentVariables(EnvironmentVariableTarget) method with each member of the EnvironmentVariableTarget enumeration to establish that the variable can be retrieved only from the current process environment block. Finally, if the example created the variable, it deletes it.
       /// @include EnvironmentGetEnvironmentVariable2.cpp
       static String GetEnvironmentVariable(const String& variable) {return GetEnvironmentVariable(variable, EnvironmentVariableTarget::Process);}
-      
+
       /// @brief Retrieves the value of an environment variable from the current process or from the Windows operating system registry key for the current user or local machine.
       /// @param variable The name of an environment variable.
       /// @param target One of the EnvironmentVariableTarget values.
@@ -454,7 +454,7 @@ namespace Switch {
       /// The following example creates environment variables for the Process, User, and Machine targets, checks whether the operating system registry contains the User and Machine environment variables, then deletes the environment variables.
       /// @include EnvironmentGetEnvironmentVariable3.cpp
       static String GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target);
-      
+
       /// @brief Retrieves all environment variable names and their values from the current process.
       /// @return Collections::Generic::IDictionary<string, string> A dictionary that contains all environment variable names and their values; otherwise, an empty dictionary if no environment variables are found.
       /// @remarks The names and values for the environment variables are stored as key-value pairs in the returned IDictionary.
@@ -462,7 +462,7 @@ namespace Switch {
       /// The following example demonstrates the GetEnvironmentVariables method.
       /// @include EnvironmentGetEnvironmentVariables.cpp
       static const Collections::Generic::IDictionary<String, String>& GetEnvironmentVariables() {return GetEnvironmentVariables(System::EnvironmentVariableTarget::Process);}
-      
+
       /// @brief Retrieves all environment variable names and their values from the current process, or from the Windows operating system registry key for the current user or local machine.
       /// @param target One of the EnvironmentVariableTarget values.
       /// @return A dictionary that contains all environment variable names and their values from the source specified by the target parameter; otherwise, an empty dictionary if no environment variables are found.
@@ -472,7 +472,7 @@ namespace Switch {
       /// The following example creates environment variables for the Process, User, and Machine targets, checks whether the operating system registry contains the User and Machine environment variables, then deletes the environment variables.
       /// @include EnvironmentGetEnvironmentVariables2.cpp
       static const Collections::Generic::IDictionary<String, String>& GetEnvironmentVariables(EnvironmentVariableTarget target);
-      
+
       /// @brief Gets the path to the system special folder that is identified by the specified enumeration.
       /// @param folder An enumerated constant that identifies a system special folder.
       /// @return string The path to the specified system special folder, if that folder physically exists on your computer; otherwise, an empty string ("").
@@ -485,7 +485,7 @@ namespace Switch {
       /// The following example demonstrates how to use the GetFolderPath method to return and display the path associated with the folder parameter.
       /// @include EnvironmentGetFolderPath.cpp
       static String GetFolderPath(Environment::SpecialFolder folder) {return GetFolderPath(folder, Environment::SpecialFolderOption::None);}
-      
+
       /// @brief Gets the path to the system special folder that is identified by the specified enumeration, and uses a specified option for accessing special folders.
       /// @exception ArgumentException folder is not a member of System.Environment.SpecialFolder.
       /// @param folder An enumerated constant that identifies a system special folder.
@@ -496,7 +496,7 @@ namespace Switch {
       /// @remarks The folder parameter designates the special folder to retrieve and must be one of the values in the Environment.SpecialFolder enumeration; any other value throws an exception.
       /// @remarks For more information about special folders, see the CSIDL values topic.
       static String GetFolderPath(Environment::SpecialFolder folder, Environment::SpecialFolderOption option);
-      
+
       /// @brief Returns an array of string containing the names of the logical drives on the current computer.
       /// @return Array<string> An array of strings where each element contains the name of a logical drive. For example, if the computer's hard drive is the first logical drive, the first element returned is "C:\".
       /// @Exception IOException An I/O error occurs.
@@ -504,7 +504,7 @@ namespace Switch {
       /// The following example shows how to display the logical drives of the current computer using the GetLogicalDrives method.
       /// @include EnvironmentGetLogicalDrives.cpp
       static Array<String> GetLogicalDrives();
-      
+
       /// @brief Initailize CommandLineArgs with specified command line arguments.
       /// @param argv Command line arguments.
       /// @param argc Number of command line arguments.
@@ -516,7 +516,7 @@ namespace Switch {
       /// This example show how to call SetCommandLineArgs with sandard C++ main method:
       /// @include Main5.cpp
       static Array<string> SetCommandLineArgs(char* argv[], int argc);
-      
+
       /// @brief Creates, modifies, or deletes an environment variable stored in the current process.
       /// @param name The name of an environment variable.
       /// @param value A value to assign to variable.
@@ -532,7 +532,7 @@ namespace Switch {
       /// The following example attempts to retrieve the value of an environment variable named Test1 from the process environment block. If the variable doesn't exist, the example creates the variable and retrieves its value. The example displays the value of the variable. If the example created the variable, it also calls the GetEnvironmentVariables(EnvironmentVariableTarget) method with each member of the EnvironmentVariableTarget enumeration to establish that the variable can be retrieved only from the current process environment block. Finally, if the example created the variable, it deletes it.
       /// @include EnvironmentSetEnvironmentVariable.cpp
       static void SetEnvironmentVariable(const String& name, const String& value) {SetEnvironmentVariable(name, value, System::EnvironmentVariableTarget::Process);}
-      
+
       /// @brief Creates, modifies, or deletes an environment variable stored in the current process or in the Windows operating system registry key reserved for the current user or local machine.
       /// @param name The name of an environment variable.
       /// @param value A value to assign to variable.
@@ -554,7 +554,7 @@ namespace Switch {
       /// The following example creates environment variables for the EnvironmentVariableTarget.Process, EnvironmentVariableTarget.User, and Machine targets, checks whether the operating system registry contains the user and machine environment variables, then deletes the environment variables.
       /// @include EnvironmentGetEnvironmentVariables2.cpp
       static void SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target);
-      
+
     private:
       friend class System::Diagnoastics::Process;
       void SetUserInteractive(bool userInteractive);

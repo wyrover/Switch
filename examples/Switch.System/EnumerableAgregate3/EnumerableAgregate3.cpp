@@ -9,7 +9,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       Array<string> fruits = {"apple", "mango", "orange", "passionfruit", "grape"};
-      
+
       // Determine whether any string in the array is longer than "banana".
       string longestName =
         fruits.Agregate<string, string>("bananas",
@@ -20,7 +20,7 @@ namespace Examples {
       _delegate(const string & fruit) {
         return fruit.ToUpper();
       });
-      
+
       Console::WriteLine("The fruit with the longest name is {0}", longestName);
     }
   };

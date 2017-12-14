@@ -22,15 +22,15 @@ namespace Switch {
       class SystemSound : public object {
       public:
         SystemSound() {}
-        
+
         void Play() const;
-        
+
         bool Equals(const object& obj) const override {return is<SystemSound>(obj) && Equals((const SystemSound&)obj);}
-        
+
         bool Equals(const SystemSound& sound) const {return this->type == sound.type;}
-        
+
         intptr Tag() const {return (intptr)this->type;}
-        
+
       private:
         friend struct ::__opaque_sound_access__;
         SystemSound(int32 type) : type(type) {}

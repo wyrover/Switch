@@ -18,10 +18,10 @@ namespace {
     printf("%s", value);
     return output;
   }
-  
+
   refptr<System::Text::Encoding> inputEncoding = ref_new<System::Text::UTF8Encoding>(false);
   refptr<System::Text::Encoding> outputEncoding = ref_new<System::Text::UTF8Encoding>(false);
-  
+
   bool treatControlCAsInput = false;
 }
 
@@ -112,7 +112,7 @@ _property<int32> Console::CursorLeft {
   [](int32 value) {
     if (value < 0 || value >= Native::ConsoleApi::GetWindowWidth())
       throw ArgumentOutOfRangeException(_caller);
-      
+
     SetCursorPosition(value, Native::ConsoleApi::GetCursorTop());
   }
 };
@@ -122,7 +122,7 @@ _property<int32> Console::CursorSize {
   [](int32 value) {
     if (value < 1 || value > 100)
       throw ArgumentOutOfRangeException(_caller);
-      
+
     Native::ConsoleApi::SetCursorSize(value);
   }
 };
@@ -132,7 +132,7 @@ _property<int32> Console::CursorTop {
   [](int32 value) {
     if (value < 0 || value >= Native::ConsoleApi::GetBufferHeight())
       throw ArgumentOutOfRangeException(_caller);
-      
+
     SetCursorPosition(Native::ConsoleApi::GetCursorLeft(), value);
   }
 };
@@ -262,7 +262,7 @@ ConsoleCancelEventHandler Console::CancelKeyPress;
 void Console::Beep(int32 frequency, int32 duration) {
   if (frequency < 37 || frequency > 32767 || duration <= 0)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   Native::ConsoleApi::Beep(frequency, duration);
 }
 
@@ -301,14 +301,14 @@ ConsoleKeyInfo Console::ReadKey(bool intercept) {
   bool shift = false;
   bool ctrl = false;
   ConsoleKeyInfo keyInfo;
-  
+
   out->Flush();
   Native::ConsoleApi::ReadKey(KeyChar, KeyCode, alt, shift, ctrl);
   keyInfo = ConsoleKeyInfo(KeyChar, (ConsoleKey)KeyCode, shift, alt, ctrl);
-  
+
   if (intercept == false)
     Write(Char(keyInfo.KeyChar()));
-    
+
   return keyInfo;
 }
 

@@ -44,7 +44,7 @@ namespace Switch {
         WindowFrame,
         WindowText,
         Transparent,
-        
+
         /// @brief A system-defined color.
         AliceBlue,
         /// @brief A system-defined color.
@@ -325,7 +325,7 @@ namespace Switch {
         Yellow,
         /// @brief A system-defined color.
         YellowGreen,
-        
+
         ButtonFace,
         ButtonHighlight,
         ButtonShadow,

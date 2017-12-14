@@ -5,16 +5,16 @@ using namespace System;
 namespace Examples {
   class Program {
     static const string formatter;
-    
+
     // Reinterpret the double argument as a long.
     static void DoubleToLongBits(double argument) {
       long long longValue;
       longValue = BitConverter::DoubleToInt64Bits(argument);
-      
+
       // Display the resulting long in hexadecimal.
       Console::WriteLine(formatter, argument, longValue);
     }
-    
+
   public:
     // The main entry point for the application.
     static void Main() {
@@ -22,7 +22,7 @@ namespace Examples {
         "\nmethod generates the following output.\n");
       Console::WriteLine(formatter, "double argument", "hexadecimal value");
       Console::WriteLine(formatter, "---------------", "-----------------");
-      
+
       // Convert double values and display the results.
       DoubleToLongBits(1.0);
       DoubleToLongBits(15.0);
@@ -45,7 +45,7 @@ namespace Examples {
       DoubleToLongBits(Double::PositiveInfinity);
     }
   };
-  
+
   const string Program::formatter = "{0,25:E16}{1,23:X16}";
 }
 

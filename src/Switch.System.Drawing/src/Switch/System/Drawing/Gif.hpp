@@ -13,12 +13,12 @@ namespace Switch {
       public:
         template<typename TStream>
         Gif(const TStream& stream) : reader(stream) {}
-        
+
         Gif(refptr<System::IO::Stream> stream) : reader(stream) {}
-        
+
         void Read(Image& image) {
         }
-        
+
       private:
         System::IO::BinaryReader reader;
       };

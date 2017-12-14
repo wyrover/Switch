@@ -24,49 +24,49 @@ namespace Switch {
         protected:
           /// @brief Creates an instance of the WebSocket class.
           WebSocket() {}
-          
+
         public:
           /// @brief Indicates the reason why the remote endpoint initiated the close handshake.
           /// @property value Returns WebSocketCloseStatus.
           _property<WebSocketCloseStatus, _readonly> CloseStatus {
             _get {return this->GetCloseStatus();}
           };
-          
+
           /// @brief Allows the remote endpoint to describe the reason why the connection was closed.
           _property<string, _readonly> CloseStatusDescription {
             _get {return this->GetCloseStatusDescription();}
           };
-          
+
           /// @brief Gets the default WebSocket protocol keep-alive interval in milliseconds.
           /// @property The default WebSocket protocol keep-alive interval in milliseconds. The typical value for this interval is 30 seconds.
           static _property<TimeSpan, _readonly> DefaultKeepAliveInterval;
-          
+
           /// @brief Allows the remote endpoint to describe the reason why the connection was closed.
           _property<WebSocketState, _readonly> State {
             _get {return this->GetState();}
           };
-          
+
           /// @brief The subprotocol that was negotiated during the opening handshake.
           _property<string, _readonly> SubProtocol {
             _get {return this->GetSubProtocol();}
           };
-          
+
           /// @brief Aborts the WebSocket connection and cancels any pending IO operations.
           virtual void Abort() = 0;
-          
+
         protected:
           /// @brief Indicates the reason why the remote endpoint initiated the close handshake.
           /// @return WebSocketCloseStatus.
           virtual WebSocketCloseStatus GetCloseStatus() const = 0;
-          
+
           /// @brief Allows the remote endpoint to describe the reason why the connection was closed.
           /// @return The remote endpoint to describe the reason why the connection was closed.
           virtual string GetCloseStatusDescription() const = 0;
-          
+
           /// @brief Gets the default WebSocket protocol keep-alive interval in milliseconds.
           /// @return the current state of the WebSocket connection.
           virtual WebSocketState GetState() const = 0;
-          
+
           /// @brief The subprotocol that was negotiated during the opening handshake.
           virtual string GetSubProtocol() const = 0;
         };

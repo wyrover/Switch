@@ -13,7 +13,7 @@ namespace Examples {
     class Reader : public object {
     public:
       explicit Reader(const NetworkStream& stream) : stream(stream) {this->readThread.Start();}
-      
+
     private:
       Reader() = delete;
       Reader(const Reader& reader) = delete;
@@ -28,11 +28,11 @@ namespace Examples {
         })};
       static object lock;
     };
-    
+
     // The main entry point for the application.
     static void Main() {
       Console::WriteLine("Press Ctrl+C to quit...");
-      
+
       // create server thread
       Thread server(ThreadStart(_delegate {
         TcpListener tcpListener(IPAddress::Any, 9050);
@@ -44,9 +44,9 @@ namespace Examples {
         }
       }));
       server.Start();
-      
+
       Random rand;
-      
+
       // Create 10 client threads
       List<Thread> clients;
       for (int i = 0; i < 10; i++) {
@@ -61,7 +61,7 @@ namespace Examples {
         })));
         clients[clients.Count - 1].Start();
       }
-      
+
       Thread::Sleep(Timeout::Infinite);
     }
   };

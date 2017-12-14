@@ -17,49 +17,49 @@ namespace {
     ProcessInfo() {}
     ProcessInfo(pid_t pid, const string &name, const string& path) : pid(pid), name(name), path(path) {}
     ProcessInfo(const ProcessInfo& pi) : pid(pi.pid),  name(pi.name), path(pi.path) {}
-  
+
     _property<intptr, _readonly> Id {
       _get {return this->pid;}
     };
-  
+
     _property<string, _readonly> Name {
       _get {return this->name;}
     };
-  
+
     _property<string, _readonly> Path {
       _get {return this->path;}
     };
-  
+
     String ToString() const override {return string::Format("{{pid={0}, Name={1}, Path={2}}}", this->pid, this->name, this->path);}
-  
+
   private:
     intptr pid = 0;
     string name;
     string path;
   };*/
-  
+
   string GetProcessPath(pid_t id) {
     char path[PROC_PIDPATHINFO_SIZE + 1] = {0};
     if (proc_pidinfo(id, PROC_PIDPATHINFO, 0, &path, PROC_PIDPATHINFO_SIZE) != 0)
       throw System::InvalidOperationException(_caller);
     return path;
   }
-  
+
   string GetProcessName(pid_t id) {
     char name[1024] = {0};
     if (proc_name(id, name, 1024) != 0 || string::IsNullOrEmpty(name))
       return System::IO::Path::GetFileNameWithoutExtension(GetProcessPath(id));
     return name;
   }
-  
+
   /*
   ProcessInfo GetProcessInfo(pid_t id) {
     return {id, GetProcessName(id), GetProcessPath(id)};
   }*/
-  
+
   System::Array<intptr> GetProcesses() {
     System::Collections::Generic::List<intptr> processes;
-    
+
     pid_t pids[16384];
     int count = proc_listallpids(&pids, 16384 * sizeof(pid_t));
     for (int index = 0; index < count; index++)

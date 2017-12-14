@@ -12,7 +12,7 @@ namespace Examples {
       Process process = Process::Start("gcc", "--version");
       //StreamReader reader(process.StandardOutput());
       Console::WriteLine(StreamReader(process.StandardOutput()).ReadToEnd());
-      
+
       /*
       System::Diagnostics::ProcessStartInfo command;
       if (Environment::OSVersion().Platform > PlatformID::WinCE)
@@ -22,7 +22,7 @@ namespace Examples {
       Console::WriteLine();
       Console::WriteLine(">" + command);
       System::Diagnostics::Process::Start(command);
-      
+
       if (Environment::OSVersion().Platform > PlatformID::WinCE) {
         command = System::Diagnostics::ProcessStartInfo("ls", "-lia");
       } else {
@@ -31,21 +31,21 @@ namespace Examples {
       Console::WriteLine();
       Console::WriteLine(">" + command);
       System::Diagnostics::Process::Start(command);
-      
+
       if (Environment::OSVersion().Platform == PlatformID::MacOSX) {
         System::Diagnostics::Process::Start(System::Diagnostics::ProcessStartInfo("open", "."));
       }
       if (Environment::OSVersion().Platform == PlatformID::Win32NT) {
         System::Diagnostics::Process::Start(System::Diagnostics::ProcessStartInfo("explorer", "."));
       }
-      
+
       if (Environment::OSVersion().Platform == PlatformID::MacOSX) {
         System::Diagnostics::Process::Start(System::Diagnostics::ProcessStartInfo("open", "-a /Applications/calculator.app"));
       }
       if (Environment::OSVersion().Platform == PlatformID::Win32NT) {
         System::Diagnostics::Process::Start(System::Diagnostics::ProcessStartInfo("calc"));
       }
-      
+
       //System::Diagnostics::Process::Start(System::Diagnostics::ProcessStartInfo("https://www.gammasoft71.wixsite.com/switch"));
        */
     }

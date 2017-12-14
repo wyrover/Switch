@@ -17,12 +17,12 @@ namespace Switch {
     public:
       /// @brief Initializes a new instance of the GiveFeedbackEventArgs class.
       ConsoleCancelEventArgs() {}
-      
+
       /// @brief Initializes a new instance of the GiveFeedbackEventArgs class.
       /// @param effects The type of drag-and-drop operation. Possible values are obtained by applying the bitwise OR (|) operation to the constants defined in the DragDropEffects.
       /// @param true if default pointers are used; otherwise, false.
       ConsoleCancelEventArgs(bool cancel, ConsoleSpecialKey specialKey) : cancel(cancel), specialKey(specialKey) {}
-      
+
       /// @cond
       ConsoleCancelEventArgs(const ConsoleCancelEventArgs& consoleCancelSpecialEventArgs) : cancel(consoleCancelSpecialEventArgs.cancel), specialKey(consoleCancelSpecialEventArgs.specialKey) {}
       ConsoleCancelEventArgs& operator=(const ConsoleCancelEventArgs& consoleCancelSpecialEventArgs) {
@@ -31,20 +31,20 @@ namespace Switch {
         return *this;
       }
       /// @endcond
-      
+
       /// @brief Gets or sets a value that indicates whether simultaneously pressing the Control modifier key and the C console key (Ctrl+C) or the Ctrl+Break keys terminates the current process. The default is false, which terminates the current process.
       /// @return true if the current process should resume when the event handler concludes; false if the current process should terminate. The default value is false; the current process terminates when the event handler returns. If true, the current process continues.
       _property<bool> Cancel {
         _get {return this->cancel;},
         _set {this->cancel = value;}
       };
-      
+
       /// @brief Gets the combination of modifier and console keys that interrupted the current process.
       /// @return One of the enumeration values that specifies the key combination that interrupted the current process. There is no default value.
       _property<ConsoleSpecialKey, _readonly> SpecialKey {
         _get {return this->specialKey;}
       };
-      
+
     private:
       bool cancel = true;
       ConsoleSpecialKey specialKey = static_cast<ConsoleSpecialKey>(0);

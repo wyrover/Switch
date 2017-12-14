@@ -16,13 +16,13 @@ namespace {
         values.Add(value);
       }
     }
-    
+
     _using(Random rand(1)) {
       for (int i = 0; i < 100; i++)
         ASSERT_EQ(values[i], rand.Next());
     }
   }
-  
+
   TEST(RandomTest, NextWithRange0To10) {
     System::Collections::Generic::List<int> values(100);
     _using(Random rand(5)) {
@@ -33,18 +33,18 @@ namespace {
         values.Add(value);
       }
     }
-    
+
     _using(Random rand(5)) {
       for (int i = 0; i < 100; i++)
         ASSERT_EQ(values[i], rand.Next(0, 11));
     }
   }
-  
+
   TEST(RandomTest, NextBytes) {
     Array<byte> bytes(100);
     _using(Random rand(42))
     rand.NextBytes(bytes);
-    
+
     _using(Random rand(42)) {
       for (int i = 0; i < 100; i++)
         ASSERT_EQ(bytes[i], rand.Next(Byte::MaxValue + 1));

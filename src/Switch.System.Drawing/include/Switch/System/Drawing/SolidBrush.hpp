@@ -16,13 +16,13 @@ namespace Switch {
         explicit SolidBrush(const System::Drawing::Color& color);
         SolidBrush(const SolidBrush& brush) : SolidBrush(brush.color) {}
         SolidBrush& operator=(const SolidBrush& brush);
-        
+
         _property<System::Drawing::Color, _readonly> Color {
           _get {return this->color;}
         };
-        
+
         refptr<object> Clone() const override {return ref_new<SolidBrush>(this->color);};
-        
+
       private:
         System::Drawing::Color color;
       };

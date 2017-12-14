@@ -14,7 +14,7 @@ namespace Switch {
       public:
         /// @brief Performs application-defined tasks associated with freeing, releasing, or resetting resources.
         virtual void Close() = 0;
-        
+
         /// @brief Represents the method that handles the Closed event of a component.
         /// @remarks When you create a Closed delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate.
         System::EventHandler Closed;

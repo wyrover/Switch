@@ -83,7 +83,7 @@ namespace {
   private:
     System::String GetDefaultMessage() const override {return "My First Group Exception"; }
   };
-  
+
   class MySecondGroupException : public System::Exception {
   public:
     MySecondGroupException() : System::Exception() {}
@@ -95,7 +95,7 @@ namespace {
   private:
     System::String GetDefaultMessage() const override {return "My Second Group Exception"; }
   };
-  
+
   class MyFirstOwnException : public MyFirstGroupException {
   public:
     MyFirstOwnException() : MyFirstGroupException() {}
@@ -107,7 +107,7 @@ namespace {
   private:
     System::String GetDefaultMessage() const override {return "My First Own Exception"; }
   };
-  
+
   class MySecondOwnException : public MyFirstGroupException {
   public:
     MySecondOwnException() : MyFirstGroupException() {}
@@ -119,7 +119,7 @@ namespace {
   private:
     System::String GetDefaultMessage() const override {return "My Second Own Exception"; }
   };
-  
+
   class MyThirdOwnException : public MySecondGroupException {
   public:
     MyThirdOwnException() : MySecondGroupException() {}
@@ -131,7 +131,7 @@ namespace {
   private:
     System::String GetDefaultMessage() const override {return "My Third Own Exception"; }
   };
-  
+
   class MyFourthOwnException : public MySecondGroupException {
   public:
     MyFourthOwnException() : MySecondGroupException() {}
@@ -143,32 +143,32 @@ namespace {
   private:
     System::String GetDefaultMessage() const override {return "My Fourth Own Exception"; }
   };
-  
+
   TEST(ExceptionTest, Constructor) {
     ASSERT_TRUE(is<Exception>(Exception()));
     ASSERT_EQ((int32)0x80131500, Exception().HResult());
     ASSERT_NE(_caller.FilePath, Exception().FilePath());
     ASSERT_NE(_caller.LineNumber, Exception().LineNumber());
     ASSERT_FALSE(Exception().HasInnerException);
-    
+
     ASSERT_TRUE(is<Exception>(Exception(_caller)));
     ASSERT_EQ((int32)0x80131500, Exception(_caller).HResult());
     ASSERT_EQ(_caller.FilePath, Exception(_caller).FilePath());
     ASSERT_EQ(_caller.LineNumber, Exception(_caller).LineNumber());
     ASSERT_FALSE(Exception(_caller).HasInnerException);
-    
+
     ASSERT_TRUE(is<Exception>(Exception("Value is invalid.", _caller)));
     ASSERT_EQ((int32)0x80131500, Exception("Value is invalid.", _caller).HResult());
     ASSERT_EQ(_caller.FilePath, Exception("Value is invalid.", _caller).FilePath());
     ASSERT_EQ(_caller.LineNumber, Exception("Value is invalid.", _caller).LineNumber());
     ASSERT_FALSE(Exception("Value is invalid.", _caller).HasInnerException);
   }
-  
+
   TEST(ExceptionTest, GetStackTrace) {
     try { throw Exception(Caller("ExceptionUT.cpp", 43)); } catch (const Exception& e) { ASSERT_TRUE(e.ToString().Contains(" in ExceptionUT.cpp:43")); }
     try { throw ArgumentOutOfRangeException(Caller("ExceptionUT.cpp", 44)); } catch (const Exception& e) { ASSERT_TRUE(e.ToString().Contains(" in ExceptionUT.cpp:44")); }
   }
-  
+
   TEST(ExceptionTest, GetMessage) {
     try { throw Exception(_caller); } catch (const Exception& e) { ASSERT_EQ("Exception of type 'Switch::System::Exception' was thrown.", e.Message()); }
     try { throw SystemException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "System error."); }
@@ -181,7 +181,7 @@ namespace {
     try { throw ArgumentOutOfRangeException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Specified argument is out of range of valid values."); }
     try { throw ArithmeticException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Overflow or underflow in the arithmetic operation."); }
     try { throw ArrayTypeMismatchException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to access an element as a type incompatible with the array."); }
-    
+
     try { throw BadImageFormatException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Format for the executable or library is invalid."); }
     try { throw CannotUnloadAppDomainException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to unload the AppDomain failed."); }
     try { throw ContextMarshalException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to marshal an object across a context boundary."); }
@@ -224,9 +224,9 @@ namespace {
     //try { throw TypeInitializationException(Type::GetName(Int32()), NullReferenceException(), _caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The type initializer for '" + Type::GetName(Int32()) + "' threw an exception."); }
     try { throw TypeUnloadedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Type had been unloaded."); }
     try { throw UnauthorizedAccessException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to perform an unauthorized operation."); }
-    
+
     try { throw KeyNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ("The given key was not present in the dictionnary.", e.Message()); }
-    
+
     try { throw IOException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "I/O error occured."); }
     try { throw DirectoryNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access a path that is not on the disk."); }
     try { throw DriveNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access a drive that is not avaible."); }
@@ -235,9 +235,9 @@ namespace {
     try { throw FileLoadException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Could not load the specified file."); }
     try { throw FileNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Unable to find the specified file."); }
     try { throw PathTooLongException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The specified path, file name, or both are too long. The fully ualified file name must be less than 260 caracters, and the directory name must be less than 248 caracters."); }
-    
+
     try { throw SerializationException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Serialization error."); }
-    
+
     try { throw AbandonedMutexException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The wait completed due to an abandoned mutex."); }
     try { throw LockRecursionException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Exception of type 'Switch::System::Threading::LockRecursionException' was thrown."); }
     try { throw SynchronizationLockException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Object synchronization method was called from an unsynchronized block of code."); }
@@ -247,14 +247,14 @@ namespace {
     try { throw ThreadStateException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Thread was in an invalid state for the operation being executed."); }
     try { throw WaitHandleCannotBeOpenedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "No handle of the given name exists."); }
   }
-  
+
   TEST(ExceptionTest, ThrowException) {
     try {
       throw Exception(_caller);
     } catch (const Exception& e) {
       ASSERT_TRUE(is<Exception>(e));
     }
-    
+
     try {
       throw Exception(_caller);
     } catch (const MyFirstOwnException& /*e*/) {
@@ -264,7 +264,7 @@ namespace {
     } catch (const Exception& /*e*/) {
       //ASSERT_EQ(e.Message(), "Exception of type 'System::Exception' was thrown.");
     }
-    
+
     try {
       throw Exception("My First Exception", _caller);
     } catch (const MyFirstOwnException& /*e*/) {
@@ -275,7 +275,7 @@ namespace {
       ASSERT_EQ(e.Message(), "My First Exception");
     }
   }
-  
+
   TEST(ExceptionTest, ThrowMyFirstGroupException) {
     try {
       throw MyFirstGroupException(_caller);
@@ -285,7 +285,7 @@ namespace {
       else
         ASSERT_TRUE(false);
     }
-    
+
     try {
       throw MyFirstGroupException(_caller);
     }  catch (const MyFirstOwnException& /*e*/) {
@@ -297,7 +297,7 @@ namespace {
       ASSERT_TRUE(false);
     }
   }
-  
+
   TEST(ExceptionTest, ThrowMyFirstOwnException) {
     try {
       throw MyFirstOwnException(_caller);
@@ -307,7 +307,7 @@ namespace {
       else
         ASSERT_TRUE(false);
     }
-    
+
     try {
       throw MyFirstOwnException(_caller);
     } catch (const MyFirstGroupException& e) {
@@ -316,7 +316,7 @@ namespace {
       else
         ASSERT_TRUE(false);
     }
-    
+
     try {
       throw MyFirstOwnException(_caller);
     } catch (const MyFirstOwnException& e) {
@@ -327,5 +327,5 @@ namespace {
       ASSERT_TRUE(false);
     }
   }
-  
+
 }

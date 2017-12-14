@@ -6,20 +6,20 @@ namespace Examples {
   class Program {
   public:
     static const string formatter;
-    
+
     // Convert a double argument to a byte array and display it.
     static void GetBytesDouble(double argument) {
       Array<byte> byteArray = BitConverter::GetBytes(argument);
       Console::WriteLine(formatter, argument, BitConverter::ToString(byteArray));
     }
-    
+
     // The main entry point for the application.
     static void Main() {
       Console::WriteLine("This example of the BitConverter.GetBytes(double) "
         "\nmethod generates the following output.\n");
       Console::WriteLine(formatter, "double", "byte array");
       Console::WriteLine(formatter, "------", "----------");
-      
+
       // Convert double values and display the results.
       GetBytesDouble(0.0);
       GetBytesDouble(1.0);
@@ -40,7 +40,7 @@ namespace Examples {
       GetBytesDouble(Double::PositiveInfinity);
     }
   };
-  
+
   const string Program::formatter = "{0,25:E16}{1,30}";
 }
 

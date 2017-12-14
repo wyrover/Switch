@@ -12,11 +12,11 @@ namespace Examples {
       ConsoleColor dftBackColor = Console::BackgroundColor;
       bool continueFlag = true;
       Console::Clear();
-      
+
       do {
         ConsoleColor newForeColor = ConsoleColor::White;
         ConsoleColor newBackColor = ConsoleColor::Black;
-        
+
         char32 foreColorSelection = GetKeyPress("Select Text Color (B for Blue, R for Red, Y for Yellow): ", Array<char32> { 'B', 'R', 'Y' });
         switch (foreColorSelection) {
         case 'B':
@@ -26,7 +26,7 @@ namespace Examples {
         case 'Y':
         case 'y': newForeColor = ConsoleColor::DarkYellow; break;
         }
-        
+
         Char backColorSelection = GetKeyPress("Select Background Color (W for White, G for Green, M for Magenta): ", Array<char32> { 'W', 'G', 'M' });
         switch (backColorSelection) {
         case 'W':
@@ -36,7 +36,7 @@ namespace Examples {
         case 'M':
         case 'm': newBackColor = ConsoleColor::Magenta; break;
         }
-        
+
         Console::WriteLine();
         Console::Write("Enter a message to display: ");
         String textToDisplay = Console::ReadLine();
@@ -47,19 +47,19 @@ namespace Examples {
         Console::WriteLine();
         if (Char::ToUpper(GetKeyPress("Display another message (Y/N): ", Array<char32> { 'Y', 'N' })) == 'N')
           continueFlag = false;
-          
+
         // Restore the default settings and clear the screen.
         Console::ForegroundColor = dftForeColor;
         Console::BackgroundColor = dftBackColor;
         Console::Clear();
       } while (continueFlag);
     }
-    
+
   private:
     static char32 GetKeyPress(String msg, const Array<char32>& validChars) {
       ConsoleKeyInfo keyPressed;
       bool valid = false;
-      
+
       Console::WriteLine();
       do {
         Console::Write(msg);
@@ -67,7 +67,7 @@ namespace Examples {
         Console::WriteLine();
         if (Array<>::Exists<char32>(validChars, _delegate(const char32 & ch) {return Char(ch).Equals(Char::ToUpper(keyPressed.KeyChar));}))
         valid = true;
-        
+
       } while (! valid);
       return keyPressed.KeyChar;
     }

@@ -12,7 +12,7 @@ namespace {
 
   /*
                    Unicode() ascii  437   ISO-L1  ISO-L2  UTF8                  UTF16           UTF32
-  
+
   charA            0x61     0x61   0x61  0x61    0x61    0x61                  0x61            0x61
   charAE           0xE6     ?      0x91  0xE6    ?       0xC3 0xA6             0xE6            0xE6
   charSpecialT     0x163    ?      ?     ?       0xFE    0xC5 0xA3             0x163           0x163
@@ -22,7 +22,7 @@ namespace {
   cjk              0x597B   ?      ?     ?       ?       0xE5 0xA5 0xBB        0x597B          0x597B
   koala            0x1F428  ?      ?     ?       ?       0xF0 0x9F 0x90 0xA8   0xD83D 0xDC28   0x1F428
   */
-  
+
   char32 charA = 0x61;
   char32 charAE = 0xE6;
   char32 charSpecialT = 0x163;
@@ -31,53 +31,53 @@ namespace {
   char32 fullBlock = 0x2588;
   char32 cjk = 0x597B;
   char32 koala = 0x1F428;
-  
+
   TEST(Decoder, CreateDecoder_ASCII) {
     ASCIIEncoding encoding;
     ASCIIEncoding::Decoder decoder;
     ASSERT_EQ("ASCIIDecoder", decoder.ToString());
   }
-  
+
   TEST(Decoder, CreateDecoder_437) {
     CodePage437Encoding::Decoder decoder;
     ASSERT_EQ("Code Page 437 Decoder", decoder.ToString());
   }
-  
+
   TEST(Decoder, CreateDecoder_28591) {
     CodePage28591Encoding::Decoder decoder;
     ASSERT_EQ("Code Page 28591 Decoder", decoder.ToString());
   }
-  
+
   TEST(Decoder, CreateDecoder_28592) {
     CodePage28592Encoding::Decoder decoder;
     ASSERT_EQ("Code Page 28592 Decoder", decoder.ToString());
   }
-  
+
   TEST(Decoder, CreateDecoder_UTF8) {
     UTF8Encoding::Decoder decoder;
     ASSERT_EQ("UTF8Decoder", decoder.ToString());
   }
-  
+
   TEST(Decoder, CreateDecoder_UTF16) {
     UnicodeEncoding::Decoder decoder(false);
     ASSERT_EQ("UnicodeDecoder", decoder.ToString());
   }
-  
+
   TEST(Decoder, CreateDecoder_UTF16BE) {
     UnicodeEncoding::Decoder decoder(true);
     ASSERT_EQ("UnicodeDecoder Big Endian", decoder.ToString());
   }
-  
+
   TEST(Decoder, CreateDecoder_UTF32) {
     UTF32Encoding::Decoder decoder(false);
     ASSERT_EQ("UTF32Decoder", decoder.ToString());
   }
-  
+
   TEST(Decoder, CreateDecoder_UTF32BE) {
     UTF32Encoding::Decoder decoder(true);
     ASSERT_EQ("UTF32Decoder Big Endian", decoder.ToString());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_ASCII_charA) {
     ASCIIEncoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -85,7 +85,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charA, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_437_charA) {
     CodePage437Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -93,7 +93,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charA, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_437_charAE) {
     CodePage437Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -101,7 +101,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charAE, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_437_sigma) {
     CodePage437Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -109,7 +109,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(sigma, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_437_fullBlock) {
     CodePage437Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -117,7 +117,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(fullBlock, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_88591_charA) {
     CodePage28591Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -125,7 +125,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charA, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_88591_charAE) {
     CodePage28591Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -133,7 +133,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charAE, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_88592_charA) {
     CodePage28592Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -141,7 +141,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charA, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_88592_charSpecialT) {
     CodePage28592Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -149,7 +149,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charSpecialT, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_charA) {
     UTF8Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -157,7 +157,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charA, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_charAE) {
     UTF8Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -167,7 +167,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charAE, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_charSpecialT) {
     UTF8Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -177,7 +177,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charSpecialT, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_sigma) {
     UTF8Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -187,7 +187,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(sigma, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_syriacSemkath) {
     UTF8Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -197,7 +197,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(syriacSemkath, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_fullBlock) {
     UTF8Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -209,7 +209,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(fullBlock, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_cjk) {
     UTF8Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -221,7 +221,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(cjk, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF8_koala) {
     UTF8Encoding::Decoder decoder;
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -235,7 +235,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(koala, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_charA) {
     UnicodeEncoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -245,7 +245,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charA, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_charAE) {
     UnicodeEncoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -255,7 +255,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charAE, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_charSpecialT) {
     UnicodeEncoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -265,7 +265,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charSpecialT, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_sigma) {
     UnicodeEncoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -275,7 +275,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(sigma, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_syriacSemkath) {
     UnicodeEncoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -285,7 +285,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(syriacSemkath, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_fullBlock) {
     UnicodeEncoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -295,7 +295,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(fullBlock, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_cjk) {
     UnicodeEncoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -305,7 +305,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(cjk, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16_koala) {
     UnicodeEncoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -319,7 +319,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(koala, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_charA) {
     UnicodeEncoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -329,7 +329,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charA, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_charAE) {
     UnicodeEncoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -339,7 +339,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charAE, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_charSpecialT) {
     UnicodeEncoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -349,7 +349,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charSpecialT, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_sigma) {
     UnicodeEncoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -359,7 +359,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(sigma, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_syriacSemkath) {
     UnicodeEncoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -369,7 +369,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(syriacSemkath, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_fullBlock) {
     UnicodeEncoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -379,7 +379,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(fullBlock, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_cjk) {
     UnicodeEncoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -389,7 +389,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(cjk, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF16BE_koala) {
     UnicodeEncoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -403,7 +403,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(koala, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_charA) {
     UTF32Encoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -417,7 +417,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charA, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_charAE) {
     UTF32Encoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -431,7 +431,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charAE, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_charSpecialT) {
     UTF32Encoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -445,7 +445,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charSpecialT, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_sigma) {
     UTF32Encoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -459,7 +459,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(sigma, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_syriacSemkath) {
     UTF32Encoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -473,7 +473,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(syriacSemkath, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_fullBlock) {
     UTF32Encoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -487,7 +487,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(fullBlock, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_cjk) {
     UTF32Encoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -501,7 +501,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(cjk, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32_koala) {
     UTF32Encoding::Decoder decoder(false);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -515,7 +515,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(koala, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32BE_charA) {
     UTF32Encoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -529,7 +529,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charA, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32BE_charAE) {
     UTF32Encoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -543,7 +543,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charAE, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32BE_charSpecialT) {
     UTF32Encoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -557,7 +557,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(charSpecialT, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32BE_sigma) {
     UTF32Encoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -571,7 +571,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(sigma, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32BE_syriacSemkath) {
     UTF32Encoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -585,7 +585,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(syriacSemkath, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32BE_fullBlock) {
     UTF32Encoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -599,7 +599,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(fullBlock, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32BE_cjk) {
     UTF32Encoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -613,7 +613,7 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(cjk, decoder.CodePoint());
   }
-  
+
   TEST(Decoder, CodePointDefined_GetCodePoint_UTF32BE_koala) {
     UTF32Encoding::Decoder decoder(true);
     ASSERT_FALSE(decoder.CodePointDefined());
@@ -627,5 +627,5 @@ namespace {
     ASSERT_TRUE(decoder.CodePointDefined());
     ASSERT_EQ(koala, decoder.CodePoint());
   }
-  
+
 }

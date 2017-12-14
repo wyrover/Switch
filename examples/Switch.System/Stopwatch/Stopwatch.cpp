@@ -15,7 +15,7 @@ namespace Examples {
       stopwatch.Stop();
       // Get the elapsed time as a TimeSpan value.
       TimeSpan ts = stopwatch.Elapsed;
-      
+
       // Format and display the TimeSpan value.
       string elapsedTime = String::Format("{0:D2}:{1:D2}:{2:D2}.{3:D2}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
       Console::WriteLine("RunTime " + elapsedTime);

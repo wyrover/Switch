@@ -19,7 +19,7 @@ namespace Switch {
       public:
         /// @brief Initializes a new instance of the TraceFilter class.
         TraceFilter() {}
-        
+
         /// @brief When overridden in a derived class, determines whether the trace listener should trace the event.
         /// @param cache The TraceEventCache that contains information for the trace event.
         /// @param source The name of the source.

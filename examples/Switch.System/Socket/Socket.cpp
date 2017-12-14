@@ -25,7 +25,7 @@ namespace Examples {
         }
       }));
       server.Start();
-      
+
       Thread client(ThreadStart(_delegate {
         Socket socket(AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::Tcp);
         socket.Connect("127.0.0.1", 9050);
@@ -36,7 +36,7 @@ namespace Examples {
         }
       }));
       client.Start();
-      
+
       Console::ReadKey(true);
       server.Join();
       client.Join();

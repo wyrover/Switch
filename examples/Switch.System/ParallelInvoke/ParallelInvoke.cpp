@@ -29,15 +29,15 @@ namespace Examples {
         Console::WriteLine("An action has thrown an exception. THIS WAS UNEXPECTED.\n{0}", e.InnerException().ToString());
       }
     }
-    
+
     static void BasicAction() {
       _lock(lck)
       Console::WriteLine("Method=alpha, Thread={0}", Thread::CurrentThread().ManagedThreadId);
     }
-    
+
     static object lck;
   };
-  
+
   object Program::lck;
 }
 

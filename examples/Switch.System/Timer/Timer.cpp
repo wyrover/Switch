@@ -11,7 +11,7 @@ namespace Examples {
       TimerCallback callback = _delegate(object & state) {
         Console::WriteLine("counter -> {0}", ++counter);
       };
-      
+
       Timer timer(callback, 0, 10);
       Thread::Sleep(100);
     }

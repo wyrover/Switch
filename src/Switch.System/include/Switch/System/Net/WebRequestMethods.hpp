@@ -24,12 +24,12 @@ namespace Switch {
           /// @brief Represents the FILE GET protocol method that is used to retrieve a file from a specified location.
           /// @return string
           static _property<string, _readonly> DownloadFile;
-          
+
           /// @brief Represents the FILE PUT protocol method that is used to copy a file to a specified location.
           /// @return string
           static _property<string, _readonly> UploadFile;
         };
-        
+
         /// @brief Represents the types of FTP protocol methods that can be used with an FTP request. This class cannot be inherited.
         /// @par Library
         /// Switch.System
@@ -38,51 +38,51 @@ namespace Switch {
           /// @brief
           /// @return string
           static _property<string, _readonly> UploadFile;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> DownloadFile;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> ListDirectory;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> ListDirectoryDetails;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> MakeDirectory;
         };
-        
+
         /// @brief Represents the types of HTTP protocol methods that can be used with an HTTP request.
         class Http _static {
         public:
           /// @brief
           /// @return string
           static _property<string, _readonly> Get;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> Head;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> Post;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> Put;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> Delete;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> Trace;
-          
+
           /// @brief
           /// @return string
           static _property<string, _readonly> Options;

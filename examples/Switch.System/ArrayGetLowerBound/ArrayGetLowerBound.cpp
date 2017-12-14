@@ -9,11 +9,11 @@ namespace Examples {
     static void Main() {
       // Creates a new one-dimensional Array of type Int32.
       Array<int> my1DIntArray(5);
-      
+
       // Uses GetLowerBound and GetUpperBound in the for loop.
       for (int index = my1DIntArray.GetLowerBound(0); index <= my1DIntArray.GetUpperBound(0); index++)
         my1DIntArray.SetValue(index + 1, index);
-        
+
       // Displays the bounds and values of the one-dimensional Array.
       Console::WriteLine("One-dimensional Array:");
       Console::WriteLine("Rank\tLower\tUpper");
@@ -21,12 +21,12 @@ namespace Examples {
       Console::WriteLine("Values:");
       for (int index = 0; index < my1DIntArray.GetLength(0); index++)
         Console::Write("\t{0}", my1DIntArray[index]);
-        
+
       Console::WriteLine();
-      
+
       // Creates a new three-dimensional Array of type Int32.
       Array<int, 3> my3DIntArray(2, 3, 4);
-      
+
       // Uses GetLowerBound and GetUpperBound in the for loop.
       for (int i = my3DIntArray.GetLowerBound(0); i <= my3DIntArray.GetUpperBound(0); i++) {
         for (int j = my3DIntArray.GetLowerBound(1); j <= my3DIntArray.GetUpperBound(1); j++) {
@@ -34,7 +34,7 @@ namespace Examples {
             my3DIntArray.SetValue((i * 100) + (j * 10) + k, i, j, k);
         }
       }
-      
+
       // Displays the bounds and values of the multidimensional Array.
       Console::WriteLine("Multidimensional Array:");
       Console::WriteLine("Rank\tLower\tUpper");
@@ -43,7 +43,7 @@ namespace Examples {
       Console::WriteLine("Values:");
       PrintValues(my3DIntArray);
     }
-    
+
   private:
     static void PrintValues(const Array<int, 3>& arr) {
       System::Collections::Generic::Enumerator<int> myEnumerator = arr.GetEnumerator();

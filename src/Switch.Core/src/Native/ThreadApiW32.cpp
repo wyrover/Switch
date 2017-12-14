@@ -16,7 +16,7 @@ namespace {
       DWORD dwFlags;
     };
 #pragma pack(pop)
-    
+
 #pragma warning(push)
 #pragma warning(disable: 6320 6322)
     __try {

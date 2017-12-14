@@ -41,7 +41,7 @@ void UnicodeEncoding::Decoder::Add(byte b) {
       return;
     }
   }
-  
+
   if (count == 4) {
     uint32 cp;
     if (Native::UnicodeEncodingsApi::UTF16::Decode(bytes, count, bigEndian, cp) == 4) {
@@ -134,17 +134,17 @@ bool UnicodeEncoding::Equals(const object& obj) const {
   const UnicodeEncoding* ue = dynamic_cast<const UnicodeEncoding*>(&obj);
   if (ue == null)
     return false;
-    
+
   return this->shouldEmitPreamble == ue->shouldEmitPreamble && this->bigEndian == ue->bigEndian;
 }
 
 int32 UnicodeEncoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
   if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
   if (index < 0) throw ArgumentOutOfRangeException(_caller);
-  
+
   int32 count = GetByteCount(c);
   if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
-  
+
   Encoder encoder(this->bigEndian);
   encoder.Encode(c, &bytes[index]);
   return count;

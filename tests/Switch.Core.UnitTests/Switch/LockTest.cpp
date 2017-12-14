@@ -10,43 +10,43 @@ namespace SwitchUnitTests {
   TEST(LockTest, SingleLock) {
     int value = 0;
     object lock;
-    
+
     _lock(lock) {
       ++value;
     }
-    
+
     ASSERT_EQ(1, value);
   }
-  
+
   TEST(LockTest, DoubleLockOnDifferentObjects) {
     int value = 0;
     object lock;
     object lock2;
-    
+
     _lock(lock) {
       ++value;
       _lock(lock2) {
         ++value;
       }
     }
-    
+
     ASSERT_EQ(2, value);
   }
-  
+
   TEST(LockTest, DoubleLockOnSameObject) {
     int value = 0;
     object lock;
-    
+
     _lock(lock) {
       ++value;
       _lock(lock) {
         ++value;
       }
     }
-    
+
     ASSERT_EQ(2, value);
   }
-  
+
   TEST(LockTest, LockDuration) {
     object lock;
     int value = 0;
@@ -56,7 +56,7 @@ namespace SwitchUnitTests {
     }
     ASSERT_LE(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start, 1);
   }
-  
+
   TEST(LockTest, Thread) {
     string s;
     object lock;
@@ -72,12 +72,12 @@ namespace SwitchUnitTests {
           s += '2';
       }
     });
-    
+
     if (t1.joinable())
       t1.join();
     if (t2.joinable())
       t2.join();
-      
+
     char32 o = 0;
     int32 i = 0;
     for (char32 c : s) {

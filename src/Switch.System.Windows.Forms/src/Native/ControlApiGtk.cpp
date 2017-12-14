@@ -51,10 +51,10 @@ System::Drawing::Point Native::ControlApi::PointToClient(const System::Windows::
     workControl = workControl().Parent();
     pointToClient -= workControl().Location();
   }
-  
+
   if (workControl().Parent != null)
     pointToClient -= workControl().Parent()().Location();
-    
+
   return pointToClient;
 }
 
@@ -65,10 +65,10 @@ System::Drawing::Point Native::ControlApi::PointToScreen(const System::Windows::
     workControl = workControl().Parent();
     pointToScreen += workControl().Location();
   }
-  
+
   if (workControl().Parent != null)
     pointToScreen += workControl().Parent()().Location();
-    
+
   return pointToScreen;
 }
 

@@ -12,7 +12,7 @@ namespace DesignPatterns {
     public:
       virtual void Operation(int extrinsicstate) const = 0;
     };
-    
+
     // The 'ConcreteFlyweight' class
     class ConcreteFlyweight : public Flyweight {
     public:
@@ -20,7 +20,7 @@ namespace DesignPatterns {
         Console::WriteLine("ConcreteFlyweight: {0}", extrinsicstate);
       }
     };
-    
+
     // The 'FlyweightFactory' class
     class FlyweightFactory : public object {
     public:
@@ -30,19 +30,19 @@ namespace DesignPatterns {
         flyweights.Add("Y", ref_new<ConcreteFlyweight>());
         flyweights.Add("Z", ref_new<ConcreteFlyweight>());
       }
-      
+
       refptr<Flyweight> GetFlyweight(const string& key) const {return flyweights[key];}
-      
+
     private:
       Dictionary<string, refptr<Flyweight>> flyweights;
     };
-    
+
     /// @brief The 'UnsharedConcreteFlyweight' class
     class UnsharedConcreteFlyweight : public Flyweight {
     public:
       void Operation(int extrinsicstate) const override  {Console::WriteLine("UnsharedConcreteFlyweight: {0}", extrinsicstate);}
     };
-    
+
     // MainApp _startup class for Structural
     // Flyweight Design Pattern.
     class MainApp {
@@ -51,19 +51,19 @@ namespace DesignPatterns {
       static void Main() {
         // Arbitrary extrinsic state
         int extrinsicstate = 22;
-        
+
         FlyweightFactory factory;
-        
+
         // Work with different flyweight instances
         refptr<Flyweight> fx = factory.GetFlyweight("X");
         fx->Operation(--extrinsicstate);
-        
+
         refptr<Flyweight> fy = factory.GetFlyweight("Y");
         fy->Operation(--extrinsicstate);
-        
+
         refptr<Flyweight> fz = factory.GetFlyweight("Z");
         fz->Operation(--extrinsicstate);
-        
+
         refptr<UnsharedConcreteFlyweight> fu = ref_new<UnsharedConcreteFlyweight>();
         fu->Operation(--extrinsicstate);
       }

@@ -33,18 +33,18 @@ namespace Switch {
           /// @remarks This constructor creates a new TcpClient and allows the underlying service provider to assign the most appropriate local IP address and port number. You must first call the Connect method before sending and receiving data.
           /// @note This constructor works only with IPv4 address types.
           TcpClient() {}
-          
+
           /// @brief Initializes a new instance of the TcpClient class with the specified family.
           /// @param addressFamily one of the AddressFamily values that specifies the addressing scheme of the socket.
           /// @exception ArgumentException The family parameter is not equal to AddressFamily::InterNetwork or The family parameter is not equal to AddressFamily::InterNetworkV6.
           TcpClient(AddressFamily addressFamily);
-          
+
           /// @brief Initializes a new instance of the TcpClient class and binds it to the specified local endpoint.
           /// @param endPoint The IPEndPoint to which you bind the TCP Socket.
           /// @remarks This constructor creates a new TcpClient and binds it to the IPEndPoint specified by the localEP parameter. Before you call this constructor, you must create an IPEndPoint using the IP address and port number from which you intend to send and receive data. You do not need to specify a local IP address and port number before connecting and communicating. If you create a TcpClient using any other constructor, the underlying service provider will assign the most appropriate local IP address and port number.
           /// @remarks You must call the Connect method before sending and receiving data.
           TcpClient(const IPEndPoint& endPoint);
-          
+
           /// @brief Initializes a new instance of the TcpClient class and connects to the specified port on the specified host.
           /// @param hostname The DNS name of the remote host to which you intend to connect.
           /// @param port The port number of the remote host to which you intend to connect.
@@ -54,23 +54,23 @@ namespace Switch {
           /// @remarks If IPv6 is enabled and the TcpClient(String, Int32) method is called to connect to a host that resolves to both IPv6 and IPv4 addresses, the connection to the IPv6 address will be attempted first before the IPv4 address. This may have the effect of delaying the time to establish the connection if the host is not listening on the IPv6 address.
           /// @note If you receive a SocketException, use SocketException.ErrorCode to obtain the specific error code. After you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error.
           TcpClient(const String& hostname, int32 port);
-          
+
           /// @brief Initializes a new instance of the TcpClient class
           /// @param acceptedSocket the socket to use
           /// @exception SocketException An error occurred when accessing the socket.
           TcpClient(const Socket& acceptedSocket);
-          
+
           /// @cond
           TcpClient(const TcpClient& tcpClient) : data(tcpClient.data) {}
           /// @endcond
-          
+
           /// @brief Gets or sets a value that indicates whether a connection has been made.
           /// @return bool true if the connection has been made; otherwise, false.
           _property<bool> Active {
             _get {return this->data->active;},
             _set {this->data->active = value;}
           };
-          
+
           /// @brief Gets the amount of data that has been received from the network and is available to be read.
           /// @return int32 The number of bytes of data received from the network and available to be read.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -81,7 +81,7 @@ namespace Switch {
           _property<int32, _readonly> Available {
             _get {return this->data->clientSocket.Available();}
           };
-          
+
           /// @brief Gets or sets the underlying network Socket
           /// @return The underlying network Socket
           /// @remarks TcpClient creates a Socket to send and receive data over a network. Classes deriving from TcpClient can use this property to get or set this Socket.
@@ -92,7 +92,7 @@ namespace Switch {
             _get {return this->data->clientSocket;},
             _set {this->data->clientSocket = value;}
           };
-          
+
           /// @brief Gets a value that indicates whether a Socket is connected to a remote host as of the last Send or Receive operation.
           /// @return bool true if the Socket was connected to a remote resource as of the most recent operation; otherwise, false.
           /// @remarks The Connected property gets the connection state of the Client socket as of the last I/O operation. When it returns false,
@@ -104,7 +104,7 @@ namespace Switch {
           _property<bool, _readonly> Connected {
             _get {return this->data->clientSocket.Connected();}
           };
-          
+
           /// @brief Gets or sets a bool value that specifies whether the TcpClient allows only one client to use a port.
           /// @return bool true if the TcpClient allows only one client to use a specific port; otherwise, false.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -117,7 +117,7 @@ namespace Switch {
             _get {return this->data->clientSocket.ExclusiveAddressUse();},
             _set {this->data->clientSocket.ExclusiveAddressUse(value);}
           };
-          
+
           /// @brief Gets a value that specifies whether the Socket will delay closing a socket in an attempt to send all pending data.
           /// @return A LingerOption that specifies how to linger while closing a socket.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -139,7 +139,7 @@ namespace Switch {
             _get {return this->data->clientSocket.LingerState();},
             _set {this->data->clientSocket.LingerState(value);}
           };
-          
+
           /// @brief Gets or sets a bool value that specifies whether the stream Socket is using the Nagle algorithm.
           /// @return bool false if the Socket uses the Nagle algorithm; otherwise, true. The default is false.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -153,7 +153,7 @@ namespace Switch {
             _get {return this->data->clientSocket.NoDelay();},
             _set {this->data->clientSocket.NoDelay(value);}
           };
-          
+
           /// @brief Gets or sets the size of the receive buffer.
           /// @return An int32 that contains the size, in bytes, of the receive buffer. The default is 8192.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -165,7 +165,7 @@ namespace Switch {
             _get {return this->data->clientSocket.ReceiveBufferSize();},
             _set {this->data->clientSocket.ReceiveBufferSize(value);}
           };
-          
+
           /// @brief Gets or sets the amount of time a TcpClient will wait to receive data once a read operation is initiated.
           /// @return int32 The time-out value of the connection in milliseconds. The default value is 0.
           /// @remarks The ReceiveTimeout property determines the amount of time that the Read method will block until it is able to receive data. This time is measured in milliseconds. If the time-out expires before Read successfully completes, TcpClient throws a IOException. There is no time-out by default.
@@ -173,7 +173,7 @@ namespace Switch {
             _get {return this->data->clientSocket.ReceiveTimeout();},
             _set {this->data->clientSocket.ReceiveTimeout(value);}
           };
-          
+
           /// @brief Gets or sets the size of the send buffer.
           /// @return int32 The size of the send buffer, in bytes. The default value is 8192 bytes.
           /// @remarks The SendBufferSize property gets or sets the number of bytes that you are expecting to send in each call to the NetworkStream.Write method. This property actually manipulates the network buffer space allocated for send operation.
@@ -183,7 +183,7 @@ namespace Switch {
             _get {return this->data->clientSocket.SendBufferSize();},
             _set {this->data->clientSocket.SendBufferSize(value);}
           };
-          
+
           /// @brief Gets or sets the amount of time a TcpClient will wait for a send operation to complete successfully.
           /// @return int32 The send time-out value, in milliseconds. The default value is 0.
           /// @remarks The SendTimeout property determines the amount of time that the Send method will block until it is able to return successfully. This time is measured in milliseconds..
@@ -192,7 +192,7 @@ namespace Switch {
             _get {return this->data->clientSocket.SendTimeout();},
             _set {this->data->clientSocket.SendTimeout(value);}
           };
-          
+
           /// @brief Disposes this TcpClient instance and requests that the underlying TCP connection be closed.
           /// @remarks The Close method marks the instance as disposed and requests that the associated Socket close the TCP connection. Based on the LingerState property,
           /// @remarks the TCP connection may stay open for some time after the Close method is called when data remains to be sent. There is no notification provided when
@@ -200,7 +200,7 @@ namespace Switch {
           /// @remarks Calling this method will eventually result in the close of the associated Socket and will also close the associated NetworkStream that is used to send
           /// @remarks and receive data if one was created.
           void Close();
-          
+
           /// @brief Connects the client to a remote TCP host using the specified remote network endpoint.
           /// @param endPoint The IPEndPoint to which you intend to connect.
           /// @exception ArgumentNullException The localEP parameter is null.
@@ -210,7 +210,7 @@ namespace Switch {
           /// @remarks the IPEndPoint class using an IP address and a port number. Use this IPEndPoint as the remoteEP parameter. The Connect method will block until it either
           /// @remarks connects or fails. After connecting with the remote host, use the GetStream method to obtain the underlying NetworkStream. Use this NetworkStream to send and receive data.
           void Connect(const IPEndPoint& endPoint);
-          
+
           /// @brief Connects the client to a remote TCP host using the specified IP address and port number.
           /// @param ipAddress The IPAddress of the remote host to which you intend to send data
           /// @param port The port number to which you intend send data
@@ -222,7 +222,7 @@ namespace Switch {
           /// @remarks After connecting with the remote host, use the GetStream method to obtain the underlying NetworkStream.
           /// @remarks Use this NetworkStream to send and receive data.
           void Connect(const IPAddress& ipAddress, int32 port);
-          
+
           /// @brief Connects the client to the specified port on the specified host.
           /// @param hostname The DNS name of the remote host to which you intend to connect.
           /// @param port The port number of the remote host to which you intend to connect.
@@ -235,14 +235,14 @@ namespace Switch {
           /// @remarks If IPv6 is enabled and the Connect(string, int32) method is called to connect to a host that resolves to both IPv6 and IPv4 addresses, the connection to the IPv6 address will be
           /// @remarks attempted first before the IPv4 address. This may have the effect of delaying the time to establish the connection if the host is not listening on the IPv6 address.
           void Connect(const String& hostname, int32 port);
-          
+
           /// @brief Returns the NetworkStream used to send and receive data.
           /// @return The underlying NetworkStream.
           /// @remarks GetStream returns a NetworkStream that you can use to send and receive data. The NetworkStream class inherits from the Stream class, which provides a rich collection of methods and properties used to facilitate network communications.You must call the Connect method first, or the GetStream method will throw an InvalidOperationException. After you have obtained the NetworkStream, call the Write method to send data to the remote host. Call the Read method to receive data arriving from the remote host. Both of these methods block until the specified operation is performed. You can avoid blocking on a read operation by checking the DataAvailable property. A true value means that data has arrived from the remote host and is available for reading. In this case, Read is guaranteed to complete immediately. If the remote host has shutdown its connection, Read will immediately return with zero bytes.
           /// @note You must close the NetworkStream when you are through sending and receiving data. Closing TcpClient does not release the NetworkStream.
           /// @note If you receive a SocketException, use SocketException.ErrorCode to obtain the specific error code. After you have obtained this code, you can refer to the Windows Sockets version 2 API error code documentation in MSDN for a detailed description of the error.
           NetworkStream GetStream();
-          
+
         private:
           struct TcpClientData {
             Socket clientSocket {AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::Tcp};

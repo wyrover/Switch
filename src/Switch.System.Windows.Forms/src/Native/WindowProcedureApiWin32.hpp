@@ -13,7 +13,7 @@ namespace Native {
     #else
     static System::Collections::Generic::Dictionary<int64, long(__stdcall*)(HWND, uint32, uint32, long)> DefWindowProcs;
     #endif
-    
+
     static void SetWindowTheme(HWND handle);
     #if _WIN64
     static int64 __stdcall WndProc(HWND hwnd, uint32 msg, uintptr wParam, int64 lParam);

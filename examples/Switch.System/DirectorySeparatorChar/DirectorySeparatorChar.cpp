@@ -12,7 +12,7 @@ namespace Examples {
       Console::WriteLine("Path::DirectorySeparatorChar()='{0}'", Path::DirectorySeparatorChar);
       Console::WriteLine("Path::PathSeparator()='{0}'", Path::PathSeparator);
       Console::WriteLine("Path::VolumeSeparatorChar()='{0}'", Path::VolumeSeparatorChar);
-      
+
       Console::Write("Path::GetInvalidPathChars()=");
       for (char32 c : Path::GetInvalidPathChars())
         Console::Write(c);

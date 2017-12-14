@@ -13,7 +13,7 @@ namespace DesignPatterns {
         Console::WriteLine("Called Target Request()");
       }
     };
-    
+
     // The 'Adaptee' class
     class Adaptee : public object {
     public:
@@ -21,7 +21,7 @@ namespace DesignPatterns {
         Console::WriteLine("Called SpecificRequest()");
       }
     };
-    
+
     // The 'Adapter' class
     class Adapter : public Target {
     public:
@@ -33,7 +33,7 @@ namespace DesignPatterns {
     private:
       Adaptee adaptee;
     };
-    
+
     // MainApp _startup class for Structural
     // Adapter Design Pattern.
     class MainApp {

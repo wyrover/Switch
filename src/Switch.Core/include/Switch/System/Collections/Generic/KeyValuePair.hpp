@@ -23,7 +23,7 @@ namespace Switch {
         template<typename TKey = NullPtr, typename TValue = NullPtr>
         class KeyValuePair;
         /// @endcond
-        
+
         /// @brief Defines a key/value pair that can be set or retrieved.
         template<typename TKey, typename TValue>
         class KeyValuePair : public Object {
@@ -32,46 +32,46 @@ namespace Switch {
           /// @param Key The object defined in each key/value pair
           /// @param value The definition associated with key
           KeyValuePair(const TKey& key, const TValue& value) : pair(std::make_pair(key, value)) {}
-          
+
           /// @cond
           KeyValuePair() {}
           KeyValuePair(const KeyValuePair& keyValuePair) : pair(keyValuePair.pair) {}
           KeyValuePair(const std::pair<TKey, TValue>& pair) : pair(pair) {}
           operator std::pair<TKey, TValue>() const {return this->pair;}
           /// @endcond
-          
+
           /// @brief Gets the key in the key/value pair.
           /// @return TKey A TKey that is the key of the KeyValuePair<TKey, TValue>.
           _property<const TKey&, _readonly> Key {
             _get->const TKey& {return this->pair.first;}
           };
-          
+
           /// @brief Gets the value in the key/value pair.
           /// @return TValue A TValue that is the value of the KeyValuePair<TKey, TValue>.
           _property<const TValue&, _readonly> Value {
             _get->const TValue& {return this->pair.second;}
           };
-          
+
           /// @brief Returns a String representation of the KeyValuePair<TKey, TValue>, using the String representations of the key and value.
           /// @return const String A String representation of the KeyValuePair<TKey, TValue>, which includes the String representations of the key and value.
           /// @return String
           String ToString() const override {return String::Format("[{0}, {1}]", this->pair.first, this->pair.second);}
-          
+
           bool Equals(const KeyValuePair& value) const {return this->pair == value.pair;}
-          
+
           bool Equals(const Object& obj) const override {return is<KeyValuePair>(obj) && Equals(static_cast<const KeyValuePair&>(obj));}
-          
+
         private:
           std::pair<TKey, TValue> pair;
         };
-        
+
         /// @brief Defines a key/value pair that can be set or retrieved.
         template<>
         class KeyValuePair<> : public object {
         public:
           template<typename TKey, typename TValue>
           static KeyValuePair<TKey, TValue> Create(TKey key, TValue value) {return KeyValuePair<TKey, TValue>(key, value);}
-          
+
         private:
           KeyValuePair() = delete;
         };

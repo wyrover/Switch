@@ -10,7 +10,7 @@ namespace Examples {
       Object* o = null;
       Object* p = null;
       Object* q = new Object();
-      
+
       Console::WriteLine(Object::ReferenceEquals(*o, *p));
       p = q;
       Console::WriteLine(Object::ReferenceEquals(*p, *q));

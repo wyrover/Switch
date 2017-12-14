@@ -18,23 +18,23 @@ namespace Switch {
       class _export HttpWebResponse : public System::Net::WebResponse {
       public:
         virtual ~HttpWebResponse();
-        
+
         _property<System::Net::HttpStatusCode, _readonly> StatusCode {
           _get {return this->GetStatusCode();}
         };
-        
+
         _property<string, _readonly> StatusDescription {
           _get {return this->GetStatusDescription();}
         };
-        
+
         WebResponse::WebResponseStream GetResponseStream() override;
-        
+
       protected:
         HttpWebResponse();
-        
+
       private:
         friend class HttpWebRequest;
-        
+
         System::Net::HttpStatusCode GetStatusCode() const;
         const String GetStatusDescription() const;
       };

@@ -24,7 +24,7 @@ namespace {
       this->name = semaphore.name;
       return *this;
     }
-    
+
     void Close() override {
       if (this->guard == null)
         return;
@@ -35,10 +35,10 @@ namespace {
       this->count.Reset();
       this->maxCount.Reset();
     }
-    
+
     bool Equals(const Semaphore& value) const {return this->guard == value.guard && this->signal == value.signal && this->count == value.count &&  this->maxCount == value.maxCount && this->name == value.name;}
     bool Equals(const Object& obj) const override {return is<Semaphore>(obj) && this->Equals((const Semaphore&)obj);}
-    
+
     int32 Release() {return this->Release(1);}
     int32 Release(int32 releaseCount) {
       if (this->guard == null)
@@ -50,19 +50,19 @@ namespace {
       this->signal->notify_all();
       return *this->count - releaseCount;
     }
-    
+
   private:
     bool Signal() override {
       this->Release();
       return true;
     }
-    
+
     bool Wait(int32 millisecondsTimeOut) override {
       if (this->guard == null)
         throw ObjectDisposedException(_caller);
       if (millisecondsTimeOut < -1)
         throw AbandonedMutexException(_caller);
-        
+
       std::unique_lock<std::mutex> lock(*this->guard);
       while (*this->count == 0) {
         if (millisecondsTimeOut == -1)
@@ -70,11 +70,11 @@ namespace {
         else if (this->signal->wait_for(lock, std::chrono::milliseconds(millisecondsTimeOut)) == std::cv_status::timeout)
           return false;
       }
-      
+
       *this->count -= 1;
       return true;
     }
-    
+
     refptr<std::mutex> guard = ref_new<std::mutex>();
     refptr<std::condition_variable> signal = ref_new<std::condition_variable>();
     refptr<int32> count = ref_new<int32>(0);
@@ -101,7 +101,7 @@ ThreadPool::ThreadArray::~ThreadArray() {
   for (Thread& thread : *this)
     if (thread.ThreadState != ThreadState::Unstarted)
       semaphore.Release();
-      
+
   for (Thread& thread : *this)
     if (thread.ThreadState != ThreadState::Unstarted)
       thread.Join();
@@ -113,7 +113,7 @@ ThreadPool::AsynchronousThreadArray::~AsynchronousThreadArray() {
   for (Thread& thread : *this)
     if (thread.ThreadState != ThreadState::Unstarted)
       asynchronousIOSemaphore.Release();
-      
+
   for (Thread& thread : *this)
     if (thread.ThreadState != ThreadState::Unstarted)
       thread.Join();
@@ -177,31 +177,31 @@ RegisteredWaitHandle ThreadPool::RegisterWaitForSingleObject(WaitHandle& waitObj
 bool ThreadPool::SetMaxThreads(int32 workerThreads, int32 completionPortThreads) {
   if (workerThreads < Environment::ProcessorCount || completionPortThreads < Environment::ProcessorCount)
     return false;
-    
+
   maxThreads = workerThreads;
   maxAsynchronousIOThreads = completionPortThreads;
-  
+
   _lock(threadPoolItems.SyncRoot)
   semaphore = Semaphore(semaphore.Release(), maxThreads);
   _lock(threadPoolAsynchronousIOItems.SyncRoot)
   asynchronousIOSemaphore = Semaphore(asynchronousIOSemaphore.Release(), maxAsynchronousIOThreads);
-  
+
   return true;
 }
 
 bool ThreadPool::SetMinThreads(int32 workerThreads, int32 completionPortThreads) {
   if (workerThreads < 0 || completionPortThreads < 0 || workerThreads >= maxThreads || completionPortThreads >= maxAsynchronousIOThreads)
     return false;
-    
+
   minThreads = workerThreads;
   minAsynchronousIOThreads = completionPortThreads;
-  
+
   if (threads.Count != 0)
     CreateThreads();
-    
+
   if (asynchronousIOThreads.Count != 0)
     CreateAsynchronousIOThreads();
-    
+
   return true;
 }
 
@@ -248,7 +248,7 @@ void ThreadPool::AsynchronousIORun() {
       _lock(threadPoolAsynchronousIOItems.SyncRoot)
       item = threadPoolAsynchronousIOItems[0];
       threadPoolAsynchronousIOItems.RemoveAt(0);
-      
+
       do {
         bool timeout = !item->waitObject->WaitOne(item->millisecondsTimeoutInterval);
         if (!item->unregistered)
@@ -261,7 +261,7 @@ void ThreadPool::AsynchronousIORun() {
 bool RegisteredWaitHandle::Unregister() {
   if (item == null)
     return false;
-    
+
   ThreadPool::ThreadPoolAsynchronousIOItem& item = *((ThreadPool::ThreadPoolAsynchronousIOItem*)this->item);
   item.unregistered = true;
   return item.waitObject->Signal();
@@ -270,7 +270,7 @@ bool RegisteredWaitHandle::Unregister() {
 bool RegisteredWaitHandle::Unregister(WaitHandle& waitObject) {
   if (item == null)
     return false;
-    
+
   ThreadPool::ThreadPoolAsynchronousIOItem& item = *((ThreadPool::ThreadPoolAsynchronousIOItem*)this->item);
   item.unregistered = true;
   return waitObject.Signal();

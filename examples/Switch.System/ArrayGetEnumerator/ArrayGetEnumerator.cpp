@@ -9,7 +9,7 @@ namespace Examples {
     static void Main() {
       // Creates and initializes a new Array.
       Array<string> myArray(10);
-      
+
       myArray[0] = "The";
       myArray[1] = "quick";
       myArray[2] = "brown";
@@ -19,7 +19,7 @@ namespace Examples {
       myArray[6] = "the";
       myArray[7] = "lazy";
       myArray[8] = "dog";
-      
+
       // Displays the values of the Array.
       int index = 0;
       System::Collections::Generic::Enumerator<string> myEnumerator = myArray.GetEnumerator();
@@ -28,7 +28,7 @@ namespace Examples {
         Console::WriteLine("[{0}] {1}", index++, myEnumerator.Current);
     }
   };
-  
+
 }
 
 _startup(Examples::Program);

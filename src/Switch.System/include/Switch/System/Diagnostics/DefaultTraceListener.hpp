@@ -19,20 +19,20 @@ namespace Switch {
       class _export DefaultTraceListener : public TraceListener {
       public:
         DefaultTraceListener() {}
-        
+
         /// @cond
         DefaultTraceListener(const DefaultTraceListener& dtl) : data(dtl.data) { }
         DefaultTraceListener& operator=(const DefaultTraceListener& dtl) {this->data = dtl.data; return *this;}
         ~DefaultTraceListener() {this->Flush();}
         /// @endcond
-        
+
         void Flush() override {
           if (!string::IsNullOrEmpty(this->data->messageLine))
             this->WriteLine("");
           if (this->data->logWriter != null)
             this->data->logWriter->Flush();
         }
-        
+
         /// @brief When overridden in a derived class, writes the specified msg to the listener you create in the derived class.
         void Write(const String& message) override {
           #if defined(DEBUG) || defined(TRACE)
@@ -43,7 +43,7 @@ namespace Switch {
             this->data->logWriter->Write(message);
           #endif
         }
-        
+
         /// @brief When overridden in a derived class, writes a msg to the listener you create in the derived class, followed by a line terminator.
         void WriteLine(const String& message) override {
           #if defined(DEBUG) || defined(TRACE)
@@ -56,7 +56,7 @@ namespace Switch {
           this->NeedIndent = true;
           #endif
         }
-        
+
         /// @brief Get or Sets the name of a log file to write trace or debug msgs to.
         _property<String> LogFileName {
           _get {return this->data->logFileName;},
@@ -65,7 +65,7 @@ namespace Switch {
             this->data->logWriter = new System::IO::StreamWriter(this->data->logFileName);
           }
         };
-        
+
       private:
         void WriteToOutputDebug(const string& message);
         struct DefaultTraceListenerData {
@@ -73,7 +73,7 @@ namespace Switch {
           refptr<System::IO::StreamWriter> logWriter;
           string messageLine;
         };
-        
+
         refptr<DefaultTraceListenerData> data {new DefaultTraceListenerData()};
       };
     }

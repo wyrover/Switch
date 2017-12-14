@@ -60,26 +60,26 @@ namespace Switch {
           /// @note If this constructor throws a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           Socket(System::Net::Sockets::AddressFamily addressFamily, System::Net::Sockets::SocketType socketType, System::Net::Sockets::ProtocolType protocolType);
-          
+
           /// @brief Initializes a new instance of the Socket class using the specified value returned from DuplicateAndClose.
           /// @param socketInformation The socket information returned by DuplicateAndClose.
           /// @remarks If you call the Socket constructor multiple times with the same byte array as the argument for each call, you will create multiple managed Sockets with the same underlying socket. This practice is strongly discouraged.
           explicit Socket(const SocketInformation& socketInformation)  {}
-          
+
           /// @cond
           Socket() {}
           Socket(const Socket& socket) : data(socket.data) {}
           Socket& operator=(const Socket& socket) {this->data = socket.data; return *this;}
           ~Socket();
           /// @endcond
-          
+
           /// @brief Gets the address family of the Socket.
           /// @return AddressFamily One of the AddressFamily values.
           /// @remarks The AddressFamily specifies the addressing scheme that an instance of the Socket class can use. This property is read-only and is set when the Socket is created.
           _property<System::Net::Sockets::AddressFamily, _readonly> AddressFamily {
             _get {return this->data->addressFamily;}
           };
-          
+
           /// @brief Gets the amount of data that has been received from the network and is available to be read.
           /// @return int32 The number of bytes of data received from the network and available to be read.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -89,7 +89,7 @@ namespace Switch {
           _property<int32, _readonly> Available {
             _get {return this->GetAvailable();}
           };
-          
+
           /// @brief Gets a value that indicates whether the Socket is in blocking mode.
           /// @return bool true if the Socket will block; otherwise, false. The default is true
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -102,13 +102,13 @@ namespace Switch {
             _get {return this->GetBlocking();},
             _set {this->SetBlocking(value);}
           };
-          
+
           /// @brief Gets a value that indicates whether a Socket is connected to a remote host as of the last Send or Receive operation.
           /// @return bool true if the Socket was connected to a remote resource as of the most recent operation; otherwise, false.
           _property<bool, _readonly> Connected {
             _get {return this->data->connected;}
           };
-          
+
           /// @brief Gets a Boolean value that specifies whether the Socket allows Internet Protocol (IP) datagrams to be fragmented.
           /// @return bool true if the Socket allows datagram fragmentation; otherwise, false. The default is true.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -119,14 +119,14 @@ namespace Switch {
             _get {return this->GetDontFragment();},
             _set {this->SetDontFragment(value);}
           };
-          
+
           /// @brief Gets or sets a Boolean value that specifies whether the Socket is a dual-mode socket used for both IPv4 and IPv6.
           /// @return bool true if the Socket is a dual-mode socket; otherwise, false. The default is false.
           _property<bool> DualMode {
             _get {return this->GetDualMode();},
             _set {this->SetDualMode(value);}
           };
-          
+
           /// @brief Gets a Boolean value that specifies whether the Socket can send or receive broadcast packets.
           /// @return bool true if the Socket allows only one socket to bind to a specific port; otherwise, false. The default is true.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -137,7 +137,7 @@ namespace Switch {
             _get {return this->GetEnableBroadcast();},
             _set {this->SetEnableBroadcast(value);}
           };
-          
+
           /// @brief Gets or sets a Boolean value that specifies whether the Socket allows only one process to bind to a port.
           /// @return bool true if the Socket allows broadcast packets; otherwise, false. The default is false.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -149,20 +149,20 @@ namespace Switch {
             _get {return this->GetExclusiveAddressUse();},
             _set {this->SetExclusiveAddressUse(value);}
           };
-          
+
           /// @brief Gets the operating system handle for the Socket.
           /// @return IntPtr An IntPtr that represents the operating system handle for the Socket.
           _property<intptr, _readonly> Handle {
             _get {return (intptr)this->data->socket;}
           };
-          
+
           /// @brief Gets a value that indicates whether the Socket is bound to a specific local port.
           /// @return bool true if the Socket is bound to a local port; otherwise, false.
           /// @remarks A socket is considered bound to a local port if it is explicitly bound by calling the Bind method, or implicitly bound by calling members like Connect, SendTo, or ReceiveFrom, which use an ephemeral local port (a free port greater than 1024, selected by the operating system.) Servers use the Bind method to bind to a well-known port so that clients may connect to them.
           _property<bool, _readonly> IsBound {
             _get {return this->data->bound;}
           };
-          
+
           /// @brief Gets os sets a value that specifies whether the Socket will delay closing a socket in an attempt to send all pending data.
           /// @return A LingerOption that specifies how to linger while closing a socket.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -183,7 +183,7 @@ namespace Switch {
             _get {return this->GetLingerState();},
             _set {this->SetLingerState(value);}
           };
-          
+
           /// @brief Gets the local endpoint.
           /// @return The EndPoint that the Socket is using for communications.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -195,7 +195,7 @@ namespace Switch {
           _property<const EndPoint&, _readonly> LocalEndPoint {
             _get->const EndPoint& {return this->GetLocalEndPoint();}
           };
-          
+
           /// @brief Gets a value that specifies whether outgoing multicast packets are delivered to the sending application.
           /// @return bool true if the Socket receives outgoing multicast packets; otherwise, false.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -206,7 +206,7 @@ namespace Switch {
             _get {return this->GetMulticastLoopback();},
             _set {this->SetMulticastLoopback(value);}
           };
-          
+
           /// @brief Gets a Boolean value that specifies whether the stream Socket is using the Nagle algorithm.
           /// @return bool false if the Socket uses the Nagle algorithm; otherwise, true. The default is false.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -218,24 +218,24 @@ namespace Switch {
             _get {return this->GetNoDelay();},
             _set {this->SetNoDelay(value);}
           };
-          
+
           /// @brief Indicates whether the underlying operating system and network adaptors support Internet Protocol version 4 (IPv4).
           /// @return bool true if the operating system and network adaptors support the IPv4 protocol; otherwise, false.
           /// @remarks The majority of operating system may support both IPv4 and IPv6 protocols.
           static _property<bool, _readonly> OSSupportsIPv4;
-          
+
           /// @brief Indicates whether the underlying operating system and network adaptors support Internet Protocol version 6 (IPv6).
           /// @return bool true if the operating system and network adaptors support the IPv6 protocol; otherwise, false.
           /// @remarks The majority of operating system may support both IPv4 and IPv6 protocols.
           static _property<bool, _readonly> OSSupportsIPv6;
-          
+
           /// @brief Gets the protocol type of the Socket.
           /// @return One of the ProtocolType values.
           /// @remarks The ProtocolType property is set when the Socket is created, and specifies the protocol used by that Socket.
           _property<System::Net::Sockets::ProtocolType, _readonly> ProtocolType {
             _get {return this->data->protocolType;}
           };
-          
+
           /// @brief Gets a value that specifies the size of the receive buffer of the Socket.
           /// @return An int32 that contains the size, in bytes, of the receive buffer. The default is 8192.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -245,7 +245,7 @@ namespace Switch {
             _get {return this->GetReceiveBufferSize();},
             _set {this->SetReceiveBufferSize(value);}
           };
-          
+
           /// @brief Gets a value that specifies the amount of time after which a synchronous Receive call will time out.
           /// @return The time-out value, in milliseconds. The default value is 0, which indicates an infinite time-out period. Specifying -1 also indicates an infinite time-out period.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -255,7 +255,7 @@ namespace Switch {
             _get {return this->GetReceiveTimeout();},
             _set {this->SetReceiveTimeout(value);}
           };
-          
+
           /// @brief Gets the remote endpoint.
           /// @return The EndPoint with which the Socket is communicating.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -266,7 +266,7 @@ namespace Switch {
           _property<const EndPoint&, _readonly> RemoteEndPoint {
             _get->const EndPoint& {return this->GetRemoteEndPoint();}
           };
-          
+
           /// @brief Gets a value that specifies the size of the send buffer of the Socket.
           /// @return An int32 that contains the size, in bytes, of the send buffer. The default is 8192.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -276,7 +276,7 @@ namespace Switch {
             _get {return this->GetSendBufferSize();},
             _set {this->SetSendBufferSize(value);}
           };
-          
+
           /// @brief Gets a value that specifies the amount of time after which a synchronous Send call will time out.
           /// @return The time-out value, in milliseconds. The default value is 0, which indicates an infinite time-out period. Specifying -1 also indicates an infinite time-out period.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -286,14 +286,14 @@ namespace Switch {
             _get {return this->GetSendTimeout();},
             _set {this->SetSendTimeout(value);}
           };
-          
+
           /// @brief Gets the type of the Socket.
           /// @return SocketType One of the SocketType values.
           /// @remarks SocketType is read-only and is set when the Socket is created.
           _property<System::Net::Sockets::SocketType, _readonly> SocketType {
             _get {return this->data->socketType;}
           };
-          
+
           /// @brief Gets a value that specifies the Time To Live (TTL) value of Internet Protocol (IP) packets sent by the Socket.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information. - or - socketOptionName was set to the unsupported value SocketOptionNameMaxConnections.
           /// @exception ObjectDisposedException The Socket has been closed.
@@ -306,7 +306,7 @@ namespace Switch {
             _get {return this->GetTtl();},
             _set {this->SetTtl(value);}
           };
-          
+
           /// @brief Creates a new Socket for a newly created connection.
           /// @return Socket A Socket for a newly created connection.
           /// @remarks Accept synchronously extracts the first pending connection request from the connection request queue of the listening socket, and then creates and returns a new Socket. You cannot use this returned Socket to accept any additional connections from the connection queue. However, you can call the RemoteEndPoint method of the returned Socket to identify the remote host's network address and port number.
@@ -315,7 +315,7 @@ namespace Switch {
           /// @note Before calling the Accept method, you must first call the Listen method to listen for and queue incoming connection requests.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           Socket Accept();
-          
+
           /// @brief Associates a Socket with a local endpoint.
           /// @param localEndPoint The local EndPoint to associate with the Socket.
           /// @exception ArgumentNullException localEndPoint is null.
@@ -333,11 +333,11 @@ namespace Switch {
           void Bind(const TEndPoint& localEndPoint) {
             if (this->data->socket == 0)
               throw ObjectDisposedException(_caller);
-              
+
             this->data->localEndPoint = as<EndPoint>(localEndPoint.template MemberwiseClone<TEndPoint>());
             InnerBind();
           }
-          
+
           /// @brief Closes the Socket connection and releases all associated resources.
           /// @remarks The Close method closes the remote host connection and releases all managed and unmanaged resources associated with the Socket. Upon closing, the Connected property is set to false.
           /// @remarks For connection-oriented protocols, it is recommended that you call Shutdown before calling the Close method. This ensures that all data is sent and received on the connected socket before it is closed.
@@ -345,7 +345,7 @@ namespace Switch {
           /// @note To set the DontLinger socket option to false, create a LingerOption, set the enabled property to true, and set the LingerTime property to the desired time out period. Use this LingerOption along with the DontLinger socket option to call the SetSocketOption method.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           void Close();
-          
+
           /// @brief Establishes a connection to a remote host.
           /// @param endPoint An EndPoint that represents the remote device.
           /// @exception ArgumentNullException endPoint is null.
@@ -364,11 +364,11 @@ namespace Switch {
               throw ObjectDisposedException(_caller);
             if (this->data->listening == true)
               throw InvalidOperationException(_caller);
-              
+
             this->data->remoteEndPoint = as<EndPoint>(endPoint.template MemberwiseClone<TEndPoint>());
             InnerConnect();
           }
-          
+
           /// @brief Establishes a connection to a remote host. The host is specified by an IP address and a port number.
           /// @param address The IP address of the remote host.
           /// @param port The port number of the remote host.
@@ -385,7 +385,7 @@ namespace Switch {
           /// @note If the socket has been previously disconnected, then you cannot use this method to restore the connection. Use one of the asynchronous BeginConnect methods to reconnect. This is a limitation of the underlying provider.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           void Connect(const IPAddress& address, int32 port);
-          
+
           /// @brief Establishes a connection to a remote host. The host is specified by an array of IP addresses and a port number.
           /// @param address The IP address of the remote host.
           /// @param port The port number of the remote host.
@@ -402,9 +402,9 @@ namespace Switch {
           /// @note If the socket has been previously disconnected, then you cannot use this method to restore the connection. Use one of the asynchronous BeginConnect methods to reconnect. This is a limitation of the underlying provider.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           void Connect(const Array<IPAddress>& addresses, int32 port);
-          
+
           void Connect(const string& host, int32 port);
-          
+
           /// @brief Closes the socket connection and allows reuse of the socket.
           /// @param reuseSocket true if this socket can be reused after the current connection is closed; otherwise, false.
           /// @exception NotSupportedException This method requires Windows 2000 or earlier, or the exception will be thrown.
@@ -416,7 +416,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           void Disconnect(bool reuseSocket);
-          
+
           /// @brief Duplicates the socket reference for the target process, and closes the socket for this process.
           /// @param targetProcessId The ID of the target process where a duplicate of the socket reference is created.
           /// @exception SocketException targetProcessID is not a valid process id. -or- Duplication of the socket reference failed.
@@ -424,7 +424,7 @@ namespace Switch {
           /// @remarks If you call the Socket constructor multiple times with the same byte array as the argument for each call, you will create multiple managed Socket instances with the same underlying socket. This practice is strongly discouraged.
           /// @remarks If the process creating the socket uses asynchronous methods (BeginReceive or BeginSend), the process must first set the UseOnlyOverlappedIO property to true; otherwise, the socket is bound to the completion port of the creating process, which may cause an ArgumentNullException to be thrown on the target process.
           SocketInformation DuplicateAndClose(int32 targetProcessId);
-          
+
           /// @brief Returns the value of a specified Socket option, represented as an object.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
           /// @param socketOptionName One of the SocketOptionName values.
@@ -433,7 +433,7 @@ namespace Switch {
           /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks Socket options determine the behavior of the current Socket. Use this overload to get the SocketOptionNameLinger, SocketOptionNameAddMembership, and SocketOptionNameDropMembership Socket options. For the SocketOptionNameLinger option, use Socket for the socketOptionLevel parameter. For SocketOptionNameAddMembership and SocketOptionNameDropMembership, use IP. If you want to set the value of any of the options listed above, use the SetSocketOption method.
           refptr<Object> GetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName) const;
-          
+
           /// @brief Sets low-level operating modes for the Socket using the IOControlCode enumeration to specify control codes.
           /// @param ioControlCode A IOControlCode value that specifies the control code of the operation to perform.
           /// @param optionInValue An array of type Byte that contains the input data required by the operation.
@@ -445,7 +445,7 @@ namespace Switch {
           /// @remarks This method provides low-level access to the operating system Socket underlying the current instance of the Socket class. For more, see the WSAIoctl documentation in the MSDN library or see ioctl in the man.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 IOControl(IOControlCode ioControlCode, const Array<byte>& optionInValue, Array<byte>& optionOutValue);
-          
+
           /// @brief Places a Socket in a listening state.
           /// @param backlog The maximum length of the pending connections queue.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -456,7 +456,7 @@ namespace Switch {
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           /// @note The backlog parameter is limited to different values depending on the Operating System. You may specify a higher value, but the backlog will be limited based on the Operating System::
           void Listen(int32 backlog);
-          
+
           /// @brief Determines the status of the Socket.
           /// @param microseconds The time to wait for a response, in microseconds.
           /// @param mode One of the SelectMode values.
@@ -474,7 +474,7 @@ namespace Switch {
           /// @note This method cannot detect certain kinds of connection problems, such as a broken network cable, or that the remote host was shut down ungracefully. You must attempt to send or receive data to detect these kinds of errors.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           bool Poll(int32 microseconds, SelectMode mode);
-          
+
           /// @brief Receives data from a bound Socket into a receive buffer.
           /// @param buffer An array of type Byte that is the storage location for the received data.
           /// @return int32 The number of bytes received.
@@ -490,7 +490,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Receive(Array<byte>& buffer) {return this->Receive(buffer, 0, buffer.Length, SocketFlags::None);}
-          
+
           /// @brief Receives data from a bound Socket into a receive buffer, using the specified SocketFlags.
           /// @param buffer An array of type Byte that is the storage location for the received data.
           /// @param socketFlags A bitwise combination of the SocketFlags values.
@@ -507,7 +507,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Receive(Array<byte>& buffer, SocketFlags socketFlags) {return this->Receive(buffer, 0, buffer.Length, socketFlags);}
-          
+
           /// @brief Receives the specified number of bytes of data from a bound Socket into a receive buffer, using the specified SocketFlags.
           /// @param buffer An array of type Byte that is the storage location for the received data.
           /// @param size The number of bytes to receive.
@@ -526,7 +526,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Receive(Array<byte>& buffer, int32 size, SocketFlags socketFlags) {return this->Receive(buffer, 0, size, socketFlags);}
-          
+
           /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
           /// @param buffer An array of type Byte that is the storage location for the received data.
           /// @param offset The location in buffer to store the received data.
@@ -546,7 +546,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Receive(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags);
-          
+
           /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
           /// @param buffer An array of type Byte that is the storage location for the received data.
           /// @param offset The location in buffer to store the received data.
@@ -567,7 +567,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Receive(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, SocketError& error);
-          
+
           /// @brief Receives data from a bound Socket into a receive buffer.
           /// @param buffer An array of type Byte that is the storage location for the received data.
           /// @param endPoint: the remote host
@@ -584,7 +584,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 ReceiveFrom(Array<byte>& buffer, IPEndPoint& endPoint) {return this->ReceiveFrom(buffer, 0, buffer.Length, SocketFlags::None, endPoint);}
-          
+
           /// @brief Receives data from a bound Socket into a receive buffer, using the specified SocketFlags.
           /// @param buffer An array of type Byte that is the storage location for the received data.
           /// @param socketFlags A bitwise combination of the SocketFlags values.
@@ -602,7 +602,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 ReceiveFrom(Array<byte>& buffer, SocketFlags socketFlags, IPEndPoint& endPoint) {return this->ReceiveFrom(buffer, 0, buffer.Length, socketFlags, endPoint);}
-          
+
           /// @brief Receives the specified number of bytes of data from a bound Socket into a receive buffer, using the specified SocketFlags.
           /// @param buffer An array of type Byte that is the storage location for the received data.
           /// @param size The number of bytes to receive.
@@ -622,7 +622,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 ReceiveFrom(Array<byte>& buffer, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint) {return this->ReceiveFrom(buffer, 0, size, socketFlags, endPoint);}
-          
+
           /// @brief Receives the specified number of bytes from a bound Socket into the specified offset position of the receive buffer, using the specified SocketFlags.
           /// @param buffer An array of type Byte that is the storage location for the received data.
           /// @param offset The location in buffer to store the received data.
@@ -643,7 +643,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 ReceiveFrom(Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, IPEndPoint& endPoint);
-          
+
           /// @brief Determines the status of one or more sockets.
           /// @param checkRead An IList of Socket instances to check for readability.
           /// @param checkWrite An IList of Socket instances to check for writability.
@@ -668,7 +668,7 @@ namespace Switch {
           /// @note If you receive a SocketException, use the SocketException::ErrorCode property to obtain the specific error code. After you have obtained this code,
           /// @note refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           static int32 Select(Collections::Generic::IList<Socket>& checkRead, Collections::Generic::IList<Socket>& checkWrite, Collections::Generic::IList<Socket>& checkError, int32 microseconds);
-          
+
           /// @brief Sends data to a connected Socket.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @return int32 The number of bytes sent to the Socket.
@@ -683,7 +683,7 @@ namespace Switch {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Send(const Array<byte>& buffer) {return this->Send(buffer, 0, buffer.Length, SocketFlags::None);}
-          
+
           /// @brief Sends data to a connected Socket using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param socketFlags A bitwise combination of the SocketFlags values.
@@ -699,7 +699,7 @@ namespace Switch {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Send(const Array<byte>& buffer, SocketFlags socketFlags) {return this->Send(buffer, 0, buffer.Length, socketFlags);}
-          
+
           /// @brief Sends the specified number of bytes of data to a connected Socket, using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param size The number of bytes to send.
@@ -717,7 +717,7 @@ namespace Switch {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Send(const Array<byte>& buffer, int32 size, SocketFlags socketFlags) {return this->Send(buffer, 0, size, socketFlags);}
-          
+
           /// @brief Sends the specified number of bytes of data to a connected Socket, starting at the specified offset, and using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param offset TThe position in the data buffer at which to begin sending data.
@@ -736,7 +736,7 @@ namespace Switch {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Send(const Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags);
-          
+
           /// @brief Sends the specified number of bytes of data to a connected Socket, starting at the specified offset, and using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param offset TThe position in the data buffer at which to begin sending data.
@@ -756,7 +756,7 @@ namespace Switch {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 Send(const Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, SocketError& errorCode);
-          
+
           /// @brief Sends data to a connected Socket.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param endPoint: the remote host
@@ -772,7 +772,7 @@ namespace Switch {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 SendTo(const Array<byte>& buffer, const IPEndPoint& endPoint) {return this->SendTo(buffer, 0, buffer.Length, SocketFlags::None, endPoint);}
-          
+
           /// @brief Sends data to a connected Socket using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param socketFlags A bitwise combination of the SocketFlags values.
@@ -789,7 +789,7 @@ namespace Switch {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 SendTo(const Array<byte>& buffer, SocketFlags socketFlags, const IPEndPoint& endPoint) {return this->SendTo(buffer, 0, buffer.Length, socketFlags, endPoint);}
-          
+
           /// @brief Sends the specified number of bytes of data to a connected Socket, using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param size The number of bytes to send.
@@ -808,7 +808,7 @@ namespace Switch {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 SendTo(const Array<byte>& buffer, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint) {return this->SendTo(buffer, 0, size, socketFlags, endPoint);}
-          
+
           /// @brief Sends the specified number of bytes of data to a connected Socket, starting at the specified offset, and using the specified SocketFlags.
           /// @param buffer An array of type Byte that contains the data to be sent.
           /// @param offset TThe position in the data buffer at which to begin sending data.
@@ -828,7 +828,7 @@ namespace Switch {
           /// @note The successful completion of a send does not indicate that the data was successfully delivered. If no buffer space is available within the transport system to hold the data to be transmitted, send will block unless the socket has been placed in nonblocking mode.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           int32 SendTo(const Array<byte>& buffer, int32 offset, int32 size, SocketFlags socketFlags, const IPEndPoint& endPoint);
-          
+
           /// @brief Sets the specified Socket option to the specified Boolean value.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
           /// @param socketOptionName One of the SocketOptionName values.
@@ -859,7 +859,7 @@ namespace Switch {
           /// @remarks <br />For more information on these options, refer to the SocketOptionName enumeration.
           /// @note If you receive a SocketException exception, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           void SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, bool optionValue);
-          
+
           /// @brief Sets the specified Socket option to the specified value, represented as a byte array.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
           /// @param socketOptionName One of the SocketOptionName values.
@@ -872,7 +872,7 @@ namespace Switch {
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           /// @note You must call the Bind method before using SocketOptionNameAddMembership as the socketOptionName parameter.
           void SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const Array<byte>& optionValue);
-          
+
           /// @brief Sets the specified Socket option to the specified integer value.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
           /// @param socketOptionName One of the SocketOptionName values.
@@ -914,7 +914,7 @@ namespace Switch {
           /// @remarks <br />For more information on these options, refer to the SocketOptionName enumeration.
           /// @note If you receive a SocketException exception, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           void SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, int32 optionValue);
-          
+
           /// @brief Sets the specified Socket option to the specified value, represented as an object.
           /// @param socketOptionLevel One of the SocketOptionLevel values.
           /// @param socketOptionName One of the SocketOptionName values.
@@ -927,7 +927,7 @@ namespace Switch {
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           /// @note You must call the Bind method before using SocketOptionNameAddMembership as the socketOptionName parameter.
           void SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const Object& optionValue);
-          
+
           /// @brief Disables sends and receives on a Socket.
           /// @param how One of the SocketShutdown values that specifies the operation that will no longer be allowed.
           /// @exception SocketException An error occurred when attempting to access the socket. See the Remarks section for more information.
@@ -949,7 +949,7 @@ namespace Switch {
           /// @note If you receive a SocketException when calling the Shutdown method, use the SocketException.ErrorCode property to obtain the specific error code. After you have obtained this code, refer to the Windows Sockets version 2 API error code documentation in the MSDN library for a detailed description of the error.
           /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
           void Shutdown(SocketShutdown how);
-          
+
         private :
           Socket(intptr socket);
           void InnerBind();
@@ -983,7 +983,7 @@ namespace Switch {
           void SetSendBufferSize(int32 bufferSize);
           void SetSendTimeout(int32 timeout);
           void SetTtl(int32 ttl);
-          
+
           struct SocketData {
             intptr socket = 0;
             System::Net::Sockets::AddressFamily addressFamily = System::Net::Sockets::AddressFamily::Unspecified;
@@ -997,7 +997,7 @@ namespace Switch {
             bool bound = false;
           };
           refptr<SocketData> data = ref_new<SocketData>();
-          
+
         };
       }
     }

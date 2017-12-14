@@ -9,7 +9,7 @@ namespace Examples {
     static void Main() {
       // Creates and initializes a new Array.
       Array<string, 2> myArray(2, 5);
-      
+
       myArray(0, 0) = "The";
       myArray(0, 1) = "quick";
       myArray(0, 2) = "brown";
@@ -19,7 +19,7 @@ namespace Examples {
       myArray(1, 1) = "the";
       myArray(1, 2) = "lazy";
       myArray(1, 3) = "dog";
-      
+
       // Displays the values of the Array.
       Console::WriteLine("The Array contains the following values:");
       for (int index1 = 0; index1 < myArray.GetLength(0); index1++)

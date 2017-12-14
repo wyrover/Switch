@@ -74,7 +74,7 @@ int32 Native::RegistryApi::GetValue(intptr hkey, const string& subKey, Microsoft
   int32 size = 0;
   if (RegQueryValueEx((HKEY)hkey, subKey.w_str().c_str(), 0, (DWORD*)&type, NULL, (LPDWORD)&size) != ERROR_SUCCESS)
     return -1;
-    
+
   System::Array<>::Resize(data, size);
   return RegQueryValueEx((HKEY)hkey, subKey.w_str().c_str(), 0, (DWORD*)&type, (LPBYTE)data.Data(), (LPDWORD)&size);
 }
@@ -83,7 +83,7 @@ int32 Native::RegistryApi::NumberOfSubKey(intptr key) {
   LPSTR className = null;
   DWORD classNameSize = MAX_PATH, subKey = 0, maxSubKey, maxClass, value, maxValue, maxValueData, securityDescriptor;
   FILETIME ftLastWriteTime;
-  
+
   if (RegQueryInfoKeyA((HKEY)key, className, &classNameSize, null, &subKey, &maxSubKey, &maxClass, &value, &maxValue, &maxValueData, &securityDescriptor, &ftLastWriteTime) == ERROR_SUCCESS)
     return subKey;
   return -1;
@@ -93,7 +93,7 @@ int32 Native::RegistryApi::NumberOfValue(intptr key) {
   LPSTR className = null;
   DWORD classNameSize = MAX_PATH, subKey = 0, maxSubKey, maxClass, value, maxValue, maxValueData, securityDescriptor;
   FILETIME ftLastWriteTime;
-  
+
   if (RegQueryInfoKeyA((HKEY)key, className, &classNameSize, null, &subKey, &maxSubKey, &maxClass, &value, &maxValue, &maxValueData, &securityDescriptor, &ftLastWriteTime) == ERROR_SUCCESS)
     return value;
   return -1;
@@ -107,10 +107,10 @@ int32  Native::RegistryApi::QueryInfoKey(intptr hkey, int32& subKey, int32& valu
   LPSTR className = null;
   DWORD classNameSize = MAX_PATH, subKeyResultQuery = 0, maxSubKey, maxClass, valueResultQuery, maxValue, maxValueData, securityDescriptor;
   FILETIME ftLastWriteTime;
-  
+
   if (RegQueryInfoKeyA((HKEY)hkey, className, &classNameSize, null, &subKeyResultQuery, &maxSubKey, &maxClass, &valueResultQuery, &maxValue, &maxValueData, &securityDescriptor, &ftLastWriteTime) != ERROR_SUCCESS)
     return -1;
-    
+
   subKey = subKeyResultQuery;
   value = valueResultQuery;
   return 0;

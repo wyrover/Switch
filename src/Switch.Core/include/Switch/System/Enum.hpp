@@ -87,37 +87,37 @@ namespace Switch {
     public:
       Enum() {}
       Enum(T value) : BoxEnum<T>(value) {}
-      
+
     private:
       virtual void InitValues(Collections::Generic::Dictionary<int64, String>& values) {
         EnumToStrings<T>()(values, Enum::flags);
       }
     };
-    
+
     /// @cond
     template<typename T>
     String BoxEnum<T>::GetName(T value) {return Enum<T>(value).ToString();}
-    
+
     template<typename T>
     T BoxEnum<T>::Parse(const String& value, bool ignoreCase) {
       Values();
       if (flags)
         return ParseFlags(value, ignoreCase);
-        
+
       for (auto item : Values()) {
         if (String::Compare(value, item.Value(), ignoreCase) == 0)
           return (T)item.Key();
       }
-      
+
       return (T)Int64::Parse(value);
     }
-    
+
     template<typename T>
     T BoxEnum<T>::ParseFlags(const String& value, bool ignoreCase) {
       Array<String> values = value.Split(',');
       for (String& str : values)
         str = str.TrimStart(' ').TrimEnd(' ');
-        
+
       if (values.Count == 1) {
         for (auto item : Values()) {
           if (String::Compare(value, item.Value(), ignoreCase) == 0)
@@ -125,7 +125,7 @@ namespace Switch {
         }
         return (T)Int64::Parse(value);
       }
-      
+
       int64 result = 0;
       for (String str : values) {
         bool found = false;
@@ -139,16 +139,16 @@ namespace Switch {
         if (found == false)
           throw FormatException(_caller);
       }
-      
+
       return (T)result;
     }
-    
+
     template<typename T>
     int32 BoxEnum<T>::ToInt32(T value) { return Enum<T>(value).ToInt32(); }
-    
+
     template<typename T>
     int64 BoxEnum<T>::ToInt64(T value) { return Enum<T>(value).ToInt64(); }
-    
+
     template<typename T>
     Collections::Generic::Dictionary<int64, String>& BoxEnum<T>::Values() {
       Enum<T>().LoadValues();

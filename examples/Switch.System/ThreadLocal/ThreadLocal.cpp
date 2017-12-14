@@ -16,16 +16,16 @@ namespace Examples {
       ThreadLocal<string> threadName(_delegate {
         return "Thread"_s + Thread::CurrentThread().ManagedThreadId;
       });
-      
+
       // Action that prints out ThreadName for the current thread
       Action<> action = _delegate {
         // If ThreadName.IsValueCreated is true, it means that we are not the
         // first action to run on this thread.
         bool repeat = threadName.IsValueCreated;
-        
+
         Console::WriteLine("threadName = {0} {1}", threadName.Value, repeat ? "(repeat)" : "");
       };
-      
+
       // Launch eight of them.  On 4 cores or less, you should see some repeat ThreadNames
       Parallel::Invoke(action, action, action, action, action, action, action, action);
     }

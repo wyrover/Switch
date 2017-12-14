@@ -24,46 +24,46 @@ namespace Switch {
             this->SetStyle(ControlStyles::UserPaint, false);
             //this->BackColor = System::Drawing::SystemColors::Window;
           }
-          
+
           /// @cond
           Form(const Form& form) : ContainerControl(form), formBorderStyle(form.formBorderStyle), maximizeBox(form.maximizeBox), minimizeBox(form.minimizeBox), startPosition(form.startPosition), messageActions(form.messageActions) {}
           /// @endcond
-          
+
           _property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
             _get{return this->formBorderStyle;},
             _set{this->formBorderStyle = value;}
           };
-          
+
           _property<bool> MaximizeBox {
             _get {return this->maximizeBox;},
             _set {this->maximizeBox = value;}
           };
-          
+
           _property<bool> MinimizeBox {
             _get {return this->minimizeBox;},
             _set {this->minimizeBox = value;}
           };
-          
+
           _property<FormStartPosition> StartPosition{
             _get{return this->startPosition;},
             _set{this->startPosition = value;}
           };
-          
+
           void Close() override;
-          
+
           void WndProc(Message& message) override;
-          
+
           FormClosedEventHandler FormClosed;
-          
+
           FormClosingEventHandler FormClosing;
-          
+
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override { return System::Drawing::Size(300, 300); }
-          
+
           virtual void OnFormClosed(const FormClosedEventArgs& e) { this->FormClosed(*this, e); }
           virtual void OnFormClosing(FormClosingEventArgs& e) { this->FormClosing(*this, e); }
-          
+
           /// @cond
           System::Windows::Forms::FormBorderStyle formBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
           bool maximizeBox = true;
@@ -71,7 +71,7 @@ namespace Switch {
           System::Windows::Forms::FormStartPosition startPosition = FormStartPosition::WindowsDefaultLocation;
           System::Collections::Generic::Dictionary<int32, Action<Message&>> messageActions;
           /// @endcond
-          
+
         private:
           void WmClose(Message& message);
         };

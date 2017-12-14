@@ -31,7 +31,7 @@ namespace Switch {
           _property<const Array<FontFamily>&, _readonly> Families{
             _get->const Array<FontFamily>& {return this->families;}
           };
-          
+
         protected:
           /// @cond
           FontCollection();

@@ -9,7 +9,7 @@ namespace Examples {
     static void Main() {
       // Define an array of integers.
       Array<int> values = {0, 15, -15, 0x100000,  -0x100000, 1000000000, -1000000000, Int32::MinValue, Int32::MaxValue};
-      
+
       // Convert each integer to a byte array.
       Console::WriteLine("{0,16}{1,10}{2,17}", "Integer", "Endian", "Byte Array");
       Console::WriteLine("{0,16}{1,10}{2,17}", "-------", "------", "----------");

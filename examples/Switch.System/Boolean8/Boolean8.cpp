@@ -11,7 +11,7 @@ namespace Examples {
       double subtotal = 120.62;
       double shippingCharge = 2.50;
       double serviceCharge = 5.00;
-      
+
       for (Boolean hasServiceCharge : hasServiceCharges) {
         double total = subtotal + shippingCharge + (hasServiceCharge ? serviceCharge : 0);
         Console::WriteLine("hasServiceCharge = {0}: The total is ${1}.", hasServiceCharge, total);

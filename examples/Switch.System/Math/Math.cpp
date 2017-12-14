@@ -21,50 +21,50 @@ namespace Examples {
       double dyD = trpz.GetRightBaseDegreeAngle();
       Console::WriteLine("Trapezoid left base angle is: {0} Degrees", dyD);
     }
-    
+
     MathTrapezoidSample(double longbase, double shortbase, double leftLeg, double rightLeg) {
       this->longBase = Math::Abs(longbase);
       this->shortBase = Math::Abs(shortbase);
       this->leftLeg = Math::Abs(leftLeg);
       this->rightLeg = Math::Abs(rightLeg);
     }
-    
+
     double GetHeight() {
       double x = GetRightSmallBase();
       return Math::Sqrt(Math::Pow(this->rightLeg, 2.0) - Math::Pow(x, 2.0));
     }
-    
+
     double GetSquare() {
       return GetHeight() * this->longBase / 2.0;
     }
-    
+
     double GetLeftBaseRadianAngle() {
       double sinX = GetHeight() / this->leftLeg;
       return Math::Round(Math::Asin(sinX), 2);
     }
-    
+
     double GetRightBaseRadianAngle() {
       double x = GetRightSmallBase();
       double cosX = (Math::Pow(this->rightLeg, 2.0) + Math::Pow(x, 2.0) - Math::Pow(GetHeight(), 2.0)) / (2 * x * this->rightLeg);
       return Math::Round(Math::Acos(cosX), 2);
     }
-    
+
     double GetLeftBaseDegreeAngle() {
       double x = GetLeftBaseRadianAngle() * 180 / Math::PI;
       return Math::Round(x, 2);
     }
-    
+
     double GetRightBaseDegreeAngle() {
       double x = GetRightBaseRadianAngle() * 180 / Math::PI;
       return Math::Round(x, 2);
     }
-    
+
   private:
     double longBase;
     double shortBase;
     double leftLeg;
     double rightLeg;
-    
+
     double GetRightSmallBase() {
       return (Math::Pow(this->rightLeg, 2.0) - Math::Pow(this->leftLeg, 2.0) + Math::Pow(this->longBase, 2.0) + Math::Pow(this->shortBase, 2.0) - 2 * this->shortBase * this->longBase) / (2 * (this->longBase - this->shortBase));
     }

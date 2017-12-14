@@ -12,7 +12,7 @@ namespace Examples {
       // Change the directory to user's desktop
       Environment::CurrentDirectory = Environment::GetFolderPath(Environment::SpecialFolder::Desktop);
       DirectoryInfo info(".");
-      
+
       Console::WriteLine("Directory Info:   " + info.FullName);
     }
   };

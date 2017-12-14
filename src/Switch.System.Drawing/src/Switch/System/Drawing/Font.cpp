@@ -15,7 +15,7 @@ System::Drawing::Font System::Drawing::Font::FromHFont(intptr hfont) {
 
 System::Drawing::Font System::Drawing::Font::FromLogFontHandle(intptr logfont, intptr hdc) {
   System::Drawing::Font font;
-  
+
   return font;
 }
 

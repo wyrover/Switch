@@ -60,7 +60,6 @@ list(APPEND ASTYLE_ARGS
   --pad-comma
   --pad-header
   --unpad-paren
-  --fill-empty-lines
   --align-pointer=type
   --align-reference=type
   --remove-braces

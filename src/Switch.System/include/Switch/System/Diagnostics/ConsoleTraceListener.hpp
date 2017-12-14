@@ -19,17 +19,17 @@ namespace Switch {
         /// @brief Initializes a new instance of the ConsoleTraceListener class with trace output written to the standard output stream.
         /// @remarks This constructor initializes a ConsoleTraceListener object to write messages to either the Console.Out or the Console.Error stream. Its Name property is initialized to an empty string ("").
         ConsoleTraceListener() : TextWriterTraceListener(Console::Out()) {}
-        
+
         /// @brief Initializes a new instance of the ConsoleTraceListener class with an option to write trace output to the standard output stream or the standard error stream.
         /// @param useErrorStream true to write tracing and debugging output to the standard error stream; false to write tracing and debugging output to the standard output stream.
         /// @remarks This constructor initializes a ConsoleTraceListener object to write messages to either the Console.Out or the Console.Error stream. Its Name property is initialized to an empty string ("").
         ConsoleTraceListener(bool useErrorStream) : TextWriterTraceListener(Console::Error()) {}
-        
+
         /// @cond
         ConsoleTraceListener(const ConsoleTraceListener&) = default;
         ConsoleTraceListener& operator=(const ConsoleTraceListener&) = default;
         /// @endcond
-        
+
         /// @brief When overridden in a derived class, closes the output stream so it no longer receives tracing or debugging output.
         /// @remarks Use this method when the output is going to a file, such as to the TextWriterTraceListener. After a call to this method, you must reinitialize the object.
         void Close() override {this->Writer().Flush();}

@@ -6,7 +6,7 @@ namespace Examples {
   class Program : public object {
   public:
     using Stuff = System::Threading::Mutex;
-    
+
     class C {
     public:
       _property<int> Value {
@@ -18,20 +18,20 @@ namespace Examples {
       int Method2(int z) {return 0;}
       template<typename T>
       string f(const T& value) {return _nameof(value);}
-      
+
     private:
       int value = 0;
     };
-    
+
     // The main entry point for the application.
     static void Main(const Array<string>& args) {
       C c;
       c.Value = 42;
-      
+
       Console::WriteLine("{0} = {1}", _nameof(c.Value), c.Value);
       Console::WriteLine("{0} = {1}", _nameof(c.Value), _typeof(c.Value));
       C::Method1("", 24);
-      
+
       Console::WriteLine(_nameof(C));
       Console::WriteLine(_nameof(C::Method1));
       Console::WriteLine(_nameof(C::Method2));

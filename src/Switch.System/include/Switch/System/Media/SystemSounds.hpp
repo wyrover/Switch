@@ -16,13 +16,13 @@ namespace Switch {
       class SystemSounds {
       public:
         static _property<SystemSound, _readonly> Asterisk;
-        
+
         static _property<SystemSound, _readonly> Beep;
-        
+
         static _property<SystemSound, _readonly> Exclamation;
-        
+
         static _property<SystemSound, _readonly> Hand;
-        
+
         static _property<SystemSound, _readonly> Question;
       };
     }

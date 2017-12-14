@@ -34,7 +34,7 @@ namespace Switch {
           bool lockTaken = false;
           Enter(obj, lockTaken);
         }
-        
+
         /// @brief Acquires an exclusive lock on the specified obj.
         /// @param obj The object on which to acquire the monitor lock.
         /// @param lockTaken The result of the attempt to acquire the lock, passed by reference. The input must be false. The output is true if the lock is acquired; otherwise, the output is false. The output is set even if an exception occurs during the attempt to acquire the lock.
@@ -46,7 +46,7 @@ namespace Switch {
           if (TryEnter(obj, lockTaken) == false)
             throw InvalidOperationException(_caller);
         }
-        
+
         /// @brief Acquires an exclusive lock on the specified obj.
         /// @param obj The object on which to acquire the monitor lock.
         /// @exception ArgumentNullException The obj parameter is null.
@@ -55,14 +55,14 @@ namespace Switch {
         static bool IsEntered(const object& obj) {
           return MonitorItems().ContainsKey(ToKey(obj));
         }
-        
+
         /// @brief Notifies a thread in the waiting queue of a change in the locked object's state.
         /// @param obj The object a thread is waiting for.
         /// @exception ArgumentNullException The obj parameter is null.
         /// Only the current owner of the lock can signal a waiting object using Pulse.
         /// The thread that currently owns the lock on the specified object invokes this method to signal the next thread in line for the lock. Upon receiving the pulse, the waiting thread is moved to the ready queue. When the thread that invoked Pulse releases the lock, the next thread in the ready queue (which is not necessarily the thread that was pulsed) acquires the lock.
         static void Pulse(const object& obj);
-        
+
         /// @brief Notifies all waiting threads of a change in the object's state.
         /// @param obj The object a thread is waiting for.
         /// @exception ArgumentNullException The obj parameter is null.
@@ -72,14 +72,14 @@ namespace Switch {
         /// @remarks The remarks for the Pulse method explain what happens if Pulse is called when no threads are waiting.
         /// @remarks To signal a single thread, use the Pulse method.
         static void PulseAll(const object& obj);
-        
+
         /// @brief Releases an exclusive lock on the specified obj.
         /// @param obj The object on which to release the lock.
         /// @exception ArgumentNullException The obj parameter is null.
         /// @remarks The calling thread must own the lock on the obj parameter. If the calling thread owns the lock on the specified object, and has made an equal number of Exit and Enter calls for the object, then the lock is released. If the calling thread has not invoked Exit as many times as Enter, the lock is not released.
         /// @remarks If the lock is released and other threads are in the ready queue for the object, one of the threads acquires the lock. If other threads are in the waiting queue waiting to acquire the lock, they are not automatically moved to the ready queue when the owner of the lock calls Exit. To move one or more waiting threads into the ready queue, call Pulse or PulseAll before invoking Exit.
         static void Exit(const object& obj) {Remove(obj);}
-        
+
         /// @brief Attempts to acquire an exclusive lock on the specified object.
         /// @param obj The object on which to acquire the lock.
         /// @return bool true if the current thread acquires the lock; otherwise, false
@@ -87,7 +87,7 @@ namespace Switch {
         /// @remarks If successful, this method acquires an exclusive lock on the obj parameter. This method returns immediately, whether or not the lock is available.
         /// @remarks This method is similar to Enter, but it will never block. If the thread cannot enter without blocking, the method returns false, and the thread does not enter the critical section.
         static bool TryEnter(const object& obj) {return TryEnter(obj, Timeout::Infinite);}
-        
+
         /// @brief Attempts to acquire an exclusive lock on the specified object.
         /// @param obj The object on which to acquire the lock.
         /// @param lockTaken The result of the attempt to acquire the lock, passed by reference. The input must be false. The output is true if the lock is acquired; otherwise, the output is false. The output is set even if an exception occurs during the attempt to acquire the lock.
@@ -97,7 +97,7 @@ namespace Switch {
         /// @remarks If successful, this method acquires an exclusive lock on the obj parameter. This method returns immediately, whether or not the lock is available.
         /// @remarks This method is similar to Enter, but it will never block. If the thread cannot enter without blocking, the method returns false, and the thread does not enter the critical section.
         static bool TryEnter(const object& obj, bool& lockTaken) {return TryEnter(obj, Timeout::Infinite, lockTaken);}
-        
+
         /// @brief Attempts, for the specified number of milliseconds, to acquire an exclusive lock on the specified object.
         /// @param obj The object on which to acquire the lock.
         /// @param millisecondsTimeout The number of milliseconds to wait for the lock.
@@ -108,7 +108,7 @@ namespace Switch {
           bool lockTacken = false;
           return TryEnter(obj, millisecondsTimeout, lockTacken);
         }
-        
+
         /// @brief Attempts, for the specified number of milliseconds, to acquire an exclusive lock on the specified object.
         /// @param obj The object on which to acquire the lock.
         /// @param millisecondsTimeout The number of milliseconds to wait for the lock.
@@ -120,11 +120,11 @@ namespace Switch {
         static bool TryEnter(const object& obj, int32 millisecondsTimeout, bool& lockTaken) {
           if (millisecondsTimeout < -1)
             return false;
-            
+
           lockTaken = Add(obj, millisecondsTimeout);
           return true;
         }
-        
+
         /// @brief Attempts, for the specified number of milliseconds, to acquire an exclusive lock on the specified object.
         /// @param obj The object on which to acquire the lock.
         /// @param millisecondsTimeout The number of milliseconds to wait for the lock.
@@ -135,7 +135,7 @@ namespace Switch {
           bool lockTacken = false;
           return TryEnter(obj, millisecondsTimeout, lockTacken);
         }
-        
+
         /// @brief Attempts, for the specified number of milliseconds, to acquire an exclusive lock on the specified object.
         /// @param obj The object on which to acquire the lock.
         /// @param millisecondsTimeout The number of milliseconds to wait for the lock.
@@ -147,11 +147,11 @@ namespace Switch {
         static bool TryEnter(const object& obj, int64 millisecondsTimeout, bool& lockTaken) {
           if (millisecondsTimeout < -1)
             return false;
-            
+
           lockTaken = Add(obj, (int32)millisecondsTimeout);
           return true;
         }
-        
+
         /// @brief Attempts, for the specified amount of time, to acquire an exclusive lock on the specified object.
         /// @param obj The object on which to acquire the lock.
         /// @param timeout A TimeSpan representing the amount of time to wait for the lock. A value of -1 millisecond specifies an infinite wait.
@@ -162,7 +162,7 @@ namespace Switch {
           bool lockTaken = false;
           return TryEnter(obj, as<int32>(timeout.TotalMilliseconds()), lockTaken);
         }
-        
+
         /// @brief Attempts, for the specified amount of time, to acquire an exclusive lock on the specified object.
         /// @param obj The object on which to acquire the lock.
         /// @param timeout A TimeSpan representing the amount of time to wait for the lock. A value of -1 millisecond specifies an infinite wait.
@@ -172,7 +172,7 @@ namespace Switch {
         /// @exception ArgumentNullException The obj timeout or  parameter is null.
         /// @remarks If the value of the timeout parameter converted to milliseconds equals -1, this method is equivalent to Enter. If the value of timeout equals 0, this method is equivalent to TryEnter.
         static bool TryEnter(const object& obj, const TimeSpan& timeout, bool& lockTaken) {return TryEnter(obj, as<int32>(timeout.TotalMilliseconds()), lockTaken);}
-        
+
         /// @brief Releases the lock on an object and blocks the current thread until it reacquires the lock.
         /// @param obj The object on which to wait.
         /// @return Boolean true if the call returned because the caller reacquired the lock for the specified object. This method does not return if the lock is not reacquired.
@@ -185,7 +185,7 @@ namespace Switch {
         /// The Pulse, PulseAll, and Wait methods must be invoked from within a synchronized block of code.
         /// The remarks for the Pulse method explain what happens if Pulse is called when no threads are waiting.
         static bool Wait(const object& obj) {return Wait(obj, Timeout::Infinite);}
-        
+
         /// @brief Releases the lock on an object and blocks the current thread until it reacquires the lock.
         /// @param obj The object on which to wait.
         /// @param millisecondsTimeout The number of milliseconds to wait before the thread enters the ready queue.
@@ -201,7 +201,7 @@ namespace Switch {
         /// The Pulse, PulseAll, and Wait methods must be invoked from within a synchronized block of code.
         /// The remarks for the Pulse method explain what happens if Pulse is called when no threads are waiting.
         static bool Wait(const object& obj, int32 millisecondsTimeout);
-        
+
         /// @brief Releases the lock on an object and blocks the current thread until it reacquires the lock. If the specified time-out interval elapses, the thread enters the ready queue.
         /// @param obj The object on which to wait.
         /// @param timeout A TimeSpan representing the amount of time to wait before the thread enters the ready queue.
@@ -217,19 +217,19 @@ namespace Switch {
         /// The Pulse, PulseAll, and Wait methods must be invoked from within a synchronized block of code.
         ///The remarks for the Pulse method explain what happens if Pulse is called when no threads are waiting.
         static bool Wait(const object& obj, const TimeSpan& timeout) {return Wait(obj, as<int32>(timeout.TotalMilliseconds()));}
-        
+
       private:
         struct MonitorItem {
           MonitorItem() {}
           MonitorItem(const string& name) : name(name) {}
           bool operator==(const MonitorItem& monitorItem) const {return this->event == monitorItem.event && this->usedCounter == monitorItem.usedCounter;}
           bool operator!=(const MonitorItem& monitorItem) const {return !this->operator==(monitorItem);}
-          
+
           Mutex event {false};
           int32 usedCounter {0};
           Nullable<string> name;
         };
-        
+
         static const object* ToKey(const object& obj) {
           if (is<string>(obj)) {
             for (const auto& item : MonitorItems())
@@ -238,12 +238,12 @@ namespace Switch {
           }
           return &obj;
         }
-        
+
         static System::Collections::Generic::Dictionary<const object*, MonitorItem>& MonitorItems() {
           static System::Collections::Generic::Dictionary<const object*, MonitorItem> monitorItems;
           return monitorItems;
         }
-        
+
         static bool Add(const object& obj, int32 millisecondsTimeout);
         static void Remove(const object& obj);
       };

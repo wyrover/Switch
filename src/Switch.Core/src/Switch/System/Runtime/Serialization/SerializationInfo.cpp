@@ -71,14 +71,14 @@ void SerializationInfo::AddValue(const string& name, const ISerializable& value,
   refptr<SerializationInfo> infos = new SerializationInfo();
   infos->SetObjectType(typeName);
   value.GetObjectData(*infos);
-  
+
   mItems.Add(name, SerializationEntry(infos.ChangeType<object>(), typeName));
 }
 
 void SerializationInfo::AddValue(const string& name, refptr<Object> value, const string& typeName) {
   if (value == null)
     throw ArgumentNullException(_caller);
-    
+
   mItems.Add(name, SerializationEntry(value, typeName));
 }
 

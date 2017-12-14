@@ -9,20 +9,20 @@ namespace Examples {
     static void Main() {
       string value;
       bool toDelete = false;
-      
+
       // Check whether the environment variable exists.
       value = Environment::GetEnvironmentVariable("Test1");
       // If necessary, create it.
       if (string::IsNullOrEmpty(value)) {
         Environment::SetEnvironmentVariable("Test1", "Value1");
         toDelete = true;
-        
+
         // Now retrieve it.
         value = Environment::GetEnvironmentVariable("Test1");
       }
       // Display the value.
       Console::WriteLine("Test1: {0}\n", value);
-      
+
       // Confirm that the value can only be retrieved from the process
       // environment block.
       Console::WriteLine("Attempting to retrieve Test1 from:");
@@ -31,7 +31,7 @@ namespace Examples {
         Console::WriteLine("   {0}: {1}", enumValue, !string::IsNullOrEmpty(value) ? value : "not found");
       }
       Console::WriteLine();
-      
+
       // If we've created it, now delete it.
       if (toDelete) {
         Environment::SetEnvironmentVariable("Test1", "");

@@ -52,7 +52,7 @@ void StreamWriter::Write(const string& value) {
   int32 length = bytes.Length;
   if (length != 0)
     this->data->stream->Write(bytes, 0, length);
-    
+
   if (this->data->autoFlush)
     Flush();
 }

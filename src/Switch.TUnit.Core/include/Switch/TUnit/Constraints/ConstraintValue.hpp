@@ -22,20 +22,20 @@ namespace Switch {
         ConstraintValue() {}
         template <typename T>
         ConstraintValue(const T& value) : value(value) {}
-        
+
         /// @cond
         ConstraintValue(const any& value) : value(value) {}
         ConstraintValue(const ConstraintValue& value) : value(value.value) {}
         ConstraintValue& operator=(const ConstraintValue& value) {this->value = value.value; return *this;}
         /// @endcond
-        
+
         _property<object, _readonly> Value {
           _get {return this->value.Value();}
         };
-        
+
         operator const any& () const {return this->value;}
         operator any& () {return this->value;}
-        
+
         string ToString() const {
           if (is<string>(this->value) && string::IsNullOrEmpty(as<string>(this->value)))
             return "<string::Empty>";
@@ -43,13 +43,13 @@ namespace Switch {
             return string::Format("\"{0}\"", this->value);
           return string::Format("{0}", this->value);
         }
-        
+
       private:
         any value;
       };
     }
   }
-  
+
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
@@ -61,7 +61,7 @@ namespace Switch {
   const T& as(const TUnit::Constraints::ConstraintValue& value) {
     return ((const any&)value).As<T>();
   }
-  
+
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
@@ -73,7 +73,7 @@ namespace Switch {
   T& as(TUnit::Constraints::ConstraintValue& value) {
     return ((any&)value).As<T>();
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code
@@ -85,7 +85,7 @@ namespace Switch {
   bool is(const TUnit::Constraints::ConstraintValue& value) {
     return ((const any&)value).Is<T>();
   }
-  
+
   /// @brief Return true if specified value is the specified Type. A Is expression takes the following form:
   /// @par Examples
   /// @code

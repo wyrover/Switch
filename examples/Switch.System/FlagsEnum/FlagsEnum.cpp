@@ -53,31 +53,31 @@ namespace Examples {
     static void Main() {
       // Create a Letters Enum
       Letters letter = Letters::None;
-      
+
       Console::WriteLine("letter is equal to {0}.", letter);
-      
+
       // Assigne a Letters value
       letter  = Letters::D;
       Console::WriteLine("letter is equal to {0}.", letter);
-      
+
       // Assigne a Int32 value
       letter = (Letters)9;
       Console::WriteLine("letter is equal to {0}.", letter);
-      
+
       // Assigne bits value
       letter = Letters::A | Letters::L | Letters::T;
       Console::WriteLine("letter is equal to {0}.", letter);
-      
+
       // Parse a Numbers
       letter = Enum<Letters>::Parse("A, F");
       Console::WriteLine("letter is equal to {0}.", letter);
-      
+
       // Give name of value Numbers
       Console::WriteLine("The Letters::Q name is {0}.", Enum<Letters>(Letters::Q).GetName());
-      
+
       // Give value of value Numbers
       Console::WriteLine("The Letters::G value is {0}.", Enum<Letters>(Letters::G).ToInt32());
-      
+
       // Give Nimbers names list
       Console::WriteLine("Letters names list : {0}", string::Join(", ", Enum<Letters>::GetNames()));
     }

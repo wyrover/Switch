@@ -9,7 +9,7 @@ namespace Examples {
     static void Main() {
       // Define Boolean true and false values.
       Array<bool> values = {true, false};
-      
+
       // Display the value and its corresponding byte array.
       Console::WriteLine("{0,10}{1,16}\n", "Boolean", "Bytes");
       for (bool value : values) {

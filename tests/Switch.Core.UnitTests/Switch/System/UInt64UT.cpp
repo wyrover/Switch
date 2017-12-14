@@ -11,21 +11,21 @@ namespace {
   TEST(UInt64Test, MaxValue) {
     ASSERT_EQ(0xFFFFFFFFFFFFFFFFull, UInt64::MaxValue);
   }
-  
+
   TEST(UInt64Test, MinValue) {
     ASSERT_EQ(0ull, UInt64::MinValue);
   }
-  
+
   TEST(UInt64Test, DefaultValue) {
     ASSERT_EQ(0ull, UInt64());
   }
-  
+
   TEST(UInt64Test, CtorValue) {
     ASSERT_EQ(10ull, UInt64(10ull));
     ASSERT_EQ(1236548889ull, UInt64(1236548889ull));
     ASSERT_EQ(0ull, UInt64(0ull));
   }
-  
+
   TEST(UInt64Test, Parse) {
     ASSERT_EQ(0ull, UInt64::Parse("0"));
     ASSERT_EQ(1ull, UInt64::Parse("1"));
@@ -33,13 +33,13 @@ namespace {
     ASSERT_EQ(123654ull, UInt64::Parse("123654"));
     ASSERT_EQ(0xFFFFFFFFull, UInt64::Parse("4294967295"));
   }
-  
+
   TEST(UInt64Test, Parse_Sign) {
     ASSERT_EQ(5ull, UInt64::Parse("+5"));
     ASSERT_EQ(0ull, UInt64::Parse("-0"));
     ASSERT_THROW(UInt64::Parse("-1"), OverflowException);
   }
-  
+
   TEST(UInt64Test, Parse_Leading_Zeros) {
     ASSERT_EQ(0ull, UInt64::Parse("0"));
     ASSERT_EQ(0ull, UInt64::Parse("00"));
@@ -49,7 +49,7 @@ namespace {
     ASSERT_EQ(99ull, UInt64::Parse("099"));
     ASSERT_EQ(999ull, UInt64::Parse("0000999"));
   }
-  
+
   TEST(UInt64Test, Parse_Spaces) {
     ASSERT_EQ(5ull, UInt64::Parse(" 5"));
     ASSERT_EQ(5ull, UInt64::Parse("     5"));
@@ -58,7 +58,7 @@ namespace {
     ASSERT_EQ(5ull, UInt64::Parse(" 5      "));
     ASSERT_EQ(52ull, UInt64::Parse("        52 "));
   }
-  
+
   TEST(UInt64Test, Parse_FormatException) {
     ASSERT_THROW(UInt64::Parse(""), FormatException);
     ASSERT_THROW(UInt64::Parse("a56"), FormatException);
@@ -71,7 +71,7 @@ namespace {
     ASSERT_THROW(UInt64::Parse("100a"), FormatException);
     ASSERT_THROW(UInt64::Parse("10u"), FormatException);
   }
-  
+
   TEST(UInt64Test, Parse_OverflowException) {
     ASSERT_THROW(UInt64::Parse("-1"), OverflowException);
     ASSERT_THROW(UInt64::Parse("-15602"), OverflowException);
@@ -82,7 +82,7 @@ namespace {
     ASSERT_THROW(UInt64::Parse("28446744073709551615"), OverflowException);
     ASSERT_THROW(UInt64::Parse("1018446744073709551615"), OverflowException);
   }
-  
+
   TEST(UInt64Test, Parse_Binary) {
     ASSERT_EQ(0ull, UInt64::Parse("0", 2));
     ASSERT_EQ(1ull, UInt64::Parse("1", 2));
@@ -90,7 +90,7 @@ namespace {
     ASSERT_EQ(3ull, UInt64::Parse("11", 2));
     ASSERT_EQ(6ull, UInt64::Parse("110", 2));
   }
-  
+
   TEST(UInt64Test, Parse_Exceptions_Binary) {
     ASSERT_THROW(UInt64::Parse("", 2), FormatException);
     ASSERT_THROW(UInt64::Parse("2", 2), FormatException);
@@ -103,7 +103,7 @@ namespace {
     ASSERT_THROW(UInt64::Parse("100a", 2), FormatException);
     ASSERT_THROW(UInt64::Parse("10u", 2), FormatException);
   }
-  
+
   TEST(UInt64Test, Parse_Octal) {
     ASSERT_EQ(0ull, UInt64::Parse("0", 8));
     ASSERT_EQ(1ull, UInt64::Parse("1", 8));
@@ -111,7 +111,7 @@ namespace {
     ASSERT_EQ(56ull, UInt64::Parse("70", 8));
     ASSERT_EQ(601ull, UInt64::Parse("1131", 8));
   }
-  
+
   TEST(UInt64Test, Parse_Hexadecimal) {
     ASSERT_EQ(0ull, UInt64::Parse("0", 16));
     ASSERT_EQ(1ull, UInt64::Parse("1", 16));
@@ -124,7 +124,7 @@ namespace {
     ASSERT_THROW(UInt64::Parse("10000000000000000", 16), OverflowException);
     ASSERT_THROW(UInt64::Parse("1000000000000000000", 16), OverflowException);
   }
-  
+
   TEST(UInt64Test, TryParse) {
     uint64 x;
     ASSERT_TRUE(UInt64::TryParse("0", x));
@@ -138,7 +138,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("4294967295", x));
     ASSERT_EQ(0xFFFFFFFFull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_Sign) {
     uint64 x;
     ASSERT_TRUE(UInt64::TryParse("+5", x));
@@ -147,7 +147,7 @@ namespace {
     ASSERT_EQ(0ull, x);
     ASSERT_FALSE(UInt64::TryParse("-1", x));
   }
-  
+
   TEST(UInt64Test, TryParse_Leading_Zeros) {
     uint64 x;
     ASSERT_TRUE(UInt64::TryParse("0", x));
@@ -165,7 +165,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("0000999", x));
     ASSERT_EQ(999ull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_Spaces) {
     uint64 x;
     ASSERT_TRUE(UInt64::TryParse(" 5", x));
@@ -181,7 +181,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("        52 ", x));
     ASSERT_EQ(52ull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_FormatException) {
     uint64 x;
     ASSERT_FALSE(UInt64::TryParse("", x));
@@ -195,7 +195,7 @@ namespace {
     ASSERT_FALSE(UInt64::TryParse("100a", x));
     ASSERT_FALSE(UInt64::TryParse("10u", x));
   }
-  
+
   TEST(UInt64Test, TryParse_OverflowException) {
     uint64 x;
     ASSERT_FALSE(UInt64::TryParse("-1", x));
@@ -210,7 +210,7 @@ namespace {
     ASSERT_FALSE(UInt64::TryParse("28446744073709551615", x));
     ASSERT_FALSE(UInt64::TryParse("1018446744073709551615", x));
   }
-  
+
   TEST(UInt64Test, TryParse_Binary) {
     uint64 x;
     ASSERT_TRUE(UInt64::TryParse("0", 2, x));
@@ -224,7 +224,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("110", 2, x));
     ASSERT_EQ(6ull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_Exceptions_Binary) {
     uint64 x;
     ASSERT_FALSE(UInt64::TryParse("", 2, x));
@@ -238,7 +238,7 @@ namespace {
     ASSERT_FALSE(UInt64::TryParse("100a", 2, x));
     ASSERT_FALSE(UInt64::TryParse("10u", 2, x));
   }
-  
+
   TEST(UInt64Test, TryParse_Octal) {
     uint64 x;
     ASSERT_TRUE(UInt64::TryParse("0", 8, x));
@@ -252,7 +252,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("1131", 8, x));
     ASSERT_EQ(601ull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_Hexadecimal) {
     uint64 x;
     ASSERT_TRUE(UInt64::TryParse("0", 16, x));
@@ -274,7 +274,7 @@ namespace {
     ASSERT_FALSE(UInt64::TryParse("10000000000000000",  16, x));
     ASSERT_FALSE(UInt64::TryParse("1000000000000000000",  16, x));
   }
-  
+
   TEST(UInt64Test, TryParse_UInt64) {
     UInt64 x;
     ASSERT_TRUE(UInt64::TryParse("0", x));
@@ -288,7 +288,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("4294967295", x));
     ASSERT_EQ(0xFFFFFFFFull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_Sign_UInt64) {
     UInt64 x;
     ASSERT_TRUE(UInt64::TryParse("+5", x));
@@ -297,7 +297,7 @@ namespace {
     ASSERT_EQ(0ull, x);
     ASSERT_FALSE(UInt64::TryParse("-1", x));
   }
-  
+
   TEST(UInt64Test, TryParse_Leading_Zeros_UInt64) {
     UInt64 x;
     ASSERT_TRUE(UInt64::TryParse("0", x));
@@ -315,7 +315,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("0000999", x));
     ASSERT_EQ(999ull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_Spaces_UInt64) {
     UInt64 x;
     ASSERT_TRUE(UInt64::TryParse(" 5", x));
@@ -331,7 +331,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("        52 ", x));
     ASSERT_EQ(52ull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_FormatException_UInt64) {
     UInt64 x;
     ASSERT_FALSE(UInt64::TryParse("", x));
@@ -345,7 +345,7 @@ namespace {
     ASSERT_FALSE(UInt64::TryParse("100a", x));
     ASSERT_FALSE(UInt64::TryParse("10u", x));
   }
-  
+
   TEST(UInt64Test, TryParse_OverflowException_UInt64) {
     UInt64 x;
     ASSERT_FALSE(UInt64::TryParse("-1", x));
@@ -360,7 +360,7 @@ namespace {
     ASSERT_FALSE(UInt64::TryParse("28446744073709551615", x));
     ASSERT_FALSE(UInt64::TryParse("1018446744073709551615", x));
   }
-  
+
   TEST(UInt64Test, TryParse_Binary_UInt64) {
     UInt64 x;
     ASSERT_TRUE(UInt64::TryParse("0", 2, x));
@@ -374,7 +374,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("110", 2, x));
     ASSERT_EQ(6ull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_Exceptions_Binary_UInt64) {
     UInt64 x;
     ASSERT_FALSE(UInt64::TryParse("", 2, x));
@@ -388,7 +388,7 @@ namespace {
     ASSERT_FALSE(UInt64::TryParse("100a", 2, x));
     ASSERT_FALSE(UInt64::TryParse("10u", 2, x));
   }
-  
+
   TEST(UInt64Test, TryParse_Octal_UInt64) {
     UInt64 x;
     ASSERT_TRUE(UInt64::TryParse("0", 8, x));
@@ -402,7 +402,7 @@ namespace {
     ASSERT_TRUE(UInt64::TryParse("1131", 8, x));
     ASSERT_EQ(601ull, x);
   }
-  
+
   TEST(UInt64Test, TryParse_Hexadecimal_UInt64) {
     UInt64 x;
     ASSERT_TRUE(UInt64::TryParse("0", 16, x));
@@ -424,8 +424,8 @@ namespace {
     ASSERT_FALSE(UInt64::TryParse("10000000000000000",  16, x));
     ASSERT_FALSE(UInt64::TryParse("1000000000000000000",  16, x));
   }
-  
-  
+
+
 }
 
 /*

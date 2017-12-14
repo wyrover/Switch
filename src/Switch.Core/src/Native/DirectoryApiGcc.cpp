@@ -16,58 +16,58 @@ namespace {
       File,
       Directory
     };
-    
+
     Enumerator(const string& path, const string& pattern, FileType fileType) : path(path), pattern(pattern), fileType(fileType) {Reset();}
     ~Enumerator() {
       if (this->handle != null)
         closedir(this->handle);
     }
-    
+
     bool MoveNext() override {
       dirent* item;
       System::IO::FileAttributes attributes;
-      
+
       do {
         if ((item = readdir(this->handle)) != null)
           Native::DirectoryApi::GetFileAttributes(string::Format("{0}/{1}", this->path, item->d_name), attributes);
       } while (item != null && ((this->fileType == FileType::Directory && (attributes & System::IO::FileAttributes::Directory) != System::IO::FileAttributes::Directory) || (this->fileType == FileType::File && (attributes & System::IO::FileAttributes::Directory) == System::IO::FileAttributes::Directory) || string(item->d_name) == "." ||  string(item->d_name) == ".." ||  string(item->d_name).EndsWith(".app") || !PatternCompare(item->d_name, this->pattern)));
-      
+
       if (item == null)
         return false;
       this->current = string::Format("{0}{1}{2}", this->path, this->path.EndsWith('/') ? "" : System::Char('/').ToString(), item->d_name);
       return true;
     }
-    
+
     void Reset() override {
       if (this->handle != null)
         closedir(this->handle);
       this->handle = opendir(path.Data());
     }
-    
+
   protected:
     const string& GetCurrent() const override {
       if (this->handle == null)
         throw System::InvalidOperationException(_caller);
       return this->current;
     }
-    
+
   private:
     bool PatternCompare(const string& fileName, const string& pattern) {
       if (string::IsNullOrEmpty(pattern))
         return string::IsNullOrEmpty(fileName);
-        
+
       if (string::IsNullOrEmpty(fileName))
         return false;
-        
+
       if (pattern == "*")
         return true;
-        
+
       if (pattern[0] == '*')
         return PatternCompare(fileName, pattern.Substring(1)) || PatternCompare(fileName.Substring(1), pattern);
-        
+
       return ((pattern[0] == '?') || (fileName[0] == pattern[0])) && PatternCompare(fileName.Substring(1), pattern.Substring(1));
     }
-    
+
     string path;
     string pattern;
     DIR* handle = null;
@@ -133,7 +133,7 @@ int32 Native::DirectoryApi::GetFileTime(const string& path, int64& creationTime,
   struct stat status {0};
   if (stat(path.Data(), &status) != 0)
     return -1;
-    
+
   creationTime = status.st_ctime;
   lastAccessTime = status.st_atime;
   lastWriteTime = status.st_mtime;
@@ -143,20 +143,20 @@ int32 Native::DirectoryApi::GetFileTime(const string& path, int64& creationTime,
 string Native::DirectoryApi::GetFullPath(const string& relativePath) {
   System::Array<string> directories = relativePath.Split(DirectorySeparatorChar(), System::StringSplitOptions::RemoveEmptyEntries);
   string fullPath;
-  
+
   if (relativePath[0] != DirectorySeparatorChar())
     fullPath = GetCurrentDirectory();
-    
+
   for (string& item : directories) {
     if (item == ".." && fullPath.LastIndexOf(DirectorySeparatorChar()) != -1)
       fullPath = fullPath.Remove(fullPath.LastIndexOf(DirectorySeparatorChar()));
     else if (item != ".")
       fullPath = string::Format("{0}{1}{2}", fullPath, DirectorySeparatorChar(), item);
   }
-  
+
   if (relativePath[relativePath.Length - 1] == DirectorySeparatorChar())
     fullPath = string::Format("{0}{1}", fullPath, DirectorySeparatorChar());
-    
+
   return fullPath;
 }
 

@@ -22,10 +22,10 @@ namespace Switch {
     namespace Linq {
       template<typename T>
       using EnumerableCollection = System::Collections::Generic::List<T>;
-      
+
       template<typename T>
       using IOrderedEnumerable = System::Collections::Generic::IEnumerable<T>;
-      
+
       /// @brief Provides a set of static methods for querying objects that implement IEnumerable<T>.
       class _export Enumerable _static {
       public:
@@ -48,7 +48,7 @@ namespace Switch {
           }
           return agregated;
         }
-        
+
         /// @brief Applies an accumulator function over a sequence. The specified seed value is used as the initial accumulator value.
         /// @param source An IEnumerable<T> to aggregate over.
         /// @param seed The initial accumulator value.
@@ -64,7 +64,7 @@ namespace Switch {
             agregated = func(agregated, item);
           return agregated;
         }
-        
+
         /// @brief Applies an accumulator function over a sequence. The specified seed value is used as the initial accumulator value, and the specified function is used to select the result value.
         /// @param source An IEnumerable<T> to aggregate over.
         /// @param seed The initial accumulator value.
@@ -83,7 +83,7 @@ namespace Switch {
             agregated = func(agregated, item);
           return resultSelector(agregated);
         }
-        
+
         /// @brief Determines whether all elements of a sequence satisfy a condition.
         /// @param source An IEnumerable<T> that contains the elements to apply the predicate to.
         /// @param func A function to test each element for a condition.
@@ -98,7 +98,7 @@ namespace Switch {
               return false;
           return true;
         }
-        
+
         /// @brief Determines whether a sequence contains any elements.
         /// @param source The IEnumerable<T> to check for emptiness.
         /// @return true if the source sequence contains any elements; otherwise, false.
@@ -109,7 +109,7 @@ namespace Switch {
         static bool Any(const Collections::Generic::IEnumerable<TSource>& source) {
           return source.GetEnumerator().MoveNext();
         }
-        
+
         /// @brief Determines whether any element of a sequence satisfies a condition.
         /// @param source An IEnumerable<T> whose elements to apply the predicate to.
         /// @param predicate A function to test each element for a condition.
@@ -124,7 +124,7 @@ namespace Switch {
               return true;
           return false;
         }
-        
+
         /// @brief Returns the input typed as IEnumerable<T>.
         /// @param source The sequence to type as IEnumerable<T>.
         /// @return The input sequence typed as IEnumerable<T>.
@@ -135,7 +135,7 @@ namespace Switch {
         /// @include EnumerableAsEnumerable.cpp
         template<typename TSource>
         static refptr<EnumerableCollection<TSource>> AsEnumerable(const Collections::Generic::IEnumerable<TSource>& source) {return ref_new<EnumerableCollection<TSource>>(source);}
-        
+
         /// @brief Returns the input typed as IEnumerable<T>.
         /// @param source The sequence to type as IEnumerable<T>.
         /// @return The input sequence typed as IEnumerable<T>.
@@ -146,7 +146,7 @@ namespace Switch {
         /// @include EnumerableAsEnumerable2.cpp
         template<typename TSource, int32 len>
         static refptr<EnumerableCollection<TSource>> AsEnumerable(const TSource(&source)[len]) {return ref_new<EnumerableCollection<TSource>>(source);}
-        
+
         /// @brief Computes the average of a sequence of Double values.
         /// @param source A sequence of Double values to calculate the average of.
         /// @return The average of the sequence of values.
@@ -165,7 +165,7 @@ namespace Switch {
             throw InvalidOperationException(_caller);
           return average / count;
         }
-        
+
         /// @brief Computes the average of a sequence of Single values.
         /// @param source A sequence of Single values to calculate the average of.
         /// @return The average of the sequence of values.
@@ -184,7 +184,7 @@ namespace Switch {
             throw InvalidOperationException(_caller);
           return average / count;
         }
-        
+
         /// @brief Computes the average of a sequence of Int32 values.
         /// @param source A sequence of Int32 values to calculate the average of.
         /// @return The average of the sequence of values.
@@ -203,7 +203,7 @@ namespace Switch {
             throw InvalidOperationException(_caller);
           return average / count;
         }
-        
+
         /// @brief Computes the average of a sequence of Int64 values.
         /// @param source A sequence of Int64 values to calculate the average of.
         /// @return The average of the sequence of values.
@@ -222,7 +222,7 @@ namespace Switch {
             throw InvalidOperationException(_caller);
           return average / count;
         }
-        
+
         /// @brief Casts the elements of an IEnumerable to the specified type.
         /// @par Examples
         /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
@@ -234,7 +234,7 @@ namespace Switch {
             list->Add(as<TResult>(item));
           return list;
         }
-        
+
         /// @brief Concatenates two sequences.
         /// @param first The first sequence to concatenate.
         /// @param second The sequence to concatenate to the first sequence.
@@ -251,7 +251,7 @@ namespace Switch {
             list->Add(item);
           return list;
         }
-        
+
         /// @brief Concatenates two sequences.
         /// @param first The first sequence to concatenate.
         /// @param second The sequence to concatenate to the first sequence.
@@ -268,7 +268,7 @@ namespace Switch {
             list->Add(item);
           return list;
         }
-        
+
         /// @brief Concatenates two sequences.
         /// @param first The first sequence to concatenate.
         /// @param second The sequence to concatenate to the first sequence.
@@ -280,12 +280,12 @@ namespace Switch {
         static refptr<EnumerableCollection<TSource>> Intersect(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
           for (TSource item : first)
-          
+
             if (second.Contains(item))
               list->Add(item);
           return list;
         }
-        
+
         /// @brief Concatenates two sequences.
         /// @param first The first sequence to concatenate.
         /// @param second The sequence to concatenate to the first sequence.
@@ -302,7 +302,7 @@ namespace Switch {
               list->Add(item);
           return list;
         }
-        
+
         /// @brief Returns the maximum value in a generic sequence.
         /// @param source The IEnumerable that contains the elements to be cast to type TResult.
         /// @return An IEnumerable<T> that contains each element of the source sequence cast to the specified type.
@@ -318,7 +318,7 @@ namespace Switch {
               max = &enumerator.Current();
           return *max;
         }
-        
+
         /// @brief Returns the minimum value in a generic sequence.
         /// @param source The IEnumerable that contains the elements to be cast to type TResult.
         /// @par Examples
@@ -333,7 +333,7 @@ namespace Switch {
               min = &enumerator.Current();
           return *min;
         }
-        
+
         /// @brief Sorts the elements of a sequence in ascending order according to a key.
         /// @param source A sequence of values to order.
         /// @param keySelector A function to extract a key from an element.
@@ -348,11 +348,11 @@ namespace Switch {
             if (keySelector(x) == keySelector(y)) return 0;
             return 1;
           };
-          
+
           list->Sort(comparer);
           return list;
         }
-        
+
         /// @brief Projects each element of a sequence into a new form.
         /// @include EnumerableCast.cpp
         template<typename TSource, typename TKey>
@@ -366,7 +366,7 @@ namespace Switch {
           list->Sort(comparer);
           return list;
         }
-        
+
         /// @brief Inverts the order of the elements in a sequence.
         /// @par Examples
         /// The following code example demonstrates how to use Reverse<TSource> to reverse the order of elements in an array.
@@ -378,7 +378,7 @@ namespace Switch {
             list->Insert(0, item);
           return list;
         }
-        
+
         /// @brief Projects each element of a sequence into a new form.
         /// @include EnumerableCast.cpp
         template<typename TSource, typename TResult>
@@ -388,7 +388,7 @@ namespace Switch {
             list->Add(selector(item));
           return list;
         }
-        
+
         /// @brief Creates an array from a IEnumerable<T>
         /// @par Examples
         /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
@@ -402,7 +402,7 @@ namespace Switch {
           }
           return array;
         }
-        
+
         /// @brief Projects each element of a sequence into a new form.
         /// @include EnumerableCast.cpp
         template<typename TSource>
@@ -414,14 +414,14 @@ namespace Switch {
           return list;
         }
       };
-      
+
       namespace Extension {
         /// @brief Provides a set of methods for querying objects that implement IEnumerable<T>.
         template<typename T, typename TSource>
         class Enumerable {
         public:
           //class EnumerablePtr : public refptr<Collections::Generic::IEnumerable<T>>, public Enumerable<EnumerablePtr, T> {};
-          
+
           /// @brief Applies an accumulator function over a sequence.
           /// @param func An accumulator function to be invoked on each element.
           /// @return The final accumulator value.
@@ -429,7 +429,7 @@ namespace Switch {
           /// The following code example demonstrates how to reverse the order of words in a string by using Aggregate.
           /// @include EnumerableAgregate.cpp
           TSource Agregate(const System::Func<const TSource&, const TSource&, TSource>& func) const {return System::Linq::Enumerable::Agregate<TSource>(static_cast<const T&>(*this), func);}
-          
+
           /// @brief Applies an accumulator function over a sequence. The specified seed value is used as the initial accumulator value.
           /// @param seed The initial accumulator value.
           /// @param func An accumulator function to be invoked on each element.
@@ -439,7 +439,7 @@ namespace Switch {
           /// @include EnumerableAgregate2.cpp
           template<typename TAccumulate>
           TAccumulate Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func) const {return System::Linq::Enumerable::Agregate<TSource, TAccumulate>(static_cast<const T&>(*this), seed, func);}
-          
+
           /// @brief Applies an accumulator function over a sequence. The specified seed value is used as the initial accumulator value, and the specified function is used to select the result value.
           /// @param seed The initial accumulator value.
           /// @param objFunc An accumulator obj to be invoked on each element.
@@ -452,7 +452,7 @@ namespace Switch {
           /// @include EnumerableAgregate3.cpp
           template<typename TAccumulate, typename TResult>
           TResult Agregate(const TAccumulate& seed, const System::Func<const TAccumulate&, const TSource&, TAccumulate>& func, const System::Func<const TAccumulate&, TResult>& resultSelector) const {return System::Linq::Enumerable::Agregate<TSource, TAccumulate, TResult>(static_cast<const T&>(*this), seed, func, resultSelector);}
-          
+
           /// @brief Determines whether all elements of a sequence satisfy a condition.
           /// @param func A function to test each element for a condition.
           /// @return true if every element of the source sequence passes the test in the specified predicate, or if the sequence is empty; otherwise, false.
@@ -460,14 +460,14 @@ namespace Switch {
           /// The following code example demonstrates how to use All<TSource> to determine whether all the elements in a sequence satisfy a condition. Variable allStartWithB is true if all the pet names start with "B" or if the pets array is empty.
           /// @include EnumerableAll.cpp
           bool All(const System::Func<const TSource&, bool>& func) const {return System::Linq::Enumerable::All<TSource>(static_cast<const T&>(*this), func);}
-          
+
           /// @brief Determines whether a sequence contains any elements.
           /// @return true if the source sequence contains any elements; otherwise, false.
           /// @par Examples
           /// The following code example demonstrates how to use Any to determine whether a sequence contains any elements.
           /// @include EnumerableAny.cpp
           bool Any() const {return System::Linq::Enumerable::Any<TSource>(static_cast<const T&>(*this));}
-          
+
           /// @brief Determines whether any element of a sequence satisfies a condition.
           /// @param predicate A function to test each element for a condition.
           /// @return true if any elements in the source sequence pass the test in the specified predicate; otherwise, false.
@@ -475,7 +475,7 @@ namespace Switch {
           /// The following code example demonstrates how to use Any to determine whether any element in a sequence satisfies a condition.
           /// @include EnumerableAny2.cpp
           bool Any(const System::Func<const TSource&, bool>& predicate) const {return System::Linq::Enumerable::Any<TSource>(static_cast<const T&>(*this), predicate);}
-          
+
           /// @brief Returns the input typed as IEnumerable<T>.
           /// @return The input sequence typed as IEnumerable<T>.
           /// @remarks The AsEnumerable<TSource>(IEnumerable<TSource>) method has no effect other than to change the compile-time type of source from a type that implements IEnumerable<T> to IEnumerable<T> itself.
@@ -484,7 +484,7 @@ namespace Switch {
           /// The following code example demonstrates how to use AsEnumerable<TSource>(IEnumerable<TSource>) to hide a type's custom Where method when the standard query operator implementation is desired.
           /// @include EnumerableAsEnumerable.cpp
           refptr<System::Linq::EnumerableCollection<TSource>> AsEnumerable() const {return System::Linq::Enumerable::AsEnumerable<TSource>(static_cast<const T&>(*this));}
-          
+
           /// @brief Computes the average of a sequence of Double values.
           /// @param source A sequence of Double values to calculate the average of.
           /// @return The average of the sequence of values.
@@ -492,14 +492,14 @@ namespace Switch {
           /// The following code example demonstrates how to use Average(IEnumerable<Int32>) to calculate an average.
           /// @include EnumerableAverageInt32.cpp
           double Average() const {return System::Linq::Enumerable::Average(static_cast<const T&>(*this));}
-          
+
           /// @brief Casts the elements of an IEnumerable to the specified type.
           /// @par Examples
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
           /// @include EnumerableCast.cpp
           template<typename TResult>
           refptr<System::Linq::EnumerableCollection<TResult>> Cast() const {return System::Linq::Enumerable::Cast<TSource, TResult>(static_cast<const T&>(*this));}
-          
+
           /// @brief Concatenates two sequences.
           /// @param second The sequence to concatenate to this sequence.
           /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
@@ -507,7 +507,7 @@ namespace Switch {
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
           /// @include EnumerableConcat.cpp
           refptr<System::Linq::EnumerableCollection<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& second) const {return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);}
-          
+
           /// @brief Concatenates two sequences.
           /// @param second The sequence to concatenate to this sequence.
           /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
@@ -516,7 +516,7 @@ namespace Switch {
           /// @include EnumerableConcat.cpp
           template<int32 len>
           refptr<System::Linq::EnumerableCollection<TSource>> Concat(const TSource(&second)[len]) const {return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);}
-          
+
           /// @brief Concatenates two sequences.
           /// @param second The sequence to concatenate to this sequence.
           /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
@@ -524,7 +524,7 @@ namespace Switch {
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
           /// @include EnumerableIntersect.cpp
           refptr<System::Linq::EnumerableCollection<TSource>> Intersect(const Collections::Generic::IEnumerable<TSource>& second) const {return System::Linq::Enumerable::Intersect<TSource>(static_cast<const T&>(*this), second);}
-          
+
           /// @brief Concatenates two sequences.
           /// @param second The sequence to concatenate to this sequence.
           /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
@@ -533,20 +533,20 @@ namespace Switch {
           /// @include EnumerableIntersect.cpp
           template<int32 len>
           refptr<System::Linq::EnumerableCollection<TSource>> Intersect(const TSource(&second)[len]) const {return System::Linq::Enumerable::Intersect<TSource>(static_cast<const T&>(*this), second);}
-          
+
           /// @brief Returns the maximum value in a generic sequence.
           /// @return An IEnumerable<T> that contains each element of the source sequence cast to the specified type.
           /// @par Examples
           /// The following code example demonstrates how to use Max<TSource>(IEnumerable<TSource>) to determine the maximum value in a sequence of IComparable<T> objects.
           /// @include EnumerableMax.cpp
           const TSource& Max() const {return System::Linq::Enumerable::Max<TSource>(static_cast<const T&>(*this));}
-          
+
           /// @brief Returns the minimum value in a generic sequence.
           /// @par Examples
           /// The following code example demonstrates how to use Min<TSource>(IEnumerable<TSource>) to determine the minimum value in a sequence of IComparable<T> objects.
           /// @include EnumerableMin.cpp
           const TSource& Min() const {return System::Linq::Enumerable::Min<TSource>(static_cast<const T&>(*this));}
-          
+
           /// @brief Sorts the elements of a sequence in ascending order according to a key.
           /// @param keySelector A function to extract a key from an element.
           /// @par Examples
@@ -554,33 +554,33 @@ namespace Switch {
           /// @include EnumerableOrderBy.cpp
           template<typename TKey>
           refptr<System::Linq::EnumerableCollection<TSource>> OrderBy(const System::Func<const TSource&, TKey>& keySelector) const {return System::Linq::Enumerable::OrderBy<TSource, TKey>(static_cast<const T&>(*this), keySelector);}
-          
+
           /// @brief Projects each element of a sequence into a new form.
           /// @include EnumerableCast.cpp
           template<typename TKey>
           refptr<System::Linq::EnumerableCollection<TSource>> OrderByDescending(const System::Func<const TSource&, TKey>& keySelector) const {return System::Linq::Enumerable::OrderByDescending<TSource, TKey>(static_cast<const T&>(*this), keySelector);}
-          
+
           /// @brief Projects each element of a sequence into a new form.
           /// @include EnumerableCast.cpp
           template<typename TResult>
           refptr<System::Linq::EnumerableCollection<TResult>> Select(const System::Func<const TSource&, TResult>& selector) const {return System::Linq::Enumerable::Select<TSource, TResult>(static_cast<const T&>(*this), selector);}
-          
+
           /// @brief Inverts the order of the elements in a sequence.
           /// @par Examples
           /// The following code example demonstrates how to use Reverse<TSource> to reverse the order of elements in an array.
           /// @include EnumerableReverse.cpp
           refptr<System::Linq::EnumerableCollection<TSource>> Reverse() const {return System::Linq::Enumerable::Reverse<TSource>(static_cast<const T&>(*this));}
-          
+
           /// @brief Creates an array from a IEnumerable<T>
           /// @par Examples
           /// The following code example demonstrates how to use ToArray<TSource> to force immediate query evaluation and return an array of results.
           /// @include EnumerableToArray.cpp
           System::Array<TSource> ToArray() const {return System::Linq::Enumerable::ToArray<TSource>(static_cast<const T&>(*this));}
-          
+
           /// @brief Projects each element of a sequence into a new form.
           /// @include EnumerableCast.cpp
           refptr<System::Linq::EnumerableCollection<TSource>> Where(const System::Func<const TSource&, bool>& predicate) const {return System::Linq::Enumerable::Where<TSource>(static_cast<const T&>(*this), predicate);}
-          
+
         protected:
           Enumerable() {}
         };

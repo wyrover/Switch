@@ -12,7 +12,7 @@ namespace DesignPatterns {
     public:
       virtual void Handle(Context& context) = 0;
     };
-    
+
     // The 'Context' class
     class Context : public object {
     public:
@@ -20,7 +20,7 @@ namespace DesignPatterns {
       explicit Context(refptr<DesignPatterns::Behavioral::State> state) {
         this->State = state;
       }
-      
+
       // Gets or sets the state
       _property<refptr<DesignPatterns::Behavioral::State>> State {
         _get { return this->state; },
@@ -29,35 +29,35 @@ namespace DesignPatterns {
           Console::WriteLine("State: " + this->state->GetType().Name);
         }
       };
-      
+
       void Request() {
         this->state->Handle(*this);
       }
-      
+
     private:
       refptr<DesignPatterns::Behavioral::State> state;
     };
-    
+
     // A 'ConcreteState' class
     class ConcreteStateA : public State {
     public:
       void Handle(Context& context) override;
     };
-    
+
     // A 'ConcreteState' class
     class ConcreteStateB : public State {
     public:
       void Handle(Context& context) override;
     };
-    
+
     inline void ConcreteStateA::Handle(Context& context) {
       context.State = ref_new<ConcreteStateB>();
     }
-    
+
     inline void ConcreteStateB::Handle(Context& context) {
       context.State = ref_new<ConcreteStateA>();
     }
-    
+
     // MainApp _startup class for Behavioral
     // State Design Pattern.
     class MainApp {
@@ -66,7 +66,7 @@ namespace DesignPatterns {
       static void Main() {
         // Setup context in a state
         Context c(ref_new<ConcreteStateA>());
-        
+
         // Issue requests, which toggles state
         c.Request();
         c.Request();

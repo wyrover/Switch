@@ -19,7 +19,7 @@ namespace Examples {
       saveCursorVisibile = Console::CursorVisible;
       saveCursorSize = Console::CursorSize;
       Console::CursorSize = 100;     // Emphasize the cursor.
-      
+
       while (true) {
         Console::WriteLine(m1, ((Console::CursorVisible == true) ? "VISIBLE" : "HIDDEN"));
         s = Console::ReadLine();

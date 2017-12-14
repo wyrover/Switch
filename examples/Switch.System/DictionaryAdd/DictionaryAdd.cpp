@@ -11,7 +11,7 @@ namespace Examples {
       // Create a new dictionary of int, with string keys.
       //
       Dictionary<string, int> numbers;
-      
+
       // Add some elements to the dictionary.
       numbers.Add("One", 1);
       numbers.Add("Two", 2);
@@ -23,7 +23,7 @@ namespace Examples {
       numbers.Add("Eigth", 8);
       numbers.Add("Nine", 9);
       numbers.Add("Ten", 10);
-      
+
       // Show the dictionary elements.
       Console::WriteLine("numbers[\"One\"]   -> "_s + numbers["One"]);
       Console::WriteLine("numbers[\"Two\"]   -> "_s + numbers["Two"]);

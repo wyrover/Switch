@@ -50,7 +50,7 @@ bool ANSIEncoding::Equals(const object& obj) const {
   const ANSIEncoding* enc = dynamic_cast<const ANSIEncoding*>(&obj);
   if (enc == null)
     return false;
-    
+
   return this->codePage == enc->codePage;
 }
 
@@ -69,10 +69,10 @@ refptr<Encoding::Encoder> CodePage437Encoding::CreateEncoder() const {
 int32 CodePage437Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
   if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
   if (index < 0) throw ArgumentOutOfRangeException(_caller);
-  
+
   int32 count = GetByteCount(c);
   if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
-  
+
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
   return count;
@@ -93,10 +93,10 @@ refptr<Encoding::Encoder> CodePage28591Encoding::CreateEncoder() const {
 int32 CodePage28591Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
   if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
   if (index < 0) throw ArgumentOutOfRangeException(_caller);
-  
+
   int32 count = GetByteCount(c);
   if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
-  
+
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
   return count;
@@ -119,10 +119,10 @@ refptr<Encoding::Encoder> CodePage28592Encoding::CreateEncoder() const {
 int32 CodePage28592Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
   if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
   if (index < 0) throw ArgumentOutOfRangeException(_caller);
-  
+
   int32 count = GetByteCount(c);
   if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
-  
+
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
   return count;
@@ -286,31 +286,31 @@ byte CodePage437Encoding::Encoder::GetByte(char32 cp) {
   case 0x00b2: return 0xfd; //SUPERSCRIPT TWO
   case 0x25a0: return 0xfe; //BLACK SQUARE
   case 0x00a0: return 0xff; //NO-BREAK SPACE
-  
+
   // 225 (E1) is both the German sharp S (U+00DF) and the Greek lowercase beta (U+03B2).
   case 0x03B2: return 0xE1;
-  
+
   // 227 (E3) is the Greek lowercase pi (U+03C0), but early fonts such as
   // Terminal use a variant of pi that is ambiguous in case, and therefore
   // can be used for the Greek capital pi (U+03A0) or the n-ary product sign (U+220F).
   case 0x03A0: return 0xE3;
   case 0x220F: return 0xE3;
-  
+
   // 228 (E4) is both the n-ary summation sign (U+2211) and the Greek uppercase sigma (U+03A3).
   case 0x2211: return 0xE4;
-  
+
   //230 (E6) is both the micro sign (U+00B5) and the Greek lowercase mu (U+03BC).
   case 0x03BC: return 0xE6;
-  
+
   //234 (EA) is both the ohm sign (U+2126) and the Greek uppercase omega (U+03A9).
   case 0x2126: return 0xEA;
-  
+
   // 235 (EB) is the Greek lowercase delta (U+03B4), but it has also been used
   // as a surrogate for the Icelandic lowercase eth (U+00F0, ð) and the partial
   // derivative sign (U+2202, d).
   case 0x00F0: return 0xEB;
   case 0x2202: return 0xEB;
-  
+
   // 237 (ED) is supposed to be used as Greek lowercase phi, but is mainly used
   // as the empty set sign (U+2205) and was also used as the Greek phi symbol
   // in italics (U+03D5) to name angles, diameter sign (U+2300, \varnothing),
@@ -319,7 +319,7 @@ byte CodePage437Encoding::Encoder::GetByte(char32 cp) {
   case 0x03D5: return 0xED;
   case 0x2300: return 0xED;
   case 0x00F8: return 0xED;
-  
+
   // 238 (EE) is both the Greek lowercase epsilon (U+03B5) and the element-of
   // sign (U+2208). Later it was often used for the euro sign (U+20AC).
   case 0x2208: return 0xEE;
@@ -332,7 +332,7 @@ byte CodePage28591Encoding::Encoder::GetByte(char32 cp) {
   if (cp > 0xFF)
     return '?';
   return static_cast<byte>(cp);
-  
+
 }
 
 byte CodePage28592Encoding::Encoder::GetByte(char32 cp) {

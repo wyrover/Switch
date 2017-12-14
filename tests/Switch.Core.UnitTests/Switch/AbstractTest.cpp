@@ -12,26 +12,26 @@ namespace SwitchUnitTests {
     struct NotAnAbstract {
       ~NotAnAbstract() {result += "~NotAnAbstract";}
     };
-    
+
     struct NotInheritedFromAnAbstract : public NotAnAbstract {
       ~NotInheritedFromAnAbstract() {result += "~NotInheritedFromAnAbstract";}
     };
-    
+
     _using(refptr<NotAnAbstract> value = ref_new<NotInheritedFromAnAbstract>());
     GTEST_ASSERT_EQ("~NotAnAbstract", result);
   }
-  
+
   TEST(AbstractTest, CreateClassInheritedFromAnAbstract) {
     static string result;
     result = "";
     struct AnAbstract _abstract {
       ~AnAbstract() {result += "~AnAbstract";}
     };
-    
+
     struct InheritedFromAnAbstract : public AnAbstract {
       ~InheritedFromAnAbstract() {result += "~InheritedFromAnAbstract";}
     };
-    
+
     _using(refptr<AnAbstract> value = ref_new<InheritedFromAnAbstract>());
     GTEST_ASSERT_EQ("~InheritedFromAnAbstract~AnAbstract", result);
   }

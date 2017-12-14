@@ -36,7 +36,7 @@ namespace Switch {
         Process& operator=(const Process& process) {this->data = process.data; return *this;}
         virtual ~Process();
         /// @endcond
-        
+
         /// @brief Gets the base priority of the associated process.
         /// @exception InvalidOperationException The process has exited.  - or -  The process has not started, so there is no process ID.
         /// @remarks The BasePriority of the process is the starting priority for threads created within the associated process. You can view information about the base priority through the System Monitor's Priority Base counter.
@@ -51,57 +51,57 @@ namespace Switch {
         _property<int32, _readonly> BasePriority {
           _get {return this->data->basePriority;}
         };
-        
+
         _property<int32, _readonly> ExitCode {
           _get {return this->data->exitCode;}
         };
-        
+
         _property<int32, _readonly> Id {
           _get {return *((int32*)&this->data->handle);}
         };
-        
+
         _property<string, _readonly> ProcessName {
           _get {return this->GetName();}
         };
-        
+
         _property<string, _readonly> Path {
           _get {return this->GetPath();}
         };
-        
+
         _property<ProcessStartInfo&> StartInfo {
           _get->ProcessStartInfo& {return this->data->startInfo;},
           _set {this->data->startInfo = value;}
         };
-        
+
         _property<System::IO::StreamReader, _readonly> StandardOutput {
           _get {return this->GetStreamReader();}
         };
-        
+
         void Close();
-        
+
         void Kill();
-        
+
         static Process GetCurrentProcess();
-        
+
         static Array<Process> GetProcesses();
-        
+
         static Process Start(const String& fileName);
-        
+
         static Process Start(const String& fileName, const String& argument);
-        
+
         static Process Start(const ProcessStartInfo& startInfo);
-        
+
         String ToString() const override {return string::Format("{0} ({1})", this->GetType(), this->ProcessName);};
-        
+
         void WaitForExit();
-        
+
       private:
         Process(intptr handle) {this->data->handle = handle;}
         int32 GetId();
         string GetName();
         string GetPath();
         System::IO::StreamReader GetStreamReader();
-        
+
         struct ProcessData {
           int32 basePriority = 8;
           int32 exitCode = 0;

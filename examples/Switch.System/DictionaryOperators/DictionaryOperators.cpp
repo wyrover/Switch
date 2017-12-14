@@ -11,7 +11,7 @@ namespace Examples {
       // Create a new dictionary of int, with string keys.
       //
       Dictionary<string, int> numbers;
-      
+
       // Add some elements to the dictionary.
       numbers["One"] = 1;
       numbers["Two"] = 2;
@@ -23,7 +23,7 @@ namespace Examples {
       numbers["Eigth"] = 8;
       numbers["Nine"] = 9;
       numbers["Ten"] = 10;
-      
+
       // Show the dictionary elements.
       Console::WriteLine("numbers[\"One\"]   -> {0}", numbers["One"]);
       Console::WriteLine("numbers[\"Two\"]   -> {0}", numbers["Two"]);
@@ -35,7 +35,7 @@ namespace Examples {
       Console::WriteLine("numbers[\"Eigth\"] -> {0}", numbers["Eigth"]);
       Console::WriteLine("numbers[\"Nine\"]  -> {0}", numbers["Nine"]);
       Console::WriteLine("numbers[\"Ten\"]   -> {0}", numbers["Ten"]);
-      
+
       Console::WriteLine();
       for (KeyValuePair<string, int> item : numbers)
         Console::WriteLine("numbers[{0}] = {1}", item.Key(), item.Value());

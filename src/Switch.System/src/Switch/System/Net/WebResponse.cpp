@@ -21,7 +21,7 @@ WebResponse::WebResponse() {
 void WebResponse::SetWebRequest(WebRequest& webRequest) {
   if (!Native::CurlApi::GetOSSupportsWebOperations())
     throw NotSupportedException(_caller);
-    
+
   this->webRequest = &webRequest;
   this->responseStream.SetWebRequest(this->webRequest);
 }
@@ -56,7 +56,7 @@ void WebResponse::EndTransfert() {
 int64 WebResponse::GetResponseCode() const {
   if (!Native::CurlApi::GetOSSupportsWebOperations())
     throw NotSupportedException(_caller);
-    
+
   int64 code = 0;
   Native::CurlApi::GetResponseCode(this->webRequest->GetRequestHandle(), code);
   return int64(code);
@@ -91,14 +91,14 @@ int32 WebResponse::WebResponseStream::Read(Array<byte>& buffer, int32 offset, in
     throw IOException(_caller);
   if (!CanRead())
     throw NotSupportedException(_caller);
-    
+
   int32 nbBytesRead = 0;
   if (CanRead())
     nbBytesRead = Read((void*)&buffer.Data()[offset], count);
-    
+
   if (nbBytesRead == -1)
     nbBytesRead = 0;
-    
+
   return nbBytesRead;
 }
 
@@ -112,7 +112,7 @@ int32 WebResponse::WebResponseStream::Read(void* handle, int32 count) {
     if (!isTimeout && !this->data->finished) {
       byteToCopy = Math::Min(count, (this->data->bufferSize - this->data->bufferOffset));
       Buffer::BlockCopy(this->data->buffer, this->data->bufferSize, this->data->bufferOffset, handle, count, 0, byteToCopy);
-      
+
       if (byteToCopy < (this->data->bufferSize - this->data->bufferOffset))
         this->data->bufferOffset = this->data->bufferOffset + byteToCopy;
       else {
@@ -123,7 +123,7 @@ int32 WebResponse::WebResponseStream::Read(void* handle, int32 count) {
     } else {
       if (isTimeout)
         throw TimeoutException(_caller);
-        
+
       //Transfer is finished
       this->data->finished = true;
       this->data->readEvent.Set();
@@ -135,7 +135,7 @@ int32 WebResponse::WebResponseStream::Read(void* handle, int32 count) {
     this->data->readEvent.Set();
     byteToCopy = -1;
   }
-  
+
   return byteToCopy;
 }
 
@@ -143,10 +143,10 @@ int32 WebResponse::WebResponseStream::Receive(const void* handle, int32 count) {
   //Wait previous read is finished
   if (!this->data->readEvent.WaitOne(ReadTimeout()))
     throw TimeoutException(_caller);
-    
+
   if (this->data->webRequest->internalError != 0)
     return 0;
-    
+
   if (!this->data->finished) {
     this->data->buffer = const_cast<void*>(handle);
     this->data->bufferSize = count;
@@ -154,12 +154,12 @@ int32 WebResponse::WebResponseStream::Receive(const void* handle, int32 count) {
     //Unlock Read thread
     this->data->readEvent.Reset();
     this->data->writeEvent.Set();
-    
+
     //Wait end of read
     if (!this->data->readEvent.WaitOne(ReadTimeout()))
       throw TimeoutException(_caller);
   }
-  
+
   return count;
 }
 

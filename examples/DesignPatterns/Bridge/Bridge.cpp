@@ -11,7 +11,7 @@ namespace DesignPatterns {
     public:
       virtual void Operation() const = 0;
     };
-    
+
     // The 'Abstraction' class
     class Abstraction : public object {
     public:
@@ -19,15 +19,15 @@ namespace DesignPatterns {
       _property<refptr<DesignPatterns::Structural::Implementor>, _writeonly> Implementor {
         _set {this->implementor = value;}
       };
-      
+
       virtual void Operation() const {
         this->implementor->Operation();
       }
-      
+
     protected:
       refptr<DesignPatterns::Structural::Implementor> implementor;
     };
-    
+
     // The 'RefinedAbstraction' class
     class RefinedAbstraction : public Abstraction {
     public:
@@ -35,7 +35,7 @@ namespace DesignPatterns {
         this->implementor->Operation();
       }
     };
-    
+
     // The 'ConcreteImplementorA' class
     class ConcreteImplementorA : public Implementor {
     public:
@@ -43,7 +43,7 @@ namespace DesignPatterns {
         Console::WriteLine("ConcreteImplementorA Operation");
       }
     };
-    
+
     // The 'ConcreteImplementorB' class
     class ConcreteImplementorB : public Implementor {
     public:
@@ -51,7 +51,7 @@ namespace DesignPatterns {
         Console::WriteLine("ConcreteImplementorB Operation");
       }
     };
-    
+
     // MainApp _startup class for Structural
     // Bridge Design Pattern.
     class MainApp {
@@ -59,11 +59,11 @@ namespace DesignPatterns {
       // Entry point into console application.
       static void Main() {
         refptr<Abstraction> ab = ref_new<RefinedAbstraction>();
-        
+
         // Set implementation and call
         ab->Implementor = ref_new<ConcreteImplementorA>();
         ab->Operation();
-        
+
         // Change implemention and call
         ab->Implementor = ref_new<ConcreteImplementorB>();
         ab->Operation();

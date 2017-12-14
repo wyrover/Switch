@@ -28,7 +28,7 @@ void MemoryStream::SetLength(int64 value) {
     throw NotSupportedException(_caller);
   if (value < 0 || value > Int32::MaxValue)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   if (IsDynamic()) {
     if (static_cast<int32>(value) < this->data->dynamicBuffer.Count) {
       //todo
@@ -68,7 +68,7 @@ int32 MemoryStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
     throw ArgumentException(_caller);
   if (IsClosed())
     throw ObjectDisposedException(_caller);
-    
+
   int32 nbRead = Convert::ToInt32(Length()) - this->data->position;
   if (count < nbRead) nbRead = count;
   for (int32 iter = nbRead; iter > 0; iter -= 1)
@@ -94,7 +94,7 @@ int64 MemoryStream::Seek(int64 offset, SeekOrigin origin) {
     newPosition = static_cast<int64>(Length()) + offset;
   else
     invalidSeekOrigin = true;
-    
+
   if (newPosition < 0) throw IOException(_caller);
   if (offset > Int32::MaxValue || newPosition > Int32::MaxValue)
     throw ArgumentOutOfRangeException(_caller);
@@ -120,7 +120,7 @@ void MemoryStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
     throw ArgumentException(_caller);
   if (offset < 0 || count < 0)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   while (count-- > 0) {
     byte b = buffer[offset++];
     AbstractWriteByteUnChecked(b);

@@ -9,14 +9,14 @@ namespace Examples {
     static void Main() {
       // make a single dimension array
       Array<int> myArray1(5);
-      
+
       // make a 3 dimensional array
       Array<int, 3> myArray2(5, 3, 2);
-      
+
       Console::WriteLine("Lengths of single dimension array");
       // show the total length of the entire array or all dimensions
       Console::WriteLine("    Total length of the array = {0}", myArray1.Length);
-      
+
       Console::WriteLine("Lengths of {0} dimension array", myArray2.Rank);
       for (int rank = 0; rank < myArray2.Rank; rank++) {
         // show the lengths of each dimension

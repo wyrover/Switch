@@ -12,12 +12,12 @@ namespace Switch {
         CancelEventArgs() {}
         CancelEventArgs(const CancelEventArgs& ce) : cancel(ce.cancel) {}
         CancelEventArgs(bool cancel) : cancel(cancel) {}
-        
+
         _property<bool> Cancel {
           _get {return cancel;},
           _set {this->cancel = value;}
         };
-        
+
       private:
         bool cancel = false;
       };

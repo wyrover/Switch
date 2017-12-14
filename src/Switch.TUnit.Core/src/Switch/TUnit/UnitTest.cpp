@@ -10,19 +10,19 @@ using namespace TUnit;
 
 UnitTest::UnitTest(const System::Array<System::String>& args) {
   this->args = ConvertParam(args);
-  
+
   int32 argc = args.Length;
   char* argv[128] = {0};
   for (int i = 0; i < argc; i++)
     argv[i + 1] = (char*)this->args[i].Data();
   testing::InitGoogleTest(&++argc, argv);
   TUnit::ConsoleEventListener::ReplaceDefaultGTestListener();
-  
+
   if (this->args.Contains("--tunit_help")) {
     TUnit::ConsoleEventListener::ShowHelp();
     System::Environment::Exit(0);
   }
-  
+
   if (this->args.Contains("--tunit_version")) {
     TUnit::ConsoleEventListener::ShowVersion();
     System::Environment::Exit(0);
@@ -83,6 +83,6 @@ System::Array<System::String> UnitTest::ConvertParam(const System::Array<System:
     else if (args[index].StartsWith("--tunit_"))
       convertedArgs[index] = "--tunit_help";
   }
-  
+
   return convertedArgs;
 }

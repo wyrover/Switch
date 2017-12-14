@@ -10,19 +10,19 @@ namespace Examples {
       string s1 = "Tom";
       string s2 = "Carol";
       Console::WriteLine("Object::Equals(\"{0}\", \"{1}\") => {2}", s1, s2, Object::Equals(s1, s2));
-      
+
       s1 = "Tom";
       s2 = "Tom";
       Console::WriteLine("Object::Equals(\"{0}\", \"{1}\") => {2}", s1, s2, Object::Equals(s1, s2));
-      
+
       s1 = "";
       s2 = "Tom";
       Console::WriteLine("Object::Equals(\"{0}\", \"{1}\") => {2}", s1, s2, Object::Equals(s1, s2));
-      
+
       s1 = "Carol";
       s2 = "";
       Console::WriteLine("Object::Equals(\"{0}\", \"{1}\") => {2}", s1, s2, Object::Equals(s1, s2));
-      
+
       s1 = "";
       s2 = "";
       Console::WriteLine("Object::Equals(\"{0}\", \"{1}\") => {2}", s1, s2, Object::Equals(s1, s2));

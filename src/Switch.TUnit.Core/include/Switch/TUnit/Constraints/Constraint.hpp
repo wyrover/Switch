@@ -24,38 +24,38 @@ namespace Switch {
           _get {return this->caller;},
           _set {this->caller = value;}
         };
-        
+
         _property<ConstraintValue> Actual {
           _get {return this->actual;},
           _set {this->actual = value;}
         };
-        
+
         _property<ConstraintValue> Expect {
           _get {return this->expect;},
           _set {this->expect = value;}
         };
-        
+
         _property<string, _readonly> Error {
           _get {return string::Format("Expected: {0}{2}But was:  {1}", ToString(), this->actual, System::Environment::NewLine);}
         };
-        
+
         _property<string> Message {
           _get {return this->message;},
           _set {this->message = value;}
         };
-        
+
         template<typename T>
         bool Verify(const T& value) const {
           return Verify(ConstraintValue(value));
         }
-        
+
       protected:
         Constraint() {}
         Constraint(const ConstraintValue& expect) : expect(expect) {}
-        
+
         virtual bool Verify(const ConstraintValue& actual) const = 0;
         virtual string ToString() const = 0;
-        
+
         mutable ConstraintValue actual;
         ConstraintValue expect;
         mutable string message;

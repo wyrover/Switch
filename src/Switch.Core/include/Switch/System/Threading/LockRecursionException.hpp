@@ -16,26 +16,26 @@ namespace Switch {
         /// @brief Create a new instance of class LockRecursionException
         /// @remarks Message is set with the default message associate to the error.
         LockRecursionException() : Exception() {}
-        
+
         /// @brief Create a new instance of class LockRecursionException
         /// @param value The Excetion to copy.
         /// @remarks Message is set with the default message associate to the error.
         LockRecursionException(const LockRecursionException& value) : Exception(value) {}
-        
+
         /// @brief Create a new instance of class LockRecursionException
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
         /// @remarks Message is set with the default message associate to the error.
         LockRecursionException(const System::Runtime::CompilerServices::Caller& information) : Exception(information) {}
-        
+
         /// @brief Create a new instance of class LockRecursionException
         /// @param message Message string associate to the error.
         LockRecursionException(const System::String& message) : Exception(message) {}
-        
+
         /// @brief Create a new instance of class LockRecursionException
         /// @param message Message string associate to the error.
         /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
         LockRecursionException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : Exception(message, information) {}
-        
+
         /// @brief Create a new instance of class LockRecursionException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.

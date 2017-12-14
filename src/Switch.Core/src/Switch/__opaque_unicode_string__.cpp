@@ -12,31 +12,31 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char* str) : string(s
 __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t startIndex, int32_t length) {
   if (str == null)
     throw System::ArgumentNullException(_caller);
-    
+
   __opaque_unicode_string__ other(str);
-  
+
   int32_t count = static_cast<int32_t>((static_cast<size_t>(length) == npos) ? other.size() : length);
   if (startIndex + count > static_cast<int32_t>(other.size()))
     count = static_cast<int32_t>(other.size()) - startIndex;
-    
+
   if (startIndex == static_cast<int32_t>(other.size())) {
     this->stringSize = 0;
     return;
   }
-  
+
   int32_t begin = -1, end = -1;
-  
+
   for (__opaque_unicode_string__::const_iterator it = ((const __opaque_unicode_string__&)other).begin(); it != ((const __opaque_unicode_string__&)other).end(); it++) {
     if (startIndex == it.get_logical_index())
       begin = it.get_byte_index();
-      
+
     if (it.get_logical_index() == (startIndex + count))
       end = it.get_byte_index();
   }
-  
+
   if (begin == -1)
     throw System::ArgumentOutOfRangeException(_caller);
-    
+
   if (end == -1) {
     this->string = other.string.substr(begin);
     this->stringSize = other.size() - startIndex;
@@ -57,47 +57,47 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char32_t* str, int32_
 char32_t __opaque_unicode_string__::operator[](int i) const {
   if (i < 0)
     throw System::ArgumentOutOfRangeException(_caller);
-    
+
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++)
     if (it.get_logical_index() == i)
       return *it;
-      
+
   throw System::ArgumentOutOfRangeException(_caller);
 }
 
 char32_t& __opaque_unicode_string__::operator[](int i) {
   if (i < 0)
     throw System::ArgumentOutOfRangeException(_caller);
-    
+
   for (__opaque_unicode_string__::iterator it = (*this).begin(); it != (*this).end(); it++)
     if (it.get_logical_index() == i)
       return *it;
-      
+
   throw System::ArgumentOutOfRangeException(_caller);
 }
 
 __opaque_unicode_string__& __opaque_unicode_string__::erase(size_t pos, size_t len) {
   int byteIndexIn = -1;
   __opaque_unicode_string__::iterator it = begin();
-  
+
   if (len == 0) return *this;
-  
+
   for (; it != end(); it++) {
     if (static_cast<size_t>(it.get_logical_index()) == pos && byteIndexIn == -1) {
       byteIndexIn = it.get_byte_index();
       break;
     }
   }
-  
+
   if (byteIndexIn == -1)
     throw System::ArgumentOutOfRangeException(_caller);
-    
+
   if (len == npos) {
     this->string.erase(byteIndexIn);
     this->stringSize = Native::UnicodeEncodingsApi::UTF8::GetLength(this->string);
     return *this;
   }
-  
+
   int byteIndexOut = static_cast<int>(this->string.size());
   for (; it != end(); it++) {
     if (--len == 0) {
@@ -106,7 +106,7 @@ __opaque_unicode_string__& __opaque_unicode_string__::erase(size_t pos, size_t l
         byteIndexOut = next;
     }
   }
-  
+
   this->string.erase(byteIndexIn, byteIndexOut - byteIndexIn);
   this->stringSize = Native::UnicodeEncodingsApi::UTF8::GetLength(this->string);
   return *this;
@@ -138,10 +138,10 @@ __opaque_unicode_string__& __opaque_unicode_string__::trim_end(const std::vector
     if (!matched)
       rit = rend();
   }
-  
+
   if (byteIndex == -1)
     return *this;
-    
+
   this->string.erase(byteIndex);
   this->stringSize = Native::UnicodeEncodingsApi::UTF8::GetLength(this->string);
   return *this;
@@ -175,7 +175,7 @@ size_t __opaque_unicode_string__::rfind(const __opaque_unicode_string__& match, 
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++) {
     if ((pos != npos) && ((size_t)it.get_logical_index() > pos))
       return foundIndex;
-      
+
     if (equals(it, end(), match.begin(), match.end()))
       foundIndex = it.get_logical_index();
   }
@@ -187,7 +187,7 @@ size_t __opaque_unicode_string__::rfind(char32_t match, size_t pos) const {
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++) {
     if ((pos != npos) && ((size_t)it.get_logical_index() > pos))
       return foundIndex;
-      
+
     if (*it == match)
       foundIndex = it.get_logical_index();
   }
@@ -214,10 +214,10 @@ size_t __opaque_unicode_string__::find(const __opaque_unicode_string__& match, s
     len += 1;
     if ((pos != npos) && ((size_t)it.get_logical_index() < pos))
       continue;
-      
+
     if ((pos != npos) && (count != npos) && ((size_t)it.get_logical_index() >= pos + count))
       return npos;
-      
+
     if (equals(it, end(), match.begin(), match.end()))
       return it.get_logical_index();
   }
@@ -232,10 +232,10 @@ size_t __opaque_unicode_string__::find(char32_t match, size_t pos, size_t count)
     len += 1;
     if ((pos != npos) && ((size_t)it.get_logical_index() < pos))
       continue;
-      
+
     if ((pos != npos) && (count != npos) && ((size_t)it.get_logical_index() >= pos + count))
       return npos;
-      
+
     if (*it == match)
       return it.get_logical_index();
   }
@@ -250,10 +250,10 @@ size_t __opaque_unicode_string__::find_any(const std::vector<char32_t>& any, siz
     len += 1;
     if ((pos != npos) && ((size_t)it.get_logical_index() < pos))
       continue;
-      
+
     if ((pos != npos) && (count != npos) && ((size_t)it.get_logical_index() >= pos + count))
       return npos;
-      
+
     for (size_t i = 0; i < any.size(); i++)
       if (*it == any[i])
         return it.get_logical_index();
@@ -266,7 +266,7 @@ size_t __opaque_unicode_string__::find_any(const std::vector<char32_t>& any, siz
 bool __opaque_unicode_string__::ends_with(const __opaque_unicode_string__& s) const {
   if (s.string.size() > this->string.size())
     return false;
-    
+
   return this->string.substr(this->string.size() - s.string.size()) == s.string;
 }
 
@@ -289,18 +289,18 @@ int __opaque_unicode_string__::compare(const __opaque_unicode_string__& str)  co
   for (__opaque_unicode_string__::const_iterator it1 = (*this).begin(); it1 != (*this).end(); it1++) {
     if (it2 == str.end()) // str is a prefix of *this
       return 1;
-      
+
     if (*it1 < *it2)
       return -1;
     if (*it1 > *it2)
       return 1;
-      
+
     it2++;
   }
-  
+
   if (it2 != str.end()) // *this is a prefix of str
     return -1;
-    
+
   return 0;
 }
 

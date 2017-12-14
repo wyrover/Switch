@@ -11,7 +11,7 @@ int32 Buffer::BlockCompare(const void* blk1, int64 blk1Length, int64 blk1Offset,
     throw ArgumentOutOfRangeException(_caller);
   if (blk2Offset + count > blk2Length || blk1Offset + count > blk1Length)
     throw ArgumentException(_caller);
-    
+
   return memcmp(reinterpret_cast<const char*>(blk1) + blk1Offset, reinterpret_cast<const char*>(blk2) + blk2Offset, size_t(count));
 }
 
@@ -22,7 +22,7 @@ void Buffer::BlockCopy(const void* src, int64 srcLength, int64 srcOffset, void* 
     throw ArgumentOutOfRangeException(_caller);
   if (dstOffset + count > dstLenth || srcOffset + count > srcLength)
     throw ArgumentException(_caller);
-    
+
   memmove(reinterpret_cast<char*>(dst) + dstOffset, reinterpret_cast<const char*>(src) + srcOffset, size_t(count));
 }
 
@@ -33,6 +33,6 @@ void Buffer::BlockFill(byte filler, void* dst, int64 dstLenth, int64 dstOffset, 
     throw ArgumentOutOfRangeException(_caller);
   if (dstOffset + count > dstLenth)
     throw ArgumentException(_caller);
-    
+
   memset(reinterpret_cast<char*>(dst) + dstOffset, filler, size_t(count));
 }

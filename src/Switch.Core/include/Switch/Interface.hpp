@@ -14,7 +14,7 @@ namespace Switch {
     virtual ~Interface() {}
     /// @endcond
   };
-  
+
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @cond
@@ -22,7 +22,7 @@ namespace Switch {
     class Array;
     /// @endcond
   }
-  
+
   /// @brief This keyword is use to represent an interface.
   /// @par Examples
   /// @code

@@ -9,7 +9,7 @@ namespace Examples {
     static void Main() {
       Boolean raining = false;
       Boolean busLate = true;
-      
+
       Console::WriteLine("It is raining: {0}", raining);
       Console::WriteLine("The bus is late: {0}", busLate);
     }

@@ -9,13 +9,13 @@ namespace UnitTests {
     void _Test(TestWithCurrentInformation) {
       Assert::False(true, _caller);
     }
-    
+
     // Without current information
     void TestWithoutCurrentInformation() {
       Assert::False(true);
     }
   };
-  
+
   _AddTestFixture(UserTest);
   _AddTest(UserTest, TestWithCurrentInformation);
   _AddTest(UserTest, TestWithoutCurrentInformation);

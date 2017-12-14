@@ -21,7 +21,7 @@ namespace Switch {
       /// @cond
       class WebRequest;
       /// @endcond
-      
+
       /// @brief Provides a response from a Uniform Resource Identifier (URI). This is an abstract class.
       /// @par Library
       /// Switch.System
@@ -32,20 +32,20 @@ namespace Switch {
           WebResponseStream() : Stream(1000, 1000) {}
           WebResponseStream(const WebResponseStream& wrs) : data(wrs.data) {}
           void SetWebRequest(System::Net::WebRequest* webRequest);
-          
+
           void StartTransfert();
-          
+
           int32 Read(void* handle, int32 count);
           int32 Read(Array<byte>& buffer, int32 offset, int32 count) override;
           void Write(const Array<byte>& buffer, int32 offset, int32 count) override { }
           int64 Seek(int64, System::IO::SeekOrigin) override;
-          
+
           int32 Receive(const void* handle, int32 count);
-          
+
           void EndTransfert();
-          
+
           void Close() override;
-          
+
         protected:
           friend class WebResponse;
           bool GetCanRead() const override {return true;}
@@ -54,7 +54,7 @@ namespace Switch {
           bool GetCanWrite() const override {return false;}
           int64 GetLength() const override {return 0;}
           int64 GetPosition() const override {return 0;}
-          
+
         private:
           struct WebRequestStreamData {
             void* buffer = null;
@@ -68,41 +68,41 @@ namespace Switch {
           };
           refptr<WebRequestStreamData> data = ref_new<WebRequestStreamData>();
         };
-        
+
         _property<int64> ContentLength {
           _get {return this->GetContentLength();},
           _set {this->SetContentLength(value);}
         };
-        
+
         _property<string, _readonly> ContentType {
           _get {return this->GetContentType();}
         };
-        
+
         virtual ~WebResponse();
-        
+
         virtual WebResponseStream GetResponseStream();
-        
+
       protected:
         virtual int64 GetContentLength() const {return this->contentLength;}
         virtual void SetContentLength(const int64& contentLength) {this->contentLength = contentLength;}
-        
+
         virtual String GetContentType() const {return this->contentType;}
-        
+
         friend class WebRequest;
         friend class FtpWebRequest;
-        
+
         WebResponse();
         WebResponse(const WebResponse& webResponse) = delete;
         WebResponse& operator =(const WebResponse& webResponse) = delete;
-        
-        
+
+
         int64 contentLength = 0;
         string contentType;
-        
+
         void SetWebRequest(System::Net::WebRequest& webRequest);
         System::Net::WebRequest* webRequest = null;
         System::Net::WebResponse::WebResponseStream responseStream;
-        
+
         static size_t WriteNullStream(void* buffer, size_t size, size_t nmemb, void* stream);
         static size_t WriteStream(void* buffer, size_t size, size_t nmemb, void* stream);
         virtual void EndTransfert();

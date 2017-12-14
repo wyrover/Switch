@@ -16,7 +16,7 @@ namespace Switch {
       class Bmp;
       class Image;
       /// @endcond
-      
+
       /// @brief The System::Drawing::Imaging namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the System::Drawing namespace.
       /// @par Library
       /// Switch.System.Drawing
@@ -29,16 +29,16 @@ namespace Switch {
           _property<Array<Color>, _readonly> Entries {
             _get {return this->entries;}
           };
-          
+
           _property<int32, _readonly> Falgs {
             _get {return this->flags;}
           };
-          
+
         private:
           friend class Switch::System::Drawing::Bmp;
           friend class Switch::System::Drawing::Image;
           ColorPalette() : flags(0) {}
-          
+
           Array<Color> entries;
           int32 flags;
         };

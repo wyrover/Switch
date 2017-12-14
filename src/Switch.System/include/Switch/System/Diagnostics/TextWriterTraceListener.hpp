@@ -35,34 +35,34 @@ namespace Switch {
             twtl.textWriter = textWriter.template MemberwiseClone<TTextWriter>().template As<System::IO::TextWriter>();
           }
         };
-        
+
         struct InitStream {
           template<typename TStream>
           void operator()(const TStream& stream, TextWriterTraceListener& twtl) {
             twtl.textWriter = new System::IO::StreamWriter(stream);
           }
         };
-        
+
       public:
         /// @brief Initializes a new instance of the TextWriterTraceListener class with TextWriter as the output recipient.
         /// @remarks This constructor uses the TextWriter stream as the recipient of the tracing or debugging output. Its Name property is initialized to an empty string ("", or String.Empty).
         TextWriterTraceListener() {}
-        
+
         /// @brief When overridden in a derived class, closes the output stream so it no longer receives tracing or debugging output.
         /// @remarks Use this method when the output is going to a file, such as to the TextWriterTraceListener. After a call to this method, you must reinitialize the object.
         void Close() override {
           this->textWriter->Flush();
           this->textWriter->Close();
         }
-        
+
         template<typename TTextWriterOrStream>
         TextWriterTraceListener(const TTextWriterOrStream& textWriterOrStream) {
           typename std::conditional<std::is_base_of<System::IO::Stream, TTextWriterOrStream>::value, InitStream, InitTextWriter>::type init;
           init(textWriterOrStream, *this);
         }
-        
+
         TextWriterTraceListener(const string& path) {this->textWriter = new System::IO::StreamWriter(path);}
-        
+
         /// @cond
         TextWriterTraceListener(const TextWriterTraceListener& twtl) : TraceListener(twtl), textWriter(twtl.textWriter) {}
         TextWriterTraceListener& operator=(const TextWriterTraceListener& twtl) {
@@ -71,13 +71,13 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-        
+
         /// @brief Gets the text writer that receives the tracing or debugging output.
         /// @return System::IO::TextWriter A TextWriter that represents the writer that receives the tracing or debugging output.
         _property<System::IO::TextWriter&, _readonly> Writer {
           _get->System::IO::TextWriter& {return *this->textWriter;}
         };
-        
+
         void Write(const String& message) override {
           #if defined(DEBUG) || defined(TRACE)
           if (this->NeedIndent)
@@ -85,7 +85,7 @@ namespace Switch {
           this->textWriter->Write(message);
           #endif
         }
-        
+
         void WriteLine(const String& message) override {
           #if defined(DEBUG) || defined(TRACE)
           if (this->NeedIndent)
@@ -94,7 +94,7 @@ namespace Switch {
           this->NeedIndent = true;
           #endif
         }
-        
+
       private:
         refptr<System::IO::TextWriter> textWriter;
       };

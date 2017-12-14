@@ -17,38 +17,38 @@ namespace Examples {
     Nine,
     Ten
   };
-  
+
   class Program {
   public:
     // The main entry point for the application.
     static void Main() {
       // Create a Numbers Enum
       Numbers number = Numbers::Ten;
-      
+
       Console::WriteLine("number is equal to {0}.", number);
-      
+
       // Assigne a Numbers value
       number  = Numbers::Six;
       Console::WriteLine("number is equal to {0}.", number);
-      
+
       // Assigne a int value
       number = (Numbers)9;
       Console::WriteLine("number is equal to {0}.", number);
-      
+
       // Assigne a int value
       number = (Numbers)11;
       Console::WriteLine("number is equal to {0}.", number);
-      
+
       // Parse a Numbers
       number = Enum<Numbers>::Parse("Four");
       Console::WriteLine("number is equal to {0}.", number);
-      
+
       // Give name of value Numbers
       Console::WriteLine("The Numbers::Eight name is {0}.", Enum<Numbers>(Numbers::Eight).GetName());
-      
+
       // Give value of value Numbers
       Console::WriteLine("The Numbers::Three value is {0}.", Enum<Numbers>(Numbers::Three).ToInt32());
-      
+
       // Give Nimbers names list
       Console::WriteLine("Numbers names list : {0}", string::Join(", ", Enum<Numbers>::GetNames()));
     }

@@ -23,18 +23,18 @@ namespace Switch {
           /// @param group The IPAddress of the multicast group.
           /// @exception ArgumentNullException group is null.
           IPv6MulticastOption(const IPAddress& group) : group(group) {}
-          
+
           /// @brief Initializes a new instance of the IPv6MulticastOption class with the specified IP multicast group and the local interface address.
           /// @param group The IPAddress of the multicast group.
           /// @param interfaceIndex The local interface address.
           /// @exception ArgumentNullException group is null.
           /// @exception ArgumentOutOfRangeException interfaceIndex is less than 0. -or- interfaceIndex is greater than 0x00000000FFFFFFFF.
           IPv6MulticastOption(const IPAddress& group, int64 interfaceIndex) : group(group) {InterfaceIndex = interfaceIndex;}
-          
+
           /// @cond
           IPv6MulticastOption(const IPv6MulticastOption& ipv6MulticastOption) : group(ipv6MulticastOption.group), interfaceIndex(ipv6MulticastOption.interfaceIndex) {}
           /// @endcond
-          
+
           /// @brief Gets or Set the IP address of a multicast group.
           /// @param group An IPAddress that contains the Internet address of a multicast group.
           /// @return IPAddress An IPAddress that contains the Internet address of a multicast group.
@@ -43,7 +43,7 @@ namespace Switch {
             _get->const IPAddress& {return this->group;},
             _set {this->group = value;}
           };
-          
+
           /// @brief Gets the interface index that is associated with a multicast group.
           /// @param interfaceIndex A Int64 value that specifies the address of the interface.
           /// @return int64 A Int64 value that specifies the address of the interface.
@@ -56,7 +56,7 @@ namespace Switch {
               this->interfaceIndex = int32(value);
             }
           };
-          
+
         private:
           IPAddress group;
           int32 interfaceIndex = 0;

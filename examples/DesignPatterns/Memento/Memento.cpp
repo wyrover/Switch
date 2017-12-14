@@ -17,16 +17,16 @@ namespace DesignPatterns {
         this->state = memento.state;
         return *this;
       }
-      
+
       // Gets or sets state
       _property<string, _readonly> State {
         _get { return this->state; }
       };
-      
+
     private:
       string state;
     };
-    
+
     // The 'Originator' class
     class Originator : public object {
     public:
@@ -38,37 +38,37 @@ namespace DesignPatterns {
           Console::WriteLine("State = " + this->state);
         }
       };
-      
+
       // Creates memento
       Memento CreateMemento() {
         return Memento(this->state);
       }
-      
+
       // Restores original state
       void SetMemento(const Memento& memento) {
         Console::WriteLine("Restoring state...");
         State = memento.State;
       }
-      
+
     private:
       string state;
     };
-    
+
     // The 'Caretaker' class
     class Caretaker : public object {
     public:
       Caretaker() {}
-      
+
       // Gets or sets memento
       _property<DesignPatterns::Behavioral::Memento> Memento {
         _get { return this->memento; },
         _set { this->memento = value; }
       };
-      
+
     private:
       DesignPatterns::Behavioral::Memento memento;
     };
-    
+
     // MainApp _startup class for Behavioral
     // Memento Design Pattern.
     class MainApp {
@@ -77,14 +77,14 @@ namespace DesignPatterns {
       static void Main() {
         Originator o;
         o.State = "On";
-        
+
         // Store internal state
         Caretaker c;
         c.Memento = o.CreateMemento();
-        
+
         // Continue changing originator
         o.State = "Off";
-        
+
         // Restore saved state
         o.SetMemento(c.Memento);
       }

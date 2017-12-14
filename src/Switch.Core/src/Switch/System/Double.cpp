@@ -61,7 +61,7 @@ String Double::ToString(const String& format, const IFormatProvider&) const {
     return "-Infinity";
   if (IsPositiveInfinity(this->value))
     return "Infinity";
-    
+
   int32 precision;
   double arg = this->value;
   char32 type = NumericalFormat::GetFormatType(format, precision);
@@ -94,17 +94,17 @@ String Double::ToString(const String& format, const IFormatProvider&) const {
 int32 Double::CompareTo(const Double& value) const {
   if (this->value > value)
     return 1;
-    
+
   if (this->value < value.value)
     return -1;
-    
+
   return 0;
 }
 
 int32 Double::CompareTo(const IComparable& obj) const {
   if (!is<Double>(obj))
     return 1;
-    
+
   return CompareTo(static_cast<const Double&>(obj));
 }
 
@@ -239,7 +239,7 @@ Double& Double::operator *=(const Double& value) {
 Double& Double::operator /=(const Double& value) {
   if (value == 0)
     throw DivideByZeroException(_caller);
-    
+
   this->value /= value.value;
   return *this;
 }

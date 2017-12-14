@@ -18,39 +18,39 @@ namespace Switch {
       class _export HttpWebRequest: public System::Net::WebRequest {
       public:
         ~HttpWebRequest();
-        
+
         _property<bool> AllowAutoRedirect {
           _get {return this->GetAllowAutoRedirect();},
           _set {this->SetAllowAutoRedirect(value);}
         };
-        
+
         _property<const string&> ContentType {
           _get->const string& {return this->GetContentType();},
           _set {this->SetContentType(value);}
         };
-        
+
         WebResponse& GetResponse() override;
-        
+
         WebRequest::WebRequestStream GetRequestStream() override;
-        
+
       protected:
         HttpWebRequest(const string& uri);
         HttpWebRequest(const System::Uri& uri);
         HttpWebRequest(const HttpWebRequest&) = delete;
         HttpWebRequest& operator =(const HttpWebRequest&) = delete;
-        
+
         void Finished(int32 error) override;
         WebResponse& GetInternalResponse() override;
-        
+
         System::Net::HttpWebResponse httpWebResponse;
         bool allowAutoRedirect = true;
         String contentType;
         intptr header = IntPtr::Zero;
-        
+
       private:
         friend class System::Net::WebRequest;
         friend class System::Net::HttpWebResponse;
-        
+
         bool GetAllowAutoRedirect() const;
         void SetAllowAutoRedirect(bool autoRedirect);
         const String& GetContentType() const;

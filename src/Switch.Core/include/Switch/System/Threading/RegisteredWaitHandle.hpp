@@ -14,13 +14,13 @@ namespace Switch {
       /// @cond
       class ThreadPool;
       /// @endcond
-      
+
       /// @brief Represents a handle that has been registered when calling RegisterWaitForSingleObject. This class cannot be inherited.
       class _export RegisteredWaitHandle final : public Object {
         /// @cond
         friend class ThreadPool;
         /// @endcond
-        
+
       public:
         /// @brief Cancels a registered wait operation issued by the RegisterWaitForSingleObject method.
         /// waitObject
@@ -28,14 +28,14 @@ namespace Switch {
         /// @remarks If waitObject is specified, it is signaled only if the RegisteredWaitHandle is successfully unregistered. If a callback method is in progress when Unregister executes, waitObject is not signaled until the callback method completes. In particular, if a callback method executes Unregister, waitObject is not signaled until that callback method completes.
         /// @see ThreadPool
         bool Unregister();
-        
+
         /// @brief Cancels a registered wait operation issued by the RegisterWaitForSingleObject method.
         /// waitObject
         /// @return bool true if the function succeeds; otherwise, false
         /// @remarks If waitObject is specified, it is signaled only if the RegisteredWaitHandle is successfully unregistered. If a callback method is in progress when Unregister executes, waitObject is not signaled until the callback method completes. In particular, if a callback method executes Unregister, waitObject is not signaled until that callback method completes.
         /// @see ThreadPool
         bool Unregister(WaitHandle& waitObject);
-        
+
       private:
         RegisteredWaitHandle() {}
         void* item = null;

@@ -11,21 +11,21 @@ namespace {
   TEST(UInt32Test, MaxValue) {
     ASSERT_EQ(0xFFFFFFFFU, UInt32::MaxValue);
   }
-  
+
   TEST(UInt32Test, MinValue) {
     ASSERT_EQ(0ul, UInt32::MinValue);
   }
-  
+
   TEST(UInt32Test, DefaultValue) {
     ASSERT_EQ(0ul, UInt32());
   }
-  
+
   TEST(UInt32Test, CtorValue) {
     ASSERT_EQ(10ul, UInt32(10ul));
     ASSERT_EQ(123654ul, UInt32(123654ul));
     ASSERT_EQ(0ul, UInt32(0ul));
   }
-  
+
   TEST(UInt32Test, Parse) {
     ASSERT_EQ(0ul, UInt32::Parse("0"));
     ASSERT_EQ(1ul, UInt32::Parse("1"));
@@ -33,13 +33,13 @@ namespace {
     ASSERT_EQ(123654ul, UInt32::Parse("123654"));
     ASSERT_EQ(0xFFFFFFFFul, UInt32::Parse("4294967295"));
   }
-  
+
   TEST(UInt32Test, Parse_Sign) {
     ASSERT_EQ(5ul, UInt32::Parse("+5"));
     ASSERT_EQ(0ul, UInt32::Parse("-0"));
     ASSERT_THROW(UInt32::Parse("-1"), OverflowException);
   }
-  
+
   TEST(UInt32Test, Parse_Leading_Zeros) {
     ASSERT_EQ(0ul, UInt32::Parse("0"));
     ASSERT_EQ(0ul, UInt32::Parse("00"));
@@ -49,7 +49,7 @@ namespace {
     ASSERT_EQ(99ul, UInt32::Parse("099"));
     ASSERT_EQ(999ul, UInt32::Parse("0000999"));
   }
-  
+
   TEST(UInt32Test, Parse_Spaces) {
     ASSERT_EQ(5ul, UInt32::Parse(" 5"));
     ASSERT_EQ(5ul, UInt32::Parse("     5"));
@@ -58,7 +58,7 @@ namespace {
     ASSERT_EQ(5ul, UInt32::Parse(" 5      "));
     ASSERT_EQ(52ul, UInt32::Parse("        52 "));
   }
-  
+
   TEST(UInt32Test, Parse_FormatException) {
     ASSERT_THROW(UInt32::Parse(""), FormatException);
     ASSERT_THROW(UInt32::Parse("a56"), FormatException);
@@ -71,7 +71,7 @@ namespace {
     ASSERT_THROW(UInt32::Parse("100a"), FormatException);
     ASSERT_THROW(UInt32::Parse("10u"), FormatException);
   }
-  
+
   TEST(UInt32Test, Parse_OverflowException) {
     ASSERT_THROW(UInt32::Parse("-1"), OverflowException);
     ASSERT_THROW(UInt32::Parse("-15602"), OverflowException);
@@ -79,7 +79,7 @@ namespace {
     ASSERT_THROW(UInt32::Parse("4294967296"), OverflowException);
     ASSERT_THROW(UInt32::Parse("5294967295"), OverflowException);
   }
-  
+
   TEST(UInt32Test, Parse_Binary) {
     ASSERT_EQ(0ul, UInt32::Parse("0", 2));
     ASSERT_EQ(1ul, UInt32::Parse("1", 2));
@@ -87,7 +87,7 @@ namespace {
     ASSERT_EQ(3ul, UInt32::Parse("11", 2));
     ASSERT_EQ(6ul, UInt32::Parse("110", 2));
   }
-  
+
   TEST(UInt32Test, Parse_Exceptions_Binary) {
     ASSERT_THROW(UInt32::Parse("", 2), FormatException);
     ASSERT_THROW(UInt32::Parse("2", 2), FormatException);
@@ -100,7 +100,7 @@ namespace {
     ASSERT_THROW(UInt32::Parse("100a", 2), FormatException);
     ASSERT_THROW(UInt32::Parse("10u", 2), FormatException);
   }
-  
+
   TEST(UInt32Test, Parse_Octal) {
     ASSERT_EQ(0ul, UInt32::Parse("0", 8));
     ASSERT_EQ(1ul, UInt32::Parse("1", 8));
@@ -108,7 +108,7 @@ namespace {
     ASSERT_EQ(56ul, UInt32::Parse("70", 8));
     ASSERT_EQ(601ul, UInt32::Parse("1131", 8));
   }
-  
+
   TEST(UInt32Test, Parse_Hexadecimal) {
     ASSERT_EQ(0ul, UInt32::Parse("0", 16));
     ASSERT_EQ(1ul, UInt32::Parse("1", 16));
@@ -118,7 +118,7 @@ namespace {
     ASSERT_EQ(0xDEADBEEFul, UInt32::Parse("DeadBeef", 16));
     ASSERT_EQ(0xFFFFFFFFul, UInt32::Parse("FFFFFFFF", 16));
   }
-  
+
   TEST(UInt32Test, TryParse) {
     uint32 x;
     ASSERT_TRUE(UInt32::TryParse("0", x));
@@ -132,7 +132,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("4294967295", x));
     ASSERT_EQ(0xFFFFFFFFul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_Sign) {
     uint32 x;
     ASSERT_TRUE(UInt32::TryParse("+5", x));
@@ -141,7 +141,7 @@ namespace {
     ASSERT_EQ(0ul, x);
     ASSERT_FALSE(UInt32::TryParse("-1", x));
   }
-  
+
   TEST(UInt32Test, TryParse_Leading_Zeros) {
     uint32 x;
     ASSERT_TRUE(UInt32::TryParse("0", x));
@@ -159,7 +159,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("0000999", x));
     ASSERT_EQ(999ul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_Spaces) {
     uint32 x;
     ASSERT_TRUE(UInt32::TryParse(" 5", x));
@@ -175,7 +175,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("        52 ", x));
     ASSERT_EQ(52ul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_FormatException) {
     uint32 x;
     ASSERT_FALSE(UInt32::TryParse("", x));
@@ -189,7 +189,7 @@ namespace {
     ASSERT_FALSE(UInt32::TryParse("100a", x));
     ASSERT_FALSE(UInt32::TryParse("10u", x));
   }
-  
+
   TEST(UInt32Test, TryParse_OverflowException) {
     uint32 x;
     ASSERT_FALSE(UInt32::TryParse("-1", x));
@@ -199,7 +199,7 @@ namespace {
     ASSERT_FALSE(UInt32::TryParse("4294967296", x));
     ASSERT_FALSE(UInt32::TryParse("5294967295", x));
   }
-  
+
   TEST(UInt32Test, TryParse_Binary) {
     uint32 x;
     ASSERT_TRUE(UInt32::TryParse("0", 2, x));
@@ -213,7 +213,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("110", 2, x));
     ASSERT_EQ(6ul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_Exceptions_Binary) {
     uint32 x;
     ASSERT_FALSE(UInt32::TryParse("", 2, x));
@@ -227,7 +227,7 @@ namespace {
     ASSERT_FALSE(UInt32::TryParse("100a", 2, x));
     ASSERT_FALSE(UInt32::TryParse("10u", 2, x));
   }
-  
+
   TEST(UInt32Test, TryParse_Octal) {
     uint32 x;
     ASSERT_TRUE(UInt32::TryParse("0", 8, x));
@@ -241,7 +241,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("1131", 8, x));
     ASSERT_EQ(601ul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_Hexadecimal) {
     uint32 x;
     ASSERT_TRUE(UInt32::TryParse("0", 16, x));
@@ -259,7 +259,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("FFFFFFFF", 16, x));
     ASSERT_EQ(0xFFFFFFFFul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_UInt32) {
     UInt32 x;
     ASSERT_TRUE(UInt32::TryParse("0", x));
@@ -273,7 +273,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("4294967295", x));
     ASSERT_EQ(0xFFFFFFFFul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_Sign_UInt32) {
     UInt32 x;
     ASSERT_TRUE(UInt32::TryParse("+5", x));
@@ -282,7 +282,7 @@ namespace {
     ASSERT_EQ(0ul, x);
     ASSERT_FALSE(UInt32::TryParse("-1", x));
   }
-  
+
   TEST(UInt32Test, TryParse_Leading_Zeros_UInt32) {
     UInt32 x;
     ASSERT_TRUE(UInt32::TryParse("0", x));
@@ -300,7 +300,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("0000999", x));
     ASSERT_EQ(999ul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_Spaces_UInt32) {
     UInt32 x;
     ASSERT_TRUE(UInt32::TryParse(" 5", x));
@@ -316,7 +316,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("        52 ", x));
     ASSERT_EQ(52ul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_FormatException_UInt32) {
     UInt32 x;
     ASSERT_FALSE(UInt32::TryParse("", x));
@@ -330,7 +330,7 @@ namespace {
     ASSERT_FALSE(UInt32::TryParse("100a", x));
     ASSERT_FALSE(UInt32::TryParse("10u", x));
   }
-  
+
   TEST(UInt32Test, TryParse_OverflowException_UInt32) {
     UInt32 x;
     ASSERT_FALSE(UInt32::TryParse("-1", x));
@@ -340,7 +340,7 @@ namespace {
     ASSERT_FALSE(UInt32::TryParse("4294967296", x));
     ASSERT_FALSE(UInt32::TryParse("5294967295", x));
   }
-  
+
   TEST(UInt32Test, TryParse_Binary_UInt32) {
     UInt32 x;
     ASSERT_TRUE(UInt32::TryParse("0", 2, x));
@@ -354,7 +354,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("110", 2, x));
     ASSERT_EQ(6ul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_Exceptions_Binary_UInt32) {
     UInt32 x;
     ASSERT_FALSE(UInt32::TryParse("", 2, x));
@@ -368,7 +368,7 @@ namespace {
     ASSERT_FALSE(UInt32::TryParse("100a", 2, x));
     ASSERT_FALSE(UInt32::TryParse("10u", 2, x));
   }
-  
+
   TEST(UInt32Test, TryParse_Octal_UInt32) {
     UInt32 x;
     ASSERT_TRUE(UInt32::TryParse("0", 8, x));
@@ -382,7 +382,7 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("1131", 8, x));
     ASSERT_EQ(601ul, x);
   }
-  
+
   TEST(UInt32Test, TryParse_Hexadecimal_UInt32) {
     UInt32 x;
     ASSERT_TRUE(UInt32::TryParse("0", 16, x));
@@ -400,8 +400,8 @@ namespace {
     ASSERT_TRUE(UInt32::TryParse("FFFFFFFF", 16, x));
     ASSERT_EQ(0xFFFFFFFFul, x);
   }
-  
-  
+
+
 }
 
 /*

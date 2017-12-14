@@ -13,7 +13,7 @@ using namespace System::Net::Sockets;
 NetworkStream::NetworkStream(const System::Net::Sockets::Socket& socket, FileAccess access) {
   if (!socket.Connected || socket.SocketType != SocketType::Stream || !socket.Blocking)
     throw IOException(_caller);
-    
+
   this->data->streamSocket = socket;
   switch (access) {
   case FileAccess::Read: this->data->readable = true; break;

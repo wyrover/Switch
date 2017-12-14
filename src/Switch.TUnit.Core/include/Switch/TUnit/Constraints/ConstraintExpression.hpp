@@ -20,7 +20,7 @@ namespace Switch {
       public:
         ~ConstraintExpression() = 0;
       };
-      
+
       inline ConstraintExpression::~ConstraintExpression() {}
     }
   }

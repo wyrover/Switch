@@ -12,14 +12,14 @@ namespace Examples {
       int nWhitespace = 0;
       int nPunctuation = 0;
       StringBuilder sb("This is a simple sentence.");
-      
+
       for (int ctr = 0; ctr < sb.Length; ctr++) {
         char32 ch = sb[ctr];
         if (Char::IsLetter(ch)) { nAlphabeticChars++;  continue; }
         if (Char::IsWhiteSpace(ch)) { nWhitespace++;  continue; }
         if (Char::IsPunctuation(ch)) nPunctuation++;
       }
-      
+
       Console::WriteLine("The sentence '{0}' has:", sb);
       Console::WriteLine("   Alphabetic characters: {0}", nAlphabeticChars);
       Console::WriteLine("   Whitespace characters: {0}", nWhitespace);

@@ -15,7 +15,7 @@ namespace Examples {
       pets["Egyptian Mau"] = "Cat";
       pets["Persian"] = "Cat";
       pets["Pied Mutation Cockatiel"] = "Bird";
-      
+
       // you can use auto type insted :
       // System::Collections::Specialized::StringKeyValuePair item
       for (auto item : pets)

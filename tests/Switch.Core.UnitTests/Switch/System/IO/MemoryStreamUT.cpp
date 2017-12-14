@@ -14,7 +14,7 @@ namespace {
     ASSERT_FALSE(ms.CanTimeout());
     ASSERT_EQ(0, ms.Capacity());
   }
-  
+
   TEST(MemoryStreamTest, Ctor_Capacity) {
     IO::MemoryStream ms(10);
     ASSERT_EQ(0, ms.Length());
@@ -24,11 +24,11 @@ namespace {
     ASSERT_TRUE(ms.CanSeek());
     ASSERT_FALSE(ms.CanTimeout());
   }
-  
+
   TEST(MemoryStreamTest, Ctor_Capacity_Exception) {
     ASSERT_THROW(IO::MemoryStream ms(-1), ArgumentOutOfRangeException);
   }
-  
+
   TEST(MemoryStreamTest, Ctor_Buffer_CanWrite) {
     Array<byte> buffer(10);
     IO::MemoryStream ms(buffer, true);
@@ -40,7 +40,7 @@ namespace {
     ASSERT_FALSE(ms.CanTimeout());
     ASSERT_EQ(10, ms.Capacity());
   }
-  
+
   TEST(MemoryStreamTest, Ctor_Buffer_CanNotWrite) {
     Array<byte> buffer(10);
     IO::MemoryStream ms(buffer, false);
@@ -52,7 +52,7 @@ namespace {
     ASSERT_FALSE(ms.CanTimeout());
     ASSERT_EQ(10, ms.Capacity());
   }
-  
+
   TEST(MemoryStreamTest, GetData_NotDynamic) {
     Array<byte> buffer = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
     IO::MemoryStream ms(buffer, false);
@@ -60,7 +60,7 @@ namespace {
     for (int32 i = 0; i < ms.Length(); i++)
       ASSERT_EQ(buffer[i], ms.Buffer()[i]);
   }
-  
+
   TEST(MemoryStreamTest, GetData_Dynamic) {
     IO::MemoryStream ms(10);
     ms.WriteByte(0);
@@ -72,7 +72,7 @@ namespace {
     for (int32 i = 0; i < ms.Length(); i++)
       ASSERT_EQ(i, buffer[i]);
   }
-  
+
   TEST(MemoryStreamTest, Read_NotDynamic) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, false);
@@ -81,7 +81,7 @@ namespace {
     for (int32 i = 0; i < 10; i++)
       ASSERT_EQ(i, readBuffer[i]);
   }
-  
+
   TEST(MemoryStreamTest, Read_NotDynamic_2) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, false);
@@ -93,7 +93,7 @@ namespace {
     for (int32 i = 0; i < 5; i++)
       ASSERT_EQ(i, readBuffer[i]);
   }
-  
+
   TEST(MemoryStreamTest, Read_NotDynamic_Offset) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     Array<byte> reference = {2, 3, 4, 0, 1};
@@ -106,7 +106,7 @@ namespace {
     for (int32 i = 0; i < 5; i++)
       ASSERT_EQ(reference[i], readBuffer[i]);
   }
-  
+
   TEST(MemoryStreamTest, Read_NotDynamic_Offset_Exceptions) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, false);
@@ -117,7 +117,7 @@ namespace {
     ASSERT_THROW(ms.Read(readBuffer, 0, 6), ArgumentException);
     ASSERT_EQ(2, ms.Position());
   }
-  
+
   TEST(MemoryStreamTest, Read_NotDynamic_Overflow) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     Array<byte> refBuffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 255, 255, 255, 255, 255};
@@ -132,7 +132,7 @@ namespace {
     for (int32 i = 0; i < 15; i++)
       ASSERT_EQ(refBuffer[i], readBuffer[i]);
   }
-  
+
   TEST(MemoryStreamTest, Read_NotDynamic_Exception) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, false);
@@ -142,7 +142,7 @@ namespace {
     ASSERT_THROW(ms.Read(readBuffer, -1, 5), ArgumentOutOfRangeException);
     ASSERT_THROW(ms.Read(readBuffer, 0, -5), ArgumentOutOfRangeException);
   }
-  
+
   TEST(MemoryStreamTest, ReadByte_NotDynamic) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, false);
@@ -151,7 +151,7 @@ namespace {
       else ASSERT_EQ(-1, ms.ReadByte());
     }
   }
-  
+
   TEST(MemoryStreamTest, Seek_NotDynamic_NotWritable) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, false);
@@ -177,7 +177,7 @@ namespace {
     ASSERT_EQ(Int32::MaxValue, ms.Position());
     ASSERT_EQ(-1, ms.ReadByte());
   }
-  
+
   TEST(MemoryStreamTest, Seek_NotDynamic_Exceptions) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, false);
@@ -186,7 +186,7 @@ namespace {
     ASSERT_THROW(ms.Seek(static_cast<int64>(Int32::MaxValue) + 1, IO::SeekOrigin::Begin), ArgumentOutOfRangeException);
     ASSERT_THROW(ms.Seek(1, (IO::SeekOrigin) - 66), ArgumentException);
   }
-  
+
   TEST(MemoryStreamTest, SetLength_NotDynamic_Writable_Twice_ReadByte) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, true);
@@ -209,7 +209,7 @@ namespace {
     ASSERT_EQ(0, ms.ReadByte());
     ASSERT_EQ(-1, ms.ReadByte());
   }
-  
+
   TEST(MemoryStreamTest, SetLength_NotDynamic_Writable_Seek_ReadByte) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, true);
@@ -221,7 +221,7 @@ namespace {
     ASSERT_EQ(15, ms.Seek(15, IO::SeekOrigin::Begin));
     ASSERT_EQ(-1, ms.ReadByte());
   }
-  
+
   TEST(MemoryStreamTest, SetLength_Dynamic_ZeroCapacity) {
     IO::MemoryStream ms;
     ms.Length = 5;
@@ -232,7 +232,7 @@ namespace {
     ASSERT_EQ(0, ms.ReadByte());
     ASSERT_EQ(-1, ms.ReadByte());
   }
-  
+
   TEST(MemoryStreamTest, SetLength_Dynamic_Capacity) {
     IO::MemoryStream ms(10);
     ASSERT_EQ(-1, ms.ReadByte());
@@ -244,7 +244,7 @@ namespace {
     ASSERT_EQ(0, ms.ReadByte());
     ASSERT_EQ(-1, ms.ReadByte());
   }
-  
+
   TEST(MemoryStreamTest, ToArray_NotDynamic) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, false);
@@ -253,7 +253,7 @@ namespace {
     for (int32 i = 0; i < array.Length; i++)
       ASSERT_EQ(i, array[i]);
   }
-  
+
   TEST(MemoryStreamTest, ToArray_NotDynamic_Empty) {
     Array<byte> buffer = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     IO::MemoryStream ms(buffer, true);
@@ -261,7 +261,7 @@ namespace {
     Array<byte> array = ms.ToArray();
     ASSERT_EQ(0, array.Length);
   }
-  
+
   TEST(MemoryStreamTest, Write_Dynamic) {
     IO::MemoryStream ms(5);
     ms.Length = 5;
@@ -282,7 +282,7 @@ namespace {
     ASSERT_EQ(2, ms.ReadByte());
     ASSERT_EQ(-1, ms.ReadByte());
   }
-  
+
   TEST(MemoryStreamTest, Write_Dynamic_ChangeCapacity) {
     IO::MemoryStream ms(10);
     ms.Length = 5;
@@ -292,7 +292,7 @@ namespace {
     ms.Write(bytes, 0, 3);
     ASSERT_EQ(8, ms.Position());
   }
-  
+
   TEST(MemoryStreamTest, Write_NotDynamic) {
     Array<byte> buffer(10);
     IO::MemoryStream ms(buffer, true);
@@ -303,25 +303,25 @@ namespace {
     ASSERT_EQ(5, ms.Position());
     ms.Write(bytes, 0, 5);
     ASSERT_EQ(10, ms.Position());
-    
+
     ASSERT_EQ(0, ms.Seek(-10, IO::SeekOrigin::Current));
     ms.Write({' '}, 0, 1);
     ASSERT_EQ(0, ms.Seek(-1, IO::SeekOrigin::Current));
-    
+
     ASSERT_EQ(32, ms.ReadByte());
     ASSERT_EQ(1, ms.ReadByte());
     ASSERT_EQ(2, ms.ReadByte());
-    
+
     ASSERT_EQ(2, ms.ReadByte());
     ASSERT_EQ(3, ms.ReadByte());
-    
+
     ASSERT_EQ(0, ms.ReadByte());
     ASSERT_EQ(1, ms.ReadByte());
     ASSERT_EQ(2, ms.ReadByte());
     ASSERT_EQ(3, ms.ReadByte());
     ASSERT_EQ(4, ms.ReadByte());
   }
-  
+
   TEST(MemoryStreamTest, WriteByte_Dynamic_ChangeCapacity) {
     IO::MemoryStream ms(10);
     ms.Length = 5;
@@ -332,7 +332,7 @@ namespace {
     ms.WriteByte(2);
     ASSERT_EQ(8, ms.Position());
   }
-  
+
   TEST(MemoryStreamTest, WriteByte_NotDynamic) {
     Array<byte> buffer(10);
     IO::MemoryStream ms(buffer, true);
@@ -349,25 +349,25 @@ namespace {
     ms.WriteByte(3);
     ms.WriteByte(4);
     ASSERT_EQ(10, ms.Position());
-    
+
     ASSERT_EQ(0, ms.Seek(-10, IO::SeekOrigin::Current));
     ms.WriteByte(32);
     ASSERT_EQ(0, ms.Seek(-1, IO::SeekOrigin::Current));
-    
+
     ASSERT_EQ(32, ms.ReadByte());
     ASSERT_EQ(1, ms.ReadByte());
     ASSERT_EQ(2, ms.ReadByte());
-    
+
     ASSERT_EQ(2, ms.ReadByte());
     ASSERT_EQ(3, ms.ReadByte());
-    
+
     ASSERT_EQ(0, ms.ReadByte());
     ASSERT_EQ(1, ms.ReadByte());
     ASSERT_EQ(2, ms.ReadByte());
     ASSERT_EQ(3, ms.ReadByte());
     ASSERT_EQ(4, ms.ReadByte());
   }
-  
+
   TEST(MemoryStreamTest, Write_NotDynamic_Empty) {
     Array<byte> buffer = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     IO::MemoryStream ms(buffer, true);
@@ -375,7 +375,7 @@ namespace {
     ASSERT_NO_THROW(ms.Write(source, 0, 0));
     ASSERT_EQ(0, ms.Position());
   }
-  
+
   TEST(MemoryStreamTest, Write_NotDynamic_Offset) {
     Array<byte> buffer = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     IO::MemoryStream ms(buffer, true);
@@ -393,18 +393,18 @@ namespace {
     ASSERT_EQ(10, ms.Length());
     ASSERT_EQ("ace hello", String((const char*)buffer.Data()));
   }
-  
-  
+
+
   TEST(MemoryStreamTest, WriteTo) {
     Array<byte> source = {'b', 'o', 'n', 'j', 'o', 'u', 'r'};
     Array<byte> buffer(7);
     IO::MemoryStream ms1;
     IO::MemoryStream ms2(buffer, true);
-    
+
     ms1.Write(source, 0, 7);
     ms1.WriteTo(ms2);
     ms2.Seek(0, IO::SeekOrigin::Begin);
-    
+
     ASSERT_EQ('b', ms2.ReadByte());
     ASSERT_EQ('o', ms2.ReadByte());
     ASSERT_EQ('n', ms2.ReadByte());
@@ -414,13 +414,13 @@ namespace {
     ASSERT_EQ('r', ms2.ReadByte());
     ASSERT_EQ(-1, ms2.ReadByte());
   }
-  
+
   TEST(MemoryStreamTest, ReadMsdn) {
     IO::MemoryStream s;
     for (int32 i = 0; i < 122; i++)
       s.WriteByte((byte)i);
     s.Position = 0;
-    
+
     // Now read s into a byte buffer with a little padding.
     int32 bytesCount = Convert::ToInt32(s.Length()) + 10;
     Array<byte> bytes(bytesCount);
@@ -444,5 +444,5 @@ namespace {
     ASSERT_THROW(s.Write({'1', '4', '5'}, 0, 1), ObjectDisposedException);
     ASSERT_THROW(s.WriteByte(1), ObjectDisposedException);
   }
-  
+
 }

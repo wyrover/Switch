@@ -17,13 +17,13 @@ namespace Examples {
         Console::WriteLine("7 is not divided by 2 integrally.");
       }
     }
-    
+
   private:
     static int DivideByTwo(int num) {
       // If num is an odd number, throw an ArgumentException.
       if ((num & 1) == 1)
         throw ArgumentException("Number must be even");
-        
+
       // num is even, return half of its value.
       return num / 2;
     }

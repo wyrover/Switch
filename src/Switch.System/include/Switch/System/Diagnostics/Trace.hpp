@@ -21,7 +21,7 @@ namespace Switch {
       /// @cond
       class Debug;
       /// @endcond
-      
+
       /// @brief Provides a set of methods and properties that help you trace the execution of your code. This class cannot be inherited.
       /// @remarks You can use the properties and methods in the Trace class to instrument release builds. Instrumentation allows you to monitor the health of your application running in real-life settings. Tracing helps you isolate problems and fix them without disturbing a running system.
       /// @remarks This class provides methods to display an Assert dialog box, and to emit an assertion that will always Fail. This class provides write methods in the following variations: Write, WriteLine, WriteIf, and WriteLineIf.
@@ -44,29 +44,29 @@ namespace Switch {
         /// @remarks The default is false.
         /// @remarks Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or Close. Setting AutoFlush to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.
         static _property<bool> AutoFlush;
-        
+
         /// @brief Gets or sets the indent level.
         /// @return int32 The indent level. The default is zero.
         /// @remarks The IndentLevel property represents the number of times the indent of size IndentSize is applied. This property is stored on per-thread/per-request basis.
         static _property<int32> IndentLevel;
-        
+
         /// @brief Gets or sets the number of spaces in an indent.
         /// @return int32 The number of spaces in an indent. The default is four.
         /// @remarks A TextWriterTraceListener interprets this number as spaces. An EventLogTraceListener ignores this value.
         /// @remarks This property is stored on per-thread/per-request basis.
         static _property<int32> IndentSize;
-        
+
         /// @brief Gets the collection of listeners that is monitoring the trace output.
         /// @return TraceListenerCollection A TraceListenerCollection that represents a collection of type TraceListener monitoring the trace output.
         /// @remarks The listeners produce formatted output from the trace output. By default, the collection contains an instance of the DefaultTraceListener class. If you want to remove the default listener, call the Remove method, and pass it the instance of the DefaultTraceListener. To redirect output to the console window, add an instance of the ConsoleTraceListener class.
         /// @note The Listeners collection is shared by both the Debug and the Trace classes; adding a trace listener to either class adds the listener to both.
         static _property<TraceListenerCollection&, _readonly> Listeners;
-        
+
         /// @brief Gets or sets a value indicating whether the global lock should be used.
         /// @return bool true if the global lock is to be used; otherwise, false. The default is true.
         /// @remarks The global lock is always used if the trace listener is not thread safe, regardless of the value of UseGlobalLock. The IsThreadSafe property is used to determine if the listener is thread safe. The global lock is not used only if the value of UseGlobalLock is false and the value of IsThreadSafe is true. The default behavior is to use the global lock.
         static _property<bool> UseGlobalLock;
-        
+
         /// @brief Checks for a condition; if the condition is false, displays a message box that shows the call stack.
         /// @param condition The conditional expression to evaluate. If the condition is true, a failure message is not sent and the message box is not displayed.
         static void Assert(bool condition) {
@@ -74,7 +74,7 @@ namespace Switch {
           Assert(condition, "");
           #endif
         }
-        
+
         /// @brief Checks for a condition; if the condition is false, displays a message box that shows the call stack.
         /// @param condition The conditional expression to evaluate. If the condition is true, a failure message is not sent and the message box is not displayed.
         /// @param message The message to send to the Listeners collection.
@@ -85,7 +85,7 @@ namespace Switch {
             Fail(message);
           #endif
         }
-        
+
         /// @brief Flushes the output buffer, and then closes the Listeners.
         /// @remarks Use this method when the output is going to a file, such as to the TextWriterTraceListener.
         /// @remarks Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or Close. Setting AutoFlush to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.
@@ -96,7 +96,7 @@ namespace Switch {
             listener.Close();
           }
         }
-        
+
         /// @brief Emits the specified error message.
         /// @brief message A message to emit.
         /// @remarks The default behavior for the default trace listener is to output the message parameter to a message box when the application runs in user-interface mode, and to the TraceListener instances in the Listeners collection.
@@ -114,7 +114,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Emits an error message, and a detailed error message.
         /// @param message A message to emit.
         /// @param detailMessage A detailed message to emit.
@@ -133,7 +133,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Flushes the output buffer, and causes buffered data to be written to the Listeners.
         /// @remarks Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or Close. Setting AutoFlush to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.
         static void Flush() {
@@ -143,7 +143,7 @@ namespace Switch {
             listener.Flush();
           #endif
         }
-        
+
         /// @brief Increases the current IndentLevel by one.
         static void Indent() {
           if (IndentLevel < Int32::MaxValue) {
@@ -152,47 +152,47 @@ namespace Switch {
               listener.IndentLevel = IndentLevel();
           }
         }
-        
+
         /// @brief Refreshes the trace configuration data.
         /// @remarks Trace configuration data is captured when the application is started. If the configuration data is changed after the application is started, call the Refresh method to update the trace configuration data.
         static void Refresh() {}
-        
+
         /// @brief Writes an error message to the trace listeners in the Listeners collection using the specified message.
         /// @param message The informative message to write.
         /// @remarks TraceError calls the TraceEvent method for each trace listener, with the trace event type Error, passing the informative message as the message string.
         static void TraceError(const string& message) {TraceEvent(TraceEventType::Error, message);}
-        
+
         /// @brief Writes an error message to the trace listeners in the Listeners collection using the specified array of objects and formatting information.
         /// @param format A format string that contains zero or more format items, which correspond to objects in the args array.
         /// @param args An object array containing zero or more objects to format.
         /// @remarks TraceError calls the TraceEvent methods in the trace listeners with the trace event type Error, passing the message content as an object array with formatting information. See the Format method for more information about the format and args parameters.
         template<typename ...Objects>
         static void TraceError(const string& format, const Objects& ... args) {TraceEvent(TraceEventType::Error, string::Format(format, args...));}
-        
+
         /// @brief Writes an informational message to the trace listeners in the Listeners collection using the specified message.
         /// @param message The informative message to write.
         /// @remarks TraceInformation calls the TraceEvent method for each trace listener, with the trace event type Information, passing the informative message as the message string.
         static void TraceInformation(const string& message) {TraceEvent(TraceEventType::Information, message);}
-        
+
         /// @brief Writes an informational message to the trace listeners in the Listeners collection using the specified array of objects and formatting information.
         /// @param format A format string that contains zero or more format items, which correspond to objects in the args array.
         /// @param args An object array containing zero or more objects to format.
         /// @remarks TraceInformation calls the TraceEvent methods in the trace listeners with the trace event type Information, passing the message content as an object array with formatting information. See the Format method for more information about the format and args parameters.
         template<typename ...Objects>
         static void TraceInformation(const string& format, const Objects& ... args) {TraceEvent(TraceEventType::Information, string::Format(format, args...));}
-        
+
         /// @brief Writes a warning message to the trace listeners in the Listeners collection using the specified message.
         /// @param message The informative message to write.
         /// @remarks TraceWarning calls the TraceEvent method for each trace listener with the trace event type Warning, passing the informative message as the message string.
         static void TraceWarning(const string& message) {TraceEvent(TraceEventType::Warning, message);}
-        
+
         /// @brief Writes a warning message to the trace listeners in the Listeners collection using the specified array of objects and formatting information.
         /// @param format A format string that contains zero or more format items, which correspond to objects in the args array.
         /// @param args An object array containing zero or more objects to format.
         /// @remarks TraceWarning calls the TraceEvent methods in the trace listeners with the trace event type Warning, passing the message content as an object array with formatting information. See the Format method for more information about the format and args parameters.
         template<typename ...Objects>
         static void TraceWarning(const string& format, const Objects& ... args) {TraceEvent(TraceEventType::Warning, string::Format(format, args...));}
-        
+
         /// @brief Decreases the current IndentLevel by one.
         static void Unindent() {
           if (IndentLevel > 0) {
@@ -201,7 +201,7 @@ namespace Switch {
               listener.IndentLevel = IndentLevel();
           }
         }
-        
+
         /// @brief Writes the value of the object's ToString method to the trace listeners in the Listeners collection.
         /// @param value An Object whose name is sent to the Listeners.
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
@@ -218,7 +218,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Writes a category name and the value of the object's ToString method to the trace listeners in the Listeners collection.
         /// @param value An Object whose name is sent to the Listeners.
         /// @param category A category name used to organize the output.
@@ -238,7 +238,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Writes a message to the trace listeners in the Listeners collection.
         /// @param message A message to write.
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
@@ -256,7 +256,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Writes a category name and the value of the object's ToString method to the listener you create when you implement the TraceListener class.
         /// @param message A message to write.
         /// @param category A category name used to organize the output.
@@ -276,7 +276,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Writes the value of the object's ToString method to the trace listeners in the Listeners collection.
         /// @param value An Object whose name is sent to the Listeners.
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
@@ -294,7 +294,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Writes a category name and the value of the object's ToString method to the trace listeners in the Listeners collection.
         /// @param value An Object whose name is sent to the Listeners.
         /// @param category A category name used to organize the output.
@@ -314,7 +314,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Writes a message to the trace listeners in the Listeners collection.
         /// @param message A message to write.
         /// @remarks By default, the output is written to an instance of DefaultTraceListener.
@@ -332,7 +332,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Writes a category name and message to the trace listeners in the Listeners collection.
         /// @param message A message to write.
         /// @param category A category name used to organize the output.
@@ -352,7 +352,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         /// @brief Writes the value of the object's ToString method to the trace listeners in the Listeners collection if a condition is true.
         /// @param condition true to cause a message to be written; otherwise, false.
         /// @param value An Object whose name is sent to the Listeners.
@@ -364,7 +364,7 @@ namespace Switch {
             WriteLine(value);
           #endif
         }
-        
+
         /// @brief Writes a category name and the value of the object's ToString method to the trace listeners in the Listeners collection if a condition is true.
         /// @param condition true to cause a message to be written; otherwise, false.
         /// @param value An Object whose name is sent to the Listeners.
@@ -378,7 +378,7 @@ namespace Switch {
             WriteLine(value, category);
           #endif
         }
-        
+
         /// @brief Writes a message to the trace listeners in the Listeners collection if a condition is true.
         /// @param condition true to cause a message to be written; otherwise, false.
         /// @param message A message to write.
@@ -390,7 +390,7 @@ namespace Switch {
             WriteLine(message);
           #endif
         }
-        
+
         /// @brief Writes a category name and message to the trace listeners in the Listeners collection if a condition is true.
         /// @param condition true to cause a message to be written; otherwise, false.
         /// @param message A message to write.
@@ -404,11 +404,11 @@ namespace Switch {
             WriteLine(message, category);
           #endif
         }
-        
+
         /// @cond
         static TraceListenerCollection& __get_listeners__() {return listeners;}
         /// @endcond
-        
+
       private:
         friend class Debug;
         static void TraceEvent(const TraceEventType& traceEventType, const string& message) {
@@ -426,7 +426,7 @@ namespace Switch {
             Flush();
           #endif
         }
-        
+
         static TraceListenerCollection listeners;
         static object lock;
       };

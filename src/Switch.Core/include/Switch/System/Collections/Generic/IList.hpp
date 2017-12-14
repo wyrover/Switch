@@ -20,39 +20,39 @@ namespace Switch {
           /// @cond
           IList() {}
           /// @endcond
-          
+
           /// @brief Gets a value indicating whether the IList has a fixed size.
           /// @return Boolean true if the IList has a fixed size; otherwise, false.
           _property<bool, _readonly> IsFixedSize {
             _get {return this->GetIsFixedSize();}
           };
-          
+
           /// @brief Determines the index of a specific item in the IList.
           /// @param value The object to locate in the IList.
           /// @return Int32 The index of value if found in the list; otherwise, -1.
           virtual int32 IndexOf(const T& value) const = 0;
-          
+
           /// @brief Inserts an item to the IList at the specified index.
           /// @param index The zero-based index at which value should be inserted
           /// @param value The object to insert into the IList.
           virtual void Insert(int32 index, const T& value) = 0;
-          
+
           /// @brief Removes the IList item at the specified index.
           /// @param index The zero-based index of the item to remove
           virtual void RemoveAt(int32 index) = 0;
-          
+
           /// @brief Gets the element at the specified index.
           /// @param index The zero-based index of the element to get.
           /// @return T The element at the specified index.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
           virtual const T& operator[](int32 index) const = 0;
-          
+
           /// @brief Gets the element at the specified index.
           /// @param index The zero-based index of the element to get.
           /// @return T The element at the specified index.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
           virtual T& operator[](int32 index) = 0;
-          
+
         protected:
           /// @brief Gets a value indicating whether the IList has a fixed size.
           /// @return Boolean true if the IList has a fixed size; otherwise, false.

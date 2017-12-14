@@ -22,7 +22,7 @@ namespace Switch {
           /// @brief Returns an enumerator that iterates through a collection.
           /// @return IEnumerator An IEnumerator object that can be used to iterate through the collection.
           virtual Enumerator<T> GetEnumerator() const = 0;
-          
+
           // Not correct for an interface but necessary for C++ language.
         private:
           class Iterator : public std::iterator<std::input_iterator_tag, T> {
@@ -33,19 +33,19 @@ namespace Switch {
               this->pos = value.pos;
               return *this;
             }
-            
+
             explicit Iterator(const Enumerator<T>& enumerator) : enumerator(enumerator) {
               this->enumerator.Reset();
               if (this->enumerator.MoveNext() == false)
                 this->pos = -1;
             }
-            
+
             Iterator(const Enumerator<T>& enumerator, bool end) : enumerator(enumerator) {
               this->enumerator.Reset();
               if (this->enumerator.MoveNext() == false || end == true)
                 this->pos = -1;
             }
-            
+
             Iterator& operator++() {
               if (this->pos != -1) {
                 ++this->pos;
@@ -54,7 +54,7 @@ namespace Switch {
               }
               return *this;
             }
-            
+
             Iterator operator++(int) {
               Iterator iterator(*this);
               if (this->pos != -1) {
@@ -64,23 +64,23 @@ namespace Switch {
               }
               return iterator;
             }
-            
+
             bool operator==(const Iterator& rhs) const {return this->pos == rhs.pos;}
             bool operator!=(const Iterator& rhs) const {return this->pos != rhs.pos;}
-            
+
             const T& operator*() const {return this->enumerator.Current();}
             T& operator*() {return const_cast<T&>(this->enumerator.Current());}
-            
+
           private:
             Enumerator<T> enumerator;
             int32 pos = 0;
           };
-          
+
         public:
           /// @cond
           using const_iterator = const Iterator;
           using iterator = Iterator;
-          
+
           const_iterator cbegin() const {return const_iterator(GetEnumerator());}
           const_iterator cend() const  {return const_iterator(GetEnumerator(), true);}
           const_iterator begin() const {return const_iterator(GetEnumerator());}

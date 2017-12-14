@@ -13,12 +13,12 @@ namespace Native {
   public:
     ProgressBar() {this->RegisterEvent();}
     void BackColor(const System::Drawing::Color& color) override {}
-    
+
     void Text(const string& text) override {}
     guint marquee = 0;
     bool isMarquee = false;
   };
-  
+
   int MarqueeProc(gpointer progressBar) {
     ((Native::ProgressBar*)progressBar)->pulse();
     return 1;

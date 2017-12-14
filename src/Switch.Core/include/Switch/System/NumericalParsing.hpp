@@ -12,9 +12,9 @@ namespace Switch {
     class _export NumericalParsing {
     public:
       NumericalParsing() = delete;
-      
+
       static int64 ParseSigned(const String& str, int32 base, int32 nbBits);
-      
+
       static uint64 ParseUnsigned(const String& str, int32 base);
     };
     /// @endcond

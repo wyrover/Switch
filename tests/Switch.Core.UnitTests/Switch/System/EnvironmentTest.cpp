@@ -8,11 +8,11 @@ namespace SwitchUnitTests {
    TEST(EnvironmentTest, GetEnvironmentVariables) {
    ASSERT_GT(Environment::GetEnvironmentVariables().Count, 0);
    } */
-  
+
   TEST(EnvironmentTest, GetEnvironmentVariable) {
     ASSERT_FALSE(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("PATH")));
   }
-  
+
   /*
    TEST(EnvironmentTest, SetEnvironmentVariable) {
    ASSERT_TRUE(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT")));

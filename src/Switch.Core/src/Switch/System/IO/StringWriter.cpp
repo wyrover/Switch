@@ -29,7 +29,7 @@ void StringWriter::Write(const String& value) {
   if (this->data->close)
     throw ObjectDisposedException(_caller);
   this->data->str += value;
-  
+
 }
 
 string StringWriter::ToString() const {

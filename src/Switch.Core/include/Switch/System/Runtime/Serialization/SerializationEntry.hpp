@@ -26,17 +26,17 @@ namespace Switch {
             _get {return this->value;},
             _set {this->value = value;}
           };
-          
+
           /// @brief Gets the value contained in the object.
           /// @param vlue The value contained in the object.
           _property<const String&> TypeName {
             _get->const String& {return this->typeName;},
             _set {this->typeName = value;}
           };
-          
+
           SerializationEntry() {}
           SerializationEntry(const SerializationEntry& entry) : value(entry.value), typeName(entry.typeName) {}
-          
+
           /// @cond
           SerializationEntry& operator=(const SerializationEntry& entry) {
             this->value = entry.value;
@@ -44,11 +44,11 @@ namespace Switch {
             return *this;
           }
           /// @endcond
-          
+
         protected:
           /// @brief Initializes a new instance of the SerializationEntry
           SerializationEntry(const refptr<Object>& value, const String& typeName) : value(value), typeName(typeName) {}
-          
+
         private:
           friend class SerializationInfo;
           refptr<Object> value;

@@ -15,16 +15,16 @@ namespace Examples {
     //      ConcurrentStack<T>.IsEmpty;
     static void Main() {
       int errorCount = 0;
-      
+
       // Construct a ConcurrentStack
       ConcurrentStack<int> cs;
-      
+
       // Push some elements onto the stack
       cs.Push(1);
       cs.Push(2);
-      
+
       int result;
-      
+
       // Peek at the top of the stack
       if (!cs.TryPeek(result)) {
         Console::WriteLine("CS: TryPeek() failed when it should have succeeded");
@@ -35,7 +35,7 @@ namespace Examples {
           errorCount++;
         }
       }
-      
+
       // Pop a number off of the stack
       if (!cs.TryPop(result)) {
         Console::WriteLine("CS: TryPop() failed when it should have succeeded");
@@ -46,14 +46,14 @@ namespace Examples {
           errorCount++;
         }
       }
-      
+
       // Clear the stack, and verify that it is empty
       cs.Clear();
       if (!cs.IsEmpty) {
         Console::WriteLine("CS: IsEmpty not true after Clear()");
         errorCount++;
       }
-      
+
       if (errorCount == 0)
         Console::WriteLine("  OK!");
     }

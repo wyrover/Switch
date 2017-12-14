@@ -16,12 +16,12 @@ namespace Switch {
     class UnitTest {
     public:
       UnitTest(const System::Array<System::String>& args);
-      
+
       int32 Run();
-      
+
     private:
       System::Array<System::String> ConvertParam(const System::Array<System::String>& args);
-      
+
       System::Array<System::String> args;
     };
   }

@@ -14,32 +14,32 @@ namespace Switch {
       /// @brief Create a new instance of class MissingMemberException
       /// @remarks Message is set with the default message associate to the error.
       MissingMemberException() : MemberAccessException() {}
-      
+
       /// @brief Create a new instance of class MissingMemberException
       /// @param value The Excetion to copy.
       /// @remarks Message is set with the default message associate to the error.
       MissingMemberException(const MissingMemberException& value) : MemberAccessException(value) {}
-      
+
       /// @brief Create a new instance of class MissingMemberException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
       MissingMemberException(const System::Runtime::CompilerServices::Caller& information) : MemberAccessException(information) {}
-      
+
       /// @brief Create a new instance of class MissingMemberException
       /// @param message Message string associate to the error.
       MissingMemberException(const System::String& message) : MemberAccessException(message) {}
-      
+
       /// @brief Create a new instance of class MissingMemberException
       /// @param message Message string associate to the error.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       MissingMemberException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : MemberAccessException(message, information) {}
-      
+
       /// @brief Create a new instance of class MissingMemberException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       MissingMemberException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : MemberAccessException(message, innerException, information) {}
-      
+
     private:
       System::String GetDefaultMessage() const override {return "Attempt to acces a missing member."; }
     };

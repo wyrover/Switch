@@ -13,12 +13,12 @@ namespace {
     void Fail(const string& message)  {
       ASSERT_TRUE(message.Equals("TestFail"));
     }
-    
+
     void Fail(const string& message, const string& detailMessage) {
       ASSERT_TRUE(message.Equals("TestFail"));
       ASSERT_TRUE(detailMessage.Equals("Detail"));
     }
-    
+
     void TraceEvent(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const string& message) {
       ASSERT_TRUE(src.Equals(Environment::CommandLine()));
       switch (type) {
@@ -34,86 +34,86 @@ namespace {
       default : ASSERT_FALSE(true);
       }
     }
-    
+
     void Write(const Object& obj) {
       ASSERT_TRUE(obj.ToString().Equals("Data object"));
     }
-    
+
     void Write(const string& message) {
       ASSERT_TRUE(message.Equals("Data string"));
     }
-    
+
     void Write(const Object& obj, const string& category) {
       ASSERT_TRUE(category.Equals("Category"));
       ASSERT_TRUE(obj.ToString().Equals("Data object"));
     }
-    
+
     void Write(const string& message, const string& category) {
       ASSERT_TRUE(category.Equals("Category"));
       ASSERT_TRUE(message.Equals("Data string"));
     }
-    
+
     void WriteLine(const Object& obj) {
       ASSERT_TRUE(obj.ToString().Equals("Data object"));
     }
-    
+
     void WriteLine(const string& message) {
       ASSERT_TRUE(message.Equals("Data string"));
     }
-    
+
     void WriteLine(const Object& obj, const string& category) {
       ASSERT_TRUE(category.Equals("Category"));
       ASSERT_TRUE(obj.ToString().Equals("Data object"));
     }
-    
+
     void WriteLine(const string& message, const string& category) {
       ASSERT_TRUE(category.Equals("Category"));
       ASSERT_TRUE(message.Equals("Data string"));
     }
   };
-  
+
   TEST(TraceTest, Default) {
     Console::SetOut(System::IO::TextWriter::Null());
-    
+
     string dataString("Data string");
     const Object& dataObject = string("Data object");
-    
+
     Trace::WriteLine("No listener yet");
-    
+
     DefaultTraceListener defaultListener;
     defaultListener.LogFileName = "Trace.log";
-    
+
     DefaultTraceListener listener = defaultListener;
     Trace::Listeners().Add(listener);
-    
+
     DefaultTraceListener newListener;
     Trace::Listeners().Add(newListener);
-    
+
     Trace::Fail("TestFail");
     Trace::Fail("TestFail", "Detail");
-    
+
     Trace::TraceError("TestError");
-    
+
     Trace::TraceInformation("TestInformation");
-    
+
     Trace::TraceWarning("TestWarning");
-    
+
     Trace::Write(dataString);
     Trace::Write(dataObject);
     Trace::Write(dataString, "Category");
     Trace::Write(dataObject, "Category");
-    
+
     Trace::WriteLine(dataString);
     Trace::WriteLine(dataObject);
     Trace::WriteLine(dataString, "Category");
     Trace::WriteLine(dataObject, "Category");
-    
+
     Trace::Listeners().Remove(listener);
     Trace::Listeners().Remove(newListener);
-    
+
     Console::SetOut(Console::Out);
   }
-  
+
   class TraceSourceUnittestListener : public TraceListener {
   public:
     void TraceData(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const System::Object& data) override {
@@ -127,7 +127,7 @@ namespace {
         ASSERT_TRUE(false);
       }
     }
-    
+
     void TraceData(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const System::Collections::ArrayList& data) override {
       ASSERT_TRUE(src.Equals("TraceUnittest"));
       ASSERT_EQ(1, id);
@@ -140,13 +140,13 @@ namespace {
         ASSERT_TRUE(false);
       }
     }
-    
+
     void TraceEvent(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id) override {
       ASSERT_TRUE(src.Equals("TraceUnittest"));
       ASSERT_EQ(2, id);
       ASSERT_EQ(TraceEventType::Error, type);
     }
-    
+
     void TraceEvent(const TraceEventCache& /*cache*/, const string& src, const TraceEventType& type, int32 id, const string& message) override {
       ASSERT_TRUE(src.Equals("TraceUnittest"));
       switch (type) {
@@ -162,34 +162,34 @@ namespace {
         ASSERT_TRUE(false);
       }
     }
-    
+
     void Write(const string& message) override {}
     void WriteLine(const string& message) override {}
   };
-  
+
   TEST(TraceTest, Source) {
     Console::SetOut(System::IO::TextWriter::Null());
-    
+
     string dataString("Data string");
     const Object& dataObject = string("Data object");
-    
+
     Array<refptr<Object>> dataArray(2);
     dataArray[0] = ref_new<string>("Object 0");
     dataArray[1] = ref_new<string>("Object 1");
-    
+
     TraceSource traceSource("TraceUnittest");
-    
+
     traceSource.Listeners().Add(DefaultTraceListener());
     traceSource.Listeners().Add(TraceSourceUnittestListener());
-    
+
     traceSource.TraceData(TraceEventType(TraceEventType::Error), 1, dataObject);
     traceSource.TraceData(TraceEventType(TraceEventType::Error), 1, dataArray);
-    
+
     traceSource.TraceEvent(TraceEventType(TraceEventType::Error), 2);
     traceSource.TraceEvent(TraceEventType(TraceEventType::Error), 2, "ErrorTest");
-    
+
     traceSource.TraceInformation("InformationTest");
-    
+
     Console::SetOut(Console::Out);
   }
 }

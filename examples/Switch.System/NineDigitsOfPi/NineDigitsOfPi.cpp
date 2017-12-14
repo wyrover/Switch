@@ -20,86 +20,86 @@ public:
   static int mul_mod(long a, long b, int m) {
     return (int)((a * b) % m);
   }
-  
+
   // return the inverse of x mod y
   static int inv_mod(int x, int y) {
     int u = x;
     int v = y;
     int a = 0;
     int c = 1;
-    
+
     do {
       int q = v / u;
-      
+
       int t = c;
       c = a - q * c;
       a = t;
-      
+
       t = u;
       u = v - q * u;
       v = t;
     } while (u != 0);
-    
+
     a = a % y;
     if (a < 0) a = y + a;
-    
+
     return a;
   }
-  
+
   // return (a^b) mod m
   static int pow_mod(int a, int b, int m) {
     int r = 1;
     int aa = a;
-    
+
     while (true) {
       if ((b & 0x01) != 0) r = mul_mod(r, aa, m);
       b = b >> 1;
       if (b == 0) break;
       aa = mul_mod(aa, aa, m);
     }
-    
+
     return r;
   }
-  
+
   // return true if n is prime
   static bool is_prime(int n) {
     if ((n % 2) == 0) return false;
-    
+
     int r = (int)(Math::Sqrt(n));
     for (int i = 3; i <= r; i += 2) {
       if ((n % i) == 0) return false;
     }
-    
+
     return true;
   }
-  
+
   // return the prime number immediately after n
   static int next_prime(int n) {
     do {
       n++;
     } while (!is_prime(n));
-    
+
     return n;
   }
-  
+
   static int StartingAt(int n) {
     int N = (int)((n + 20) * Math::Log(10) / Math::Log(2));
     int t = 0;
     double sum = 0.0;
-    
+
     for (int a = 3; a <= (2 * N); a = next_prime(a)) {
       int vmax = (int)(Math::Log(2 * N) / Math::Log(a));
       int av = 1;
-      
+
       for (int i = 0; i < vmax; ++i) av = av * a;
-      
+
       int s = 0;
       int num = 1;
       int den = 1;
       int v = 0;
       int kq = 1;
       int kq2 = 1;
-      
+
       for (int k = 1; k <= N; ++k) {
         t = k;
         if (kq >= a) {
@@ -107,13 +107,13 @@ public:
             t = t / a;
             --v;
           } while ((t % a) == 0);
-          
+
           kq = 0;
         }
-        
+
         ++kq;
         num = mul_mod(num, t, av);
-        
+
         t = (2 * k - 1);
         if (kq2 >= a) {
           if (kq2 == a) {
@@ -122,13 +122,13 @@ public:
               ++v;
             } while ((t % a) == 0);
           }
-          
+
           kq2 -= a;
         }
-        
+
         den = mul_mod(den, t, av);
         kq2 += 2;
-        
+
         if (v > 0) {
           t = inv_mod(den, av);
           t = mul_mod(t, num, av);
@@ -138,12 +138,12 @@ public:
           if (s >= av) s -= av;
         }
       }
-      
+
       t = pow_mod(10, n - 1, av);
       s = mul_mod(s, t, av);
       sum = Double(sum + (double)s / (double)av) % Double(1.0);
     }
-    
+
     return (int)(sum * 1e9);
   }
 };
@@ -157,11 +157,11 @@ namespace Examples {
       for (int index = 0; index < 1; index++)
         pi += Box(NineDigitsOfPi::StartingAt(index)).ToString();
       Console::WriteLine(pi);
-      
+
       /*
       double d1 = 13.0;
       double d2 = 2.0;
-      
+
       double result = (Double)d1 % (Double)d2;
       Console::WriteLine("13.0 % 2.0 = {0}", result);
        */

@@ -20,19 +20,19 @@ namespace Switch {
         _property<System::Net::FtpStatusCode, _readonly> StatusCode {
           _get {return this->GetStatusCode();}
         };
-        
+
         _property<string, _readonly> StatusDescription {
           _get {return this->GetStatusDescription();}
         };
-        
+
         WebResponse::WebResponseStream GetResponseStream() override;
-        
+
       protected:
         FtpWebResponse();
-        
+
       private:
         friend class FtpWebRequest;
-        
+
         System::Net::FtpStatusCode GetStatusCode() const;
         const String GetStatusDescription() const;
       };

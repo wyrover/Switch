@@ -10,13 +10,13 @@ namespace DesignPatterns {
     class Handler _abstract {
     public:
       void SetSuccessor(refptr<Handler> successor) {this->successor = successor;}
-      
+
       virtual void HandleRequest(int request) const = 0;
-      
+
     protected:
       refptr<Handler> successor;
     };
-    
+
     // The 'ConcreteHandler1' class
     class ConcreteHandler1 : public Handler {
     public:
@@ -27,7 +27,7 @@ namespace DesignPatterns {
           successor->HandleRequest(request);
       }
     };
-    
+
     // The 'ConcreteHandler2' class
     class ConcreteHandler2 : public Handler {
     public:
@@ -38,7 +38,7 @@ namespace DesignPatterns {
           successor->HandleRequest(request);
       }
     };
-    
+
     // The 'ConcreteHandler3' class
     class ConcreteHandler3 : public Handler {
     public:
@@ -49,7 +49,7 @@ namespace DesignPatterns {
           successor->HandleRequest(request);
       }
     };
-    
+
     // MainApp _startup class for Behavioral
     // Chain Of Responsability Design Pattern.
     class MainApp {
@@ -62,10 +62,10 @@ namespace DesignPatterns {
         refptr<Handler> h3 = ref_new<ConcreteHandler3>();
         h1->SetSuccessor(h2);
         h2->SetSuccessor(h3);
-        
+
         // Generate and process request
         int requests[] = { 2, 5, 14, 22, 18, 3, 27, 20 };
-        
+
         for (int request : requests)
           h1->HandleRequest(request);
       }

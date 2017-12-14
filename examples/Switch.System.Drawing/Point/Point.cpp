@@ -10,14 +10,14 @@ namespace Examples {
     static void Main() {
       Point location = {10, 235};
       Console::WriteLine("location = {0}", location);
-      
+
       location.X += 20;
       location.Y -= 15;
       Console::WriteLine("location = {0}", location);
-      
+
       location = Point(10, 10) + Point(20, 50);
       Console::WriteLine("location = {0}", location);
-      
+
       location.Offset({70, 140});
       Console::WriteLine("location = {0}", location);
     }

@@ -21,14 +21,14 @@ namespace Switch {
       class _export Bitmap : public Image {
       public:
         Bitmap(const Image& image) : Image(image) {}
-        
+
         Bitmap(const string& fileName);
-        
+
         template<typename TStream>
         Bitmap(const TStream& stream) : Image(stream) {}
-        
+
         Bitmap(refptr<System::IO::Stream> stream) : Image(stream) {}
-        
+
       private:
         Bitmap() {}
       };

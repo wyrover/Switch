@@ -9,13 +9,13 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       List<string> colors;
-      
+
       colors.Add("Red");
       colors.Add("Blue");
       colors.Add("Green");
       colors.Add("Yellow");
       colors.Add("Gray");
-      
+
       for (string item : colors)
         Console::WriteLine(item);
     }

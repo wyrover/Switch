@@ -10,11 +10,11 @@ namespace Examples {
     static void Main() {
       Size size = {200, 300};
       Console::WriteLine("size = {0}", size);
-      
+
       size.Width += 50;
       size.Height -= 100;
       Console::WriteLine("size = {0}", size);
-      
+
       size = Size(300, 300) + Point(200, 100);
       Console::WriteLine("size = {0}", size);
     }

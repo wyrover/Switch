@@ -14,13 +14,13 @@ bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles) {
 bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
   if (millisecondsTimeout < Timeout::Infinite)
     throw ArgumentException(_caller);
-    
+
   if (millisecondsTimeout == Timeout::Infinite) {
     for (auto& item : waitHandles)
       item().WaitOne();
     return true;
   }
-  
+
   int32 timeout = millisecondsTimeout;
   int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
   for (auto& item : waitHandles) {
@@ -44,7 +44,7 @@ int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles) {
 int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
   if (millisecondsTimeout < Timeout::Infinite)
     throw ArgumentException(_caller);
-    
+
   if (millisecondsTimeout == Timeout::Infinite) {
     for (int32 index = 0; index < waitHandles.Count; index++) {
       if (waitHandles[index]().WaitOne(0) == true)
@@ -54,7 +54,7 @@ int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles, int32 milliseconds
     }
     return WaitTimeout;
   }
-  
+
   int32 timeout = millisecondsTimeout;
   int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
   do {

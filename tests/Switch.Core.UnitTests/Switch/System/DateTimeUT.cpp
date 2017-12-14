@@ -15,7 +15,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Unspecified, System::DateTime::MinValue.Kind());
     ASSERT_FALSE(System::DateTime::MinValue.IsDaylightSavingTime());
   }
-  
+
   TEST(DateTimeTest, MaxValue) {
     ASSERT_EQ(3155378975999999999L, System::DateTime::MaxValue.Ticks);
     ASSERT_EQ(9999, System::DateTime::MaxValue.Year);
@@ -27,7 +27,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Unspecified, System::DateTime::MaxValue.Kind());
     ASSERT_FALSE(System::DateTime::MaxValue.IsDaylightSavingTime());
   }
-  
+
   TEST(DateTimeTest, DefaultConstructor) {
     System::DateTime d;
     ASSERT_EQ(0, d.Ticks);
@@ -40,7 +40,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Unspecified, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
   }
-  
+
   TEST(DateTimeTest, ConstructorByTicksWith0) {
     System::DateTime d(0);
     ASSERT_EQ(0, d.Ticks);
@@ -53,7 +53,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Unspecified, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
   }
-  
+
   /*
   TEST(DateTimeTest, ConstructorByTicksWith504911232000000000LL) {
     System::DateTime d(504911232000000000LL);
@@ -67,7 +67,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Unspecified, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
   }*/
-  
+
   /*
   TEST(DateTimeTest, ConstructorByTicksWith633452274520000000LLAndKindSetToLocal) {
     System::DateTime d(633452274520000000LL, DateTimeKind::Local);
@@ -82,7 +82,7 @@ namespace {
     ASSERT_TRUE(d.IsDaylightSavingTime());
   }
   */
-  
+
   TEST(DateTimeTest, ConstructorByTicksWith633452274520000000LLAndKindSetToUtc) {
     System::DateTime d(633452274520000000LL, DateTimeKind::Utc);
     ASSERT_EQ(633452274520000000LL, d.Ticks);
@@ -95,7 +95,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Utc, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
   }
-  
+
   TEST(DateTimeTest, ConstructorByYearMonthDayWithValue) {
     System::DateTime d(2011, 10, 30);
     ASSERT_EQ(2011, d.Year);
@@ -107,7 +107,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Unspecified, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
   }
-  
+
   TEST(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondWithValue) {
     System::DateTime d(2011, 10, 30, 1, 59, 59);
     ASSERT_EQ(2011, d.Year);
@@ -119,7 +119,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Unspecified, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
   }
-  
+
   /*
   TEST(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToLocalAndValueWithDayligthSet) {
     System::DateTime d(2011, 10, 30, 1, 59, 59, (DateTimeKind)DateTimeKind::Local);
@@ -132,7 +132,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Local, d.Kind());
     ASSERT_TRUE(d.IsDaylightSavingTime());
   }*/
-  
+
   TEST(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToUtcAndValueWithDayligthSet) {
     System::DateTime d(2011, 10, 30, 1, 59, 59, (DateTimeKind)DateTimeKind::Utc);
     ASSERT_EQ(2011, d.Year);
@@ -144,7 +144,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Utc, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
   }
-  
+
   /*
   TEST(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToLocalAndValueWithoutDayligthSet) {
     System::DateTime d(2011, 10, 30, 3, 0, 1, (DateTimeKind)DateTimeKind::Local);
@@ -157,7 +157,7 @@ namespace {
     ASSERT_EQ(DateTimeKind::Local, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
   } */
-  
+
   TEST(DateTimeTest, ConstructorByYearMonthDayHourMinuteSecondKindWithkindToUtcAndValueWithoutDayligthSet) {
     System::DateTime d(2011, 10, 30, 3, 0, 1, (DateTimeKind)DateTimeKind::Utc);
     ASSERT_EQ(2011, d.Year);
@@ -169,12 +169,12 @@ namespace {
     ASSERT_EQ(DateTimeKind::Utc, d.Kind());
     ASSERT_FALSE(d.IsDaylightSavingTime());
   }
-  
+
   TEST(DateTimeTest, Constructor) {
     EXPECT_THROW(System::DateTime(System::DateTime::MaxValue.Ticks() + TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
     EXPECT_THROW(System::DateTime(System::DateTime::MinValue.Ticks() - TimeSpan::TicksPerSecond), ArgumentOutOfRangeException);
   }
-  
+
   /*!
    Description
    Be careful test on date is written in the zone GMT+1 so it must be executed with this zone to be correct.
@@ -186,7 +186,7 @@ namespace {
     EXPECT_EQ("24/05/2011 14:05:05", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Unspecified)).ToLocalTime().ToString());
   }
   */
-  
+
   /*!
    Description
    Be careful test on date is written in the zone GMT+1 so it must be executed with this zone to be correct.
@@ -198,14 +198,14 @@ namespace {
    EXPECT_EQ("24/05/2011 10:05:05", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Unspecified)).ToUniversalTime().ToString());
   }
   */
-  
+
   TEST(DateTimeTest, ToString) {
     EXPECT_EQ("Monday 02 May 2011", System::DateTime(2011, 5, 2, 8, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).ToLongDateString().ToString());
     EXPECT_EQ("08:05:05", System::DateTime(2011, 5, 2, 8, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).ToLongTimeString().ToString());
     EXPECT_EQ("02/05/2011", System::DateTime(2011, 5, 2, 8, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).ToShortDateString().ToString());
     EXPECT_EQ("08:05", System::DateTime(2011, 5, 1, 8, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).ToShortTimeString().ToString());
   }
-  
+
   TEST(DateTimeTest, Add) {
     EXPECT_EQ("24/05/2011 16:55:52", System::DateTime(2011, 5, 24, 14, 31, 0).Add(TimeSpan(2, 24, 52)).ToString());
     EXPECT_EQ("25/06/2011 14:31:00", System::DateTime(2011, 5, 24, 14, 31, 0).AddDays(32).ToString());
@@ -213,7 +213,7 @@ namespace {
     EXPECT_EQ("24/05/2011 14:31:50", System::DateTime(2011, 5, 24, 14, 31, 0).AddMilliseconds(50000).ToString());
     EXPECT_EQ("24/05/2011 16:35:00", System::DateTime(2011, 5, 24, 14, 31, 0).AddMinutes(124).ToString());
   }
-  
+
   /*
   TEST(DateTimeTest, SpecifyKind) {
     EXPECT_EQ("24/05/2011 12:05:05", System::DateTime::SpecifyKind(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)), System::DateTimeKind::Local).ToString());
@@ -224,27 +224,27 @@ namespace {
     EXPECT_EQ("24/05/2011 10:05:05", System::DateTime::SpecifyKind(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Unspecified)), System::DateTimeKind::Utc).ToString());
   }
   */
-  
+
   TEST(DateTimeTest, Binary) {
     EXPECT_EQ("24/05/2011 12:05:05", System::DateTime::FromBinary(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).ToBinary()).ToString());
   }
-  
+
   TEST(DateTimeTest, Get) {
     EXPECT_EQ("24/05/2011 00:00:00", System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).Date().ToString());
     EXPECT_EQ(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).Day(), 24);
     EXPECT_EQ(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).DayOfYear(), 144);
     EXPECT_EQ(System::DateTime(2011, 5, 24, 12, 5, 5, System::DateTimeKind(System::DateTimeKind::Local)).TimeOfDay(), TimeSpan(12, 5, 5));
   }
-  
+
   /*
    Test not covered yet
    Console::WriteLine("System::DateTime::Now                                      : " + System::DateTime::Now);
    Console::WriteLine("System::DateTime::GetUtcNow()                                   : " + System::DateTime::GetUtcNow());
    Console::WriteLine("System::DateTime::GetToday()                                    : " + System::DateTime::GetToday());
    */
-  
+
   TEST(DateTimeTest, GetTypeCode) {
     EXPECT_EQ(TypeCode::DateTime, System::DateTime().GetTypeCode());
   }
-  
+
 }

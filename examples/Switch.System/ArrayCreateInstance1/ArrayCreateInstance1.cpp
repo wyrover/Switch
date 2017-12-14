@@ -11,12 +11,12 @@ namespace Examples {
       auto my1DArray = Array<>::CreateInstance<int32>(5);
       for (int i = my1DArray.GetLowerBound(0); i <= my1DArray.GetUpperBound(0); i++)
         my1DArray.SetValue(i + 1, i);
-        
+
       // Displays the values of the Array.
       Console::WriteLine("The one-dimensional Array contains the following values:");
       PrintValues(my1DArray);
     }
-    
+
   private:
     template<typename T>
     static void PrintValues(const Array<T>& myArr)  {

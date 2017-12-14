@@ -32,10 +32,10 @@ void StringReader::Close() {
 int32 StringReader::Peek() const {
   if (this->closed)
     throw ObjectDisposedException(_caller);
-    
+
   if (this->finished)
     return -1;
-    
+
   return Convert::ToInt32(this->enumerator.Current());
 }
 

@@ -90,7 +90,7 @@ bool Char::IsWhiteSpace(const String& value, int32 index) {
 char32 Char::Parse(const String& value) {
   if (value.Length() != 1)
     throw FormatException(_caller);
-    
+
   return value[0];
 }
 

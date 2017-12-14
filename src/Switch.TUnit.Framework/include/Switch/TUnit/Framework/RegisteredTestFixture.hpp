@@ -9,7 +9,7 @@ namespace Switch {
     namespace Framework {
       struct RegisteredTestFixture : public object {
         RegisteredTestFixture(const string& name, refptr<TUnit::Framework::TestFixture> testFixture) : name(name), testFixture(testFixture) {}
-        
+
       private:
         friend class UnitTest;
         string name;

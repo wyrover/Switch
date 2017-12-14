@@ -27,7 +27,7 @@ IPEndPoint::IPEndPoint(const IPAddress& address, int32 port) {
 
 refptr<EndPoint> IPEndPoint::Create(const SocketAddress& socketAddress) const {
   refptr<IPEndPoint> endPoint = ref_new<IPEndPoint>(0, 0);
-  
+
   endPoint->addressFamily = socketAddress.GetAddressFamily();
   endPoint->port = IPAddress::NetworkToHostOrder(BitConverter::ToUInt16(socketAddress.bytes, 2));
   endPoint->address = IPAddress(socketAddress[4], socketAddress[5], socketAddress[6], socketAddress[7]);
@@ -45,7 +45,7 @@ SocketAddress IPEndPoint::Serialize() const {
     socketAddress[index++] = b;
   for (byte b : addressBytes)
     socketAddress[index++] = b;
-    
+
   if (AddressFamily != Sockets::AddressFamily::InterNetwork) {
     Array<byte> scopeIdBytes = BitConverter::GetBytes(IPAddress::HostToNetworkOrder(this->address.ScopeId));
     for (byte b : scopeIdBytes)
@@ -62,7 +62,7 @@ void IPEndPoint::SetAddress(const IPAddress& address) {
 void IPEndPoint::SetPort(int32 port) {
   if (port < MinPort || port > MaxPort)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   this->port = port;
 }
 

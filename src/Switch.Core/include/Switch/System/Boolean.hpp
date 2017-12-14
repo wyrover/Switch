@@ -49,32 +49,32 @@ namespace Switch {
       /// @brief Create a new instance of struct Boolean
       /// @remarks Boolean is initialized by default to false.
       Boolean() {}
-      
+
       /// @brief Create a new instance of struct Boolean
       /// @param value Value for the Boolean. true or false.
       Boolean(int32 value) : value(value != 0) {} // int value instead of bool to avoid too many implicit casts (int vs bool in c++)
-      
+
       /// @cond
       Boolean(const Boolean& value) : value(value.value) {}
       virtual Boolean& operator =(const Boolean& value) {this->value = value; return *this;}
       virtual Boolean& operator =(int32 value) {this->value = value != 0; return *this;}
       operator bool() const { return this->value; }
-      
+
       friend std::ostream& operator<<(std::ostream& output, const Boolean& value);
       /// @endcond
-      
+
       /// @brief Represent false bool value
       static constexpr bool False = false;
-      
+
       /// @brief Represent true bool value
       static constexpr bool True = true;
-      
+
       /// @brief Returns a string that represents true value.
       static const String& FalseString();
-      
+
       /// @brief Returns a string that represents false value.
       static const String& TrueString();
-      
+
       /// @brief Compares this instance to a specified Boolean Object and returns an indication of their relative values.
       /// @param value An Boolean Object to compare with this instance.
       /// @return Int32 A 32-bit signed integer that indicates the relative order of the Objects being compared. The return value has these meanings:
@@ -84,7 +84,7 @@ namespace Switch {
       /// | Zero              | This instance and value are equal (either both are true or both are false). |
       /// | Greater than zero | This instance is true and value is false.  -or- value is null reference.    |
       int32 CompareTo(const Boolean& value) const {return this->value - value.value;}
-      
+
       /// @brief Compares the current instance with another Object of the same type.
       /// @param obj An Object to compare with this instance.
       /// @return Int32 A 32-bit signed integer that indicates the relative order of the Objects being compared. The return value has these meanings:
@@ -97,46 +97,46 @@ namespace Switch {
         if (!is<Boolean>(obj)) return 1;
         return CompareTo(static_cast<const Boolean&>(obj));
       }
-      
+
       /// @brief Determines whether this instance of Boolean and a specified Object, which must also be a Boolean Object, have the same value.
       /// @param value The Boolean to compare with the current Object.
       /// @return Boolean true if the specified value is equal to the current Object. otherwise, false.
       bool Equals(bool value) const { return this->value == value; }
-      
+
       /// @brief Determines whether this instance of Boolean and a specified Object, which must also be a Boolean Object, have the same value.
       /// @param obj The Object to compare with the current Object.
       /// @return Boolean true if the specified Object is equal to the current Object. otherwise, false.
       bool Equals(const Object& obj) const override {return is<Boolean>(obj) && Equals(((const Boolean&)obj).value);}
-      
+
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current Object.
       int32 GetHashCode() const override { return this->value; }
-      
+
       /// @brief Returns the TypeCode for this instance.
       /// @return TypeCode The enumerated constant that is the TypeCode of the class or value type that implements this interface.
       TypeCode GetTypeCode() const override {return TypeCode::Boolean;}
-      
+
       /// @brief Converts the specified string representation of a logical value to its Boolean equivalent.
       /// @param str A string containing the value to convert.
       /// @return Boolean true if str is equivalent to TrueString; otherwise, false.
       /// @exception ArgumentException str is not equivalent to TrueString or FalseString.
       static bool Parse(const String& str);
-      
+
       /// @brief Converts the specified string representation of a logical value to its Boolean equivalent.
       /// @param str A string containing the value to convert.
       /// @param result When this method returns, if the conversion succeeded, contains true if str is equivalent to TrueString or false if str is equivalent to FalseString. If the conversion failed, contains false. The conversion fails if value is null reference or is not equivalent to either TrueString or FalseString. This parameter is passed uninitialized.
       /// @return Boolean true if value was converted successfully; otherwise, false.
       static bool TryParse(const String& str, bool& result);
-      
+
       /// @brief Returns a string that represents the current Boolean.
       /// @return const string A string that represents the current Boolean.
       String ToString() const override;
-      
+
     protected:
       /// @cond
       bool value = false;
       /// @endcond
-      
+
     private:
       friend class Convert;
       bool ToBoolean(const IFormatProvider& provider) const override {return this->value;}

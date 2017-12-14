@@ -16,7 +16,7 @@ namespace Examples {
       // Royalty Percent is nullable.
       Nullable<int> royaltyPercent;
     };
-    
+
     // The main entry point for the application.
     static void Main(const Array<string>& args) {
       // Declare and initialize the titleAuthor array.
@@ -25,17 +25,17 @@ namespace Examples {
       titleAuthors[0].titleId = "PS3333";
       titleAuthors[0].authorORD = 1;
       titleAuthors[0].royaltyPercent = 100;
-      
+
       titleAuthors[1].authorId = "213-46-8915";
       titleAuthors[1].titleId = "BU1032";
       titleAuthors[1].authorORD = null;
       titleAuthors[1].royaltyPercent = null;
-      
+
       titleAuthors[2].authorId = "672-71-3249";
       titleAuthors[2].titleId = "TC7777";
       titleAuthors[2].authorORD = null;
       titleAuthors[2].royaltyPercent = 40;
-      
+
       // Display the values of the titleAuthor array elements, and
       // display a legend.
       Display("Title Authors Table", titleAuthors);
@@ -43,7 +43,7 @@ namespace Examples {
       Console::WriteLine("An Author ORD of -1 means no value is defined.");
       Console::WriteLine("A Royalty % of 0 means no value is defined.");
     }
-    
+
     // Display the values of the titleAuthor array elements.
     static void Display(const string& title, const Array<TitleAuthor>& titleAuthors) {
       Console::WriteLine("*** {0} ***", title);

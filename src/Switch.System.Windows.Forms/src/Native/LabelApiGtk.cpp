@@ -19,7 +19,7 @@ namespace Native {
       this->RegisterEvent();
     }
     void Text(const string& text) override {this->set_label(text.c_str());}
-    
+
   private:
     constexpr static float textAlignLeft = 0;
     constexpr static float textAlignMidle = 0.5;

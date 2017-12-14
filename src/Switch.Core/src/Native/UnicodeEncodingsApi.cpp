@@ -91,7 +91,7 @@ std::string Native::UnicodeEncodingsApi::UTF8::Encode(uint32 code) {
 int Native::UnicodeEncodingsApi::UTF8::GetByteCount(uint32 code) {
   if (!UnicodeCharactersApi::ValidateCodePoint(code))
     return 0;
-    
+
   if (code < 0x80) return 1;
   if (code < 0x800) return 2;
   if (code < 0x10000) return 3;
@@ -101,7 +101,7 @@ int Native::UnicodeEncodingsApi::UTF8::GetByteCount(uint32 code) {
 int Native::UnicodeEncodingsApi::UTF8::Encode(uint32 code, byte bytes[]) {
   if (!UnicodeCharactersApi::ValidateCodePoint(code))
     return 0;
-    
+
   if (code < 0x80) {
     bytes[0] = static_cast<byte>(code);
     return 1;
@@ -126,22 +126,22 @@ int Native::UnicodeEncodingsApi::UTF8::Encode(uint32 code, byte bytes[]) {
 System::Array<byte> Native::UnicodeEncodingsApi::UTF8::ToBytes(uint32 code) {
   if (!UnicodeCharactersApi::ValidateCodePoint(code))
     return {};
-    
+
   if (code < 0x80)
     return System::Array<byte> {static_cast<byte>(code)};
-    
+
   if (code < 0x800)
     return System::Array<byte> {static_cast<byte>((code >> 6) | 0xc0), static_cast<byte>((code & 0x3f) | 0x80)};
-    
+
   if (code < 0x10000)
     return System::Array<byte> {static_cast<byte>((code >> 12) | 0xe0), static_cast<byte>(((code >> 6) & 0x3f) | 0x80), static_cast<byte>((code & 0x3f) | 0x80)};
-    
+
   return System::Array<byte> {static_cast<byte>((code >> 18) | 0xf0), static_cast<byte>(((code >> 12) & 0x3f) | 0x80), static_cast<byte>(((code >> 6) & 0x3f) | 0x80), static_cast<byte>((code & 0x3f) | 0x80)};
 }
 
 int Native::UnicodeEncodingsApi::UTF8::Encode(uint32 code, std::string& utf8_encoding) {
   if (!UnicodeCharactersApi::ValidateCodePoint(code)) return 0;
-  
+
   if (code < 0x80) {
     utf8_encoding.push_back(static_cast<byte>(code));
     return 1;
@@ -184,9 +184,9 @@ static void PushLittleEndian(uint16 val, byte& b1, byte& b2) {
 int Native::UnicodeEncodingsApi::UTF16::Encode(uint32 code, byte bytes[], bool bigEndian) {
   if (!UnicodeCharactersApi::ValidateCodePoint(code))
     return 0;
-    
+
   BytePush pushFunc = bigEndian ? &PushBigEndian : &PushLittleEndian;
-  
+
   if (code > 0xFFFF) {
     uint16 high = static_cast<uint16>((code >> 10)   + 0xD7C0u);
     uint16 low = static_cast<uint16>((code & 0x3ff) + 0xDC00u);
@@ -194,7 +194,7 @@ int Native::UnicodeEncodingsApi::UTF16::Encode(uint32 code, byte bytes[], bool b
     pushFunc(low, bytes[2], bytes[3]);
     return 4;
   }
-  
+
   pushFunc(static_cast<uint16>(code), bytes[0], bytes[1]);
   return 2;
 }
@@ -213,11 +213,11 @@ static uint16 MakeWordLittleEndian(byte byte1, byte byte2) {
 
 int Native::UnicodeEncodingsApi::UTF16::Decode(const byte* bytes, uint32 size, bool bigEndian, uint32& codePoint) {
   if (size < 2) return 0;
-  
+
   MakeWord makeWordFunc = bigEndian ? &MakeWordBigEndian : &MakeWordLittleEndian;
-  
+
   uint16 word = makeWordFunc(bytes[0], bytes[1]);
-  
+
   if (word >= 0xD800 && word <= 0xDBFF) { // 4 bytes code point
     if (size < 4) return 0;
     codePoint = ((word - 0xD800) << 10) + 0x10000;
@@ -232,17 +232,17 @@ int Native::UnicodeEncodingsApi::UTF16::Decode(const byte* bytes, uint32 size, b
 
 int Native::UnicodeEncodingsApi::UTF16::GetLength(const byte* bytes, uint32 nb_bytes, bool bigEndian) {
   MakeWord makeWordFunc = bigEndian ? &MakeWordBigEndian : &MakeWordLittleEndian;
-  
+
   uint32 nb_code_points = 0;
   for (std::vector<byte>::size_type i = 0; i < nb_bytes; i += 2) {
     if (i + 1 >= nb_bytes)
       return nb_code_points;
-      
+
     uint16 word = makeWordFunc(bytes[i], bytes[i + 1]);
     if (word < 0xD800 || word > 0xDBFF)
       nb_code_points += 1;
   }
-  
+
   return nb_code_points;
 }
 

@@ -16,7 +16,7 @@ namespace Examples {
       Console::WriteLine("Green = {0}", color.G);
       Console::WriteLine("Blue = {0}", color.B);
       Console::WriteLine();
-      
+
       color = SystemColors::ActiveCaptionText;
       Console::WriteLine("color = {0}", color);
       Console::WriteLine("Argb = 0x{0:X}", color.ToArgb());

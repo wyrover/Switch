@@ -11,10 +11,10 @@ namespace Examples {
     static void Main() {
       // Create a c++ native array.
       string fruits[] = { "apple", "passionfruit", "banana", "mango", "orange", "blueberry", "grape", "strawberry" };
-      
+
       // transform c++ aray to Enumerable and call Where method.
       refptr<IEnumerable<string>> query = Enumerable::AsEnumerable(fruits)->Where(_delegate(string fruit) { return fruit.Contains("o");});
-      
+
       // Display the output.
       Console::WriteLine("query = {{{0}}}", string::Join(", ", *query));
     }

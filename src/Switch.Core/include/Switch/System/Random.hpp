@@ -32,23 +32,23 @@ namespace Switch {
     public:
       /// @brief Initializes a new instance of the Random class, using a time-dependent default seed value
       Random();
-      
+
       /// @brief Initializes a new instance of the Random class, using a time-dependent default seed value.
       /// @param seed A number used to calculate a starting value for the pseudo-random number sequence. If a negative number is specified, the absolute value of the number is used.
       /// @exception OverflowException seed is Int32::MinValue, which causes an overflow when its absolute value is calculated.
       Random(int32 seed);
-      
+
       /// @brief Returns a nonnegative random number.
       /// @return Int32 A 32-bit signed integer greater than or equal to zero and less than Int32::MaxValue
       virtual int32 Next() const {return Next(0, Int32::MaxValue);}
-      
+
       /// @brief Returns a nonnegative random number less than the specified maximum.
       /// @param maxValue The exclusive upper bound of the random number to be generated. maxValue must be greater than or equal to zero.
       /// @return Int32 A 32-bit signed integer greater than or equal to zero and less than maxValue
       /// @exception ArgumentOutOfRangeException maxValue is less than zero.
       /// @remarks The Next(Int32) overload returns random integers that range from 0 to maxValue – 1. However, if maxValue is 0, the method returns 0.
       virtual int32 Next(int32 maxValue) const {return Next(0, maxValue);}
-      
+
       /// @brief Returns a random number within a specified range.
       /// @param minValue The inclusive lower bound of the random number returned
       /// @param maxValue The exclusive upper bound of the random number returned. maxValue must be greater than or equal to minValue.
@@ -57,7 +57,7 @@ namespace Switch {
       /// @remarks The Next(iInt32, int32) overload returns random integers that range from minValue to maxValue – 1. However, if maxValue equals minValue, the method returns minValue.
       /// @remarks Unlike the other overloads of the Next method, which return only non-negative values, this method can return a negative random integer.
       virtual int32 Next(int32 minValue, int32 maxValue) const;
-      
+
       /// @brief Fills the elements of a specified array of bytes with random numbers.
       /// @param buffer An array of bytes to contain random numbers.
       /// @exception ArgumentNullException buffer is null.
@@ -66,12 +66,12 @@ namespace Switch {
         for (int32 i = 0; i < buffer.Length; i++)
           buffer[i] = Convert::ToByte(Next(0, Byte::MaxValue + 1));
       }
-      
+
       /// @brief Returns a random number between 0.0 and 1.0
       /// @return Double A double-precision floating point number greater than or equal to 0.0, and less than 1.0.
       /// @remarks This method is the public version of the protected method, Sample
       virtual double NextDouble() const {return Sample();}
-      
+
     protected:
       /// @brief Returns a random number between 0.0 and 1.0
       /// @return Double A double-precision floating point number greater than or equal to 0.0, and less than 1.0.

@@ -13,16 +13,16 @@ namespace Examples {
       names.Add("Alfred");
       names.Add("Tim");
       names.Add("Richard");
-      
+
       // Display the contents of the list using the Print method.
       names.ForEach(Print);
-      
+
       // The following demonstrates the lambda of C++ to display the contents of the list to the console.
       names.ForEach(_delegate(const string & name) {
         Console::WriteLine(name);
       });
     }
-    
+
   private:
     static void Print(const string& s) {
       Console::WriteLine(s);

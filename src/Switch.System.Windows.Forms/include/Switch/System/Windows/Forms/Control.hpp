@@ -58,36 +58,36 @@ namespace Switch {
               ChangeParent(value);
               this->System::Collections::Generic::List<ref<Control>>::Add(value);
             }
-            
+
             void Insert(int32 index, const ref<Control>& value) override {
               ChangeParent(value);
               this->System::Collections::Generic::List<ref<Control>>::Insert(index, value);
             }
-            
+
             bool Remove(const ref<Control>& value) override {
               RemoveParent(value);
               return this->System::Collections::Generic::List<ref<Control>>::Remove(value);
             }
-            
+
             void RemoveAt(int32 index) override {
               RemoveParent((*this)[index]);
               this->System::Collections::Generic::List<ref<Control>>::RemoveAt(index);
             }
-            
+
           private:
             friend Control;
             ControlCollection(ref<Control> controlContainer) : controlContainer(controlContainer) {}
-            
+
             void ChangeParent(ref<Control> value);
-            
+
             void RemoveParent(ref<Control> value);
             ref<Control> controlContainer;
           };
-          
+
           /// @brief Initializes a new instance of the Control class with default settings.
           /// @remarks The Control class is the base class for all controls used in a Windows Forms application. Because this class is not typically used to create an instance of the class, this constructor is typically not called directly but is instead called by a derived class.
           Control();
-          
+
           /// @brief Initializes a new instance of the Control class as a child control, with specific text.
           /// @param parent The Control to be the parent of the control.
           /// @param text The text displayed by the control.
@@ -97,7 +97,7 @@ namespace Switch {
             this->Parent = parent;
             this->Text = text;
           }
-          
+
           /// @brief Initializes a new instance of the Control class with specific text, size, and location.
           /// @param text The text displayed by the control.
           /// @param left The X position of the control, in pixels, from the left edge of the control's container. The value is assigned to the Left property.
@@ -111,7 +111,7 @@ namespace Switch {
             this->Text = text;
             this->Bounds = System::Drawing::Rectangle(left, top, width, height);
           }
-          
+
           /// @brief Initializes a new instance of the Control class as a child control, with specific text, size, and location.
           /// @param parent The Control to be the parent of the control.
           /// @param text The text displayed by the control.
@@ -126,7 +126,7 @@ namespace Switch {
             this->Parent = parent;
             this->Text = text;
           }
-          
+
           /// @cond
           Control(const Control& control) : backColor(control.backColor), backBrush(control.backBrush), clientSize(control.clientSize), controls(control.controls), defaultBackColor(control.defaultBackColor),
             defaultForeColor(control.defaultForeColor), enabled(control.enabled), foreColor(control.foreColor), /*handle(control.handle),*/ location(control.location), messageActions(control.messageActions),
@@ -138,7 +138,7 @@ namespace Switch {
               this->DestroyHandle();
           }
           /// @endcond
-          
+
           /// @brief Gets or sets the background color for the control.
           /// @param color A Color that represents the background color of the control. The default is the value of the DefaultBackColor property.
           /// @remarks The BackColor property does not support transparent colors unless the SupportsTransparentBackColor value of System::Windows::Forms::ControlStyles is set to true.
@@ -152,7 +152,7 @@ namespace Switch {
               }
             }
           };
-          
+
           /// @brief Gets the distance, in pixels, between the bottom edge of the control and the top edge of its container's client area.
           /// @param value An Int32 representing the distance, in pixels, between the bottom edge of the control and the top edge of its container's client area.
           /// @remarks The value of this property is equal to the sum of the Top property value, and the Height property value.
@@ -160,7 +160,7 @@ namespace Switch {
           _property<int32, _readonly> Bottom {
             _get{ return this->location.Y() + this->size.Height(); }
           };
-          
+
           /// @brief Gets or sets the size and location of the control including its nonclient elements, in pixels, relative to the parent control.
           /// @param value A Rectangle in pixels relative to the parent control that represents the size and location of the control including its nonclient elements.
           /// @remarks The bounds of the control include the nonclient elements such as scroll bars, borders, title bars, and menus. The SetBoundsCore method is called to set the Bounds property. The Bounds property is not always changed through its set method so you should override the SetBoundsCore method to ensure that your code is executed when the Bounds property is set.
@@ -171,7 +171,7 @@ namespace Switch {
               this->Size(value.Size());
             }
           };
-          
+
           _property<System::Drawing::Size> ClientSize {
             _get{ return this->clientSize; },
             _set{
@@ -181,7 +181,7 @@ namespace Switch {
               }
             }
           };
-          
+
           /// @brief Gets the collection of controls contained within the control.
           /// @param controls A Control.ControlCollection representing the collection of controls contained within the control.
           /// @remarks A Control can act as a parent to a collection of controls. For example, when several controls are added to a Form, each of the controls is a member of the Control.ControlCollection assigned to the Controls property of the form, which is derived from the Control class.
@@ -191,10 +191,10 @@ namespace Switch {
           _property<ControlCollection&, _readonly> Controls {
             _get->ControlCollection& {return this->controls; }
           };
-          
+
           static _property<System::Drawing::Color, _readonly> DefaultBackColor;
           static _property<System::Drawing::Color, _readonly> DefaultForeColor;
-          
+
           _property<bool> Enabled{
             _get {return this->enabled; },
             _set {
@@ -204,7 +204,7 @@ namespace Switch {
               }
             }
           };
-          
+
           _property<System::Drawing::Color> ForeColor {
             _get{ return (!this->foreColor.HasValue && this->parent != null) ? this->parent().ForeColor : this->foreColor.GetValueOrDefault(DefaultForeColor); },
             _set {
@@ -214,7 +214,7 @@ namespace Switch {
               }
             }
           };
-          
+
           /// @brief Gets the window handle that the control is bound to.
           /// @return intptr An IntPtr that contains the window handle (HWND) of the control.
           /// @remarks The value of the Handle property is a Windows HWND. If the handle has not yet been created, referencing this property will force the handle to be created.
@@ -225,7 +225,7 @@ namespace Switch {
               return this->handle;
             }
           };
-          
+
           /// @brief Gets or sets the height of the control.
           /// @return int32 The height of the control in pixels.
           /// @remarks Changes made to the Height and Top property values cause the Bottom property value of the control to change.
@@ -234,16 +234,16 @@ namespace Switch {
             _get { return this->size.Height(); },
             _set { this->Size(System::Drawing::Size(this->size.Width(), value)); }
           };
-          
+
           _property<bool, _readonly> IsHandleCreated {
             _get { return this->handle != 0; }
           };
-          
+
           _property<int32> Left {
             _get{ return this->location.X(); },
             _set{ this->Location(System::Drawing::Point(value, this->location.Y())); }
           };
-          
+
           /// @brief Gets or sets the coordinates of the upper-left corner of the control relative to the upper-left corner of its container.
           /// @return System::Drawing::Point The Point that represents the upper-left corner of the control relative to the upper-left corner of its container.
           /// @remarks Because the Point class is returned by value, meaning accessing the property returns a copy of the upper-left point of the control. So, adjusting the X or Y properties of the Point returned from this property will not affect the Left, Right, Top, or Bottom property values of the control. To adjust these properties set each property value individually, or set the Location property with a new Point.
@@ -257,7 +257,7 @@ namespace Switch {
               }
             }
           };
-          
+
           /// @brief Gets or sets the name of the control.
           /// @return string The name of the control. The default is an empty string ("").
           /// @remarks The Name property can be used at run time to evaluate the object by name rather than type and programmatic name.
@@ -270,7 +270,7 @@ namespace Switch {
               }
             }
           };
-          
+
           /// @brief Gets or sets the parent container of the control.
           /// @return Control A Control that represents the parent or container control of the control.
           /// @remarks Setting the Parent property value to null removes the control from the Control.ControlCollection of its current parent control.
@@ -278,11 +278,11 @@ namespace Switch {
             _get {return this->parent;},
             _set {this->SetParent(value);}
           };
-          
+
           _property<int32, _readonly> Right{
             _get{ return this->location.X() + this->size.Width(); }
           };
-          
+
           /// @brief Gets or sets the height and width of the control.
           /// @return System::Drawing::Size The Size that represents the height and width of the control in pixels.
           /// @remarks Because the Size class is returned by value, meaning accessing the property returns a copy of the size of the control. So, adjusting the Width or Height properties of the Size returned from this property will not affect the Width or Height of the control. To adjust the Width or Height of the control, you must set the control's Width or Height property, or set the Size property with a new Size.
@@ -296,7 +296,7 @@ namespace Switch {
               }
             }
           };
-          
+
           _property<bool> TabStop {
             _get {return this->tabStop;},
             _set {
@@ -306,7 +306,7 @@ namespace Switch {
               }
             }
           };
-          
+
           /// @brief Gets or sets the text associated with this control.
           /// @return string The text associated with this control.
           /// @remarks The Text property of the control is used differently by each derived class. For example the Text property of a Form is displayed in the title bar at the top of the form, is fairly small in character count, and usually displays the application or document name. However, the Text property of a RichTextBox can be large and can include numerous nonvisual characters used to format the text. For example, the text displayed in a RichTextBox can be formatted by adjusting the Font properties, or by the addition of spaces or tab characters to align the text.
@@ -320,12 +320,12 @@ namespace Switch {
               }
             }
           };
-          
+
           _property<int32> Top {
             _get{ return this->location.Y(); },
             _set{ this->Location(System::Drawing::Point(this->location.X(), value)); }
           };
-          
+
           _property<bool> Visible {
             _get { return this->visible; },
             _set {
@@ -335,16 +335,16 @@ namespace Switch {
               }
             }
           };
-          
+
           _property<int32> Width {
             _get { return this->size.Width(); },
             _set { this->Size(System::Drawing::Size(value, this->size.Height())); }
           };
-          
+
           void CreateControl();
-          
+
           bool Focus();
-          
+
           static ref<Control> FromHandle(intptr handle) {
             try {
               return handles[handle];
@@ -352,21 +352,21 @@ namespace Switch {
               return ref<Control>::Null();
             }
           }
-          
+
           void Invalidate() { Invalidate(false); }
-          
+
           void Invalidate(bool invalidateChildren);
-          
+
           void Invalidate(const System::Drawing::Rectangle& rect) { Invalidate(rect, false); }
-          
+
           void Invalidate(const System::Drawing::Rectangle& rect, bool invalidateChildren);
-          
+
           System::Drawing::Point PointToClient(System::Drawing::Point point) const;
-          
+
           System::Drawing::Point PointToScreen(System::Drawing::Point point) const;
-          
+
           bool PreProcessMessage(const Message& msg);
-          
+
           /// @brief Sets the bounds of the control to the specified location and size.
           /// @param x The new Left property value of the control.
           /// @param y The new Top property value of the control.
@@ -376,9 +376,9 @@ namespace Switch {
             this->Location = System::Drawing::Point(x, y);
             this->Size = System::Drawing::Size(width, height);
           }
-          
+
           virtual void WndProc(Message& message);
-          
+
           EventHandler BackColorChanged;
           EventHandler Click;
           EventHandler ClientSizeChanged;
@@ -410,20 +410,20 @@ namespace Switch {
           EventHandler TabStopChanged;
           EventHandler TextChanged;
           EventHandler VisibleChanged;
-          
+
         protected:
           _property<System::Drawing::Size, _readonly> DefaultSize {
             _get { return this->GetDefaultSize(); }
           };
-          
+
           virtual void CreateHandle();
-          
+
           virtual void DefWndProc(Message& message);
-          
+
           virtual void DestroyHandle();
-          
+
           virtual System::Drawing::Size GetDefaultSize() const { return System::Drawing::Size(0, 0); }
-          
+
           virtual void SetParent(ref<Control> parent) {
             if (this->parent != parent) {
               if (parent == null && this->parent != null)
@@ -433,75 +433,75 @@ namespace Switch {
               this->OnParentChanged(EventArgs::Empty());
             }
           }
-          
+
           virtual bool GetStyle(ControlStyles flag) { return ((int32)this->style & (int32)flag) == (int32)flag; }
-          
+
           virtual void SetStyle(ControlStyles flag, bool value) { this->style = value ? (ControlStyles)((int32)this->state | (int32)flag) : (ControlStyles)((int32)this->style & ~(int32)flag); }
-          
+
           virtual void OnCreateControl() {}
-          
+
           virtual void OnBackColorChanged(const EventArgs& e);
-          
+
           virtual void OnClick(const EventArgs& e) { this->Click(*this, e); }
-          
+
           virtual void OnClientSizeChanged(const EventArgs& e);
-          
+
           virtual void OnDoubleClick(const EventArgs& e) { this->DoubleClick(*this, e); }
-          
+
           virtual void OnEnabledChanged(const EventArgs& e);
-          
+
           virtual void OnForeColorChanged(const EventArgs& e);
-          
+
           virtual void OnHandleCreated(const EventArgs& e) { this->HandleCreated(*this, e); }
-          
+
           virtual void OnHandleDestroyed(const EventArgs& e) { this->HandleDestroyed(*this, e); }
-          
+
           virtual void OnKeyDown(KeyEventArgs& e) { this->KeyDown(*this, e); }
-          
+
           virtual void OnKeyPress(KeyPressEventArgs& e) { this->KeyPress(*this, e); }
-          
+
           virtual void OnKeyUp(KeyEventArgs& e) { this->KeyUp(*this, e); }
-          
+
           virtual void OnInvalidated(const InvalidateEventArgs& e) { this->Invalidated(*this, e); }
-          
+
           virtual void OnLocationChanged(const EventArgs& e);
-          
+
           virtual void OnLostFocus(const EventArgs& e) { this->LostFocus(*this, e); }
-          
+
           virtual void OnMouseCaptureChanged(const EventArgs& e) { this->MouseCaptureChanged(*this, e); }
-          
+
           virtual void OnMouseClick(const MouseEventArgs& e) { this->MouseClick(*this, e); }
-          
+
           virtual void OnMouseDoubleClick(const MouseEventArgs& e) { this->MouseDoubleClick(*this, e); }
-          
+
           virtual void OnMouseDown(const MouseEventArgs& e) { this->MouseDown(*this, e); }
-          
+
           virtual void OnMouseEnter(const EventArgs& e) { this->MouseEnter(*this, e); }
-          
+
           virtual void OnMouseHover(const EventArgs& e) { this->MouseHover(*this, e); }
-          
+
           virtual void OnMouseLeave(const EventArgs& e) { this->MouseLeave(*this, e); }
-          
+
           virtual void OnMouseMove(const MouseEventArgs& e) { this->MouseMove(*this, e); }
-          
+
           virtual void OnMouseUp(const MouseEventArgs& e) { this->MouseUp(*this, e); }
-          
+
           virtual void OnMouseWheel(const MouseEventArgs& e) { this->MouseWheel(*this, e); }
-          
+
           virtual void OnNameChanged(const EventArgs& e) { this->NameChanged(*this, e); }
-          
+
           virtual void OnPaint(PaintEventArgs& e) { this->Paint(*this, e); }
-          
+
           virtual void OnParentChanged(const EventArgs& e);
-          
+
           virtual void OnSizeChanged(const EventArgs& e);
-          
+
           virtual void OnTabStopChanged(const EventArgs& e);
-          
+
           virtual void OnTextChanged(const EventArgs& e);
-          
+
           virtual void OnVisibleChanged(const EventArgs& e);
-          
+
           /// @cond
           Nullable<System::Drawing::Color> backColor;
           System::Drawing::SolidBrush backBrush {System::Drawing::SystemColors::Control};
@@ -524,7 +524,7 @@ namespace Switch {
           string text;
           bool visible = true;
           /// @endcond
-          
+
         private:
           static bool ReflectMessage(intptr hWnd, Message& m);
           intptr SendMessage(int32 msg, intptr wparam, intptr lparam) const;
@@ -572,16 +572,16 @@ namespace Switch {
           void WmUpdateUIState(Message& message);
           void WmWindowPosChanged(Message& message);
           void WmWindowPosChanging(Message& message);
-          
+
           bool GetState(State flag) const { return ((int32)this->state & (int32)flag) == (int32)flag; }
           void SetState(State flag, bool value) { this->state = value ? (State)((int32)this->state | (int32)flag) : (State)((int32)this->state & ~(int32)flag); }
-          
+
           enum class State {
             Empty = 0,
             DoubleClickFired = 0b1,
             MouseEntered = 0x10,
           };
-          
+
           static ref<Control> controlEntered;
           bool setFocusAfterHandleCreated = false;
           bool setClientSizeAfterHandleCreated = false;

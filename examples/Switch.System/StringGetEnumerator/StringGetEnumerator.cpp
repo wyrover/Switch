@@ -6,12 +6,12 @@ namespace Examples {
   class Program {
     static void EnumerateAndDisplay(const string& phrase) {
       Console::WriteLine("The characters in the string \"{0}\" are:", phrase);
-      
+
       int charCount = 0;
       int controlChars = 0;
       int alphanumeric = 0;
       int punctuation = 0;
-      
+
       for (char32 ch : phrase) {
         Console::Write("'{0}' ", (! Char::IsControl(ch) ? Char(ch).ToString() : "0x" + UInt16(Convert::ToUInt16(ch)).ToString("%04X")));
         if (Char::IsLetterOrDigit(ch))
@@ -22,13 +22,13 @@ namespace Examples {
           punctuation++;
         charCount++;
       }
-      
+
       Console::WriteLine("\n   Total characters:        {0,3}", charCount);
       Console::WriteLine("   Alphanumeric characters: {0,3}", alphanumeric);
       Console::WriteLine("   Punctuation characters:  {0,3}", punctuation);
       Console::WriteLine("   Control Characters:      {0,3}\n", controlChars);
     }
-    
+
   public:
     // The main entry point for the application.
     static void Main() {

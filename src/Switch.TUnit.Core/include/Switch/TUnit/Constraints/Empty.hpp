@@ -19,9 +19,9 @@ namespace Switch {
       class _export Empty : public Constraint {
       public:
         Empty() {}
-        
+
         string ToString() const override {return "<empty>";}
-        
+
       private:
         bool Verify(const ConstraintValue& actual) const override {
           if (is<string>(actual) && string::IsNullOrEmpty(as<string>(actual)))

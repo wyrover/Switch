@@ -25,7 +25,7 @@ namespace Switch {
         /// @exception ArgumentException name is longer than 128 characters
         /// @exception IO::IOException An Io error occurred.
         Mutex() {this->WaitOne();}
-        
+
         /// @brief Initializes a new instance of the System::Threading::Mutex class with a Boolean
         /// value that indicates whether the calling thread should have initial ownership
         /// of the mutex.
@@ -38,7 +38,7 @@ namespace Switch {
           if (initiallyOwned)
             this->WaitOne();
         }
-        
+
         /// @brief Initializes a new instance of the System::Threading::Mutex class with a Boolean
         /// value that indicates whether the calling thread should have initial ownership
         /// of the mutex, and a string that is the name of the mutex.
@@ -49,7 +49,7 @@ namespace Switch {
         /// @exception ArgumentException name is longer than 128 characters
         /// @exception IO::IOException An Io error occurred.
         Mutex(bool initiallyOwned, const String& name);
-        
+
         /// @brief Initializes a new instance of the System::Threading::Mutex class with a Boolean
         /// value that indicates whether the calling thread should have initial ownership
         /// of the mutex, a string that is the name of the mutex, and a Boolean value
@@ -61,7 +61,7 @@ namespace Switch {
         /// @exception AgumentException name is longer than 128 characters
         /// @exception IO::IOException An Io error occurred.
         Mutex(bool initiallyOwned, const String& name, bool& createdNew);
-        
+
         /// @cond
         Mutex(const Mutex& mutex) : mutex(mutex.mutex), name(mutex.name) {}
         ~Mutex() {Close();}
@@ -71,10 +71,10 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-        
+
         /// @brief When overridden in a derived class, releases all resources held by the current System::Threading::WaitHandle.
         void Close() override;
-        
+
         /// @brief Opens an existing named mutex.
         /// @param name The name of a system-wide named mutex object.
         /// @return A System::Threading::Mutex object that represents a named system mutex.
@@ -82,7 +82,7 @@ namespace Switch {
         /// @exception ArgumentException name is longer than 128 characters
         /// @exception IO::IOException A Win32 error occurred.
         static Mutex OpenExisting(const String& name);
-        
+
         /// @brief Releases the System::Threading::Mutex once.
         /// @param name The name of a system-wide named mutex object.
         /// @return A System::Threading::Mutex object that represents a named system mutex.
@@ -92,29 +92,29 @@ namespace Switch {
             throw ObjectDisposedException(_caller);
           this->mutex->unlock();
         }
-        
+
         /// @brief Determines whether this instance and another specified Mutex object have the same value.
         /// @param value The Mutex to compare.
         /// @return bool true if the value of this instance is the same as the value of value; otherwise, false.
         bool Equals(const Mutex& value) const {return this->mutex == value.mutex && this->name == value.name;}
-        
+
         /// @brief Determines whether this instance of Mutex and a specified object, which must also be a Mutex object, have the same value.
         /// @param obj The object to compare with the current object.
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
         bool Equals(const Object& obj) const override {return is<Mutex>(obj) && Equals((const Mutex&)obj);}
-        
+
         /// @brief Opens the specified named mutex, if it already exists, and returns a value that indicates whether the operation succeeded.
         /// @param name The name of a system-wide named mutex object.
         /// @param result When this method returns, contains a Mutex object that represents the named mutex if the call succeeded, or null if the call failed. This parameter is treated as uninitialized.
         /// @return true if the named mutex was opened successfully; otherwise, false.
         static bool TryOpenExisting(const String& name, Mutex& result);
-        
+
       private:
         bool Signal() override {
           this->ReleaseMutex();
           return true;
         }
-        
+
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->mutex == null)
             throw ObjectDisposedException(_caller);
@@ -126,7 +126,7 @@ namespace Switch {
           }
           return this->mutex->try_lock_for(std::chrono::milliseconds(millisecondsTimeOut));
         }
-        
+
         refptr<std::recursive_timed_mutex> mutex = ref_new<std::recursive_timed_mutex>();
         refptr<string> name = ref_new<string>();
       };

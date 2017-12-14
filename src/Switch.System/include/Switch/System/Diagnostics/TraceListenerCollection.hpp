@@ -17,7 +17,7 @@ namespace Switch {
       class Trace;
       class TraceSource;
       /// @endcond
-      
+
       /// @brief Provides a thread-safe list of TraceListener objects.
       /// @par Library
       /// Switch.System
@@ -33,7 +33,7 @@ namespace Switch {
         TraceListenerCollection(const TraceListenerCollection& tlc) : list(tlc.list) {}
         TraceListenerCollection& operator=(const TraceListenerCollection& tlc) {this->list = tlc.list; return *this;}
         /// @endcond
-        
+
         template<typename TTraceListener>
         void Add(const TTraceListener& value) {
           _lock(this->SyncRoot()) {
@@ -42,32 +42,32 @@ namespace Switch {
             this->list.Add(value.template MemberwiseClone<TTraceListener>().template As<System::Diagnostics::TraceListener>());
           }
         }
-        
+
         void Clear() override {
           _lock(this->SyncRoot()) {
             this->list.Clear();
           }
         }
-        
+
         bool Contains(const TraceListener& value) const override {return this->IndexOf(value) != -1;}
-        
+
         void CopyTo(System::Array<refptr<TraceListener>>& array, int32 index) const {this->list.CopyTo(array, index);}
-        
+
         System::Collections::Generic::Enumerator<TraceListener> GetEnumerator() const override {
           class Enumerator : public System::Collections::Generic::IEnumerator<TraceListener>, public object {
           public:
             Enumerator(const System::Collections::Generic::Enumerator<refptr<TraceListener>>& enumerator) : enumerator(enumerator)  {}
             bool MoveNext() override {return this->enumerator.MoveNext();}
             void Reset() override {this->enumerator.Reset();}
-            
+
           private:
             const TraceListener& GetCurrent() const override {return *this->enumerator.Current();}
             System::Collections::Generic::Enumerator<refptr<TraceListener>> enumerator;
           };
-          
+
           return System::Collections::Generic::Enumerator<TraceListener>(new Enumerator(this->list.GetEnumerator()));
         }
-        
+
         int32 IndexOf(const TraceListener& value) const override {
           for (int32 index = 0; index < this->list.Count; index++) {
             if (*this->list[index] == value)
@@ -75,7 +75,7 @@ namespace Switch {
           }
           return -1;
         }
-        
+
         template<typename TTraceListener>
         void Insert(int32 index, const TTraceListener& value) {
           _lock(this->SyncRoot()) {
@@ -84,11 +84,11 @@ namespace Switch {
             this->list.Insert(index, value.template MemberwiseClone<TTraceListener>().template As<System::Diagnostics::TraceListener>());
           }
         }
-        
+
         const TraceListener& operator[](int32 index) const override {return *this->list[index];}
-        
+
         TraceListener& operator[](int32 index) override {return *this->list[index];}
-        
+
         const TraceListener& operator[](const string& name) const {
           static NullTraceListener nullTraceListener;
           for (const auto& item : this->list)
@@ -96,7 +96,7 @@ namespace Switch {
               return *item;
           return nullTraceListener;
         }
-        
+
         TraceListener& operator[](const string& name) {
           static NullTraceListener nullTraceListener;
           for (auto& item : this->list)
@@ -104,7 +104,7 @@ namespace Switch {
               return *item;
           return nullTraceListener;
         }
-        
+
         bool Remove(const TraceListener& value) override {
           _lock(this->SyncRoot()) {
             int32 index = IndexOf(value);
@@ -113,25 +113,25 @@ namespace Switch {
           }
           return true;
         }
-        
+
         void RemoveAt(int32 index) override {
           _lock(this->SyncRoot()) {
             this->list.RemoveAt(index);
           }
         }
-        
+
       protected:
         int32 GetCount() const override {return this->list.Count();}
         bool GetIsFixedSize() const override {return this->list.IsFixedSize();}
         bool GetIsReadOnly() const override {return this->list.IsReadOnly();}
         bool GetIsSynchronized() const override {return true;}
         const Object& GetSyncRoot() const override {return this->list.SyncRoot();}
-        
+
       private:
         void Add(const TraceListener& traceListener) override {throw InvalidOperationException(_caller);}
         void CopyTo(System::Array<TraceListener>& array, int32 index) const override {throw InvalidOperationException(_caller);}
         void Insert(int32 index, const TraceListener& value) override {throw InvalidOperationException(_caller);}
-        
+
         System::Collections::Generic::List<refptr<TraceListener>> list;
       };
     }

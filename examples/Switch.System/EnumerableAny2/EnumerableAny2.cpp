@@ -16,25 +16,25 @@ namespace Examples {
         this->vaccinated = pet.vaccinated;
         return *this;
       }
-      
+
       _property<int, _readonly> Age {
         _get { return this->age; }
       };
-      
+
       _property<bool, _readonly> IsVaccinated {
         _get { return this->vaccinated; }
       };
-      
+
       _property<string, _readonly> Name {
         _get { return this->name; }
       };
-      
+
     private:
       string name;
       int age = 0;
       bool vaccinated = false;
     };
-    
+
   public:
     // The main entry point for the application.
     static void Main() {
@@ -44,12 +44,12 @@ namespace Examples {
         {"Boots", 4, false},
         {"Whiskers", 1, false}
       };
-      
+
       // Determine whether any pets over age 1 are also unvaccinated.
       bool unvaccinated = pets.Any(_delegate(const Pet & pet) {
         return pet.IsVaccinated == false && pet.Age > 1;
       });
-      
+
       Console::WriteLine("There {0} unvaccinated animals over age one.", unvaccinated ? "are" : "are not any");
     }
   };

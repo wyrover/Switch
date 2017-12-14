@@ -39,62 +39,62 @@ namespace Switch {
           public:
             Format() : id(0) {}
             Format(int32 id, const string& name) : id(id), name(name) {}
-            
+
             int32 Id() const { return this->id; }
             const string& Name() const { return this->name; }
-            
+
           private:
             int32 id;
             string name;
             static System::Collections::Generic::List<Format> formats;
           };
-          
+
           static string Riff() {return "RiffAudio"; }
-          
+
           static string Palette() {return "Palette"; }
-          
+
           static string PenData() {return "PenData"; }
-          
+
           static string Rtf() {return "Rich Text Format"; }
-          
+
           static string Serializable() {return "WindowsForms10PersistentObject"; }
-          
+
           static string StringFormat() {return "System::String"; }
-          
+
           static string SymbolicLink() {return "SymbolicLink"; }
-          
+
           static string Text() {return "Text"; }
-          
+
           static string Tiff() {return "Tiff"; }
-          
+
           static string UnicodeText() {return "UnicodeText"; }
-          
+
           static string OemText() {return "OEMText"; }
-          
+
           static string Bitmap() {return "Bitmap"; }
-          
+
           static string CommaSeparatedValue() {return "Csv"; }
-          
+
           static string Dib() {return "DeviceIndependentBitmap"; }
-          
+
           static string Dif() {return "DataInterchangeFormat"; }
-          
+
           static string EnhancedMetafile() {return "EnhancedMetafile"; }
-          
+
           static string FileDrop() {return "FileDrop"; }
-          
+
           static string Html() {return "HTML Format"; }
-          
+
           static string Locale() {return "Locale"; }
-          
+
           static string MetafilePict() {return "MetaFilePict"; }
-          
+
           static string WaveAudio() {return "WaveAudio"; }
-          
+
           static refptr<DataFormats> GetFormat(const string& format) {
             return new DataFormats();
           }
-          
+
         private:
           DataFormats() {
           }

@@ -7,12 +7,12 @@ namespace Examples {
   class Account : public object {
   public:
     explicit Account(int initial) : balance(initial) {}
-    
+
     int Withdraw(int amount) {
       // This condition never is true unless the lock statement is commented out.
       if (this->balance < 0)
         throw Exception("Negative Balance", _caller);
-        
+
       // Comment out the next line to see the effect of leaving out the lock keyword.
       _lock(this->lock) {
         if (this->balance >= amount) {
@@ -25,18 +25,18 @@ namespace Examples {
       }
       return 0;
     }
-    
+
     void DoTransactions() {
       for (int i = 0; i < 100; i++)
         Withdraw(this->random.Next(1, 100));
     }
-    
+
   private:
     Object lock;
     int balance;
     Random random;
   };
-  
+
   class Program {
   public:
     static void Main() {

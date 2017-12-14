@@ -9,7 +9,7 @@ namespace Examples {
     static void Main() {
       int value = -16;
       Array<byte> bytes = BitConverter::GetBytes(value);
-      
+
       // Convert bytes back to Int32.
       int intValue = BitConverter::ToInt32(bytes, 0);
       Console::WriteLine("{0} = {1}: {2}", value, intValue, Int32(value).Equals(intValue) ? "Round-trips" : "Does not round-trip");

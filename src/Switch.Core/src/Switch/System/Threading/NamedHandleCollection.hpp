@@ -12,9 +12,9 @@ namespace {
     };
   public:
     NamedHandleCollection() {}
-    
+
     bool Conatains(const string& name) {return this->handles.find(name) != this->handles.end();}
-    
+
     const T& AddOrCreate(const string& name, bool& createNew) {
       std::lock_guard<std::recursive_mutex> lock(this->guard);
       typename std::map<string, NamedHandleCountPair>::iterator iterator = this->handles.find(name);
@@ -25,7 +25,7 @@ namespace {
         this->handles[name].count++;
       return this->handles[name].handle;
     }
-    
+
     bool Remove(const string& name) {
       std::lock_guard<std::recursive_mutex> lock(this->guard);
       typename std::map<string, NamedHandleCountPair>::iterator iterator = this->handles.find(name);
@@ -36,7 +36,7 @@ namespace {
       this->handles.erase(name);
       return true;
     }
-    
+
   private:
     std::map<string, NamedHandleCountPair> handles;
     std::recursive_mutex guard;

@@ -15,7 +15,7 @@ FtpWebResponse::FtpWebResponse(): WebResponse() {
 WebResponse::WebResponseStream FtpWebResponse::GetResponseStream() {
   if (this->webRequest->Method() == WebRequestMethods::Ftp::DownloadFile || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectory || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectoryDetails)
     return WebResponse::GetResponseStream();
-    
+
   throw InvalidOperationException(_caller);
 }
 
@@ -26,7 +26,7 @@ FtpStatusCode FtpWebResponse::GetStatusCode() const {
 const string FtpWebResponse::GetStatusDescription() const {
   string description;
   static Dictionary<int32, string> statusDescriptions;
-  
+
   if (statusDescriptions.Count == 0) {
     statusDescriptions[(int32)FtpStatusCode::RestartMarker] = "The response contains a restart marker reply.";
     statusDescriptions[(int32)FtpStatusCode::ServiceTemporarilyNotAvailable] = "The service is not available now; try your request later.";
@@ -65,12 +65,12 @@ const string FtpWebResponse::GetStatusDescription() const {
     statusDescriptions[(int32)FtpStatusCode::FileActionAborted] = "The requested action cannot be performed.";
     statusDescriptions[(int32)FtpStatusCode::ActionNotTakenFilenameNotAllowed] = "The requested action cannot be performed on the specified file.";
   }
-  
+
   FtpStatusCode statusCode = GetStatusCode();
   if (statusDescriptions.ContainsKey((int32)statusCode))
     description = statusDescriptions[(int32)statusCode];
   else
     description = "Unknown status code.";
-    
+
   return description;
 }

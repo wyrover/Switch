@@ -15,7 +15,7 @@ namespace Examples {
             myArr.SetValue((i * 100) + (j * 10) + k, i, j, k);
         }
       }
-      
+
       // Displays the properties of the Array.
       Console::WriteLine("The Array has {0} dimension(s) and a total of {1} elements.", myArr.Rank, myArr.Length);
       Console::WriteLine("\tLength\tLower\tUpper");
@@ -23,12 +23,12 @@ namespace Examples {
         Console::Write("{0}:\t{1}", i, myArr.GetLength(i));
         Console::WriteLine("\t{0}\t{1}", myArr.GetLowerBound(i), myArr.GetUpperBound(i));
       }
-      
+
       // Displays the contents of the Array.
       Console::WriteLine("The Array contains the following values:");
       PrintValues(myArr);
     }
-    
+
   private:
     static void PrintValues(const Array<int, 3>& myArr) {
       System::Collections::Generic::Enumerator<int> myEnumerator = myArr.GetEnumerator();

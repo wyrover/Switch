@@ -13,7 +13,7 @@ namespace Examples {
         Console::WriteLine("Usage: Factorial <integer>");
         return -1;
       }
-      
+
       Console::WriteLine("The Factorial of {0} is {1}", number, _delegate {
         int64 result = 1;
         for (int i = 1; i <= number; ++i)

@@ -14,22 +14,22 @@ namespace SwitchEvents {
       this->message = cea.message;
       return *this;
     }
-    
+
     _property<string> Message {
       _get { return this->message; },
       _set { this->message = value; }
     };
-    
+
   private:
     string message;
   };
-  
+
   // Class that publishes an event
   class Publisher : public object {
   public:
     // Declare the event using EventHandler<T>
     _event<Publisher, GenericEventHandler<const CustomEventArgs&>> RaiseCustomEvent;
-    
+
     void DoSomething() {
       // Write some code that does something useful here
       // then raise the event. You can also raise an event
@@ -37,7 +37,7 @@ namespace SwitchEvents {
       CustomEventArgs customEventArgs("Did something");
       OnRaiseCustomEvent(customEventArgs);
     }
-    
+
   protected:
     // Wrap event invocations inside a protected virtual method
     // to allow derived classes to override the event invocation behavior
@@ -46,15 +46,15 @@ namespace SwitchEvents {
       // a race condition if the last subscriber unsubscribes
       // immediately after the null check and before the event is raised.
       GenericEventHandler<const CustomEventArgs&> handler = as<GenericEventHandler<const CustomEventArgs&>>(RaiseCustomEvent);
-      
+
       // Format the string to send inside the CustomEventArgs parameter
       e.Message += String::Format(" at {0}", DateTime::Now().ToString());
-      
+
       // Use the () operator to raise the event.
       handler(*this, e);
     }
   };
-  
+
   //Class that subscribes to an event
   class Subscriber : public object {
   public:
@@ -62,25 +62,25 @@ namespace SwitchEvents {
       // Subscribe to the event
       pub.RaiseCustomEvent += {*this, &Subscriber::HandleCustomEvent};
     }
-    
+
     // Define what actions to take when the event is raised.
     void HandleCustomEvent(const object& sender, const CustomEventArgs& e) const {
       Console::WriteLine(id + " received this message: {0}", e.Message);
     }
-    
+
   private:
     string id;
   };
-  
+
   class Program : public object {
   public:
     // The main entry point for the application.
     static void Main() {
-    
+
       Publisher pub;
       Subscriber sub1("sub1", pub);
       Subscriber sub2("sub2", pub);
-      
+
       // Call the method that raises the event.
       pub.DoSomething();
     }

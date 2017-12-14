@@ -10,15 +10,15 @@ namespace {
   TEST(Int64Test, MaxValue) {
     ASSERT_EQ(0x7FFFFFFFFFFFFFFFll, Int64::MaxValue);
   }
-  
+
   TEST(Int64Test, MinValue) {
     ASSERT_EQ((int64) - 0x8000000000000000ll, Int64::MinValue); //  VS2012 does not handle -2147483648 correctly
   }
-  
+
   TEST(Int64Test, DefaultValue) {
     ASSERT_EQ(0LL, Int64());
   }
-  
+
   TEST(Int64Test, CtorValue) {
     ASSERT_EQ(10, Int64(10));
     ASSERT_EQ(123654, Int64(123654));
@@ -26,7 +26,7 @@ namespace {
     ASSERT_EQ(-1, Int64(-1));
     ASSERT_EQ(-0x7050123654LL, Int64(-0x7050123654LL));
   }
-  
+
   TEST(Int64Test, Parse) {
     ASSERT_EQ(0, Int64::Parse("0"));
     ASSERT_EQ(1, Int64::Parse("1"));
@@ -36,7 +36,7 @@ namespace {
     ASSERT_EQ(-100, Int64::Parse("-100"));
     ASSERT_EQ(-9981235744, Int64::Parse("-9981235744"));
   }
-  
+
   TEST(Int64Test, Parse_Leading_Zeros) {
     ASSERT_EQ(0, Int64::Parse("0"));
     ASSERT_EQ(0, Int64::Parse("00"));
@@ -46,7 +46,7 @@ namespace {
     ASSERT_EQ(99, Int64::Parse("099"));
     ASSERT_EQ(999, Int64::Parse("0000999"));
   }
-  
+
   TEST(Int64Test, Parse_Spaces) {
     ASSERT_EQ(5, Int64::Parse(" 5"));
     ASSERT_EQ(5, Int64::Parse("     5"));
@@ -55,7 +55,7 @@ namespace {
     ASSERT_EQ(5, Int64::Parse(" 5      "));
     ASSERT_EQ(52, Int64::Parse("        52 "));
   }
-  
+
   TEST(Int64Test, Parse_FormatException) {
     ASSERT_THROW(Int64::Parse(""), FormatException);
     ASSERT_THROW(Int64::Parse("a56"), FormatException);
@@ -68,7 +68,7 @@ namespace {
     ASSERT_THROW(Int64::Parse("100a"), FormatException);
     ASSERT_THROW(Int64::Parse("10u"), FormatException);
   }
-  
+
   TEST(Int64Test, Parse_OverFlowException) { //    987654321.987654321
     ASSERT_EQ(Int64::MaxValue, Int64::Parse("9223372036854775807"));
     ASSERT_THROW(Int64::Parse("9223372036854775808"), OverflowException);
@@ -77,7 +77,7 @@ namespace {
     ASSERT_THROW(Int64::Parse("19223372036854775807"), OverflowException);
     ASSERT_THROW(Int64::Parse("9876549223372036854775807"), OverflowException);
   }
-  
+
   TEST(Int64Test, Parse_Binary) {
     ASSERT_EQ(0, Int64::Parse("0", 2));
     ASSERT_EQ(1, Int64::Parse("1", 2));
@@ -88,21 +88,21 @@ namespace {
     ASSERT_EQ(-4, Int64::Parse("-100", 2));
     ASSERT_EQ(-15, Int64::Parse("-1111", 2));
   }
-  
+
   TEST(Int64Test, Parse_Binary_Complement) {
     ASSERT_EQ(-1, Int64::Parse("1111111111111111111111111111111111111111111111111111111111111111", 2));
     ASSERT_EQ(Int64::MinValue, Int64::Parse("1000000000000000000000000000000000000000000000000000000000000000", 2));
     ASSERT_EQ(Int64::MinValue, Int64::Parse("-1000000000000000000000000000000000000000000000000000000000000000", 2));
     ASSERT_EQ(-852147, Int64::Parse("1111111111111111111111111111111111111111111100101111111101001101", 2));
   }
-  
+
   TEST(Int64Test, Parse_Binary_Complement_Overflow) {
     ASSERT_THROW(Int64::Parse("-1111111111111111111111111111111111111111111111111111111111111111", 2), OverflowException);
     ASSERT_THROW(Int64::Parse("10000000000000000000000000000000000000000000000000000000000000000", 2), OverflowException);
     ASSERT_THROW(Int64::Parse("-1000000000000000000000000000000000000000000000000000000000000001", 2), OverflowException);
   }
-  
-  
+
+
   TEST(Int64Test, Parse_Exceptions_Binary) {
     ASSERT_THROW(Int64::Parse("", 2), FormatException);
     ASSERT_THROW(Int64::Parse("2", 2), FormatException);
@@ -115,7 +115,7 @@ namespace {
     ASSERT_THROW(Int64::Parse("100a", 2), FormatException);
     ASSERT_THROW(Int64::Parse("10u", 2), FormatException);
   }
-  
+
   TEST(Int64Test, Parse_Octal) {
     ASSERT_EQ(0, Int64::Parse("0", 8));
     ASSERT_EQ(1, Int64::Parse("1", 8));
@@ -126,7 +126,7 @@ namespace {
     ASSERT_EQ(-4, Int64::Parse("-4", 8));
     ASSERT_EQ(-15, Int64::Parse("-17", 8));
   }
-  
+
   TEST(Int64Test, Parse_Hexadecimal) {
     ASSERT_EQ(0, Int64::Parse("0", 16));
     ASSERT_EQ(1, Int64::Parse("1", 16));
@@ -140,14 +140,14 @@ namespace {
     ASSERT_EQ(Int64::MaxValue, Int64::Parse("7FFFFFFFFFFFFFFF", 16));
     ASSERT_THROW(Int64::Parse("-08000000000000001", 16), OverflowException);
   }
-  
+
   TEST(Int64Test, Parse_Hexadecimal_Complement) {
     ASSERT_EQ(-1, Int64::Parse("0xFFFFFFFFFFFFFFFF", 16));
     ASSERT_EQ(Int64::MinValue, Int64::Parse("0x8000000000000000", 16));
     ASSERT_EQ(Int64::MinValue, Int64::Parse("-0x8000000000000000", 16));
     ASSERT_EQ(-89147, Int64::Parse("FFFFFFFFFFFEA3C5", 16));
   }
-  
+
   TEST(Int64Test, TryParse) {
     int64 x;
     ASSERT_TRUE(Int64::TryParse("0", x));
@@ -165,7 +165,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("-9981235744", x));
     ASSERT_EQ(-9981235744, x);
   }
-  
+
   TEST(Int64Test, TryParse_Int64) {
     Int64 x;
     ASSERT_TRUE(Int64::TryParse("0", x));
@@ -183,7 +183,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("-9981235744", x));
     ASSERT_EQ(-9981235744LL, x);
   }
-  
+
   TEST(Int64Test, TryParse_Leading_Zeros) {
     int64 x;
     ASSERT_TRUE(Int64::TryParse("0", x));
@@ -201,7 +201,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("0000999", x));
     ASSERT_EQ(999, x);
   }
-  
+
   TEST(Int64Test, TryParse_Leading_Zeros_Int64) {
     Int64 x;
     ASSERT_TRUE(Int64::TryParse("0", x));
@@ -219,7 +219,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("0000999", x));
     ASSERT_EQ(999, x);
   }
-  
+
   TEST(Int64Test, TryParse_Spaces) {
     int64 x;
     ASSERT_TRUE(Int64::TryParse(" 5", x));
@@ -235,7 +235,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("        52 ", x));
     ASSERT_EQ(52, x);
   }
-  
+
   TEST(Int64Test, TryParse_Spaces_Int64) {
     Int64 x;
     ASSERT_TRUE(Int64::TryParse(" 5", x));
@@ -251,7 +251,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("        52 ", x));
     ASSERT_EQ(52, x);
   }
-  
+
   TEST(Int64Test, TryParse_FormatException) {
     int64 x;
     ASSERT_FALSE(Int64::TryParse("", x));
@@ -265,7 +265,7 @@ namespace {
     ASSERT_FALSE(Int64::TryParse("100a", x));
     ASSERT_FALSE(Int64::TryParse("10u", x));
   }
-  
+
   TEST(Int64Test, TryParse_FormatException_Int64) {
     Int64 x;
     ASSERT_FALSE(Int64::TryParse("", x));
@@ -279,7 +279,7 @@ namespace {
     ASSERT_FALSE(Int64::TryParse("100a", x));
     ASSERT_FALSE(Int64::TryParse("10u", x));
   }
-  
+
   TEST(Int64Test, TryParse_OverFlowException) { //    987654321.987654321
     int64 x;
     ASSERT_TRUE(Int64::TryParse("9223372036854775807", x));
@@ -291,7 +291,7 @@ namespace {
     ASSERT_FALSE(Int64::TryParse("19223372036854775807", x));
     ASSERT_FALSE(Int64::TryParse("9876549223372036854775807", x));
   }
-  
+
   TEST(Int64Test, TryParse_OverFlowException_Int64) { //    987654321.987654321
     Int64 x;
     ASSERT_TRUE(Int64::TryParse("9223372036854775807", x));
@@ -303,7 +303,7 @@ namespace {
     ASSERT_FALSE(Int64::TryParse("19223372036854775807", x));
     ASSERT_FALSE(Int64::TryParse("9876549223372036854775807", x));
   }
-  
+
   TEST(Int64Test, TryParse_Binary) {
     int64 x;
     ASSERT_TRUE(Int64::TryParse("0", 2, x));
@@ -323,7 +323,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("-1111", 2, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(Int64Test, TryParse_Binary_Int64) {
     Int64 x;
     ASSERT_TRUE(Int64::TryParse("0", 2, x));
@@ -343,7 +343,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("-1111", 2, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(Int64Test, TryParse_Binary_Complement) {
     int64 x;
     ASSERT_TRUE(Int64::TryParse("1111111111111111111111111111111111111111111111111111111111111111", 2, x));
@@ -355,7 +355,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("1111111111111111111111111111111111111111111100101111111101001101", 2, x));
     ASSERT_EQ(-852147, x);
   }
-  
+
   TEST(Int64Test, TryParse_Binary_Complement_Int64) {
     Int64 x;
     ASSERT_TRUE(Int64::TryParse("1111111111111111111111111111111111111111111111111111111111111111", 2, x));
@@ -367,21 +367,21 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("1111111111111111111111111111111111111111111100101111111101001101", 2, x));
     ASSERT_EQ(-852147, x);
   }
-  
+
   TEST(Int64Test, TryParse_Binary_Complement_Overflow) {
     int64 x;
     ASSERT_FALSE(Int64::TryParse("-1111111111111111111111111111111111111111111111111111111111111111", 2, x));
     ASSERT_FALSE(Int64::TryParse("10000000000000000000000000000000000000000000000000000000000000000", 2, x));
     ASSERT_FALSE(Int64::TryParse("-1000000000000000000000000000000000000000000000000000000000000001", 2, x));
   }
-  
+
   TEST(Int64Test, TryParse_Binary_Complement_Overflow_Int64) {
     Int64 x;
     ASSERT_FALSE(Int64::TryParse("-1111111111111111111111111111111111111111111111111111111111111111", 2, x));
     ASSERT_FALSE(Int64::TryParse("10000000000000000000000000000000000000000000000000000000000000000", 2, x));
     ASSERT_FALSE(Int64::TryParse("-1000000000000000000000000000000000000000000000000000000000000001", 2, x));
   }
-  
+
   TEST(Int64Test, TryParse_Exceptions_Binary) {
     int64 x;
     ASSERT_FALSE(Int64::TryParse("", 2, x));
@@ -395,7 +395,7 @@ namespace {
     ASSERT_FALSE(Int64::TryParse("100a", 2, x));
     ASSERT_FALSE(Int64::TryParse("10u", 2, x));
   }
-  
+
   TEST(Int64Test, TryParse_Exceptions_Binary_Int64) {
     Int64 x;
     ASSERT_FALSE(Int64::TryParse("", 2, x));
@@ -409,7 +409,7 @@ namespace {
     ASSERT_FALSE(Int64::TryParse("100a", 2, x));
     ASSERT_FALSE(Int64::TryParse("10u", 2, x));
   }
-  
+
   TEST(Int64Test, TryParse_Octal) {
     int64 x;
     ASSERT_TRUE(Int64::TryParse("0", 8, x));
@@ -429,7 +429,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("-17", 8, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(Int64Test, TryParse_Octal_Int64) {
     Int64 x;
     ASSERT_TRUE(Int64::TryParse("0", 8, x));
@@ -449,7 +449,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("-17", 8, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(Int64Test, TryParse_Hexadecimal) {
     int64 x;
     ASSERT_TRUE(Int64::TryParse("0", 16, x));
@@ -474,7 +474,7 @@ namespace {
     ASSERT_EQ(Int64::MaxValue, x);
     ASSERT_FALSE(Int64::TryParse("-08000000000000001", 16, x));
   }
-  
+
   TEST(Int64Test, TryParse_Hexadecimal_Int64) {
     Int64 x;
     ASSERT_TRUE(Int64::TryParse("0", 16, x));
@@ -499,7 +499,7 @@ namespace {
     ASSERT_EQ(Int64::MaxValue, x);
     ASSERT_FALSE(Int64::TryParse("-08000000000000001", 16, x));
   }
-  
+
   TEST(Int64Test, TryParse_Hexadecimal_Complement) {
     int64 x;
     ASSERT_TRUE(Int64::TryParse("0xFFFFFFFFFFFFFFFF", 16, x));
@@ -511,7 +511,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("FFFFFFFFFFFEA3C5", 16, x));
     ASSERT_EQ(-89147, x);
   }
-  
+
   TEST(Int64Test, TryParse_Hexadecimal_Complement_Int64) {
     Int64 x;
     ASSERT_TRUE(Int64::TryParse("0xFFFFFFFFFFFFFFFF", 16, x));
@@ -523,7 +523,7 @@ namespace {
     ASSERT_TRUE(Int64::TryParse("FFFFFFFFFFFEA3C5", 16, x));
     ASSERT_EQ(-89147, x);
   }
-  
+
 }
 
 

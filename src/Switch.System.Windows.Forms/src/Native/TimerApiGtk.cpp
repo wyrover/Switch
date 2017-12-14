@@ -11,7 +11,7 @@ namespace {
     guint timer = 0;
     delegate<void> tick;
   };
-  
+
   int TimerPeroc(gpointer timer) {
     ((TimerGtk*)timer)->tick();
     return 1;

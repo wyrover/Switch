@@ -33,7 +33,7 @@ namespace Switch {
           /// @remarks The IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the LingerState property is not set.
           /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
           LingerOption() {}
-          
+
           /// @brief Initializes a new version of the LingerOption class for the specified IP multicast group.
           /// @param enabled true to remain connected after the Socket.Close method is called; otherwise, false.
           /// @param lingerTime The number of seconds to remain connected after the Socket.Close method is called.
@@ -47,7 +47,7 @@ namespace Switch {
           /// @remarks The IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the LingerState property is not set.
           /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
           LingerOption(bool enabled, int32 lingerTime) : enabled(enabled), lingerTime(lingerTime) {}
-          
+
           /// @cond
           LingerOption(const LingerOption& lingerOption) : enabled(lingerOption.enabled), lingerTime(lingerOption.lingerTime) {}
           LingerOption& operator=(const LingerOption& lingerOption) {
@@ -56,7 +56,7 @@ namespace Switch {
             return *this;
           }
           /// @endcond
-          
+
           /// @brief Gets or Sets a value that indicates whether to linger after the Socket is closed.
           /// @param enabled true if the Socket should linger after Socket.Close is called; otherwise, false.
           /// @return bool true if the Socket should linger after Socket.Close is called; otherwise, false.
@@ -73,7 +73,7 @@ namespace Switch {
             _get {return this->enabled;},
             _set {this->enabled = value;}
           };
-          
+
           /// @brief Gets the amount of time to remain connected after calling the Socket.Close method if data remains to be sent.
           /// @param lingerTime The amount of time, in seconds, to remain connected after calling Socket.Close.
           /// @return int32 The amount of time, in seconds, to remain connected after calling Socket.Close.
@@ -91,7 +91,7 @@ namespace Switch {
             _get {return this->lingerTime;},
             _set {this->lingerTime = value;}
           };
-          
+
         private:
           bool enabled = false;
           int32 lingerTime = 0;

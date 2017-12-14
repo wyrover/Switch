@@ -17,24 +17,24 @@ namespace Switch {
         class _export FrameDimension : public object {
         public:
           static _property<FrameDimension, _readonly> Page;
-          
+
           static _property<FrameDimension, _readonly> Resolution;
-          
+
           static _property<FrameDimension, _readonly> Time;
-          
+
           FrameDimension(const Guid& guid) : guid(guid) {}
           FrameDimension(const Guid& guid, const string name) : guid(guid), name(name) {}
           FrameDimension(const string& guid, const string name) : guid(guid), name(name) {}
           FrameDimension(const FrameDimension& fd) : guid(fd.guid), name(fd.name) {}
-          
+
           _property<System::Guid, _readonly> Guid {
             _get {return this->guid;}
           };
-          
+
           _property<string, _readonly> Name {
             _get {return this->name;}
           };
-          
+
         private:
           System::Guid guid;
           string name;

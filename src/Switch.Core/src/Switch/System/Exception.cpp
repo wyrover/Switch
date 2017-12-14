@@ -16,7 +16,7 @@ const string& Exception::GetMessage() const {
 string Exception::GetStackTrace() const {
   if (this->stackTrace == null || this->stackTrace().Length == 0)
     return "";
-    
+
   return string::Join("\n", this->stackTrace());
 }
 
@@ -78,7 +78,7 @@ Exception& Exception::operator =(const Exception& value) {
   this->innerException = value.innerException;
   this->hresult = value.hresult;
   this-> stackTrace = value.stackTrace;
-  
+
   return *this;
 }
 
@@ -92,10 +92,10 @@ void Exception::SetStackTrace(const Exception& exception) {
     this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
     return;
   }
-  
+
   Diagnostics::StackTrace stackTrace(1, true);
   this->stackTrace = ref_new<Array<string>>(stackTrace.FrameCount() + 1);
-  
+
   if (stackTrace.FrameCount() == 0)
     this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
   else {
@@ -116,13 +116,13 @@ const char* Exception::what() const noexcept {
 string Exception::GetStackTrace(const string& filter) const {
   if (this->stackTrace == null || this->stackTrace().Length == 0)
     return "";
-    
+
   int32 startIndex = 0;
   for (int32 i = 0; i < this->stackTrace().Length; i++) {
     if (this->stackTrace()[i].Contains(filter))
       startIndex = i + 1;
   }
-  
+
   string output;
   for (int32 i = startIndex; i < this->stackTrace().Length; i++) {
     if (i == startIndex)

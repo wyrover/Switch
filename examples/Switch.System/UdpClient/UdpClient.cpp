@@ -22,7 +22,7 @@ namespace Examples {
         }
       }));
       server.Start();
-      
+
       Thread client(ThreadStart(_delegate {
         UdpClient udpClient;
         int counter = Random().Next(1, 20000);
@@ -32,7 +32,7 @@ namespace Examples {
         }
       }));
       client.Start();
-      
+
       server.Join();
       client.Join();
     }

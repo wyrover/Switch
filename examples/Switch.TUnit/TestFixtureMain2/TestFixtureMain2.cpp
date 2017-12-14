@@ -12,7 +12,7 @@ namespace UnitTests {
       Assert::Null(null, _caller);
     }
   };
-  
+
   // Used _Test to add unit test to execute at the unit test suit.
   _AddTestFixture(UserTest);
   _AddTest(UserTest, AnyTest);
@@ -21,7 +21,7 @@ namespace UnitTests {
 // The main entry point for the test application.
 int main(int argc, char* argv[]) {
   // You can add your own code here.
-  
+
   // Create UnitTest and run it
   return TUnit::UnitTest(Environment::SetCommandLineArgs(argv, argc)).Run();
 }

@@ -208,7 +208,7 @@ namespace Switch {
           LCommandKey = 256,
           RCommandKey = 257,
         };
-        
+
         /// @cond
         inline Keys& operator +=(Keys& lhs, Keys rhs) {lhs = static_cast<Keys>(static_cast<int32>(lhs) + static_cast<int32>(rhs)); return lhs;}
         inline Keys& operator -=(Keys& lhs, Keys rhs) {lhs = static_cast<Keys>(static_cast<int32>(lhs) - static_cast<int32>(rhs)); return lhs;}

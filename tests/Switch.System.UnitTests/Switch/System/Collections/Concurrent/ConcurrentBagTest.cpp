@@ -19,7 +19,7 @@ namespace SwitchUnitTests {
       ASSERT_EQ(values[index++], item);
     ASSERT_EQ(6, index);
   }
-  
+
   TEST(ConcurrentBagTest, GetEnumerator) {
     ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
     int values[] = {0, 1, 2, 3, 4, 5};
@@ -30,14 +30,14 @@ namespace SwitchUnitTests {
       ASSERT_EQ(values[index++], enumerator.Current());
     ASSERT_EQ(6, index);
   }
-  
+
   TEST(ConcurrentBagTest, TryPeek) {
     ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
     int result;
     ASSERT_TRUE(bag.TryPeek(result));
     ASSERT_EQ(5, result);
   }
-  
+
   TEST(ConcurrentBagTest, TryTake) {
     ConcurrentBag<int> bag = {0, 1, 2, 3, 4, 5};
     int result;

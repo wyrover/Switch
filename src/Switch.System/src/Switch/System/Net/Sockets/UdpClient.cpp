@@ -30,7 +30,7 @@ UdpClient::UdpClient(const IPEndPoint& endPoint) {
 
 UdpClient::UdpClient(int32 port, AddressFamily addressFamily) {
   this->client = ref_new<Socket>(addressFamily, SocketType::Dgram, ProtocolType::Udp);
-  
+
   // Retrieve local IPAddress and use the 1st one
   this->client->Bind(IPEndPoint(Dns::GetHostAddresses(Dns::GetHostName())[0], port));
 }
@@ -43,7 +43,7 @@ UdpClient::UdpClient(const string& hostname, int32 port) {
 int32 UdpClient::GetAvailable() const {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   return this->client->Available();
 }
 
@@ -58,7 +58,7 @@ const refptr<Socket> UdpClient::GetClient() const {
 bool UdpClient::GetConnected() const {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   return this->client->Connected();
 }
 
@@ -69,98 +69,98 @@ void UdpClient::SetClient(const refptr<Socket>& client) {
 bool UdpClient::GetDontFragment() const {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   return this->client->DontFragment();
 }
 
 void UdpClient::SetDontFragment(bool dontFragment) {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   this->client->DontFragment = dontFragment;
 }
 
 bool UdpClient::GetEnableBroadcast() const {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   return this->client->EnableBroadcast();
 }
 
 void UdpClient::SetEnableBroadcast(bool enableBroadcast) {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   this->client->EnableBroadcast = enableBroadcast;
 }
 
 bool UdpClient::GetExclusiveAddressUse() const {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   return this->client->ExclusiveAddressUse();
 }
 
 void UdpClient::SetExclusiveAddressUse(bool exclusiveAddressUse) {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   this->client->ExclusiveAddressUse = exclusiveAddressUse;
 }
 
 bool UdpClient::GetMulticastLoopback() const {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   return this->client->MulticastLoopback();
 }
 
 void UdpClient::SetMulticastLoopback(bool multicastLoopback) {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   this->client->MulticastLoopback = multicastLoopback;
 }
 
 int32 UdpClient::GetTtl() const {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   return this->client->Ttl();
 }
 
 void UdpClient::SetTtl(int32 ttl) {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   this->client->Ttl = ttl;
 }
 
 void UdpClient::Close() {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   this->client->Close();
 }
 
 void UdpClient::Connect(const IPEndPoint& endPoint) {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   this->client->Connect(endPoint);
 }
 
 void UdpClient::Connect(const IPAddress& ipAddress, int32 port) {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   this->client->Connect(ipAddress, port);
 }
 
 void UdpClient::Connect(const string& hostname, int32 port) {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   // Use the 1st IPAddress corresponding to the hostname
   this->client->Connect(Dns::GetHostAddresses(hostname)[0], port);
 }
@@ -190,7 +190,7 @@ void UdpClient::JoinMulticastGroup(const IPAddress& multicastAddress, const IPAd
 int32 UdpClient::Receive(Array<byte>& buffer, IPEndPoint& endPoint) {
   if (this->client == null)
     throw NullReferenceException(_caller);
-    
+
   return this->client->ReceiveFrom(buffer, endPoint);
 }
 
@@ -199,7 +199,7 @@ int32 UdpClient::Send(const Array<byte>& data) {
     throw NullReferenceException(_caller);
   if (!GetConnected())
     throw SocketException((int32)SocketError::NotConnected, _caller);
-    
+
   return this->client->Send(data);
 }
 
@@ -208,10 +208,10 @@ int32 UdpClient::Send(const Array<byte>& data, const IPEndPoint& endPoint) {
     throw NullReferenceException(_caller);
   if (GetConnected())
     throw InvalidOperationException(_caller);
-    
+
   if (endPoint.Address() == IPAddress::Broadcast)
     this->client->EnableBroadcast = true;
-    
+
   return this->client->SendTo(data, endPoint);
 }
 
@@ -220,7 +220,7 @@ int32 UdpClient::Send(const Array<byte>& data, const string& hostname, int32 por
     throw NullReferenceException(_caller);
   if (GetConnected())
     throw InvalidOperationException(_caller);
-    
+
   if (hostname == IPAddress::Broadcast().ToString()) {
     // hostname can be 255.255.255.255
     this->client->EnableBroadcast = true;

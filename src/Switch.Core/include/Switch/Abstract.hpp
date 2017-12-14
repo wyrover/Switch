@@ -11,11 +11,11 @@ namespace Switch {
   struct _export Abstract : public System::Object {
     ~Abstract() override = 0;
   };
-  
+
   /// @cond
   inline Abstract::~Abstract() {}
   /// @endcond
-  
+
   /// @brief This keyword is used to represents an abstract class.
   /// @par Examples
   /// @code

@@ -13,12 +13,12 @@ namespace Switch {
         /// @cond
         class Control;
         /// @endcond
-        
+
         class _export KeyPressEventArgs : public EventArgs {
         public:
           KeyPressEventArgs() {}
           KeyPressEventArgs(char32 keyChar) : keyChar(keyChar), handled(false) {}
-          
+
           /// @cond
           KeyPressEventArgs(const KeyPressEventArgs& keyPressEventArgs): keyChar(keyPressEventArgs.keyChar), handled(keyPressEventArgs.handled) {}
           KeyPressEventArgs& operator =(const KeyPressEventArgs& keyPressEventArgs) {
@@ -27,16 +27,16 @@ namespace Switch {
             return *this;
           }
           /// @endcond
-          
+
           _property<bool> Handled {
             _get {return this->handled;},
             _set {this->handled = value;}
           };
-          
+
           _property<char32, _readonly> KeyChar {
             _get {return this->keyChar;}
           };
-          
+
         private:
           char32 keyChar = 0;
           bool handled = false;

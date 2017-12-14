@@ -15,13 +15,13 @@ void ConsoleEventListener::OnTestProgramStart(const testing::UnitTest& unitTest)
 void ConsoleEventListener::OnTestIterationStart(const testing::UnitTest& unitTest, int iteration) {
   if (testing::FLAGS_gtest_repeat != 1)
     WriteLine(String::Format("{1}Repeating all tests (iteration {0}) . . .{1}", iteration + 1, System::Environment::NewLine));
-    
+
   if (!String(testing::FLAGS_gtest_filter).Equals("*"))
     WriteLine(ConsoleColor::DarkMagenta, String::Format("Note: TUnit filter = {0}", testing::FLAGS_gtest_filter.c_str()));
-    
+
   if (testing::FLAGS_gtest_shuffle)
     WriteLine(ConsoleColor::DarkMagenta, String::Format("Note: Randomizing tests' orders with a seed of {0}.", unitTest.random_seed()));
-    
+
   WriteLine(String::Format("Start {0} {1} from {2} {3}", unitTest.test_to_run_count(), unitTest.test_to_run_count() == 1 ? "test" : "tests", unitTest.test_case_to_run_count(), unitTest.test_case_to_run_count() == 1 ? "test case" : "test cases"));
 }
 
@@ -64,7 +64,7 @@ void ConsoleEventListener::OnTestEnd(const testing::TestInfo& testInfo) {
   if (testInfo.result()->Failed()) {
     const char* const type_param = testInfo.type_param();
     const char* const value_param = testInfo.value_param();
-    
+
     if (type_param != null || value_param != null) {
       Write(", where ");
       if (type_param != null)
@@ -98,29 +98,29 @@ void ConsoleEventListener::OnTestIterationEnd(const testing::UnitTest& unitTest,
   WriteLine("  Summary :");
   Write(ConsoleColor::DarkGreen, "    PASSED ");
   WriteLine(String::Format("{0} {1}.", unitTest.successful_test_count(), unitTest.successful_test_count() == 1 ? "test" : "tests"));
-  
+
   int numFailures = unitTest.failed_test_count();
   if (!unitTest.Passed()) {
     const int failedTestCount = unitTest.failed_test_count();
     Write(ConsoleColor::DarkRed, "*** FAILED ");
     WriteLine(String::Format("{0} {1}, listed below:", failedTestCount,  failedTestCount == 1 ? "test" : "tests"));
-    
+
     if (numFailures > 0) {
       for (int index1 = 0; index1 < unitTest.total_test_case_count(); ++index1) {
         const testing::TestCase& testCase = *unitTest.GetTestCase(index1);
-        
+
         if (!testCase.should_run() || (testCase.failed_test_count() == 0))
           continue;
-          
+
         for (int index2 = 0; index2 < testCase.total_test_count(); ++index2) {
           const testing::TestInfo& testInfo = *testCase.GetTestInfo(index2);
-          
+
           if (!testInfo.should_run() || testInfo.result()->Passed())
             continue;
-            
+
           Write(ConsoleColor::DarkRed, "*** FAILED ");
           Write(String::Format("{0}.{1}", testCase.name(), testInfo.name()));
-          
+
           const char* const typeParam = testInfo.type_param();
           const char* const valueParam = testInfo.value_param();
           if (typeParam != null || valueParam != null) {
@@ -145,7 +145,7 @@ void ConsoleEventListener::OnTestIterationEnd(const testing::UnitTest& unitTest,
     Write(String::Format(" ({0} ms total)", (int64)unitTest.elapsed_time()));
   WriteLine();
   WriteLine();
-  
+
   int numIgnored = unitTest.reportable_disabled_test_count();
   if (numIgnored && !testing::FLAGS_gtest_also_run_disabled_tests) {
     if (numIgnored == 1)
@@ -268,7 +268,7 @@ void ConsoleEventListener::Write(ConsoleColor color, const String& value) {
     Console::Write(value);
     return;
   }
-  
+
   Console::ForegroundColor = color;
   Console::Write(value);
   Console::ResetColor();

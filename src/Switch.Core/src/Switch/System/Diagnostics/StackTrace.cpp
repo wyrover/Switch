@@ -25,22 +25,22 @@ void StackTrace::FillFrames(int32 skipFrames, bool needFileInfo) {
 void StackTrace::FillFrames(const String& str, int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   this->stackTrace = ref_new<CallStack>();
-  
+
   int32 skipFramesBeforeStr = 0;
   for (int32 index = 0; index < StackFrame::GetFrameCount(((stacktrace::call_stack*)this->stackTrace->handle)); index++) {
     if (StackFrame(((stacktrace::call_stack*)this->stackTrace->handle), index, needFileInfo).GetMethod().StartsWith(str))
       skipFramesBeforeStr = index;
   }
-  
+
   FillFrames(((stacktrace::call_stack*)this->stackTrace->handle), skipFrames + skipFramesBeforeStr, needFileInfo);
 }
 
 void StackTrace::FillFrames(void* stackTrace, int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   int32 length = skipFrames < StackFrame::GetFrameCount(stackTrace) ? StackFrame::GetFrameCount(stackTrace) - skipFrames : 0;
   for (int32 index = 0; index  < length; index++) {
     if (!StackFrame(stackTrace, index + skipFrames, needFileInfo).GetMethod().StartsWith("System::Delegate<"))

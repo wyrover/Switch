@@ -45,13 +45,13 @@ namespace Switch {
         public:
           /// @brief Starts the Task, scheduling it for execution to the current TaskScheduler.
           virtual void Start() = 0;
-          
+
           /// @brief Waits for the Task to complete execution.
           virtual void Wait() = 0;
-          
+
           /// @brief Waits for the Task to complete execution within a specified number of milliseconds.
           virtual bool Wait(int32 millisecondsTimeout) = 0;
-          
+
           /// @brief Waits for the Task to complete execution within a specified time interval.
           virtual bool Wait(const TimeSpan& timeout) = 0;
         };

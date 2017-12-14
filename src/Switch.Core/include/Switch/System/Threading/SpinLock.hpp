@@ -23,13 +23,13 @@ namespace Switch {
         void Enter(bool lockTaken) {
           while (this->lock.test_and_set(std::memory_order_acquire));
         }
-        
+
         void Exit() {this->Exit(false);}
-        
+
         void Exit(bool useMemoryBarrier) {
           this->lock.clear(std::memory_order_release);
         }
-        
+
       private:
         std::atomic_flag lock = ATOMIC_FLAG_INIT;
       };

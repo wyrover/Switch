@@ -17,10 +17,10 @@ void Monitor::Pulse(const Object& obj) {
   if (IsEntered(obj))
     monitorItem = &MonitorItems()[ToKey(obj)];
   mutex.unlock();
-  
+
   if (monitorItem == null)
     throw InvalidOperationException(_caller);
-    
+
   monitorItem->event.ReleaseMutex();
 }
 
@@ -30,10 +30,10 @@ void Monitor::PulseAll(const Object& obj) {
   if (IsEntered(obj))
     monitorItem = &MonitorItems()[ToKey(obj)];
   mutex.unlock();
-  
+
   if (monitorItem == null)
     throw InvalidOperationException(_caller);
-    
+
   monitorItem->event.ReleaseMutex();
 }
 
@@ -43,10 +43,10 @@ bool Monitor::Wait(const Object& obj, int32 millisecondsTimeout) {
   if (IsEntered(obj))
     monitorItem = &MonitorItems()[ToKey(obj)];
   mutex.unlock();
-  
+
   if (monitorItem == null)
     throw InvalidOperationException(_caller);
-    
+
   return monitorItem->event.WaitOne(millisecondsTimeout);
 }
 
@@ -67,7 +67,7 @@ void Monitor::Remove(const Object& obj) {
     mutex.unlock();
     throw SynchronizationLockException(_caller);
   }
-  
+
   MonitorItem* monitorData = &MonitorItems()[ToKey(obj)];
   if (--monitorData->usedCounter == 0) {
     saved = MonitorItems()[ToKey(obj)];

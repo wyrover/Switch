@@ -16,7 +16,7 @@ namespace Examples {
         binaryWriter.Write(Array<byte> {10, 29, 32, 42});
         binaryWriter.Write("This is a test");
       }
-      
+
       // Open and read from binary file stream.
       _using(BinaryReader binaryReader(FileStream(Path::Combine(Path::GetTempPath(), "SwitchTest.bin"), FileMode::Open))) {
         Console::WriteLine("Boolean: {0}", binaryReader.ReadBoolean());
@@ -24,7 +24,7 @@ namespace Examples {
         Console::WriteLine("Array<byte>: {{{0}}}", string::Join(", ", binaryReader.ReadBytes(binaryReader.ReadInt32())));
         Console::WriteLine("String: \"{0}\"", binaryReader.ReadString());
       }
-      
+
       // Delete binary file stream.
       File::Delete(Path::Combine(Path::GetTempPath(), "SwitchTest.bin"));
     }

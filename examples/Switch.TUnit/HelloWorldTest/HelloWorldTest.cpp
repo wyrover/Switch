@@ -9,13 +9,13 @@ namespace UnitTests {
       string s = "Hello, World!";
       Assert::AreEqual("Hello, World!", s);
     }
-    
+
     void _Test(CreateStringFromChars) {
       string s = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'};
       Assert::AreEqual("Hello, World!", s);
     }
   };
-  
+
   _AddTestFixture(HelloWorldTest);
   _AddTest(HelloWorldTest, CreateStringFromLiteral);
   _AddTest(HelloWorldTest, CreateStringFromChars);

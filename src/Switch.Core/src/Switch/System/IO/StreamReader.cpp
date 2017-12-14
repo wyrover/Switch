@@ -36,7 +36,7 @@ int32 StreamReader::Peek() const {
     const_cast<StreamReader&>(*this).data->stream->Seek(position, System::IO::SeekOrigin::Begin);
     return peek;
   }
-  
+
   if (!this->data->hasPeekByte) {
     const_cast<StreamReader&>(*this).data->peekByte = const_cast<StreamReader&>(*this).data->stream->ReadByte();
     const_cast<StreamReader&>(*this).data->hasPeekByte = true;
@@ -51,14 +51,14 @@ int32 StreamReader::Read() {
 int32 StreamReader::Read(Text::Encoding::Decoder& decoder) {
   if (this->data->stream->CanSeek)
     return ReadCodePoint(decoder);
-    
+
   if (!this->data->hasPeekByte) {
     int32 result = ReadCodePoint(decoder);
     this->data->peekByte = ReadCodePoint(decoder);
     this->data->hasPeekByte = true;
     return result;
   }
-  
+
   int32 result = this->data->peekByte;
   this->data->peekByte = ReadCodePoint(decoder);
   return result;
@@ -80,7 +80,7 @@ string StreamReader::ReadLine() {
     if (value != '\r')
       result += (char32)value;
   }
-  
+
   return result;
 }
 
@@ -91,6 +91,6 @@ string StreamReader::ReadToEnd() {
     if (value != '\r')
       result += (char32)value;
   }
-  
+
   return result;
 }

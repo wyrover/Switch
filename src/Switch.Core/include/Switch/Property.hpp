@@ -20,22 +20,22 @@ class _property : public Attribute {
   //using Setter = std::function<void(T)>;
   using Getter = __opaque_function_pointer__<T>;
   using Setter = __opaque_function_pointer__<void, T>;
-  
+
 public:
   template<typename TGetter, typename TSetter>
   _property(TGetter getter, TSetter setter) : getter(getter), setter(setter) {}
-  
+
   T Get() const {return this->getter();}
   T operator()() const {return this->getter();}
-  
+
   operator T() const {return this->getter();}
   _property& operator=(const _property& _property) {this->setter(_property.getter()); return *this;}
   bool operator==(T value) const {return this->getter() == value;}
   bool operator !=(T value) const {return this->getter() != value;}
-  
+
   T Set(T value) {this->setter(value); return this->getter();}
   T operator()(T value) {this->setter(value); return this->getter();}
-  
+
   _property& operator=(T value) {this->setter(value); return *this;}
   void operator+=(T value) {this->setter(this->getter() + value);}
   void operator-=(T value) {this->setter(this->getter() - value);}
@@ -47,7 +47,7 @@ public:
   void operator ^=(T value) {this->setter(this->getter() ^ value);}
   void operator<<=(T value) {this->setter(this->getter() << value);}
   void operator>>=(T value) {this->setter(this->getter() >> value);}
-  
+
 private:
   _property(const _property& _property)  = delete;
   Getter getter;
@@ -59,19 +59,19 @@ class _property<T, _readonly> : public _readonly {
   // Don't use std::function<> because the build became very slow
   //using Getter = std::function<T()>;
   using Getter = __opaque_function_pointer__<T>;
-  
+
 public:
   template<typename TGetter>
   explicit _property(TGetter getter) : getter(getter) {}
   _property& operator=(const _property& _property) {return *this;}
-  
+
   T Get() const {return this->getter();}
   T operator()() const {return this->getter();}
   operator T() const { return this->getter(); }
   operator T() { return this->getter(); }
   bool operator==(T value) const {return this->getter() == value;}
   bool operator !=(T value) const {return this->getter() != value;}
-  
+
 private:
   _property(const _property& _property)  = delete;
   Getter getter;
@@ -82,16 +82,16 @@ class _property<T, _writeonly> : public _writeonly {
   // Don't use std::function<> because the build became very slow
   //using Setter = std::function<void(T)>;
   using Setter = __opaque_function_pointer__<void, T>;
-  
+
 public:
   template<typename TSetter>
   explicit _property(TSetter setter) : setter(setter) {}
   _property& operator=(const _property& _property) {return *this;}
-  
+
   void Set(T value) {this->setter(value);}
   void operator()(T value) {this->setter(value);}
   void operator=(T value) {this->setter(value);}
-  
+
 private:
   _property(const _property& _property)  = delete;
   Setter setter;
@@ -104,17 +104,17 @@ namespace Switch {
   /// @ingroup Keywords
 #define _readonly \
   _readonly
-  
+
   /// @brief #_readwrite keyword represent a #_property read write attribute.
   /// @ingroup Keywords
 #define _readwrite \
   _readwrite
-  
+
   /// @brief #_writeonly keyword represent a #_property write only attribute.
   /// @ingroup Keywords
 #define _writeonly \
   _writeonly
-  
+
   /// @brief A #_property is a member that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be used as if they are public data members, but they are actually special methods called accessors. This enables data to be accessed easily and still helps promote the safety and flexibility of methods.
   /// @remarks The copy constructor is deleted. So the copy constructor of the owner class must be specified (the implicit or default copy contructor doesn't build).
   /// @par Examples
@@ -123,7 +123,7 @@ namespace Switch {
   /// @ingroup Keywords
 #define _property \
   _property
-  
+
   /// @brief The get keyword defines an accessor method in a #_property or indexer that retrieves the value of the #_property or the indexer element.
   /// @par Examples
   /// @code
@@ -144,7 +144,7 @@ namespace Switch {
   /// @ingroup Keywords
 #define _get \
   [&]()
-  
+
   /// @brief The set keyword defines an accessor method in a #_property or indexer that assigns the value of the #_property or the indexer element.
   /// @par Examples
   /// @code

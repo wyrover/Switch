@@ -13,17 +13,17 @@ namespace DesignPatterns {
       void Add(string part) {
         this->parts.Add(part);
       }
-      
+
       void Show() const {
         Console::WriteLine("\nProduct Parts -------");
         for (const string& part : this->parts)
           Console::WriteLine(part);
       }
-      
+
     private:
       List<string> parts;
     };
-    
+
     // The 'Builder' abstract class
     class Builder _abstract {
     public:
@@ -31,7 +31,7 @@ namespace DesignPatterns {
       virtual void BuildPartB() = 0;
       virtual const Product& GetResult() const = 0;
     };
-    
+
     // The 'Director' class
     class Director : public object {
     public:
@@ -41,29 +41,29 @@ namespace DesignPatterns {
         builder.BuildPartB();
       }
     };
-    
+
     // The 'ConcreteBuilder1' class
     class ConcreteBuilder1 : public Builder {
     public:
       void BuildPartA() override {this->product.Add("PartA");}
       void BuildPartB() override {this->product.Add("PartB");}
       const Product& GetResult() const override {return this->product;}
-      
+
     private:
       Product product;
     };
-    
+
     // The 'ConcreteBuilder2' class
     class ConcreteBuilder2 : public Builder {
     public:
       void BuildPartA() override {this->product.Add("PartX");}
       void BuildPartB() override {this->product.Add("PartY");}
       const Product& GetResult() const override {return this->product;}
-      
+
     private:
       Product product;
     };
-    
+
     // MainApp _startup class for Creational
     // Builder Design Pattern.
     class MainApp {
@@ -72,15 +72,15 @@ namespace DesignPatterns {
       static void Main() {
         // Create director and builders
         Director director;
-        
+
         refptr<Builder> b1 = ref_new<ConcreteBuilder1>();
         refptr<Builder> b2 = ref_new<ConcreteBuilder2>();
-        
+
         // Construct two products
         director.Construct(*b1);
         Product p1 = b1->GetResult();
         p1.Show();
-        
+
         director.Construct(*b2);
         Product p2 = b2->GetResult();
         p2.Show();

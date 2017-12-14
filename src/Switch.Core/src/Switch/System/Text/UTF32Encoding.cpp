@@ -115,17 +115,17 @@ bool UTF32Encoding::Equals(const object& obj) const {
   const UTF32Encoding* ue = dynamic_cast<const UTF32Encoding*>(&obj);
   if (ue == null)
     return false;
-    
+
   return this->shouldEmitPreamble == ue->shouldEmitPreamble && this->bigEndian == ue->bigEndian;
 }
 
 int32 UTF32Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
   if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
   if (index < 0) throw ArgumentOutOfRangeException(_caller);
-  
+
   int32 count = GetByteCount(c);
   if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
-  
+
   Encoder encoder(this->bigEndian);
   encoder.Encode(c, &bytes[index]);
   return count;

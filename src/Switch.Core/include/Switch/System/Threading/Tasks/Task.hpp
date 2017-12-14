@@ -21,7 +21,7 @@ namespace Switch {
           /// @param action The delegate that represents the code to execute in the task.
           /// @remarks Rather than calling this constructor, the most common way to instantiate a Task object and launch a task is by calling the static Task.Run(Action) or TaskFactory.StartNew(Action) method. The only advantage offered by this constructor is that it allows object instantiation to be separated from task invocation.
           Task(const Action<>& action) {this->data->task = action;}
-          
+
           /// @brief Initializes a new Task with the specified action and state.
           /// @param action The delegate that represents the code to execute in the task.
           /// @param state An object representing data to be used by the action.
@@ -30,7 +30,7 @@ namespace Switch {
             this->data->parameterizedTask = action;
             this->data->state = &state;
           }
-          
+
           /// @brief Initializes a new Task with the specified action and state.
           /// @param action The delegate that represents the code to execute in the task.
           /// @param state An object representing data to be used by the action.
@@ -39,7 +39,7 @@ namespace Switch {
             this->data->constParameterizedTask = action;
             this->data->state = const_cast<object*>(&state);
           }
-          
+
           /// @cond
           Task() {}
           Task(const Task& task) : data(task.data) {}
@@ -49,16 +49,16 @@ namespace Switch {
               this->data->endEvent.WaitOne();
           }
           /// @endcond
-          
+
           /// @brief Returns the ID of the currently executing Task.
           /// @return An integer that was assigned by the system to the currently-executing task.
           /// @remarks CurrentId is a static property that is used to get the identifier of the currently executing task from the code that the task is executing. It differs from the Id property, which returns the identifier of a particular Task instance. If you attempt to retrieve the CurrentId value from outside the code that a task is executing, the property returns null.
           static Nullable<int32> CurrentId();
-          
+
           /// @brief Provides access to factory methods for creating and configuring Task and Task<TResult> instances.
           /// @return A factory object that can create a variety of Task and Task<TResult> objects.
           static TaskFactory& Factory();
-          
+
           /// @brief Gets an ID for this Task instance.
           /// @brief The identifier that is assigned by the system to this Task instance.
           /// @remarks Task IDs are assigned on-demand and do not necessarily represent the order in which task instances are created. Note that although collisions are very rare, task identifiers are not guaranteed to be unique.
@@ -66,33 +66,33 @@ namespace Switch {
           _property<int32, _readonly> Id {
             _get {return this->data->id;}
           };
-          
+
           /// @brief Gets whether this Task instance has completed execution due to being canceled.
           /// @return true if the task has completed due to being canceled; otherwise false.
           _property<bool, _readonly> IsCanceled {
             _get {return this->data->status == TaskStatus::Canceled;}
           };
-          
+
           /// @brief Gets whether this Task has completed.
           /// @return rue if the task has completed; otherwise false.
           /// @remarks IsCompleted will return true when the task is in one of the three final states: RanToCompletion, Faulted, or Canceled.
           _property<bool, _readonly> IsCompleted {
             _get {return this->data->status == TaskStatus::RanToCompletion || this->data->status == TaskStatus::Faulted || this->data->status == TaskStatus::Canceled;}
           };
-          
+
           /// @brief Gets whether the Task completed due to an unhandled exception.
           /// @return true if the task has thrown an unhandled exception; otherwise false.
           /// @remarks If IsFaulted is true, the task's Status is equal to Faulted, and its Exception property will be non-null.
           _property<bool, _readonly> IsFaulted {
             _get {return this->data->status == TaskStatus::Faulted;}
           };
-          
+
           /// @brief Gets the TaskStatus of this task.
           /// @return The current TaskStatus of this task instance.
           _property<TaskStatus, _readonly> Status {
             _get {return this->data->status;}
           };
-          
+
           /// @brief Creates a task that completes after a specified time interval.
           /// @param delay The time span to wait before completing the returned task, or TimeSpan.FromMilliseconds(-1) to wait indefinitely.
           /// @return A task that represents the time delay.
@@ -101,7 +101,7 @@ namespace Switch {
           /// The following example shows a simple use of the Delay method.
           /// @include TaskDelay.cpp
           static Task<void> Delay(const TimeSpan& delay) {return Delay(as<int32>(delay.TotalMilliseconds()));}
-          
+
           /// @brief Creates a task that completes after a time delay.
           /// @param millisecondsDelay The number of milliseconds to wait before completing the returned task, or -1 to wait indefinitely.
           /// @return A task that represents the time delay.
@@ -115,7 +115,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Queues the specified work to run on the thread pool and returns a Task object that represents that work.
           /// @param action The work to execute asynchronously
           /// @return A task that represents the work queued to execute in the ThreadPool.
@@ -124,7 +124,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Queues the specified work to run on the thread pool and returns a Task object that represents that work.
           /// @param action The work to execute asynchronously
           /// @param state An object representing data to be used by the action.
@@ -134,7 +134,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Queues the specified work to run on the thread pool and returns a Task object that represents that work.
           /// @param action The work to execute asynchronously
           /// @param state An object representing data to be used by the action.
@@ -144,7 +144,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Queues the specified work to run on the thread pool and returns a Task<TResult> object that represents that work.
           /// @param function The work to execute asynchronously.
           /// @return A task that represents the work queued to execute in the ThreadPool.
@@ -154,7 +154,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Queues the specified work to run on the thread pool and returns a Task object that represents that work.
           /// @param function The work to execute asynchronously.
           /// @param state An object representing data to be used by the action.
@@ -165,7 +165,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Queues the specified work to run on the thread pool and returns a Task object that represents that work.
           /// @param function The work to execute asynchronously.
           /// @param state An object representing data to be used by the action.
@@ -176,7 +176,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Runs the Task synchronously on the current TaskScheduler.
           /// @remarks Ordinarily, tasks are executed asynchronously on a thread pool thread and do not block the calling thread. Tasks executed by calling the RunSynchronously() method are associated with the current TaskScheduler and are run on the calling thread. If the target scheduler does not support running this task on the calling thread, the task will be scheduled for execution on the scheduler, and the calling thread will block until the task has completed execution. Even though the task runs synchronously, the calling thread should still call Wait to handle any exceptions that the task might throw. For more information on exception handling, see Exception Handling (Task Parallel Library).
           /// @remarks Tasks executed by calling the RunSynchronously method are instantiated by calling a Task or Task<TResult> class constructor. The task to be run synchronously must be in the TaskStatus.Created state. A task may be started and run only once. Any attempts to schedule a task a second time results in an exception.
@@ -188,7 +188,7 @@ namespace Switch {
             this->data->startEvent.Set();
             __opaque_task_id_generator__::currentId = 0;
           }
-          
+
           /// @brief Starts the Task, scheduling it for execution to the current TaskScheduler.
           /// @exception InvalidOperationException The Task is not in a valid state to be started. It may have already been started, executed, or canceled, or it may have been created in a manner that doesn't support direct scheduling.
           /// @remarks A task may be started and run only once. Any attempts to schedule a task a second time will result in an exception.
@@ -197,17 +197,17 @@ namespace Switch {
           void Start() override {
             if (this->data->status != TaskStatus::Created || (this->data->millisecondsDelay == -2 && this->data->task.IsEmpty() && this->data->parameterizedTask.IsEmpty() && this->data->constParameterizedTask.IsEmpty()))
               throw InvalidOperationException(_caller);
-              
+
             this->data->status = TaskStatus::WaitingForActivation;
             ThreadPool::RegisterWaitForSingleObject(this->data->startEvent, this->data->waitOrTimerCallback, *this->data->state, Timeout::Infinite, true);
             this->data->status = TaskStatus::WaitingToRun;
             this->data->startEvent.Set();
           }
-          
+
           /// @brief Waits for the Task to complete execution.
           /// @remarks Wait is a synchronization method that causes the calling thread to wait until the current task has completed. If the current task has not started execution, the Wait method attempts to remove the task from the scheduler and execute it inline on the current thread. If it is unable to do that, or if the current task has already started execution, it blocks the calling thread until the task completes. For more information, see Task.Wait and "Inlining" in the Parallel Programming with .NET blog.
           void Wait() override {this->Wait(Timeout::Infinite);}
-          
+
           /// @brief Waits for the Task to complete execution within a specified number of milliseconds.
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
           /// @return true if the Task completed execution within the allotted time; otherwise, false.
@@ -219,45 +219,45 @@ namespace Switch {
             this->data->status = TaskStatus::RanToCompletion;
             return result;
           }
-          
+
           /// @brief Waits for the Task to complete execution within a specified time interval.
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @return true if the Task completed execution within the allotted time; otherwise, false.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
           bool Wait(const TimeSpan& timeout) override {return this->Wait(as<int32>(timeout.TotalMilliseconds()));}
-          
+
           /// @brief Waits for all of the provided Task objects to complete execution.
           /// @param tasks An array of ITask instances on which to wait.
           static void WaitAll(Array<ref<ITask>> tasks) {WaitAll(tasks, Timeout::Infinite);}
-          
+
           /// @brief Waits for all of the provided Task objects to complete execution.
           /// @param tasks An array of Task instances on which to wait.
           static void WaitAll(Array<Task<>> tasks) {WaitAll(tasks, Timeout::Infinite);}
-          
+
           /// @brief Waits for all of the provided Task objects to complete execution.
           /// @param tasks An array of Task instances on which to wait.
           template<typename T>
           static void WaitAll(Array<Task<T>> tasks) {WaitAll(tasks, Timeout::Infinite);}
-          
+
           /// @brief Waits for all of the provided cancellable Task objects to complete execution within a specified time interval.
           /// @param tasks An array of ITask instances on which to wait.
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
           static bool WaitAll(Array<ref<ITask>> tasks, const TimeSpan& timeout) {return WaitAll(tasks, as<int32>(timeout.TotalMilliseconds()));}
-          
+
           /// @brief Waits for all of the provided cancellable Task objects to complete execution within a specified time interval.
           /// @param tasks An array of Task instances on which to wait.
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
           static bool WaitAll(Array<Task<>> tasks, const TimeSpan& timeout) {return WaitAll(tasks, as<int32>(timeout.TotalMilliseconds()));}
-          
+
           /// @brief Waits for all of the provided cancellable Task objects to complete execution within a specified time interval.
           /// @param tasks An array of Task instances on which to wait.
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
           template<typename T>
           static bool WaitAll(Array<Task<T>> tasks, const TimeSpan& timeout) {return WaitAll(tasks, as<int32>(timeout.TotalMilliseconds()));}
-          
+
           /// @brief Waits for all of the provided Task objects to complete execution within a specified number of milliseconds.
           /// @param tasks An array of ITask instances on which to wait.
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
@@ -265,13 +265,13 @@ namespace Switch {
           static bool WaitAll(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(_caller);
-              
+
             if (millisecondsTimeout == Timeout::Infinite) {
               for (auto& task : tasks)
                 task().Wait();
               return true;
             }
-            
+
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
             for (auto& item : tasks) {
@@ -283,7 +283,7 @@ namespace Switch {
             }
             return true;
           }
-          
+
           /// @brief Waits for all of the provided Task objects to complete execution within a specified number of milliseconds.
           /// @param tasks An array of Task instances on which to wait.
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
@@ -291,13 +291,13 @@ namespace Switch {
           static bool WaitAll(Array<Task<>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(_caller);
-              
+
             if (millisecondsTimeout == Timeout::Infinite) {
               for (auto& task : tasks)
                 task.Wait();
               return true;
             }
-            
+
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
             for (auto& item : tasks) {
@@ -309,7 +309,7 @@ namespace Switch {
             }
             return true;
           }
-          
+
           /// @brief Waits for all of the provided Task objects to complete execution within a specified number of milliseconds.
           /// @param tasks An array of Task instances on which to wait.
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
@@ -318,13 +318,13 @@ namespace Switch {
           static bool WaitAll(Array<Task<T>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(System::Runtime::CompilerServices::Caller(__FILE__, __LINE__));
-              
+
             if (millisecondsTimeout == Timeout::Infinite) {
               for (auto& task : tasks)
                 task.Wait();
               return true;
             }
-            
+
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
             for (auto& item : tasks) {
@@ -336,39 +336,39 @@ namespace Switch {
             }
             return true;
           }
-          
+
           /// @brief Waits for any of the provided Task objects to complete execution.
           /// @param tasks An array of ITask instances on which to wait.
           static void WaitAny(Array<ref<ITask>> tasks) {WaitAny(tasks, Timeout::Infinite);}
-          
+
           /// @brief Waits for any of the provided Task objects to complete execution.
           /// @param tasks An array of Task instances on which to wait.
           static void WaitAny(Array<Task<>> tasks) {WaitAny(tasks, Timeout::Infinite);}
-          
+
           /// @brief Waits for any of the provided Task objects to complete execution.
           /// @param tasks An array of Task instances on which to wait.
           template<typename T>
           static void WaitAny(Array<Task<T>> tasks) {WaitAny(tasks, Timeout::Infinite);}
-          
+
           /// @brief Waits for any of the provided cancellable Task objects to complete execution within a specified time interval.
           /// @param tasks An array of ITask instances on which to wait.
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
           static int32 WaitAny(Array<ref<ITask>> tasks, const TimeSpan& timeout) {return WaitAny(tasks, as<int32>(timeout.TotalMilliseconds()));}
-          
+
           /// @brief Waits for any of the provided cancellable Task objects to complete execution within a specified time interval.
           /// @param tasks An array of Task instances on which to wait.
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
           static int32 WaitAny(Array<Task<>> tasks, const TimeSpan& timeout) {return WaitAny(tasks, as<int32>(timeout.TotalMilliseconds()));}
-          
+
           /// @brief Waits for any of the provided cancellable Task objects to complete execution within a specified time interval.
           /// @param tasks An array of Task instances on which to wait.
           /// @param timeout A TimeSpan that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.
           /// @exception ArgumentOutOfRangeException timeout is a negative number other than -1 milliseconds, which represents an infinite time-out.
           template<typename T>
           static int32 WaitAny(Array<Task<T>> tasks, const TimeSpan& timeout) {return WaitAny(tasks, as<int32>(timeout.TotalMilliseconds()));}
-          
+
           /// @brief Waits for any of the provided Task objects to complete execution within a specified number of milliseconds.
           /// @param tasks An array of ITask instances on which to wait.
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
@@ -376,7 +376,7 @@ namespace Switch {
           static int32 WaitAny(Array<ref<ITask>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(_caller);
-              
+
             if (millisecondsTimeout == Timeout::Infinite) {
               for (int32 index = 0; index < tasks.Count; index++) {
                 if (tasks[index]().Wait(0) == true)
@@ -386,7 +386,7 @@ namespace Switch {
               }
               return -1;
             }
-            
+
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
             do {
@@ -402,7 +402,7 @@ namespace Switch {
             } while (timeout >= 0);
             return -1;
           }
-          
+
           /// @brief Waits for any of the provided Task objects to complete execution within a specified number of milliseconds.
           /// @param tasks An array of Task instances on which to wait.
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
@@ -410,7 +410,7 @@ namespace Switch {
           static int32 WaitAny(Array<Task<>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(_caller);
-              
+
             if (millisecondsTimeout == Timeout::Infinite) {
               for (int32 index = 0; index < tasks.Count; index++) {
                 if (tasks[index].Wait(0) == true)
@@ -420,7 +420,7 @@ namespace Switch {
               }
               return -1;
             }
-            
+
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
             do {
@@ -436,7 +436,7 @@ namespace Switch {
             } while (timeout >= 0);
             return -1;
           }
-          
+
           /// @brief Waits for any of the provided Task objects to complete execution within a specified number of milliseconds.
           /// @param tasks An array of Task instances on which to wait.
           /// @param millisecondsTimeout The number of milliseconds to wait, or Infinite (-1) to wait indefinitely.
@@ -445,7 +445,7 @@ namespace Switch {
           static int32 WaitAny(Array<Task<T>> tasks, int32 millisecondsTimeout) {
             if (millisecondsTimeout < Timeout::Infinite)
               ArgumentOutOfRangeException(System::Runtime::CompilerServices::Caller(__FILE__, __LINE__));
-              
+
             if (millisecondsTimeout == Timeout::Infinite) {
               for (int32 index = 0; index < tasks.Count; index++) {
                 if (tasks[index].Wait(0) == true)
@@ -455,7 +455,7 @@ namespace Switch {
               }
               return -1;
             }
-            
+
             int32 timeout = millisecondsTimeout;
             int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
             do {
@@ -471,10 +471,10 @@ namespace Switch {
             } while (timeout >= 0);
             return -1;
           }
-          
+
           /// @brief Creates an awaitable task that asynchronously yields back to the current context when awaited.
           static bool Yield() {return Thread::Yield();}
-          
+
         private:
           class TaskData {
             friend class Task<void>;
@@ -512,7 +512,7 @@ namespace Switch {
               }
             };
           };
-          
+
           refptr<TaskData> data {new TaskData()};
         };
       }
@@ -531,7 +531,7 @@ namespace Switch {
         Nullable<int32> Task<TResult>::CurrentId() {
           return __opaque_task_id_generator__::currentId == 0 ? Nullable<int32>() : Nullable<int32>(__opaque_task_id_generator__::currentId);
         }
-        
+
         template<typename TResult>
         TaskFactory& Task<TResult>::Factory() {
           static TaskFactory taskFactory;

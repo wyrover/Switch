@@ -9,7 +9,7 @@ namespace Examples {
     static void Main() {
       String str;
       String nl = Environment::NewLine;
-      
+
       Console::WriteLine();
       //  <-- Keep this information secure! -->
       String query = "My system drive is %SystemDrive% and my system root is %SystemRoot%";

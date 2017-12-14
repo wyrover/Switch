@@ -9,7 +9,7 @@ namespace Examples {
     static void Main() {
       // make an array
       Array<int> myArray = {10, 20, 30, 40, 50, 60, 70};
-      
+
       Console::WriteLine("Items of myArray : ");
       _lock(myArray.SyncRoot) {
         for (int item : myArray)

@@ -22,7 +22,7 @@ namespace Switch {
   ref<TT> as(const ref<T>& value) {
     return value.template As<TT>();
   }
-  
+
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
@@ -35,7 +35,7 @@ namespace Switch {
   ref<TT> as(ref<T>& value) {
     return value.template As<TT>();
   }
-  
+
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
@@ -48,7 +48,7 @@ namespace Switch {
   refptr<TT> as(const refptr<T>& value) {
     return value.template As<TT>();
   }
-  
+
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
@@ -61,7 +61,7 @@ namespace Switch {
   refptr<TT> as(refptr<T>& value) {
     return value.template As<TT>();
   }
-  
+
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
@@ -79,7 +79,7 @@ namespace Switch {
     }
     throw std::bad_cast();
   }
-  
+
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
@@ -97,7 +97,7 @@ namespace Switch {
     }
     throw std::bad_cast();
   }
-  
+
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code
@@ -112,7 +112,7 @@ namespace Switch {
       return null;
     return &as<TT>(*value);
   }
-  
+
   /// @brief Used to static cast a type into another type. A To expression takes the following form:
   /// @par Examples
   /// @code

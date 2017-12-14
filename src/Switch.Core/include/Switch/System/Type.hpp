@@ -24,7 +24,7 @@ namespace Switch {
 namespace __s__ {
   template<typename T>
   Switch::System::Type __typeof_();
-  
+
   template<typename T>
   Switch::System::Type __typeof_(const T& value);
 }
@@ -40,32 +40,32 @@ namespace Switch {
       /// @cond
       Type(const Type& type);
       /// @endcond
-      
+
       /// @brief Gets the fully qualified name of the Type, including the namespace of the Type.
       /// @return The fully qualified name of the Type, including the namespace of the Type.
       /// @remarks For example, the fully qualified name of the String type is String.
       _property<String, _readonly> FullName;
-      
+
       /// @brief Gets the name of the Type.
       /// @return The name of the Type.
       /// @remarks For example, the name of the String type is String.
       _property<String, _readonly> Name;
-      
+
       /// @brief Gets the namespace of the Type.
       /// @return The namespace of the Type.
       /// @remarks For example, the namespace of the String type is System::
       _property<String, _readonly> Namespace;
-      
+
       /// @brief Determines whether the specified Object is equal to the current Object.
       /// @param obj The Object to compare with the current Object.
       /// @return bool true if the specified Object is equal to the current Object. otherwise, false.
       bool Equals(const Object& obj) const override;
-      
+
       /// @brief Determines whether the specified Type is equal to the current Type.
       /// @param type The Type to compare with the current Object.
       /// @return bool true if the specified type is equal to the current Type. otherwise, false.
       bool Equals(const Type& type) const;
-      
+
       /// @brief Gets the underlying type code of the specified Type
       /// @param value The value of type whose underlying type code to get.
       /// @return The code of the underlying type, or Empty if type is null.
@@ -75,35 +75,35 @@ namespace Switch {
           return TypeCode::Object;
         return dynamic_cast<const IConvertible&>(value).GetTypeCode();
       }
-      
+
       template<typename T>
       static bool IsComparable(T value) {return is<IComparable>(value);}
-      
+
       template<typename T, class TT>
       static bool IsInstanceOfType(TT value) {return is<T>(value);}
-      
+
       template<typename T>
       static bool IsValueType(T obj) {return is<ValueType>(obj);}
-      
+
       /// @brief Returns a String representing the name of the current Type.
       /// @return A String representing the name of the current Type.
       String ToString() const override;
-      
+
     private:
       String GetFullName() const;
       String GetName() const;
       String GetNamespace() const;
-      
+
       template<typename T>
       friend Type __s__::__typeof_();
       template<typename T>
       friend Type __s__::__typeof_(const T& value);
       friend class Object;
-      
+
       Type();
       Type(const std::type_info& type);
       Type& operator=(const Type& type);
-      
+
       const std::type_info& type;
     };
   }
@@ -115,7 +115,7 @@ namespace __s__ {
   Switch::System::Type __typeof_() {
     return System::Type(typeid(T));
   }
-  
+
   template<typename T>
   Switch::System::Type __typeof_(const T& value) {
     return System::Type(typeid(value));

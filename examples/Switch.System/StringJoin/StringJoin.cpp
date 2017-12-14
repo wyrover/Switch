@@ -11,7 +11,7 @@ namespace Examples {
       string output = String::Join(" ", *GetAlphabet(true).Where(_delegate(const string & letter) {return letter.CompareTo("M") >= 0;}));
       Console::WriteLine(output);
     }
-    
+
   private:
     static List<string> GetAlphabet(bool upper) {
       List<string> alphabet;

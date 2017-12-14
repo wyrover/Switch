@@ -15,19 +15,19 @@ namespace Switch {
         this->fullTypeName = exception.fullTypeName;
         this->SetStackTrace(*this);
       }
-      
+
       TypeInitializationException(const String& fullTypeName, ref<System::Exception> innerException) : SystemException() {
         this->SetInnerException(innerException);
         this->fullTypeName = fullTypeName;
         this->SetStackTrace(*this);
       }
-      
+
       TypeInitializationException(const String& fullTypeName, ref<System::Exception> innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {
         this->SetInnerException(innerException);
         this->fullTypeName = fullTypeName;
         this->SetStackTrace(*this);
       }
-      
+
     private:
       String GetDefaultMessage() const override {return String::Format("The type initializer for '{0}' threw an exception.", this->fullTypeName);}
       String fullTypeName;

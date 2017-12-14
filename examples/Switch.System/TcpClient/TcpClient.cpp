@@ -21,7 +21,7 @@ namespace Examples {
         }
       }));
       server.Start();
-      
+
       Thread client(ThreadStart(_delegate {
         StreamWriter streamWriter(TcpClient("127.0.0.1", 9050).GetStream());
         int counter = Random().Next(1, 20000);
@@ -32,7 +32,7 @@ namespace Examples {
         }
       }));
       client.Start();
-      
+
       server.Join();
       client.Join();
     }

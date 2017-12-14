@@ -11,7 +11,7 @@ namespace Switch {
   namespace System {
     namespace ComponentModel {
       class IComponent;
-      
+
       /// @brief Provides a read-only container for a collection of IComponent objects.
       class _export ComponentCollection : public object {
       public:
@@ -22,15 +22,15 @@ namespace Switch {
           for (auto component : components)
             this->components.Add(component);
         }
-        
+
         int32 Count() const { return this->components.Count(); }
-        
+
         const System::Collections::ArrayList& GetInnerList() const { return this->components; }
-        
+
         Any operator [](int32 index) const { return this->components[index]; }
-        
+
         Any operator [](int32 index) { return this->components[index]; }
-        
+
         Any operator [](string name) {
           /*
           for(refptr<Object> component : components) {
@@ -40,7 +40,7 @@ namespace Switch {
            */
           return "";
         }
-        
+
       private:
         System::Collections::ArrayList components;
       };

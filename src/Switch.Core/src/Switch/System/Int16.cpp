@@ -70,7 +70,7 @@ string Int16::ToString(const string& format, const IFormatProvider&) const {
     if (precision == 0) precision = 5;
     return NumericalFormat::Format_G(arg, precision, type == 'G');
   }
-  
+
   case 'n':
     if (format.Length() == 1) precision = 2;
     return NumericalFormat::Format_N(arg, precision);
@@ -104,17 +104,17 @@ bool Int16::ToBoolean(const IFormatProvider&) const {
 byte Int16::ToByte(const IFormatProvider&) const {
   if (this->value < Byte::MinValue)
     throw OverflowException(_caller);
-    
+
   if (this->value > Byte::MaxValue)
     throw OverflowException(_caller);
-    
+
   return (sbyte)value;
 }
 
 char32 Int16::ToChar(const IFormatProvider&) const {
   if (this->value < 0)
     throw OverflowException(_caller);
-    
+
   return this->value;
 }
 
@@ -141,31 +141,31 @@ int64 Int16::ToInt64(const IFormatProvider&) const {
 uint16 Int16::ToUInt16(const IFormatProvider&) const {
   if (this->value < UInt16::MinValue)
     throw OverflowException(_caller);
-    
+
   return (uint16)this->value;
 }
 
 uint32 Int16::ToUInt32(const IFormatProvider&) const {
   if (this->value < 0)
     throw OverflowException(_caller);
-    
+
   return (uint32)this->value;
 }
 
 uint64 Int16::ToUInt64(const IFormatProvider&) const {
   if (this->value < 0)
     throw OverflowException(_caller);
-    
+
   return (uint64)this->value;
 }
 
 sbyte Int16::ToSByte(const IFormatProvider&) const {
   if (this->value < SByte::MinValue)
     throw OverflowException(_caller);
-    
+
   if (this->value > SByte::MaxValue)
     throw OverflowException(_caller);
-    
+
   return (sbyte)this->value;
 }
 
@@ -204,7 +204,7 @@ Int16& Int16::operator *=(const Int16& value) {
 Int16& Int16::operator /=(const Int16& value) {
   if (value == 0)
     throw DivideByZeroException(_caller);
-    
+
   this->value /= value.value;
   return *this;
 }
@@ -212,7 +212,7 @@ Int16& Int16::operator /=(const Int16& value) {
 Int16& Int16::operator %=(const Int16& value) {
   if (value == 0)
     throw DivideByZeroException(_caller);
-    
+
   this->value %= value;
   return *this;
 }

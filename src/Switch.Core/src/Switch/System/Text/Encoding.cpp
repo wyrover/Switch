@@ -157,7 +157,7 @@ int32 Encoding::GetByteCount(const string& s) const {
 // string
 int32 Encoding::GetBytes(const String& s, byte bytes[], int32 bytesSize) const {
   ArrayAlgorithms::ValidateArray(bytes, bytesSize);
-  
+
   int32 index = 0;
   System::Collections::Generic::Enumerator<char32> enumerator = s.GetEnumerator();
   while (enumerator.MoveNext())
@@ -203,7 +203,7 @@ int32 Encoding::GetBytes(const char32 chars[], int32 charsSize, int32 charIndex,
   ArrayAlgorithms::ValidateArray(bytes, bytesSize);
   ArrayAlgorithms::ValidateRange(charsSize, charIndex, charCount);
   ArrayAlgorithms::ValidateIndex(byteIndex, bytesSize);
-  
+
   if (byteIndex < 0) throw ArgumentOutOfRangeException(_caller);
   int32 count = 0;
   for (int32 i = charIndex; i < charIndex + charCount; i += 1)
@@ -226,18 +226,18 @@ int32 Encoding::GetBytes(const String& source, int32 charIndex, int32 charCount,
     }
     iteration += 1;
   }
-  
+
   if (iteration <= charIndex && charIndex > 0)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   return index;
 }
 
 Array<byte> Encoding::GetBytes(const String& s, int32 index, int32 count) const {
   ArrayAlgorithms::ValidateRange(s.Length(), index, count);
-  
+
   if (count == 0) return Array<byte>();
-  
+
   // todo optimize
   return GetBytes(s.Substring(index, count));
 }
@@ -280,7 +280,7 @@ int32 Encoding::GetChars(const byte bytes[], int32 bytesLength, int32 byteIndex,
       chars[index++] = decoder->CodePoint();
     }
   }
-  
+
   return index - charIndex;
 }
 
@@ -317,11 +317,11 @@ string Encoding::GetString(const byte bytes[], int32 bytesSize) const {
 
 string Encoding::GetString(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
   if (bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
-  
+
   if (bytesSize == 0) return string();
   int32 nbChars = GetCharCount(bytes, bytesSize, index, count);
   if (nbChars == 0) return string();
-  
+
   Array<char32> chars(nbChars);
   GetChars(bytes, bytesSize, index, count, (char32*)chars.Data(), nbChars, 0);
   return string(chars.Data(), nbChars, 0, nbChars);
@@ -344,7 +344,7 @@ void Encoding::ValidateGBC(int32 charsLength, int32 index, int32 count) const {
 void Encoding::ValidateGCC(int32 bytesLength, int32 index, int32 count) const {
   if (index < 0 || count < 0 || (index > bytesLength && index > 0))
     throw ArgumentOutOfRangeException(_caller);
-    
+
   if (index + count > bytesLength)
     throw ArgumentOutOfRangeException(_caller);
 }
@@ -352,7 +352,7 @@ void Encoding::ValidateGCC(int32 bytesLength, int32 index, int32 count) const {
 void Encoding::ValidateGC(int32 bytesLength, int32 byteIndex, int32 byteCount, int32 charsLength, int32 charIndex) const {
   if (byteIndex < 0 || byteCount < 0 || byteIndex > bytesLength || byteIndex + byteCount > bytesLength)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   if (charIndex < 0 || charIndex >= charsLength)
     throw ArgumentOutOfRangeException(_caller);
 }

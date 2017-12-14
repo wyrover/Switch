@@ -24,13 +24,13 @@ void CheckBox::SetCheckState(System::Windows::Forms::CheckState checkState) {
   if (this->checkState != checkState) {
     bool oldChecked = this->Checked;
     this->checkState = checkState;
-    
+
     if (this->IsHandleCreated)
       Native::CheckBoxApi::SetChecked(*this);
-      
+
     if (oldChecked != this->Checked)
       this->OnCheckedChanged(EventArgs::Empty());
-      
+
     this->OnCheckStateChanged(EventArgs::Empty());
   }
 }

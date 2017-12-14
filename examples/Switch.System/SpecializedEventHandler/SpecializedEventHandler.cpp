@@ -13,16 +13,16 @@ namespace Examples {
       this->message = e.message;
       return *this;
     }
-    
+
     const string& GetMessage() const { return this->message; }
-    
+
   private:
     string message;
   };
-  
+
   // Declares a specialized event handler from GenericEventHandler<T> with a SpecializedEventArgs argument.
   using SpecializedEventHandler = GenericEventHandler<const SpecializedEventArgs&>;
-  
+
   // Defines some methods to which the delegate can point.
   class MySampleClass : public object {
   public:
@@ -30,13 +30,13 @@ namespace Examples {
     void OnMyEvent(const Object&, const SpecializedEventArgs& e) {
       Console::WriteLine("  OnMyEvent is called - {0}", e.GetMessage());
     }
-    
+
     // Defines a static method.
     static void OnMyEventStatic(const Object&, const SpecializedEventArgs& e) {
       Console::WriteLine("  OnMyEventStatic is called - {0}", e.GetMessage());
     }
   };
-  
+
   class Program {
   public:
     // The main entry point for the application.
@@ -46,10 +46,10 @@ namespace Examples {
       // class name.
       MySampleClass mySC;
       SpecializedEventHandler myEvent;
-      
+
       myEvent += SpecializedEventHandler(mySC, &MySampleClass::OnMyEvent);
       myEvent += SpecializedEventHandler(&MySampleClass::OnMyEventStatic);
-      
+
       // Invokes the EventHandler.
       Console::WriteLine("Call myEvent :");
       myEvent(string("Sender"), SpecializedEventArgs("First call."));

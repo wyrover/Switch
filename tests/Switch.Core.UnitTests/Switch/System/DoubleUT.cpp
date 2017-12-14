@@ -10,13 +10,13 @@ namespace {
     ASSERT_EQ(0xFFEFFFFFFFFFFFFFull, (uint64)BitConverter::DoubleToInt64Bits(Double::MinValue));
     ASSERT_EQ(0x0000000000000001ull, (uint64)BitConverter::DoubleToInt64Bits(Double::Epsilon));
     ASSERT_EQ(0x7FF8000000000000ull, (uint64)BitConverter::DoubleToInt64Bits(Double::NaN));
-    
+
     EXPECT_GT(Double::MaxValue, 0.0);
     EXPECT_LT(Double::MinValue, 0.0);
     EXPECT_GT(Double::Epsilon, 0.0);
     EXPECT_LT(-Double::Epsilon, 0.0);
   }
-  
+
   TEST(Double, IsInfinity) {
     ASSERT_FALSE(Double::IsInfinity(0.0));
     ASSERT_FALSE(Double::IsInfinity(1.0));
@@ -34,7 +34,7 @@ namespace {
     ASSERT_TRUE(Double::IsInfinity(Double::NegativeInfinity));
     ASSERT_TRUE(Double::IsInfinity(Double::PositiveInfinity));
   }
-  
+
   TEST(Double, IsNegativeInfinity) {
     ASSERT_FALSE(Double::IsNegativeInfinity(0.0));
     ASSERT_FALSE(Double::IsNegativeInfinity(1.0));
@@ -52,7 +52,7 @@ namespace {
     ASSERT_TRUE(Double::IsNegativeInfinity(Double::NegativeInfinity));
     ASSERT_FALSE(Double::IsNegativeInfinity(Double::PositiveInfinity));
   }
-  
+
   TEST(Double, IsPositiveInfinity) {
     ASSERT_FALSE(Double::IsPositiveInfinity(0.0));
     ASSERT_FALSE(Double::IsPositiveInfinity(1.0));
@@ -70,7 +70,7 @@ namespace {
     ASSERT_FALSE(Double::IsPositiveInfinity(Double::NegativeInfinity));
     ASSERT_TRUE(Double::IsPositiveInfinity(Double::PositiveInfinity));
   }
-  
+
   TEST(Double, IsNaN) {
     ASSERT_FALSE(Double::IsNaN(0.0));
     ASSERT_FALSE(Double::IsNaN(1.0));
@@ -88,7 +88,7 @@ namespace {
     ASSERT_FALSE(Double::IsNaN(Double::NegativeInfinity));
     ASSERT_FALSE(Double::IsNaN(Double::PositiveInfinity));
   }
-  
+
   TEST(Double, ToString) {
     ASSERT_EQ("0", string::Format("{0}", double(0.0)));
     ASSERT_EQ("1", string::Format("{0}", double(1.0)));

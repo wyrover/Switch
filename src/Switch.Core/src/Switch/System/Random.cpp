@@ -18,10 +18,10 @@ Random::Random(int32 seed) {
 int32 Random::Next(int32 minValue, int32 maxValue) const {
   if (minValue > maxValue)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   if (maxValue == minValue)
     return minValue;
-    
+
   return minValue + Convert::ToInt32(Sample() * RAND_MAX) % ((maxValue - 1) - minValue + 1);
 }
 

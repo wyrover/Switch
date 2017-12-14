@@ -16,11 +16,11 @@ namespace Switch {
         class _export GroupBox : public ContainerControl {
         public:
           GroupBox();
-          
+
           /// @cond
           GroupBox(const GroupBox& groupBox) : ContainerControl(groupBox) {}
           /// @endcond
-          
+
         protected:
           void CreateHandle() override;
           System::Drawing::Size GetDefaultSize() const override {return System::Drawing::Size(200, 100);}

@@ -15,7 +15,7 @@ int32 Native::DateTimeApi::Ftime(int64& seconds, int32& milliseconds, int32& tim
   TIME_ZONE_INFORMATION tzi = { 0 };
   if (GetTimeZoneInformation(&tzi) == TIME_ZONE_ID_UNKNOWN)
     return -1;
-    
+
   SYSTEMTIME st = { 0 };
   GetSystemTime(&st);
   seconds = Mkgmtime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
@@ -32,7 +32,7 @@ int32 Native::DateTimeApi::Gmtime(int64 time, int32& year, int32& month, int32& 
   SYSTEMTIME st = { 0 };
   if (FileTimeToSystemTime(&ft, &st) == 0)
     return -1;
-    
+
   year = st.wYear;
   month = st.wMonth;
   day = st.wDay;
@@ -51,11 +51,11 @@ int32 Native::DateTimeApi::Localtime(int64 time, int32& year, int32& month, int3
   FILETIME locFt = { 0 };
   if (FileTimeToLocalFileTime((const FILETIME*)&ft, &locFt) == 0)
     return -1;
-    
+
   SYSTEMTIME st = { 0 };
   if (FileTimeToSystemTime(&locFt, &st) == 0)
     return -1;
-    
+
   year = st.wYear;
   month = st.wMonth;
   day = st.wDay;
@@ -72,7 +72,7 @@ int64 Native::DateTimeApi::Mkgmtime(int32 year, int32 month, int32 day, int32 ho
   FILETIME ft = { 0 };
   if (SystemTimeToFileTime(&st, &ft) == 0)
     return -1;
-    
+
   ULARGE_INTEGER lt = { ft.dwLowDateTime, ft.dwHighDateTime };
   lt.QuadPart -= dateFixOs;
   lt.QuadPart /= 10000000ULL;
@@ -84,11 +84,11 @@ int64 Native::DateTimeApi::Mktime(int32 year, int32 month, int32 day, int32 hour
   FILETIME ft = { 0 };
   if (SystemTimeToFileTime(&st, &ft) == 0)
     return -1;
-    
+
   FILETIME ftUtc;
   if (LocalFileTimeToFileTime((const FILETIME*)&ft, &ftUtc) == 0)
     return -1;
-    
+
   ULARGE_INTEGER lt = { ftUtc.dwLowDateTime, ftUtc.dwHighDateTime };
   lt.QuadPart -= dateFixOs;
   lt.QuadPart /= 10000000ULL;

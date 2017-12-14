@@ -9,10 +9,10 @@ namespace Examples {
     static void Main() {
       // Define an array of Int64 values.
       Array<int64> values = {0, 0xFFFFFF, -0xFFFFFF, 1000000000, -1000000000, 0x100000000, -0x100000000, 0xAAAAAAAAAAAA, -0xAAAAAAAAAAAA, 1000000000000000000, -1000000000000000000, Int64::MinValue, Int64::MaxValue};
-      
+
       Console::WriteLine("{0,22}{1,10}{2,30}", "Int64", "Endian", "Byte Array");
       Console::WriteLine("{0,22}{1,10}{2,30}", "-----", "------", "----------");
-      
+
       for (auto value : values) {
         // Convert each Int64 value to a byte array.
         Array<byte> byteArray = BitConverter::GetBytes(value);

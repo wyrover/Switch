@@ -18,12 +18,12 @@ namespace Switch {
         /// @brief Initializes a new instance of the ConsoleTraceListener class with trace output written to the standard output stream.
         /// @remarks This constructor initializes a ConsoleTraceListener object to write messages to either the Console.Out or the Console.Error stream. Its Name property is initialized to an empty string ("").
         NullTraceListener() {}
-        
+
         /// @cond
         NullTraceListener(const NullTraceListener& ntl) : TraceListener(ntl) {}
         NullTraceListener& operator=(const NullTraceListener& ntl) {this->TraceListener::operator=(ntl); return *this;}
         /// @endcond
-        
+
         void Write(const String& message) override {}
         void WriteLine(const String& message) override {}
       };

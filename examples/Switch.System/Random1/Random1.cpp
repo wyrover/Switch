@@ -11,17 +11,17 @@ namespace Examples {
       Array<byte> bytes2(100);
       Random rnd1;
       Random rnd2;
-      
+
       rnd1.NextBytes(bytes1);
       rnd2.NextBytes(bytes2);
-      
+
       Console::WriteLine("First Series:");
       for (int i = 0; i < bytes1.Length; i++) {
         Console::Write("{0, 5}", bytes1[i]);
         if ((i + 1) % 10 == 0)
           Console::WriteLine();
       }
-      
+
       Console::WriteLine();
       Console::WriteLine("Second Series:");
       for (int i = 0; i < bytes2.Length; i++) {

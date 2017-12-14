@@ -11,7 +11,7 @@ namespace Examples {
       // Change the directory to %WINDIR% if on Windows otherwise %HOME%
       Environment::CurrentDirectory = Environment::GetEnvironmentVariable(Environment::OSVersion().IsWindowsFamilly ? "windir" : "HOME");
       DirectoryInfo info(".");
-      
+
       Console::WriteLine("Directory Info:   " + info.FullName);
     }
   };

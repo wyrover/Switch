@@ -28,24 +28,24 @@ namespace Switch {
         /// @remarks The default value of T is used to initialize the instance when Value is accessed for the first time.
         /// @remarks This constructor is equivalent to calling the ThreadLocal<T>(Boolean) constructor with a value of false for the trackAllValues argument.
         ThreadLocal() {}
-        
+
         /// @brief Initializes the ThreadLocal<T> instance and specifies whether all values are accessible from any thread.
         /// @param trackAllValues) true to track all values set on the instance and expose them through the Values property; false otherwise.
         /// @remarks If trackAllValues is false, only the value of this instance for the current thread is accessible. Attempting to use the Values property to retrieve all values throws an InvalidOperationException exception.
         ThreadLocal(bool trackAllValues) : trackAllValues(trackAllValues) {}
-        
+
         /// @brief Initializes the ThreadLocal<T> instance with the specified valueFactory function.
         /// @param valueFactory The System.Func<TResult> invoked to produce a lazily-initialized value when an attempt is made to retrieve Value without it having been previously initialized.
         ThreadLocal(const Func<T>& valueFactory) {this->valueFactory = valueFactory;}
-        
+
         /// @brief Initializes the ThreadLocal<T> instance with the specified valueFactory function and a flag that indicates whether all values are accessible from any thread.
         /// @param valueFactory The System.Func<TResult> invoked to produce a lazily-initialized value when an attempt is made to retrieve Value without it having been previously initialized.
         /// @param trackAllValues) true to track all values set on the instance and expose them through the Values property; false otherwise.
         ThreadLocal(const Func<T>& valueFactory, bool trackAllValues) : trackAllValues(trackAllValues) {this->valueFactory = valueFactory;}
-        
+
         /// @cond
         ThreadLocal(const ThreadLocal& value) : values(value.values), trackAllValues(value.trackAllValues) {this->valueFactory = value.valueFactory;}
-        
+
         ThreadLocal& operator =(const ThreadLocal& value) {
           this->values = value.values;
           this->valueFactory = value.valueFactory;
@@ -53,31 +53,31 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-        
+
         /// @brief Gets whether Value is initialized on the current thread.
         /// @return true if Value is initialized on the current thread; otherwise false.
         _property<bool, _readonly> IsValueCreated {
           _get {return this->values.ContainsKey(Thread::CurrentThread().ManagedThreadId);}
         };
-        
+
         /// @brief Gets or sets the value of this instance for the current thread.
         /// @return Returns an instance of the object that this ThreadLocal is responsible for initializing.
         _property<T> Value {
           _get {return this->GetValue();},
           _set {this->SetValue(value);}
         };
-        
+
         /// @brief Gets a list for all of the values currently stored by all of the threads that have accessed this instance.
         /// @return A array for all of the values currently stored by all of the threads that have accessed this instance.
         /// @exception InvalidOperationException Values stored by all threads are not available because this instance was initialized with the trackAllValues argument set to false in the call to a class constructor.
         _property<Array<T>, _readonly> Values {
           _get {return this->GetValues();}
         };
-        
+
         /// @brief Creates and returns a string representation of this instance for the current thread
         /// @return The result of calling ToString on the Value.
         String ToString() const override {return string::Format("{0}", this->Value());}
-        
+
       private:
         const T& GetValue() const {
           _lock(this->values.SyncRoot) {
@@ -87,13 +87,13 @@ namespace Switch {
           }
           return this->values[Thread::CurrentThread().ManagedThreadId];
         }
-        
+
         void SetValue(const T& value) {
           _lock(this->values.SyncRoot) {
             this->values[Thread::CurrentThread().ManagedThreadId] = value;
           }
         }
-        
+
         Array<T> GetValues() const {
           if (!trackAllValues)
             throw InvalidOperationException(_caller);
@@ -102,7 +102,7 @@ namespace Switch {
           }
           return Array<T>(this->values.Values());
         }
-        
+
         mutable System::Collections::Generic::Dictionary<int32, T> values;
         Func<T> valueFactory;
         bool trackAllValues = false;

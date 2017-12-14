@@ -11,7 +11,7 @@ namespace MessageBoxExample {
       Application::EnableVisualStyles();
       Application::Run(Form1());
     }
-    
+
     Form1() {
       this->buttonShowMessage.Location = System::Drawing::Point(10, 10);
       this->buttonShowMessage.Width = 100;
@@ -20,16 +20,16 @@ namespace MessageBoxExample {
         DialogResult result = MessageBox::Show("Hello, World!", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Asterisk);
         labelDialogResult.Text = string::Format("DialogResult = {0}", result);
       };
-      
+
       this->labelDialogResult.Location = System::Drawing::Point(10, 45);
       this->labelDialogResult.Width = 200;
-      
+
       this->StartPosition = FormStartPosition::Manual;
       this->Location = System::Drawing::Point(400, 200);
       this->Text = "MessageBox example";
       this->Controls().AddRange({this->buttonShowMessage, this->labelDialogResult});
     }
-    
+
   private:
     Button buttonShowMessage;
     Label labelDialogResult;

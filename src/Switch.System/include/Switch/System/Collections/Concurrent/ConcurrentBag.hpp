@@ -27,13 +27,13 @@ namespace Switch {
         public:
           /// @brief Initializes a new instance of the ConcurrentBag<T> class.
           ConcurrentBag() {}
-          
+
           ConcurrentBag(const ConcurrentBag& concurrentBag) : list(concurrentBag.list) {}
-          
+
           /// @cond
           ConcurrentBag(ConcurrentBag&& concurrentBag) : list(Move(concurrentBag.list)) {}
           /// @endcond
-          
+
           /// @brief Initializes a new instance of the ConcurrentBag<T> class that contains elements copied from the specified collection.
           /// @param collection The collection whose elements are copied to the new ConcurrentBag<T>.
           /// @exception ArgumentNullException collection is a null reference.
@@ -43,7 +43,7 @@ namespace Switch {
                 this->list.Add(item);
             }
           }
-          
+
           /// @cond
           ConcurrentBag(InitializerList<T> il)  {
             _lock(this->list.SyncRoot) {
@@ -52,7 +52,7 @@ namespace Switch {
             }
           }
           /// @endcond
-          
+
           /// @brief Gets a value that indicates whether the ConcurrentBag<T> is empty.
           /// @return Boolean true if the ConcurrentBag<T> is empty; otherwise, false.
           _property<bool, _readonly> IsEmpty {
@@ -60,27 +60,27 @@ namespace Switch {
               return this->list.Count == 0;
             }
           };
-          
+
           /// @brief Adds an object to the ConcurrentBag<T>.
           /// @param item The object to be added to the ConcurrentBag<T>.
           void Add(const T& item) override {
             _lock(this->list.SyncRoot)
             this->list.Add(item);
           }
-          
+
           /// @brief Copies the elements of the IProducerConsumerCollection<T> to an Array, starting at a specified index.
           /// @param array TThe one-dimensional Array that is the destination of the elements copied from the IProducerConsumerCollection<T>. The array must have zero-based indexing.
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
             if (index + this->list.Count > array.Length)
               throw ArgumentOutOfRangeException(_caller);
-              
+
             _lock(this->list.SyncRoot) {
               for (T item : this->list)
                 array[index++] = item;
             }
           }
-          
+
           /// @brief Copies the elements contained in the IProducerConsumerCollection<T> to a new array.
           /// @return A new array containing the elements copied from the IProducerConsumerCollection<T>.
           System::Array<T> ToArray() const override {
@@ -88,7 +88,7 @@ namespace Switch {
             return this->list.ToArray();
             return this->list.ToArray();
           }
-          
+
           /// @brief Returns an enumerator that iterates through the ConcurrentBag<T>.
           /// @return Int32 A List<T>::Enumerator for the List<T>.
           Generic::Enumerator<T> GetEnumerator() const override {
@@ -96,7 +96,7 @@ namespace Switch {
             return Generic::Enumerator<T>(new Enumerator(this));
             return Generic::Enumerator<T>(new Enumerator(this));
           }
-          
+
           /// @brief Attempts to add an object to the IProducerConsumerCollection<T>.
           /// @param item The object to add to the IProducerConsumerCollection<T>.
           /// @return true if the object was added successfully; otherwise, false.
@@ -112,7 +112,7 @@ namespace Switch {
             }
             return false;
           }
-          
+
           /// @brief Attempts to return an object from the ConcurrentBag<T> without removing it.
           /// @param result When this method returns, result contains an object from the ConcurrentBag<T> or the default value of T if the operation failed.
           /// @return true if and object was returned successfully; otherwise, false.
@@ -125,7 +125,7 @@ namespace Switch {
             }
             return false;
           }
-          
+
           /// @brief Attempts to remove and return an object from the IProducerConsumerCollection<T>.
           /// @param result When this method returns, if the object was removed and returned successfully, item contains the removed object. If no object was available to be removed, the value is unspecified.
           /// @return true if an object was removed and returned successfully; otherwise, false.
@@ -139,50 +139,50 @@ namespace Switch {
             }
             return false;
           }
-          
+
         private:
           int32 GetCount() const override {return this->list.Count;}
-          
+
           bool GetIsReadOnly() const override {return false;}
-          
+
           bool GetIsSynchronized() const override { return true; }
-          
+
           const object& GetSyncRoot() const override {return this->list.SyncRoot;}
-          
+
           void Clear() override {
             _lock(this->list.SyncRoot)
             this->list.Clear();
           }
-          
+
           bool Contains(const T& value) const override {
             _lock(this->list.SyncRoot)
             return this->list.Contains(value);
             return this->list.Contains(value);
           }
-          
+
           bool Remove(const T& value) override {
             _lock(this->list.SyncRoot)
             return this->list.Remove(value);
             return this->list.Remove(value);
           }
-          
+
           class Enumerator : public object, public Generic::IEnumerator<T> {
           public:
             Enumerator(const ConcurrentBag* bag) : array(bag->list.ToArray()) {}
             void Reset() { this->index = -1; }
             virtual bool MoveNext() { return ++this->index < this->array.Length; }
-            
+
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
                 throw InvalidOperationException(_caller);
               return this->array[this->index];
             }
-            
+
             int32 index = -1;
             System::Array<T> array;
           };
-          
+
           Generic::List<T, TAllocator> list;
         };
       }

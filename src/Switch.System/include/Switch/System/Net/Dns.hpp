@@ -25,17 +25,17 @@ namespace Switch {
         /// @param hostNameOrAddress The host name or IP address to resolve.
         /// @return Array<IPAddress> An array of type IPAddress that holds the IP addresses for the host that is specified by the hostNameOrAddress parameter..
         static Array<IPAddress> GetHostAddresses(const String& hostNameOrAddress);
-        
+
         /// @brief Resolves an IP address to an IPHostEntry instance.
         /// @param address An IP address.
         /// @return IPHostEntry An IPHostEntry instance that contains address information about the host specified in address.
         static IPHostEntry GetHostEntry(const IPAddress& address);
-        
+
         /// @brief Resolves a host name or IP address to an IPHostEntry instance.
         /// @param hostNameOrAddress The host name or IP address to resolve.
         /// @return IPHostEntry An IPHostEntry instance that contains address information about the host specified in hostNameOrAddress.
         static IPHostEntry GetHostEntry(const String& hostNameOrAddress);
-        
+
         /// @brief Gets the host name of the local computer.
         /// @return string A string that contains the DNS host name of the local computer.
         static String GetHostName();

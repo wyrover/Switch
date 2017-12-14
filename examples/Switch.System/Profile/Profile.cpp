@@ -14,7 +14,7 @@ namespace Examples {
       Thread thread((ParameterizedThreadStart)Profile::LockThread);
       thread.Name = "LockThread";
       thread.Start(sync);
-      
+
       Stopwatch stopWatch;
       stopWatch.Start();
       while (index < Profile::CountMax()) {
@@ -27,16 +27,16 @@ namespace Examples {
       }
       stopWatch.Stop();
       thread.Join();
-      
+
       Console::WriteLine("Lock Duration : {0}", stopWatch.Elapsed());
     }
-    
+
   private:
     class Profile : public object {
     public:
       static int CountMax() { return 10000; }
       static int Counter;
-      
+
       static void LockThread(const Object& sync) {
         for (int index = 0; index < CountMax(); index++) {
           _lock(sync)

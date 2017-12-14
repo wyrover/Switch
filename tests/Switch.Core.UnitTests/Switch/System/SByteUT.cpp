@@ -10,15 +10,15 @@ namespace {
   TEST(SByteTest, MaxValue) {
     ASSERT_EQ(127, SByte::MaxValue);
   }
-  
+
   TEST(SByteTest, MinValue) {
     ASSERT_EQ(-128, SByte::MinValue);
   }
-  
+
   TEST(SByteTest, DefaultValue) {
     ASSERT_EQ(0, SByte());
   }
-  
+
   TEST(SByteTest, CtorValue) {
     ASSERT_EQ(10, SByte(10));
     ASSERT_EQ(0, SByte(0));
@@ -26,7 +26,7 @@ namespace {
     ASSERT_EQ(-1, SByte(-1));
     ASSERT_EQ(-100, SByte(-100));
   }
-  
+
   TEST(SByteTest, Parse) {
     ASSERT_EQ(0, SByte::Parse("0"));
     ASSERT_EQ(1, SByte::Parse("1"));
@@ -35,7 +35,7 @@ namespace {
     ASSERT_EQ(-54, SByte::Parse("-54"));
     ASSERT_EQ(-123, SByte::Parse("-123"));
   }
-  
+
   TEST(SByteTest, Parse_Leading_Zeros) {
     ASSERT_EQ(0, SByte::Parse("0"));
     ASSERT_EQ(0, SByte::Parse("00"));
@@ -45,7 +45,7 @@ namespace {
     ASSERT_EQ(99, SByte::Parse("099"));
     ASSERT_EQ(-99, SByte::Parse("-099"));
   }
-  
+
   TEST(SByteTest, Parse_Spaces) {
     ASSERT_EQ(5, SByte::Parse(" 5"));
     ASSERT_EQ(5, SByte::Parse("     5"));
@@ -55,7 +55,7 @@ namespace {
     ASSERT_EQ(52, SByte::Parse("        +52 "));
     ASSERT_EQ(-52, SByte::Parse("        -52 "));
   }
-  
+
   TEST(SByteTest, Parse_FormatException) {
     ASSERT_THROW(SByte::Parse(""), FormatException);
     ASSERT_THROW(SByte::Parse("- 5"), FormatException);
@@ -69,7 +69,7 @@ namespace {
     ASSERT_THROW(SByte::Parse("100a"), FormatException);
     ASSERT_THROW(SByte::Parse("10u"), FormatException);
   }
-  
+
   TEST(SByteTest, Parse_OverFlowException) {
     ASSERT_EQ(SByte::MaxValue, SByte::Parse("127"));
     ASSERT_THROW(SByte::Parse("128"), OverflowException);
@@ -78,7 +78,7 @@ namespace {
     ASSERT_THROW(SByte::Parse("130"), OverflowException);
     ASSERT_THROW(SByte::Parse("00128"), OverflowException);
   }
-  
+
   TEST(SByteTest, Parse_Binary) {
     ASSERT_EQ(0, SByte::Parse("0", 2));
     ASSERT_EQ(1, SByte::Parse("1", 2));
@@ -89,7 +89,7 @@ namespace {
     ASSERT_EQ(-4, SByte::Parse("-100", 2));
     ASSERT_EQ(-15, SByte::Parse("-1111", 2));
   }
-  
+
   TEST(SByteTest, Parse_Binary_Complement) {
     ASSERT_EQ(-1, SByte::Parse("11111111", 2));
     ASSERT_EQ(-1, SByte::Parse("11111111b", 2));
@@ -100,8 +100,8 @@ namespace {
     ASSERT_THROW(SByte::Parse("100000000", 2), OverflowException);
     ASSERT_THROW(SByte::Parse("-11111111b", 2), OverflowException);
   }
-  
-  
+
+
   TEST(SByteTest, Parse_Binary_Exceptions) {
     ASSERT_THROW(SByte::Parse("", 2), FormatException);
     ASSERT_THROW(SByte::Parse("2", 2), FormatException);
@@ -114,7 +114,7 @@ namespace {
     ASSERT_THROW(SByte::Parse("100a", 2), FormatException);
     ASSERT_THROW(SByte::Parse("10u", 2), FormatException);
   }
-  
+
   TEST(SByteTest, Parse_Binary_Suffix) {
     ASSERT_EQ(0, SByte::Parse("0b", 2));
     ASSERT_EQ(1, SByte::Parse("1B", 2));
@@ -125,7 +125,7 @@ namespace {
     ASSERT_EQ(-4, SByte::Parse("-100b", 2));
     ASSERT_EQ(-15, SByte::Parse("-1111B", 2));
   }
-  
+
   TEST(SByteTest, Parse_Binary_Suffix_Exceptions) {
     ASSERT_THROW(SByte::Parse("0 b", 2), FormatException);
     ASSERT_THROW(SByte::Parse("0x1", 2), FormatException);
@@ -136,7 +136,7 @@ namespace {
     ASSERT_THROW(SByte::Parse("-100a", 2), FormatException);
     ASSERT_THROW(SByte::Parse("-11110x", 2), FormatException);
   }
-  
+
   TEST(SByteTest, Parse_Octal) {
     ASSERT_EQ(0, SByte::Parse("0", 8));
     ASSERT_EQ(1, SByte::Parse("1", 8));
@@ -146,7 +146,7 @@ namespace {
     ASSERT_EQ(-4, SByte::Parse("-4", 8));
     ASSERT_EQ(-15, SByte::Parse("-17", 8));
   }
-  
+
   TEST(SByteTest, Parse_Hexadecimal) {
     ASSERT_EQ(0, SByte::Parse("0", 16));
     ASSERT_EQ(1, SByte::Parse("1", 16));
@@ -154,7 +154,7 @@ namespace {
     ASSERT_EQ(0x3C, SByte::Parse("3c", 16));
     ASSERT_EQ(-0x4A, SByte::Parse("-4A", 16));
   }
-  
+
   TEST(SByteTest, Parse_Hexadecimal_Complement) {
     ASSERT_EQ(-1, SByte::Parse("FF", 16));
     ASSERT_EQ(-1, SByte::Parse("0xFF", 16));
@@ -165,7 +165,7 @@ namespace {
     ASSERT_THROW(SByte::Parse("100", 16), OverflowException);
     ASSERT_THROW(SByte::Parse("-0xFF", 16), OverflowException);
   }
-  
+
   TEST(SByteTest, Parse_Hexadecimal_Prefix) {
     ASSERT_EQ(0, SByte::Parse("0x0", 16));
     ASSERT_EQ(1, SByte::Parse("0x1", 16));
@@ -176,7 +176,7 @@ namespace {
     ASSERT_EQ(0x1B, SByte::Parse("1B", 16));
     ASSERT_EQ(0x1B, SByte::Parse("0x1b", 16));
   }
-  
+
   TEST(SByteTest, Parse_Hexadecimal_Prefix_Exceptions) {
     ASSERT_THROW(SByte::Parse("- 0xFF", 16), FormatException);
     ASSERT_THROW(SByte::Parse("xFF", 16), FormatException);
@@ -190,7 +190,7 @@ namespace {
     ASSERT_THROW(SByte::Parse("0x", 16), FormatException);
     ASSERT_THROW(SByte::Parse("00xFF", 16), FormatException);
   }
-  
+
   TEST(SByteTest, TryParse) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("0", x));
@@ -206,7 +206,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-123", x));
     ASSERT_EQ(-123, x);
   }
-  
+
   TEST(SByteTest, TryParse_Leading_Zeros) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("0", x));
@@ -224,7 +224,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-099", x));
     ASSERT_EQ(-99, x);
   }
-  
+
   TEST(SByteTest, TryParse_Spaces) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse(" 5", x));
@@ -242,7 +242,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("        -52 ", x));
     ASSERT_EQ(-52, x);
   }
-  
+
   TEST(SByteTest, TryParse_FormatException) {
     sbyte x;
     ASSERT_FALSE(SByte::TryParse("", x));
@@ -257,7 +257,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("100a", x));
     ASSERT_FALSE(SByte::TryParse("10u", x));
   }
-  
+
   TEST(SByteTest, TryParse_OverFlowException) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("127", x));
@@ -269,7 +269,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("130", x));
     ASSERT_FALSE(SByte::TryParse("00128", x));
   }
-  
+
   TEST(SByteTest, TryParse_Binary) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("0", 2, x));
@@ -289,7 +289,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-1111", 2, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(SByteTest, TryParse_Binary_Complement) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("11111111", 2, x));
@@ -306,8 +306,8 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("100000000",  2, x));
     ASSERT_FALSE(SByte::TryParse("-11111111b",  2, x));
   }
-  
-  
+
+
   TEST(SByteTest, TryParse_Binary_Exceptions) {
     sbyte x;
     ASSERT_FALSE(SByte::TryParse("", 2, x));
@@ -321,7 +321,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("100a", 2, x));
     ASSERT_FALSE(SByte::TryParse("10u", 2, x));
   }
-  
+
   TEST(SByteTest, TryParse_Binary_Suffix) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("0b", 2, x));
@@ -341,7 +341,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-1111B", 2, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(SByteTest, TryParse_Binary_Suffix_Exceptions) {
     sbyte x;
     ASSERT_FALSE(SByte::TryParse("0 b", 2, x));
@@ -353,7 +353,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("-100a", 2, x));
     ASSERT_FALSE(SByte::TryParse("-11110x", 2, x));
   }
-  
+
   TEST(SByteTest, TryParse_Octal) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("0", 8, x));
@@ -371,7 +371,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-17", 8, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(SByteTest, TryParse_Hexadecimal) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("0", 16, x));
@@ -385,7 +385,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-4A", 16, x));
     ASSERT_EQ(-0x4A, x);
   }
-  
+
   TEST(SByteTest, TryParse_Hexadecimal_Complement) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("FF", 16, x));
@@ -402,7 +402,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("100",  16, x));
     ASSERT_FALSE(SByte::TryParse("-0xFF",  16, x));
   }
-  
+
   TEST(SByteTest, TryParse_Hexadecimal_Prefix) {
     sbyte x;
     ASSERT_TRUE(SByte::TryParse("0x0", 16, x));
@@ -422,7 +422,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("0x1b", 16, x));
     ASSERT_EQ(0x1B, x);
   }
-  
+
   TEST(SByteTest, TryParse_Hexadecimal_Prefix_Exceptions) {
     sbyte x;
     ASSERT_FALSE(SByte::TryParse("- 0xFF", 16, x));
@@ -437,7 +437,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("0x", 16, x));
     ASSERT_FALSE(SByte::TryParse("00xFF", 16, x));
   }
-  
+
   TEST(SByteTest, TryParse_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("0", x));
@@ -453,7 +453,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-123", x));
     ASSERT_EQ(-123, x);
   }
-  
+
   TEST(SByteTest, TryParse_Leading_Zeros_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("0", x));
@@ -471,7 +471,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-099", x));
     ASSERT_EQ(-99, x);
   }
-  
+
   TEST(SByteTest, TryParse_Spaces_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse(" 5", x));
@@ -489,7 +489,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("        -52 ", x));
     ASSERT_EQ(-52, x);
   }
-  
+
   TEST(SByteTest, TryParse_FormatException_SByte) {
     SByte x;
     ASSERT_FALSE(SByte::TryParse("", x));
@@ -504,7 +504,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("100a", x));
     ASSERT_FALSE(SByte::TryParse("10u", x));
   }
-  
+
   TEST(SByteTest, TryParse_OverFlowException_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("127", x));
@@ -516,7 +516,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("130", x));
     ASSERT_FALSE(SByte::TryParse("00128", x));
   }
-  
+
   TEST(SByteTest, TryParse_Binary_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("0", 2, x));
@@ -536,7 +536,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-1111", 2, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(SByteTest, TryParse_Binary_Complement_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("11111111", 2, x));
@@ -553,8 +553,8 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("100000000",  2, x));
     ASSERT_FALSE(SByte::TryParse("-11111111b",  2, x));
   }
-  
-  
+
+
   TEST(SByteTest, TryParse_Binary_Exceptions_SByte) {
     SByte x;
     ASSERT_FALSE(SByte::TryParse("", 2, x));
@@ -568,7 +568,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("100a", 2, x));
     ASSERT_FALSE(SByte::TryParse("10u", 2, x));
   }
-  
+
   TEST(SByteTest, TryParse_Binary_Suffix_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("0b", 2, x));
@@ -588,7 +588,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-1111B", 2, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(SByteTest, TryParse_Binary_Suffix_Exceptions_SByte) {
     SByte x;
     ASSERT_FALSE(SByte::TryParse("0 b", 2, x));
@@ -600,7 +600,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("-100a", 2, x));
     ASSERT_FALSE(SByte::TryParse("-11110x", 2, x));
   }
-  
+
   TEST(SByteTest, TryParse_Octal_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("0", 8, x));
@@ -618,7 +618,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-17", 8, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(SByteTest, TryParse_Hexadecimal_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("0", 16, x));
@@ -632,7 +632,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("-4A", 16, x));
     ASSERT_EQ(-0x4A, x);
   }
-  
+
   TEST(SByteTest, TryParse_Hexadecimal_Complement_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("FF", 16, x));
@@ -649,7 +649,7 @@ namespace {
     ASSERT_FALSE(SByte::TryParse("100",  16, x));
     ASSERT_FALSE(SByte::TryParse("-0xFF",  16, x));
   }
-  
+
   TEST(SByteTest, TryParse_Hexadecimal_Prefix_SByte) {
     SByte x;
     ASSERT_TRUE(SByte::TryParse("0x0", 16, x));
@@ -669,7 +669,7 @@ namespace {
     ASSERT_TRUE(SByte::TryParse("0x1b", 16, x));
     ASSERT_EQ(0x1B, x);
   }
-  
+
   TEST(SByteTest, TryParse_Hexadecimal_Prefix_Exceptions_SByte) {
     SByte x;
     ASSERT_FALSE(SByte::TryParse("- 0xFF", 16, x));

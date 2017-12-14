@@ -14,32 +14,32 @@ namespace Switch {
       /// @brief Create a new instance of class DivideByZeroException
       /// @remarks Message is set with the default message associate to the error.
       DivideByZeroException() : ArithmeticException() {}
-      
+
       /// @brief Create a new instance of class DivideByZeroException
       /// @param value The Excetion to copy.
       /// @remarks Message is set with the default message associate to the error.
       DivideByZeroException(const DivideByZeroException& value) : ArithmeticException(value) {}
-      
+
       /// @brief Create a new instance of class DivideByZeroException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
       explicit DivideByZeroException(const System::Runtime::CompilerServices::Caller& information) : ArithmeticException(information) {}
-      
+
       /// @brief Create a new instance of class DivideByZeroException
       /// @param message Message string associate to the error.
       explicit DivideByZeroException(const System::String& message) : ArithmeticException(message) {}
-      
+
       /// @brief Create a new instance of class DivideByZeroException
       /// @param message Message string associate to the error.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       DivideByZeroException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : ArithmeticException(message, information) {}
-      
+
       /// @brief Create a new instance of class DivideByZeroException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       DivideByZeroException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : ArithmeticException(message, innerException, information) {}
-      
+
     private:
       System::String GetDefaultMessage() const override {return "Attempt to divide by zero."; }
     };

@@ -19,7 +19,7 @@ namespace Switch {
         /// @param initialState true to set the initial state to signaled if the named event is created as a result of this call; false to set it to nonsignaled.
         /// @exception IO::IOException A Win32 error occurred.
         AutoResetEvent(bool initialState) : EventWaitHandle(initialState, EventResetMode::AutoReset) { }
-        
+
         /// @cond
         AutoResetEvent() {}
         AutoResetEvent(const AutoResetEvent& autoResetEvent) : EventWaitHandle(autoResetEvent) {}

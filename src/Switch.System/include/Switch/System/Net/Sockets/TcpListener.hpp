@@ -46,7 +46,7 @@ namespace Switch {
           /// @remarks Call the Start method to begin listening for incoming connection attempts.
           /// @note The 0 for local port functionality is not available.
           TcpListener(const IPEndPoint& ipEndPoint);
-          
+
           /// Initializes a new instance of the TcpListener class that listens for incoming connection attempts on the specified local IP address and port number.
           /// @param ipAddress An IPAddress that represents the local IP address.
           /// @param port The port on which to listen for incoming connection attempts.
@@ -61,11 +61,11 @@ namespace Switch {
           /// @remarks Call the Start method to begin listening for incoming connection attempts.
           /// @note The 0 for local port functionality is not available.
           TcpListener(const IPAddress& ipAddress, int32 port) : TcpListener(IPEndPoint(ipAddress, port)) {}
-          
+
           /// @cond
           TcpListener(const TcpListener& tcpListener) : data(tcpListener.data) {}
           /// @endcond
-          
+
           /// @brief Gets a bool value that specifies whether the TcpListener allows only one underlying socket to listen to a specific port.
           /// @return true if the TcpListener allows only one TcpListener to listen to a specific port; otherwise, false. .
           /// @exception InvalidOperationException The TcpListener has been started. Call the Stop() method and then set the exclusiveAddressUse property.
@@ -81,11 +81,11 @@ namespace Switch {
             _set {
               if (this->data->active)
                 throw ApplicationException(_caller); // tcplistener must be stopped
-                
+
               this->data->serverSocket.ExclusiveAddressUse = value;
             }
           };
-          
+
           /// @brief Gets the underlying EndPoint of the current TcpListener.
           /// @return The EndPoint to which the Socket is bound.
           /// @remarks You can use the LocalEndpoint property to identify the local network interface and port number being used to listen for incoming client connection requests,
@@ -94,7 +94,7 @@ namespace Switch {
           _property<const EndPoint&, _readonly> LocalEndPoint {
             _get->const EndPoint& { return this->data->serverSocket.LocalEndPoint(); }
           };
-          
+
           /// @brief Gets the underlying network Socket.
           /// @return The underlying Socket.
           /// @remarks TcpListener creates a Socket to listen for incoming client connection requests. Classes deriving from TcpListener can use this property to get this Socket.
@@ -105,12 +105,12 @@ namespace Switch {
           _property<Socket, _readonly> Server {
             _get {return this->data->serverSocket; }
           };
-          
+
           /// @brief Creates a new TcpListener instance to listen on the specified port.
           /// @param port The port on which to listen for incoming connection attempts.
           /// @return TcpListener A new TcpListener instance to listen on the specified port.
           static TcpListener Create(int32 port) { return TcpListener(IPAddress::Any, port); }
-          
+
           /// @brief Accepts a pending connection request.
           /// @return A Socket used to send and receive data.
           /// @exception InvalidOperationException The listener has not been started with a call to Start.
@@ -121,7 +121,7 @@ namespace Switch {
           /// @remarks be sure to call its Close method. If your application is relatively simple, consider using the AcceptTcpClient method rather than the AcceptSocket method.
           /// @remarks TcpClient provides you with simple methods for sending and receiving data over a network in blocking synchronous mode.
           Socket AcceptSocket();
-          
+
           /// @brief Accepts a pending connection request.
           /// @return A TcpClient used to send and receive data.
           /// @exception InvalidOperationException The listener has not been started with a call to Start.
@@ -132,7 +132,7 @@ namespace Switch {
           /// @remarks and receiving with the remote host. When you are through with the TcpClient, be sure to call its Close method. If you want greater flexibility than a TcpClient
           /// @remarks offers, consider using AcceptSocket.
           TcpClient AcceptTcpClient();
-          
+
           /// @brief Starts listening for incoming connection requests.
           /// @exception SocketException
           /// @remarks The Start method initializes the underlying Socket, binds it to a local endpoint, and listens for incoming connection attempts. If a connection request is received,
@@ -144,7 +144,7 @@ namespace Switch {
           /// @remarks until a connection request is available in the queue.
           /// @remarks Use the Stop method to close the TcpListener and stop listening. You are responsible for closing your accepted connections separately.
           void Start();
-          
+
           /// @brief Starts listening for incoming connection requests with a maximum number of pending connection.
           /// @param backlog The maximum length of the pending connections queue.
           /// @exception SocketException An error occurred while accessing the socket. See the Remarks section for more information.
@@ -159,7 +159,7 @@ namespace Switch {
           /// @remarks methods block until a connection request is available in the queue.
           /// @remarks Use the Stop method to close the TcpListener and stop listening. You are responsible for closing your accepted connections separately.
           void Start(int32 backlog);
-          
+
           /// @brief Closes the listener.
           /// @exception SocketException
           /// @remarks Stop closes the listener. Any unaccepted connection requests in the queue will be lost. Remote hosts waiting for a connection to be accepted will throw
@@ -167,14 +167,14 @@ namespace Switch {
           /// @note The Stop method also closes the underlying Socket, and creates a new Socket for the TcpListener. If you set any properties on the underlying Socket prior
           /// @note to calling the Stop method, those properties will not carry over to the new Socket.
           void Stop();
-          
+
           /// @brief Determines if there are pending connection requests.
           /// @return true if connections are pending; otherwise, false.
           /// @exception InvalidOperationException The listener has not been started with a call to Start.
           /// @remarks This non-blocking method determines if there are any pending connection requests. Because the AcceptSocket and AcceptTcpClient methods block execution until
           /// @remarks the Start method has queued an incoming connection request, the Pending method can be used to determine if connections are available before attempting to accept them.
           bool Pending();
-          
+
         protected:
           /// @brief Gets a value that indicates whether TcpListener is actively listening for client connections.
           /// @return true if TcpListener is actively listening; otherwise, false.
@@ -183,7 +183,7 @@ namespace Switch {
           _property<bool, _readonly> Active {
             _get {return this->data->active; }
           };
-          
+
         private:
           struct TcpListenerData {
             IPEndPoint serverIPEndPoint;

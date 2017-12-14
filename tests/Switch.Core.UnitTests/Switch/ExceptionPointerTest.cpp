@@ -9,20 +9,20 @@ namespace SwitchUnitTests {
     ASSERT_TRUE(ep == null);
     ASSERT_NO_THROW(ep.Rethrow());
   }
-  
+
   TEST(ExceptionPointerTest, CreateKnownExceptionThenRethrow) {
     ExceptionPtr ep = ExceptionPtr::Create(InvalidCastException());
     ASSERT_FALSE(ep == null);
     ASSERT_THROW(ep.Rethrow(), InvalidCastException);
   }
-  
+
   TEST(ExceptionPointerTest, CreateUnknownExceptionThenRethrow) {
     struct MyException {};
     ExceptionPtr ep = ExceptionPtr::Create(MyException());
     ASSERT_FALSE(ep == null);
     ASSERT_THROW(ep.Rethrow(), MyException);
   }
-  
+
   TEST(ExceptionPointerTest, GetCurrentExceptionOnNullExceptionThenRethrow) {
     ExceptionPtr ep;
     {
@@ -31,7 +31,7 @@ namespace SwitchUnitTests {
     ASSERT_TRUE(ep == null);
     ASSERT_NO_THROW(ep.Rethrow());
   }
-  
+
   TEST(ExceptionPointerTest, GetCurrentExceptionOnKnownExceptionThenRethrow) {
     ExceptionPtr ep;
     {
@@ -44,7 +44,7 @@ namespace SwitchUnitTests {
     ASSERT_FALSE(ep == null);
     ASSERT_THROW(ep.Rethrow(), InvalidOperationException);
   }
-  
+
   TEST(ExceptionPointerTest, GetCurrentExceptionOnUnknownExceptionThenRethrow) {
     struct MyException {};
     ExceptionPtr ep;

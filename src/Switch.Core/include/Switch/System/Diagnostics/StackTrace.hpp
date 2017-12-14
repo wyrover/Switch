@@ -27,7 +27,7 @@ namespace Switch {
       class _export StackTrace : public Object {
       private:
         friend class System::Exception;
-        
+
         /// @brief Initializes a new instance of the StackTrace class using the provided exception object, skipping the specified number of frames and optionally capturing source information.
         /// @param str The string from which to construct the stack trace.
         /// @param skipFrames The number of frames up the stack from which to start the trace.
@@ -36,7 +36,7 @@ namespace Switch {
         StackTrace(const String& str, int32 skipFrames, bool needFileInfo) {
           FillFrames(str, skipFrames, needFileInfo);
         }
-        
+
       public:
         /// @brief Initializes a new instance of the StackTrace class from the caller's frame.
         /// @remarks The StackTrace is created with the caller's current thread, and does not contain file name, line number, or column information.
@@ -44,7 +44,7 @@ namespace Switch {
         StackTrace() {
           FillFrames(0, false);
         }
-        
+
         /// @brief Initializes a new instance of the StackTrace class from the caller's frame, optionally capturing source information.
         /// @param needFileInfo true to capture the file name, line number, and column number; otherwise, false.
         /// @remarks The StackTrace is created with the caller's current thread.
@@ -64,7 +64,7 @@ namespace Switch {
         StackTrace(const System::Exception& exception, bool needFileInfo) {
           FillFrames(exception.GetType().ToString(), 0, needFileInfo);
         }
-        
+
         /// @brief Initializes a new instance of the StackTrace class using the provided exception object and skipping the specified number of frames.
         /// @param exception The exception object from which to construct the stack trace.
         /// @param skipFrames The number of frames up the stack from which to start the trace.
@@ -72,7 +72,7 @@ namespace Switch {
         StackTrace(const System::Exception& exception, int32 skipFrames) {
           FillFrames(exception.GetType().ToString(), skipFrames, false);
         }
-        
+
         /// @brief Initializes a new instance of the StackTrace class using the provided exception object, skipping the specified number of frames and optionally capturing source information.
         /// @param exception The exception object from which to construct the stack trace.
         /// @param skipFrames The number of frames up the stack from which to start the trace.
@@ -81,7 +81,7 @@ namespace Switch {
         StackTrace(const System::Exception& exception, int32 skipFrames, bool needFileInfo) {
           FillFrames(exception.GetType().ToString(), skipFrames, needFileInfo);
         }
-        
+
         /// @brief Initializes a new instance of the StackTrace class from the caller's frame, skipping the specified number of frames.
         /// @param skipFrames The number of frames up the stack from which to start the trace.
         /// @exception ArgumentOutOfRangeException The skipFrames parameter is negative.
@@ -90,7 +90,7 @@ namespace Switch {
         StackTrace(int32 skipFrames) {
           FillFrames(skipFrames, false);
         }
-        
+
         /// @brief Initializes a new instance of the StackTrace class from the caller's frame, skipping the specified number of frames and optionally capturing source information.
         /// @param skipFrames The number of frames up the stack from which to start the trace.
         /// @param needFileInfo true to capture the file name, line number, and column number; otherwise, false.
@@ -99,15 +99,15 @@ namespace Switch {
         StackTrace(int32 skipFrames, bool needFileInfo) {
           FillFrames(skipFrames, needFileInfo);
         }
-        
+
         /// @brief Gets the number of frames in the stack trace.
         int32 FrameCount() const;
-        
+
         /// @brief Gets the number of frames in the stack trace.
         /// @deprecated Replaced by System::Diagnostics::StackTrace::FrameCount()
         [[deprecated("Replaced by System::Diagnostics::StackTrace::FrameCount()")]]
         int32 GetFrameCount() const {return FrameCount();}
-        
+
         /// @brief Gets the specified stack frame.
         /// @param index The index of the stack frame requested.
         /// @return The specified stack frame.
@@ -115,10 +115,10 @@ namespace Switch {
         StackFrame GetFrame(int32 index) {
           if (index >= 0 && index < this->frames.Count)
             return StackFrame(*this->frames[index]);
-            
+
           return StackFrame();
         }
-        
+
         /// @brief Returns a copy of all stack frames in the current stack trace.
         /// @return An array of type StackFrame representing the function calls in the stack trace.
         /// @remarks Use the returned StackFrame array to enumerate and examine function calls in the StackTrace. The length of the returned array is equal to the FrameCount property value.
@@ -127,22 +127,22 @@ namespace Switch {
         System::Array<refptr<StackFrame>> GetFrames() {
           return this->frames.ToArray();
         }
-        
+
         /// @brief Builds a readable representation of the stack trace.
         /// @return A readable representation of the stack trace.
         virtual String ToString() const;
-        
+
       private:
         void FillFrames(int32 skipFrames, bool needFileInfo);
         void FillFrames(const String& str, int32 skipFrames, bool needFileInfo);
         void FillFrames(void* callStack, int32 skipFrames, bool needFileInfo);
-        
+
         struct CallStack {
           CallStack();
           ~CallStack();
           intptr handle;
         };
-        
+
         refptr<CallStack> stackTrace;
         System::Collections::Generic::List<refptr<StackFrame>> frames;
       };

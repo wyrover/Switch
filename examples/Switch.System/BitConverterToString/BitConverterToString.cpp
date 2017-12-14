@@ -18,7 +18,7 @@ namespace Examples {
       WriteByteArray(arrayThree, "arrayThree");
       WriteByteArray(arrayFour, "arrayFour");
     }
-    
+
   private:
     // Display a byte array with a name.
     static void WriteByteArray(const Array<byte>& bytes, const String& name) {

@@ -28,7 +28,7 @@ HttpStatusCode HttpWebResponse::GetStatusCode() const {
 const string HttpWebResponse::GetStatusDescription() const {
   string description;
   static Dictionary<int32, string> statusDescriptions;
-  
+
   if (statusDescriptions.Count == 0) {
     statusDescriptions[(int32)HttpStatusCode::Continue] = "The server has received the request headers, and the client should proceed to send the request body";
     statusDescriptions[(int32)HttpStatusCode::SwitchingProtocols] = "The requester has asked the server to switch protocols";
@@ -78,7 +78,7 @@ const string HttpWebResponse::GetStatusDescription() const {
     description = statusDescriptions[(int32)statusCode];
   else
     description = "Unknown status code.";
-    
+
   return description;
 }
 

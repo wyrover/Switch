@@ -13,19 +13,19 @@ namespace UnitTests {
       Expect::AreEqual(9, ts.Hours, _caller);
       Expect::AreEqual(15, ts.Minutes, _caller);
     }
-    
+
     // Used Expect::IsTrue to virifie if a condition is true
     void _Test(TimeSpanIsEqualToAnotherTimeSpan) {
       TimeSpan ts(10, 42, 24);
       Expect::IsTrue(ts.Equals(TimeSpan(10, 42, 24)), _caller);
     }
-    
+
     // Used Expect::IsFalse to virifie if a condition is false
     void _Test(DefaultTimeSpanIsEqualToZero) {
       Expect::IsFalse(TimeSpan(1) == TimeSpan::Zero(), _caller);
     }
   };
-  
+
   // Used _Test to add unit test to execute at the unit test suit.
   _AddTestFixture(TimeSpanTest);
   _AddTest(TimeSpanTest, CreateTimeSpanFromDateTime);

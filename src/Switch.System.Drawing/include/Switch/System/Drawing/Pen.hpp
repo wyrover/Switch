@@ -26,7 +26,7 @@ namespace Switch {
       }
     }
     /// @endcond
-    
+
     /// @brief The System::Drawing namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the System::Drawing::Drawing2D, System::Drawing::Imaging, and System::Drawing::Text namespaces.
     /// @par Library
     /// Switch.System.Drawing
@@ -34,7 +34,7 @@ namespace Switch {
       class _export Pen : public object {
       public:
         Pen() {}
-        
+
         /// @cond
         ~Pen() { this->Destroy(); }
         Pen(const Pen& pen) : brush(pen.brush), dashStyle(pen.dashStyle), width(pen.width) { this->Create(); }
@@ -46,24 +46,24 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-        
+
         Pen(const Brush& brush) : brush(as<System::Drawing::Brush>(brush.Clone())) { this->Create(); }
-        
+
         Pen(const Brush& brush, float width) : brush(as<System::Drawing::Brush>(brush.Clone())), width(width) { this->Create(); }
-        
+
         Pen(System::Drawing::Color color) : brush(as<System::Drawing::Brush>(ref_new<SolidBrush>(color))) { this->Create(); }
-        
+
         Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(ref_new<SolidBrush>(color))), width(width) { this->Create(); }
-        
+
         _property<const System::Drawing::Brush&> Brush{
           _get->const System::Drawing::Brush& { return this->brush(); },
           _set {this->brush = as<System::Drawing::Brush>(value.Clone()); }
         };
-        
+
         _property<System::Drawing::Color, _readonly> Color{
           _get{ return as<SolidBrush>(this->brush)().Color(); }
         };
-        
+
         _property<System::Drawing::Drawing2D::DashStyle> DashStyle {
           _get {return this->dashStyle;},
           _set {
@@ -73,12 +73,12 @@ namespace Switch {
             }
           }
         };
-        
+
         _property<float> Width{
           _get {return this->width;},
           _set {this->width = value;}
         };
-        
+
       private:
         friend class Native::GdiApi;
         friend class Windows::Forms::Control;

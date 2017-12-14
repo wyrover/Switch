@@ -10,28 +10,28 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       List<string> dinosaurs(4);
-      
+
       Console::WriteLine("\nCapacity: {0}", dinosaurs.Capacity);
-      
+
       dinosaurs.Add("Tyrannosaurus");
       dinosaurs.Add("Amargasaurus");
       dinosaurs.Add("Mamenchisaurus");
       dinosaurs.Add("Deinonychus");
-      
+
       Console::WriteLine();
       for (string s : dinosaurs)
         Console::WriteLine(s);
-        
+
       Console::WriteLine("\nReadOnlyCollection<string> roDinosaurs = dinosaurs.AsReadOnly()");
       ReadOnlyCollection<string> roDinosaurs = dinosaurs.AsReadOnly();
-      
+
       Console::WriteLine("\nElements in the read-only collection:");
       for (string dinosaur : roDinosaurs)
         Console::WriteLine(dinosaur);
-        
+
       Console::WriteLine("\ndinosaurs[2] = \"Coelophysis\"");
       dinosaurs[2] = "Coelophysis";
-      
+
       Console::WriteLine("\nElements in the read-only collection:");
       for (string dinosaur : roDinosaurs)
         Console::WriteLine(dinosaur);

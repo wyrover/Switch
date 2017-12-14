@@ -20,20 +20,20 @@ namespace Switch {
       public:
         /// @brief Initializes a new instance of the EventHandlerList class.
         EventHandlerList() {}
-        
+
         /// @cond
         EventHandlerList(const EventHandlerList& eventHandlerList) = default;
         /// @endcond
-        
+
         delegate<Result, Arguments...> operator[](ref<object>) {}
-        
+
       private:
         struct Item {
           ref<object> key;
           delegate<Result, Arguments...> handler;
           refptr<Item> next;
         };
-        
+
         refptr<Item> head;
       };
     }

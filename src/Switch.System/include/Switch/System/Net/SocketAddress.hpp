@@ -19,7 +19,7 @@ namespace Switch {
       class IPEndPoint;
       namespace Sockets {class Socket;}
       /// @endcond
-      
+
       /// @brief Stores serialized information from EndPoint derived classes.
       /// @remarks The first 2 bytes of the underlying buffer are reserved for the AddressFamily enumerated value.
       /// @remarks When the SocketAddress is used to store a serialized IPEndPoint, the third and fourth bytes are
@@ -34,35 +34,35 @@ namespace Switch {
       public:
         /// @brief Creates a new instance of the SocketAddress class for the given address family.
         SocketAddress(Sockets::AddressFamily addressFamily) : SocketAddress(addressFamily, 32) {}
-        
+
         /// @brief Creates a new instance of the SocketAddress class using the specified address family and buffer size.
         SocketAddress(Sockets::AddressFamily addressFamily, int32 bufferSize);
-        
+
         /// @brief Creates a new instance of the SocketAddress class using the specified byte buffer .
         SocketAddress(const Array<byte>& buffer);
-        
+
         /// @cond
         SocketAddress(const SocketAddress& socketAddress): bytes(socketAddress.bytes) {}
         SocketAddress& operator=(const SocketAddress& socketAddress) {this->bytes = socketAddress.bytes; return *this;}
         /// @endcond
-        
+
         /// @brief Gets the address family to which the endpoint belongs.
         /// @return One of the AddressFamily values.
         _property<Sockets::AddressFamily, _readonly> AddressFamily {
           _get {return this->GetAddressFamily();}
         };
-        
+
         /// @brief Gets the underlying buffer size of the SocketAddress.
         /// @return int32 The underlying buffer size of the SocketAddress.
         _property<int32, _readonly> Size {
           _get {return this->bytes.Length();}
         };
-        
+
         /// @brief Gets or sets the specified index element in the underlying buffer.
         /// @param index The array index element of the desired information.
         /// @return byte The value of the specified index element in the underlying buffer.
         byte& operator[](int32 index) { return this->bytes[index]; }
-        
+
         /// @brief Gets the specified index element in the underlying buffer.
         /// @param index The array index element of the desired information.
         /// @return byte The value of the specified index element in the underlying buffer.
@@ -70,12 +70,12 @@ namespace Switch {
         /// @remarks This property gets or sets the specified byte position in the underlying buffer.
         /// @note Be sure to call GetSize before referring to elements in the underlying buffer. Referring to an index that does not exist will cause the SocketAddress to throw an ArgumentOutOfRangeException.
         const byte& operator[](int32 index) const { return bytes[index]; }
-        
+
         /// @brief Returns information about the socket address.(
         /// @return string A string that contains information about the SocketAddress.
         /// @remarks The ToString method returns a string that contains the AddressFamily enumerated value, the size of the underlying buffer of the SocketAddress structure, and the remaining contents of the buffer.
         virtual String ToString() const;
-        
+
       private :
         friend class IPEndPoint;
         friend class Sockets::Socket;

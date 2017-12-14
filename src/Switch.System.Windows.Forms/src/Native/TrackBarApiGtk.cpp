@@ -22,7 +22,7 @@ namespace Native {
         control().Parent()().WndProc(event);
       });
     }
-    
+
     void Text(const string& text) override {}
   };
 }
@@ -65,7 +65,7 @@ void Native::TrackBarApi::SetTickFrequency(const System::Windows::Forms::TrackBa
       position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_TOP : Gtk::POS_BOTTOM;
     else
       position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_LEFT : Gtk::POS_RIGHT;
-      
+
     for (int32 i = 0; i <= trackBar.Maximum - trackBar.Minimum; i +=  trackBar.TickFrequency)
       ((Native::TrackBar*)trackBar.Handle())->add_mark(i, position, "");
   }

@@ -17,22 +17,22 @@ namespace Switch {
     /// @param task The asynchronous task
     template<typename T>
     Async(T task) : task(task) {this->task.Start();}
-    
+
     /// @brief Get the asynchronous task
     /// @return The asynchronous task
     System::Threading::Tasks::Task<typename Task::TaskResult>& operator()() {return this->task;}
-    
+
   private:
     System::Threading::Tasks::Task<typename Task::TaskResult> task;
   };
-  
+
   /// @brief Represent an asynchronous task
   /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async1.cpp
   template<typename Task>
   using async = Async<Task>;
-  
+
   /// @brief Represent an asynchronous task
   /// @par Examples
   /// This example demontrate how to use async and await

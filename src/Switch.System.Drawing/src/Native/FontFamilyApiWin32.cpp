@@ -22,13 +22,13 @@ namespace {
     logFont.lfPitchAndFamily = 0;
     return logFont;
   }
-  
+
   int CALLBACK EnumFamilyCallback(CONST LOGFONTW* logFont, CONST TEXTMETRICW* textMetric, DWORD fontType, LPARAM logFonts) {
     if ((fontType & TRUETYPE_FONTTYPE) == TRUETYPE_FONTTYPE && logFont->lfFaceName[0] != '@')
       (*(SortedDictionary<string, LOGFONTW*>*)logFonts)[string(logFont->lfFaceName).ToLower()] = new LOGFONT(*logFont);
     return 1;
   }
-  
+
   int CALLBACK EnumFamilyFromNameCallback(CONST LOGFONTW* logFont, CONST TEXTMETRICW* textMetric, DWORD fontType, LPARAM result) {
     if ((fontType & TRUETYPE_FONTTYPE) == TRUETYPE_FONTTYPE && logFont->lfFaceName[0] != '@' && (*(LOGFONTW**)result) == null)
       (*(LOGFONTW**)result) = new LOGFONT(*logFont);
@@ -67,7 +67,7 @@ string Native::FontFamilyApi::GetName(intptr handle) {
 
 bool Native::FontFamilyApi::IsStyleAvailable(intptr handle, FontStyle style) {
   if (handle == 0) return false;
-  
+
   /*
   if ((style & FontStyle::Italic) == FontStyle::Italic && result->lfItalic == 0) return false;
   if ((style & FontStyle::Underline) == FontStyle::Underline && result->lfUnderline == 0) return false;

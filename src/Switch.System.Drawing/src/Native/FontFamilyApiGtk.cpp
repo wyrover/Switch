@@ -22,7 +22,7 @@ string Native::FontFamilyApi::GetName(intptr handle) {
 
 bool Native::FontFamilyApi::IsStyleAvailable(intptr handle, FontStyle style) {
   if (handle == 0) return false;
-  
+
   /*
   if ((style & FontStyle::Italic) == FontStyle::Italic && result->lfItalic == 0) return false;
   if ((style & FontStyle::Underline) == FontStyle::Underline && result->lfUnderline == 0) return false;

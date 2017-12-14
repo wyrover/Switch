@@ -34,33 +34,33 @@ namespace Switch {
     // defined in file ../Interface.hpp
     //template<typename T = NullPtr, int32 Rank = 1, typename TAllocator = Allocator<typename std::conditional<std::is_same<bool, T>::value, char, T>::type>>
     //class Array;
-    
+
     template<>
     class Array<>;
-    
+
     template<typename T, typename TAllocator>
     class GenericArrayObject;
     /// @endcond
-    
+
     /// @brief Base object that represent Array.
     class ArrayObject : public object {
       template<typename T, typename TAllocator>
       friend class GenericArrayObject;
       ArrayObject() = default;
     };
-    
+
     /// @brief Generic Base object that represent Array.
     template<typename T, typename TAllocator = Allocator<typename std::conditional<std::is_same<bool, T>::value, char, T>::type>>
     class GenericArrayObject : public ArrayObject, public Linq::Extension::Enumerable<GenericArrayObject<T, TAllocator>, T>, public Collections::Generic::IList<T> {
     public:
       /// @cond
       GenericArrayObject(const GenericArrayObject& array) : length(array.length), operationNumber(array.operationNumber), array(array.array), lowerBound(array.lowerBound), upperBound(array.upperBound) {}
-      
+
       GenericArrayObject(GenericArrayObject&& array) : length(array.length), operationNumber(array.operationNumber), array(Move(array.array)), lowerBound(Move(array.lowerBound)), upperBound(Move(array.upperBound)) {
         array.length = 0;
         array.operationNumber = 0;
       }
-      
+
       GenericArrayObject& operator=(const GenericArrayObject& array) {
         this->length = array.length;
         this->operationNumber = array.operationNumber;
@@ -69,24 +69,24 @@ namespace Switch {
         this->upperBound = array.upperBound;
         return *this;
       }
-      
+
       friend std::ostream& operator<<(std::ostream& output, const GenericArrayObject& value) {
         if (value.Length == 0)
           return output << "{empty}";
-          
+
         output << "{";
         for (int index = 0; index < value.Length; index++)
           output << (index != 0 ? ", " : "") << value[index];
         return output << "}";
       }
       /// @endcond
-      
+
       /// @brief Get access to raw data of the Array.
       /// @return A pointer to raw data of the array.
       _property<const T*, _readonly> Data {
         _get {return (const T*)this->array.data();}
       };
-      
+
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
       /// @remarks Retrieving the value of this property is an O(1) operation.
@@ -96,14 +96,14 @@ namespace Switch {
       _property<int32, _readonly> Length {
         _get {return (int32)this->array.size();}
       };
-      
+
       /// @brief Gets a 64-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int64 A 64-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
       /// @remarks Retrieving the value of this property is an O(1) operation.
       _property<int64, _readonly> LongLength {
         _get {return (int64)this->array.size();}
       };
-      
+
       /// @brief Gets the rank (number of dimensions) of the Array.
       /// @return int32 The rank (number of dimensions) of the Array.
       /// @par Examples
@@ -112,7 +112,7 @@ namespace Switch {
       _property<int32, _readonly> Rank {
         _get {return this->GetRank();}
       };
-      
+
       /// @brief Returns an IEnumerator for the Array.
       /// @return IEnumerator An IEnumerator for the Array.
       /// @par Examples
@@ -123,7 +123,7 @@ namespace Switch {
         public:
           explicit Enumerator(const GenericArrayObject& array) : array(array), operationNumber(array.operationNumber), iterator(array.array.begin()) {}
           void Reset() override {this->beforeFirst = true; this->operationNumber = this->array.operationNumber; this->iterator = this->array.array.begin();}
-          
+
           bool MoveNext() override {
             if (this->operationNumber != this->array.operationNumber) throw System::InvalidOperationException(_caller);
             if (this->iterator == this->array.array.end()) return false;
@@ -133,7 +133,7 @@ namespace Switch {
             }
             return ++this->iterator != this->array.array.end();
           }
-          
+
         protected:
           #if defined(_WIN32)
 #pragma warning(push)
@@ -147,24 +147,24 @@ namespace Switch {
           #if defined(_WIN32)
 #pragma warning(pop)
           #endif
-          
+
           const GenericArrayObject& array;
           bool beforeFirst = true;
           int64 operationNumber;
           typename std::vector<typename std::conditional<std::is_same<bool, T>::value, char, T>::type, TAllocator>::const_iterator iterator;
         };
-        
+
         return System::Collections::Generic::Enumerator<T>(new Enumerator(*this));
       }
-      
+
       /// @brief Determines whether an element is in the Array.
       /// @param value The object to be added to the end of the Array. The value can ! be null for reference types.
       bool Contains(const T& value) const override { return this->IndexOf(value) != -1; }
-      
+
       bool Equals(const object& obj) const override {return (is<GenericArrayObject>(obj)) && this->Equals((const GenericArrayObject<T, TAllocator>&)obj);}
-      
+
       bool Equals(const GenericArrayObject& array) const {return this->length == array.length && this->array == array.array && this->lowerBound == array.lowerBound && this->upperBound == array.upperBound && this->GetRank() == array.GetRank();}
-      
+
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @param dimension A zero-based dimension of the Array whose length needs to be determined.
       /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
@@ -173,7 +173,7 @@ namespace Switch {
       /// The following code example demonstrates methods to get the length of an array.
       /// @include ArrayGetLength.cpp
       int32 GetLength(int32 dimension) const {return this->GetUpperBound(dimension) + 1;}
-      
+
       /// @brief Gets the lower bound of the specified dimension in the Array.
       /// @param dimension A zero-based dimension of the Array whose lower bound needs to be determined.
       /// @return int32 The lower bound of the specified dimension in the Array.
@@ -183,10 +183,10 @@ namespace Switch {
       /// @include ArrayGetLowerBound.cpp
       int32 GetLowerBound(int32 dimension) const {
         if (dimension < 0 || dimension >= this->Rank) throw System::ArgumentOutOfRangeException(_caller);
-        
+
         return this->lowerBound[dimension];
       }
-      
+
       /// @brief Gets the upper bound of the specified dimension in the Array.
       /// @param dimension A zero-based dimension of the Array whose upper bound needs to be determined.
       /// @return int32 The upper bound of the specified dimension in the Array.
@@ -196,15 +196,15 @@ namespace Switch {
       /// @include ArrayGetLowerBound.cpp
       int32 GetUpperBound(int32 dimension) const {
         if (dimension < 0 || dimension >= this->Rank) throw System::ArgumentOutOfRangeException(_caller);
-        
+
         return this->upperBound[dimension];
       }
-      
+
       /// @brief Determines the index of a specific item in the Array.
       /// @param value The object to locate in the Array.
       /// @return int32 The index of value if found in the Array; otherwise, -1.
       int32 IndexOf(const T& value) const override { return IndexOf(*this, value); }
-      
+
       /// @brief Determines the index of a specific item in the array specified.
       /// @param array The object to locate in the Array.
       /// @param value The object to locate in the Array.
@@ -213,7 +213,7 @@ namespace Switch {
       /// The following code example shows how to determine the index of the first occurrence of a specified element.
       /// @include ArrayIndexOf.cpp
       static int32 IndexOf(const GenericArrayObject& array, const T& value) { return IndexOf(array, value, 0, array.Length); }
-      
+
       /// @brief Determines the index of a specific item in the array specified.
       /// @param array The object to locate in the Array.
       /// @param value The object to locate in the Array.
@@ -224,7 +224,7 @@ namespace Switch {
       /// The following code example shows how to determine the index of the first occurrence of a specified element.
       /// @include ArrayIndexOf.cpp
       static int32 IndexOf(const GenericArrayObject& array, const T& value, int32 index) { return IndexOf(array, value, index, array.Length - index); }
-      
+
       /// @brief Determines the index of a specific item in the array specified.
       /// @param array The object to locate in the Array.
       /// @param value The object to locate in the Array.
@@ -240,18 +240,18 @@ namespace Switch {
           throw System::ArgumentOutOfRangeException(_caller);
         if (index + count > array.Length)
           throw System::ArgumentException(_caller);
-          
+
         for (int32 increment = 0; increment < count; increment++) {
           if (array[index + increment] == value)
             return index + increment;
         }
         return -1;
       }
-      
+
       /// @cond
       using const_iterator = typename std::vector<typename std::conditional<std::is_same<bool, T>::value, char, T>::type, TAllocator>::const_iterator;
       using iterator = typename std::vector<typename std::conditional<std::is_same<bool, T>::value, char, T>::type, TAllocator>::iterator;
-      
+
       const_iterator cbegin() const {return this->array.begin();}
       const_iterator cend() const {return this->array.end();}
       iterator begin() {return this->array.begin();}
@@ -259,32 +259,32 @@ namespace Switch {
       iterator end() {return this->array.end();}
       const_iterator end() const {return this->array.end();}
       /// @endcond
-      
+
     protected:
       /// @cond
       T& operator[](int32 index) override {
         if (index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(_caller);
-        
+
         return (T&)this->array[index];
       }
-      
+
       const T& operator[](int32 index) const override {
         if (index >= this->Length || index < 0) throw System::ArgumentOutOfRangeException(_caller);
-        
+
         return (T&)this->array[index];
       }
-      
+
       void CopyTo(Array<T>& array, int32 index) const override {
         if (index < 0) throw System::ArgumentOutOfRangeException(_caller);
         if (index + this->Length > array.Length) throw System::ArgumentException(_caller);
-        
+
         for (int32 increment = 0; increment < this->Length; increment++)
           array[index + increment] = (*this)[increment];
       }
       void Resize(int32 newSize) {
         if (newSize < 0) throw System::ArgumentOutOfRangeException(_caller);
         if (newSize == this->length) return;
-        
+
         this->operationNumber += 1;
         if (newSize < this->length)
           this->array.resize(newSize);
@@ -294,46 +294,46 @@ namespace Switch {
         this->length = newSize;
         this->upperBound[0] = newSize - 1;
       }
-      
+
       void Reverse() {
         this->operationNumber++;
         std::reverse(this->array.begin(), this->array.end());
       }
-      
+
       void Reverse(int32 index, int32 count) {
         if (index < 0 || count < 0) throw ArgumentOutOfRangeException(_caller);
         if (index + count > this->Count) throw ArgumentException(_caller);
-        
+
         this->operationNumber++;
         int pos1 = index, pos2 = (index + count) - 1;
         typename std::vector<T, TAllocator>::iterator it1 = this->array.begin() + pos1, it2 = this->array.begin() + pos2;
-        
+
         while (pos1++ < pos2--)
           std::iter_swap(it1++, it2--);
       }
       /// @endcond
-      
+
     private:
       template<typename TArray, int32 RankArray, typename TAllocatorArray>
       friend class Array;
-      
+
       GenericArrayObject() {
         this->lowerBound.push_back(0);
         this->upperBound.push_back(-1);
       }
-      
+
       GenericArrayObject(const Array<int32, 1>& lengths);
-      
+
       GenericArrayObject(const T* array, int32 length) : length(length), array(length) {
         if (array == null) throw System::ArgumentNullException(_caller);
         if (length < 0) throw System::ArgumentOutOfRangeException(_caller);
-        
+
         for (int32 index = 0; index < length; index++)
           this->array[index] = array[index];
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length - 1);
       }
-      
+
       explicit GenericArrayObject(const Collections::Generic::IEnumerable<T>& enumerable) {
         for (const auto& value : enumerable)
           this->array.push_back(value);
@@ -341,22 +341,22 @@ namespace Switch {
         this->lowerBound.push_back(0);
         this->upperBound.push_back(this->length - 1);
       }
-      
+
       explicit GenericArrayObject(const std::vector<T>& array) : length((int32)array.size()) {
         for (T value : array)
           this->array.push_back(value);
         this->lowerBound.push_back(0);
         this->upperBound.push_back(length - 1);
       }
-      
-      
+
+
       GenericArrayObject(InitializerList<T> il) : length((int32)il.size()) {
         for (T value : il)
           this->array.push_back(value);
         this->lowerBound.push_back(0);
         this->upperBound.push_back((int32)il.size() - 1);
       }
-      
+
       GenericArrayObject(InitializerList<InitializerList<T>> il)  {
         for (const InitializerList<T>& il1 : il)
           for (T value : il1)
@@ -366,7 +366,7 @@ namespace Switch {
         this->lowerBound.push_back(0);
         this->upperBound.push_back((int32)(*il.begin()).size() - 1);
       }
-      
+
       GenericArrayObject(InitializerList<InitializerList<InitializerList<T>>> il)  {
         for (const InitializerList<InitializerList<T>>& il1 : il)
           for (const InitializerList<T>& il2 : il1)
@@ -379,7 +379,7 @@ namespace Switch {
         this->lowerBound.push_back(0);
         this->upperBound.push_back((int32)(*(*il.begin()).begin()).size() - 1);
       }
-      
+
       class Comparer : public std::binary_function<T, T, bool> {
       public:
         Comparer(const System::Collections::Generic::IComparer<T>* comparer) : comparer(comparer) { }
@@ -389,34 +389,34 @@ namespace Switch {
       private:
         const System::Collections::Generic::IComparer<T>* comparer;
       };
-      
+
       class ComparisonComparer : public std::binary_function<T, T, bool> {
       private:
         Comparison<const T&> comparer;
-        
+
       public:
         ComparisonComparer(Comparison<const T&> c) : comparer(c) { }
         ComparisonComparer(const ComparisonComparer& mc) { *this = mc; }
         ~ComparisonComparer() { }
-        
+
         ComparisonComparer& operator=(const ComparisonComparer& mc) { comparer = mc.comparer; return *this; }
         bool operator()(const T& e1, const T& e2) const { return comparer(e1, e2) < 0; }
       };
-      
+
       virtual int32 GetRank() const = 0;
-      
+
       bool GetIsFixedSize() const override { return true; }
       bool GetIsReadOnly() const override { return true; }
       bool GetIsSynchronized() const override { return false; }
       const object& GetSyncRoot() const override { return this->syncRoot; }
-      
+
       int32 GetCount() const override {return static_cast<int32>(this->array.size());}
       void Insert(int32, const T&) override { throw InvalidOperationException(_caller); }
       void RemoveAt(int32) override { throw InvalidOperationException(_caller); }
       void Add(const T&) override { throw InvalidOperationException(_caller); }
       void Clear() override { throw InvalidOperationException(_caller); }
       bool Remove(const T&) override { throw InvalidOperationException(_caller); }
-      
+
       int32 length = 0;
       int64 operationNumber = 0;
       //std::vector<T, TAllocator> array;
@@ -425,7 +425,7 @@ namespace Switch {
       std::vector<int32> upperBound;
       object syncRoot;
     };
-    
+
     /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
@@ -449,7 +449,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array() {}
-      
+
       /// @brief Initializes a new instance of the Array class with lengths for each rank specified.
       /// @param lengths the lengths for each rank.
       /// @remarks The Array class is not thread safe.
@@ -457,7 +457,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(const Array<int32>& lengths) : GenericArrayObject<T, TAllocator>(lengths) {}
-      
+
       /// @cond
       Array(const Array& array) : GenericArrayObject<T, TAllocator>((GenericArrayObject<T, TAllocator>&)array) {}
       Array(const Array&& array) : GenericArrayObject<T, TAllocator>(Move((GenericArrayObject<T, TAllocator> &&)array)) {}
@@ -465,24 +465,24 @@ namespace Switch {
         this->GenericArrayObject<T, TAllocator>::operator=(array);
         return *this;
       }
-      
+
       friend std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
-          
+
         output << "{";
         for (int index = 0; index < value.Length; index++)
           output << (index != 0 ? ", " : "") << value(index);
         return output << "}";
       }
       /// @endcond
-      
+
       /// @brief Get access to raw data of the Array.
       /// @return A pointer to raw data of the array.
       _property<const T*, _readonly> Data {
         _get{return this->GenericArrayObject<T, TAllocator>::Data();}
       };
-      
+
       /// @brief Gets a 32-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int32 A 32-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
       /// @remarks Retrieving the value of this property is an O(1) operation.
@@ -492,14 +492,14 @@ namespace Switch {
       _property<int32, _readonly> Length {
         _get {return this->GenericArrayObject<T, TAllocator>::Length();}
       };
-      
+
       /// @brief Gets a 64-bit integer that represents the total number of elements in all the dimensions of the Array.
       /// @return int64 A 64-bit integer that represents the total number of elements in all the dimensions of the Array; zero if there are no elements in the array.
       /// @remarks Retrieving the value of this property is an O(1) operation.
       _property<int64, _readonly> LongLength {
         _get {return this->GenericArrayObject<T, TAllocator>::LongLength();}
       };
-      
+
       /// @brief Gets the rank (number of dimensions) of the Array.
       /// @return int32 The rank (number of dimensions) of the Array.
       /// @par Examples
@@ -508,7 +508,7 @@ namespace Switch {
       _property<int32, _readonly> Rank {
         _get {return this->GenericArrayObject<T, TAllocator>::Rank();}
       };
-      
+
       /// @brief Creates a shallow copy of the Array.
       /// @return object A shallow copy of the Array.
       /// @remarks A shallow copy of an Array copies only the elements of the Array, whether they are reference types or value types, but it does not copy the objects that the references refer to. The references in the new Array point to the same objects that the references in the original Array point to.
@@ -516,15 +516,15 @@ namespace Switch {
       /// @remarks The clone is of the same Type as the original Array.
       /// @remarks This method is an O(n) operation, where n is Length.
       refptr<object> Clone() const override {return ref_new<Array<T, rank, TAllocator>>(*this);}
-      
+
       bool Equals(const object& obj) const override {return this->GenericArrayObject<T, TAllocator>::Equals(obj);}
-      
+
     private:
       friend class Array<>;
       Array(const Array<int32>& lengths, bool) : GenericArrayObject<T, TAllocator>(lengths) {}
       int32 GetRank() const override {return rank;}
     };
-    
+
     /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
@@ -548,7 +548,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array() {}
-      
+
       /// @brief Initializes a new instance of the Array class with lengths for each rank specified.
       /// @param length the length for the first rank.
       /// @remarks The Array class is not thread safe.
@@ -556,7 +556,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(int32 length) : GenericArrayObject<T, TAllocator>(Array<int32> {length}) {}
-      
+
       /// @brief Initializes a new instance of the Array and copy array[] T.
       /// @param array the Array to copy.
       /// @remarks The Array class is not thread safe.
@@ -565,7 +565,7 @@ namespace Switch {
       /// @include ArrayConstructor.cpp
       template<int32 length>
       explicit Array(const T(&array)[length]) : GenericArrayObject<T, TAllocator>(array, length) {}
-      
+
       /// @brief Initializes a new instance of the Array and copy array[] T with length specified.
       /// @param array the Array to copy.
       /// @param length Length of the array.
@@ -574,7 +574,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(const T* array, int32 length) : GenericArrayObject<T, TAllocator>(array, length) {}
-      
+
       /// @brief Initializes a new instance of the Array and copy array Array specified.
       /// @param array the Array to copy.
       /// @remarks The Array class is not thread safe.
@@ -582,7 +582,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       explicit Array(const Collections::Generic::IEnumerable<T>& enumerable) : GenericArrayObject<T, TAllocator>(enumerable) {}
-      
+
       /// @brief Initializes a new instance of the Array and copy array Array specified.
       /// @param array the Array to copy.
       /// @remarks The Array class is not thread safe.
@@ -590,29 +590,29 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       explicit Array(const Collections::Generic::IList<T>& list) : GenericArrayObject<T, TAllocator>(list) {}
-      
+
       /// @cond
       Array(const Array& array) : GenericArrayObject<T, TAllocator>((GenericArrayObject<T, TAllocator>&)array) {}
       Array(const Array&& array) : GenericArrayObject<T, TAllocator>(Move((GenericArrayObject<T, TAllocator> &&)array)) {}
       explicit Array(const std::vector<T>& array) : GenericArrayObject<T, TAllocator>(array) {}
       Array(InitializerList<T> il) : GenericArrayObject<T, TAllocator>(il) {}
-      
+
       Array& operator=(const Array& array) {
         this->GenericArrayObject<T, TAllocator>::operator=(array);
         return *this;
       }
-      
+
       friend std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
-          
+
         output << "{";
         for (int index = 0; index < value.Length; index++)
           output << (index != 0 ? ", " : "") << value(index);
         return output << "}";
       }
       /// @endcond
-      
+
       /// @brief Sets a value to the element at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
       /// @param value The new value for the specified element.
       /// @param index A 32-bit integer that represents the position of the Array element to set.
@@ -622,7 +622,7 @@ namespace Switch {
       /// The following code example shows how to use operator () to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       T& operator()(int32 index) {return this->GenericArrayObject<T, TAllocator>::operator[](index);}
-      
+
       /// @brief Gets the value at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
       /// @param index A 32-bit integer that represents the position of the Array element to get.
       /// @return The value at the specified position in the one-dimensional Array.
@@ -632,7 +632,7 @@ namespace Switch {
       /// The following code example shows how to use operator () to list the elements of an array.
       /// @include ArrayArrayOperatorFunctor.cpp
       const T& operator()(int32 index) const {return this->GenericArrayObject<T, TAllocator>::operator[](index);}
-      
+
       /// @brief Sets a value to the element at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
       /// @param value The new value for the specified element.
       /// @param index A 32-bit integer that represents the position of the Array element to set.
@@ -642,7 +642,7 @@ namespace Switch {
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperator.cpp
       T& operator[](int32 index) override {return this->GenericArrayObject<T, TAllocator>::operator[](index);}
-      
+
       /// @brief Gets the element at the specified index.
       /// @param index The zero-based index of the element to get.
       /// @return The value at the specified position in the one-dimensional Array.
@@ -652,7 +652,7 @@ namespace Switch {
       /// The following code example shows how to use operator [] to list the elements of an array.
       /// @include ArrayArrayOperator.cpp
       const T& operator[](int32 index) const override {return this->GenericArrayObject<T, TAllocator>::operator[](index);}
-      
+
       /// @brief Copies all the elements of the current one-dimensional array to the specified one-dimensional array starting at the specified destination array index. The index is specified as a 32-bit integer.
       /// @param array The one-dimensional array that is the destination of the elements copied from the current array.
       /// @param index A 32-bit integer that represents the index in array at which copying begins.
@@ -669,7 +669,7 @@ namespace Switch {
       /// The following code example shows how to copy an Array to another native Array.
       /// @include ArrayCopyTo.cpp
       void CopyTo(Array<T>& array, int32 index) const override {this->GenericArrayObject<T, TAllocator>::CopyTo(array, index);}
-      
+
       /// @brief Copies all the elements of the current one-dimensional array to the specified one-dimensional array starting at the specified destination array index. The index is specified as a 64-bit integer.
       /// @param array The one-dimensional array that is the destination of the elements copied from the current array.
       /// @param ibdex A 64-bit integer that represents the index in array at which copying begins.
@@ -685,11 +685,11 @@ namespace Switch {
       void CopyTo(Array<T>& array, int64 index) const {
         if (index < 0) throw System::ArgumentOutOfRangeException(_caller);
         if (index + this->Length > array.Length) throw System::ArgumentException(_caller);
-        
+
         for (int32 increment = 0; increment < this->Length; increment++)
           array[index + increment] = (*this)[increment];
       }
-      
+
       /// @brief Creates a shallow copy of the Array.
       /// @return object A shallow copy of the Array.
       /// @remarks A shallow copy of an Array copies only the elements of the Array, whether they are reference types or value types, but it does not copy the objects that the references refer to. The references in the new Array point to the same objects that the references in the original Array point to.
@@ -697,29 +697,29 @@ namespace Switch {
       /// @remarks The clone is of the same Type as the original Array.
       /// @remarks This method is an O(n) operation, where n is Length.
       refptr<object> Clone() const override {return ref_new<Array<T, 1, TAllocator>>(*this);}
-      
+
       bool Equals(const object& obj) const override {return this->GenericArrayObject<T, TAllocator>::Equals(obj);}
-      
+
       /// @brief Gets the value at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
       /// @param index A 32-bit integer that represents the position of the Array element to get.
       /// @return The value at the specified position in the one-dimensional Array.
       /// @exception ArgumentException The current Array does ! have exactly one dimension.
       /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
       const T& GetValue(int32 index) const { return this->operator()(index); }
-      
+
       /// @brief Sets a value to the element at the specified position in the one-dimensional Array. The index is specified as a 32-bit integer.
       /// @param value The new value for the specified element.
       /// @param index A 32-bit integer that represents the position of the Array element to set.
       /// @exception ArgumentException The current Array does ! have exactly one dimension.
       /// @exception IndexOutOfRangeException index is outside the range of valid indexes for the current Array.
       void SetValue(const T& value, int32 index) { this->operator()(index) = value; }
-      
+
     private:
       friend class Array<>;
       Array(const Array<int32>& lengths, bool) : GenericArrayObject<T, TAllocator>(lengths) {}
       int32 GetRank() const override {return 1;}
     };
-    
+
     /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
@@ -743,7 +743,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array() {}
-      
+
       /// @brief Initializes a new instance of the Array class with lengths for each rank specified.
       /// @param length1 the length for the first rank.
       /// @param length2 the length for the second rank.
@@ -752,7 +752,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(int32 length1, int32 length2) : GenericArrayObject<T, TAllocator>(Array<int32> {length1, length2}) {}
-      
+
       /// @cond
       Array(const Array& array) : GenericArrayObject<T, TAllocator>((GenericArrayObject<T, TAllocator>&)array) {}
       Array(const Array&& array) : GenericArrayObject<T, TAllocator>(Move((GenericArrayObject<T, TAllocator> &&)array)) {}
@@ -762,11 +762,11 @@ namespace Switch {
         this->GenericArrayObject<T, TAllocator>::operator=(array);
         return *this;
       }
-      
+
       friend std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
-          
+
         output << "{";
         for (int index1 = 0; index1 < value.GetLength(0); index1++) {
           output << (index1 == 0 ? "{" : ", {");
@@ -777,7 +777,7 @@ namespace Switch {
         return output << "}";
       }
       /// @endcond
-      
+
       /// @brief Sets the element at in multidimension array the specified index.
       /// @param index The zero-based index of the element to set.
       /// @return T The modified element at the specified index.
@@ -788,10 +788,10 @@ namespace Switch {
       T& operator()(int32 index1, int32 index2) {
         if (index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(_caller);
         if (index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(_caller);
-        
+
         return this->array[index2 + (index1 * this->GetLength(1))];
       }
-      
+
       /// @brief Gets the value at the specified position in the two-dimensional Array. The index is specified as a 32-bit integer.
       /// @param index1 A 32-bit integer that represents the first-dimension index of the Array element to get.
       /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
@@ -804,10 +804,10 @@ namespace Switch {
       const T& operator()(int32 index1, int32 index2) const {
         if (index2 >= this->GetLength(1) || index2 < 0) throw System::ArgumentOutOfRangeException(_caller);
         if (index1 >= this->GetLength(0) || index1 < 0) throw System::ArgumentOutOfRangeException(_caller);
-        
+
         return this->array[index2 + (index1 * this->GetLength(1))];
       }
-      
+
       /// @brief Creates a shallow copy of the Array.
       /// @return object A shallow copy of the Array.
       /// @remarks A shallow copy of an Array copies only the elements of the Array, whether they are reference types or value types, but it does not copy the objects that the references refer to. The references in the new Array point to the same objects that the references in the original Array point to.
@@ -815,9 +815,9 @@ namespace Switch {
       /// @remarks The clone is of the same Type as the original Array.
       /// @remarks This method is an O(n) operation, where n is Length.
       refptr<object> Clone() const override {return ref_new<Array<T, 2, TAllocator>>(*this);}
-      
+
       bool Equals(const object& obj) const override {return this->GenericArrayObject<T, TAllocator>::Equals(obj);}
-      
+
       /// @brief Gets the value at the specified position in the two-dimensional Array. The indexes are specified as 32-bit integers.
       /// @param index1 A 32-bit integer that represents the first-dimension index of the Array element to get.
       /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
@@ -825,7 +825,7 @@ namespace Switch {
       /// @exception ArgumentException The current Array does ! have exactly two dimension.
       /// @exception IndexOutOfRangeException Either index1 or index2 is outside the range of valid indexes for the corresponding dimension of the current Array.
       const T& GetValue(int32 index1, int32 index2) const { return this->operator()(index1, index2); }
-      
+
       /// @brief Sets a value to the element at the specified position in the two-dimensional Array.
       /// @param value The new value for the specified element.
       /// @param index1 A 32-bit integer that represents the position of the first dimension Array element to set.
@@ -833,13 +833,13 @@ namespace Switch {
       /// @exception ArgumentException The current Array does ! have exactly two dimension.
       /// @exception IndexOutOfRangeException index1 or index2 is outside the range of valid indexes for the current Array.
       void SetValue(const T& value, int32 index1, int32 index2) { this->operator()(index1, index2) = value; }
-      
+
     private:
       friend class Array<>;
       Array(const Array<int32>& lengths, bool) : GenericArrayObject<T, TAllocator>(lengths) {}
       int32 GetRank() const override {return 2;}
     };
-    
+
     /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
@@ -863,7 +863,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array() {}
-      
+
       /// @brief Initializes a new instance of the Array class with lengths for each rank specified.
       /// @param length1 the length for the first rank.
       /// @param length2 the length for the second rank.
@@ -873,7 +873,7 @@ namespace Switch {
       /// The following code example demonstrates different methods to create an array.
       /// @include ArrayConstructor.cpp
       Array(int32 length1, int32 length2, int32 length3) : GenericArrayObject<T, TAllocator>(Array<int32> {length1, length2, length3}) {}
-      
+
       /// @cond
       Array(const Array& array) : GenericArrayObject<T, TAllocator>((GenericArrayObject<T, TAllocator>&)array) {}
       Array(const Array&& array) : GenericArrayObject<T, TAllocator>(Move((GenericArrayObject<T, TAllocator> &&)array)) {}
@@ -883,11 +883,11 @@ namespace Switch {
         this->GenericArrayObject<T, TAllocator>::operator=(array);
         return *this;
       }
-      
+
       friend std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
-          
+
         output << "{";
         for (int index1 = 0; index1 < value.GetLength(0); index1++) {
           output << (index1 == 0 ? "{" : ", {");
@@ -902,7 +902,7 @@ namespace Switch {
         return output << "}";
       }
       /// @endcond
-      
+
       /// @brief Sets the element at in multidimension array the specified index.
       /// @param index The zero-based index of the element to set.
       /// @return T The modified element at the specified index.
@@ -914,10 +914,10 @@ namespace Switch {
         if (index3 >= this->GetLength(2) || index3 < 0) throw System::IndexOutOfRangeException(_caller);
         if (index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(_caller);
         if (index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(_caller);
-        
+
         return this->array[index3 + (index2 * this->GetLength(2)) + (index1 * this->GetLength(2) * this->GetLength(1))];
       }
-      
+
       /// @brief Gets the value at the specified position in the three-dimensional Array. The index is specified as a 32-bit integer.
       /// @param index1 A 32-bit integer that represents the first-dimension index of the Array element to get.
       /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
@@ -932,10 +932,10 @@ namespace Switch {
         if (index3 >= this->GetLength(2) || index3 < 0) throw System::IndexOutOfRangeException(_caller);
         if (index2 >= this->GetLength(1) || index2 < 0) throw System::IndexOutOfRangeException(_caller);
         if (index1 >= this->GetLength(0) || index1 < 0) throw System::IndexOutOfRangeException(_caller);
-        
+
         return this->array[index3 + (index2 * this->GetLength(2)) + (index1 * this->GetLength(2) * this->GetLength(1))];
       }
-      
+
       /// @brief Creates a shallow copy of the Array.
       /// @return object A shallow copy of the Array.
       /// @remarks A shallow copy of an Array copies only the elements of the Array, whether they are reference types or value types, but it does not copy the objects that the references refer to. The references in the new Array point to the same objects that the references in the original Array point to.
@@ -943,9 +943,9 @@ namespace Switch {
       /// @remarks The clone is of the same Type as the original Array.
       /// @remarks This method is an O(n) operation, where n is Length.
       refptr<object> Clone() const override {return ref_new<Array<T, 3, TAllocator>>(*this);}
-      
+
       bool Equals(const object& obj) const override {return this->GenericArrayObject<T, TAllocator>::Equals(obj);}
-      
+
       /// @brief Gets the value at the specified position in the three-dimensional Array. The indexes are specified as 32-bit integers.
       /// @param index1 A 32-bit integer that represents the first-dimension index of the Array element to get.
       /// @param index2 A 32-bit integer that represents the second-dimension index of the Array element to get.
@@ -954,7 +954,7 @@ namespace Switch {
       /// @exception ArgumentException The current Array does ! have exactly three dimension.
       /// @exception IndexOutOfRangeException Either index1 or index2 or index3 is outside the range of valid indexes for the corresponding dimension of the current Array.
       const T& GetValue(int32 index1, int32 index2, int32 index3) const { return this->operator()(index1, index2, index3); }
-      
+
       /// @brief Sets a value to the element at the specified position in the three-dimensional Array.
       /// @param value The new value for the specified element.
       /// @param index1 A 32-bit integer that represents the position of the first dimension Array element to set.
@@ -963,13 +963,13 @@ namespace Switch {
       /// @exception ArgumentException The current Array does ! have exactly three dimension.
       /// @exception IndexOutOfRangeException index1 or index2 or index3 is outside the range of valid indexes for the current Array.
       void SetValue(const T& value, int32 index1, int32 index2, int32 index3)  { this->operator()(index1, index2, index3) = value; }
-      
+
     private:
       friend class Array<>;
       Array(const Array<int32>& lengths, bool) : GenericArrayObject<T, TAllocator>(lengths) {}
       int32 GetRank() const override {return 3;}
     };
-    
+
     /// @brief Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays.
     /// @remarks The Array class is not part of the System.Collections namespaces. However, it is still considered a collection because it is based on the IList interface.
     /// @remarks An element is a value in an Array. The length of an Array is the total number of elements it can contain. The lower bound of an Array is the index of its first element. An Array can have any lower bound, but it has a lower bound of zero by default. A different lower bound can be defined when creating an instance of the Array class using CreateInstance.A multidimensional Array can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
@@ -998,7 +998,7 @@ namespace Switch {
       /// @include ArrayAsReadOnly.cpp
       template<typename T, typename TAllocator>
       static System::Collections::ObjectModel::ReadOnlyCollection<T> AsReadOnly(const Array<T, 1, TAllocator>& array) { return System::Collections::ObjectModel::ReadOnlyCollection<T>(array); }
-      
+
       /// @brief Searches a range of elements in a one-dimensional sorted array for a value, using the IComparable interface implemented by each element of the array and by the specified value.
       /// @param array The sorted one-dimensional Array to search.
       /// @param index The starting index of the range to search.
@@ -1019,7 +1019,7 @@ namespace Switch {
       /// @remarks This method is an O(log n) operation, where n is length.
       template<typename T, typename TAllocator>
       static int32 BinarySearch(const Array<T, 1, TAllocator>& array, int32 index, int32 length, const T& value) {return BinarySearch(array, index, length, value, System::Collections::Generic::Comparer<T>::Default());}
-      
+
       /// @brief Searches a range of elements in a one-dimensional sorted array for a value, using the specified IComparer interface.
       /// @param array The sorted one-dimensional Array to search.
       /// @param index The starting index of the range to search.
@@ -1045,18 +1045,18 @@ namespace Switch {
       static int32 BinarySearch(const Array<T, 1, TAllocator>& array, int32 index, int32 count, const T& value, const System::Collections::Generic::IComparer<T>& comparer) {
         if (index < 0 || count < 0) throw ArgumentOutOfRangeException(_caller);
         if (index + count > array->Length) throw ArgumentException(_caller);
-        
+
         typename std::vector<T>::const_iterator first = array.array.begin();
         typename std::vector<T>::const_iterator last = array.array.begin();
         std::advance(first, index);
         std::advance(last, index + count);
         typename std::vector<T>::const_iterator position = std::lower_bound(first, last, value, Array<T>::Comparer(&comparer));
-        
+
         if (position != array.array.end() && !comparer->Compare(value, *position))
           return (int32)std::distance(array.array.begin(), position);
         return (int32)~std::distance(array.array.begin(), position);
       }
-      
+
       /// @brief Searches an entire one-dimensional sorted array for a specific element, using the IComparable interface implemented by each element of the array and by the specified object.
       /// @param array The sorted one-dimensional Array to search.
       /// @param value The object to search for.
@@ -1074,7 +1074,7 @@ namespace Switch {
       /// @remarks This method is an O(log n) operation, where n is the Length of array.
       template<typename T, typename TAllocator>
       static int32 BinarySearch(const Array<T, 1, TAllocator>& array, const T& value) {return BinarySearch(array, 0, array.Length, value, System::Collections::Generic::Comparer<T>::Default().Release());}
-      
+
       /// @brief Searches a range of elements in a one-dimensional sorted array for a value, using the specified IComparer interface.
       /// @param array The sorted one-dimensional Array to search.
       /// @param value The object to search for.
@@ -1096,7 +1096,7 @@ namespace Switch {
       /// @remarks This method is an O(log n) operation, where n is length.
       template<typename T, typename TAllocator>
       static int32 BinarySearch(const Array<T, 1, TAllocator>& array, const T& value, const System::Collections::Generic::IComparer<T>& comparer) {return BinarySearch(array, 0, array.Length, value, comparer);}
-      
+
       /// @brief Sets a range of elements in an array to the default value of each element type.
       /// @param array The array whose elements need to be cleared.
       /// @param index The starting index of the range of elements to clear.
@@ -1117,11 +1117,11 @@ namespace Switch {
       static void Clear(GenericArrayObject<T, TAllocator>& array, int32 index, int32 length) {
         if (index < 0 || length < 0 || index + length > array.Length) throw ArgumentOutOfRangeException(_caller);
         if (index + length > array.Length) throw ArgumentException(_caller);
-        
+
         for (int32 increment = 0; increment < length; increment++)
           array[index + increment] = T();
       }
-      
+
       /// @brief Copies a range of elements from an Array starting at the specified source index and pastes them to another Array starting at the specified destination index. Guarantees that all changes are undone if the copy does not succeed completely.
       /// @param sourceArray The Array that contains the data to copy.
       /// @param sourceIndex A 32-bit integer that represents the index in the sourceArray at which copying begins.
@@ -1145,11 +1145,11 @@ namespace Switch {
         if (!std::is_base_of<T1, T2>::value) throw ArrayTypeMismatchException(_caller);
         if (sourceIndex < 0 || destinationArray < 0 || length < 0) throw ArgumentOutOfRangeException(_caller);
         if (sourceIndex + length > sourceArray.Length || destinationIndex + length > destinationArray.Length) throw ArgumentException(_caller);
-        
+
         for (int32 increment = 0; increment < length; increment++)
           destinationArray[destinationIndex + increment] = as<T2>(sourceArray[sourceIndex + increment]);
       }
-      
+
       /// @brief Converts an array of one type to an array of another type.
       /// @param array The one-dimensional, zero-based Array to convert to a target type.
       /// @param converter A Converter<TInput, TOutput> that converts each element from one type to another type.
@@ -1168,7 +1168,7 @@ namespace Switch {
           result[index] = converter(array[index]);
         return result;
       }
-      
+
       /// @brief Creates a one-dimensional Array of the specified Type and length, with zero-based indexing.
       /// @param length The size of the Array to create.
       /// @return A new one-dimensional Array of the specified Type with the specified length, using zero-based indexing.
@@ -1180,7 +1180,7 @@ namespace Switch {
       /// @remarks This method is an O(n) operation, where n is length.
       template<typename T, typename TAllocator = Allocator<T>>
       static Array<T, 1, TAllocator> CreateInstance(int32 length) {return Array<T, 1, TAllocator>(length);}
-      
+
       /// @brief Creates a two-dimensional Array of the specified Type and dimension lengths, with zero-based indexing.
       /// @param length1 The size of the first dimension of the Array to create.
       /// @param length2 The size of the second dimension of the Array to create.
@@ -1193,7 +1193,7 @@ namespace Switch {
       /// @remarks This method is an O(n) operation, where n is length.
       template<typename T, typename TAllocator = Allocator<T>>
       static Array<T, 2, TAllocator> CreateInstance(int32 length1, int32 length2) {return Array<T, 2, TAllocator>(length1, length2);}
-      
+
       /// @brief Creates a three-dimensional Array of the specified Type and dimension lengths, with zero-based indexing.
       /// @param length1 The size of the first dimension of the Array to create.
       /// @param length2 The size of the second dimension of the Array to create.
@@ -1207,7 +1207,7 @@ namespace Switch {
       /// @remarks This method is an O(n) operation, where n is length.
       template<typename T, typename TAllocator = Allocator<T>>
       static Array<T, 3, TAllocator> CreateInstance(int32 length1, int32 length2, int32 length3) {return Array<T, 3, TAllocator>(length1, length2, length3);}
-      
+
       /// @brief Creates a multidimensional Array of the specified Type and dimension lengths, with zero-based indexing. The dimension lengths are specified in an array of 32-bit integers.
       /// @param An array of 32-bit integers that represent the size of each dimension of the Array to create.
       /// @return A new multidimensional Array of the specified Type with the specified length for each dimension, using zero-based indexing.
@@ -1220,7 +1220,7 @@ namespace Switch {
       /// @remarks This method is an O(n) operation, where n is length.
       template<typename T, int32 Rank, typename TAllocator = Allocator<T>>
       static Array<T, Rank, TAllocator> CreateInstance(const Array<int32>& lengths) {return Array<T, Rank, TAllocator>(lengths, true);}
-      
+
       /// @brief Determines whether the List<T> contains elements that match the conditions defined by the specified predicate..
       /// @param match The Predicate pointer function that defines the conditions of the elements to search for.
       /// @return Boolean true if the List<T> contains one or more elements that match the conditions defined by the specified predicate; otherwise, false.
@@ -1238,10 +1238,10 @@ namespace Switch {
         for (const T& elem : array)
           if (match(elem))
             return true;
-            
+
         return false;
       }
-      
+
       /// @brief Changes the number of elements of a one-dimensional array to the specified new size.
       /// @param array The one-dimensional, zero-based array to resize, or null to create a new array with the specified size.
       /// @param newSize The size of the new array.
@@ -1251,7 +1251,7 @@ namespace Switch {
       /// @remarks This method is an O(n) operation, where n is old size.
       template<typename T, typename TAllocator = Allocator<T>>
       static void Resize(Array<T, 1, TAllocator>& array, int32 newSize) {array.Resize(newSize);}
-      
+
       /// @brief Reverses the order of the elements in the entire List<T>.
       /// @remarks This method uses Array.Reverse to reverse the order of the elements, such that the element at List<T>[i], where i is any index within the range, moves to List<T>[j], where j equals index plus index plus count minus i minus 1.
       /// @remarks This method is an O(n) operation, where n is Count.
@@ -1260,7 +1260,7 @@ namespace Switch {
       /// @include ListReverse.cpp
       template<typename T, typename TAllocator = Allocator<T>>
       static void Reverse(Array<T, 1, TAllocator>& array) {array.Reverse();}
-      
+
       /// @brief Reverses the order of the elements in the specified range.
       /// @param index The zero-based starting index of the range to reverse.
       /// @param count The number of elements in the range to reverse.
@@ -1274,7 +1274,7 @@ namespace Switch {
       template<typename T, typename TAllocator = Allocator<T>>
       static void Reverse(Array<T, 1, TAllocator>& array, int32 index, int32 count) {array.Reverse(index, count);}
     };
-    
+
     template<typename T, typename TAllocator>
     inline GenericArrayObject<T, TAllocator>::GenericArrayObject(const Array<int32, 1>& lengths) {
       this->length = lengths.Agregate(_delegate(const int32 & accumulator, const int32 & value) {return accumulator * value;});

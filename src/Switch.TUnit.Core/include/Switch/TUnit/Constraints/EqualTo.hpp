@@ -20,9 +20,9 @@ namespace Switch {
       public:
         template<typename TExpect>
         EqualTo(const TExpect& expect) : Constraint(expect) {}
-        
+
         string ToString() const override {return string::Format("{0}", this->expect);}
-        
+
       private:
         bool Verify(const ConstraintValue& actual) const override {
           return actual.Value() == expect.Value();

@@ -47,7 +47,7 @@ IPAddress::IPAddress() {
 IPAddress::IPAddress(int64 address) {
   if (address < 0 || address > 0x0000000FFFFFFFFLL)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   this->address = Convert::ToUInt32(address);
 }
 
@@ -69,12 +69,12 @@ IPAddress& IPAddress::operator =(const IPAddress& address) {
 IPAddress::IPAddress(const Array<byte>& address) {
   if (address.Length != 4 && address.Length != 16)
     throw ArgumentException(_caller);
-    
+
   if (address.Length == 4) {
     this->family = Sockets::AddressFamily::InterNetwork;
     this->address = BitConverter::ToUInt32(address, 0);
   }
-  
+
   if (address.Length == 16) {
     this->family = Sockets::AddressFamily::InterNetworkV6;
     Buffer::BlockCopy(address, 0, this->numbers, 0, 16);
@@ -84,12 +84,12 @@ IPAddress::IPAddress(const Array<byte>& address) {
 IPAddress::IPAddress(const std::vector<byte>& address) {
   if (address.size() != 4 && address.size() != 16)
     throw ArgumentException(_caller);
-    
+
   if (address.size() == 4) {
     this->family = Sockets::AddressFamily::InterNetwork;
     this->address = Convert::ToInt32(address[0]) + (Convert::ToInt32(address[1]) << 8) + (Convert::ToInt32(address[2]) << 16) + (Convert::ToInt32(address[3]) << 24);
   }
-  
+
   if (address.size() == 16) {
     this->family = Sockets::AddressFamily::InterNetworkV6;
     for (int i = 0; i < 8; i++)
@@ -100,10 +100,10 @@ IPAddress::IPAddress(const std::vector<byte>& address) {
 IPAddress::IPAddress(const Array<byte>& address, int64 scopeId) : family(Sockets::AddressFamily::InterNetworkV6) {
   if (address.Length != 16)
     throw ArgumentException(_caller);
-    
+
   if (scopeId < 0 || scopeId > 0x00000000FFFFFFFFLL)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   this->scopeId = Convert::ToUInt32(scopeId);
   Buffer::BlockCopy(address, 0, this->numbers, 0, 16);
 }
@@ -114,11 +114,11 @@ IPAddress::IPAddress(byte quadPartAddress1, byte quadPartAddress2, byte quadPart
 bool IPAddress::Equals(const IPAddress& value) const {
   if (!(this->address == value.address && this->scopeId == value.scopeId && this->family == value.family))
     return false;
-    
+
   for (int32 i = 0; i < this->numbers.Length; i++)
     if (this->numbers[i] != value.numbers[i])
       return false;
-      
+
   return true;
 }
 
@@ -129,11 +129,11 @@ bool IPAddress::Equals(const object& obj) const {
 Array<byte> IPAddress::GetAddressBytes() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return BitConverter::GetBytes(this->address);
-    
+
   //Array<byte> addressBytes(16);
   //Buffer::BlockCopy(this->numbers, 0, addressBytes, 0, 16);
   //return addressBytes;
-  
+
   System::Collections::Generic::List<byte> bytes;
   for (auto number : this->numbers)
     bytes.AddRange(BitConverter::GetBytes(number));
@@ -155,7 +155,7 @@ AddressFamily IPAddress::GetAddressFamily() const {
 int32 IPAddress::GetHashCode() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return Int64(this->address).GetHashCode();
-    
+
   int32 hash = 0;
   for (uint16 item : this->numbers)
     hash ^= int32(item);
@@ -165,7 +165,7 @@ int32 IPAddress::GetHashCode() const {
 int64 IPAddress::GetScopeId() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     throw SocketException(_caller);
-    
+
   return this->scopeId;
 }
 
@@ -192,21 +192,21 @@ float IPAddress::HostToNetworkOrder(float host) {
 uint16 IPAddress::HostToNetworkOrder(uint16 host) {
   if (BitConverter::IsLittleEndian() == false)
     return host;
-    
+
   return (host >> 8) | (host << 8);
 }
 
 uint32 IPAddress::HostToNetworkOrder(uint32 host) {
   if (BitConverter::IsLittleEndian() == false)
     return host;
-    
+
   return (host >> 24) | ((host << 8) & 0x00FF0000L) | ((host >> 8) & 0x0000FF00L) | (host << 24);
 }
 
 uint64 IPAddress::HostToNetworkOrder(uint64 host) {
   if (BitConverter::IsLittleEndian() == false)
     return host;
-    
+
   return (host >> 56) | ((host << 40) & 0x00FF000000000000LL) | ((host << 24) & 0x0000FF0000000000LL) | ((host << 8) & 0x000000FF00000000LL) | ((host >> 8) & 0x00000000FF000000LL) | ((host >> 24) & 0x0000000000FF0000LL) | ((host >> 40) & 0x000000000000FF00LL) | (host << 56);
 }
 
@@ -231,7 +231,7 @@ bool IPAddress::GetIsIPv6SiteLocal() const {
 bool IPAddress::IsLoopback(const IPAddress& address) {
   if (address.family == Sockets::AddressFamily::InterNetwork)
     return byte(address.address & 0x00000000000000FF) == 0x7F;
-    
+
   for (int32 i = 0; i < 6; i++) {
     if (address.numbers[i] != 0)
       return false;
@@ -273,7 +273,7 @@ uint64 IPAddress::NetworkToHostOrder(uint64 network) {
 
 IPAddress IPAddress::Parse(const string& str) {
   string workIpString = ((str[0] == '[' && str[str.Length() - 1] == ']') ? str.Substring(1, str.Length() - 2) : str);
-  
+
   // Parse IP v4 Address
   _using(Array<String> addressParts = workIpString.Split('.')) {
     if (addressParts.Length == 4) {
@@ -283,14 +283,14 @@ IPAddress IPAddress::Parse(const string& str) {
       return IPAddress(addresses);
     }
   }
-  
+
   // Parse Scope Id
   IPAddress value;
   if (workIpString.IndexOf('%') != -1) {
     value.scopeId = UInt32::Parse(workIpString.Substring(workIpString.IndexOf('%') + 1));
     workIpString = workIpString.Remove(workIpString.IndexOf('%'));
   };
-  
+
   // Parse IP v6 Address
   _using(Array<String> addressParts = workIpString.Split(':')) {
     if (addressParts.Length == 8) {
@@ -299,24 +299,24 @@ IPAddress IPAddress::Parse(const string& str) {
       return value;
     }
   }
-  
+
   throw ArgumentException(_caller);
 }
 
 void IPAddress::SetScopeId(int64 scopeId) {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     throw SocketException(_caller);
-    
+
   if (scopeId < 0 || scopeId > 0xFFFFFFFF)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   this->scopeId = Convert::ToUInt32(scopeId);
 }
 
 string IPAddress::ToString() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
     return String::Join(".", GetAddressBytes());
-    
+
   string str = "[";
   for (uint16 number : this->numbers)
     str += string::Format("{0:x}:", NetworkToHostOrder(number));
@@ -333,7 +333,7 @@ bool IPAddress::TryParse(const string& str, IPAddress& address) {
   } catch (...) {
     return false;
   }
-  
+
   return true;
 }
 

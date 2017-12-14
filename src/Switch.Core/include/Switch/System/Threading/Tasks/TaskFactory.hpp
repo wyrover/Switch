@@ -16,12 +16,12 @@ namespace Switch {
         class _export TaskFactory : public object {
         public:
           TaskFactory() {}
-          
+
           /// @cond
           TaskFactory(const TaskFactory& taskFactory) {}
           TaskFactory& operator=(const TaskFactory& taskFactory) {return *this;}
           /// @endcond
-          
+
           /// @brief Creates and starts a task.
           /// @param action The action delegate to execute asynchronously.
           /// @return The started task.
@@ -31,7 +31,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Creates and starts a task.
           /// @param action The action delegate to execute asynchronously.
           /// @return The started task.
@@ -41,7 +41,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Creates and starts a task.
           /// @param action The action delegate to execute asynchronously.
           /// @return The started task.
@@ -51,7 +51,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Creates and starts a task.
           /// @param action The action delegate to execute asynchronously.
           /// @return The started task.
@@ -62,7 +62,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Creates and starts a task.
           /// @param action The action delegate to execute asynchronously.
           /// @return The started task.
@@ -73,7 +73,7 @@ namespace Switch {
             task.Start();
             return task;
           }
-          
+
           /// @brief Creates and starts a task.
           /// @param action The action delegate to execute asynchronously.
           /// @return The started task.

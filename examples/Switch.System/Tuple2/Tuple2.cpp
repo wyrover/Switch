@@ -20,7 +20,7 @@ namespace Test {
       double mean = ComputeMean(scores, number);
       Console::WriteLine("Average test score: {0:G2} (n={1})", mean, number);
     }
-    
+
   private:
     static double ComputeMean(const Array<Tuple<string, Nullable<int>>>& scores, int& n) {
       n = 0;

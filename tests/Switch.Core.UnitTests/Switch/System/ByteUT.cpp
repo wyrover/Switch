@@ -10,22 +10,22 @@ namespace {
   TEST(ByteTest, MaxValue) {
     ASSERT_EQ(255, Byte::MaxValue);
   }
-  
+
   TEST(ByteTest, MinValue) {
     ASSERT_EQ(0, Byte::MinValue);
   }
-  
+
   TEST(ByteTest, DefaultValue) {
     ASSERT_EQ(0, Byte());
   }
-  
+
   TEST(ByteTest, CtorValue) {
     ASSERT_EQ(10, Byte(10));
     ASSERT_EQ(123, Byte(123));
     ASSERT_EQ(205, Byte(205));
     ASSERT_EQ(0, Byte(0));
   }
-  
+
   TEST(ByteTest, Parse) {
     ASSERT_EQ(0, Byte::Parse("0"));
     ASSERT_EQ(1, Byte::Parse("1"));
@@ -33,14 +33,14 @@ namespace {
     ASSERT_EQ(127, Byte::Parse("127"));
     ASSERT_EQ(255, Byte::Parse("255"));
   }
-  
+
   TEST(ByteTest, Parse_Sign) {
     ASSERT_EQ(0, Byte::Parse("+0"));
     ASSERT_EQ(0, Byte::Parse("-0"));
     ASSERT_EQ(12, Byte::Parse("+12"));
     ASSERT_EQ(255, Byte::Parse("+255"));
   }
-  
+
   TEST(ByteTest, Parse_Leading_Zeros) {
     ASSERT_EQ(0, Byte::Parse("0"));
     ASSERT_EQ(0, Byte::Parse("00"));
@@ -49,7 +49,7 @@ namespace {
     ASSERT_EQ(1, Byte::Parse("0001"));
     ASSERT_EQ(99, Byte::Parse("099"));
   }
-  
+
   TEST(ByteTest, Parse_Spaces) {
     ASSERT_EQ(5, Byte::Parse(" 5"));
     ASSERT_EQ(5, Byte::Parse("     5"));
@@ -58,7 +58,7 @@ namespace {
     ASSERT_EQ(5, Byte::Parse(" 5      "));
     ASSERT_EQ(52, Byte::Parse("        52 "));
   }
-  
+
   TEST(ByteTest, Parse_FormatException) {
     ASSERT_THROW(Byte::Parse(""), FormatException);
     ASSERT_THROW(Byte::Parse("a56"), FormatException);
@@ -71,7 +71,7 @@ namespace {
     ASSERT_THROW(Byte::Parse("100a"), FormatException);
     ASSERT_THROW(Byte::Parse("10u"), FormatException);
   }
-  
+
   TEST(ByteTest, Parse_OverflowException) {
     ASSERT_EQ(0xFF, Byte::Parse("255"));
     ASSERT_THROW(Byte::Parse("256"), OverflowException);
@@ -81,7 +81,7 @@ namespace {
     ASSERT_THROW(Byte::Parse("-256"), OverflowException);
     ASSERT_THROW(Byte::Parse("-300"), OverflowException);
   }
-  
+
   TEST(ByteTest, Parse_Binary) {
     ASSERT_EQ(0, Byte::Parse("0b", 2));
     ASSERT_EQ(1, Byte::Parse("1", 2));
@@ -89,7 +89,7 @@ namespace {
     ASSERT_EQ(3, Byte::Parse("11", 2));
     ASSERT_EQ(6, Byte::Parse("110", 2));
   }
-  
+
   TEST(ByteTest, Parse_Exceptions_Binary) {
     ASSERT_THROW(Byte::Parse("", 2), FormatException);
     ASSERT_THROW(Byte::Parse("2", 2), FormatException);
@@ -102,14 +102,14 @@ namespace {
     ASSERT_THROW(Byte::Parse("100a", 2), FormatException);
     ASSERT_THROW(Byte::Parse("10u", 2), FormatException);
   }
-  
+
   TEST(ByteTest, Parse_Octal) {
     ASSERT_EQ(0, Byte::Parse("0", 8));
     ASSERT_EQ(1, Byte::Parse("1", 8));
     ASSERT_EQ(12, Byte::Parse("14", 8));
     ASSERT_EQ(56, Byte::Parse("70", 8));
   }
-  
+
   TEST(ByteTest, Parse_Hexadecimal) {
     ASSERT_EQ(0, Byte::Parse("0x0", 16));
     ASSERT_EQ(0, Byte::Parse(" 0x0", 16));
@@ -121,11 +121,11 @@ namespace {
     ASSERT_EQ(0x3C, Byte::Parse("0X3c", 16));
     ASSERT_EQ(0x3C, Byte::Parse("0x3C", 16));
   }
-  
+
   TEST(ByteTest, Parse_Hexadecimal_Prefix_OverflowExceptions) {
     ASSERT_THROW(Byte::Parse("0x100", 16), OverflowException);
   }
-  
+
   TEST(ByteTest, Parse_Hexadecimal_Prefix_Exceptions) {
     ASSERT_THROW(Byte::Parse("x", 16), FormatException);
     ASSERT_THROW(Byte::Parse("x0", 16), FormatException);
@@ -140,7 +140,7 @@ namespace {
     ASSERT_THROW(Byte::Parse("0 X0", 16), FormatException);
     ASSERT_THROW(Byte::Parse("0X 0", 16), FormatException);
   }
-  
+
   TEST(ByteTest, TryParse) {
     byte b;
     ASSERT_TRUE(Byte::TryParse("0", b));
@@ -154,7 +154,7 @@ namespace {
     ASSERT_TRUE(Byte::TryParse("255", b));
     ASSERT_EQ(255, b);
   }
-  
+
   TEST(ByteTest, TryParse_Sign) {
     byte b;
     ASSERT_TRUE(Byte::TryParse("+0", b));
@@ -166,7 +166,7 @@ namespace {
     ASSERT_TRUE(Byte::TryParse("+255", b));
     ASSERT_EQ(255, b);
   }
-  
+
   TEST(ByteTest, TryParse_Leading_Zeros) {
     byte b;
     ASSERT_TRUE(Byte::TryParse("0", b));
@@ -182,7 +182,7 @@ namespace {
     ASSERT_TRUE(Byte::TryParse("099", b));
     ASSERT_EQ(99, b);
   }
-  
+
   TEST(ByteTest, TryParse_Spaces) {
     byte b;
     ASSERT_TRUE(Byte::TryParse(" 5", b));
@@ -198,7 +198,7 @@ namespace {
     ASSERT_TRUE(Byte::TryParse("        52 ", b));
     ASSERT_EQ(52, b);
   }
-  
+
   TEST(ByteTest, TryParse_Fail_Format) {
     byte b;
     ASSERT_FALSE(Byte::TryParse("", b));
@@ -212,7 +212,7 @@ namespace {
     ASSERT_FALSE(Byte::TryParse("100a", b));
     ASSERT_FALSE(Byte::TryParse("10u", b));
   }
-  
+
   TEST(ByteTest, TryParse_Fail_Overflow) {
     byte b;
     ASSERT_TRUE(Byte::TryParse("255", b));
@@ -224,7 +224,7 @@ namespace {
     ASSERT_FALSE(Byte::TryParse("-256", b));
     ASSERT_FALSE(Byte::TryParse("-300", b));
   }
-  
+
   TEST(ByteTest, TryParse_Binary) {
     byte b;
     ASSERT_TRUE(Byte::TryParse("0b", 2, b));
@@ -238,7 +238,7 @@ namespace {
     ASSERT_TRUE(Byte::TryParse("110", 2, b));
     ASSERT_EQ(6, b);
   }
-  
+
   TEST(ByteTest, TryParse_Binary_Fail) {
     byte b;
     ASSERT_FALSE(Byte::TryParse("", 2, b));
@@ -252,7 +252,7 @@ namespace {
     ASSERT_FALSE(Byte::TryParse("100a", 2, b));
     ASSERT_FALSE(Byte::TryParse("10u", 2, b));
   }
-  
+
   TEST(ByteTest, TryParse_Octal) {
     byte b;
     ASSERT_TRUE(Byte::TryParse("0", 8, b));
@@ -264,7 +264,7 @@ namespace {
     ASSERT_TRUE(Byte::TryParse("70", 8, b));
     ASSERT_EQ(56, b);
   }
-  
+
   TEST(ByteTest, TryParse_Hexadecimal) {
     byte b;
     ASSERT_TRUE(Byte::TryParse("0x0", 16, b));
@@ -284,7 +284,7 @@ namespace {
     ASSERT_TRUE(Byte::TryParse("0x3C", 16, b));
     ASSERT_EQ(0x3C, b);
   }
-  
+
   TEST(ByteTest, TryParse_Hexadecimal_Fail) {
     byte b;
     ASSERT_FALSE(Byte::TryParse("x", 16, b));

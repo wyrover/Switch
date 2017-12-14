@@ -9,7 +9,7 @@ namespace Examples {
     static void Main() {
       string string1 = "Today is " + DateTime::Now() + ".";
       Console::WriteLine(string1);
-      
+
       string string2 = "This is one sentence. "_s + "This is a second. ";
       string2 += "This is a third sentence.";
       Console::WriteLine(string2);

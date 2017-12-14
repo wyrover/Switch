@@ -8,38 +8,38 @@ namespace UnitTests {
   class _TestFixture(Test) {
     void _OneTimeSetUp(OneTimeInit) {
     }
-    
+
     void _OneTimeTearDown(OneTimeCleanup) {
     }
-    
+
     // This is the method that is called before any tests in a fixture are run.
     void _SetUp(Init) {
     }
-    
+
     // This is the method that is called after any tests in a fixture are run.
     void _TearDown(Cleanup) {
     }
-    
+
     void _Test(TestCase1) {
     }
-    
+
     void _Test(TestCase2) {
     }
-    
+
     void _IgnoreTest(TestCase3) {
     }
   };
-  
+
   // Used _AddTestFixture to add unit test suit.
   _AddTestFixture(Test);
-  
+
   class Program _static {
   public:
     static int Main(const Array<string>& args) {
       return UnitTest(args).Run();
     }
   };
-  
+
 }
 
 _startup(UnitTests::Program)

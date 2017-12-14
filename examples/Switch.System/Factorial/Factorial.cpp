@@ -8,13 +8,13 @@ namespace FactorialExample {
   public:
     static int64 Value() { return Factorial < number - 1 >::Value() * number; }
   };
-  
+
   template<>
   struct Factorial<0> {
   public:
     static int64 Value() { return 1; }
   };
-  
+
   class Progam {
   public:
     static void Main() {

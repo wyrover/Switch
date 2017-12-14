@@ -8,12 +8,12 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       Array<string> values = {"09", "12.6", "0", "-13 "};
-      
+
       for (string value : values) {
         Boolean success, result;
         int number;
         success = Int32::TryParse(value, number);
-        
+
         if (success) {
           // The method throws no exceptions.
           result = Convert::ToBoolean(number);

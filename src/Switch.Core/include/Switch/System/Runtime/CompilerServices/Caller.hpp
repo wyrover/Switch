@@ -23,7 +23,7 @@ namespace Switch {
           Caller() {}
           Caller(const System::String& filePath, int32 lineNumber) : filePath(filePath), lineNumber(lineNumber) {}
           Caller(const System::String& memberNamne, const System::String& filePath, int32 lineNumber) : memberNamne(memberNamne), filePath(filePath), lineNumber(lineNumber) {}
-          
+
           /// @cond
           Caller(const Caller& caller) : memberNamne(caller.memberNamne), filePath(caller.filePath),  lineNumber(caller.lineNumber) {}
           Caller& operator=(const Caller caller) {
@@ -33,25 +33,25 @@ namespace Switch {
             return *this;
           }
           /// @endcond
-          
+
           /// @brief Gets the member name
           /// @return string member name
           _property<const System::String&, _readonly> MemberNamne {
             _get->const System::String& {return this->memberNamne;}
           };
-          
+
           /// @brief Gets the file path
           /// @return string file path
           _property<const System::String&, _readonly> FilePath {
             _get->const System::String& {return this->filePath;}
           };
-          
+
           /// @brief Gets the line number
           /// @return int32 line number
           _property<int32, _readonly> LineNumber {
             _get {return this->lineNumber;}
           };
-          
+
           System::String ToString() const override {
             if (string::IsNullOrEmpty(this->filePath) && this->lineNumber == 0 && string::IsNullOrEmpty(this->memberNamne))
               return "{Empty}";
@@ -59,7 +59,7 @@ namespace Switch {
               return System::String::Format("{{FilePath=\"{0}\", LineNumber={1}}}", this->filePath, this->lineNumber);
             return System::String::Format("{{MemberName=\"{0}\", FilePath=\"{1}\", LineNumber={2}}}", this->memberNamne, this->filePath, this->lineNumber);
           }
-          
+
         private:
           System::String memberNamne;
           System::String filePath;
@@ -68,7 +68,7 @@ namespace Switch {
       }
     }
   }
-  
+
   /// @brief Get Switch::System::Runtime::CompilerServices::Caller informations
   /// @return Switch::System::Runtime::CompilerServices::Caller caller informations.
   /// @par Examples

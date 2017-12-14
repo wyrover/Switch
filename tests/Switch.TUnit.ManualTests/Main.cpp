@@ -11,9 +11,9 @@ namespace ManualTests {
       TUnit::Expect::True(true);
     }
   };
-  
+
   _AddTest(TestFixture1, Test1)
-  
+
   class Program {
   public:
     // The main entry point for the application.

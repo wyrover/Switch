@@ -12,7 +12,7 @@ namespace Examples {
       list.Add(Tuple<string, string, DateTime>("John", "Doe", DateTime()));
       list.Add(Tuple<string, string, DateTime>("Marilyn", "Monroe", DateTime(1926, 6, 1)));
       list.Add(Tuple<string, string, DateTime>("Neil", "Armstrong", DateTime(1930, 8, 5)));
-      
+
       Console::WriteLine("Enumeration using foreach: ");
       for (auto item : list)
         Console::WriteLine("({0}, {1}, {2})", item.Item1, item.Item2, item.Item3().ToShortDateString());

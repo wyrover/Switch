@@ -46,7 +46,7 @@ namespace Examples {
       Console::WriteLine("This is a colored text");
       Console::ForegroundColor = ConsoleColor::White;
       Console::WriteLine("This is a colored text");
-      
+
       Console::ResetColor();
     }
   };

@@ -19,7 +19,7 @@ namespace Switch {
       class _export NetworkCredential : public Object {
       public:
         NetworkCredential() {}
-        
+
         NetworkCredential(const String& userName, const String& password): userName(userName), password(password) {}
         /// @cond
         NetworkCredential(const NetworkCredential& networkCredential) : userName(networkCredential.userName), password(networkCredential.password) {}
@@ -29,17 +29,17 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-        
+
         _property<const string&> UserName {
           _get->const string& {return this->userName;},
           _set {this->userName = value;}
         };
-        
+
         _property<const string&> Password {
           _get->const string& {return this->password;},
           _set {this->password = value;}
         };
-        
+
       private:
         String userName;
         String password;

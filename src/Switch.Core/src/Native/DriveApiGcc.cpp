@@ -17,7 +17,7 @@ bool Native::DriveApi::GetAvailableFreeSpace(const string& rootPathName, int64& 
   struct statfs stat;
   if (::statfs(rootPathName.Data(), &stat) != 0)
     return false;
-    
+
   freeBytes = (stat.f_flags & ST_RDONLY) == ST_RDONLY ? 0 : stat.f_bavail * stat.f_bsize;
   totalNumberOfBytes = stat.f_blocks * stat.f_bsize;
   totalNumberOfFreeBytes = (stat.f_flags & ST_RDONLY) == ST_RDONLY ? 0 : stat.f_bfree * stat.f_bsize;
@@ -52,7 +52,7 @@ System::Array<string> Native::DriveApi::GetDrives() {
   drives.Add(rootDrive);
   drives.AddRange(ramDrives);
   drives.AddRange(networkDrives);
-  
+
   for (string drive : Native::DirectoryApi::EnumerateDirectories(AmovibleMountedPoint(), "*")) {
     struct statfs stat;
     #if defined(__APPLE__)
@@ -62,7 +62,7 @@ System::Array<string> Native::DriveApi::GetDrives() {
     #endif
       drives.Add(drive);
   }
-  
+
   return drives.ToArray();
 }
 
@@ -70,7 +70,7 @@ bool Native::DriveApi::GetVolumeInformation(const string& rootPathName, string& 
   struct statfs stat;
   if (statfs(rootPathName.Data(), &stat) != 0)
     return false;
-    
+
   volumeName = rootPathName;
   #if defined(__APPLE__)
   fileSystemName = stat.f_fstypename;

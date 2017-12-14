@@ -24,7 +24,7 @@ Socket::Socket(System::Net::Sockets::AddressFamily addressFamily, System::Net::S
   this->data->addressFamily = addressFamily;
   this->data->protocolType = protocolType;
   this->data->socketType = socketType;
-  
+
   if (Native::SocketApi::Open(this->data->addressFamily, this->data->socketType, this->data->protocolType, &this->data->socket) != 0)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
 }
@@ -43,12 +43,12 @@ Socket Socket::Accept() {
     throw ObjectDisposedException(_caller);
   if (this->data->bound == false || this->data->listening == false)
     throw InvalidOperationException(_caller);
-    
+
   SocketAddress socketAddress(this->data->addressFamily);
   intptr socketHandle = 0;
   if (Native::SocketApi::Accept(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size, &socketHandle) != 0)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
-    
+
   Socket socketNewlyCreated(socketHandle);
   socketNewlyCreated.data->addressFamily = this->data->addressFamily;
   socketNewlyCreated.data->socketType = this->data->socketType;
@@ -63,7 +63,7 @@ void Socket::InnerBind() {
   SocketAddress socketAddress = this->data->localEndPoint->Serialize();
   if (Native::SocketApi::Bind(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size()) != 0)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
-    
+
   this->data->bound = true;
 }
 
@@ -81,7 +81,7 @@ void Socket::InnerConnect() {
   SocketAddress socketAddress = this->data->remoteEndPoint->Serialize();
   if (Native::SocketApi::Connect(this->data->socket, (byte*)socketAddress.bytes.Data(), socketAddress.Size) != 0)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
-    
+
   this->data->connected = true;
 }
 
@@ -103,13 +103,13 @@ void Socket::Connect(const string& host, int32 port) {
 void Socket::Disconnect(bool reuseSocket) {
   if (this->data->connected == false)
     throw ObjectDisposedException(_caller);
-    
+
   if (Native::SocketApi::Connect(this->data->socket, null, 0) != 0)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
-    
+
   this->data->connected = false;
   this->data->bound = false;
-  
+
   if (reuseSocket == false)
     Close();
 }
@@ -121,7 +121,7 @@ SocketInformation Socket::DuplicateAndClose(int32 targetProcessId) {
 int32 Socket::GetAvailable() const {
   if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
-    
+
   int32 nbrBytesAvailable = 0;
   Native::SocketApi::GetAvailable(this->data->socket, &nbrBytesAvailable);
   return nbrBytesAvailable;
@@ -130,43 +130,43 @@ int32 Socket::GetAvailable() const {
 bool Socket::GetBlocking() const {
   if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
-    
+
   return !this->data->nonBlocking;
 }
 
 const EndPoint& Socket::GetLocalEndPoint() const {
   if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
-    
+
   return *this->data->localEndPoint;
 }
 
 const EndPoint& Socket::GetRemoteEndPoint() const {
   if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
-    
+
   return *this->data->remoteEndPoint;
 }
 
 refptr<object> Socket::GetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName) const {
   if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
-    
+
   if (socketOptionName == SocketOptionName::MaxConnections)
     throw SocketException((int32)SocketError::ProtocolOption, _caller);
-    
+
   if (socketOptionName == SocketOptionName::Linger) {
     /// @todo
     //return ref_new<LingerOption>(false, 0);
     throw NotImplementedException(_caller);
   }
-  
+
   if (socketOptionName == SocketOptionName::AddMembership || socketOptionName == SocketOptionName::DropMembership) {
     /// @todo
     //return ref_new<MulticastOption>(IPAddress());
     throw NotImplementedException(_caller);
   }
-  
+
   int32 socketOption = 0;
   int32 size = sizeof(int32);
   if (Native::SocketApi::GetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, &socketOption, &size) == -1)
@@ -181,24 +181,24 @@ int32 Socket::IOControl(System::Net::Sockets::IOControlCode /*ioControlCode*/, c
 void Socket::Listen(int32 backlog) {
   if (this->data->bound == false)
     throw SocketException((int32)SocketError::NotConnected, _caller);
-    
+
   if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
-    
+
   if (backlog > (int32)SocketOptionName::MaxConnections || backlog < 0)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   Native::SocketApi::Listen(this->data->socket, backlog);
-  
+
   this->data->listening = true;
 }
 
 bool Socket::Poll(int32 microseconds, SelectMode mode) {
   int32 status = Native::SocketApi::Poll(this->data->socket, microseconds, (int32)mode);
-  
+
   if (status < 0)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
-    
+
   return (status > 0);
 }
 
@@ -215,7 +215,7 @@ int32 Socket::Receive(Array<byte>& buffer, int32 offset, int32 size, SocketFlags
     throw IndexOutOfRangeException(_caller);
   if (this->data->socket == 0)
     throw ObjectDisposedException(_caller);
-    
+
   int32 numberOfBytesReceived = Native::SocketApi::Receive(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags);
   errorCode = numberOfBytesReceived == -1 ? (SocketError)Native::SocketApi::GetLastError() : SocketError::Success;
   return numberOfBytesReceived;
@@ -226,73 +226,73 @@ int32 Socket::ReceiveFrom(Array<byte>& buffer, int32 offset, int32 size, SocketF
     throw IndexOutOfRangeException(_caller);
   if (this->data->socket == 0)
     throw ObjectDisposedException(_caller);
-    
+
   SocketAddress socketAddress(this->data->addressFamily);
   int32 numberOfBytesReceived = Native::SocketApi::ReceiveFrom(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags, (byte*)socketAddress.bytes.Data(), socketAddress.Size);
   if (numberOfBytesReceived == -1)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
   endPoint = endPoint.Create(socketAddress).ChangeType<IPEndPoint>().ToObject();
-  
+
   return numberOfBytesReceived;
 }
 
 int32 Socket::Select(IList<Socket>& checkRead, IList<Socket>& checkWrite, IList<Socket>& checkError, int32 microseconds) {
   if (checkRead.Count == 0 && checkWrite.Count == 0 && checkError.Count == 0)
     throw ArgumentNullException(_caller);
-    
+
   int32 nbCheckRead = checkRead.Count;
   Array<intptr> checkReadHandles(nbCheckRead);
   for (int32 i = 0; i < nbCheckRead; i++)
     checkReadHandles[i] = checkRead[i].data->socket;
-    
+
   int32 nbCheckWrite = checkWrite.Count;
   Array<intptr> checkWriteHandles(nbCheckWrite);
   for (int32 i = 0; i < nbCheckWrite; i++)
     checkWriteHandles[i] = checkWrite[i].data->socket;
-    
+
   int32 nbCheckError = checkError.Count;
   Array<intptr> checkErrorHandles(nbCheckError);
   for (int32 i = 0; i < nbCheckError; i++)
     checkErrorHandles[i] = checkError[i].data->socket;
-    
+
   int32 status = Native::SocketApi::Select((intptr*)checkReadHandles.Data(), nbCheckRead, (intptr*)checkWriteHandles.Data(), nbCheckWrite, (intptr*)checkErrorHandles.Data(), nbCheckError, microseconds);
-  
+
   if (status < 0)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
-    
+
   // List the null sockets
   List<Socket> readToRemove;
   for (int32 i = 0; i < nbCheckRead; i++)
     if (checkReadHandles[i] == 0)
       readToRemove.Add(checkRead[i]);
-      
+
   // Remove the null sockets
   for (Socket item : readToRemove)
     if (checkRead.Contains(item))
       checkRead.Remove(item);
-      
+
   // List the null sockets
   List<Socket> writeToRemove;
   for (int32 i = 0; i < nbCheckWrite; i++)
     if (checkWriteHandles[i] == 0)
       writeToRemove.Add(checkWrite[i]);
-      
+
   // Remove the null sockets
   for (Socket item : writeToRemove)
     if (checkWrite.Contains(item))
       checkWrite.Remove(item);
-      
+
   // List the null sockets
   List<Socket> errorToRemove;
   for (int32 i = 0; i < nbCheckError; i++)
     if (checkErrorHandles[i] == 0)
       errorToRemove.Add(checkError[i]);
-      
+
   // Remove the null sockets
   for (Socket item : errorToRemove)
     if (checkError.Contains(item))
       checkError.Remove(item);
-      
+
   return status;
 }
 
@@ -309,7 +309,7 @@ int32 Socket::Send(const Array<byte>& buffer, int32 offset, int32 size, SocketFl
     throw IndexOutOfRangeException(_caller);
   if (this->data->socket == 0)
     throw ObjectDisposedException(_caller);
-    
+
   int32 numberOfBytesSended = Native::SocketApi::Send(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags);
   errorCode = numberOfBytesSended == -1 ? (SocketError)Native::SocketApi::GetLastError() : SocketError::Success;
   return numberOfBytesSended;
@@ -320,7 +320,7 @@ int32 Socket::SendTo(const Array<byte>& buffer, int32 offset, int32 size, Socket
     throw IndexOutOfRangeException(_caller);
   if (this->data->socket == 0)
     throw ObjectDisposedException(_caller);
-    
+
   SocketAddress socketAddress = endPoint.Serialize();
   int32 numberOfBytesSended = Native::SocketApi::SendTo(this->data->socket, (byte*)&buffer.Data()[offset], size, (int32)socketFlags, (byte*)socketAddress.bytes.Data(), socketAddress.Size);
   if (numberOfBytesSended == -1)
@@ -331,10 +331,10 @@ int32 Socket::SendTo(const Array<byte>& buffer, int32 offset, int32 size, Socket
 void Socket::SetBlocking(bool blocking) {
   if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
-    
+
   if (Native::SocketApi::SetBlocking(this->data->socket, blocking) == -1)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
-    
+
   this->data->nonBlocking = !blocking;
 }
 
@@ -369,11 +369,11 @@ void Socket::SetNoDelay(bool noDelay) {
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, bool optionValue) {
   if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
-    
+
   int32 option = 0;
   if (optionValue)
     option = 0xFFFFFFFF;
-    
+
   if (Native::SocketApi::SetSocketOption(this->data->socket, socketOptionLevel, socketOptionName, (int32*)&option, sizeof(option)) == -1)
     throw SocketException(Native::SocketApi::GetLastError(), _caller);
 }
@@ -395,7 +395,7 @@ void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionNa
 void Socket::SetSocketOption(SocketOptionLevel socketOptionLevel, SocketOptionName socketOptionName, const object& optionValue) {
   if (this->data->socket == IntPtr::Zero)
     throw ObjectDisposedException(_caller);
-    
+
   if (is<MulticastOption>(optionValue)) {
     /// @todo
     // Array<byte> optionValue;

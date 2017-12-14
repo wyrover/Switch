@@ -23,112 +23,112 @@ namespace Switch {
       /// @brief Create a new instance of class Exception
       /// @remarks Message is set with the default message associate to the error.
       Exception();
-      
+
       /// @brief Create a new instance of class Exception
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
       explicit Exception(const System::Runtime::CompilerServices::Caller& information);
-      
+
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
       explicit Exception(const String& message);
-      
+
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       Exception(const String& message, const System::Runtime::CompilerServices::Caller& information);
-      
+
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       Exception(const String& message, const Exception& innerException);
-      
+
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       Exception(const String& message, const Exception& innerException, const System::Runtime::CompilerServices::Caller& information);
-      
+
       /// @cond
       Exception(const Exception& value);
       const char* what() const noexcept override;
       /// @endcond
-      
+
       /// @brief Get file path where Exception occurred
       /// @return string A string represent file path where Exception occurred
       _property<const String&, _readonly> FilePath {
         _get->const string& {return this->caller.FilePath();}
       };
-      
+
       /// @brief Gets a link to the help file associated with this exception.
       /// @return string A string represent a link to Help file associated with Exception
       _property<const String&, _readonly> HelpLink {
         _get->const string& {return this->helpLink;}
       };
-      
+
       /// @brief Get Error associate to the Exception
       /// @return Error A ErrorCode represent a Error associate to the Exception
       _property<int32, _readonly> HResult {
         _get {return this->hresult;}
       };
-      
+
       /// @brief Gets If other Exception instance that caused the current exception.
       /// @return Exception An instance of Exception that describes the error that caused the current exception. The InnerException property returns the same value as was passed into the constructor, or a null reference if the inner exception value was not supplied to the constructor.
       _property<bool, _readonly> HasInnerException {
         _get {return this->innerException != null;}
       };
-      
+
       /// @brief Gets the Exception instance that caused the current exception.
       /// @return Exception An instance of Exception that describes the error that caused the current exception. The InnerException property returns the same value as was passed into the constructor, or a null reference if the inner exception value was not supplied to the constructor.
       _property<const Exception&, _readonly> InnerException {
         _get->const Exception& {return this->innerException();}
       };
-      
+
       /// @brief Get Line number where the Exception occurred
       /// @return Int32 the line number where Exception occurred
       _property<int32, _readonly> LineNumber {
         _get {return this->caller.LineNumber();}
       };
-      
+
       /// @brief Get message associate to the Exception
       /// @return string A string represent a massage associate to the Exception
       _property<const String&, _readonly> Message {
         _get->const string& {return this->GetMessage();}
       };
-      
+
       /// @brief Gets a string representation of the immediate frames on the call stack.
       /// @return string A string that describes the immediate frames of the call stack.
       _property<String, _readonly> StackTrace {
         _get {return this->GetStackTrace();}
       };
-      
+
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a DelegateItem object, have the same value.
       /// @param value The Exception to compare with the current object.
       /// @return bool true if the specified value is equal to the current object. otherwise, false.
       bool Equals(const Exception& value) const;
-      
+
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a Exception object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       bool Equals(const Object& obj) const override;
-      
+
       /// @brief Returns a string that represents the current DelegateItem.
       /// @return string A string that represents the current DelegateItem.
       String ToString() const override;
-      
+
       /// @brief Explicit operator equal between Exception
       /// @param value Value to assign this instance.
       /// @return Exception& This instance assigned
       Exception& operator=(const Exception& value);
-      
+
       /// @brief Check if the generation of the stack trace is enabled.
       /// @return true if stack trace generation is enabled.
       static bool StackTraceEnabled() { return Exception::stackTraceEnabled; }
-      
+
       /// @brief Enable / disable the generation of the stack trace.
       /// @param enabled True to enable the stack trace generation.
       static void StackTraceEnabled(bool enabled) { Exception::stackTraceEnabled = enabled; }
-      
+
     protected:
       /// @cond
       virtual String GetDefaultMessage() const;
@@ -138,7 +138,7 @@ namespace Switch {
       void SetHResult(int32 hresult) {this->hresult = hresult;}
       void SetInnerException(ref<Exception> innerException) {this->innerException = innerException;}
       void SetStackTrace(const Exception& exception);
-      
+
       //private:
       String message;
       String helpLink;

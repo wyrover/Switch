@@ -36,30 +36,30 @@ namespace {
       Native::ConsoleApi::SetInputCodePage(65001);
       Native::ConsoleApi::SetOutputCodePage(65001);
     }
-    
+
     ~ConsoleChangeCodePage() {
       Native::ConsoleApi::SetInputCodePage(previousInputCodePage);
       Native::ConsoleApi::SetOutputCodePage(previousOutputCodePage);
     }
-    
+
   private:
     int32 previousInputCodePage = Native::ConsoleApi::GetInputCodePage();
     int32 previousOutputCodePage = Native::ConsoleApi::GetOutputCodePage();
   };
-  
+
   struct ConsoleInterceptSignals {
     ConsoleInterceptSignals() {
       auto signalKeys = Native::ConsoleApi::GetSignalKeys();
       for (auto signal : signalKeys)
         ::signal(signal.Key, ConsoleInterceptSignals::SignalHandler);
     }
-    
+
     ~ConsoleInterceptSignals() {
       auto signalKeys = Native::ConsoleApi::GetSignalKeys();
       for (auto signal : signalKeys)
         ::signal(signal.Key, SIG_DFL);
     }
-    
+
   private:
     static void SignalHandler(int32 signal) {
       static auto signalKeys = Native::ConsoleApi::GetSignalKeys();
@@ -70,7 +70,7 @@ namespace {
         Environment::Exit(-1);
     }
   };
-  
+
   struct SignalCatcher {
     SignalCatcher() {
       signal(SIGILL, SignalCatcher::SignalIllegalInstructionHandler);
@@ -78,36 +78,36 @@ namespace {
       signal(SIGFPE, SignalCatcher::SignalFloatingPointExceptionHandler);
       signal(SIGSEGV, SignalCatcher::SignalSegmentationViolationHandler);
     }
-    
+
     ~SignalCatcher() {
       signal(SIGILL, SIG_DFL);
       signal(SIGABRT, SIG_DFL);
       signal(SIGFPE, SIG_DFL);
       signal(SIGSEGV, SIG_DFL);
     }
-    
+
     static void SignalIllegalInstructionHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalIllegalInstructionHandler);
       throw System::InvalidOperationException(_caller);
     }
-    
+
     static void SignalAbortExceptionHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalAbortExceptionHandler);
       //throw System::Threading::ThreadAbortException(_caller);
       exit(-1);
     }
-    
+
     static void SignalFloatingPointExceptionHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalFloatingPointExceptionHandler);
       throw System::ArithmeticException(_caller);
     }
-    
+
     static void SignalSegmentationViolationHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalSegmentationViolationHandler);
       throw System::AccessViolationException(_caller);
     }
   };
-  
+
   Collections::Generic::Dictionary<string, string> GetEnvironmentVariables() {
     Collections::Generic::Dictionary<string, string> envs;
     for (int32 index = 0; environ[index] != null; index++) {
@@ -116,14 +116,14 @@ namespace {
     }
     return envs;
   }
-  
+
   _property<Collections::Generic::Dictionary<string, string>&, _readonly> EnvironmentVariables {
     []()->Collections::Generic::Dictionary<string, string>& {
       static Collections::Generic::Dictionary<string, string> environmentVariables = GetEnvironmentVariables();
       return environmentVariables;
     }
   };
-  
+
   int32 exitCode;
   bool userInteractive = true;
   refptr<SocketInit> socketInit;
@@ -137,7 +137,7 @@ _property<String, _readonly> Environment::CommandLine {
   [] {
     if (commandLineArgs->Length == 0)
       throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", _caller);
-      
+
     string commandLine = string::Format("\"{0}\" ", commandLineArgs.ToObject()[0]);
     int32 index = 1;
     int32 length = commandLineArgs->Length;
@@ -250,7 +250,7 @@ void Environment::Exit(int32 ec) {
 String Environment::ExpandEnvironmentVariables(const String& name) {
   string buffer = name;
   string result;
-  
+
   int32 index = buffer.IndexOf('%');
   while (index != -1 && buffer.IndexOf('%', index + 1) != -1) {
     result += buffer.Substring(0, index);
@@ -276,7 +276,7 @@ const Array<String>& Environment::GetCommandLineArgs() {
 String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target) {
   if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
     throw ArgumentException(_caller);
-    
+
   if (target == EnvironmentVariableTarget::Process) {
     char* value = getenv(variable.Data());
     return value == null ? "" : value;
@@ -288,10 +288,10 @@ String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVa
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables(EnvironmentVariableTarget target) {
   if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
     throw ArgumentException(_caller);
-    
+
   if (target == EnvironmentVariableTarget::Process)
     return EnvironmentVariables;
-    
+
   static Collections::Generic::Dictionary<string, string> environmentVariables;
   environmentVariables.Clear();
   Microsoft::Win32::RegistryKey key = target == EnvironmentVariableTarget::User ? Microsoft::Win32::Registry::CurrentUser().CreateSubKey("Environment") : Microsoft::Win32::Registry::LocalMachine().CreateSubKey("System").CreateSubKey("CurrentControlSet").CreateSubKey("Control").CreateSubKey("Session Manager").CreateSubKey("Environment");
@@ -303,15 +303,15 @@ const Collections::Generic::IDictionary<String, String>& Environment::GetEnviron
 String Environment::GetFolderPath(Environment::SpecialFolder folder, Environment::SpecialFolderOption option) {
   if (!Enum<Environment::SpecialFolderOption>::GetValues().Contains(option))
     throw ArgumentException(_caller);
-    
+
   string path = Native::DirectoryApi::GetKnowFolderPath(folder);
-  
+
   if (option == Environment::SpecialFolderOption::None)
     return  !System::IO::Directory::Exists(path) ? "" :  path;
-    
+
   if (!System::IO::Directory::Exists(path))
     System::IO::Directory::CreateDirectory(path);
-    
+
   return path;
 }
 
@@ -322,7 +322,7 @@ Array<String> Environment::GetLogicalDrives() {
 void Environment::SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target) {
   if (string::IsNullOrEmpty(name))
     throw ArgumentException(_caller);
-    
+
   if (target == EnvironmentVariableTarget::Process) {
     if (string::IsNullOrEmpty(value)) {
       EnvironmentVariables().Remove(name);
@@ -345,7 +345,7 @@ void Environment::SetEnvironmentVariable(const String& name, const String& value
 Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   if (commandLineArgs != null)
     throw InvalidOperationException("Can be called only once", _caller);
-    
+
   socketInit = ref_new<SocketInit>();
   consoleChangeCodePage = ref_new<ConsoleChangeCodePage>();
   consoleInterceptSignals = ref_new<ConsoleInterceptSignals>();

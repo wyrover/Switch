@@ -19,7 +19,7 @@ namespace Switch {
         public:
           /// @brief Initializes a new instance of the ContainerControl class with default settings.
           ContainerControl() {}
-          
+
           /// @brief Initializes a new instance of the ContainerControl class with specific text, size, and location.
           /// @param text The text displayed by the control.
           /// @param left The X position of the control, in pixels, from the left edge of the control's container. The value is assigned to the Left property.
@@ -31,17 +31,17 @@ namespace Switch {
           /// @note To maintain better performance, do not set the size of a control in its constructor. The preferred method is to virtual the DefaultSize property.
           ContainerControl(const string& text, int32 left, int32 top, int32 width, int32 height) : ScrollableControl(text, left, top, width, height) {
           }
-          
+
           /// @cond
           ContainerControl(const ContainerControl& containerControl) : ScrollableControl(containerControl) {}
           /// @endcond
-          
+
           _property<const System::ComponentModel::IContainer&, _readonly> Container {
             _get->const System::ComponentModel::IContainer& {return this->GetContainer();}
           };
-          
+
           virtual const System::ComponentModel::IContainer& GetContainer() const {return ref<NullContainer>::Null();}
-          
+
         private:
           class NullContainer : public System::ComponentModel::IContainer {};
         };

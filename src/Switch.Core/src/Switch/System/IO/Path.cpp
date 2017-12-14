@@ -67,7 +67,7 @@ string Path::GetFileNameWithoutExtension(const string& path) {
 string Path::GetFullPath(const string& path) {
   if (path.IndexOfAny(GetInvalidPathChars()) != -1)
     throw ArgumentException(_caller);
-    
+
   return Native::DirectoryApi::GetFullPath(path);
 }
 
@@ -82,7 +82,7 @@ namespace {
         return true;
     return false;
   }
-  
+
   static int32 GetIndexPathRooted(const String& path) {
     int32 index = path.IndexOfAny(DirectorySeparatorChars);
     return (index == -1 || index == path.Length || (index != 0 && !IsDrive(path.Substring(0, index + 1)))) ? -1 : index;
@@ -97,13 +97,13 @@ string Path::GetRandomFileName() {
   static string validChars = "1234567890abcdefghijklmnopqrstuvwxyz";
   static Random rand;
   string randomFileName;
-  
+
   for (int32 i = 0; i < 11; i++) {
     randomFileName += validChars[rand.Next(validChars.Length)];
     if (i == 7)
       randomFileName += '.';
   }
-  
+
   return randomFileName;
 }
 
@@ -117,7 +117,7 @@ string Path::GetTempFileName() {
   do {
     static Random rand;
     tempFileName = "tmp";
-    
+
     for (int32 i = 0; i < 8; i++) {
       if (i == 0)
         tempFileName += validChars[rand.Next(10)];
@@ -126,11 +126,11 @@ string Path::GetTempFileName() {
     }
     tempFileName += ".tmp";
   } while (File::Exists(Combine(GetTempPath(), tempFileName)));
-  
+
   FILE* file = fopen(Combine(GetTempPath(), tempFileName).Data(), "w");
   if (file != null)
     fclose(file);
-    
+
   return Combine(GetTempPath(), tempFileName);
 }
 

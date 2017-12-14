@@ -12,7 +12,7 @@ namespace {
     Dictionary<string, string> dictionary;
     ASSERT_EQ(0, dictionary.Count);
   }
-  
+
   TEST(DictionaryTest, AddKeyValRef) {
     Dictionary<Int32, string> dictionary;
     dictionary.Add(Int32(1), "Test1");
@@ -23,17 +23,17 @@ namespace {
     ASSERT_TRUE(dictionary.ContainsValue(string("Test4")));
     ASSERT_EQ(dictionary[Int32(4)], "Test4");
   }
-  
+
   TEST(DictionaryTest, AddSpPairRef) {
     Dictionary<Int32, string> dictionary;
     refptr<KeyValuePair<Int32, string>> pair(new KeyValuePair<Int32, string>(Int32(42), "Hello"));
-    
+
     dictionary.Add(*pair);
     ASSERT_TRUE(dictionary.ContainsKey(Int32(42)));
     ASSERT_TRUE(dictionary.ContainsValue(string("Hello")));
     ASSERT_EQ(dictionary[Int32(42)], string("Hello"));
   }
-  
+
   TEST(DictionaryTest, AddPairPtr) {
     Dictionary<Int32, string> dictionary;
     dictionary.Add(KeyValuePair<Int32, string>(Int32(42), "Hello"));
@@ -41,7 +41,7 @@ namespace {
     ASSERT_TRUE(dictionary.ContainsValue(string("Hello")));
     ASSERT_EQ(dictionary[Int32(42)], "Hello");
   }
-  
+
   TEST(DictionaryTest, IntPtr) {
     Dictionary<IntPtr, IntPtr> dictionary;
     dictionary.Add(IntPtr(Int32(1)), IntPtr(Int32(2)));
@@ -49,15 +49,15 @@ namespace {
     IntPtr res = dictionary[IntPtr(Int32(2))];
     ASSERT_EQ(res, IntPtr(Int32(3)));
   }
-  
+
   TEST(DictionaryTest, Enumerator) {
     Dictionary<int32, string> ints;
     ints[5] = "five";
     ints[1] = "one";
     ints[2] = "two";
-    
+
     bool seen[6] = { false, false, false, false, false, false };
-    
+
     Dictionary<int32, string>::Enumerator e(ints);
     while (e.MoveNext()) {
       KeyValuePair<int32, string> pair = e.Current;
@@ -74,12 +74,12 @@ namespace {
     ASSERT_FALSE(seen[3]);
     ASSERT_FALSE(seen[4]);
   }
-  
+
   TEST(DictionaryTest, Enumerator_Empty) {
     Dictionary<int32, string> ints;
     Dictionary<int32, string>::Enumerator e(ints);
     while (e.MoveNext())
       ASSERT_FALSE(true);
   }
-  
+
 }

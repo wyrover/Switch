@@ -12,7 +12,7 @@ int32 Native::DateTimeApi::Ftime(int64& seconds, int32& milliseconds, int32& tim
   struct timeb value;
   if (ftime(&value) != 0)
     return -1;
-    
+
   seconds = value.time;
   milliseconds = value.millitm;
   timeZone = value.timezone;
@@ -24,7 +24,7 @@ int32 Native::DateTimeApi::Gmtime(int64 time, int32& year, int32& month, int32& 
   struct tm value;
   if (gmtime_r((const time_t*)&time, &value) == null)
     return -1;
-    
+
   year = value.tm_year + 1900;
   month = value.tm_mon + 1;
   day = value.tm_mday;
@@ -40,7 +40,7 @@ int32 Native::DateTimeApi::Localtime(int64 time, int32& year, int32& month, int3
   struct tm value;
   if (localtime_r((const time_t*)&time, &value) == null)
     return -1;
-    
+
   year = value.tm_year + 1900;
   month = value.tm_mon + 1;
   day = value.tm_mday;
@@ -55,11 +55,11 @@ int32 Native::DateTimeApi::Localtime(int64 time, int32& year, int32& month, int3
 int64 Native::DateTimeApi::Mkgmtime(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second) {
   struct tm localValue = {second, minute, hour, day, month - 1, year - 1900, 0, 0, -1, 0, null};
   int64 localTime = mktime(&localValue);
-  
+
   struct tm gmtValue;
   if (gmtime_r((const time_t*)&localTime, &gmtValue) == 0)
     return -1;
-    
+
   int64 gmtTime = mktime(&gmtValue);
   return localTime + (localTime - gmtTime + (gmtValue.tm_isdst > 0 ? 3600 : 0));
 }

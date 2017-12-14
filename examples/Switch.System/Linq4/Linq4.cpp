@@ -10,9 +10,9 @@ namespace Examples {
     static void Main() {
       int x[] = { 42, 24, 84, 21, 48, 12 };
       int y[] = { 5, 1, 71, 80 };
-      
+
       auto query = Enumerable::AsEnumerable(x)->Concat(y)->Where([](int i) {return i != 21;})->OrderByDescending<int>([](int i) {return i;});
-      
+
       Console::WriteLine("query = {{{0}}}", string::Join(", ", *query));
     }
   };

@@ -20,19 +20,19 @@ namespace Switch {
         /// The following code example demonstrates several of the properties and methods of StringDictionary.
         /// @include StringDictionary.cpp
         using StringDictionary = System::Collections::Generic::SortedDictionary<String, String>;
-        
+
         /// @brief Implements a KeyValuePair with the key and the value strongly typed to be strings rather than objects.
         /// @par Examples
         /// The following code example demonstrates a StringKeyValuePair using.
         /// @include StringDictionary.cpp
         using StringKeyValuePair = System::Collections::Generic::KeyValuePair<String, String>;
-        
+
         /// @brief Implements a KeyValuePair IEnumartor with the key and the value strongly typed to be strings rather than objects.
         /// @par Examples
         /// The following code example demonstrates a IStringKeyValuePairEnumerator using.
         /// @include StringDictionary.cpp
         using IStringKeyValuePairEnumerator = System::Collections::Generic::IEnumerator<StringKeyValuePair>;
-        
+
         /// @brief Implements a KeyValuePair IEnumartor with the key and the value strongly typed to be strings rather than objects.
         /// @par Examples
         /// The following code example demonstrates a IStringKeyValuePairEnumerator using.

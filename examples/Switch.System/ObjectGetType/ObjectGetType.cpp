@@ -5,13 +5,13 @@ using namespace System;
 namespace Examples {
   class MyBaseClass : public object {
   };
-  
+
   class MyDerivedClass: public MyBaseClass {
   };
-  
+
   class ObjectClass : public object {
   };
-  
+
   class Program {
   public:
     // The main entry point for the application.
@@ -20,7 +20,7 @@ namespace Examples {
       Examples::MyDerivedClass myDerived;
       Object* o = &myDerived;
       Examples::MyBaseClass* b = &myDerived;
-      
+
       Console::WriteLine("myBase: Type is {0}", myBase.GetType());
       Console::WriteLine("myDerived: Type is {0}", myDerived.GetType());
       Console::WriteLine("o: Type is {0}", o->GetType());

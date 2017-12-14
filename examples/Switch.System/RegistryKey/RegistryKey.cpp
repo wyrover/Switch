@@ -10,7 +10,7 @@ namespace Examples {
     static void Main() {
       // Create environment variale SWITCH_REGISTRY_KEY_TEST to validate registry expand string
       Environment::SetEnvironmentVariable("SWITCH_REGISTRY_KEY_TEST", "My Environment Variable");
-      
+
       // Create a new regiqstry sub key "HKEY_CURRENT_USER\SwitchRegistryKeyTest" and add values
       _using(RegistryKey key = Registry::CurrentUser().CreateSubKey("SwitchRegistryKeyTest")) {
         key.SetValue("Key1", "Value1");
@@ -21,7 +21,7 @@ namespace Examples {
         key.SetValue("Key6", 42, RegistryValueKind::QWord);
         key.SetValue("Key7", Version(1, 2, 3));
       }
-      
+
       // Open sub key HKEY_CURRENT_USER\SwitchRegistryKeyTest in read mode and read values
       RegistryKey key = Registry::CurrentUser().OpenSubKey("SwitchRegistryKeyTest");
       Console::WriteLine("Key1 = {0}", key.GetValue("Key1"));
@@ -32,17 +32,17 @@ namespace Examples {
       Console::WriteLine("Key6 = {0}", Int64::Parse(key.GetValue("Key6").ToString()));
       Console::WriteLine("Key7 = {0}", Version::Parse(key.GetValue("Key7").ToString()));
       Console::WriteLine("Key8 = {0}", key.GetValue("Key8", -1));
-      
+
       // Write a value on read only sub key
       try {
         key.SetValue("key9", -1);
       } catch (const UnauthorizedAccessException&) {
         Console::WriteLine("Unauthorized access !");
       }
-      
+
       // Remove the "HKEY_CURRENT_USER\SwitchRegistryKeyTest" sub key
       Registry::CurrentUser().DeleteSubKeyTree("SwitchRegistryKeyTest");
-      
+
       // Remove environment variale SWITCH_REGISTRY_KEY_TEST
       Environment::SetEnvironmentVariable("SWITCH_REGISTRY_KEY_TEST", "");
     }

@@ -10,9 +10,9 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       List<int> grades = {78, 92, 100, 37, 81};
-      
+
       double average = grades.Average();
-      
+
       Console::WriteLine("The average grade is {0}.", average);
     }
   };

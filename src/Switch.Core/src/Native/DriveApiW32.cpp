@@ -37,10 +37,10 @@ bool Native::DriveApi::GetVolumeInformation(const string& rootPathName, string& 
   char fileSystem[MAX_PATH];
   if (::GetVolumeInformationA(rootPathName.Data(), volume, MAX_PATH, null, null, &fileSystemFlags, fileSystem, MAX_PATH) == FALSE)
     return false;
-    
+
   volumeName = volume;
   fileSystemName = fileSystem;
-  
+
   return true;
 }
 

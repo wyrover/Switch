@@ -4,6 +4,6 @@ using namespace System;
 
 ExceptionPtr ExceptionPtr::CurrentException() {
   return std::current_exception();
-  
+
 }
 

@@ -12,9 +12,9 @@ namespace Examples {
       // Create a list of object.
       Array<string> cats = {"Barley", "Boots", "Whiskers"};
       Array<string> dogs = {"Bounder", "Snoopy", "Fido"};
-      
+
       refptr<IEnumerable<string>> query = cats.Concat(dogs);
-      
+
       for (string name : *query)
         Console::WriteLine(name);
     }

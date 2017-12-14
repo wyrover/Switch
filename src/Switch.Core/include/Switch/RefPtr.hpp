@@ -25,7 +25,7 @@ class _export __opaque_sub_object__ {
     this->UseCount = value.UseCount.load();
     return *this;
   }
-  
+
   std::atomic<int32> UseCount;
 };
 /// @endcond
@@ -50,66 +50,66 @@ namespace Switch {
   public:
     /// @brief Represents the empty _. This field is constant.
     static const _<T>& Empty() { static const _<T> value; return value; }
-    
+
     /// @brief Represents a Null _. This field is constant.
     static const _<T>& Null() { static const _<T> value; return value; }
-    
+
     /// @brief Create a new instance of class _
     /// @remarks _ is initialized with default value _::Empty()
     _() {}
-    
+
     /// @brief Create a new instance of class _ with a specified sp _.
     /// @param sp _ to copy
     /// @exception ArgumentNullException sp is null.
     /// @remarks the current object is equal to smartPointer and UseCount of both is incremented.
     _(const _<T>& sp) { Reset(sp); }
-    
+
     template<typename TT>
     _(const _<TT>& sp) { Reset(sp); }
-    
+
     _(_<T>&& sp) { Reset(sp); sp.Reset();}
-    
+
     template<typename TT>
     _(_<TT>&& sp) { Reset(sp); sp.Reset();}
-    
+
     /// @brief Create a new instance of class _ with a specified obj pointer T
     /// @param obj Pointer T object to assign the current object. It can be null.
     /// @remarks The obj pointer must be create by operator new. If obj is a pointer on the stack, a error will occured at used.
     _(T* obj) { Reset(obj); }
-    
+
     /// @brief Delete the current object. Set the current object to null.
     /// @remarks UseCount is decremented. If alias count equal 0 the object T is deleted.
     void Delete() { Reset(); }
-    
+
     /// @brief Gets the UseCount of object T
     /// @return The UseCount.
     /// @remarks return 0 if the current object is Empty or Null.
     int32 GetUseCount() const {
       if (this->subObject == null)
         return 0;
-        
+
       return this->subObject->UseCount;
     }
-    
+
     /// @brief Indicates whether the specified sp SharPointer is an null or Empty.
     /// @param sp A _ reference.
     /// @return bool true if the smartPointer parameter is null or an empty _; otherwise, false.
     static bool IsNullOrInvalid(const _<T>& sp) { return sp == null; }
-    
+
     /// @brief Gets a bool indicate is the current _<T> is unique (UseCount = 1).
     /// @return Return true if the current SharePointer is unique; otherwise false.
     /// @remarks An Empty SharePointer are never unique, it always return true.
     bool IsUnique() const {
       if (this->subObject == null)
         return true;
-        
+
       return this->subObject->UseCount == 1;
     }
-    
+
     /// @brief Reset the current object. Set the current object to null.
     /// @remarks UseCount is decremented. If alias count equal 0 the object T is deleted.
     void Reset() { Reset(null); }
-    
+
     /// @brief Reset the current object. Set the current object to the specifeid object pointer T.
     /// @param obj Pointer T object to assign the current object. It can be null.
     /// @remarks Before set, if the current object is not empty UseCount is decremented. If UseCount equal 0 the object T is deleted.
@@ -119,36 +119,36 @@ namespace Switch {
         delete this->subObject;
         delete this->ptr;
       }
-      
+
       if (obj == null) {
         this->subObject = null;
         this->ptr = null;
         return;
       }
-      
+
       this->subObject = new __opaque_sub_object__();
       this->ptr = obj;
       ++this->subObject->UseCount;
     }
-    
+
     template<typename TT>
     void Reset(_<TT> obj) {
       if (this->subObject != null && --this->subObject->UseCount == 0) {
         delete this->subObject;
         delete this->ptr;
       }
-      
+
       if (obj == null) {
         this->subObject = null;
         this->ptr = null;
         return;
       }
-      
+
       this->subObject = obj.subObject;
       this->ptr = obj.template ToPointer<TT>();
       ++this->subObject->UseCount;
     }
-    
+
     /// @brief Exchanges the contents of the _ object with those of ptr, transferring ownership of any managed object between them without destroying either.
     /// @param ptr Another _ object of the same type.
     void Swap(_<T>& ptr) {
@@ -159,29 +159,29 @@ namespace Switch {
       this->ptr = p;
       this->subObject = s;
     }
-    
+
     static void Swap(_<T>& ptrA, _<T>& ptrB) { ptrA.Swap(ptrB); }
-    
+
     /// @brief Gets a reference on object T
     /// @return Reference on object T.
     /// @exception NullPointerException If the current object is Empty.
     T& ToObject() {
       if (this->subObject == null)
         throw std::exception();
-        
+
       return *this->ptr;
     }
-    
+
     /// @brief Gets a reference on object T
     /// @return Reference on object T.
     /// @exception NullPointerException If the current object is Empty.
     const T& ToObject() const {
       if (this->subObject == null)
         throw std::exception();
-        
+
       return *this->ptr;
     }
-    
+
     /// @brief Gets a casted reference TT on object T
     /// @return Reference TT on object T.
     /// @exception InvalidCastException if T is not a TT type.
@@ -189,7 +189,7 @@ namespace Switch {
     TT& ToObject() {
       return *ToPointer<TT>();
     }
-    
+
     /// @brief Gets a casted reference TT on object T
     /// @return Reference TT on object T.
     /// @exception InvalidCastException if T is not a TT type.
@@ -197,51 +197,51 @@ namespace Switch {
     const TT& ToObject() const {
       return *ToPointer<TT>();
     }
-    
+
     /*
      /// @brief Gets a reference on object T
      /// @retur Reference on object T.
      /// @exception NullPointerException If the current object is Empty.
      ref<T> ToReference() { return ToObject(); }
-    
+
      /// @brief Gets a reference on object T
      /// @return Reference on object T.
      /// @exception NullPointerException If the current object is Empty.
      ref<T> ToReference() const { return ToObject(); }
-    
+
      /// @brief Gets a casted reference TT on object T
      /// @return Reference TT on object T.
      /// @exception InvalidCastException if T is not a TT type.
      template<typename TT>
      ref<TT> ToReference() { return ToObject<TT>(); }
-    
+
      /// @brief Gets a casted reference TT on object T
      /// @return Reference TT on object T.
      /// @exception InvalidCastException if T is not a TT type.
      template<typename TT>
      const ref<TT> ToReference() const { return ToObject<TT>(); }
      */
-    
+
     /// @brief Gets a pointer on object T
     /// @return Pointer on object T.
     /// @exception InvalidCastException if T is not a TT type.
     T* ToPointer() {
       if (this->subObject == null)
         throw std::exception();
-        
+
       return this->ptr;
     }
-    
+
     /// @brief Gets a pointer on object T
     /// @return Pointer on object T.
     /// @exception NullPointerException If the current object is Empty.
     const T* ToPointer() const {
       if (this->subObject == null)
         throw std::exception();
-        
+
       return this->ptr;
     }
-    
+
     /// @brief Gets a pointer of type TT* on object T
     /// @return Pointer of type TT* on object T.
     /// @exception NullPointerException If the current object is Empty.
@@ -249,13 +249,13 @@ namespace Switch {
     TT* ToPointer() {
       if (this->subObject == null)
         throw std::exception();
-        
+
       TT* cast = dynamic_cast<TT*>(this->ptr);
       if (cast == null)
         throw std::exception();
       return cast;
     }
-    
+
     /// @brief Gets a pointer of type TT* on object T
     /// @return Pointer of type TT* on object T.
     /// @exception InvalidCastException if T is not a TT type.
@@ -263,13 +263,13 @@ namespace Switch {
     const TT* ToPointer() const {
       if (this->subObject == null)
         throw std::exception();
-        
+
       const TT* cast = dynamic_cast<const TT*>(this->ptr);
       if (cast == null)
         throw std::exception();
       return cast;
     }
-    
+
     /// @brief Creates an alias of the smartpointer with a different type
     /// @return _ of type TT.
     template<typename TT>
@@ -277,7 +277,7 @@ namespace Switch {
       try {
         if (this->ptr == null)
           return _<TT>::Null();
-          
+
         TT* ptr = static_cast<TT*>(this->ptr);
         if (ptr == null)
           return _<TT>::Null();
@@ -290,7 +290,7 @@ namespace Switch {
         return _<TT>::Null();
       }
     }
-    
+
     /// @brief Creates an alias of the smartpointer with a different type
     /// @return _ of type TT.
     template<typename TT>
@@ -298,7 +298,7 @@ namespace Switch {
       try {
         if (this->ptr == null)
           return _<TT>::Null();
-          
+
         TT* ptr = dynamic_cast<TT*>(this->ptr);
         if (ptr == null)
           return _<TT>::Null();
@@ -311,7 +311,7 @@ namespace Switch {
         return _<TT>::Null();
       }
     }
-    
+
     /// @return Creates an alias of the smartpointer with a different type
     /// @return _ of type TT.
     template<typename TT>
@@ -319,7 +319,7 @@ namespace Switch {
       try {
         if (this->ptr == null)
           return _<TT>::Null();
-          
+
         TT* ptr = dynamic_cast<TT*>(this->ptr);
         if (ptr == null)
           return _<TT>::Null();
@@ -332,25 +332,25 @@ namespace Switch {
         return _<TT>::Null();
       }
     }
-    
+
     /// @brief Creates an alias of the smartpointer with a different type
     /// @param sp Pointer T object to assign the current object. It can be null.
     /// @return _ of type TT.
     template<typename TT>
     static _<TT> StaticCast(const _<T>& sp) { return sp.StaticCast<TT>(); }
-    
+
     /// @brief Creates an alias of the smartpointer with a different type
     /// @param sp Pointer T object to assign the current object. It can be null.
     /// @return _ of type TT.
     template<typename TT>
     static _<TT> DynamicCast(const _<T>& sp) { return sp.DynamicCast<TT>(); }
-    
+
     /// @brief Creates an alias of the smartpointer with a different type
     /// @param sp Pointer T object to assign the current object. It can be null.
     /// @return _ of type TT.
     template<typename TT>
     static _<TT> As(const _<T>& sp) { return sp.As<TT>(); }
-    
+
     /// @brief Creates an alias of the smartpointer with a different type
     /// @return _ of type TT.
     template<typename TT>
@@ -363,33 +363,33 @@ namespace Switch {
         return false;
       }
     }
-    
+
     /// @brief Creates an alias of the smartpointer with a different type
     /// @param sp Pointer T object to assign the current object. It can be null.
     /// @return _ of type TT.
     template<typename TT>
     static bool Is(const _<T>& sp) { return sp.Is<TT>(); }
-    
+
     /// @brief Creates an alias of the smartpointer with a different type
     /// @return _ of type TT.
     template<typename TT>
     _<TT> ChangeType() const {
       if (dynamic_cast<TT*>(this->ptr) == null)
         throw std::exception();
-        
+
       _<TT> sp;
       sp.subObject = this->subObject;
       sp.ptr = dynamic_cast<TT*>(this->ptr);
       ++this->subObject->UseCount;
       return sp;
     }
-    
+
     /// @brief Creates an alias of the smartpointer with a different type
     /// @param sp Pointer T object to assign the current object. It can be null.
     /// @return _ of type TT.
     template<typename TT>
     static _<TT> ChangeType(const _<T>& sp) { return sp.ChangeType<TT>(); }
-    
+
     /// @brief Returns a string that represents the current _.
     /// @return string A string that represents the current _.
     std::string ToString() const {
@@ -399,56 +399,56 @@ namespace Switch {
       s << "Switch::_ [Pointer=" << this->ptr << ", UseCount=" << this->GetUseCount() << "]";
       return s.str();
     }
-    
+
     /// @cond
     virtual ~_() { Reset(); }
-    
+
     const T& operator*() const { return ToObject(); }
     T& operator*() { return ToObject(); }
-    
+
     const T& operator()() const { return ToObject(); }
     T& operator()() { return ToObject(); }
-    
+
     const T* operator&() const { return ToPointer(); }
     T* operator&() { return ToPointer(); }
-    
+
     const T* operator->() const { return ToPointer(); }
     T* operator->() { return ToPointer(); }
-    
+
     _<T>& operator =(const _<T>& sp) {
       Reset(sp);
       return *this;
     }
-    
+
     template<typename TT>
     _<T>& operator=(const _<TT>& sp) {
       Reset(sp);
       return *this;
     }
-    
+
     _<T>& operator=(T* obj) {
       Reset(obj);
       return *this;
     }
-    
+
     bool operator==(NullPtr) const { return this->subObject == null; }
-    
+
     bool operator==(const T* ptr) const { return this->ptr == ptr; }
-    
+
     bool operator==(const _<T>& sp) const { return this->subObject == sp.subObject && this->ptr == sp.ptr; }
-    
+
     bool operator!=(NullPtr) const { return this->subObject != null; }
-    
+
     bool operator!=(const T* ptr) const { return this->ptr != ptr; }
-    
+
     bool operator!=(const _<T>& sp) const { return this->subObject != sp.subObject || this->ptr != sp.ptr; }
-    
+
     operator bool() const { return this->ptr != null; }
-    
+
     bool operator!() const { return this->ptr == null; }
-    
+
     /// @endcond
-    
+
   private:
     void Reset(const _<T>& sp) {
       Reset(null);
@@ -457,12 +457,12 @@ namespace Switch {
       if (this->subObject != null)
         ++this->subObject->UseCount;
     }
-    
+
   public:
     T* ptr = null;
     __opaque_sub_object__* subObject = null;
   };
-  
+
   /// @brief Represents a Reference Pointer class. A _ is a memory-managing pointer to an object.
   /// @remarks A Reference Pointer is basically a pointer with a destructor. The destructor ensures that the object pointed to is deleted when it is no longer being used. You can have multiple pointers to the same object, so the object is only deleted when the last pointer is destroyed.
   /// @remarks A Reference Pointer has to have slightly different characteristics to a conventional C pointer. These differences show up in the behaviour of the pointer on assignment and when the pointer's address (i.e. the object being pointed to) is changed. Deciding the exact behaviour is difficult and very subjective. This could be solved by having a range of different classes with slightly different behaviour. You could then choose which one suits your problem. However, I don't agree with this approach - I think you get quickly bogged down with the subtle differences and lose sight of the program you are actually trying to write. So I provide just one kind of Reference Pointer which I believe is the most general-purpose. I think this is consistent with the STL, which provides just one kind of vector, map, list etc.
@@ -480,13 +480,13 @@ namespace Switch {
   /// @ingroup Types
   template<typename T>
   using refptr = _<T>;
-  
+
   template<typename T, typename ...Args>
   refptr<T> _new(Args&& ... args) {return refptr<T>(new T(args...));}
-  
+
   template<typename T, typename ...Args>
   refptr<T> ref_new(Args&& ... args) {return refptr<T>(new T(args...));}
-  
+
   template<typename T, typename ...Args>
   refptr<T> gcnew(Args&& ... args) {return refptr<T>(new T(args...));}
 }

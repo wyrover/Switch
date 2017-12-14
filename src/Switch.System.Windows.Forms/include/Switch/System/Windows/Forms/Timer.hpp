@@ -17,27 +17,27 @@ namespace Switch {
         class Timer : public System::ComponentModel::Component {
         public:
           Timer() {}
-          
+
           /// @cond
           ~Timer() {this->Enabled = false;}
           /// @endcond
-          
+
           _property<bool> Enabled {
             _get {return this->enabled;},
             _set {this->SetEnabled(value);}
           };
-          
+
           _property<int32> Interval {
             _get {return this->interval;},
             _set {this->SetInterval(value);}
           };
-          
+
           Switch::System::EventHandler Tick;
-          
+
         private:
           void SetEnabled(bool enabled);
           void SetInterval(int32 interval);
-          
+
           int32 interval = 100;
           bool enabled = false;
           intptr handle = IntPtr::Zero;

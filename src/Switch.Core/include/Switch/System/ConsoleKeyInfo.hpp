@@ -20,12 +20,12 @@ namespace Switch {
       /// @remarks This type is not intended to be created by users. Instead, it is returned to the user in response to calling the Console::ReadKey method.
       /// @remarks The ConsoleKeyInfo type does not specify whether the left or right SHIFT, ALT, or CTRL modifier key was pressed
       ConsoleKeyInfo() {}
-      
+
       /// @brief Create a new instance of ConsoleKeyInfo class.
       /// @remarks This type is not intended to be created by users. Instead, it is returned to the user in response to calling the Console::ReadKey method.
       /// @remarks The ConsoleKeyInfo type does not specify whether the left or right SHIFT, ALT, or CTRL modifier key was pressed
       ConsoleKeyInfo(const ConsoleKeyInfo& keyInfo) : keyChar(keyInfo.keyChar), key(keyInfo.key), modifiers(keyInfo.modifiers) {}
-      
+
       /// @cond
       ConsoleKeyInfo& operator=(const ConsoleKeyInfo& keyInfo) {
         this->keyChar = keyInfo.keyChar;
@@ -34,7 +34,7 @@ namespace Switch {
         return *this;
       }
       /// @endcond
-      
+
       /// @brief Initializes a new instance of the ConsoleKeyInfo class using the specified character, console key, and modifier keys.
       /// @param keyChar The Unicode character that corresponds to the key parameter.
       /// @param key The console key that corresponds to the keyChar parameter.
@@ -51,39 +51,39 @@ namespace Switch {
         if (control == true)
           this->modifiers |= ConsoleModifiers::Control;
       }
-      
+
       /// @brief Gets the console key represented by the current ConsoleKeyInfo object.
       /// @param A System::ConsoleKey value that identifies the console key that was pressed
       _property<ConsoleKey, _readonly> Key {
         _get {return this->key;}
       };
-      
+
       /// @brief Gets the Unicode character represented by the current ConsoleKeyInfo object.
       /// @param An char32 object that corresponds to the console key represented by the current ConsoleKeyInfo object.
       _property<char32, _readonly> KeyChar {
         _get {return this->keyChar;}
       };
-      
+
       /// @brief Gets a bitwise combination of System::ConsoleModifiers values that specifies one or more modifier keys pressed simultaneously with the console key.
       /// @param A bitwise combination of System::ConsoleModifiers values. There is no default value.
       _property<ConsoleModifiers, _readonly> Modifiers {
         _get {return this->modifiers;}
       };
-      
+
       /// @brief Determines whether the specified object is equal to the current object.
       /// @param value The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       bool Equals(const ConsoleKeyInfo& value) const { return this->key == value.key && this->keyChar == value.keyChar && this->modifiers == value.modifiers; }
-      
+
       /// @brief Determines whether this instance of Char and a specified object, which must also be a Char object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
       bool Equals(const object& obj) const override { return is<ConsoleKeyInfo>(obj) && Equals(static_cast<const ConsoleKeyInfo&>(obj)); }
-      
+
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
       virtual int32 GetHashCode() const override { return (int32)this->key ^ (this->keyChar << 16) ^ ((int32)this->modifiers << 24); }
-      
+
     private:
       char32 keyChar = 0;
       ConsoleKey key = (ConsoleKey)0;

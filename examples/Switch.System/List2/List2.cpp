@@ -10,39 +10,39 @@ namespace Examples {
     static void Main() {
       Array<string> input = {"Brachiosaurus", "Amargasaurus", "Mamenchisaurus"};
       List<string> dinosaurs(input);
-      
+
       Console::WriteLine("\nCapacity: {0}", dinosaurs.Capacity);
-      
+
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-        
+
       Console::WriteLine("\nAddRange(dinosaurs)");
       dinosaurs.AddRange(dinosaurs);
-      
+
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-        
+
       Console::WriteLine("\nRemoveRange(2, 2)");
       dinosaurs.RemoveRange(2, 2);
-      
+
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-        
+
       input = {"Tyrannosaurus", "Deinonychus", "Velociraptor"};
-      
+
       Console::WriteLine("\nInsertRange(3, input)");
       dinosaurs.InsertRange(3, input);
-      
+
       Console::WriteLine();
       for (string dinosaur : dinosaurs)
         Console::WriteLine(dinosaur);
-        
+
       Console::WriteLine("\noutput = dinosaurs.GetRange(2, 3).ToArray()");
       Array<string> output = dinosaurs.GetRange(2, 3).ToArray();
-      
+
       Console::WriteLine();
       for (string dinosaur : output)
         Console::WriteLine(dinosaur);

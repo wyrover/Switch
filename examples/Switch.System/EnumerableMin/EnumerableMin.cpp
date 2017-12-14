@@ -15,22 +15,22 @@ namespace Examples {
         this->age = pet.age;
         return *this;
       }
-      
+
       _property<int, _readonly> Age {
         _get {return this->age;}
       };
-      
+
       _property<string, _readonly> Name {
         _get {return this->name;}
       };
-      
+
       virtual int CompareTo(const IComparable& other) const { return Int32(this->age).CompareTo(as<Pet>(other).age); }
-      
+
     private:
       string name;
       int age;
     };
-    
+
   public:
     // The main entry point for the application.
     static void Main() {
@@ -39,9 +39,9 @@ namespace Examples {
         {"Boots", 4},
         {"Whiskers", 1}
       };
-      
+
       Pet min = pets.Min();
-      
+
       Console::WriteLine("The 'minimum' animal is {0}.", min.Name);
     }
   };

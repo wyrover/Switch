@@ -61,7 +61,7 @@ String Decimal::ToString(const String& format, const IFormatProvider&) const {
     return "-Infinity";
   if (IsPositiveInfinity(this->value))
     return "Infinity";
-    
+
   int32 precision;
   decimal arg = this->value;
   char32 type = NumericalFormat::GetFormatType(format, precision);
@@ -94,17 +94,17 @@ String Decimal::ToString(const String& format, const IFormatProvider&) const {
 int32 Decimal::CompareTo(const Decimal& value) const {
   if (this->value > value)
     return 1;
-    
+
   if (this->value < value.value)
     return -1;
-    
+
   return 0;
 }
 
 int32 Decimal::CompareTo(const IComparable& obj) const {
   if (!is<Decimal>(obj))
     return 1;
-    
+
   return CompareTo(static_cast<const Decimal&>(obj));
 }
 
@@ -239,7 +239,7 @@ Decimal& Decimal::operator *=(const Decimal& value) {
 Decimal& Decimal::operator /=(const Decimal& value) {
   if (value == 0)
     throw DivideByZeroException(_caller);
-    
+
   this->value /= value.value;
   return *this;
 }

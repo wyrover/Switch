@@ -11,14 +11,14 @@ namespace {
     static bool IsEmpty(const string& str) { return string::IsNullOrEmpty(str); }
     bool IsNotEmpty(const string& str) { return !string::IsNullOrEmpty(str); }
   };
-  
+
   TEST(PrediacateTest, Static) {
     _using(Predicate<const string&> p(&MyClass::IsEmpty)) {
       ASSERT_FALSE(p("Not empty"));
       ASSERT_TRUE(p(""));
     }
   }
-  
+
   TEST(PrediacateTest, Member) {
     MyClass m;
     _using(Predicate<const string&> p(m, &MyClass::IsNotEmpty)) {
@@ -26,7 +26,7 @@ namespace {
       ASSERT_FALSE(p(""));
     }
   }
-  
+
   TEST(PrediacateTest, Empty) {
     _using(Predicate<const string&> p) {
       ASSERT_NO_THROW(p("Not empty"));

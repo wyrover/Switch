@@ -28,7 +28,7 @@ namespace Switch {
               tasks.Add(Task<>::Factory().StartNew(action));
             Task<>::WaitAll(tasks.ToArray());
           }
-          
+
           /// @cond
           template<typename ...Args>
           static void Invoke(Args... args) {Invoke({args...});}

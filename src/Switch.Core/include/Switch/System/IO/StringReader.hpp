@@ -23,16 +23,16 @@ namespace Switch {
           static StringReader nullStringReader("");
           return nullStringReader;
         }
-        
+
         /// @brief Initializes a new instance of the StringReader class that reads from the specified string.
         /// @param s The string to which the StringReader should be initialized.
         StringReader(const String& s);
-        
+
         /// @cond
         StringReader(const StringReader& sr);
         StringReader& operator =(const StringReader& sr);
         /// @endcond
-        
+
         /// @brief Closes the StringReader.(Overrides TextReader.Close().)
         /// @remarks For an example of creating a file and writing text to a file, see How to: Write Text to a File. For an example of reading text from a file, see How to: Read Text from a File. For an example of reading from and writing to a binary file, see How to: Read and Write to a Newly Created Data File.
         /// @remarks This method overrides the Stream.Close method.
@@ -40,7 +40,7 @@ namespace Switch {
         /// @remarks Flushing the stream will not flush its underlying encoder unless you explicitly call Close. Setting AutoFlush to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.
         /// @remarks Following a call to Close, other methods might throw an exception.
         void Close() override;
-        
+
         /// @brief Returns the next available character but does not consume it.(Overrides TextReader.Peek().)
         /// @return int32 An integer representing the next character to be read, or -1 if no more characters are available or the stream does not support seeking.
         /// @remarks The Peek method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a Char type.
@@ -48,7 +48,7 @@ namespace Switch {
         /// @remarks The current position of the StringReader is not changed by this operation.
         /// @remarks The following table lists examples of other typical or related I/O tasks.
         int32 Peek() const override;
-        
+
         /// @brief Reads the next character from the input string and advances the character position by one character.(Overrides TextReader.Read().)
         /// @return int32 The next character from the underlying string, or -1 if no more characters are available.
         /// @remarks This method overrides the TextReader.Read method.
@@ -65,7 +65,7 @@ namespace Switch {
         /// }
         /// @endcode
         int32 Read() override;
-        
+
         /// @brief Reads a line of characters from the current string and returns the data as a string.(Overrides TextReader.ReadLine().)
         /// @return string The next line from the current string, or null if the end of the string is reached.
         /// @remarks This method overrides the TextReader.ReadLine method.
@@ -89,7 +89,7 @@ namespace Switch {
         /// Console::WriteLine("Modified text:\n\n{0}", paragraph);
         /// @endcode
         String ReadLine() override;
-        
+
         /// @brief Reads all characters from the current position to the end of the string and returns them as a single string.(Overrides TextReader.ReadToEnd().)
         /// @return string The content from the current position to the end of the underlying string.
         /// @remarks This method overrides the TextReader.ReadToEnd method.
@@ -102,7 +102,7 @@ namespace Switch {
         /// }
         /// @endcode
         String ReadToEnd() override;
-        
+
       protected:
         /// @cond
         bool closed = false;

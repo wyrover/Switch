@@ -34,13 +34,13 @@ TEST(StringTest, Format_BraceMismatch) {
   ASSERT_THROW(String::Format("{{}"), FormatException);
   ASSERT_THROW(String::Format("}{"), FormatException);
   ASSERT_THROW(String::Format("{}"), FormatException);
-  
+
   ASSERT_THROW(String::Format("{{0}", 5), FormatException);
   ASSERT_THROW(String::Format("}{0}", 5), FormatException);
   ASSERT_THROW(String::Format("{{}{0}", 5), FormatException);
   ASSERT_THROW(String::Format("}{{0}", 5), FormatException);
   ASSERT_THROW(String::Format("{}{0}", 5), FormatException);
-  
+
   ASSERT_THROW(String::Format("{0}{{1}", 5, "string"), FormatException);
   ASSERT_THROW(String::Format("}{0}{1}", 5, String("string")), FormatException);
   ASSERT_THROW(String::Format("{{}{0}{1}", "string", 12), FormatException);
@@ -51,25 +51,25 @@ TEST(StringTest, Format_BraceMismatch) {
 TEST(StringTest, Format_ConsoleBraceMismatch) {
   try {
     Console::SetOut(System::IO::TextWriter::Null());
-    
+
     Console::WriteLine("{");
     Console::WriteLine("}");
     Console::WriteLine("{{}");
     Console::WriteLine("}{");
     Console::WriteLine("{}");
-    
+
     ASSERT_THROW(Console::WriteLine("{{0}", 5), FormatException);
     ASSERT_THROW(Console::WriteLine("}{0}", 5), FormatException);
     ASSERT_THROW(Console::WriteLine("{{}{0}", 5), FormatException);
     ASSERT_THROW(Console::WriteLine("}{{0}", 5), FormatException);
     ASSERT_THROW(Console::WriteLine("{}{0}", 5), FormatException);
-    
+
     ASSERT_THROW(Console::WriteLine("{0}{{1}", 5, "string"), FormatException);
     ASSERT_THROW(Console::WriteLine("}{0}{1}", 5, String("string")), FormatException);
     ASSERT_THROW(Console::WriteLine("{{}{0}{1}", "string", 12), FormatException);
     ASSERT_THROW(Console::WriteLine("}{{0}{1}", "string", true), FormatException);
     ASSERT_THROW(Console::WriteLine("{}{0{1}}", 5, 12u), FormatException);
-    
+
     Console::SetOut(Console::Out);
   } catch (Exception& x) {
     Console::SetOut(Console::Out);
@@ -132,7 +132,7 @@ TEST(StringTest, Format_CustomFormatting) {
     ASSERT_EQ(".5", String::Format("{0:##.#}", 0.5));
     ASSERT_EQ("X", String::Format("{0:X;B}", 5));
     ASSERT_EQ("B", String::Format("{0:X;B}", -5));
-  
+
     ASSERT_THROW(String::Format("{0:a}", 123456), FormatException);*/
 }
 
@@ -154,14 +154,14 @@ TEST(StringTest, Format_Align) {
   ASSERT_EQ(String::Format("[{0,-1}]", 5),      "[5]");
   ASSERT_EQ(String::Format("[{0,-6}]", "left"), "[left  ]");
   ASSERT_EQ(String::Format("[{0,6}]", "right"), "[ right]");
-  
+
   ASSERT_EQ(String::Format("[{0,3}]", "very long string"), "[very long string]");
   ASSERT_EQ(String::Format("[{0,-6}]", "very long string"), "[very long string]");
-  
+
   ASSERT_EQ(String::Format("[{0,3}]", "four"), "[four]");
   ASSERT_EQ(String::Format("[{0,4}]", "four"), "[four]");
   ASSERT_EQ(String::Format("[{0,5}]", "four"), "[ four]");
-  
+
   ASSERT_EQ(String::Format("[{0}]", Char('a')), "[a]");
 }
 
@@ -193,7 +193,7 @@ TEST(StringTest, Format_char32) {
 TEST(StringTest, Format_Pointer) {
   int32* null_ptr = null;
   int32* ptr = (int32*)0xFFFF;
-  
+
   ASSERT_EQ("0", String::Format("{0}", null_ptr));
   ASSERT_EQ("65535", String::Format("{0}", ptr));
   ASSERT_EQ("FFFF", String::Format("{0:X}", ptr));

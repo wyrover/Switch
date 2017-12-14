@@ -25,12 +25,12 @@ namespace Switch {
         public:
           /// @brief Create a new instance of SocketInformation class.
           SocketInformation() {}
-          
+
           /// @cond
           SocketInformation(const SocketInformation&) = delete;
           SocketInformation& operator=(const SocketInformation&) = delete;
           /// @endcond
-          
+
           /// @brief Gets or sets the options for a Socket.
           /// @param options A SocketInformationOptions instance.
           /// @return SocketInformationOptions A SocketInformationOptions instance.
@@ -38,7 +38,7 @@ namespace Switch {
             _get->const SocketInformationOptions& {return this->options;},
             _set {this->options = value;}
           };
-          
+
           /// @brief Gets or sets the protocol information for a Socket.
           /// @param protocolInformation An array of type Byte.
           /// @return Array<Byte> An array of type Byte.
@@ -46,7 +46,7 @@ namespace Switch {
             _get->const Array<byte>& {return this->protocolInfrmation;},
             _set {this->protocolInfrmation = value;}
           };
-          
+
         private:
           /// @cond
           SocketInformationOptions options = SocketInformationOptions::None;

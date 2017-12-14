@@ -31,37 +31,37 @@ namespace Switch {
         public:
           /// @brief Creates an instance of the ClientWebSocket class.
           ClientWebSocket();
-          
+
           /// @cond
           ~ClientWebSocket();
           /// @endcond
-          
+
           /// @brief Aborts the WebSocket connection and cancels any pending IO operations.
           void Abort() override {throw NotSupportedException(_caller);}
-          
+
           /// @brief Connect to a WebSocket server.
           /// @param uri The URI of the WebSocket server to connect to.
           void Connect(const string& uri);
-          
+
           /// @brief Close the ClientWebSocket instance
           /// @param closeStatus The WebSocket close status.
           /// @param statusDescription A description of the close status.
           void Close(WebSocketCloseStatus closeStatus, const string& statusDescription);
-          
+
           /// @brief Receive data on ClientWebSocket.
           /// @return The buffer to receive the response.
           ArraySegment<byte> Receive();
-          
+
           /// @brief Send data on ClientWebSocket
           /// @param buffer The buffer containing the message to be sent.
           /// @param messageType Specifies whether the buffer is clear text or in a binary format.
           /// @param endOfMessage Specifies whether this is the final asynchronous send. Set to true if this is the final send; false otherwise.
           void Send(const ArraySegment<byte>& buffer, WebSocketMessageType messageType, bool endOfMessage);
-          
+
         protected:
           /// @cond
           WebSocketCloseStatus GetCloseStatus() const override {return this->closeStatus;}
-          
+
           string GetCloseStatusDescription() const override {
             switch (this->closeStatus) {
             case WebSocketCloseStatus::Empty: return "No error specified.";
@@ -77,16 +77,16 @@ namespace Switch {
             default : throw InvalidOperationException(_caller);
             }
           }
-          
+
           WebSocketState GetState() const override;
-          
+
           string GetSubProtocol() const override {return this->subProtocol;}
           /// @endcond
-          
+
         private:
           ClientWebSocket(const ClientWebSocket&) = delete;
           ClientWebSocket& operator =(const ClientWebSocket&) = delete;
-          
+
           WebSocketCloseStatus closeStatus = WebSocketCloseStatus::Empty;
           string subProtocol;
           easywsclient::WebSocket* socket = null;

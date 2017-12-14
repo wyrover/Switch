@@ -25,7 +25,7 @@ namespace Switch {
         /// @param path A relative or absolute path for the file that the current FileStream object will encapsulate
         /// @param mode A FileMode constant that determines how to open or create the file
         FileStream(const String& path, FileMode mode) : FileStream(path, mode, mode == FileMode::Append ? FileAccess::Write : FileAccess::ReadWrite, FileShare::None) {}
-        
+
         /// @brief Initializes a new instance of the System::IO::FileStream class.
         /// @param path A relative or absolute path for the file that the current FileStream object will encapsulate
         /// @param mode A FileMode constant that determines how to open or create the file
@@ -35,7 +35,7 @@ namespace Switch {
         /// @exception DirectoryNotFoundException specifying FileModeOpen and the file specified by path does not exist  -or-  specifying FileModeTruncate and the specified file does not exist  -or-  specifying FileModeAppend and the specified file does not exist
         /// @exception IOError the handle of the specified file cannot be opened
         FileStream(const String& path, FileMode mode, FileAccess access) : FileStream(path, mode, access, FileShare::None) {}
-        
+
         /// @brief Initializes a new instance of the System::IO::FileStream class.
         /// @param path A relative or absolute path for the file that the current FileStream object will encapsulate
         /// @param mode A FileMode constant that determines how to open or create the file
@@ -46,13 +46,13 @@ namespace Switch {
         /// @exception DirectoryNotFoundException specifying FileModeOpen and the file specified by path does not exist  -or-  specifying FileModeTruncate and the specified file does not exist  -or-  specifying FileModeAppend and the specified file does not exist
         /// @exception IOError the handle of the specified file cannot be opened
         FileStream(const String& path, FileMode mode, FileAccess access, FileShare share);
-        
+
         /// @brief Initializes a new instance of the System::IO::FileStream class.
         /// @param path A relative or absolute path for the file that the current FileStream object will encapsulate
         /// @param mode A FileMode constant that determines how to open or create the file
         /// @param bufferSize A positive int32 value greater than 0 indicating the buffer size. For bufferSize values between one and eight, the actual buffer size is set to eight bytes.
         FileStream(const String& path, FileMode mode, int32 bufferSize)  : FileStream(path, mode, FileAccess::Write, FileShare::None) {}
-        
+
         /// @brief Initializes a new instance of the System::IO::FileStream class.
         /// @param path A relative or absolute path for the file that the current FileStream object will encapsulate
         /// @param mode A FileMode constant that determines how to open or create the file
@@ -63,7 +63,7 @@ namespace Switch {
         /// @exception DirectoryNotFoundException specifying FileModeOpen and the file specified by path does not exist  -or-  specifying FileModeTruncate and the specified file does not exist  -or-  specifying FileModeAppend and the specified file does not exist
         /// @exception IOError the handle of the specified file cannot be opened
         FileStream(const String& path, FileMode mode, FileAccess access, int32 bufferSize) : FileStream(path, mode, access, FileShare::None) {}
-        
+
         /// @brief Initializes a new instance of the System::IO::FileStream class.
         /// @param path A relative or absolute path for the file that the current FileStream object will encapsulate
         /// @param mode A FileMode constant that determines how to open or create the file
@@ -75,7 +75,7 @@ namespace Switch {
         /// @exception DirectoryNotFoundException specifying FileModeOpen and the file specified by path does not exist  -or-  specifying FileModeTruncate and the specified file does not exist  -or-  specifying FileModeAppend and the specified file does not exist
         /// @exception IOError the handle of the specified file cannot be opened
         FileStream(const String& path, FileMode mode, FileAccess access, FileShare share, int32 bufferSize) : FileStream(path, mode, access, share) {}
-        
+
         /// @cond
         FileStream() {}
         FileStream(const FileStream& fileStream) : data(fileStream.data) {};
@@ -84,21 +84,21 @@ namespace Switch {
           return *this;
         }
         /// @endcond
-        
+
         /// @brief Gets the name of the FileStream that was passed to the constructor.
         /// @return string that is the name of the FileStream.
         _property<String, _readonly> Name {
           _get {return this->data->fullPath;}
         };
-        
+
         /// @brief Closes the current FileStream and releases any resources (such as sockets and file handles) associated with the current stream.
         /// @exception IO::IOException an error occurred while the file is being closed
         void Close() override;
-        
+
         /// @brief Clears all buffers for this stream and causes any buffered data to be written to the file system.
         /// @exception IO::IOException An I/O error occurs.
         void Flush() override;
-        
+
         /// @brief Reads a byte from the stream and advances the position within the stream
         /// by one byte, or returns -1 if at the end of the stream.
         /// @return The unsigned byte cast to an int32, or -1 if at the end of the stream.
@@ -106,7 +106,7 @@ namespace Switch {
         /// @exception NotSupportedException The stream does not support reading.
         /// @exception IO::IOException An I/O error occurs.
         int32 ReadByte() override;
-        
+
         /// @brief When overridden in a derived class, reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
         /// @param buffer An array of bytes. When this method returns, the buffer contains the specified byte array with the values between offset and (offset + count - 1) replaced by the bytes read from the current source.
         /// @param bufferLength The length of buffer. (Total number of elements).
@@ -120,13 +120,13 @@ namespace Switch {
         /// @exception NotSupportedException The stream does not support writing.
         /// @exception IO::IOException An I/O error occurs.
         int32 Read(Array<byte>& buffer, int32 offset, int32 count) override;
-        
+
         /// @brief When overridden in a derived class, sets the position within the current stream.
         /// @param offset A byte offset relative to the origin parameter.
         /// @param origin A value of type SeekOrigin indicating the reference point used to obtain the new position
         /// @return The new position within the current stream.
         int64 Seek(int64 offset, SeekOrigin origin) override;
-        
+
         /// @brief When overridden in a derived class, writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
         /// @param buffer An array of bytes. This method copies count bytes from buffer to the current stream.
         /// @param bufferLength The length of buffer. (Total number of elements).
@@ -139,7 +139,7 @@ namespace Switch {
         /// @exception NotSupportedException The stream does not support writing.
         /// @exception IO::IOException An I/O error occurs.
         void Write(const Array<byte>& buffer, int32 offset, int32 count) override;
-        
+
       private:
         bool GetCanRead() const override {return (this->data->fileAccess != FileAccess::Write);}
         bool GetCanSeek() const override {return true;}
@@ -148,10 +148,10 @@ namespace Switch {
         void SetLength(int64 length) override;
         int64 GetPosition() const override;
         bool GetIsClosed() const override;
-        
+
         friend class StreamReader;
         int32 Peek();
-        
+
         struct FileStreamData {
           FileMode fileMode = FileMode::Open;
           FileAccess fileAccess = FileAccess::Read;
@@ -159,7 +159,7 @@ namespace Switch {
           std::fstream stream;
           std::fstream::openmode openMode = (std::fstream::openmode)0;
         };
-        
+
         refptr<FileStreamData> data = new FileStreamData();
       };
     }

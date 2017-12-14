@@ -11,15 +11,15 @@ namespace {
   TEST(Int16Test, MaxValue) {
     ASSERT_EQ(0x7FFF, Int16::MaxValue);
   }
-  
+
   TEST(Int16Test, MinValue) {
     ASSERT_EQ(-0x8000, Int16::MinValue);
   }
-  
+
   TEST(Int16Test, DefaultValue) {
     ASSERT_EQ(0, Int16());
   }
-  
+
   TEST(Int16Test, CtorValue) {
     ASSERT_EQ(10, Int16(10));
     ASSERT_EQ(12654, Int16(12654));
@@ -27,7 +27,7 @@ namespace {
     ASSERT_EQ(-1, Int16(-1));
     ASSERT_EQ(-29973, Int16(-29973));
   }
-  
+
   TEST(Int16Test, Parse) {
     ASSERT_EQ(0, Int16::Parse("0"));
     ASSERT_EQ(1, Int16::Parse("1"));
@@ -37,7 +37,7 @@ namespace {
     ASSERT_EQ(-100, Int16::Parse("-100"));
     ASSERT_EQ(-32768, Int16::Parse("-32768"));
   }
-  
+
   TEST(Int16Test, Parse_Leading_Zeros) {
     ASSERT_EQ(0, Int16::Parse("0"));
     ASSERT_EQ(0, Int16::Parse("00"));
@@ -47,7 +47,7 @@ namespace {
     ASSERT_EQ(99, Int16::Parse("099"));
     ASSERT_EQ(999, Int16::Parse("0000999"));
   }
-  
+
   TEST(Int16Test, Parse_Spaces) {
     ASSERT_EQ(5, Int16::Parse(" 5"));
     ASSERT_EQ(5, Int16::Parse("     5"));
@@ -57,7 +57,7 @@ namespace {
     ASSERT_EQ(52, Int16::Parse("        +52 "));
     ASSERT_EQ(-52, Int16::Parse("        -052 "));
   }
-  
+
   TEST(Int16Test, Parse_FormatException) {
     ASSERT_THROW(Int16::Parse(""), FormatException);
     ASSERT_THROW(Int16::Parse("a56"), FormatException);
@@ -70,7 +70,7 @@ namespace {
     ASSERT_THROW(Int16::Parse("100a"), FormatException);
     ASSERT_THROW(Int16::Parse("10u"), FormatException);
   }
-  
+
   TEST(Int16Test, Parse_OverFlowException) {
     ASSERT_EQ(Int16::MaxValue, Int16::Parse("32767"));
     ASSERT_THROW(Int16::Parse("32768"), OverflowException);
@@ -79,7 +79,7 @@ namespace {
     ASSERT_THROW(Int16::Parse("45111"), OverflowException);
     ASSERT_THROW(Int16::Parse("870125"), OverflowException);
   }
-  
+
   TEST(Int16Test, Parse_Binary) {
     ASSERT_EQ(0, Int16::Parse("0", 2));
     ASSERT_EQ(1, Int16::Parse("1", 2));
@@ -91,14 +91,14 @@ namespace {
     ASSERT_EQ(-15, Int16::Parse("-1111", 2));
     ASSERT_EQ(Int16::MinValue, Int16::Parse("-1000000000000000", 2));
   }
-  
+
   TEST(Int16Test, Parse_Binary_Complement) {
     ASSERT_EQ(-1, Int16::Parse("1111111111111111", 2));
     ASSERT_EQ(-111, Int16::Parse("1111111110010001", 2));
     ASSERT_EQ(-31987, Int16::Parse("1000001100001101", 2));
     ASSERT_EQ(Int16::MinValue, Int16::Parse("1000000000000000", 2));
   }
-  
+
   TEST(Int16Test, Parse_Binary_Complement_Overflow) {
     ASSERT_THROW(Int16::Parse("10000000000000000", 2), OverflowException);
     ASSERT_THROW(Int16::Parse("-1111111111111111", 2), OverflowException);
@@ -106,7 +106,7 @@ namespace {
     ASSERT_THROW(Int16::Parse("-1000001100001101", 2), OverflowException);
     ASSERT_THROW(Int16::Parse("-10000000000000000", 2), OverflowException);
   }
-  
+
   TEST(Int16Test, Parse_Exceptions_Binary) {
     ASSERT_THROW(Int16::Parse("", 2), FormatException);
     ASSERT_THROW(Int16::Parse("2", 2), FormatException);
@@ -119,7 +119,7 @@ namespace {
     ASSERT_THROW(Int16::Parse("100a", 2), FormatException);
     ASSERT_THROW(Int16::Parse("10u", 2), FormatException);
   }
-  
+
   TEST(Int16Test, Parse_Octal) {
     ASSERT_EQ(0, Int16::Parse("0", 8));
     ASSERT_EQ(1, Int16::Parse("1", 8));
@@ -130,7 +130,7 @@ namespace {
     ASSERT_EQ(-4, Int16::Parse("-4", 8));
     ASSERT_EQ(-15, Int16::Parse("-17", 8));
   }
-  
+
   TEST(Int16Test, Parse_Hexadecimal) {
     ASSERT_EQ(0, Int16::Parse("0", 16));
     ASSERT_EQ(1, Int16::Parse("1", 16));
@@ -140,7 +140,7 @@ namespace {
     ASSERT_EQ(-0x4A, Int16::Parse("-4A", 16));
     ASSERT_EQ(-0x6BCD, Int16::Parse("-6BCD", 16));
   }
-  
+
   TEST(Int16Test, Parse_Hexadecimal_Complement) {
     ASSERT_EQ(-1, Int16::Parse("FFFF", 16));
     ASSERT_EQ(-333, Int16::Parse("0xFEB3", 16));
@@ -148,12 +148,12 @@ namespace {
     ASSERT_EQ(Int16::MinValue, Int16::Parse("0x8000", 16));
     ASSERT_EQ(Int16::MinValue, Int16::Parse("-0x8000", 16));
   }
-  
+
   TEST(Int16Test, Parse_Hexadecimal_Complement_Overflow) {
     ASSERT_THROW(Int16::Parse("10000", 16), OverflowException);
     ASSERT_THROW(Int16::Parse("0x10100", 16), OverflowException);
   }
-  
+
   TEST(Int16Test, TryParse) {
     int16 x;
     ASSERT_TRUE(Int16::TryParse("0", x));
@@ -171,7 +171,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-32768", x));
     ASSERT_EQ(-32768, x);
   }
-  
+
   TEST(Int16Test, TryParse_Int16) {
     Int16 x;
     ASSERT_TRUE(Int16::TryParse("0", x));
@@ -189,7 +189,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-32768", x));
     ASSERT_EQ(-32768, x);
   }
-  
+
   TEST(Int16Test, TryParse_Leading_Zeros) {
     int16 x;
     ASSERT_TRUE(Int16::TryParse("0", x));
@@ -207,7 +207,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("0000999", x));
     ASSERT_EQ(999, x);
   }
-  
+
   TEST(Int16Test, TryParse_Leading_Zeros_Int16) {
     Int16 x;
     ASSERT_TRUE(Int16::TryParse("0", x));
@@ -225,7 +225,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("0000999", x));
     ASSERT_EQ(999, x);
   }
-  
+
   TEST(Int16Test, TryParse_Spaces) {
     int16 x;
     ASSERT_TRUE(Int16::TryParse(" 5", x));
@@ -243,7 +243,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("        -052 ", x));
     ASSERT_EQ(-52, x);
   }
-  
+
   TEST(Int16Test, TryParse_Spaces_Int16) {
     Int16 x;
     ASSERT_TRUE(Int16::TryParse(" 5", x));
@@ -261,7 +261,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("        -052 ", x));
     ASSERT_EQ(-52, x);
   }
-  
+
   TEST(Int16Test, TryParse_FormatException) {
     int16 x;
     ASSERT_FALSE(Int16::TryParse("", x));
@@ -275,7 +275,7 @@ namespace {
     ASSERT_FALSE(Int16::TryParse("100a", x));
     ASSERT_FALSE(Int16::TryParse("10u", x));
   }
-  
+
   TEST(Int16Test, TryParse_FormatException_Int16) {
     Int16 x;
     ASSERT_FALSE(Int16::TryParse("", x));
@@ -289,7 +289,7 @@ namespace {
     ASSERT_FALSE(Int16::TryParse("100a", x));
     ASSERT_FALSE(Int16::TryParse("10u", x));
   }
-  
+
   TEST(Int16Test, TryParse_OverFlowException) {
     int16 x;
     ASSERT_TRUE(Int16::TryParse("32767", x));
@@ -301,7 +301,7 @@ namespace {
     ASSERT_FALSE(Int16::TryParse("45111", x));
     ASSERT_FALSE(Int16::TryParse("870125", x));
   }
-  
+
   TEST(Int16Test, TryParse_Binary) {
     int16 x;
     ASSERT_TRUE(Int16::TryParse("0", 2, x));
@@ -323,7 +323,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-1000000000000000", 2, x));
     ASSERT_EQ(Int16::MinValue, x);
   }
-  
+
   TEST(Int16Test, TryParse_Binary_Int16) {
     Int16 x;
     ASSERT_TRUE(Int16::TryParse("0", 2, x));
@@ -345,7 +345,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-1000000000000000", 2, x));
     ASSERT_EQ(Int16::MinValue, x);
   }
-  
+
   TEST(Int16Test, TryParse_Binary_Complement) {
     int16 x;
     ASSERT_TRUE(Int16::TryParse("1111111111111111", 2, x));
@@ -357,7 +357,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("1000000000000000", 2, x));
     ASSERT_EQ(Int16::MinValue, x);
   }
-  
+
   TEST(Int16Test, TryParse_Binary_Complement_Int16) {
     Int16 x;
     ASSERT_TRUE(Int16::TryParse("1111111111111111", 2, x));
@@ -369,7 +369,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("1000000000000000", 2, x));
     ASSERT_EQ(Int16::MinValue, x);
   }
-  
+
   TEST(Int16Test, TryParse_Binary_Complement_Overflow) {
     int16 x;
     ASSERT_FALSE(Int16::TryParse("10000000000000000", 2, x));
@@ -378,7 +378,7 @@ namespace {
     ASSERT_FALSE(Int16::TryParse("-1000001100001101", 2, x));
     ASSERT_FALSE(Int16::TryParse("-10000000000000000", 2, x));
   }
-  
+
   TEST(Int16Test, TryParse_Binary_Complement_Overflow_Int16) {
     Int16 x;
     ASSERT_FALSE(Int16::TryParse("10000000000000000", 2, x));
@@ -387,7 +387,7 @@ namespace {
     ASSERT_FALSE(Int16::TryParse("-1000001100001101", 2, x));
     ASSERT_FALSE(Int16::TryParse("-10000000000000000", 2, x));
   }
-  
+
   TEST(Int16Test, TryParse_Exceptions_Binary) {
     int16 x;
     ASSERT_FALSE(Int16::TryParse("", 2, x));
@@ -401,7 +401,7 @@ namespace {
     ASSERT_FALSE(Int16::TryParse("100a", 2, x));
     ASSERT_FALSE(Int16::TryParse("10u", 2, x));
   }
-  
+
   TEST(Int16Test, TryParse_Exceptions_Binary_Int16) {
     Int16 x;
     ASSERT_FALSE(Int16::TryParse("", 2, x));
@@ -415,7 +415,7 @@ namespace {
     ASSERT_FALSE(Int16::TryParse("100a", 2, x));
     ASSERT_FALSE(Int16::TryParse("10u", 2, x));
   }
-  
+
   TEST(Int16Test, TryParse_Octal) {
     int16 x;
     ASSERT_TRUE(Int16::TryParse("0", 8, x));
@@ -435,7 +435,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-17", 8, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(Int16Test, TryParse_Octal_Int16) {
     Int16 x;
     ASSERT_TRUE(Int16::TryParse("0", 8, x));
@@ -455,7 +455,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-17", 8, x));
     ASSERT_EQ(-15, x);
   }
-  
+
   TEST(Int16Test, TryParse_Hexadecimal) {
     int16 x;
     ASSERT_TRUE(Int16::TryParse("0", 16, x));
@@ -473,7 +473,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-6BCD", 16, x));
     ASSERT_EQ(-27597, x);
   }
-  
+
   TEST(Int16Test, TryParse_Hexadecimal_Int16) {
     Int16 x;
     ASSERT_TRUE(Int16::TryParse("0", 16, x));
@@ -491,8 +491,8 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-6BCD", 16, x));
     ASSERT_EQ(-27597, x);
   }
-  
-  
+
+
   TEST(Int16Test, TryParse_Hexadecimal_Complement) {
     int16 x;
     ASSERT_TRUE(Int16::TryParse("FFFF", 16, x));
@@ -506,7 +506,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-0x8000", 16, x));
     ASSERT_EQ(Int16::MinValue, x);
   }
-  
+
   TEST(Int16Test, TryParse_Hexadecimal_Complement_Int16) {
     Int16 x;
     ASSERT_TRUE(Int16::TryParse("FFFF", 16, x));
@@ -520,7 +520,7 @@ namespace {
     ASSERT_TRUE(Int16::TryParse("-0x8000", 16, x));
     ASSERT_EQ(Int16::MinValue, x);
   }
-  
+
   TEST(Int16Test, TryParse_Hexadecimal_Complement_Overflow) {
     int16 x;
     ASSERT_FALSE(Int16::TryParse("10000", 16, x));

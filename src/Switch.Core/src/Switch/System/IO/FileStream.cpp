@@ -14,51 +14,51 @@ using namespace System::IO;
 FileStream::FileStream(const string& path, FileMode mode, FileAccess access, FileShare share) {
   if (string::IsNullOrEmpty(path) || path.IndexOfAny(Path::GetInvalidPathChars()) != -1)
     throw ArgumentException(_caller);
-    
+
   this->data->fullPath = Path::GetFullPath(path);
   this->data->fileMode = mode;
   this->data->fileAccess = access;
-  
+
   if (access == FileAccess::Read && (mode == FileMode::Create || mode == FileMode::CreateNew))
     throw ArgumentException(_caller);
-    
+
   if (mode == FileMode::Append && access != FileAccess::Write)
     throw ArgumentException(_caller);
-    
+
   if (File::Exists(this->data->fullPath)) {
     if (access == FileAccess::Read && mode == FileMode::Truncate)
       throw ArgumentException(_caller);
-      
+
     if (mode == FileMode::CreateNew)
       throw IOException(_caller);
-      
+
   } else {
     if (mode == FileMode::Open ||  mode == FileMode::Truncate)
       throw FileNotFoundException(_caller);
-      
+
     if ((mode == FileMode::Create || mode == FileMode::CreateNew || mode == FileMode::OpenOrCreate)) {
       std::fstream fs(path.Data(), std::fstream::out);
       fs.close();
     }
   }
-  
+
   if (!Directory::Exists(Path::GetDirectoryName(this->data->fullPath)))
     throw DirectoryNotFoundException(_caller);
-    
+
   this->data->openMode = std::ios_base::binary;
   if (access == FileAccess::Read || access == FileAccess::ReadWrite)
     this->data->openMode |= std::ios_base::in;
-    
+
   // if open + write, .NET does not erase the existing file, we simulate it by forcing read mode (internally
   if ((mode == FileMode::Open || mode == FileMode::OpenOrCreate) && access == FileAccess::Write)
     this->data->openMode |= std::ios_base::in;
-    
+
   if (access == FileAccess::Write || access == FileAccess::ReadWrite)
     this->data->openMode |= std::ios_base::out;
-    
+
   if (mode == FileMode::Append)
     this->data->openMode |= std::ios_base::app;
-    
+
   this->data->stream.open(path.ToCCharArray().Data(), this->data->openMode);
   if (this->data->stream.fail())
     throw IOException(_caller);
@@ -78,10 +78,10 @@ int64 FileStream::GetPosition() const {
 void FileStream::SetLength(int64 length) {
   if (IsClosed() == true)
     throw ObjectDisposedException(_caller);
-    
+
   if (length < 0)
     throw ArgumentOutOfRangeException(_caller);
-    
+
   // todo (?)
   throw NotSupportedException(_caller);
 }
@@ -109,7 +109,7 @@ int32 FileStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
     throw ObjectDisposedException(_caller);
   if (!CanRead())
     throw NotSupportedException(_caller);
-    
+
   this->data->stream.read((char*)&const_cast<byte*>(buffer.Data())[offset], count);
   std::fstream::pos_type nbRead = this->data->stream.gcount();
   return int32(nbRead);
@@ -120,17 +120,17 @@ int32 FileStream::ReadByte() {
     throw ObjectDisposedException(_caller);
   if (!CanRead())
     throw NotSupportedException(_caller);
-    
+
   return this->data->stream.get();
 }
 
 int64 FileStream::Seek(int64 offset, SeekOrigin origin) {
   if (this->data->fileAccess == FileAccess::Read)
     return this->data->stream.seekg(static_cast<std::fstream::off_type>(offset), static_cast<std::ios::seekdir>(origin)).tellg();
-    
+
   if (this->data->fileAccess == FileAccess::Write)
     return this->data->stream.seekp(static_cast<std::fstream::off_type>(offset), static_cast<std::ios::seekdir>(origin)).tellp();
-    
+
   this->data->stream.seekg(static_cast<std::fstream::off_type>(offset), static_cast<std::ios::seekdir>(origin)).tellg();
   return this->data->stream.seekp(static_cast<std::fstream::off_type>(offset), static_cast<std::ios::seekdir>(origin)).tellp();
 }
@@ -144,7 +144,7 @@ void FileStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
     throw ObjectDisposedException(_caller);
   if (!CanWrite())
     throw NotSupportedException(_caller);
-    
+
   this->data->stream.write((const char*)&buffer.Data()[offset], count);
   if (this->data->stream.fail())
     throw IOException(_caller);

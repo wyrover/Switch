@@ -85,18 +85,18 @@ namespace Switch {
       _property<const Array<excptr>&, _readonly> InnerExceptions {
         _get->const Array<excptr>& {return this->innerExceptions;}
       };
-      
+
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const Array<excptr>& innerExceptions) : innerExceptions(innerExceptions) {}
-      
+
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const Exception& innerException) {
         this->innerExceptions = Array<excptr>(1);
         this->innerExceptions[0] = excptr::Create(innerException);
       }
-      
+
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const Array<ref<Exception>>& innerExceptions) {
@@ -104,12 +104,12 @@ namespace Switch {
         for (int index = 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
-      
+
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       AggregateException(const Array<excptr>& innerExceptions, const System::Runtime::CompilerServices::Caller& information) : Exception(information), innerExceptions(innerExceptions) {}
-      
+
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
@@ -118,39 +118,39 @@ namespace Switch {
         for (int index = 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
-      
+
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const System::Collections::Generic::IEnumerable<excptr>& innerExceptions) : innerExceptions(innerExceptions) {}
-      
+
       /// @brief Initializes a new instance of the AggregateException class with references to the inner exceptions that are the cause of this exception.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       AggregateException(const System::Collections::Generic::IEnumerable<excptr>& innerExceptions, const System::Runtime::CompilerServices::Caller& information) : Exception(information), innerExceptions(innerExceptions) {}
-      
+
       /// @brief Create a new instance of class AggregateException
       /// @remarks Message is set with the default message associate to the error.
       AggregateException() : Exception() {}
-      
+
       /// @brief Create a new instance of class AggregateException
       /// @param value The Excetion to copy.
       /// @remarks Message is set with the default message associate to the error.
       AggregateException(const AggregateException& value) : Exception(value), innerExceptions(value.innerExceptions) {}
-      
+
       /// @brief Create a new instance of class AggregateException
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       /// @remarks Message is set with the default message associate to the error.
       AggregateException(const System::Runtime::CompilerServices::Caller& information) : Exception(information) {}
-      
+
       /// @brief Create a new instance of class AggregateException
       /// @param message Message string associate to the error.
       AggregateException(const System::String& message) : Exception(message) {}
-      
+
       /// @brief Create a new instance of class AggregateException
       /// @param message Message string associate to the error.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       AggregateException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : Exception(message, information) {}
-      
+
       /// @brief Create a new instance of class AggregateException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
@@ -159,12 +159,12 @@ namespace Switch {
         this->innerExceptions = Array<excptr>(1);
         this->innerExceptions[0] = excptr::Create(innerException);
       }
-      
+
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       AggregateException(const System::String& message, const Array<excptr>& innerExceptions) : innerExceptions(innerExceptions) {}
-      
+
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
@@ -173,13 +173,13 @@ namespace Switch {
         for (int index = 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
-      
+
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
       /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
       AggregateException(const System::String& message, const Array<excptr>& innerExceptions, const System::Runtime::CompilerServices::Caller& information) : Exception(message, information), innerExceptions(innerExceptions) {}
-      
+
       /// @brief Initializes a new instance of the AggregateException class with a specified error message and references to the inner exceptions that are the cause of this exception.
       /// @param message Message string associate to the error.
       /// @param innerExceptions The exceptions that are the cause of the current exception.
@@ -189,7 +189,7 @@ namespace Switch {
         for (int index = 0; index < innerExceptions.Count; index++)
           this->innerExceptions[index] = excptr::Create(innerExceptions[index]());
       }
-      
+
       /// @brief Invokes a handler on each Exception contained by this AggregateException.
       /// @param predicate The predicate to execute for each exception. The predicate accepts as an argument the Exception to be processed and returns a Boolean to indicate whether the exception was handled.
       /// @remarks Each invocation of the predicate returns true or false to indicate whether the Exception was handled. After all invocations, if any exceptions went unhandled, all unhandled exceptions will be put into a new AggregateException which will be thrown. Otherwise, the Handle method simply returns. If any invocations of the predicate throws an exception, it will halt the processing of any more exceptions and immediately propagate the thrown exception as-is.
@@ -203,11 +203,11 @@ namespace Switch {
               notHandledExceptions.Add(this->innerExceptions[index]);
           }
         }
-        
+
         if (notHandledExceptions.Count != 0)
           throw AggregateException(notHandledExceptions, _caller);
       }
-      
+
       String ToString() const override {
         string result = this->Exception::ToString();
         result += string::Format("   --- End of inner exception stack trace ---{0}", Environment::NewLine);
@@ -220,11 +220,11 @@ namespace Switch {
         }
         return result;
       }
-      
+
       /// @cond
       friend std::ostream& operator<<(std::ostream& output, const AggregateException& value) {return output << value.ToString();}
       /// @endcond
-      
+
     private:
       String GetDefaultMessage() const override {return "One or more errors occured."; }
       Array<excptr> innerExceptions;

@@ -13,13 +13,13 @@ namespace {
     ASSERT_EQ(0xFF7FFFFFul, (uint32)BitConverter::SingleToInt32Bits(Single::MinValue));
     ASSERT_EQ(0x00000001ul, (uint32)BitConverter::SingleToInt32Bits(Single::Epsilon));
     ASSERT_EQ(0x7FC00000ul, (uint32)BitConverter::SingleToInt32Bits(Single::NaN));
-    
+
     EXPECT_GT(Single::MaxValue, 0.0f);
     EXPECT_LT(Single::MinValue, 0.0f);
     EXPECT_GT(Single::Epsilon, 0.0f);
     EXPECT_LT(-Single::Epsilon, 0.0f);
   }
-  
+
   TEST(SingleTest, IsInfinity) {
     ASSERT_FALSE(Single::IsInfinity(0.0f));
     ASSERT_FALSE(Single::IsInfinity(1.0f));
@@ -36,7 +36,7 @@ namespace {
     ASSERT_TRUE(Single::IsInfinity(Single::NegativeInfinity));
     ASSERT_TRUE(Single::IsInfinity(Single::PositiveInfinity));
   }
-  
+
   TEST(SingleTest, IsNegativeInfinity) {
     ASSERT_FALSE(Single::IsNegativeInfinity(0.0f));
     ASSERT_FALSE(Single::IsNegativeInfinity(1.0f));
@@ -53,7 +53,7 @@ namespace {
     ASSERT_TRUE(Single::IsNegativeInfinity(Single::NegativeInfinity));
     ASSERT_FALSE(Single::IsNegativeInfinity(Single::PositiveInfinity));
   }
-  
+
   TEST(SingleTest, IsPositiveInfinity) {
     ASSERT_FALSE(Single::IsPositiveInfinity(0.0f));
     ASSERT_FALSE(Single::IsPositiveInfinity(1.0f));
@@ -70,7 +70,7 @@ namespace {
     ASSERT_FALSE(Single::IsPositiveInfinity(Single::NegativeInfinity));
     ASSERT_TRUE(Single::IsPositiveInfinity(Single::PositiveInfinity));
   }
-  
+
   TEST(SingleTest, IsNaN) {
     ASSERT_FALSE(Single::IsNaN(0.0f));
     ASSERT_FALSE(Single::IsNaN(1.0f));
@@ -87,7 +87,7 @@ namespace {
     ASSERT_FALSE(Single::IsNaN(Single::NegativeInfinity));
     ASSERT_FALSE(Single::IsNaN(Single::PositiveInfinity));
   }
-  
+
   TEST(SingleTest, ToString) {
     ASSERT_EQ("0", string::Format("{0}", 0.0f));
     ASSERT_EQ("1", string::Format("{0}", 1.0f));

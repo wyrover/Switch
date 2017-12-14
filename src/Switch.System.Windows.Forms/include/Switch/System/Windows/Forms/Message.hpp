@@ -18,50 +18,50 @@ namespace Switch {
           Message() {}
           Message(const Message& message) : hwnd(message.hwnd), msg(message.msg), wParam(message.wParam), lParam(message.lParam), result(message.result) {}
           /// @cond
-          
+
           _property<intptr> HWnd {
             _get {return this->hwnd;},
             _set {this->hwnd = value;}
           };
-          
+
           _property<intptr> LParam {
             _get{return this->lParam;},
             _set{this->lParam = value;}
           };
-          
+
           _property<int32> Msg {
             _get{return this->msg;},
             _set{this->msg = value;}
           };
-          
+
           _property<intptr> Result {
             _get{return this->result;},
             _set{this->result = value;}
           };
-          
+
           _property<intptr> WParam {
             _get{return this->wParam;},
             _set{this->wParam = value;}
           };
-          
+
           /// @cond
           _property<intptr> Handle {
             _get{return this->handle;},
             _set{this->handle = value;}
           };
           /// @endcond
-          
+
           static Message Create(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result) { return Message(hwnd, msg, wParam, lParam, result); }
-          
+
           /// @cond
           static Message Create(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result, intptr handle) { return Message(hwnd, msg, wParam, lParam, result, handle); }
           /// @endcond
-          
+
           template<typename Type>
           refptr<Type> GetLParam() { return (refptr<Type>)this->lParam; }
-          
+
           String ToString() const override;
-          
+
         private:
           Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result) { counter++; }
           Message(intptr hwnd, int32 msg, intptr wParam, intptr lParam, intptr result, intptr handle) : hwnd(hwnd), msg(msg), wParam(wParam), lParam(lParam), result(result), handle(handle) { counter++; }

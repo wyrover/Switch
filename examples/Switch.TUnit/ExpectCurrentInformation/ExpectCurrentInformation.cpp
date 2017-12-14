@@ -9,13 +9,13 @@ namespace UnitTests {
     void TestWithCurrentInformation() {
       Expect::False(true, _caller);
     }
-    
+
     // Without current information
     void TestWithoutCurrentInformation() {
       Expect::False(true);
     }
   };
-  
+
   _AddTestFixture(UserTest);
   _AddTest(UserTest, TestWithCurrentInformation);
   _AddTest(UserTest, TestWithoutCurrentInformation);

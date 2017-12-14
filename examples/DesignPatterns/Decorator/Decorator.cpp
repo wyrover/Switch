@@ -11,27 +11,27 @@ namespace DesignPatterns {
     public:
       virtual void Operation() const = 0;
     };
-    
+
     // The 'ConcreteComponent' class
     class ConcreteComponent : public Component {
     public:
       void Operation() const override {Console::WriteLine("ConcreteComponent.Operation()");}
     };
-    
+
     // The 'Decorator' abstract class
     class Decorator : public Component {
     public:
       void SetComponent(refptr<Component> component) {this->component = component;}
-      
+
       void Operation() const override {
         if (component != null)
           component->Operation();
       }
-      
+
     protected:
       refptr<Component> component;
     };
-    
+
     // The 'ConcreteDecoratorA' class
     class ConcreteDecoratorA : public Decorator {
     public:
@@ -40,7 +40,7 @@ namespace DesignPatterns {
         Console::WriteLine("ConcreteDecoratorA.Operation()");
       }
     };
-    
+
     // The 'ConcreteDecoratorB' class
     class ConcreteDecoratorB : public Decorator {
     public:
@@ -49,10 +49,10 @@ namespace DesignPatterns {
         AddedBehavior();
         Console::WriteLine("ConcreteDecoratorB.Operation()");
       }
-      
+
       void AddedBehavior() const {}
     };
-    
+
     // MainApp _startup class for Structural
     // Decorator Design Pattern.
     class MainApp {
@@ -63,11 +63,11 @@ namespace DesignPatterns {
         refptr<ConcreteComponent> c = ref_new<ConcreteComponent>();
         refptr<ConcreteDecoratorA> d1 = ref_new<ConcreteDecoratorA>();
         refptr<ConcreteDecoratorB> d2 = ref_new<ConcreteDecoratorB>();
-        
+
         // Link decorators
         d1->SetComponent(as<Component>(c));
         d2->SetComponent(as<Component>(d1));
-        
+
         d2->Operation();
       }
     };

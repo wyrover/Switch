@@ -11,7 +11,7 @@ namespace DesignPatterns {
     public:
       virtual void AlgorithmInterface() = 0;
     };
-    
+
     // A 'ConcreteStrategy' class
     class ConcreteStrategyA : public Strategy {
     public:
@@ -19,7 +19,7 @@ namespace DesignPatterns {
         Console::WriteLine("Called ConcreteStrategyA.AlgorithmInterface()");
       }
     };
-    
+
     // A 'ConcreteStrategy' class
     class ConcreteStrategyB : public Strategy {
     public:
@@ -27,7 +27,7 @@ namespace DesignPatterns {
         Console::WriteLine("Called ConcreteStrategyB.AlgorithmInterface()");
       }
     };
-    
+
     // A 'ConcreteStrategy' class
     class ConcreteStrategyC : public Strategy {
     public:
@@ -35,7 +35,7 @@ namespace DesignPatterns {
         Console::WriteLine("Called ConcreteStrategyC.AlgorithmInterface()");
       }
     };
-    
+
     // The 'Context' class
     class Context : public object {
     public:
@@ -47,15 +47,15 @@ namespace DesignPatterns {
         this->strategy = context.strategy;
         return *this;
       }
-      
+
       void ContextInterface() {
         this->strategy->AlgorithmInterface();
       }
-      
+
     private:
       refptr<Strategy> strategy;
     };
-    
+
     // MainApp _startup class for Behavioral
     // Strategy Design Pattern.
     class MainApp {
@@ -63,14 +63,14 @@ namespace DesignPatterns {
       /// Entry point into console application.
       static void Main() {
         Context context;
-        
+
         // Three contexts following different strategies
         context = Context(ref_new<ConcreteStrategyA>());
         context.ContextInterface();
-        
+
         context = Context(ref_new<ConcreteStrategyB>());
         context.ContextInterface();
-        
+
         context = Context(ref_new<ConcreteStrategyC>());
         context.ContextInterface();
       }

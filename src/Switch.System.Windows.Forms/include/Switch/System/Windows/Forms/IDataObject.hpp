@@ -25,7 +25,7 @@ namespace Switch {
         /// @remarks See the DataObject class for an implementation of this interface. See the DataFormats class for the predefined Clipboard data formats.
         class _export IDataObject _interface {
         public:
-        
+
         };
       }
     }

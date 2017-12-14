@@ -10,21 +10,21 @@ namespace Examples {
       Array<char32> chars = { 'w', 'o', 'r', 'd' };
       Array<sbyte> bytes = { 0x41, 0x42, 0x43, 0x44, 0x45, 0x00 };
       char cstr[] = "12345";
-      
+
       // Create a string from a character array.
       string string1(chars);
       Console::WriteLine(string1);
-      
+
       // Create a string that consists of a character repeated 20 times.
       string string2('c', 20);
       Console::WriteLine(string2);
-      
+
       // Create a string from a pointer to a signed byte array.
       string stringFromBytes(bytes);
-      
+
       // Create a string from a pointer to a character array.
       string stringFromChars(cstr);
-      
+
       Console::WriteLine(stringFromBytes);
       Console::WriteLine(stringFromChars);
     }

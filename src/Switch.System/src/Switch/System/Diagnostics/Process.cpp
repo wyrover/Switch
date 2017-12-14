@@ -13,7 +13,7 @@ namespace {
   public:
     ProcessOutputStream() {}
     ProcessOutputStream(FILE* stream) : stream(stream), isClosed(stream == null) {}
-    
+
     /// @cond
     ProcessOutputStream(const ProcessOutputStream& pos) : stream(pos.stream), isClosed(pos.isClosed) {}
     ProcessOutputStream& operator=(const ProcessOutputStream& pos) {
@@ -22,9 +22,9 @@ namespace {
       return *this;
     }
     /// @endcond
-    
+
     void Close() override  {this->isClosed = true;}
-    
+
     int32 Read(Array<byte>& buffer, int32 offset, int32 count) override {
       if (count < 0 || offset < 0)
         throw ArgumentOutOfRangeException(_caller);
@@ -36,10 +36,10 @@ namespace {
         return -1;
       return (int32)fread((char*)&buffer.Data[offset], sizeof(char), count, this->stream);
     }
-    
+
     void Write(const Array<byte>&, int32, int32) override { }
     int64 Seek(int64, System::IO::SeekOrigin) override { return 0; };
-    
+
   private:
     bool GetCanRead() const override {return true;}
     bool GetCanSeek() const override {return false;}
@@ -47,7 +47,7 @@ namespace {
     int64 GetLength() const override {return 0;}
     int64 GetPosition() const override {return 0;}
     bool GetIsClosed() const override {return this->isClosed;}
-    
+
     FILE* stream;
     bool isClosed = false;
   };

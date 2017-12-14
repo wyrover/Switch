@@ -7,9 +7,9 @@ namespace Examples {
   public:
     static void Main() {
       auto t = Tuple<>::Create(25, Version(1, 2, 3));
-      
+
       Console::WriteLine("Tuple : " + t);
-      
+
       int i = t.Item1;
       Version v = t.Item2;
       Console::WriteLine("i = {0}", i);

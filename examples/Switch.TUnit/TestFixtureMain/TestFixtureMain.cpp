@@ -12,17 +12,17 @@ namespace UnitTests {
     // The main entry point for the test application.
     static int Main(const Array<string>& args) {
       // You can add your own code here.
-      
+
       // Create UnitTest and run it
       return TUnit::UnitTest(args).Run();
     }
-    
+
   protected:
     void _Test(AnyTest) {
       Assert::Null(null, _caller);
     }
   };
-  
+
   // Used _Test to add unit test to execute at the unit test suit.
   _AddTestFixture(UserTest);
   _AddTest(UserTest, AnyTest);

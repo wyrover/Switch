@@ -18,10 +18,10 @@ namespace Switch {
     public:
       /// @brief Initializes a new instance of the Guid structure.
       Guid() {}
-      
+
       /// @brief Initializes a new instance of the Guid structure.
       Guid(const Guid& guid) : data(guid.data) {}
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the specified array of bytes.
       /// @param bytes A 16-element byte array containing values with which to initialize the GUID.
       /// @exception System::ArgumentNullException bytes is null.
@@ -31,7 +31,7 @@ namespace Switch {
           throw ArgumentException(_caller);
         this->data = bytes;
       }
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the specified array of bytes.
       /// @param bytes A 16-element byte array containing values with which to initialize the GUID.
       /// @exception System::ArgumentNullException bytes is null.
@@ -43,7 +43,7 @@ namespace Switch {
           throw ArgumentException(_caller);
         this->data = Array<byte>(bytes);
       }
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the specified array of bytes.
       /// @param bytes A 16-element byte array containing values with which to initialize the GUID.
       /// @exception System::ArgumentNullException bytes is null.
@@ -52,7 +52,7 @@ namespace Switch {
           throw ArgumentNullException(_caller);
         this->data = Array<byte>(bytes, 16);
       }
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the specified array of bytes.
       /// @param bytes A 16-element byte array containing values with which to initialize the GUID.
       /// @exception System::ArgumentNullException bytes is null.
@@ -63,7 +63,7 @@ namespace Switch {
           throw ArgumentException(_caller);
         this->data = Array<byte>(bytes, dataSize);
       }
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the specified integers and byte array.
       /// @param a The first 4 bytes of the GUID.
       /// @param b The next 2 bytes of the GUID.
@@ -73,7 +73,7 @@ namespace Switch {
       Guid(int32 a, int16 b, int16 c, const Array<byte>& d) {
         if (d.Length != 8)
           throw ArgumentException(_caller);
-          
+
         this->data[0] = (byte)((a & 0xFF000000) >> 24);
         this->data[1] = (byte)((a & 0x00FF0000) >> 16);
         this->data[2] = (byte)((a & 0x0000FF00) >> 8);
@@ -82,11 +82,11 @@ namespace Switch {
         this->data[5] = (byte)((b & 0x00FF) >> 0);
         this->data[6] = (byte)((c & 0xFF00) >> 8);
         this->data[7] = (byte)((c & 0x00FF) >> 0);
-        
+
         for (int32 i = 0; i < 8; i++)
           this->data[8 + i] = d[i];
       }
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the specified integers and byte array.
       /// @param a The first 4 bytes of the GUID.
       /// @param b The next 2 bytes of the GUID.
@@ -100,7 +100,7 @@ namespace Switch {
           throw ArgumentNullException(_caller);
         if (dataSize != 8)
           throw ArgumentException(_caller);
-          
+
         this->data[0] = (byte)((a & 0xFF000000) >> 24);
         this->data[1] = (byte)((a & 0x00FF0000) >> 16);
         this->data[2] = (byte)((a & 0x0000FF00) >> 8);
@@ -109,11 +109,11 @@ namespace Switch {
         this->data[5] = (byte)((b & 0x00FF) >> 0);
         this->data[6] = (byte)((c & 0xFF00) >> 8);
         this->data[7] = (byte)((c & 0x00FF) >> 0);
-        
+
         for (int32 i = 0; i < 8; i++)
           this->data[8 + i] = d[i];
       }
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the specified integers and byte array.
       /// @param a The first 4 bytes of the GUID.
       /// @param b The next 2 bytes of the GUID.
@@ -124,7 +124,7 @@ namespace Switch {
       Guid(int32 a, int16 b, int16 c, const byte d[8]) {
         if (d == null)
           throw ArgumentNullException(_caller);
-          
+
         this->data[0] = (byte)((a & 0xFF000000) >> 24);
         this->data[1] = (byte)((a & 0x00FF0000) >> 16);
         this->data[2] = (byte)((a & 0x0000FF00) >> 8);
@@ -133,11 +133,11 @@ namespace Switch {
         this->data[5] = (byte)((b & 0x00FF) >> 0);
         this->data[6] = (byte)((c & 0xFF00) >> 8);
         this->data[7] = (byte)((c & 0x00FF) >> 0);
-        
+
         for (int32 i = 0; i < 8; i++)
           this->data[8 + i] = d[i];
       }
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the specified integers and bytes.
       /// @param a The first 4 bytes of the GUID.
       /// @param b The next 2 bytes of the GUID.
@@ -168,7 +168,7 @@ namespace Switch {
         this->data[14] = j;
         this->data[15] = k;
       }
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the specified unsigned integers and bytes.
       /// @param a The first 4 bytes of the GUID.
       /// @param b The next 2 bytes of the GUID.
@@ -199,7 +199,7 @@ namespace Switch {
         this->data[14] = j;
         this->data[15] = k;
       }
-      
+
       /// @brief Initializes a new instance of the Guid structure by using the value represented by the specified string.
       /// @param guid A string that contains a GUID in one of the following formats ("d" represents a hexadecimal digit whose case is ignored):
       /// 32 contiguous digits:
@@ -232,19 +232,19 @@ namespace Switch {
           simple = simple.Remove(0, 2);
         }
       }
-      
+
       int32 CompareTo(const Guid& value) const {
         for (int32 i = 0; i < this->data.Length; i++)
           if (this->data[i] > value.data[i]) return 1;
           else if (this->data[i] < value.data[i]) return -1;
         return 0;
       }
-      
+
       int32 CompareTo(const IComparable& obj) const override {
         if (!is<Guid>(obj)) return 1;
         return CompareTo(static_cast<const Guid&>(obj));
       }
-      
+
       /// @brief Serves as a hash function for a particular type.
       /// @return Int32 A hash code for the current object.
       int32 GetHashCode() const override {
@@ -253,28 +253,28 @@ namespace Switch {
           hashCode ^= this->data[i];
         return hashCode;
       }
-      
+
       bool Equals(const Guid& value) const {return this->data == value.data;}
-      
+
       bool Equals(const object& obj) const override {return is<Guid>(obj) && Equals(static_cast<const Guid&>(obj));}
-      
+
       /// @brief Initializes a new instance of the Guid structure.
       /// @return Guid A new GUID object.
       /// @remarks This is a convenient static method that you can call to get a new Guid.
       /// @remarks The chance that the value of the new Guid will be all zeros or equal to any other Guid is very low. You can determine whether a GUID consists of all zeros by comparing it to Guid.Empty.
       static Guid NewGuid();
-      
+
       /// @brief Returns a 16-element byte array that contains the value of this instance.
       /// @return Array<Byte> A 16-element byte array.
       Array<byte> ToByteArray() const {return this->data;}
-      
+
       /// @brief Returns a string representation of the value of this instance in registry format.
       /// @return string The value of this Guid, formatted by using the "D" format specifier as follows:
       /// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       /// where the value of the GUID is represented as a series of lowercase hexadecimal digits in groups of 8, 4, 4, 4, and 12 digits and separated by hyphens. An example of a return value is "382c74c3-721d-4f34-80e5-57657b6cbc27". To convert the hexadecimal digits from a through f to uppercase, call the string.ToString method on the returned string.
       /// @remarks This method provides a default GUID format that is sufficient for typical use; however, other versions of this method that take a format parameter provide a few common format variations.
       String ToString() const override { return ToString("D"); }
-      
+
       /// @brief Returns a string representation of the value of this Guid instance, according to the provided format specifier.
       /// @param format A single format specifier that indicates how to format the value of this Guid. The format parameter can be "N", "D", "B", "P", or "X". If format is null or an empty string (""), "D" is used.
       /// @return The value of this Guid, represented as a series of lowercase hexadecimal digits in the specified format.
@@ -296,15 +296,15 @@ namespace Switch {
         string formats = "ndbpx";
         string fmt = (string::IsNullOrEmpty(format) ? "d" : format.ToLower());
         string result;
-        
+
         if (fmt.Length() != 1 || formats.IndexOf(fmt) == -1)
           throw FormatException(_caller);
-          
+
         bool hyphens = fmt != "n" && fmt != "x";
         bool braces = fmt == "b";
         bool parentheses = fmt == "p";
         bool hexadecimal = fmt == "x";
-        
+
         for (int32 index = 0; index < this->data.Length; index++) {
           if (hexadecimal && (index == 4 || index == 6 || (index >= 8 && index <= 15)))
             result += ",";
@@ -318,22 +318,22 @@ namespace Switch {
           if (hyphens && (index == 3 || index == 5 || index == 7 || index == 9))
             result += "-";
         }
-        
+
         if (braces)
           result = "{" + result + "}";
         if (parentheses)
           result = "(" + result + ")";
-          
+
         return result;
       }
-      
+
       /// @brief Get A read-only instance of the Guid structure whose value is all zeros.
       /// @return Guid A read-only instance of the Guid structure whose value is all zeros.
       /// @remarks You can compare a GUID with the value of the Guid.Empty field to determine whether a GUID is non-zero. The following example uses the Equality operator to compare two GUID values with Guid.Empty to determine whether they consist exclusively of zeros.
       static Guid Empty() {
         return Guid();
       }
-      
+
     private :
       Array<byte> data = Array<byte>(16);
     };

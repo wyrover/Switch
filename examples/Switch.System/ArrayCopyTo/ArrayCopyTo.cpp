@@ -25,18 +25,18 @@ namespace Examples {
       myTargetArray.SetValue("the", 6);
       myTargetArray.SetValue("lazy", 7);
       myTargetArray.SetValue("dog", 8);
-      
+
       // Displays the values of the Array.
       Console::WriteLine("The target Array contains the following (before and after copying):");
       PrintValues(myTargetArray, ' ');
-      
+
       // Copies the source Array to the target Array, starting at index 6.
       mySourceArray.CopyTo(myTargetArray, 6);
-      
+
       // Displays the values of the Array.
       PrintValues(myTargetArray, ' ');
     }
-    
+
   private:
     static void PrintValues(const Array<string>& myArray, char32 separator) {
       System::Collections::Generic::Enumerator<string>  enumerator = myArray.GetEnumerator();

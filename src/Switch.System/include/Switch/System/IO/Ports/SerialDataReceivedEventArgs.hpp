@@ -23,14 +23,14 @@ namespace Switch {
         public:
           SerialDataReceivedEventArgs(SerialData eventType) : eventType(eventType) {}
           SerialDataReceivedEventArgs(const SerialDataReceivedEventArgs& sdrea) : eventType(sdrea.eventType) {}
-          
+
           /// @brief Gets the event type.
           /// @return One of the SerialData values.
           /// @remarks This property provides information about the event type that caused the DataReceived event.
           _property<SerialData, _readonly> EventType {
             _get {return this->eventType;}
           };
-          
+
         private:
           SerialData eventType;
         };

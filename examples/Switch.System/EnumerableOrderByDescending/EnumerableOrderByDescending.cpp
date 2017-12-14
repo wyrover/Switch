@@ -16,20 +16,20 @@ namespace Examples {
         this->age = pet.age;
         return *this;
       }
-      
+
       _property<int, _readonly> Age {
         _get {return this->age;}
       };
-      
+
       _property<string, _readonly> Name {
         _get {return this->name;}
       };
-      
+
     private:
       string name;
       int age;
     };
-    
+
   public:
     // The main entry point for the application.
     static void Main() {
@@ -38,9 +38,9 @@ namespace Examples {
         {"Boots", 4},
         {"Whiskers", 1}
       };
-      
+
       refptr<IEnumerable<Pet>> query = pets.OrderByDescending<string>(_delegate(const Pet & pet) {return  pet.Name();});
-      
+
       for (Pet& pet : *query)
         Console::WriteLine("{0} - {1}", pet.Name, pet.Age);
     }

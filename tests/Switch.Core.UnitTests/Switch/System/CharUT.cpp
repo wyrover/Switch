@@ -12,7 +12,7 @@ namespace {
     ASSERT_EQ(Char('F'), Char('F'));
     ASSERT_EQ(Char(Char('T')), Char('T'));
   }
-  
+
   TEST(CharTest, IsControl) {
     ASSERT_FALSE(Char::IsControl('a'));
     ASSERT_TRUE(Char::IsControl(0x7F));
@@ -22,7 +22,7 @@ namespace {
     ASSERT_FALSE(Char::IsControl(' '));
     ASSERT_FALSE(Char::IsControl(0x7E));
   }
-  
+
   TEST(CharTest, IsLetter) {
     ASSERT_TRUE(Char::IsLetter('a'));
     ASSERT_TRUE(Char::IsLetter('F'));
@@ -34,7 +34,7 @@ namespace {
     ASSERT_TRUE(Char::IsLetter(6346));
     ASSERT_TRUE(Char::IsLetter(69804));
     ASSERT_TRUE(Char::IsLetter(194751));
-    
+
     ASSERT_FALSE(Char::IsLetter('0'));
     ASSERT_FALSE(Char::IsLetter('4'));
     ASSERT_FALSE(Char::IsLetter('9'));
@@ -46,7 +46,7 @@ namespace {
     ASSERT_FALSE(Char::IsLetter(6476));
     ASSERT_FALSE(Char::IsLetter(43271));
   }
-  
+
   TEST(CharTest, IsDigit) {
     ASSERT_FALSE(Char::IsDigit('a'));
     ASSERT_FALSE(Char::IsDigit('F'));
@@ -58,7 +58,7 @@ namespace {
     ASSERT_FALSE(Char::IsDigit(6346));
     ASSERT_FALSE(Char::IsDigit(69804));
     ASSERT_FALSE(Char::IsDigit(194751));
-    
+
     ASSERT_TRUE(Char::IsDigit('0'));
     ASSERT_TRUE(Char::IsDigit('4'));
     ASSERT_TRUE(Char::IsDigit('9'));
@@ -70,37 +70,37 @@ namespace {
     ASSERT_TRUE(Char::IsDigit(6476));
     ASSERT_TRUE(Char::IsDigit(43271));
   }
-  
+
   TEST(CharTest, Parse) {
     ASSERT_EQ('a', Char::Parse("a"));
     ASSERT_EQ('G', Char::Parse("G"));
     ASSERT_EQ('5', Char::Parse("5"));
     ASSERT_THROW(Char::Parse("589"), FormatException);
   }
-  
+
   TEST(CharTest, Equals) {
     ASSERT_FALSE(Char('d').Equals(Char('K')));
     ASSERT_TRUE(Char('d').Equals(Char('d')));
   }
-  
+
   TEST(CharTest, ToString) {
     ASSERT_EQ(string(""), Char().ToString());
     ASSERT_EQ(string("a"), Char('a').ToString());
     ASSERT_EQ(string("G"), Char('G').ToString());
     ASSERT_EQ(string("9"), Char('9').ToString());
   }
-  
+
   TEST(CharTest, CompareTo) {
     EXPECT_GT(Char('a').CompareTo(Char('A')), 0);
     EXPECT_LT(Char('B').CompareTo(Char('z')), 0);
     ASSERT_EQ(Char('8').CompareTo(Char('8')), 0);
     EXPECT_GT(Char('A').CompareTo(Int32(2)), 0);
   }
-  
+
   TEST(CharTest, GetTypeCode) {
     ASSERT_EQ(TypeCode::Char, Char().GetTypeCode());
   }
-  
+
 }
 
 TEST(char32, Ctor) {
@@ -249,7 +249,7 @@ TEST(char32, operator_p_int) {
   ASSERT_TRUE(('a' + a) == ('a' + 'a'));
   ASSERT_TRUE((a + 'b') == ('a' + 'b'));
   ASSERT_TRUE(('b' + a) == ('a' + 'b'));
-  
+
   ASSERT_TRUE(char32('0') + 9 == '9');
 }
 

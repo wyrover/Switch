@@ -10,7 +10,7 @@ namespace Examples {
     //-------------------------------------------------------------------------------------
     static string fmtNameValue;
     static string myVarSuffix;
-    
+
     // Four relatively unique environment variable names.
     static string myVarA; // default process
     static string myVarB; // Current Process
@@ -41,14 +41,14 @@ namespace Examples {
       EachVariable(myVarC, EnvironmentVariableTarget::Process);
       EachVariable(myVarD, EnvironmentVariableTarget::Process);
       Console::WriteLine();
-      
+
       Console::WriteLine("User:");
       EachVariable(myVarA, EnvironmentVariableTarget::User);
       EachVariable(myVarB, EnvironmentVariableTarget::User);
       EachVariable(myVarC, EnvironmentVariableTarget::User);
       EachVariable(myVarD, EnvironmentVariableTarget::User);
       Console::WriteLine();
-      
+
       Console::WriteLine("Machine:");
       EachVariable(myVarA, EnvironmentVariableTarget::Machine);
       EachVariable(myVarB, EnvironmentVariableTarget::Machine);
@@ -56,7 +56,7 @@ namespace Examples {
       EachVariable(myVarD, EnvironmentVariableTarget::Machine);
       Console::WriteLine();
     }
-    
+
     //=====================================================================================
     // AllVariables: CheckAllVariables helper function.
     // This section demonstrates Environment.GetEnvironmentVariables.
@@ -64,7 +64,7 @@ namespace Examples {
     static void AllVariables(EnvironmentVariableTarget tgt) {
       string value;
       string key;
-      
+
       for (auto de : Environment::GetEnvironmentVariables(tgt)) {
         key   = (string)de.Key;
         value = (string)de.Value;
@@ -80,10 +80,10 @@ namespace Examples {
     static void CheckAllVariables() {
       Console::WriteLine("Process:");
       AllVariables(EnvironmentVariableTarget::Process);
-      
+
       Console::WriteLine("User:");
       AllVariables(EnvironmentVariableTarget::User);
-      
+
       Console::WriteLine("Machine:");
       AllVariables(EnvironmentVariableTarget::Machine);
     }
@@ -94,7 +94,7 @@ namespace Examples {
     static void ChkReg(RegistryKey rk) {
       bool exists = false;
       string registryNone = "  Environment variable doesn't exist.";
-      
+
       for (string s : rk.GetValueNames()) {
         if (s.ToLower().Contains(myVarSuffix.ToLower())) {
           Console::WriteLine(fmtNameValue, s, as<string>(rk.GetValue(s)));
@@ -113,14 +113,14 @@ namespace Examples {
       string subkeyU = R"(Environment)";
       string subkeyM = R"(System\CurrentControlSet\Control\Session Manager\Environment)";
       string fmtSubkey = "\"{0}\" key:";
-      
+
       Console::WriteLine(fmtSubkey, subkeyU);
       ChkReg(Registry::CurrentUser().OpenSubKey(subkeyU));
-      
+
       Console::WriteLine(fmtSubkey, subkeyM);
       ChkReg(Registry::LocalMachine().OpenSubKey(subkeyM));
     }
-    
+
   public:
     //=====================================================================================
     // Main:
@@ -172,15 +172,15 @@ namespace Examples {
       // Set the environment variable for the default target (the current process).
       Console::WriteLine(fmt2x, "(default)", myVarA, existsA);
       Environment::SetEnvironmentVariable(myVarA, existsA);
-      
+
       // Set the environment variable for the current process.
       Console::WriteLine(fmt2x, "Process", myVarB, existsB);
       Environment::SetEnvironmentVariable(myVarB, existsB, EnvironmentVariableTarget::Process);
-      
+
       // Set the environment variable for the current user.
       Console::WriteLine(fmt2x, "User", myVarC, existsC);
       Environment::SetEnvironmentVariable(myVarC, existsC, EnvironmentVariableTarget::User);
-      
+
       // Set the environment variable for the local machine.
       Console::WriteLine(fmt2x, "Machine", myVarD, existsD);
       Environment::SetEnvironmentVariable(myVarD, existsD, EnvironmentVariableTarget::Machine);
@@ -226,10 +226,10 @@ namespace Examples {
       CheckRegistry();
     }
   };
-  
+
   string Program::fmtNameValue = "  {0} {1}.";
   string Program::myVarSuffix = "_GETSET_ENVAR_SAMPLE";
-  
+
   string Program::myVarA = "A" + myVarSuffix;
   string Program::myVarB = "B" + myVarSuffix;
   string Program::myVarC = "C" + myVarSuffix;

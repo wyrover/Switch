@@ -23,26 +23,26 @@ namespace Switch {
         public:
           /// @brief Represents the collection of keys in a Dictionary<TKey, TValue>. This class cannot be inherited.
           using KeyCollection = List<TKey>;
-          
+
           /// @brief Represents the collection of values in a Dictionary<TKey, TValue>. This class cannot be inherited.
           using ValueCollection = List<TValue>;
-          
+
           /// @cond
           IDictionary() {}
           /// @endcond
-          
+
           /// @brief Gets an ICollection<T> containing the keys of the IDictionary<TKey, TValue>.
           /// @return ICollection<TKey> An ICollection<T> containing the keys of the object that implements IDictionary<TKey, TValue>.
           _property<KeyCollection, _readonly> Keys {
             _get {return this->GetKeys();}
           };
-          
+
           /// @brief Gets an ICollection<T> containing the values of the IDictionary<TKey, TValue>.
           /// @return ICollection<TValue> An ICollection<T> containing the values of the object that implements IDictionary<TKey, TValue>.
           _property<ValueCollection, _readonly> Values {
             _get {return this->GetValues();}
           };
-          
+
           using ICollection<KeyValuePair<TKey, TValue>>::Add;
           /// @brief Adds an element with the provided key and value to the IDictionary<TKey,TValue>.
           /// @param key The object to use as the key of the element to add.
@@ -51,45 +51,45 @@ namespace Switch {
           /// @exception ArgumentException An element with the same key already exists in the IDictionary<TKey,TValue>.
           /// @exception NotSupportedException The IDictionary<TKey,TValue> is read-only.
           virtual void Add(const TKey& key, const TValue& value) = 0;
-          
+
           /// @brief Determines whether the IDictionary<TKey,TValue> contains an element with the specified key.
           /// @param key The key to locate in the IDictionary<TKey,TValue>.
           /// @return Boolean true if the IDictionary<TKey,TValue> contains an element with the key; otherwise, false
           /// @exception ArgumentNullException key is null.
           virtual bool ContainsKey(const TKey& key) const = 0;
-          
+
           /// @brief Removes the element with the specified key from the IDictionary<TKey,TValue>.
           /// @param key The key of the element to remove
           /// @return Boolean true if the element is successfully removed; otherwise, false. This method also returns false if key was not found in the original IDictionary<TKey,TValue>.
           /// @exception ArgumentNullException key is null.
           virtual bool Remove(const TKey& key) = 0;
-          
+
           using ICollection< KeyValuePair<TKey, TValue>>::Remove;
-          
+
           /// @brief Gets the value associated with the specified key.
           /// @param key The key whose value to get
           /// @param value When this method returns, the value associated with the specified key, if the key is found.
           /// @return Boolean true if the object that implements IDictionary<TKey,TValue> contains an element with the specified key; otherwise, false.
           /// @exception ArgumentNullException key or value is null.
           virtual bool TryGetValue(const TKey& key, TValue& value) const = 0;
-          
+
           /// @brief Sets the value associated with the specified key.
           /// @param key The TKey whose value to get
           /// @return TValue The element at the specified key.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
           virtual TValue& operator[](const TKey& key) = 0;
-          
+
           /// @brief Gets the element at the specified key.
           /// @param key The key whose value to get
           /// @return TValue The element at the specified key.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
           virtual const TValue& operator[](const TKey& key) const = 0;
-          
+
         protected:
           /// @brief Gets an ICollection<T> containing the keys of the IDictionary<TKey, TValue>.
           /// @return ICollection<TKey> An ICollection<T> containing the keys of the object that implements IDictionary<TKey, TValue>.
           virtual KeyCollection GetKeys() const = 0;
-          
+
           /// @brief Gets an ICollection<T> containing the values of the IDictionary<TKey, TValue>.
           /// @return ICollection<TValue> An ICollection<T> containing the values of the object that implements IDictionary<TKey, TValue>.
           virtual ValueCollection GetValues() const = 0;

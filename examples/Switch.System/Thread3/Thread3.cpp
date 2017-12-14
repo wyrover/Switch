@@ -8,7 +8,7 @@ namespace Examples {
   class Program {
   public:
     static Object obj;
-    
+
     static void Main() {
       Thread::CurrentThread().Name = "Main";
       ThreadPool::QueueUserWorkItem(ShowThreadInformation);
@@ -20,7 +20,7 @@ namespace Examples {
       Thread::Sleep(500);
       ShowThreadInformation(object());
     }
-    
+
   private:
     static void ShowThreadInformation(const Object& state) {
       _lock(obj) {
@@ -34,7 +34,7 @@ namespace Examples {
       }
     }
   };
-  
+
   Object Program::obj;
 }
 

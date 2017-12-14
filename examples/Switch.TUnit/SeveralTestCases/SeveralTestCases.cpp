@@ -8,45 +8,45 @@ namespace UnitTests {
     void _Test(TestOne) {
       Assert::IsTrue(true, _caller);
     }
-    
+
     void _Test(TestTwo) {
       Assert::IsFalse(false, _caller);
     }
-    
+
     void _Test(TestThree) {
       Assert::IsEmpty("", _caller);
     }
   };
-  
+
   class _TestFixture(TeastCase2) {
     void _Test(TestOne) {
       Assert::IsTrue(true, _caller);
     }
-    
+
     void _Test(TestTwo) {
       Assert::IsFalse(false, _caller);
     }
-    
+
     void _Test(TestThree) {
       Assert::IsEmpty("", _caller);
     }
-    
+
     void _Test(TestFour) {
       Assert::IsEmpty({}, _caller);
     }
   };
-  
+
   class _TestFixture(TeastCase3) {
     void _Test(TestOne) {
       Assert::IsNull(null, _caller);
     }
-    
+
     void _Test(TestTwo) {
       _<string> str;
       Assert::IsNull(str, _caller);
     }
   };
-  
+
   // Used _Test to add unit test to execute at the unit test suit.
   _AddTestFixture(TeastCase1);
   _AddTest(TeastCase1, TestOne);

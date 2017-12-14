@@ -12,29 +12,29 @@ public:
   __event__(const TDelegate& delegate) : TDelegate(delegate) {}
   template<typename Function> __event__(Function function) : TDelegate(function) {}
   template<typename Object, typename Function> __event__(const Object& object, Function function) : TDelegate(object, function) {}
-  
+
   __event__& operator +=(const TDelegate& event) {
     this->TDelegate::operator +=(event);
     return *this;
   }
-  
+
   template<typename Fn>
   __event__& operator +=(Fn function) {
     this->TDelegate::operator +=(function);
     return *this;
   }
-  
+
   __event__& operator -=(const TDelegate& event) {
     this->TDelegate::operator -=(event);
     return *this;
   }
-  
+
   template<typename Fn>
   __event__& operator -=(Fn function) {
     this->TDelegate::operator -=(function);
     return *this;
   }
-  
+
 private:
   friend TParent;
   template<typename ... TArguments> void operator()(const object& sender, TArguments... args) const {this->TDelegate(sender, args...);}

@@ -11,24 +11,24 @@ namespace DesignPatterns {
     public:
       virtual void Request() const = 0;
     };
-    
+
     // The 'RealSubject' class
     class RealSubject : public Subject {
     public:
       void Request() const override {Console::WriteLine("Called RealSubject.Request()");}
     };
-    
+
     // The 'Proxy' class
     class Proxy : public Subject {
     public:
       void Request() const override  {
         this->realSubject.Request();
       }
-      
+
     private:
       RealSubject realSubject;
     };
-    
+
     // MainApp _startup class for Structural
     // Proxy Design Pattern.
     class MainApp {

@@ -103,17 +103,17 @@ bool Int32::ToBoolean(const IFormatProvider&) const {
 byte Int32::ToByte(const IFormatProvider&) const {
   if (this->value < Byte::MinValue)
     throw OverflowException(_caller);
-    
+
   if (this->value > Byte::MaxValue)
     throw OverflowException(_caller);
-    
+
   return (byte)this->value;
 }
 
 char32 Int32::ToChar(const IFormatProvider&) const {
   if (this->value < 0 || this->value > static_cast<int32>(Char::MaxValue))
     throw OverflowException(_caller);
-    
+
   return char32(this->value);
 }
 
@@ -128,10 +128,10 @@ double Int32::ToDouble(const IFormatProvider&) const {
 int16 Int32::ToInt16(const IFormatProvider&) const {
   if (this->value < Int16::MinValue)
     throw OverflowException(_caller);
-    
+
   if (this->value > Int16::MaxValue)
     throw OverflowException(_caller);
-    
+
   return (int16)this->value;
 }
 
@@ -146,34 +146,34 @@ int64 Int32::ToInt64(const IFormatProvider&) const {
 uint16 Int32::ToUInt16(const IFormatProvider&) const {
   if (this->value < 0)
     throw OverflowException(_caller);
-    
+
   if (this->value > UInt16::MaxValue)
     throw OverflowException(_caller);
-    
+
   return (uint16)this->value;
 }
 
 uint32 Int32::ToUInt32(const IFormatProvider&) const {
   if (this->value < 0)
     throw OverflowException(_caller);
-    
+
   return (uint32)this->value;
 }
 
 uint64 Int32::ToUInt64(const IFormatProvider&) const {
   if (this->value < 0)
     throw OverflowException(_caller);
-    
+
   return (uint64)this->value;
 }
 
 sbyte Int32::ToSByte(const IFormatProvider&) const {
   if (this->value < SByte::MinValue)
     throw OverflowException(_caller);
-    
+
   if (this->value > SByte::MaxValue)
     throw OverflowException(_caller);
-    
+
   return (sbyte)this->value;
 }
 
@@ -212,7 +212,7 @@ Int32& Int32::operator *=(const Int32& value) {
 Int32& Int32::operator /=(const Int32& value) {
   if (value == 0)
     throw DivideByZeroException(_caller);
-    
+
   this->value /= value.value;
   return *this;
 }
@@ -220,7 +220,7 @@ Int32& Int32::operator /=(const Int32& value) {
 Int32& Int32::operator %=(const Int32& value) {
   if (value == 0)
     throw DivideByZeroException(_caller);
-    
+
   this->value %= value;
   return *this;
 }

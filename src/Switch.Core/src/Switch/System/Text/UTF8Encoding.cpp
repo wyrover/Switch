@@ -92,11 +92,11 @@ int32 UTF8Encoding::GetByteCount(char32 c) const {
 int32 UTF8Encoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
   if (bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
   ValidateGCC(bytesSize, index, count);
-  
+
   std::string s;
   for (int32 i = 0 ; i < count ; i += 1)
     s.push_back(bytes[index + i]);
-    
+
   return Native::UnicodeEncodingsApi::UTF8::GetLength(s);
 }
 
@@ -121,17 +121,17 @@ bool UTF8Encoding::Equals(const object& obj) const {
   const UTF8Encoding* utf8 = dynamic_cast<const UTF8Encoding*>(&obj);
   if (utf8 == null)
     return false;
-    
+
   return this->shouldEmitPreamble == utf8->shouldEmitPreamble;
 }
 
 int32 UTF8Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
   if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
   if (index < 0) throw ArgumentOutOfRangeException(_caller);
-  
+
   int32 count = GetByteCount(c);
   if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
-  
+
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
   return count;

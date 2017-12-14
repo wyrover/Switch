@@ -8,7 +8,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       Array<int> items = {10, 20, 30};
-      
+
       try {
         Console::WriteLine("items[3] = {0}", items[3]);
       } catch (const ArgumentOutOfRangeException& exception) {

@@ -29,18 +29,18 @@ namespace {
       termioAttributes.c_lflag &= ~ECHO;
       tcsetattr(0, TCSANOW, &termioAttributes);
     }
-    
+
     ~Terminal() {
       tcsetattr(0, TCSANOW, &this->backupedTermioAttributes);
     }
-    
+
     int32 Getch() {
       if (this->peekCharacter != -1) {
         sbyte character = this->peekCharacter;
         this->peekCharacter = -1;
         return character;
       }
-      
+
       termios termioAttributes;
       tcgetattr(0, &termioAttributes);
       termios backupedTermioAttributes = termioAttributes;
@@ -48,19 +48,19 @@ namespace {
       termioAttributes.c_cc[VTIME] = 0;
       termioAttributes.c_cc[VMIN] = 1;
       tcsetattr(0, TCSANOW, &termioAttributes);
-      
+
       sbyte character = 0;
       while (read(0, &character, 1) != 1);
-      
+
       tcsetattr(0, TCSANOW, &backupedTermioAttributes);
-      
+
       return character;
     }
-    
+
     bool KeyAvailable() {
       if (this->peekCharacter != -1)
         return true;
-        
+
       termios termioAttributes;
       tcgetattr(0, &termioAttributes);
       termios backupedTermioAttributes = termioAttributes;
@@ -68,29 +68,29 @@ namespace {
       termioAttributes.c_cc[VTIME] = 0;
       termioAttributes.c_cc[VMIN] = 0;
       tcsetattr(0, TCSANOW, &termioAttributes);
-      
+
       read(0, &this->peekCharacter, 1);
-      
+
       tcsetattr(0, TCSANOW, &backupedTermioAttributes);
-      
+
       return this->peekCharacter != -1;
     }
-    
+
     static bool IsAnsiSupported() {
       static std::string terminal = getenv("TERM") == null ? "" : getenv("TERM");
       return isatty(fileno(stdout)) && (terminal == "xterm" || terminal == "xterm-color" || terminal == "xterm-256color" || terminal == "screen" || terminal == "screen-256color" || terminal == "linux" || terminal == "cygwin");
     }
-    
+
   private:
     sbyte peekCharacter {-1};
     termios backupedTermioAttributes;
   };
-  
+
   static Terminal terminal;
   static ConsoleColor backColor = ConsoleColor::Black;
   static ConsoleColor foreColor = ConsoleColor::White;
   static bool cursorVisible = true;
-  
+
   class KeyInfo {
   public:
     class InputList {
@@ -99,35 +99,35 @@ namespace {
       InputList(const std::list<int32>& chars) : chars(chars) {}
       InputList(std::initializer_list<int32> il) : chars(il) {}
       InputList(const InputList& il) : chars(il.chars) {}
-      
+
       InputList& operator =(const InputList& il) {
         this->chars = il.chars;
         return *this;
       }
-      
+
       bool operator ==(const InputList& il) const {return this->chars == il.chars;}
       bool operator !=(const InputList& il) const {return this->chars != il.chars;}
-      
+
       using const_iterator = std::list<int32>::const_iterator;
       using iterator = std::list<int32>::iterator;
-      
+
       const_iterator cbegin() const {return this->chars.begin();}
       const_iterator cend() const {return this->chars.end();}
       const_iterator begin() const {return this->chars.begin();}
       iterator begin() {return this->chars.begin();}
       const_iterator end() const {return this->chars.end();}
       iterator end() {return this->chars.end();}
-      
-      
+
+
       void Add(int32 c) {this->chars.push_back(c);}
       void AddFront(int32 c) {this->chars.push_front(c);}
       void Remove(int32 c) {this->chars.remove(c);}
       int32 Count() const {return static_cast<int32>(this->chars.size());}
       int32 Pop() { int32 c = this->chars.front();  this->chars.erase(this->chars.begin()); return c;}
       void Clear() {this->chars.clear();}
-      
+
       bool IsEmpty() const {return this->chars.empty();}
-      
+
       std::string ToString() const {
         std::stringstream result;
         std::list<int32>::const_iterator iterator = this->chars.begin();
@@ -140,7 +140,7 @@ namespace {
         }
         return result.str();
       }
-      
+
       static InputList Parse(const std::string& value) {
         InputList result;
         std::string::const_iterator iterator = value.begin();
@@ -154,13 +154,13 @@ namespace {
         }
         return result;
       }
-      
+
     private:
       std::list<int32> chars;
     };
-    
+
     KeyInfo(const KeyInfo& keyInfo) : key(keyInfo.key), keyChar(keyInfo.keyChar), hasAltModifier(keyInfo.hasAltModifier), hasControlModifier(keyInfo.hasControlModifier), hasShiftModifier(keyInfo.hasShiftModifier) {}
-    
+
     KeyInfo& operator =(const KeyInfo& keyInfo) {
       this->key = keyInfo.key;
       this->keyChar = keyInfo.keyChar;
@@ -169,56 +169,56 @@ namespace {
       this->hasShiftModifier = keyInfo.hasShiftModifier;
       return *this;
     }
-    
+
     static bool KeyAvailable() {return !inputs.IsEmpty() || terminal.KeyAvailable();}
-    
+
     static KeyInfo Read() {
       if (!inputs.IsEmpty())
         return ToKeyInfo(inputs.Pop());
-        
+
       do
         inputs.Add(terminal.Getch());
       while (terminal.KeyAvailable());
-      
+
       if (KeyInfo::keys.find(inputs.ToString()) != KeyInfo::keys.end()) {
         std::string str = inputs.ToString();
         inputs.Clear();
         return KeyInfo(KeyInfo::keys[str].key, KeyInfo::keys[str].keyChar, false, false, KeyInfo::keys[str].shift);
       }
-      
+
       if (inputs.Count() == 1)
         return ToKeyInfo(inputs.Pop());
-        
+
       if (inputs.Count() > 1 && *inputs.begin() != 27)
         return ToKeyInfo(ToKey(inputs));
-        
+
       inputs.Pop();
       return ToKeyInfo(inputs.Pop(), true);
     }
-    
+
     int32 Key() const {return this->key;}
-    
+
     int32 KeyChar() const {return this->keyChar;}
-    
+
     bool HasAltModifier() const {return this->hasAltModifier;}
-    
+
     bool HasControlModifier() const {return this->hasControlModifier;}
-    
+
     bool HasShiftModifier() const {return this->hasShiftModifier;}
-    
+
     std::string ToString() const {
       std::stringstream result;
       result << "{Key=" << std::hex << this->key << ", KeyChar=" << std::dec << static_cast<char>(this->keyChar) << ", HasAltModifier=" << ToString(this->hasAltModifier) << ", HasControlModifier=" << ToString(this->hasControlModifier) << ", HasShiftModifier=" << ToString(this->hasShiftModifier) << "}";
       return result.str();
     }
-    
+
   private:
     KeyInfo() : key(0), keyChar(0), hasAltModifier(false), hasControlModifier(false), hasShiftModifier(false) {}
     KeyInfo(int32 key, int32 keyChar) : key(key), keyChar(keyChar), hasAltModifier(false), hasControlModifier(false), hasShiftModifier(false) {}
     KeyInfo(int32 key, int32 keyChar, bool hasAltModifier, bool hasControlModifier, bool hasShiftModifier) : key(key), keyChar(keyChar), hasAltModifier(hasAltModifier), hasControlModifier(hasControlModifier), hasShiftModifier(hasShiftModifier) {}
-    
+
     static std::string ToString(bool b) {return b ? "true" : "false";}
-    
+
     static int32 ToKey(InputList& inputs) {
       int32 key = 0;
       int32 index = 1;
@@ -227,20 +227,20 @@ namespace {
       inputs.Clear();
       return key;
     }
-    
+
     static KeyInfo ToKeyInfo(int32 key) {
       return ToKeyInfo(key, false);
     }
-    
+
     static KeyInfo ToKeyInfo(int32 key, bool alt) {
       // Ctrl + Space
       if (key == 0)
         return KeyInfo(' ', ' ', false, true, false);
-        
+
       // Ctrl + [a; z]
       if ((key >= 1 && key <= 7) || (key >= 10 && key <= 11) || (key >= 14 && key <= 18) || (key >= 20 && key <= 26))
         return KeyInfo(key + 'A' - 1, key, false, true, false);
-        
+
       switch (key) {
       case 50086 : return KeyInfo(0, U'æ', alt, false, false);
       case 50054 : return KeyInfo(0, U'Æ', alt, false, false);
@@ -335,13 +335,13 @@ namespace {
       case -1610554743 : return KeyInfo(0, U'≠', alt, false, false);
       case 49841 : return KeyInfo(0, U'±', alt, false, false);
       }
-      
+
       if (KeyInfo::keys.find(std::string(1, toupper((char)key))) != KeyInfo::keys.end())
         return KeyInfo(toupper(key), key, alt, false, key >= 'A' && key <= 'Z');
-        
+
       return KeyInfo(0, key, alt, false, key >= 'A' && key <= 'Z');
     }
-    
+
     int32 key;
     int32 keyChar;
     bool hasAltModifier;
@@ -357,9 +357,9 @@ namespace {
     static std::map<std::string, KeyKeyChar> keys;
     static InputList inputs;
   };
-  
+
   KeyInfo::InputList KeyInfo::inputs;
-  
+
   std::map<std::string, KeyInfo::KeyKeyChar> KeyInfo::keys = {
     {"\x7F", {8, 0, false, false, false}}, // Backspace
     {"\x9", {9, 9, false, false, false}}, // Tab
@@ -558,7 +558,7 @@ bool Native::ConsoleApi::GetCapsLock() {
 int32 Native::ConsoleApi::GetCursorLeft() {
   if (!Terminal::IsAnsiSupported())
     return 0;
-    
+
   printf("\x1b[6n");
   fflush(stdout);
   terminal.Getch();
@@ -577,7 +577,7 @@ int32 Native::ConsoleApi::GetCursorSize() {
 int32 Native::ConsoleApi::GetCursorTop() {
   if (!Terminal::IsAnsiSupported())
     return 0;
-    
+
   printf("\x1b[6n");
   fflush(stdout);
   terminal.Getch();

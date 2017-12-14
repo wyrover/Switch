@@ -17,7 +17,7 @@ namespace Switch {
   namespace TUnit {
     namespace Is {
       using EqualTo = Constraints::EqualTo;
-      
+
       using Empty = Constraints::Empty;
     }
   }

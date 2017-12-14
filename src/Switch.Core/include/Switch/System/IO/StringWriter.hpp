@@ -23,37 +23,37 @@ namespace Switch {
           static StringWriter nullStringWriter;
           return nullStringWriter;
         }
-        
+
         /// @brief Initializes a new instance of the System::IO::StreamWriter class for the specified file on the specified stream pointer.
         StringWriter();
         StringWriter(const StringWriter& sw) : data(sw.data) {}
-        
+
         /// @cond
         ~StringWriter();
         /// @endcond
-        
+
         /// @brief Closes the current StringWriter object and the underlying StringBuilder. (Overrides TextWriter::Close().).
         /// @exception ObjectDisposedException The StringBuilder is closed.
         /// @exception IO::IOException an error occurred while the file is being closed -or- An I/O error occurs.
         virtual void Close() override;
-        
+
         /// @brief Writes the specified System::String value to the text stream.
         /// @param value The value to write
         /// @exception IO::IOException An I/O error occurs.
         using TextWriter::Write;
         using TextWriter::WriteLine;
         void Write(const System::String& value) override;
-        
+
         /// @brief Returns a string containing the characters written to the current StringWriter so far.
         /// @return string The string containing the characters written to the current StringWriter.
         String ToString() const override;
-        
+
       private:
         struct StringWriterData {
           String str;
           bool close = false;
         };
-        
+
         refptr<StringWriterData> data = refptr<StringWriterData>();
       };
     }

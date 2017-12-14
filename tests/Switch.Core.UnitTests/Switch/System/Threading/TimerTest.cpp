@@ -9,18 +9,18 @@ namespace {
   class TimerCtrlTest : public object {
   public:
     TimerCtrlTest() : Number(0), Event(false), State(null) {}
-    
+
     void Run(object& State) {
       this->State = &State;
       if (++this->Number == 10)
         this->Event.Set();
     }
-    
+
     int32 Number;
     AutoResetEvent Event;
     object* State;
   };
-  
+
   TEST(TimerTest, CreateTimerWithoutDueTimeAndWithoutPeriod) {
     TimerCtrlTest test;
     _using(Timer timer(TimerCallback(test, &TimerCtrlTest::Run))) {
@@ -31,7 +31,7 @@ namespace {
     ASSERT_FALSE(test.Event.WaitOne(10));
     ASSERT_EQ(0, test.Number);
   }
-  
+
   /*
   TEST(TimerTest, CreateTimerWithoutDueTimeAndWithoutPeriodAndCallChange) {
     TimerTest test;

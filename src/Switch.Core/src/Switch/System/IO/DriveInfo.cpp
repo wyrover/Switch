@@ -18,7 +18,7 @@ int64 DriveInfo::GetAvailableFreeSpace() const {
   int64 freeBytes = 0, dummy;
   if (!Native::DriveApi::GetAvailableFreeSpace(this->driveName.Data(), freeBytes, dummy, dummy))
     throw IOException(_caller);
-    
+
   return freeBytes;
 }
 
@@ -26,7 +26,7 @@ String DriveInfo::GetDriveFormat() const {
   string volumeName, fileSystemName;
   if (!Native::DriveApi::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
     throw IOException(_caller);
-    
+
   return fileSystemName;
 }
 
@@ -51,7 +51,7 @@ int64 DriveInfo::GetTotalFreeSpace() const {
   int64 totalNumberOfFreeBytes = 0, dummy;
   if (!Native::DriveApi::GetAvailableFreeSpace(this->driveName.Data(), dummy, dummy, totalNumberOfFreeBytes))
     throw IOException(_caller);
-    
+
   return totalNumberOfFreeBytes;
 }
 
@@ -59,7 +59,7 @@ int64 DriveInfo::GetTotalSize() const {
   int64 totalNumberOfBytes = 0, dummy;
   if (!Native::DriveApi::GetAvailableFreeSpace(this->driveName.Data(), dummy, totalNumberOfBytes, dummy))
     throw IOException(_caller);
-    
+
   return totalNumberOfBytes;
 }
 
@@ -74,7 +74,7 @@ void DriveInfo::SetVolumeLabel(const String& label) {
   System::IO::DriveType drive = DriveType();
   if (drive == System::IO::DriveType::CDRom || drive == System::IO::DriveType::Network)
     throw UnauthorizedAccessException(_caller);
-    
+
   if (!Native::DriveApi::SetVolumeLabel(this->driveName.Data(), label.Data()))
     throw IOException(_caller);
 }

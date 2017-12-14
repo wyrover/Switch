@@ -23,7 +23,7 @@ namespace Examples {
       G      = 392,
       Gsharp = 415,
     };
-    
+
     // Define the duration of a note in units of milliseconds.
     enum class Duration {
       WHOLE     = 1600,
@@ -32,19 +32,19 @@ namespace Examples {
       EIGHTH    = QUARTER / 2,
       SIXTEENTH = EIGHTH / 2,
     };
-    
+
     // Define a note as a frequency (tone) and the amount of
     // time (duration) the note plays.
     struct Note : public object {
       Tone     toneVal;
       Duration durVal;
-      
+
       // Define a constructor to create a specific note.
       Note(Tone frequency, Duration time) {
         toneVal = frequency;
         durVal  = time;
       };
-      
+
       Note() : toneVal((Tone)0), durVal((Duration)0) {}
       Note(const Note& note) : toneVal(note.toneVal), durVal(note.durVal) {}
       Note& operator=(const Note& note) {
@@ -52,12 +52,12 @@ namespace Examples {
         this->durVal = note.durVal;
         return *this;
       }
-      
+
       // Define properties to return the note's tone and duration.
       _property<Tone, _readonly> NoteTone { _get{ return toneVal; } };
       _property<Duration, _readonly> NoteDuration { _get{ return durVal; } };
     };
-    
+
   public:
     // The main entry point for the application.
     static void Main() {
@@ -80,7 +80,7 @@ namespace Examples {
       // Play the song
       Play(Mary);
     }
-    
+
   protected:
     // Play the notes in a song.
     static void Play(const Array<Note>& tune) {

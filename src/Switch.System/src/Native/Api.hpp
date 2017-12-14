@@ -14,17 +14,17 @@ namespace Native {
   class CurlApi _static {
   public:
     static int32 Cleanup(intptr request);
-    
+
     static bool GetOSSupportsWebOperations();
     static int32 GetContentDownloadLength(intptr request, double& value);
     static int32 GetContentType(intptr request, string& value);
     static int32 GetResponseCode(intptr request, int64& value);
-    
+
     static int32 GlobalCleanup();
     static int32 GlobalInit();
     static int32 Init(intptr& request);
     static int32 Perform(intptr request);
-    
+
     static int32 SetCarriageReturnLinefeed(intptr request, int32 value);
     static int32 SetCreateDirectoryIfDirectoryMissing(intptr request);
     static int32 SetDirectoryListOnly(intptr request, int32 value);
@@ -48,12 +48,12 @@ namespace Native {
     static void FreeList(intptr list);
     static int32 SetHttpHeader(intptr request, intptr list);
   };
-  
+
   struct DebuggerApi _static {
   public:
     static void Log(int32 level, const string& category, const string& message);
   };
-  
+
   class DnsApi _static {
   public:
     static void Destroy(intptr host);
@@ -66,7 +66,7 @@ namespace Native {
     static int GetHostName(string& hostName);
     static void SetHostent(bool stayOpen);
   };
-  
+
   class ProcessApi _static {
   public:
     static intptr Start(const System::Diagnostics::ProcessStartInfo& processStartInfo);
@@ -80,7 +80,7 @@ namespace Native {
     static void WaitForExit(intptr handle, int32& exitCode);
     static bool WaitForExit(intptr handle, int32 timeout, int32& exitCode);
   };
-  
+
   class SecurityApi _static {
   public:
     static System::Security::SecureString ToSecureSecureString(const string& unsecureString);
@@ -88,7 +88,7 @@ namespace Native {
     static string ToUnsecureString(const System::Security::SecureString& secureString);
     static string ToUnsecureString(const string& secureString);
   };
-  
+
   class SocketApi _static {
   public:
     static int32 AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily);
@@ -115,7 +115,7 @@ namespace Native {
     static int32 ReceiveFrom(intptr handle, byte* buffer, int32 bufferLength, int32 flags, byte* socketAddress, int32 addressLength);
     static int32 Shutdown(intptr handle, int32 how);
   };
-  
+
   enum class SoundType {
     Beep = 0,
     Hand = 0x00000010,
@@ -123,7 +123,7 @@ namespace Native {
     Exclamation = 0x00000030,
     Asterisk = 0x00000040,
   };
-  
+
   class SystemSoundApi _static {
   public:
     static void Play(SoundType type);

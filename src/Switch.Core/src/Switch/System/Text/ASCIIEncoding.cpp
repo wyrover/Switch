@@ -91,10 +91,10 @@ bool ASCIIEncoding::Equals(const object& obj) const {
 int32 ASCIIEncoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
   if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
   if (index < 0) throw ArgumentOutOfRangeException(_caller);
-  
+
   int32 count = GetByteCount(c);
   if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
-  
+
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
   return count;

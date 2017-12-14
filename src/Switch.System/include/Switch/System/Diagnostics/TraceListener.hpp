@@ -38,28 +38,28 @@ namespace Switch {
         /// | IndentLevel | Zero.                  |
         /// | IndentSize  | Four spaces.           |
         TraceListener() {}
-        
+
         /// @cond
         TraceListener(const TraceListener& tl) : data(tl.data) {};
         TraceListener& operator=(const TraceListener& tl) {this->data = tl.data; return *this;};
         /// @endcond
-        
+
         /// @brief Initializes a new instance of the TraceListener class using the specified name as the listener.
         /// @param name The name of the TraceListener.
         explicit TraceListener(const string& name) {this->data->name = name;}
-        
+
         /// @brief Gets the custom trace listener attributes defined in the application configuration file.
         /// @return A StringDictionary containing the custom attributes for the trace listener.
         /// @remarks Classes that inherit from the TraceListener class can add custom attributes by overriding the GetSupportedAttributes method and returning a string array of custom attribute names. The Attributes property identifies the custom attributes that are referenced in the application's configuration file. For example, in the following configuration file excerpt the DelimitedListTraceListener custom attribute "delimiter" is referenced. In this case, the Attributes property returns a StringDictionary containing the string "delimiter".
         _property<const Collections::Specialized::StringDictionary&, _readonly> Attributes {
           _get->const Collections::Specialized::StringDictionary& {return this->data->attibutes;}
         };
-        
+
         _property<const TraceFilter&> Filter {
           _get->const TraceFilter& {return *this->data->filter;},
           _set {this->data->filter = &value;}
         };
-        
+
         /// @brief Gets or sets the indent level.
         /// @return int32 The indent level. The default is zero.
         /// @remarks The IndentLevel property represents the number of times that the indent specified by the IndentSize property is applied. This property is stored on per-thread/per-request basis.
@@ -67,7 +67,7 @@ namespace Switch {
           _get {return this->data->indentLevel;},
           _set {this->data->indentLevel = value;}
         };
-        
+
         /// @brief Gets or sets the number of spaces in an indent.
         /// @return int32 The number of spaces in an indent. The default is four spaces.
         /// @exception ArgumentOutOfRangeException Set operation failed because the value is less than zero.
@@ -80,14 +80,14 @@ namespace Switch {
             this->data->indentSize = value;
           }
         };
-        
+
         /// @brief Gets a value indicating whether the trace listener is thread safe.
         /// @return bool true if the trace listener is thread safe; otherwise, false. The default is false.
         /// @remarks The value of IsThreadSafe is used to determine whether to use a global lock when writing to the listener. If the value of IsThreadSafe is false, the global lock is used regardless of the value of UseGlobalLock. The global lock is not used only if the value of IsThreadSafe is true and the value of UseGlobalLock is false. The default behavior is to use the global lock whenever writing to the listener.
         _property<bool, _readonly> IsThreadSafe {
           _get {return this->data->isThreadSafe;}
         };
-        
+
         /// @brief Gets or sets a name for this TraceListener.
         /// @return string A name for this TraceListener. The default is an empty string ("").
         /// @remarks The name can be used to organize and access listeners in a TraceListenerCollection collection.
@@ -95,7 +95,7 @@ namespace Switch {
           _get {return this->data->name;},
           _set {this->data->name = value;}
         };
-        
+
         /// @brief Gets or sets the trace output options.
         /// @return TraceOptions A bitwise combination of the enumeration values. The default is None.
         /// @remarks The TraceOutputOptions property determines the optional content of trace output. The property can be set in the configuration file or programmatically during execution to include additional data specifically for a section of code. For example, you can set the TraceOutputOptions property for the console trace listener to TraceOptions.Callstack to add call stack information to the trace output.
@@ -107,25 +107,25 @@ namespace Switch {
           _get {return this->data->traceOutputOptions;},
           _set {this->data->traceOutputOptions = value;}
         };
-        
+
         /// @brief When overridden in a derived class, closes the output stream so it no longer receives tracing or debugging output.
         /// @remarks Use this method when the output is going to a file, such as to the TextWriterTraceListener. After a call to this method, you must reinitialize the object.
         virtual void Close() {this->Flush();}
-        
+
         /// @brief Emits an error message to the listener you create when you implement the TraceListener class.
         /// @param message A message to emit.
         /// @remarks The default behavior is to display the specified message in a message box when the application is running in a user-interface mode, and to the TraceListener instances in a TraceListenerCollection collection. By default, the TraceListenerCollection collection has an instance of a DefaultTraceListener. You can customize this behavior by adding a TraceListener to or removing one from the collection.
         virtual void Fail(const string& message) {WriteLine(string::Format("Fail: {0}", message));}
-        
+
         /// @brief Emits the specified error message.
         /// @param message A message to emit.
         /// @param detailMessage A detailed message to emit.
         /// @remarks The default behavior is to display the message and detailed message in a message box when the application is running in a user-interface mode, and to the TraceListener instances in a TraceListenerCollection collection. By default, the TraceListenerCollection collection has an instance of a DefaultTraceListener. You can customize this behavior by adding a TraceListener to or removing one from the collection.
         virtual void Fail(const string& message, const string& detailMessage) {WriteLine(string::Format("Fail: {0} {1}", message, detailMessage));}
-        
+
         /// @brief When overridden in a derived class, flushes the output buffer.
         virtual void Flush() {}
-        
+
         /// @brief Writes trace information, a data object and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -139,7 +139,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, data));
           this->WriteEventCache(eventCache);
         }
-        
+
         /// @brief Writes trace information, a data object and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -152,7 +152,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, data));
           this->WriteEventCache(eventCache);
         }
-        
+
         /// @brief Writes trace information, an array of data objects and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -166,7 +166,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, String::Join(", ", {data...})));
           this->WriteEventCache(eventCache);
         }
-        
+
         /// @brief Writes trace information, an array of data objects and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -179,7 +179,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, String::Join(", ", data)));
           this->WriteEventCache(eventCache);
         }
-        
+
         /// @brief Writes trace and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -191,7 +191,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} {1}: {2}", source, eventType, id));
           this->WriteEventCache(eventCache);
         }
-        
+
         /// @brief Writes trace information, a message, and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -204,7 +204,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, message));
           this->WriteEventCache(eventCache);
         }
-        
+
         /// @brief Writes trace information, a formatted array of objects and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -219,7 +219,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, string::Format(format, args...)));
           this->WriteEventCache(eventCache);
         }
-        
+
         /// @brief Writes trace information, a formatted array of objects and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -233,7 +233,7 @@ namespace Switch {
           this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, string::Format(format, args)));
           this->WriteEventCache(eventCache);
         }
-        
+
         /// @brief Writes trace information, a message, a related activity identity and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
@@ -246,49 +246,49 @@ namespace Switch {
           this->WriteLine(string::Format("{0} Transfert: {1} : {2}, relatedActivityId={3}", source, id, message, relatedActivityId));
           this->WriteEventCache(eventCache);
         }
-        
+
         /// @brief Writes the value of the object's ToString method to the listener you create when you implement the TraceListener class.
         /// @param o An Object whose fully qualified class name you want to write.
         virtual void Write(const Object& o) {Write(o.ToString());}
-        
+
         /// @brief Writes a category name and the value of the object's ToString method to the listener you create when you implement the TraceListener class.
         /// @param o An Object whose fully qualified class name you want to write.
         /// @param category A category name used to organize the output.
         virtual void Write(const Object& o, const string& category) {Write(o.ToString(), category);}
-        
+
         /// @brief When overridden in a derived class, writes the specified msg to the listener you create in the derived class.
         /// @param message A message to write.
         /// @note <b>to Inheritors:</b> When inheriting from this class, you must implement this method. To support an indentation, you should call WriteIndent if NeedIndent is true. If you need to indent the following line, you must reset NeedIndent to true.
         virtual void Write(const string& message) = 0;
-        
+
         /// @brief Writes a category name and a msg to the listener you create when you implement the TraceListener class.
         /// @param message A message to write.
         /// @param category  A category name used to organize the output.
         virtual void Write(const string& message, const string& category) {WriteLine(string::Format("{0}: {1}", category, message));}
-        
+
         /// @brief Writes the value of the object's ToString method to the listener you create when you implement the TraceListener class, followed by a line terminator.
         /// @param o An Object whose fully qualified class name you want to write.
         /// @remarks The typical line terminator you might implement is a carriage return followed by a line feed (\r\n).
         virtual void WriteLine(const Object& o) {WriteLine(o.ToString());}
-        
+
         /// @brief Writes a category name and the value of the object's ToString method to the listener you create when you implement the TraceListener class, followed by a line terminator.
         /// @param o An Object whose fully qualified class name you want to write.
         /// @param category A category name used to organize the output.
         /// @remarks The typical line terminator you might implement is a carriage return followed by a line feed (\r\n).
         virtual void WriteLine(const Object& o, const string& category) {WriteLine(o.ToString(), category);}
-        
+
         /// @brief When overridden in a derived class, writes a message to the listener you create in the derived class, followed by a line terminator.
         /// @param message A message to write.
         /// @remarks The typical line terminator you might implement is a carriage return followed by a line feed (\r\n).
         /// @note <b>to Inheritors:</b> When inheriting from this class, you must implement this method. To support an indentation, call WriteIndent if NeedIndent is true. To indent the following line, you must reset NeedIndent to true.
         virtual void WriteLine(const string& message) = 0;
-        
+
         /// @brief Writes a category name and a msg to the listener you create when you implement the TraceListener class, followed by a line terminator.
         /// @param message A message to write.
         /// @param category A category name used to organize the output.
         /// @remarks The typical line terminator you might implement is a carriage return followed by a line feed (\r\n).
         virtual void WriteLine(const string& message, const string& category) {WriteLine(string::Format("{0}: {1}", category, message));}
-        
+
       protected:
         /// @brief Gets or sets a value indicating whether to indent the output.
         /// @return bool true if the output should be indented; otherwise, false.
@@ -297,7 +297,7 @@ namespace Switch {
           _get {return this->data->needIndent;},
           _set {this->data->needIndent = value;}
         };
-        
+
         /// @brief Writes the indent to the listener you create when you implement this class, and resets the NeedIndent property to false.
         /// @remarks This method writes the indent and resets the NeedIndent property to false. Call this method if NeedIndent is true when you are overriding the Write and WriteLine methods. By default, this method uses blank spaces for indentation. The size of the indent is determined by the values of the IndentSize and IndentLevel properties. The IndentLevel property represents the number of times the indent of the size specified by the IndentSize property is applied. This method is called by the DefaultTraceListener and TextWriterTraceListener classes.
         virtual void WriteIndent() {
@@ -305,7 +305,7 @@ namespace Switch {
           for (int32 i = 0; i < this->data->indentLevel; ++i)
             this->Write(String(' ', this->data->indentSize));
         }
-        
+
       private:
         void WriteEventCache(const TraceEventCache& eventCache) {
           if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::ProcessId))
@@ -321,7 +321,7 @@ namespace Switch {
           if (Enum<TraceOptions>(this->data->traceOutputOptions).HasFlag(TraceOptions::Callstack))
             WriteLine(string::Format("{0}Callstack={1}", String(' ', this->data->indentSize), eventCache.CallStack));
         }
-        
+
         struct TraceListenerData {
           Collections::Specialized::StringDictionary attibutes;
           const TraceFilter* filter;
@@ -332,7 +332,7 @@ namespace Switch {
           bool needIndent = true;
           TraceOptions traceOutputOptions = TraceOptions::None;
         };
-        
+
         refptr<TraceListenerData> data = ref_new<TraceListenerData>();
       };
     }

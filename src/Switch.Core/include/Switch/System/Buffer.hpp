@@ -41,12 +41,12 @@ namespace Switch {
           throw ArgumentOutOfRangeException(_caller);
         if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || blk1Offset + count > Buffer::ByteLength(blk1) || blk2Offset + count > Buffer::ByteLength(blk2))
           throw ArgumentException(_caller);
-          
+
         const byte* blk1Ptr = (const byte*)blk1.GetData();
         const byte* blk2Ptr = (const byte*)blk2.GetData();
         return memcmp(&blk1Ptr[blk1Offset], &blk2Ptr[blk2Offset], count);
       }
-      
+
       /// @brief Compare a specified number of bytes from a first pointer starting at a particular offset to a second pointer starting at a particular offset.
       /// @param blk1 First pointer
       /// @param blk1Length First pointer size
@@ -66,11 +66,11 @@ namespace Switch {
       /// @exception ArgumentException The number of bytes in blk1 is less than blk1Offset plus count -or- The number of bytes in blk2 is less than blk2Offset plus count.
       template<typename T1, typename T2>
       static int32 BlockCompare(const T1* blk1, int64 blk1Length, int64 blk1Offset, const T2* blk2, int64 blk2Length, int64 blk2Offset, int64 count) {return BlockCompare((const void*)blk1, blk1Length, blk1Offset, (const void*)blk2, blk2Length, blk2Offset, count);}
-      
+
       /// @cond
       static int32 BlockCompare(const void* blk1, int64 blk1Length, int64 blk1Offset, const void* blk2, int64 blk2Length, int64 blk2Offset, int64 count);
       /// @endcond
-      
+
       /// @brief Copies a specified number of bytes from a source array starting at a particular offset to a destination array starting at a particular offset.
       /// @param src The source buffer.
       /// @param srcOffset The zero-based byte offset into src.
@@ -85,12 +85,12 @@ namespace Switch {
           throw ArgumentOutOfRangeException(_caller);
         if (!IsPrimitive<TSource>() || !IsPrimitive<TDestination>() || srcOffset + count > Buffer::ByteLength(src) || dstOffset + count > Buffer::ByteLength(dst))
           throw ArgumentException(_caller);
-          
+
         const byte* srcPtr = (const byte*)src.Data();
         byte* dstPtr = const_cast<byte*>((const byte*)dst.Data());
         memmove(&dstPtr[dstOffset], &srcPtr[srcOffset], count);
       }
-      
+
       /// @brief Copies a specified number of bytes from a src pointer starting at a particular offset to a destination pointer starting at a particular offset.
       /// @param src Source pointer
       /// @param srcLength Source size
@@ -103,7 +103,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException srcLength, srcOffset, dstLenth, dstOffset, or count is less than 0.
       /// @exception ArgumentException The number of bytes in src is less than srcOffset plus count -or- The number of bytes in dst is less than dstOffset plus count.
       static void BlockCopy(const void* src, int64 srcLength, int64 srcOffset, void* dst, int64 dstLenth, int64 dstOffset, int64 count);
-      
+
       /// @brief Fill a specified number of bytes to a destination buffer starting at a particular offset whith a specified value.
       /// @param filler The filler byte
       /// @param dst Target pointer
@@ -117,11 +117,11 @@ namespace Switch {
           throw ArgumentOutOfRangeException(_caller);
         if (!IsPrimitive<TDestination>() || dstOffset + count > Buffer::ByteLength(dst))
           throw ArgumentException(_caller);
-          
+
         byte* dstPtr = const_cast<byte*>((const byte*)dst.Data());
         memset(&dstPtr[dstOffset], filler, count);
       }
-      
+
       /// @brief Fill a specified number of bytes to a destination pointer starting at a particular offset whith a specified value.
       /// @param filler The filler byte
       /// @param dst Target pointer
@@ -132,7 +132,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException dstLenth, dstOffset, or count is less than 0.
       /// @exception ArgumentException The number of bytes in dst is less than dstOffset plus count.
       static void BlockFill(byte filler, void* dst, int64 dstLenth, int64 dstOffset, int64 count);
-      
+
       /// @brief Clear to 0 a specified number of bytes to a destination buffer starting at a particular offset.
       /// @param dst Target buffer.
       /// @param dstOffset The zero-based byte offset into dst.
@@ -141,7 +141,7 @@ namespace Switch {
       /// @exception ArgumentException st is ! primitive. - or - The number of bytes in dst is less than dstOffset plus count.
       template<typename TDestination>
       static void BlockZero(Array<TDestination>& dst, int32 dstOffset, int32 count) { BlockFill<TDestination>(0, dst, dstOffset, count); }
-      
+
       /// @brief Clear to 0 a specified number of bytes to a destination pointer starting at a particular offset.
       /// @param dst Target pointer.
       /// @param dstLenth Target size.
@@ -150,7 +150,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException dstLenth, dstOffset, or count is less than 0.
       /// @exception ArgumentException The number of bytes in dst is less than dstOffset plus count.
       static void BlockZero(void* dst, int64 dstLenth, int64 dstOffset, int64 count) { BlockFill(0, dst, dstLenth, dstOffset, count); }
-      
+
       /// @brief Returns the number of bytes in the specified array.
       /// @param array An array.
       /// @return The number of bytes in the array.
@@ -160,10 +160,10 @@ namespace Switch {
       static int32 ByteLength(const Array<T>& array) {
         if (!IsPrimitive<T>())
           throw ArgumentException(_caller);
-          
+
         return Convert::ToInt32((int64)sizeof(T) * array.Length);
       }
-      
+
       /// @brief Retrieves the byte at a specified location in a specified array.
       /// @param array An array.
       /// @param index A location in the array.
@@ -177,11 +177,11 @@ namespace Switch {
           throw ArgumentException(_caller);
         if (0 < index && index >= Buffer::ByteLength(array))
           throw ArgumentOutOfRangeException(_caller);
-          
+
         const byte* bytePtr = (const byte*)array.Data();
         return (byte)(bytePtr[index]);
       }
-      
+
       /// @brief Assigns a specified value to a byte at a particular location in a specified array.
       /// @param array An array.
       /// @param index A location in the array.
@@ -195,11 +195,11 @@ namespace Switch {
           throw ArgumentException(_caller);
         if (0 < index && index >= Buffer::ByteLength(array))
           throw ArgumentOutOfRangeException(_caller);
-          
+
         byte* bytePtr = const_cast<byte*>((const byte*)array.Data());
         bytePtr[index] = value;
       }
-      
+
     private:
       template<typename T>
       static bool IsPrimitive() {return (typeid(T) == typeid(bool)) || (typeid(T) == typeid(byte)) || (typeid(T) == typeid(char)) || (typeid(T) == typeid(double)) || (typeid(T) == typeid(int16)) || (typeid(T) == typeid(int32)) || (typeid(T) == typeid(void*)) | (typeid(T) == typeid(int64)) || (typeid(T) == typeid(sbyte)) || (typeid(T) == typeid(float)) || (typeid(T) == typeid(char32)) || (typeid(T) == typeid(uint16)) || (typeid(T) == typeid(uint32)) || (typeid(T) == typeid(uint64)) || (typeid(T) == typeid(void*));}

@@ -16,7 +16,7 @@ namespace Switch {
       class NullTextReader;
       class SynchronizedTextReader;
       /// @endcond
-      
+
       /// @brief Represents a reader that can read a sequential series of characters.
       class _export TextReader: public Object {
       public:
@@ -26,44 +26,44 @@ namespace Switch {
         /// @remarks ReadBlock method returns zero.
         /// @remarks ReadLine and ReadToEnd methods return a string Empty.
         static NullTextReader& Null();
-        
+
         /// @brief Closes the System::IO::TextReader and releases any system resources associated with the TextReader
         virtual void Close() {}
-        
+
         /// @brief Reads the next character without changing the state of the reader or the character source. Returns the next available character without actually reading it from the input stream.
         /// @return int32 An integer representing the next character to be read, or -1 if no more characters are available or the stream does not support seeking.
         /// @return available.
         virtual int32 Peek() const {return -1;}
-        
+
         /// @brief Reads the next character from the input stream and advances the character position by one character.
         /// @return The next character from the input stream, or -1 if no more characters are available.
         virtual int32 Read() {return -1;}
-        
+
         /// @brief Reads a line of characters from the current stream and returns the data as a string.
         /// @return The next line from the input stream, or the empty string if all characters have been read.
         virtual String ReadLine();
-        
+
         /// @brief Reads all characters from the current position to the end of the TextReader and returns them as one string.
         /// @return A string containing all characters from the current position to the end of the TextReader.
         /// @exception IO::IOException An I/O error occurs.
         virtual String ReadToEnd();
-        
+
         /// @brief Creates a thread-safe (synchronized) wrapper around the specified TextReader object.
         /// @param reader The TextReader object to synchronize.
         /// @return TextReader A thread-safe TextReader object.
         static SynchronizedTextReader Synchronised(TextReader& reader);
-        
+
       protected:
         /// @brief Initializes a new instance of the System::IO::TextReader class.
         TextReader() {}
       };
-      
+
       class NullTextReader : public TextReader {
       public:
         NullTextReader() {}
         int32 Read() override {return -1;}
       };
-      
+
       class SynchronizedTextReader : public TextReader {
       public:
         int32 Read() override {
@@ -71,7 +71,7 @@ namespace Switch {
           return this->reader.Read();
           return 0;
         }
-        
+
       private:
         friend class TextReader;
         explicit SynchronizedTextReader(System::IO::TextReader& reader) : reader(reader) {}

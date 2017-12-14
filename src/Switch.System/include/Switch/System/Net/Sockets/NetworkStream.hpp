@@ -33,7 +33,7 @@ namespace Switch {
           /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks The NetworkStream is created with read/write access to the specified Socket. The NetworkStream does not own the underlying Socket, so calling the Close method does not close the Socket.
           NetworkStream(const Socket& socket) : NetworkStream(socket, System::IO::FileAccess::ReadWrite) {}
-          
+
           /// @brief Creates a new instance of the NetworkStream class for the specified Socket.
           /// @param socket The Socket that the NetworkStream will use to send and receive data.
           /// @param ownsSocket Set to true to indicate that the NetworkStream will take ownership of the Socket; otherwise, false.
@@ -41,7 +41,7 @@ namespace Switch {
           /// @exception ObjectDisposedException The Socket has been closed.
           /// @remarks The NetworkStream is created with read/write access to the specified Socket. If the value of ownsSocket parameter is true, the NetworkStream takes ownership of the underlying Socket, and calling the Close method also closes the underlying Socket.
           NetworkStream(const Socket& socket, bool ownsSocket) : NetworkStream(socket, System::IO::FileAccess::ReadWrite) {this->data->ownsSocket = ownsSocket;}
-          
+
           /// @brief Creates a new instance of the NetworkStream class for the specified Socket with the specified access rights.
           /// @param socket The Socket that the NetworkStream will use to send and receive data.
           /// @param access A bitwise combination of the FileAccess values that specify the type of access given to the NetworkStream over the provided Socket.
@@ -50,7 +50,7 @@ namespace Switch {
           /// @remarks The NetworkStream is created with the specified access to the specified Socket. With this constructor, the NetworkStream does not own the underlying Socket, so calling the Close method does not close the underlying Socket.
           /// @remarks The access parameter sets the CanRead and CanWrite properties of the NetworkStream. If you specify Write, then the NetworkStream allows calls to the Write method. If you specify Read, then the NetworkStream allows calls to the Read method. If you specify ReadWrite, both method calls are allowed.
           NetworkStream(const Socket& socket, System::IO::FileAccess access);
-          
+
           /// @brief Creates a new instance of the NetworkStream class for the specified Socket with the specified access rights and the specified Socket ownership.
           /// @param socket The Socket that the NetworkStream will use to send and receive data.
           /// @param access A bitwise combination of the FileAccess values that specify the type of access given to the NetworkStream over the provided Socket.
@@ -60,29 +60,29 @@ namespace Switch {
           /// @remarks The NetworkStream is created with read/write access to the specified Socket. If the value of the ownsSocket parameter is true, the NetworkStream takes ownership of the underlying Socket, and calling the Close method also closes the underlying Socket.
           /// @remarks The access parameter sets the CanRead and CanWrite properties of the NetworkStream. If you specify Write, then the NetworkStream allows calls to the Write method. If you specify Read, then the NetworkStream allows calls to the Read method. If you specify ReadWrite, both method calls are allowed.
           NetworkStream(const Socket& socket, System::IO::FileAccess access, bool ownsSocket) : NetworkStream(socket, System::IO::FileAccess::ReadWrite) {this->data->ownsSocket = ownsSocket;}
-          
+
           /// @cond
           NetworkStream() {}
           NetworkStream(const NetworkStream& networkStream) : data(networkStream.data) {}
           ~NetworkStream();
           /// @endcond
-          
+
           /// @brief Closes the current stream and releases any resources (such as sockets and file handles) associated with the current stream.
           void Close() override;
-          
+
           /// @brief Gets a value that indicates whether data is available on the NetworkStream to be read.
           /// @return true if data is available on the stream to be read; otherwise, false.
           _property<bool, _readonly> DataAvailable {
             _get {return this->GetDataAvailable();}
           };
-          
+
           /// @brief Gets the underlying Socket.
           /// @return A Socket that represents the underlying network connection.
           /// @remarks Classes deriving from NetworkStream can use this property to get the underlying Socket. Use the underlying Socket returned from the Socket property if you require access beyond that which NetworkStream provides.
           _property<System::Net::Sockets::Socket, _readonly> Socket {
             _get {return this->data->streamSocket;}
           };
-          
+
           /// @brief Reads data from the NetworkStream.
           /// @param buffer An array of bytes. When this method returns, the buffer contains the specified byte array with the values between offset and (offset + count - 1) replaced by the bytes read from the current source.
           /// @param BufferLength The length of buffer. (Total number of elements).
@@ -92,10 +92,10 @@ namespace Switch {
           /// @remarks The Read operation reads as much data as is available, up to the number of bytes specified by the size parameter. If the remote host shuts down the connection, and all available data has been received, the Read method completes immediately and return zero bytes.
           /// @note Check to see if the NetworkStream is readable by calling the CanRead property. If you attempt to read from a NetworkStream that is not readable, you will get an IOException.
           int32 Read(Array<byte>& buffer, int32 offset, int32 count) override;
-          
+
           /// @brief Sets the current position of the stream to the given value. This method is not currently supported and always throws a NotSupportedException.
           int64 Seek(int64, System::IO::SeekOrigin) override {throw NotSupportedException(_caller);}
-          
+
           /// @brief Writes data to the NetworkStream.
           /// @param buffer An array of bytes. This method copies count bytes from buffer to the current stream.
           /// @param BufferLength The length of buffer. (Total number of elements).
@@ -105,7 +105,7 @@ namespace Switch {
           /// @note Check to see if the NetworkStream is writable by accessing the CanWrite property. If you attempt to write to a NetworkStream that is not writable, you will get an IOException.
           /// @note If you receive an IOException, check the InnerException property to determine if it was caused by a SocketException.
           void  Write(const Array<byte>& buffer, int32 offset, int32 count) override;
-          
+
         protected:
           /// @brief Gets or Sets a value that indicates whether the NetworkStream can be read.
           /// @param readable  true to indicate that the NetworkStream can be read; otherwise, false. The default value is true.
@@ -114,7 +114,7 @@ namespace Switch {
             _get {return this->GetReadable();},
             _set {this->SetReadable(value);}
           };
-          
+
           /// @brief Gets a value that indicates whether the NetworkStream is writable.
           /// @param writeable  true if data can be written to the stream; otherwise, false. The default value is true.
           /// @remarks You must derive from the NetworkStream class to use the Writeable property. If Writeable is true, NetworkStream allows calls to the Write method. You can also determine whether a NetworkStream is writable by checking the publicly accessible CanWrite property.
@@ -122,12 +122,12 @@ namespace Switch {
           _property<bool, _readonly> Writeable {
             _get {return this->GetWriteable();}
           };
-          
+
           virtual bool GetDataAvailable() const {return (this->data->streamSocket.Available() != 0);}
           virtual bool GetReadable() const {return this->data->readable;}
           virtual void SetReadable(bool readable) {this->data->readable = readable;}
           virtual bool GetWriteable() const {return this->data->writeable;}
-          
+
           /// @cond
           bool GetCanRead() const override {return this->data->readable;}
           bool GetCanSeek() const override {return false;}
@@ -141,7 +141,7 @@ namespace Switch {
           int32 GetWriteTimeout() const override {return this->data->streamSocket.SendTimeout();}
           void SetWriteTimeout(int32 timeout) override {this->data->streamSocket.SendTimeout = timeout;}
           /// @endcond
-          
+
         private:
           struct NetworkStreamData {
             System::Net::Sockets::Socket streamSocket;

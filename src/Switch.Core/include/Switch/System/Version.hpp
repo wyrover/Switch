@@ -28,7 +28,7 @@ namespace Switch {
       /// - Major = 0,
       /// - Minor = 0,
       Version() {}
-      
+
       /// @brief Initializes a new instance of the Version class using the specified major and minor values.
       /// @param major The major version number.
       /// @param minor The minor version number.
@@ -37,7 +37,7 @@ namespace Switch {
         if (major < 0 || minor < 0)
           throw ArgumentOutOfRangeException(_caller);
       }
-      
+
       /// @brief Initializes a new instance of the Version class using the specified major, minor and build values.
       /// @param major The major version number.
       /// @param minor The minor version number.
@@ -47,7 +47,7 @@ namespace Switch {
         if (major < 0 || minor < 0 || build < 0)
           throw ArgumentOutOfRangeException(_caller);
       }
-      
+
       /// @brief Initializes a new instance of the Version class using the specified major, minor, build and revision values.
       /// @param major The major version number.
       /// @param minor The minor version number.
@@ -58,7 +58,7 @@ namespace Switch {
         if (major < 0 || minor < 0 || build < 0 || revision < 0)
           throw ArgumentOutOfRangeException(_caller);
       }
-      
+
       /// @brief Initializes a new instance of the Version class using the specified string.
       /// @param version A string containing the major, minor, build, and revision numbers, where each number is delimited with a period character ('.').
       /// @exception ArgumentException version has fewer than two components or more than four components.
@@ -70,7 +70,7 @@ namespace Switch {
       /// @remarks major.minor[.build[.revision]]
       /// @remarks All defined components must be integers greater than or equal to 0. For example, if the major number is 6, the minor number is 2, the build number is 1, and the revision number is 3, then version should be "6.2.1.3".
       Version(const string& version) {this->operator=(Version::Parse(version));}
-      
+
       /// @cond
       Version(const Version& version) : major(version.major), minor(version.minor), build(version.build), revision(version.revision) {}
       Version& operator =(const Version& version) {
@@ -80,22 +80,22 @@ namespace Switch {
         this->revision = version.revision;
         return *this;
       }
-      
+
       friend std::ostream& operator<<(std::ostream& output, const Version& value) {return output << value.ToString();}
       /// @endcond
-      
+
       /// @brief Gets the value of the build component of the version number for the current Version object.
       /// @return int32 The build number, or -1 if the build number is undefined.
       _property<int32, _readonly> Build {
         _get {return this->build;}
       };
-      
+
       /// @brief Gets the value of the major component of the version number for the current Version object.
       /// @return int32 The major version number.
       _property<int32, _readonly> Major {
         _get {return this->major;}
       };
-      
+
       /// @brief Gets the high 16 bits of the revision number.
       /// @return int16 A 16-bit signed integer represented the high 16 bits of the revision number, or -1 if the revision number is undefined.
       /// @remarks Suppose you release an interim version of your application to temporarily correct a problem until you can release a permanent solution.
@@ -105,13 +105,13 @@ namespace Switch {
       _property<int16, _readonly> MajorRevision {
         _get {return (int16)((this->revision & 0xFFFF0000) >> 16);}
       };
-      
+
       /// @brief Gets the value of the minor component of the version number for the current Version object.
       /// @return int32 The minor version number.
       _property<int32, _readonly> Minor {
         _get {return this->minor;}
       };
-      
+
       /// @brief Gets the low 16 bits of the revision number.
       /// @return int16 A 16-bit signed integer represented the low 16 bits of the revision number, or -1 if the revision number is undefined.
       /// @remarks Suppose you release an interim version of your application to temporarily correct a problem until you can release a permanent solution.
@@ -121,17 +121,17 @@ namespace Switch {
       _property<int16, _readonly> MinorRevision {
         _get {return (int16)(this->revision & 0x0000FFFF);}
       };
-      
+
       /// @brief Gets the value of the revision component of the version number for the current Version object.
       /// @return int32 The revision number, or -1 if the revision number is undefined.
       _property<int32, _readonly> Revision {
         _get {return this->revision;}
       };
-      
+
       /// @brief Returns a new Version object whose value is the same as the current Version object.
       /// @return object* A new object whose values are a copy of the current Version object.
       refptr<object> Clone() const override {return ref_new<Version>(*this);}
-      
+
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param obj An object to compare with this instance.
       /// @return int32 A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings:
@@ -143,7 +143,7 @@ namespace Switch {
           return 1;
         return CompareTo((const Version&)obj);
       }
-      
+
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
       /// @param value An Version to compare with this instance.
       /// @return int32 A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings:
@@ -161,12 +161,12 @@ namespace Switch {
         if (this->revision > value.revision) return 1;
         return 0;
       }
-      
+
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param value The Version to compare with the current object.
       /// @return bool true if the specified value is equal to the current object. otherwise, false.
       bool Equals(const Version& value) const {return CompareTo(value) == 0;}
-      
+
       /// @brief Determines whether this instance of Version and a specified object, which must also be a Version object, have the same value.
       /// @param obj The object to compare with the current object.
       /// @return bool true if the specified object is equal to the current object. otherwise, false.
@@ -175,7 +175,7 @@ namespace Switch {
           return false;
         return Equals((const Version&)obj);
       }
-      
+
       /// @brief Serves as a hash function for a particular type.
       /// @return int32 A hash code for the current object.
       int32 GetHashCode() const override {
@@ -186,7 +186,7 @@ namespace Switch {
           hash ^= this->revision;
         return hash;
       }
-      
+
       /// @brief Parse a version string and fill the object
       /// @param version The string version
       /// @return Version a Version object
@@ -199,7 +199,7 @@ namespace Switch {
         }
         throw ArgumentException(_caller);
       }
-      
+
       static bool TryParse(const String& version, Version& result) {
         try {
           result = Parse(version);
@@ -208,12 +208,12 @@ namespace Switch {
           return false;
         }
       }
-      
-      
+
+
       /// @brief Returns a string that represents the current object.
       /// @return string A string that represents the current object.
       String ToString() const override {return ToString(2 + (this->build != -1 ? 1 : 0) + (this->revision != -1 ? 1 : 0));}
-      
+
       String ToString(int32 fieldCount) const {
         if (fieldCount < 0 || fieldCount > 4 || (fieldCount >= 3 && this->build == -1) || (fieldCount == 4 && this->revision == -1))
           throw ArgumentOutOfRangeException(_caller);
@@ -228,7 +228,7 @@ namespace Switch {
           result += string::Format(".{0}", this->revision);
         return result;
       }
-      
+
       /// @brief Populates a SerializationInfo with the data needed to serialize the target object.
       /// @param info The SerializationInfo to populate with data.
       /// @remarks Any objects that are included in the SerializationInfo are automatically tracked and serialized by the formatter.
@@ -240,7 +240,7 @@ namespace Switch {
         info.AddValue("Build", this->build);
         info.AddValue("Revision", this->revision);
       }
-      
+
     private :
       int32 major = 0;
       int32 minor = 0;

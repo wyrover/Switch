@@ -8,7 +8,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       string colors[] = {"Red", "Blue", "Green", "Yellow", "Gray"};
-      
+
       for (string item : colors)
         Console::WriteLine(item);
     }

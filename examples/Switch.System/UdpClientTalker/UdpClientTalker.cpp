@@ -13,12 +13,12 @@ namespace Examples {
     static void Main() {
       IPEndPoint sendingEndPoint(IPAddress::Loopback, 8082);
       UdpClient talker;
-      
+
       Console::WriteLine("Press Ctrl+C to quit...");
       int count = Random().Next(1, 20000);
       while (true) {
         string textToSend = string::Format("{{\"id\": \"{0}\"}}", count++);
-        
+
         try {
           Console::WriteLine("Sending broadcast {0} to {1}", textToSend, sendingEndPoint);
           talker.Send(Encoding::UTF8()->GetBytes(textToSend), sendingEndPoint);

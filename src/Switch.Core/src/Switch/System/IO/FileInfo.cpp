@@ -46,22 +46,22 @@ void FileInfo::Delete() {
 FileInfo FileInfo::CopyTo(const string& destFileName) {
   if (!Exists())
     throw FileNotFoundException(_caller);
-    
+
   if (File::Exists(destFileName))
     throw IOException(_caller);
-    
+
   string fullPathDestFileName = Path::GetFullPath(destFileName);
-  
+
   FILE* source = fopen(this->fullPath.ToCCharArray().Data(), "rb");
   if (source == null)
     throw IOException(_caller);
-    
+
   FILE* target = fopen(fullPathDestFileName.ToCCharArray().Data(), "wb");
   if (target == null) {
     fclose(source);
     throw IOException(_caller);
   }
-  
+
   int32 count = 0;
   do {
     byte buffer[1024];
@@ -69,10 +69,10 @@ FileInfo FileInfo::CopyTo(const string& destFileName) {
     if (count > 0)
       fwrite(buffer, 1, count, target);
   } while (count == 1024);
-  
+
   fclose(source);
   fclose(target);
-  
+
   return FileInfo(fullPathDestFileName);
 }
 
@@ -88,14 +88,14 @@ FileInfo FileInfo::CopyTo(const string& destFileName, bool overwrite) {
 void FileInfo::MoveTo(const string& destFileName) {
   if (!Exists())
     throw FileNotFoundException(_caller);
-    
+
   if (!Path::HasExtension(destFileName))
     throw ArgumentException(_caller);
-    
+
   string fullPathDestFileName = Path::GetFullPath(destFileName);
   if (Native::DirectoryApi::RenameFile(this->fullPath, fullPathDestFileName) != 0)
     throw IOException(_caller);
-    
+
   this->fullPath = fullPathDestFileName;
 }
 
