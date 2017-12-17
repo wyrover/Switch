@@ -26,8 +26,7 @@ void Native::ConsoleApi::Clrscr() {
   DWORD nbCharsWritten = 0;
   FillConsoleOutputAttribute(GetStdHandle(STD_OUTPUT_HANDLE), csbi.wAttributes, csbi.dwSize.X * csbi.dwSize.Y, coord, &nbCharsWritten);
   FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ' ', csbi.dwSize.X * csbi.dwSize.Y, coord, &nbCharsWritten);
-  SetCursorLeft(0);
-  SetCursorTop(0);
+  SetCursorPosition(0, 0);
 }
 
 ConsoleColor Native::ConsoleApi::GetBackgroundColor() {
