@@ -630,16 +630,20 @@ System::Collections::Generic::Dictionary<int32, System::ConsoleSpecialKey> Nativ
 }
 
 string Native::ConsoleApi::GetTitle() {
+  /// @todo get console get title on linux and macOS
+  /*
+   * Didn't work correctly!
   printf("\x1b[21t");
   fflush(stdout);
-  
+
   if (!terminal.KeyAvailable())
     return ::title;
 
   std::string title;
   for (char c = terminal.Getch(); terminal.KeyAvailable(); c = terminal.Getch())
     title.push_back(c);
-  return title;
+  return title;*/
+  return ::title;
 }
 
 int32 Native::ConsoleApi::GetWindowLeft() {
