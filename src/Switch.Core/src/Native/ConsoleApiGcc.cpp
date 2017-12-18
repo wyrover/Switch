@@ -359,6 +359,7 @@ namespace {
   };
 
   KeyInfo::InputList KeyInfo::inputs;
+  string title;
 
   std::map<std::string, KeyInfo::KeyKeyChar> KeyInfo::keys = {
     {"\x7F", {8, 0, false, false, false}}, // Backspace
@@ -518,12 +519,14 @@ const int32 KIOCSOUND = 0x4B2F;
 
 void Native::ConsoleApi::Beep(int32 frequency, int32 duration) {
   int32 fd = open("/dev/console", O_WRONLY);
-  if (fd == -1)
+  if (fd == -1) {
     printf("\a");
-  else {
-    if (ioctl(fd, KIOCSOUND, (int32)(1193180 / frequency)) < 0)
+    fflush(stdout);
+  } else {
+    if (ioctl(fd, KIOCSOUND, (int32)(1193180 / frequency)) < 0) {
       printf("\a");
-    else {
+      fflush(stdout);
+    } else {
       usleep(1000 * duration);
       ioctl(fd, KIOCSOUND, 0);
     }
@@ -532,8 +535,10 @@ void Native::ConsoleApi::Beep(int32 frequency, int32 duration) {
 }
 
 void Native::ConsoleApi::Clrscr() {
-  if (Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported()) {
     printf("\x1b[H\x1b[2J");
+    fflush(stdout);
+  }
 }
 
 ConsoleColor Native::ConsoleApi::GetBackgroundColor() {
@@ -625,7 +630,16 @@ System::Collections::Generic::Dictionary<int32, System::ConsoleSpecialKey> Nativ
 }
 
 string Native::ConsoleApi::GetTitle() {
-  return "";
+  printf("\x1b[21t");
+  fflush(stdout);
+  
+  if (!terminal.KeyAvailable())
+    return ::title;
+
+  std::string title;
+  for (char c = terminal.Getch(); terminal.KeyAvailable(); c = terminal.Getch())
+    title.push_back(c);
+  return title;
 }
 
 int32 Native::ConsoleApi::GetWindowLeft() {
@@ -675,6 +689,7 @@ bool Native::ConsoleApi::ResetColor() {
   if (Terminal::IsAnsiSupported()) {
     printf("\033[49m");
     printf("\033[39m");
+    fflush(stdout);
   }
   return true;
 }
@@ -682,8 +697,10 @@ bool Native::ConsoleApi::ResetColor() {
 bool Native::ConsoleApi::SetBackgroundColor(ConsoleColor color) {
   static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[40m"}, {(int32)ConsoleColor::DarkBlue, "\033[44m"}, {(int32)ConsoleColor::DarkGreen, "\033[42m"}, {(int32)ConsoleColor::DarkCyan, "\033[46m"}, {(int32)ConsoleColor::DarkRed, "\033[41m"}, {(int32)ConsoleColor::DarkMagenta, "\033[45m"}, {(int32)ConsoleColor::DarkYellow, "\033[43m"}, {(int32)ConsoleColor::Gray, "\033[47m"}, {(int32)ConsoleColor::DarkGray, "\033[100m"}, {(int32)ConsoleColor::Blue, "\033[104m"}, {(int32)ConsoleColor::Green, "\033[102m"}, {(int32)ConsoleColor::Cyan, "\033[106m"}, {(int32)ConsoleColor::Red, "\033[101m"}, {(int32)ConsoleColor::Magenta, "\033[105m"}, {(int32)ConsoleColor::Yellow, "\033[103m"}, {(int32)ConsoleColor::White, "\033[107m"}};
   backColor = color;
-  if (Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported()) {
     printf("%s", colors[(int32)backColor].c_str());
+    fflush(stdout);
+  }
   return true;
 }
 
@@ -698,8 +715,10 @@ bool Native::ConsoleApi::SetBufferWidth(int32 width) {
 }
 
 bool Native::ConsoleApi::SetCursorPosition(int32 left, int32 top) {
-  if (Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported()) {
     printf("\x1b[%d;%df", top + 1, left + 1);
+    fflush(stdout);
+  }
   return true;
 }
 
@@ -709,13 +728,16 @@ void Native::ConsoleApi::SetCursorSize(int32 size) {
       printf("\x1b[4 q");
     else
       printf("\x1b[2 q");
+    fflush(stdout);
   }
 }
 
 void Native::ConsoleApi::SetCursorVisible(bool visible) {
   cursorVisible = visible;
-  if (Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported()) {
     printf(cursorVisible ? "\x1b[?25h" : "\x1b[?25l");
+    fflush(stdout);
+  }
 }
 
 void Native::ConsoleApi::SetEchoVisible(bool visible) {
@@ -731,8 +753,10 @@ void Native::ConsoleApi::SetEchoVisible(bool visible) {
 bool Native::ConsoleApi::SetForegroundColor(ConsoleColor color) {
   static System::Collections::Generic::Dictionary<int32, string> colors {{(int32)ConsoleColor::Black, "\033[30m"}, {(int32)ConsoleColor::DarkBlue, "\033[34m"}, {(int32)ConsoleColor::DarkGreen, "\033[32m"}, {(int32)ConsoleColor::DarkCyan, "\033[36m"}, {(int32)ConsoleColor::DarkRed, "\033[31m"}, {(int32)ConsoleColor::DarkMagenta, "\033[35m"}, {(int32)ConsoleColor::DarkYellow, "\033[33m"}, {(int32)ConsoleColor::Gray, "\033[37m"}, {(int32)ConsoleColor::DarkGray, "\033[90m"}, {(int32)ConsoleColor::Blue, "\033[94m"}, {(int32)ConsoleColor::Green, "\033[92m"}, {(int32)ConsoleColor::Cyan, "\033[96m"}, {(int32)ConsoleColor::Red, "\033[91m"}, {(int32)ConsoleColor::Magenta, "\033[95m"}, {(int32)ConsoleColor::Yellow, "\033[93m"}, {(int32)ConsoleColor::White, "\033[97m"}};
   foreColor = color;
-  if (Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported()) {
     printf("%s", colors[(int32)foreColor].c_str());
+    fflush(stdout);
+  }
   return true;
 }
 
@@ -747,9 +771,11 @@ bool Native::ConsoleApi::SetOutputCodePage(int32 codePage) {
 }
 
 bool Native::ConsoleApi::SetTitle(const string& title) {
-  /// @todo set window title on linux and macOS
-  if (Terminal::IsAnsiSupported())
-    printf("\x1b[0;%s\x7", title.c_str());
+  ::title = title;
+  if (Terminal::IsAnsiSupported()) {
+    printf("\x1b]0;%s\x7", title.c_str());
+    fflush(stdout);
+  }
   return true;
 }
 
@@ -759,8 +785,10 @@ bool Native::ConsoleApi::SetWindowLeft(int32 height) {
 }
 
 bool Native::ConsoleApi::SetWindowHeight(int32 height) {
-  if (Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported()) {
     printf("\x1b[8;%d;%dt", height, GetWindowWidth());
+    fflush(stdout);
+  }
   return true;
 }
 
@@ -770,8 +798,10 @@ bool Native::ConsoleApi::SetWindowTop(int32 height) {
 }
 
 bool Native::ConsoleApi::SetWindowWidth(int32 width) {
-  if (Terminal::IsAnsiSupported())
+  if (Terminal::IsAnsiSupported()) {
     printf("\x1b[8;%d;%dt", GetWindowHeight(), width);
+    fflush(stdout);
+  }
   return true;
 }
 
