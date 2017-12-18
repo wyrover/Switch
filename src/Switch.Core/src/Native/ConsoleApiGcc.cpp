@@ -32,6 +32,10 @@ namespace {
 
     ~Terminal() {
       tcsetattr(0, TCSANOW, &this->backupedTermioAttributes);
+      if (IsAnsiSupported()) {
+        printf("\x1b]0;\x7");
+        fflush(stdout);
+      }
     }
 
     int32 Getch() {
@@ -632,7 +636,7 @@ System::Collections::Generic::Dictionary<int32, System::ConsoleSpecialKey> Nativ
 string Native::ConsoleApi::GetTitle() {
   printf("\x1b[21t");
   fflush(stdout);
-  
+
   if (!terminal.KeyAvailable())
     return ::title;
 
