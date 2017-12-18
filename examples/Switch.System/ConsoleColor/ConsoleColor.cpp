@@ -52,7 +52,7 @@ namespace Examples {
       Console::WriteLine("                                    Switch                                     ");
       Console::ForegroundColor = ConsoleColor::DarkGray;
       Console::WriteLine("                                                                               ");
-      Console::WriteLine("        Native C++ port of .Net Framework on macOS, Linux and Windows.         ");
+      Console::WriteLine("        Native C++ port of .Net Framework on Windows, macOS and Linux.         ");
       Console::WriteLine("                                                                               ");
       Console::ForegroundColor = ConsoleColor::DarkRed;
       Console::WriteLine("===============================================================================");
@@ -107,6 +107,6 @@ _startup(Examples::Program);
 //
 //                                    Switch
 //
-//         Native C++ port of .Net Framework on macOS, Linux and Windows.
+//         Native C++ port of .Net Framework on Windows, macOS and Linux.
 //
 // ===============================================================================
