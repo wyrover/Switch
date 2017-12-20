@@ -5,6 +5,7 @@
 #include "../../Property.hpp"
 #include "../../Static.hpp"
 #include "../../Types.hpp"
+#include "../TimeSpan.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -19,6 +20,7 @@ namespace Switch {
         /// @brief A constant used to specify an infinite waiting period. This field is constant.
         /// @remarks The value of this constant is -1. For threading methods that accept a timeout parameter, such as Thread::Sleep(int32) and Thread::Join(int32), this value is used to suppress timeout behavior.
         static constexpr int32 Infinite = -1;
+        static const TimeSpan InfiniteTimeSpan;
       };
     }
   }

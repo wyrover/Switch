@@ -167,12 +167,6 @@ else()
 endif()
 
 #_______________________________________________________________________________________________________________________
-#                                                                                                   executable extension
-if (WIN32)
-  set(EXECUTABLE_EXTENSION .exe)
-endif()
-
-#_______________________________________________________________________________________________________________________
 #                                                                                                      Switch build type
 if (CMAKE_BUILD_TYPE)
   set(SWITCH_BUILD_TYPE ${CMAKE_BUILD_TYPE})
