@@ -19,14 +19,12 @@ root
   +- docs
   |    +- Diagrams
   |    |    +- UML
-  |    +- Doxygen
   |    +- Pictures
   +- examples
   |    +- DesignPatterns
   |    +- Switch.System
   |    +- Switch.System.Drawing
   |    +- ...
-  +- lib
   +- scripts
   |    +- cmake
   |    +- install
@@ -66,13 +64,9 @@ root
 
 **root/docs/Diagrams/UML** folder contains the UML diagrams used to illustrate the markdown documentation and website.
 
-**root/docs/Doxygen** folder contains the specific files for Reference guide doxygen generation.
-
 **root/docs/Pictures** folder contains the pictures used to illustrate the markdown documentation and website.
 
 **root/examples** folder contains examples to show how to used Switch libraries.
-
-**root/lib** folder contains builded libraries. This folder is automaticaly create by the build.
 
 **root/scripts/cmake** folder contains scripts needed by cmake.
 
