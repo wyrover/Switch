@@ -553,33 +553,40 @@ namespace {
     EXPECT_EQ(1, count[2]);
     EXPECT_EQ(1, count[3]);
   }
-  /*
+
   TEST(StdUnorderedSet, UsingSimpleStruct) {
     struct SimpleStruct {
-      SimpleStruct() : item(0) {}
+      SimpleStruct() = default;
       SimpleStruct(int item) : item(item) {}
       int item = 0;
       bool operator==(const SimpleStruct& value) const {return this->item == value.item;}
     };
 
-    std::unordered_set<SimpleStruct> items = {SimpleStruct(0), SimpleStruct(1), SimpleStruct(2)};
+    struct HashSimpleStruct {
+      size_t operator()(SimpleStruct value) const {return static_cast<size_t>(value.item);}
+    };
+
+    std::unordered_set<SimpleStruct, HashSimpleStruct> items = {SimpleStruct(0), SimpleStruct(1), SimpleStruct(2)};
     ASSERT_TRUE(items.find({0}) != items.end());
     ASSERT_TRUE(items.find({1}) != items.end());
     ASSERT_TRUE(items.find({2}) != items.end());
     ASSERT_FALSE(items.find({3}) != items.end());
   }
 
-  TEST(HashSet, UsingSimpleStruct) {
-    struct SimpleStruct {
+  TEST(StdUnorderedSet, UsingSimpleObject) {
+    struct SimpleObject : public object {
+      SimpleObject() = default;
+      SimpleObject(int item) : item(item) {}
       int item = 0;
-      bool operator==(const SimpleStruct& value) const {return this->item == value.item;}
+      bool Equals(const object& value) const override {return is<SimpleObject>(value) && this->item == as<SimpleObject>(value).item;}
+      int32 GetHashCode() const override {return this->item;}
     };
 
-    HashSet<SimpleStruct> items = {{0}, {1}, {2}};
+    HashSet<SimpleObject> items = {{0}, {1}, {2}};
     ASSERT_TRUE(items.Contains({0}));
     ASSERT_TRUE(items.Contains({1}));
     ASSERT_TRUE(items.Contains({2}));
     ASSERT_FALSE(items.Contains({3}));
   }
-   */
 }
+
