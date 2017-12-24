@@ -71,6 +71,10 @@ namespace Switch {
         /// @return bool true if the specified object is equal to the current object. otherwise, false.
         bool Equals(const object& obj) const override;
 
+        /// @brief Serves as a hash function for a particular type.
+        /// @return int32 A hash code for the current Object.
+        int32 GetHashCode() const override {return this->x ^ this->y;}
+
         /// @brief Tests whether this Point class has X and Y of 0.
         /// @return bool Returns true  when this Point class has both a X and Y of 0; otherwise, false.
         bool IsEmpty() const { return this->x == Empty().x && this->y == Empty().y; }

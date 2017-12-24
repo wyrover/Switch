@@ -89,5 +89,9 @@ namespace SwitchUnitTests {
     ASSERT_EQ(50, Drawing::Point::Subtract(Drawing::Point(54, 987), Drawing::Size(4, 87)).X());
     ASSERT_EQ(900, Drawing::Point::Subtract(Drawing::Point(54, 987), Drawing::Size(4, 87)).Y());
   }
+
+  TEST(PointTest, GetHashCode) {
+    ASSERT_EQ(10 ^ 100, Drawing::Point(10, 100).GetHashCode());
+  }
 }
 
