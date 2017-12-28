@@ -32,7 +32,7 @@ if [[ "$OSTYPE" == *"Darwin"* ]]; then
   cmake --build . --target install --config Debug
   cmake --build . --target install --config Release
 elif [[ "$OSTYPE" == *"MINGW64"* ]]; then
-  cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local "$@"
+  cmake .. -DCMAKE_INSTALL_PREFIX=/c/usr/local "$@"
   cmake --build . --target install --config Debug
   cmake --build . --target install --config Release
 else
@@ -51,7 +51,7 @@ if [[ "$OSTYPE" == *"Darwin"* ]]; then
   cmake ../../examples -G "Xcode" "$@"
   open Examples.xcodeproj
 elif [[ "$OSTYPE" == *"MINGW64"* ]]; then
-  cmake ../../examples -DCMAKE_INSTALL_PREFIX=/usr/local "$@"
+  cmake ../../examples -DCMAKE_INSTALL_PREFIX=/c/usr/local "$@"
   start Examples.sln
 else
   cmake ../../examples -DCMAKE_BUILD_TYPE=Debug  "$@"
