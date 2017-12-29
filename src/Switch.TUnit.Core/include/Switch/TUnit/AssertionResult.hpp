@@ -2,6 +2,10 @@
 /// @brief Contains Switch::TUnit::AssertionResult class.
 #pragma once
 
+#if defined(WIN32)
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include <Switch/System/String.hpp>
 #include <gtest/gtest.h>
 

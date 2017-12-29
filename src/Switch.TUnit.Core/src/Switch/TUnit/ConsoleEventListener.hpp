@@ -2,6 +2,10 @@
 /// @brief Contains Switch::TUnit::ConsoleEventListener class.
 #pragma once
 
+#if defined(WIN32)
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include <gtest/gtest.h>
 #include <Switch/System/ConsoleColor.hpp>
 #include <Switch/System/String.hpp>
