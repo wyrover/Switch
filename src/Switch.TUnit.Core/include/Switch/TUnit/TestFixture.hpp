@@ -2,6 +2,8 @@
 /// @brief Contains Switch::TUnit::TestFixture class.
 #pragma once
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <gtest/gtest.h>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
