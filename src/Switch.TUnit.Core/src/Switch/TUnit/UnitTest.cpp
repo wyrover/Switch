@@ -1,5 +1,5 @@
 #if defined(WIN32)
-#define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING
+#define _CRT_NONSTDC_NO_WARNINGS
 #endif
 
 #include <Switch/TUnit/UnitTest.hpp>
