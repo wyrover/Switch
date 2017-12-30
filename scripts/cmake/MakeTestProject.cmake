@@ -1,6 +1,6 @@
 macro(MakeTestProject)
   if (MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj /wd4996")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
   endif()
 
   file(GLOB_RECURSE SOURCE_FILES "*.hpp" "*.cpp")

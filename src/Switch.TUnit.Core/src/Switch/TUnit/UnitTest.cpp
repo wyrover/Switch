@@ -1,7 +1,3 @@
-#if defined(WIN32)
-#define _CRT_NONSTDC_NO_WARNINGS
-#endif
-
 #include <Switch/TUnit/UnitTest.hpp>
 #include <Switch/System/Console.hpp>
 #include <Switch/System/Environment.hpp>

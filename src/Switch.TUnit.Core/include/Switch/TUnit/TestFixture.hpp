@@ -2,10 +2,6 @@
 /// @brief Contains Switch::TUnit::TestFixture class.
 #pragma once
 
-#if defined(WIN32)
-#define _CRT_NONSTDC_NO_WARNINGS
-#endif
-
 #include <gtest/gtest.h>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
