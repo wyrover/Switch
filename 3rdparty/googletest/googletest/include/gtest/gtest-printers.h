@@ -597,6 +597,8 @@ void PrintTupleTo(const T& t, ::std::ostream* os);
 // regardless of whether tr1::tuple is implemented using the
 // non-standard variadic template feature or not.
 
+GTEST_DISABLE_MSC_WARNINGS_PUSH_(4996)
+  
 inline void PrintTo(const ::std::tr1::tuple<>& t, ::std::ostream* os) {
   PrintTupleTo(t, os);
 }
@@ -662,6 +664,9 @@ void PrintTo(
     ::std::ostream* os) {
   PrintTupleTo(t, os);
 }
+
+GTEST_DISABLE_MSC_WARNINGS_POP_(4996)
+  
 #endif  // GTEST_HAS_TR1_TUPLE
 
 #if GTEST_HAS_STD_TUPLE_
