@@ -665,7 +665,7 @@ void PrintTo(
   PrintTupleTo(t, os);
 }
 
-GTEST_DISABLE_MSC_WARNINGS_POP_(4996)
+GTEST_DISABLE_MSC_WARNINGS_POP_()
   
 #endif  // GTEST_HAS_TR1_TUPLE
 
@@ -874,6 +874,7 @@ template <typename TupleT>
 struct TuplePolicy;
 
 #if GTEST_HAS_TR1_TUPLE
+GTEST_DISABLE_MSC_WARNINGS_PUSH_(4996)
 template <typename TupleT>
 struct TuplePolicy {
   typedef TupleT Tuple;
@@ -891,6 +892,7 @@ struct TuplePolicy {
 };
 template <typename TupleT>
 const size_t TuplePolicy<TupleT>::tuple_size;
+GTEST_DISABLE_MSC_WARNINGS_POP_()
 #endif  // GTEST_HAS_TR1_TUPLE
 
 #if GTEST_HAS_STD_TUPLE_
