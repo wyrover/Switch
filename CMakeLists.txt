@@ -1,13 +1,13 @@
-#_______________________________________________________________________________________________________________________
-#                                                                                                                Project
+#_________________________________________________________________________________________
+#                                                                                  Project
 cmake_minimum_required(VERSION 3.2)
 project(Switch VERSION 0.5.2)
 set(PROJECT_BRIEF "Native C++ port of .Net Framework on Windows, macOS and Linux.")
 set(PROJECT_AUTHOR gammasoft71)
 set(PROJECT_LOGO "${CMAKE_CURRENT_SOURCE_DIR}/docs/Pictures/Switch80x80.png")
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                          Build Options
+#_________________________________________________________________________________________
+#                                                                            Build Options
 option(BUILD_SWITCH_CORE "Build Switch.Core library" ON)
 option(BUILD_SWITCH_SYSTEM "Build Switch.System library" ON)
 option(BUILD_SWITCH_SYSTEM_CORE "Build Switch.System.Core library" ON)
@@ -19,29 +19,29 @@ option(BUILD_SWITCH_TUNIT_FRAMEWORK "Build Switch.TUnit.Framework library" OFF)
 option(BUILD_SWITCH_TUNIT_MAIN "Build Switch.TUnit.Main library" ON)
 option(BUILD_TESTS "Build Switch tests" OFF)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                          Tools Options
+#_________________________________________________________________________________________
+#                                                                            Tools Options
 option(DOWNLOAD_ASTYLE "Download and build astyle from Github" OFF)
 option(DOWNLOAD_CPPCHECK "Download and build cppcheck from Github" OFF)
 option(DOWNLOAD_DOXYGEN "Download and build doxygen from Github" OFF)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                        Verbose Options
+#_________________________________________________________________________________________
+#                                                                          Verbose Options
 option(ENABLE_VERBOSE "Enable verbose" OFF)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                       Coverage Options
+#_________________________________________________________________________________________
+#                                                                         Coverage Options
 option(ENABLE_COVERAGE "Enable code coverage" OFF)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                   Dynamic test Options
+#_________________________________________________________________________________________
+#                                                                     Dynamic test Options
 # remarks: For the next three options, enable only one option at a time.
 option(ENABLE_ASAN "Enable Google Address Sanitizer" OFF)
 option(ENABLE_TSAN "Enable Google Thread Sanitizer" OFF)
 option(ENABLE_USAN "Enable Google Undefined Sanitizer" OFF)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                          astyle command line arguments
+#_________________________________________________________________________________________
+#                                                            astyle command line arguments
 list(APPEND ASTYLE_ARGS
   --style=java
   --lineend=linux
@@ -77,9 +77,8 @@ list(APPEND ASTYLE_ARGS
   ${CMAKE_SOURCE_DIR}/examples/*.cpp
   )
 
-#_______________________________________________________________________________________________________________________
-#                                                                                        cppcheck command line arguments
-#--enable=warning,style,performance,portability,unusedFunction
+#_________________________________________________________________________________________
+#                                                          cppcheck command line arguments
 list(APPEND CPPCHECK_ARGS
   --enable=warning,style
   --error-exitcode=1
@@ -100,18 +99,19 @@ list(APPEND CPPCHECK_ARGS
   ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Framework/src
   ${CMAKE_SOURCE_DIR}/src/Switch.TUnit.Main/src
   )
+#--enable=warning,style,performance,portability,unusedFunction
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                           standard C++
+#_________________________________________________________________________________________
+#                                                                             standard C++
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                            enable USE_FOLDERS property
+#_________________________________________________________________________________________
+#                                                              enable USE_FOLDERS property
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                   coverage build flags
+#_________________________________________________________________________________________
+#                                                                     coverage build flags
 if (ENABLE_COVERAGE AND APPLE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g ")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
@@ -125,8 +125,8 @@ elseif(ENABLE_COVERAGE AND UNIX)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 endif()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                   Google Address Sanitizer build flags
+#_________________________________________________________________________________________
+#                                                     Google Address Sanitizer build flags
 if (ENABLE_ASAN)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O1")
@@ -137,16 +137,16 @@ if (ENABLE_ASAN)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
   endif()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                   Google Address Undefined build flags
+#_________________________________________________________________________________________
+#                                                     Google Address Undefined build flags
 elseif (ENABLE_USAN)
   if (NOT APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=gold")
   endif()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
 
-#_______________________________________________________________________________________________________________________
-#                                                                                      Google Address Thread build flags
+#_________________________________________________________________________________________
+#                                                        Google Address Thread build flags
 elseif (ENABLE_TSAN)
   if (NOT APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=gold")
@@ -154,38 +154,39 @@ elseif (ENABLE_TSAN)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread")
 endif()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                      libraries name prefix and postfix
+#_________________________________________________________________________________________
+#                                                        libraries name prefix and postfix
 set(CMAKE_DEBUG_POSTFIX d)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                 executable output path
+#_________________________________________________________________________________________
+#                                                                   executable output path
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 else()
   set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 endif()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                      Switch build type
+#_________________________________________________________________________________________
+#                                                                        Switch build type
 if (CMAKE_BUILD_TYPE)
   set(SWITCH_BUILD_TYPE ${CMAKE_BUILD_TYPE})
 else()
   set(SWITCH_BUILD_TYPE Debug)
 endif()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                                install
+#_________________________________________________________________________________________
+#                                                                                  install
 install(EXPORT Switch DESTINATION cmake)
-install(FILES scripts/cmake/SwitchConfig.cmake scripts/cmake/SwitchDependencies.cmake DESTINATION cmake)
+install(FILES scripts/cmake/SwitchConfig.cmake scripts/cmake/SwitchDependencies.cmake 
+  DESTINATION cmake)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                  include CMake modules
+#_________________________________________________________________________________________
+#                                                                    include CMake modules
 #include(CTest)
 include(ExternalProject)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                 include Switch modules
+#_________________________________________________________________________________________
+#                                                                   include Switch modules
 include(scripts/cmake/AddCustomTargets.cmake)
 include(scripts/cmake/Build3rdParties.cmake)
 include(scripts/cmake/BuildSwitchLibraries.cmake)
@@ -198,36 +199,36 @@ include(scripts/cmake/Print.cmake)
 include(scripts/cmake/SwitchDependencies.cmake)
 include(scripts/cmake/UpdateVersionNumber.cmake)
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                  Update Version Number
+#_________________________________________________________________________________________
+#                                                                    Update Version Number
 UpdateVersionNumber()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                       Get Informations
+#_________________________________________________________________________________________
+#                                                                         Get Informations
 GetInformations()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                         Download Tools
+#_________________________________________________________________________________________
+#                                                                           Download Tools
 DownloadTools()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                      Build 3rd parties
+#_________________________________________________________________________________________
+#                                                                        Build 3rd parties
 Build3rdParties()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                 Build Switch Libraries
+#_________________________________________________________________________________________
+#                                                                   Build Switch Libraries
 BuildSwitchLibraries()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                     Build Switch Tests
+#_________________________________________________________________________________________
+#                                                                       Build Switch Tests
 BuildSwitchTests()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                     Add Custom Targets
+#_________________________________________________________________________________________
+#                                                                       Add Custom Targets
 AddCustomTargets()
 
-#_______________________________________________________________________________________________________________________
-#                                                                                                                 Legend
+#_________________________________________________________________________________________
+#                                                                                   Legend
 print("")
 print("(*) embeded version")
 print("")
