@@ -1,4 +1,4 @@
-echo "Install Switch libraries version $switch_version, copyright GAMMA Soft, 2017"
+echo "Install Switch libraries version $switch_version, copyright GAMMA Soft, 2018"
 echo ""
 
 # ________________________________________________________________________________________

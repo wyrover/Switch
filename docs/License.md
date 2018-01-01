@@ -250,4 +250,4 @@ The GNU General Public License does not permit incorporating your program into p
 
 ______________________________________________________________________________________________
 
-© 2010 - 2017 by GAMMA Soft.
+© 2010 - 2018 by GAMMA Soft.

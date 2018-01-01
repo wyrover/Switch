@@ -11,9 +11,10 @@ The Switch Tutorials provide an overview of the basics of the language and ident
 | [Command Line Parameters](CommandLineParameters.md) | Shows simple command-line processing; also shows array indexing.                   | Simple |
 | [Namespaces](Namespaces.md)                         | Shows how to use namespaces.                                                       | Simple |
 | [refptr](refptr.md)                                 | Shows how to use smart pointer.                                                    | Simple |
-| [Arrays](Arrays2.md)                                 | Shows how to use arrays.                                                           | Simple |
+| [Arrays](Arrays2.md)                                | Shows how to use arrays.                                                           | Simple |
 | [Properties](Properties.md)                         | Shows how properties are declared and used; also demonstrates abstract properties. | Simple |
+| [Forms](Forms.md)                                   | Shows how to create a Windows Forms application from the command line.             | Medium |
 
 ______________________________________________________________________________________________
 
-© 2010 - 2017 by GAMMA Soft.
+© 2010 - 2018 by GAMMA Soft.

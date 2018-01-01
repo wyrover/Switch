@@ -7,4 +7,4 @@ To contact GAMMA Soft please send a mail to [gammasoft71@gmail.com](mailto:gamma
 
 ______________________________________________________________________________________________
 
-© 2010 - 2017 by GAMMA Soft.
+© 2010 - 2018 by GAMMA Soft.
