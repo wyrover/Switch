@@ -63,17 +63,16 @@ _startup (Form1);
 cmake_minimum_required(VERSION 3.2)
 ```
 
-2. Set the project name and c++14 standard.
+2. Set the project name and add Switch package.
 
 ```cmake
 Project(Form1)
-set(CMAKE_CXX_STANDARD 14)
+find_package(Switch REQUIRED)
 ```
 
-3. Add Switch package and build rules.
+3. Add build rules for the he project.
 
 ```cmake
-find_package(Switch REQUIRED)
 add_executable(Form1 ${SWITCH_GUI} Form1.cpp)
 target_link_libraries(Form1 Switch.System.Windows.Forms)
 ```
@@ -257,9 +256,8 @@ CMakeLists.txt:
 cmake_minimum_required(VERSION 3.2)
 
 Project(Form1)
-set(CMAKE_CXX_STANDARD 14)
-
 find_package(Switch REQUIRED)
+
 add_executable(Form1 ${SWITCH_GUI} Form1.cpp)
 target_link_libraries(Form1 Switch.System.Windows.Forms)
 ```
