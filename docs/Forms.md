@@ -5,7 +5,7 @@
 
 This tutorial describe the basic steps that you must complete to create and run a Windows Forms application from the command line.
 
-# Tutorial
+# Create Windows Form
 
 The following procedures describe the basic steps that you must complete to create and run a Windows Forms application from the command line. There is extensive support for these procedures in Visual Studio. Also see Walkthrough: Creating a Simple Windows Form.
 
@@ -39,6 +39,7 @@ You will add more code to the constructor in a subsequent procedure.
 4. Add a Main method to the class.
 
 a. Call EnableVisualStyles to give a modern Windows appearance to your application (no effect in macOS and Linux).
+
 b. Create an instance of the form and run it.
 
 ```c++
@@ -58,49 +59,209 @@ _startup (Form1);
 
 1. Add the cmake minimum version required.
 
-```bash
-cmake_minimum_required(VERSION 3.8)
+```cmake
+cmake_minimum_required(VERSION 3.2)
 ```
 
-2. Set the project name.
+2. Set the project name and c++14 standard.
 
-```bash
+```cmake
 Project(Form1)
-```
-
-3. Specify c++14 standard.
-
-```bash
 set(CMAKE_CXX_STANDARD 14)
 ```
 
-4. Add build rules.
+3. Add Switch package and build rules.
 
-```bash
+```cmake
+find_package(Switch REQUIRED)
 add_executable(Form1 ${SWITCH_GUI} Form1.cpp)
 target_link_libraries(Form1 Switch.System.Windows.Forms)
 ```
 
 ## To compile and run the application on Windows
 
-1. At the Command prompt, navigate to the directory you created the Form1 class adnd CMakeLists.
+1. At the Command prompt, navigate to the directory you created the Form1 class and CMakeLists.
 2. Create build directory build.
 
-```batch
+```shell
 mkdir build
 cd build
 ```
 
 3. Generate the solution.
 
-```batch
+```shell
 cmake .. -DCMAKE_INSTALL_PREFIX=c:/usr/local
 ```
 
 4. Compile the form.
 
-```batch
+```shell
 cmake --build .
+```
+
+5. At the command prompt, type:
+
+```shell
+Debug\Form1.exe
+```
+
+## To compile and run the application on macOS
+
+1. At the Terminal, navigate to the directory you created the Form1 class and CMakeLists.
+2. Create build directory build.
+
+```shell
+mkdir build
+cd build
+```
+
+3. Generate the project.
+
+```shell
+cmake ..
+```
+
+4. Compile the form.
+
+```shell
+cmake --build .
+```
+
+5. At the command prompt, type:
+
+```shell
+open ./Form1.app
+```
+
+## To compile and run the application on Linux
+
+1. At the Terminal, navigate to the directory you created the Form1 class and CMakeLists.
+2. Create build directory build.
+
+```shell
+mkdir build
+cd build
+```
+
+3. Generate the project.
+
+```shell
+cmake ..
+```
+
+4. Compile the form.
+
+```shell
+cmake --build .
+```
+
+5. At the command prompt, type:
+
+```shell
+./Form1
+```
+
+# Adding a Control and Handling an Event
+
+The previous procedure steps demonstrated how to just create a basic Windows Form that compiles and runs. The next procedure will show you how to create and add a control to the form, and handle an event for the control.
+
+In addition to understanding how to create Windows Forms applications, you should understand event-based programming and how to handle user input.
+
+## To declare a button control and handle its click event
+
+1. Declare a button control named button1.
+2. n the constructor, create the button and set its Size, Location and Text properties.
+3. Add the button to the form.
+
+The following code example demonstrates how to declare the button control.
+
+```c++
+public:
+  Button button1;
+  Form1() {
+    button1.Size = System::Drawing::Size(40, 40);
+    button1.Location = System::Drawing::Point(30, 30);
+    button1.Text = "Click\nme";
+    this->Controls().Add(button1);
+    button1.Click += EventHandler(*this, &Form1::button1_Click);
+  }
+```
+
+4. Create a method to handle the Click event for the button.
+5. In the click event handler, display a MessageBox with the message, "Hello World".
+
+The following code example demonstrates how to handle the button control's click event.
+
+```c++
+private:
+  void button1_Click(const object& sender, const EventArgs& e) {
+    MessageBox::Show("Hello World");
+  }
+```
+
+6. Associate the Click event with the method you created.
+
+The following code example demonstrates how to associate the event with the method.
+
+```c++
+button1.Click += EventHandler(*this, &Form1::button1_Click);
+```
+
+7. Compile and run the application as described in the previous tutorial.
+
+
+# Example
+
+Following code example is the complete example from the previous tutorial.
+
+Form1.cpp:
+
+```c++
+#include <Switch/Switch>
+
+using namespace System;
+using namespace System::Drawing;
+using namespace System::Windows::Forms;
+
+namespace FormWithButton {
+  class Form1 : public Form {
+  public:
+    Button button1;
+    Form1() {
+      button1.Size = System::Drawing::Size(40, 40);
+      button1.Location = System::Drawing::Point(30, 30);
+      button1.Text = "Click\nme";
+      this->Controls().Add(button1);
+      button1.Click += EventHandler(*this, &Form1::button1_Click);
+    }
+
+    static void Main() {
+      Application::EnableVisualStyles();
+      Application::Run(Form1());
+    }
+
+  private:
+    void button1_Click(const object& sender, const EventArgs& e) {
+      MessageBox::Show("Hello World");
+    }
+  };
+}
+
+_startup (FormWithButton::Form1);
+```
+
+CMakeLists.txt:
+
+```cmake
+cmake_minimum_required(VERSION 3.2)
+
+Project(Form1)
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(Switch REQUIRED)
+add_executable(Form1 ${SWITCH_GUI} Form1.cpp)
+target_link_libraries(Form1 Switch.System.Windows.Forms)
 ```
 
 # See also
@@ -111,4 +272,6 @@ Other Resources
 
 ______________________________________________________________________________________________
 
-© 2010 - 2018 by GAMMA Soft.
+© 2010 - 2017 by GAMMA Soft.
+
+<!--https://docs.microsoft.com/en-us/dotnet/framework/winforms/how-to-create-a-windows-forms-application-from-the-command-line-->
