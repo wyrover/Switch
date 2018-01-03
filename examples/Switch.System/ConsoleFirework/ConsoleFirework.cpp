@@ -133,13 +133,13 @@ namespace Examples {
       Console::Clear();
 
       Random rand;
-      System::Collections::Generic::List<$<Firework>> fireworks;
+      System::Collections::Generic::List < $<Firework >> fireworks;
       Array<ConsoleColor> colors = {ConsoleColor::Blue, ConsoleColor::Green, ConsoleColor::Cyan, ConsoleColor::Red, ConsoleColor::Magenta, ConsoleColor::Yellow, ConsoleColor::White};
 
       while (!Console::KeyAvailable) {
         fireworks.Add(new_<FireworkStart>(rand.Next(2, Console::WindowWidth - 2), rand.Next(2, Console::WindowHeight - 2), colors[rand.Next(colors.Length)], rand.Next(1, 5)));
 
-        System::Collections::Generic::List<$<Firework>> fireworksToRemove;
+        System::Collections::Generic::List < $<Firework >> fireworksToRemove;
         for ($<Firework>& firework : fireworks) {
           if (is<FireworkEnd>(firework))
             fireworksToRemove.Add(firework);
