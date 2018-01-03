@@ -675,7 +675,7 @@ namespace Switch {
 
         StringBuilder& AppendFormat(const string& format, const Array<ref<object>>& objects) {return this->Append(string::Format(format, objects));}
 
-        StringBuilder& AppendLine() {return this->Append(Environment::NewLine());}
+        StringBuilder& AppendLine() {return this->Append(Environment::NewLine);}
 
         StringBuilder& AppendLine(const string& value) {return this->Append(value).AppendLine();}
 

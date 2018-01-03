@@ -23,32 +23,36 @@ namespace Switch {
 
         /// @brief Creates an encoding for the ASCII (7-bit) character set.
         /// @return An encoding for the ASCII (7-bit) character set.
-        static refptr<Encoding> ASCII();
+        static const refptr<Encoding> ASCII;
 
         /// @brief Creates an encoding for the UTF-8 format.
         /// @return An encoding for the UTF-8 format.
-        static refptr<Encoding> UTF8();
+        static const refptr<Encoding> UTF8;
 
         /// @brief Creates an encoding for the UTF-16 format using the little endian byte order.
         /// @return An encoding for the UTF-16 format using the little endian byte order.
-        static refptr<Encoding> Unicode();
+        static const refptr<Encoding> Unicode;
 
         /// @brief Creates an encoding for the UTF-16 format that uses the big endian byte order.
         /// @return An encoding object for the UTF-16 format that uses the big endian byte order.
-        static refptr<Encoding> BigEndianUnicode();
+        static const refptr<Encoding> BigEndianUnicode;
 
         /// @brief Creates an encoding for the UTF-16 format using the little endian byte order.
         /// @return An encoding for the UTF-16 format using the little endian byte order.
-        static refptr<Encoding> UTF16LE();
+        static const refptr<Encoding> UTF16LE;
 
         /// @brief Creates an encoding for the UTF-16 format that uses the big endian byte order.
         /// @return An encoding object for the UTF-16 format that uses the big endian byte order.
-        static refptr<Encoding> UTF16BE();
+        static const refptr<Encoding> UTF16BE;
 
         /// @brief Creates an encoding for the UTF-32 format using the little endian byte order.
         /// @return An encoding object for the UTF-32 format using the little endian byte order.
-        static refptr<Encoding> UTF32();
+        static const refptr<Encoding> UTF32;
 
+        /// @brief Gets an encoding for the operating system's current ANSI code page.
+        /// @return An encoding for the operating system's current ANSI code page (currently 437).
+        static const refptr<Encoding> Default;
+        
         /// @brief Returns the encoding associated with the specified code page name.
         /// @param name The code page name of the preferred encoding. Possible values are listed in the Name column of the table that appears in the System::Text::Encoding class topic.
         /// @return The encoding associated with the specified code page.
@@ -68,10 +72,6 @@ namespace Switch {
         /// @brief When overridden in a derived class, gets the human-readable description of the current encoding.
         /// @return The human-readable description of the current System::Text::Encoding.
         virtual String GetEncodingName() const;
-
-        /// @brief Gets an encoding for the operating system's current ANSI code page.
-        /// @return An encoding for the operating system's current ANSI code page (currently 437).
-        static const Encoding& Default();
 
         /// @brief When overridden in a derived class, gets a value indicating whether the current encoding is read-only.
         /// @return true if the current System::Text::Encoding is read-only; otherwise, false.

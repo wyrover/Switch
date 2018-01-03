@@ -190,21 +190,21 @@ float IPAddress::HostToNetworkOrder(float host) {
 }
 
 uint16 IPAddress::HostToNetworkOrder(uint16 host) {
-  if (BitConverter::IsLittleEndian() == false)
+  if (BitConverter::IsLittleEndian == false)
     return host;
 
   return (host >> 8) | (host << 8);
 }
 
 uint32 IPAddress::HostToNetworkOrder(uint32 host) {
-  if (BitConverter::IsLittleEndian() == false)
+  if (BitConverter::IsLittleEndian == false)
     return host;
 
   return (host >> 24) | ((host << 8) & 0x00FF0000L) | ((host >> 8) & 0x0000FF00L) | (host << 24);
 }
 
 uint64 IPAddress::HostToNetworkOrder(uint64 host) {
-  if (BitConverter::IsLittleEndian() == false)
+  if (BitConverter::IsLittleEndian == false)
     return host;
 
   return (host >> 56) | ((host << 40) & 0x00FF000000000000LL) | ((host << 24) & 0x0000FF0000000000LL) | ((host << 8) & 0x000000FF00000000LL) | ((host >> 8) & 0x00000000FF000000LL) | ((host >> 24) & 0x0000000000FF0000LL) | ((host >> 40) & 0x000000000000FF00LL) | (host << 56);

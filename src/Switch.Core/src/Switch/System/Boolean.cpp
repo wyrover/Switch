@@ -7,15 +7,9 @@ using namespace System;
 constexpr bool Boolean::False;
 constexpr bool Boolean::True;
 
-const String& Boolean::FalseString() {
-  static const string falseString = "False";
-  return falseString;
-}
+const String Boolean::FalseString = "False";
 
-const String& Boolean::TrueString() {
-  static const string trueString = "True";
-  return trueString;
-}
+const String Boolean::TrueString = "True";
 
 bool Boolean::Parse(const String& str) {
   bool value;
@@ -26,14 +20,14 @@ bool Boolean::Parse(const String& str) {
 
 bool Boolean::TryParse(const String& str, bool& value) {
   String trimed  = str.TrimStart(' ').TrimEnd(' ');
-  if (String::Compare(trimed, TrueString(), true) != 0 && String::Compare(trimed, FalseString(), true) != 0)
+  if (String::Compare(trimed, TrueString, true) != 0 && String::Compare(trimed, FalseString, true) != 0)
     return false;
-  value = String::Compare(trimed, TrueString(), true) == 0;
+  value = String::Compare(trimed, TrueString, true) == 0;
   return true;
 }
 
 String Boolean::ToString() const {
-  return this->value ? TrueString() : FalseString();
+  return this->value ? TrueString : FalseString;
 }
 
 DateTime Boolean::ToDateTime(const IFormatProvider& provider) const {

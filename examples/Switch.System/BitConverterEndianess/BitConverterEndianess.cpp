@@ -11,7 +11,7 @@ namespace Examples {
       Array<byte> bytes = BitConverter::GetBytes(value);
       Console::WriteLine(BitConverter::ToString(bytes));
 
-      if (BitConverter::IsLittleEndian())
+      if (BitConverter::IsLittleEndian)
         Array<>::Reverse(bytes);
 
       Console::WriteLine(BitConverter::ToString(bytes));
@@ -19,7 +19,7 @@ namespace Examples {
 
       // Receive byte stream from beyond machine boundaries.
       Console::WriteLine(BitConverter::ToString(bytes));
-      if (BitConverter::IsLittleEndian())
+      if (BitConverter::IsLittleEndian)
         Array<>::Reverse(bytes);
 
       Console::WriteLine(BitConverter::ToString(bytes));

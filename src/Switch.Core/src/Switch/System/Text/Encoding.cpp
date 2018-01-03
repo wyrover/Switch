@@ -13,6 +13,22 @@ refptr< System::Collections::Generic::Dictionary<int32, string>> Encoding::names
 refptr< System::Collections::Generic::Dictionary<string, int32>> Encoding::codePagesFromName;
 refptr< System::Collections::Generic::Dictionary<int32, string>> Encoding::displayNames;
 
+const refptr<Encoding> Encoding::ASCII = ref_new<ASCIIEncoding>();
+
+const refptr<Encoding> Encoding::UTF8 = ref_new<UTF8Encoding>(true);
+
+const refptr<Encoding> Encoding::Unicode = ref_new<UnicodeEncoding>(false, true);
+
+const refptr<Encoding> Encoding::BigEndianUnicode = ref_new<UnicodeEncoding>(true, true);
+
+const refptr<Encoding> Encoding::UTF16LE = ref_new<UnicodeEncoding>(false, true);
+
+const refptr<Encoding> Encoding::UTF16BE = ref_new<UnicodeEncoding>(true, true);
+
+const refptr<Encoding> Encoding::UTF32 = ref_new<UTF32Encoding>(false, true);
+
+const refptr<Encoding> Encoding::Default = ref_new<UTF8Encoding>(true);
+
 Encoding::Encoding() {
   this->codePage = 0;
 }
@@ -48,34 +64,6 @@ string Encoding::GetEncodingName() const {
   case 12001 : return "utf-32BE";
   }
   return "";
-}
-
-refptr<Encoding> Encoding::ASCII() {
-  return ref_new<ASCIIEncoding>();
-}
-
-refptr<Encoding> Encoding::UTF8() {
-  return ref_new<UTF8Encoding>(true);
-}
-
-refptr<Encoding> Encoding::Unicode() {
-  return ref_new<UnicodeEncoding>(false, true);
-}
-
-refptr<Encoding> Encoding::BigEndianUnicode() {
-  return ref_new<UnicodeEncoding>(true, true);
-}
-
-refptr<Encoding> Encoding::UTF16LE() {
-  return ref_new<UnicodeEncoding>(false, true);
-}
-
-refptr<Encoding> Encoding::UTF16BE() {
-  return ref_new<UnicodeEncoding>(true, true);
-}
-
-refptr<Encoding> Encoding::UTF32() {
-  return ref_new<UTF32Encoding>(false, true);
 }
 
 refptr<Encoding> Encoding::CreateEncoding(int32 codePage) {

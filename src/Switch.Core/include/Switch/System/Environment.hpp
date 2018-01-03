@@ -274,7 +274,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays three lines separated by newlines.
       /// @include EnvironmentNewLine.cpp
-      static _property<String, _readonly> NewLine;
+      static const string NewLine;
 
       /// @brief Gets an OperatingSystem object that contains the current platform identifier and version number.
       /// @return OperatingSystem An object that contains the platform identifier and version number.

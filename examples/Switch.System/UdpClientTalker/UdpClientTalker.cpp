@@ -21,7 +21,7 @@ namespace Examples {
 
         try {
           Console::WriteLine("Sending broadcast {0} to {1}", textToSend, sendingEndPoint);
-          talker.Send(Encoding::UTF8()->GetBytes(textToSend), sendingEndPoint);
+          talker.Send(Encoding::UTF8->GetBytes(textToSend), sendingEndPoint);
           Thread::Sleep(250);
         } catch (const Exception& e) {
           Console::WriteLine(e.Message);

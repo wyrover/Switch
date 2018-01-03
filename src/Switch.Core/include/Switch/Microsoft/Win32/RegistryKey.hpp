@@ -37,10 +37,7 @@ namespace Switch {
           return *this;
         }
 
-        static const RegistryKey& Null() {
-          static RegistryKey rk;
-          return rk;
-        }
+        static const RegistryKey Null;
 
         virtual ~RegistryKey();
         /// @endcond
@@ -173,7 +170,7 @@ namespace Switch {
 
         const object& GetValue(const System::String& name) const {
           if (! this->values.ContainsKey(name.ToLower()))
-            return Null();
+            return Null;
 
           return this->values[name.ToLower()].Value();
         }

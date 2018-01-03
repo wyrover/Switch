@@ -42,7 +42,7 @@ namespace Switch {
           bool enabled = false;
           intptr handle = IntPtr::Zero;
           delegate<void> tick = _delegate {
-            Tick(*this, System::EventArgs::Empty());
+            Tick(*this, System::EventArgs::Empty);
           };
         };
       }

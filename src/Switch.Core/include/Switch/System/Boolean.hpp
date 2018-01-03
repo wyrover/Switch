@@ -70,10 +70,10 @@ namespace Switch {
       static constexpr bool True = true;
 
       /// @brief Returns a string that represents true value.
-      static const String& FalseString();
+      static const String FalseString;
 
       /// @brief Returns a string that represents false value.
-      static const String& TrueString();
+      static const String TrueString;
 
       /// @brief Compares this instance to a specified Boolean Object and returns an indication of their relative values.
       /// @param value An Boolean Object to compare with this instance.

@@ -9,6 +9,8 @@
 using namespace System;
 using namespace System::IO;
 
+const DirectoryInfo DirectoryInfo::Empty;
+
 DirectoryInfo::DirectoryInfo(const string& path) {
   this->fullPath = Path::GetFullPath(path);
 }
@@ -27,7 +29,7 @@ string DirectoryInfo::GetName() const {
 
 DirectoryInfo DirectoryInfo::GetParent() const {
   if (this->fullPath == Path::GetPathRoot(this->fullPath))
-    return Empty();
+    return Empty;
   return DirectoryInfo(Path::Combine(this->fullPath, ".."));
 }
 

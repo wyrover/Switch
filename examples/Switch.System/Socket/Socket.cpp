@@ -21,7 +21,7 @@ namespace Examples {
         while (!terminate) {
           Array<byte> buffer(256);
           socketWithClient.Receive(buffer);
-          Console::WriteLine(Encoding::UTF8()->GetString(buffer));
+          Console::WriteLine(Encoding::UTF8->GetString(buffer));
         }
       }));
       server.Start();
@@ -31,7 +31,7 @@ namespace Examples {
         socket.Connect("127.0.0.1", 9050);
         int counter  = Random().Next(1, 20000);
         while (!terminate) {
-          socket.Send(Encoding::UTF8()->GetBytes(string::Format("Counter={0}", counter++)));
+          socket.Send(Encoding::UTF8->GetBytes(string::Format("Counter={0}", counter++)));
           Thread::Sleep(250);
         }
       }));

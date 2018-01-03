@@ -12,7 +12,7 @@ void EXPECT_B1(T b, TArray bytes) {
 template<typename T, typename TArray>
 void EXPECT_B2(T b1, T b2, TArray bytes) {
   ASSERT_EQ(2, bytes.Length);
-  if (System::BitConverter::IsLittleEndian()) {
+  if (System::BitConverter::IsLittleEndian) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
   } else {
@@ -24,7 +24,7 @@ void EXPECT_B2(T b1, T b2, TArray bytes) {
 template<typename T, typename TArray>
 void EXPECT_B4(T b1, T b2, T b3, T b4, TArray bytes) {
   ASSERT_EQ(4, bytes.Length);
-  if (System::BitConverter::IsLittleEndian()) {
+  if (System::BitConverter::IsLittleEndian) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
     ASSERT_EQ(b3, bytes[2]);
@@ -40,7 +40,7 @@ void EXPECT_B4(T b1, T b2, T b3, T b4, TArray bytes) {
 template<typename T, typename TArray>
 void EXPECT_B8(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, TArray bytes) {
   ASSERT_EQ(8, bytes.Length);
-  if (System::BitConverter::IsLittleEndian()) {
+  if (System::BitConverter::IsLittleEndian) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
     ASSERT_EQ(b3, bytes[2]);
@@ -64,7 +64,7 @@ void EXPECT_B8(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, TArray bytes) {
 template<typename T, typename TArray>
 void EXPECT_B16(T b1, T b2, T b3, T b4, T b5, T b6, T b7, T b8, T b9, T b10, T b11, T b12, T b13, T b14, T b15, T b16, TArray bytes) {
   ASSERT_EQ(16, bytes.Length);
-  if (System::BitConverter::IsLittleEndian()) {
+  if (System::BitConverter::IsLittleEndian) {
     ASSERT_EQ(b1, bytes[0]);
     ASSERT_EQ(b2, bytes[1]);
     ASSERT_EQ(b3, bytes[2]);

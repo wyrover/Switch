@@ -12,6 +12,8 @@
 using namespace System;
 using namespace System::IO;
 
+const FileInfo FileInfo::Empty;
+
 FileInfo::FileInfo() : Directory(_delegate {return this->GetDirectory();}) {
 }
 

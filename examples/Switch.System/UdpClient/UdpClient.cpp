@@ -18,7 +18,7 @@ namespace Examples {
           Array<byte> receiveBytes(256);
           IPEndPoint incomingInformationEndpoint;
           udpClient.Receive(receiveBytes, incomingInformationEndpoint);
-          Console::WriteLine(Encoding::UTF8()->GetString(receiveBytes));
+          Console::WriteLine(Encoding::UTF8->GetString(receiveBytes));
         }
       }));
       server.Start();
@@ -27,7 +27,7 @@ namespace Examples {
         UdpClient udpClient;
         int counter = Random().Next(1, 20000);
         while (true) {
-          udpClient.Send(Encoding::UTF8()->GetBytes(string::Format("Counter={0}", counter++)), "127.0.0.1", 8082);
+          udpClient.Send(Encoding::UTF8->GetBytes(string::Format("Counter={0}", counter++)), "127.0.0.1", 8082);
           Thread::Sleep(250);
         }
       }));

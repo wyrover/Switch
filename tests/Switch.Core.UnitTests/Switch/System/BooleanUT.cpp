@@ -43,11 +43,11 @@ namespace SwitchUnitTests {
   }
 
   TEST(BooleanTest, ParseBooleanFalseString) {
-    ASSERT_FALSE(Boolean::Parse(Boolean::FalseString()));
+    ASSERT_FALSE(Boolean::Parse(Boolean::FalseString));
   }
 
   TEST(BooleanTest, ParseBooleanTrueString) {
-    ASSERT_TRUE(Boolean::Parse(Boolean::TrueString()));
+    ASSERT_TRUE(Boolean::Parse(Boolean::TrueString));
   }
 
   TEST(BooleanTest, ParseFalseString) {
@@ -112,10 +112,10 @@ namespace SwitchUnitTests {
 
   TEST(BooleanTest, TryParse) {
     bool result;
-    ASSERT_TRUE(Boolean::TryParse(Boolean::TrueString(), result));
+    ASSERT_TRUE(Boolean::TryParse(Boolean::TrueString, result));
     ASSERT_TRUE(result);
 
-    ASSERT_TRUE(Boolean::TryParse(Boolean::FalseString(), result));
+    ASSERT_TRUE(Boolean::TryParse(Boolean::FalseString, result));
     ASSERT_FALSE(result);
 
     ASSERT_TRUE(Boolean::TryParse("True", result));
@@ -182,8 +182,8 @@ namespace SwitchUnitTests {
     ASSERT_EQ("False", Boolean().ToString());
     ASSERT_EQ("True", Boolean(true).ToString());
     ASSERT_EQ("False", Boolean(false).ToString());
-    ASSERT_EQ("True", string(Boolean::TrueString()));
-    ASSERT_EQ("False", string(Boolean::FalseString()));
+    ASSERT_EQ("True", string(Boolean::TrueString));
+    ASSERT_EQ("False", string(Boolean::FalseString));
   }
 
   TEST(BooleanTest, CompareTo) {

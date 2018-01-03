@@ -1019,7 +1019,7 @@ namespace Switch {
       /// @note For every element tested, value is passed to the appropriate IComparable implementation, even if value is null. That is, the IComparable implementation determines how a given element compares to null.
       /// @remarks This method is an O(log n) operation, where n is length.
       template<typename T, typename TAllocator>
-      static int32 BinarySearch(const Array<T, 1, TAllocator>& array, int32 index, int32 length, const T& value) {return BinarySearch(array, index, length, value, System::Collections::Generic::Comparer<T>::Default());}
+      static int32 BinarySearch(const Array<T, 1, TAllocator>& array, int32 index, int32 length, const T& value) {return BinarySearch(array, index, length, value, System::Collections::Generic::Comparer<T>::Default);}
 
       /// @brief Searches a range of elements in a one-dimensional sorted array for a value, using the specified IComparer interface.
       /// @param array The sorted one-dimensional Array to search.
@@ -1074,7 +1074,7 @@ namespace Switch {
       /// @note For every element tested, value is passed to the appropriate IComparable implementation, even if value is null. That is, the IComparable implementation determines how a given element compares to null.
       /// @remarks This method is an O(log n) operation, where n is the Length of array.
       template<typename T, typename TAllocator>
-      static int32 BinarySearch(const Array<T, 1, TAllocator>& array, const T& value) {return BinarySearch(array, 0, array.Length, value, System::Collections::Generic::Comparer<T>::Default().Release());}
+      static int32 BinarySearch(const Array<T, 1, TAllocator>& array, const T& value) {return BinarySearch(array, 0, array.Length, value, System::Collections::Generic::Comparer<T>::Default.Release());}
 
       /// @brief Searches a range of elements in a one-dimensional sorted array for a value, using the specified IComparer interface.
       /// @param array The sorted one-dimensional Array to search.

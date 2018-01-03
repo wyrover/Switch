@@ -47,6 +47,8 @@ namespace {
   }
 }
 
+const RegistryKey RegistryKey::Null;
+
 RegistryKey::RegistryHandle::RegistryHandle(intptr key, const System::String& name) {
 }
 
@@ -83,7 +85,7 @@ void RegistryKey::Close() {
 
 RegistryKey RegistryKey::CreateSubKey(const System::String& subKey, RegistryKeyPermissionCheck permissionCheck) {
   RegistryKey key = OpenSubKey(subKey, permissionCheck);
-  if (key != RegistryKey::Null())
+  if (key != RegistryKey::Null)
     return key;
 
   if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
@@ -149,7 +151,7 @@ void RegistryKey::Flush() {
 RegistryKey RegistryKey::OpenSubKey(const System::String& subKeyName, RegistryKeyPermissionCheck permissionCheck) {
   System::String path = ::MakePath(this->path, subKeyName);
   if (not ::ExistSubKey(this->path, subKeyName))
-    return RegistryKey::Null();
+    return RegistryKey::Null;
 
   RegistryKey key;
   key.path = path;

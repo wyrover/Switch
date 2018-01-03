@@ -184,9 +184,7 @@ _property<String, _readonly> Environment::MachineName {
   [] {return Native::EnvironmentApi::GetMachineName();}
 };
 
-_property<String, _readonly> Environment::NewLine {
-  [] {return Native::EnvironmentApi::NewLine();}
-};
+const String Environment::NewLine = Native::EnvironmentApi::NewLine();
 
 _property<const OperatingSystem&, _readonly> Environment::OSVersion {
   []()->const OperatingSystem& {

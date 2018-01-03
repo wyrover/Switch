@@ -25,7 +25,7 @@ namespace Examples {
           ArraySegment<byte> bytes = clientWebSocket.Receive();
 
           /// Convert UTF8 bytes to string
-          message = System::Text::Encoding::UTF8()->GetString(bytes);
+          message = System::Text::Encoding::UTF8->GetString(bytes);
 
           Console::WriteLine(">>> {0}", message);
         } while (message != "world");
@@ -33,11 +33,11 @@ namespace Examples {
       receiver.Start();
 
       // Sending "goodbye" string on ClientWebSocket
-      Array<byte> bytes = System::Text::Encoding::UTF8()->GetBytes(string("goodbye"));
+      Array<byte> bytes = System::Text::Encoding::UTF8->GetBytes(string("goodbye"));
       clientWebSocket.Send(bytes, System::Net::WebSockets::WebSocketMessageType::Text, true);
 
       // Sending "hello" string on ClientWebSocket
-      bytes = System::Text::Encoding::UTF8()->GetBytes(string("hello"));
+      bytes = System::Text::Encoding::UTF8->GetBytes(string("hello"));
       clientWebSocket.Send(bytes, System::Net::WebSockets::WebSocketMessageType::Text, true);
 
       // Wait receiver thread

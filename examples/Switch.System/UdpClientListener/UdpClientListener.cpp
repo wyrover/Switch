@@ -20,7 +20,7 @@ namespace Examples {
 
         try {
           listener.Receive(receiveBytes, incomingInformationEndpoint);
-          Console::WriteLine("Received broadcast {0} from {1}", Encoding::UTF8()->GetString(receiveBytes), waitingEndpoint);
+          Console::WriteLine("Received broadcast {0} from {1}", Encoding::UTF8->GetString(receiveBytes), waitingEndpoint);
         } catch (const Exception& e) {
           Console::WriteLine(e.Message);
         }

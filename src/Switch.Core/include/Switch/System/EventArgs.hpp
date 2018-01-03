@@ -14,10 +14,7 @@ namespace Switch {
     class _export EventArgs : public Object {
     public:
       /// @brief Represents an event with no event data.
-      static const EventArgs& Empty() {
-        static EventArgs empty;
-        return empty;
-      }
+      static const EventArgs Empty;
 
       /// @brief Create a new instance of class EventArgs
       EventArgs() {}

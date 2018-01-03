@@ -22,11 +22,8 @@ namespace Switch {
           /// @endcond
 
           /// @brief Returns a default sort order comparer for the type specified by the generic argument
-          static const IComparer<T>& Default() {
-            static Comparer<T> comparer;
-            return comparer;
-          }
-
+          static const Comparer<T> Default;
+          
           /// @brief Compares two entities and returns a value indicating whether one is less than, equal to, or greater than the other.
           /// @param x The first entity to compare.
           /// @param y The second entity to compare.
@@ -38,6 +35,9 @@ namespace Switch {
         };
 
         /// @cond
+        template<typename T>
+        const Comparer<T> Comparer<T>::Default;
+
         template<typename T>
         class EmptyComparer : public Object, public IComparer<T> {
         public:

@@ -169,12 +169,12 @@ namespace {
 
   TEST_F(RegistryKeyUT, GetValuesWithNoKey) {
     Registry::CurrentUser().CreateSubKey("UnitTest");
-    ASSERT_EQ(RegistryKey::Null(), Registry::CurrentUser().OpenSubKey("UnitTest").GetValue("Key1"));
+    ASSERT_EQ(RegistryKey::Null, Registry::CurrentUser().OpenSubKey("UnitTest").GetValue("Key1"));
   }
 
   TEST_F(RegistryKeyUT, GetValuesWithEmptyKey) {
     Registry::CurrentUser().CreateSubKey("UnitTest");
-    ASSERT_EQ(RegistryKey::Null(), Registry::CurrentUser().OpenSubKey("UnitTest").GetValue(""));
+    ASSERT_EQ(RegistryKey::Null, Registry::CurrentUser().OpenSubKey("UnitTest").GetValue(""));
   }
 
   //TEST_F(RegistryKeyUT, GetValuesWithInBaseKey) {

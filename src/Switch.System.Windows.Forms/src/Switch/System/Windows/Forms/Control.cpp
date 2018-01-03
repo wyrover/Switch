@@ -272,7 +272,7 @@ void Control::WndProc(Message& message) {
 void Control::WmCaptureChange(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCaptureChange message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
-  this->OnMouseCaptureChanged(EventArgs::Empty());
+  this->OnMouseCaptureChanged(EventArgs::Empty);
 }
 
 void Control::WmClose(Message& message) {
@@ -293,7 +293,7 @@ void Control::WmContextMenu(Message& message) {
 void Control::WmCreate(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmCreate message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
-  OnHandleCreated(EventArgs::Empty());
+  OnHandleCreated(EventArgs::Empty);
 }
 
 void Control::WmCtlColorControl(Message& message) {
@@ -310,7 +310,7 @@ void Control::WmCtlColorControl(Message& message) {
 
 void Control::WmDestroy(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmDestroy message=" + message + ", name=" + this->name);
-  OnHandleDestroyed(EventArgs::Empty());
+  OnHandleDestroyed(EventArgs::Empty);
   this->DefWndProc(message);
 }
 
@@ -393,7 +393,7 @@ void Control::WmKeyChar(Message& message) {
 void Control::WmKillFocus(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::WindowMessage, "Control::WmKillFocus message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
-  this->OnLostFocus(EventArgs::Empty());
+  this->OnLostFocus(EventArgs::Empty);
 }
 
 void Control::WmMeasureItem(Message& message) {
@@ -427,14 +427,14 @@ void Control::WmMouseEnter(Message& message) {
     //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseEnter message=" + message + ", name=" + this->name);
     controlEntered = *this;
     this->DefWndProc(message);
-    this->OnMouseEnter(EventArgs::Empty());
+    this->OnMouseEnter(EventArgs::Empty);
   }
 }
 
 void Control::WmMouseHover(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseHover message=" + message + ", name=" + this->name);
   this->DefWndProc(message);
-  this->OnMouseHover(EventArgs::Empty());
+  this->OnMouseHover(EventArgs::Empty);
 }
 
 void Control::WmMouseLeave(Message& message) {
@@ -442,7 +442,7 @@ void Control::WmMouseLeave(Message& message) {
   this->SetState(State::MouseEntered, false);
   controlEntered = null;
   this->DefWndProc(message);
-  this->OnMouseLeave(EventArgs::Empty());
+  this->OnMouseLeave(EventArgs::Empty);
 }
 
 void Control::WmMouseMove(Message& message) {
@@ -460,10 +460,10 @@ void Control::WmMouseMove(Message& message) {
 void Control::WmMouseUp(Message& message) {
   //System::Diagnostics::Debug::WriteLineIf(ShowDebugTrace::MouseWindowMessage, "Control::WmMouseUp message=" + message + ", name=" + this->name);
   if (this->GetState(State::DoubleClickFired)) {
-    this->OnDoubleClick(EventArgs::Empty());
+    this->OnDoubleClick(EventArgs::Empty);
     this->OnMouseDoubleClick(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), 2, 0));
   } else {
-    this->OnClick(EventArgs::Empty());
+    this->OnClick(EventArgs::Empty);
     this->OnMouseClick(MouseEventArgs(MessageToMouseButtons(message), MakePoint(message.LParam()), 1, 0));
   }
   this->DefWndProc(message);

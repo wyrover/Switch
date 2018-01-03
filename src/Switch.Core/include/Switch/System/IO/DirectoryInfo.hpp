@@ -19,10 +19,7 @@ namespace Switch {
       class _export DirectoryInfo final : public FileSystemInfo {
       public:
         /// @brief Represents the uninitialized directory object. This field is constant.
-        static const DirectoryInfo& Empty()  {
-          static DirectoryInfo empty;
-          return empty;
-        }
+        static const DirectoryInfo Empty;
 
         /// @brief Initializes a new instance of the System::IO::DirectoryInfo class on the specified path.
         DirectoryInfo() { }

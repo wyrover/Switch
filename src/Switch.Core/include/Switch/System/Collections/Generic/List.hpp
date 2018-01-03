@@ -206,7 +206,7 @@ namespace Switch {
           /// @par Examples
           /// The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, and the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, and inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
           /// @include ListBinarySearch.cpp
-          int32 BinarySearch(const T& item) const {return BinarySearch(0, this->Count, item, System::Collections::Generic::Comparer<T>::Default());}
+          int32 BinarySearch(const T& item) const {return BinarySearch(0, this->Count, item, System::Collections::Generic::Comparer<T>::Default);}
 
           /// @brief Searches the entire sorted List<T> for an element using the specified comparer and returns the zero-based index of the element.
           /// @param item The object to locate. The value can be null for reference types.
@@ -900,7 +900,7 @@ namespace Switch {
           /// @par Examples
           /// The BinarySearch(T) method overload is then used to search for two strings that are ! in the list, and the Insert method is used to insert them. The return value of the BinarySearch(T) method is negative in each case, because the strings are ! in the list. Taking the bitwise complement of this negative number produces the index of the first element in the list that is larger than the search string, and inserting at this location preserves the sort order. The second search string is larger than any element in the list, so the insertion position is at the end of the list.
           /// @include ListBinarySearch.cpp
-          void Sort() {this->Sort(System::Collections::Generic::Comparer<T>::Default());}
+          void Sort() {this->Sort(System::Collections::Generic::Comparer<T>::Default);}
 
           void Sort(Comparison<const T&> comparison) {
             this->operationNumber++;

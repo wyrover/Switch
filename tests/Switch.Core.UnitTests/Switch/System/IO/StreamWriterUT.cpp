@@ -26,7 +26,7 @@ namespace {
 
   TEST(StreamWriterTest, WriteUTF8) {
     string unicodeString = "Pi " + Char(928) + " ma " + Char(931) + " KOALA " + Char(128040);
-    refptr<Text::Encoding> encoding = Text::Encoding::UTF8();
+    refptr<Text::Encoding> encoding = Text::Encoding::UTF8;
     IO::MemoryStream s;
     IO::StreamWriter writer(s, *encoding);
     writer.Write(unicodeString);

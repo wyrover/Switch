@@ -9,6 +9,8 @@
 using namespace System;
 using namespace Microsoft::Win32;
 
+const RegistryKey RegistryKey::Null;
+
 RegistryKey::RegistryHandle::RegistryHandle(intptr key, const string& name) {
   if (Native::RegistryApi::CreateSubKey(key, name, this->handle) != 0)
     throw IO::IOException(_caller);
