@@ -419,73 +419,43 @@ void Console::WriteLine() {
 }
 
 void Console::WriteLine(bool value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(char value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(char16 value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(char32 value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(wchar value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(double value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(int32 value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(int64 value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(const object& value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(float value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(const String& value) {
@@ -496,59 +466,35 @@ void Console::WriteLine(const String& value) {
 }
 
 void Console::WriteLine(uint32 value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(uint64 value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(llong value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(ullong value) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(const char value[]) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(const char16 value[]) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(const char32 value[]) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::WriteLine(const wchar value[]) {
-  _lock(*out) {
-    Write(value);
-    WriteLine();
-  }
+  WriteLine(String::Format("{0}", value));
 }
 
 void Console::__f() {
