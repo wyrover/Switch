@@ -23,7 +23,7 @@ namespace Switch {
 
           /// @brief Returns a default sort order comparer for the type specified by the generic argument
           static const Comparer<T> Default;
-          
+
           /// @brief Compares two entities and returns a value indicating whether one is less than, equal to, or greater than the other.
           /// @param x The first entity to compare.
           /// @param y The second entity to compare.

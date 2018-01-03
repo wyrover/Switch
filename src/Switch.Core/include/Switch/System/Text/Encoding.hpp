@@ -52,7 +52,7 @@ namespace Switch {
         /// @brief Gets an encoding for the operating system's current ANSI code page.
         /// @return An encoding for the operating system's current ANSI code page (currently 437).
         static const refptr<Encoding> Default;
-        
+
         /// @brief Returns the encoding associated with the specified code page name.
         /// @param name The code page name of the preferred encoding. Possible values are listed in the Name column of the table that appears in the System::Text::Encoding class topic.
         /// @return The encoding associated with the specified code page.
