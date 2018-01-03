@@ -373,8 +373,9 @@ void Console::Write(float value) {
 }
 
 void Console::Write(const String& value) {
-  _lock(*out)
+  _lock(*out) {
     out->Write(value);
+  }
 }
 
 void Console::Write(uint32 value) {
@@ -418,8 +419,10 @@ void Console::WriteLine() {
 }
 
 void Console::WriteLine(bool value) {
-  Write(value);
-  WriteLine();
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(char value) {
