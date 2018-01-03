@@ -374,7 +374,7 @@ void Console::Write(float value) {
 
 void Console::Write(const String& value) {
   _lock(*out)
-  out->Write(value);
+    out->Write(value);
 }
 
 void Console::Write(uint32 value) {
@@ -414,83 +414,138 @@ void Console::Write(unsigned char* value) {
 }
 
 void Console::WriteLine() {
-  Write(string::Format("{0}", Environment::NewLine));
+  Write(Environment::NewLine);
 }
 
 void Console::WriteLine(bool value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  Write(value);
+  WriteLine();
 }
 
 void Console::WriteLine(char value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(char16 value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(char32 value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(wchar value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(double value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(int32 value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(int64 value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(const object& value) {
-  Write(string::Format("{0}{1}", value.ToString(), Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(float value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(const String& value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(uint32 value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(uint64 value) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(llong value) {
-  Write(String::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(ullong value) {
-  Write(String::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(const char value[]) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(const char16 value[]) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(const char32 value[]) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::WriteLine(const wchar value[]) {
-  Write(string::Format("{0}{1}", value, Environment::NewLine));
+  _lock(*out) {
+    Write(value);
+    WriteLine();
+  }
 }
 
 void Console::__f() {
