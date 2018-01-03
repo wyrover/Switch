@@ -37,7 +37,7 @@ namespace Switch {
     /// @par Examples
     /// The following example demonstrates displays a list of information about the current environment.
     /// @include Environment.cpp
-    class _export Environment _static {
+    class export_ Environment static_ {
     public:
       /// @enum SpecialFolder
       /// @brief Specifies enumerated constants used to retrieve directory paths to system special folders.
@@ -167,7 +167,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays its own command line.
       /// @include EnvironmentCommandLine.cpp
-      static _property<String, _readonly> CommandLine;
+      static property_<String, readonly_> CommandLine;
 
       /// @brief Gets or sets the current working directory.
       /// @param The current working directory. An empty string return value indicates an error,
@@ -181,11 +181,11 @@ namespace Switch {
       /// @par Example
       /// The following example demonstrates setting the CurrentDirectory property.
       /// @include EnvironmentCurrentDirectory.cpp
-      static _property<string> CurrentDirectory;
+      static property_<string> CurrentDirectory;
 
       /// @brief Gets a unique identifier for the current managed thread.
       /// @return int32 An integer that represents a unique identifier for this managed thread.
-      static _property<int32, _readonly> CurrentManagedThreadId;
+      static property_<int32, readonly_> CurrentManagedThreadId;
 
       /// @brief Gets or sets the exit code of the process.
       /// @return Int32 A 32-bit signed integer containing the exit code. The default value is zero.
@@ -242,20 +242,20 @@ namespace Switch {
       /// @endcode
       /// Note that code for EnvironmentExitCode is identical in function to the following example, except that the former defines an entry point named Main that has no return value, whereas this example defines an entry point named Main that returns an integer.
       /// @include EnvironmentExitCode2.cpp
-      static _property<int32> ExitCode;
+      static property_<int32> ExitCode;
 
       /// @brief Gets a value that indicates whether the current application domain is shutting down.
       /// @return bool true if the current application domain is shutting down; otherwise, false.
       /// @remarks At this time the return value is always false.
-      static _property<bool, _readonly> HasShutdownStarted;
+      static property_<bool, readonly_> HasShutdownStarted;
 
       /// @brief Determines whether the current operating system is a 64-bit operating system.
       /// @return bool true if the operating system is 64-bit; otherwise, false.
-      static _property<bool, _readonly> Is64BitOperatingSystem;
+      static property_<bool, readonly_> Is64BitOperatingSystem;
 
       /// @brief Determines whether the current process is a 64-bit process.
       /// @return bool true if the process is 64-bit; otherwise, false.
-      static _property<bool, _readonly> Is64BitProcess;
+      static property_<bool, readonly_> Is64BitProcess;
 
       /// @brief Gets the NetBIOS name of this local computer.
       /// @return string A string containing the name of this computer.
@@ -264,7 +264,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays the name of the computer that runs the code example. (The machine name is omitted from the example output for security reasons.)
       /// @include EnvironmentMachineName.cpp
-      static _property<String, _readonly> MachineName;
+      static property_<String, readonly_> MachineName;
 
       /// @brief Gets the newline string defined for this environment.
       /// @return string A string containing "\r\n" for non-Unix platforms, or a string containing "\n" for Unix platforms.
@@ -286,7 +286,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays the platform identifier and version number of the computer that runs the code example.
       /// @include EnvironmentOSVersion.cpp
-      static _property<const OperatingSystem&, _readonly> OSVersion;
+      static property_<const OperatingSystem&, readonly_> OSVersion;
 
       /// @brief Gets the number of processors on the current machine.
       /// @return int32 The 32-bit signed integer that specifies the number of processors on the current machine. There is no default. If the current machine contains multiple processor groups, this property returns the number of logical processors.
@@ -294,7 +294,7 @@ namespace Switch {
       /// @par Example
       /// The following example demonstrates the ProcessorCount property.
       /// @include EnvironmentProcessorCount.cpp
-      static _property<int32, _readonly> ProcessorCount;
+      static property_<int32, readonly_> ProcessorCount;
 
       /// @brief Gets current stack trace information.
       /// @return string A string containing stack trace information. This value can be string.Empty.
@@ -312,7 +312,7 @@ namespace Switch {
       /// @par Example
       /// The following example demonstrates the StackTrace property.
       /// @include EnvironmentStackTrace.cpp
-      static _property<String, _readonly> StackTrace;
+      static property_<String, readonly_> StackTrace;
 
       /// @brief Gets the fully qualified path of the system directory.
       /// @return string A string containing a directory path.
@@ -320,14 +320,14 @@ namespace Switch {
       /// @par Example
       /// The following example displays the system directory of the computer that runs the code example. (The system directory is omitted from the example output for security reasons.)
       /// @include EnvironmentsystemDirectory.cpp
-      static _property<String, _readonly> SystemDirectory;
+      static property_<String, readonly_> SystemDirectory;
 
       /// @brief Gets the number of bytes in the operating system's memory page.
       /// @return The number of bytes in the system memory page.
       /// @remarks This information can be useful when determining whether to use the MemoryMappedFileOptions.DelayAllocatePages option when you work with memory-mapped files.
       /// @remarks In Windows, this value is the dwPageSize member in the SYSTEM_INFO structure.
       /// @remarks At this time the return value is always 4096.
-      static _property<int32, _readonly> SystemPageSize;
+      static property_<int32, readonly_> SystemPageSize;
 
       /// @brief Gets the number of milliseconds elapsed since the system started.
       /// @return Int32 A 32-bit signed integer containing the amount of time in milliseconds that has passed since the last time the computer was started.
@@ -337,13 +337,13 @@ namespace Switch {
       /// @par Example
       /// The following example demonstrates how to retrieve the positive range of values returned by the TickCount property. The TickCount property cycles between Int32.MinValue, which is a negative number, and Int32.MaxValue once every 49.8 days. This code sample removes the sign bit to yield a nonnegative number that cycles between zero and MaxValue once every 24.9 days.
       /// @include EnvironmentTickCount.cpp
-      static _property<int32, _readonly> TickCount;
+      static property_<int32, readonly_> TickCount;
 
       /// @brief Gets the network domain name associated with the current user.
       /// @return string The network domain name associated with the current user.
       /// @remarks The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the UserDomainName property to obtain the user's domain name without the user name, and the UserName property to obtain the user name without the domain name. For example, if a user's domain name and user name are CORPORATENETWORK\john, the UserDomainName property returns "CORPORATENETWORK".
       /// @remarks The UserDomainName property first attempts to get the domain name component of the Windows account name for the current user. If that attempt fails, this property attempts to get the domain name associated with the user name provided by the UserName property. If that attempt fails because the host computer is not joined to a domain, then the host computer name is returned.
-      static _property<String, _readonly> UserDomainName;
+      static property_<String, readonly_> UserDomainName;
 
       /// @brief Gets a value indicating whether the current process is running in user interactive mode.
       /// @return bool true if the current process is running in user interactive mode; otherwise, false.
@@ -351,7 +351,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays whether the current process is running in user interactive mode.
       /// @include EnvironmentUserInteractive.cpp
-      static _property<bool, _readonly> UserInteractive;
+      static property_<bool, readonly_> UserInteractive;
 
       /// @brief Gets the user name of the person who is currently logged on to the Windows operating system.
       /// @return string The user name of the person who is logged on to Windows/Linux/macOS/... .
@@ -360,14 +360,14 @@ namespace Switch {
       /// @par Example
       /// The following example displays the user name of the person who started the current thread.
       /// @include EnvironmentUserName.cpp
-      static _property<String, _readonly> UserName;
+      static property_<String, readonly_> UserName;
 
       /// @brief Gets a Version object that describes the major, minor, build, and revision numbers of the Switch.
       /// @return Version An object that displays the version of the Switch.
       /// @par Example
       /// The following example displays the version of the Switch.
       /// @include EnvironmentVersion.cpp
-      static _property<const System::Version, _readonly> Version;
+      static property_<const System::Version, readonly_> Version;
 
       /// @brief Gets the amount of physical memory mapped to the process context.
       /// @return Int64 A 64-bit signed integer containing the number of bytes of physical memory mapped to the process context.
@@ -375,7 +375,7 @@ namespace Switch {
       /// @par Example
       /// The following example displays the size of the working set of the computer that runs the code example.
       /// @include EnvironmentWorkingSet.cpp
-      static _property<int64, _readonly> WorkingSet;
+      static property_<int64, readonly_> WorkingSet;
 
       /// @brief Terminates this process and gives the underlying operating system the specified exit code.
       /// @param exitCode Exit code to be given to the operating system.
@@ -402,7 +402,7 @@ namespace Switch {
       /// @remarks Use the FailFast method instead of the Exit method to terminate your application if the state of your application is damaged beyond repair, and executing your application's try/catch blocks and finalizers will corrupt program resources.
       /// @remarks Information is reported to Microsoft by using Windows Error Reporting. For more information, see Windows Error Reporting: Getting Started.
       /// @exception NotImplementedException This method always throw NotImplementedException.
-      static void FailFast(const string& message) {throw NotImplementedException("Use System::Environment::Exit method instead", _caller);}
+      static void FailFast(const string& message) {throw NotImplementedException("Use System::Environment::Exit method instead", caller_);}
 
       /// @brief Returns a string array containing the command-line arguments for the current process.
       /// @return Array<string> An array of string where each element contains a command-line argument. The first element is the executable file name, and the following zero or more elements contain the remaining command-line arguments.
@@ -511,7 +511,7 @@ namespace Switch {
       /// @return Array<string> A string array that contains the arguments without the command line.
       /// @exception InvalidOperationException Call more than once. CommandeLine has already been set and is not empty.
       /// @remarks This methode must be call only once in main.
-      /// @remarks if you use #_startup(default) you don't need to call this method; otherwise if you use the standerd C++ main method you need to call it.
+      /// @remarks if you use #startup_(default) you don't need to call this method; otherwise if you use the standerd C++ main method you need to call it.
       /// @par Example
       /// This example show how to call SetCommandLineArgs with sandard C++ main method:
       /// @include Main5.cpp

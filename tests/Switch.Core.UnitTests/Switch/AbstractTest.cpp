@@ -17,14 +17,14 @@ namespace SwitchUnitTests {
       ~NotInheritedFromAnAbstract() {result += "~NotInheritedFromAnAbstract";}
     };
 
-    _using(refptr<NotAnAbstract> value = ref_new<NotInheritedFromAnAbstract>());
+    using_(refptr<NotAnAbstract> value = ref_new<NotInheritedFromAnAbstract>());
     GTEST_ASSERT_EQ("~NotAnAbstract", result);
   }
 
   TEST(AbstractTest, CreateClassInheritedFromAnAbstract) {
     static string result;
     result = "";
-    struct AnAbstract _abstract {
+    struct AnAbstract abstract_ {
       ~AnAbstract() {result += "~AnAbstract";}
     };
 
@@ -32,7 +32,7 @@ namespace SwitchUnitTests {
       ~InheritedFromAnAbstract() {result += "~InheritedFromAnAbstract";}
     };
 
-    _using(refptr<AnAbstract> value = ref_new<InheritedFromAnAbstract>());
+    using_(refptr<AnAbstract> value = ref_new<InheritedFromAnAbstract>());
     GTEST_ASSERT_EQ("~InheritedFromAnAbstract~AnAbstract", result);
   }
 }

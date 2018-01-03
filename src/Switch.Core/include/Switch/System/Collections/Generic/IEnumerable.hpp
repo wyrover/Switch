@@ -17,7 +17,7 @@ namespace Switch {
         /// @interface IEnumerable
         /// @brief Exposes the enumerator, which supports a simple iteration over a generic collection.
         template<typename T>
-        class IEnumerable _interface {
+        class IEnumerable interface_ {
         public:
           /// @brief Returns an enumerator that iterates through a collection.
           /// @return IEnumerator An IEnumerator object that can be used to iterate through the collection.

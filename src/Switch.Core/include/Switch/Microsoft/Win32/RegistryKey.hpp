@@ -18,7 +18,7 @@ namespace Switch {
   namespace Microsoft {
     namespace Win32 {
       /// @brief Represents a key-level node in the Windows registry. This class is a registry encapsulation.
-      class _export RegistryKey : public object {
+      class export_ RegistryKey : public object {
       private:
         friend class Registry;
         RegistryKey(RegistryHive hkey);
@@ -147,10 +147,10 @@ namespace Switch {
         /// @exception UnthorizedAccessException The RegistryKey being manipulated is read-only.
         void DeleteValue(const System::String& name, bool throwOnMissingValue) {
           if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
-            throw System::UnauthorizedAccessException(_caller);
+            throw System::UnauthorizedAccessException(caller_);
 
           if ((this->values.ContainsKey(name.ToLower()) == false || this->values.Remove(name.ToLower()) == false) && throwOnMissingValue == true)
-            throw System::ArgumentException(_caller);
+            throw System::ArgumentException(caller_);
 
           this->Flush();
         }
@@ -182,7 +182,7 @@ namespace Switch {
 
         RegistryValueKind GetValueKind(const System::String& name) const  {
           if (! values.ContainsKey(name.ToLower()))
-            throw System::InvalidOperationException(_caller);
+            throw System::InvalidOperationException(caller_);
 
           return values[name.ToLower()].Kind();
         }
@@ -222,7 +222,7 @@ namespace Switch {
         template<typename T>
         void SetValue(const System::String& name, T value) {
           if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
-            throw System::UnauthorizedAccessException(_caller);
+            throw System::UnauthorizedAccessException(caller_);
           if (is<System::Int32>(Switch::Box(value)))
             this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), Switch::Microsoft::Win32::RegistryValueKind::DWord);
           else if (is<System::Array<System::String>>(Switch::Box(value)))
@@ -241,7 +241,7 @@ namespace Switch {
         template<typename T>
         void SetValue(const System::String& name, T value, Switch::Microsoft::Win32::RegistryValueKind valueKind) {
           if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
-            throw System::UnauthorizedAccessException(_caller);
+            throw System::UnauthorizedAccessException(caller_);
           switch (valueKind) {
           case RegistryValueKind::Binary: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), valueKind); break;
           case RegistryValueKind::MultiString: this->values[name.ToLower()] = RegistryKeyValue(name, Switch::Box(value), valueKind); break;
@@ -280,7 +280,7 @@ namespace Switch {
           case RegistryHive::PerformanceData: return "HKEY_PERFORMANCE_DATA";
           case RegistryHive::CurrentConfig: return "HKEY_CURRENT_CONFIG";
           case RegistryHive::DynData: return "HKEY_DYN_DATA";
-          default: throw System::ArgumentException(_caller);
+          default: throw System::ArgumentException(caller_);
           }
         }
 
@@ -291,11 +291,11 @@ namespace Switch {
           template<typename T>
           RegistryKeyValue(const System::String& key, T value, RegistryValueKind kind) : key(key), value(new T(value)), kind(kind) {
             switch (kind) {
-            case RegistryValueKind::Binary : if (! is<System::Array<byte>>(value)) throw System::ArgumentException(_caller); break;
-            case RegistryValueKind::DWord : if (! is<System::Int32>(value)) throw System::ArgumentException(_caller); break;
-            case RegistryValueKind::MultiString : if (! is<System::Array<System::String>>(value)) throw System::ArgumentException(_caller); break;
-            case RegistryValueKind::QWord : if (! is<System::Int64>(value)) throw System::ArgumentException(_caller); break;
-            default: if (! is<System::String>(value)) throw System::ArgumentException(_caller); break;
+            case RegistryValueKind::Binary : if (! is<System::Array<byte>>(value)) throw System::ArgumentException(caller_); break;
+            case RegistryValueKind::DWord : if (! is<System::Int32>(value)) throw System::ArgumentException(caller_); break;
+            case RegistryValueKind::MultiString : if (! is<System::Array<System::String>>(value)) throw System::ArgumentException(caller_); break;
+            case RegistryValueKind::QWord : if (! is<System::Int64>(value)) throw System::ArgumentException(caller_); break;
+            default: if (! is<System::String>(value)) throw System::ArgumentException(caller_); break;
             }
           }
 
@@ -341,7 +341,7 @@ namespace Switch {
               }
               return rkv;
             } catch (const System::Exception&) {
-              throw System::FormatException(_caller);
+              throw System::FormatException(caller_);
             }
           }
 
@@ -373,7 +373,7 @@ namespace Switch {
               }
               return bytes;
             } catch (const System::Exception&) {
-              throw System::FormatException(_caller);
+              throw System::FormatException(caller_);
             }
           }
 
@@ -388,7 +388,7 @@ namespace Switch {
               }
               return strings;
             } catch (const System::Exception&) {
-              throw System::FormatException(_caller);
+              throw System::FormatException(caller_);
             }
           }
 

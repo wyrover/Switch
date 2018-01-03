@@ -64,12 +64,12 @@ DateTime::DateTime() {
 
 DateTime::DateTime(int64 ticks): value(ticks), kind(DateTimeKind::Unspecified) {
   if (ticks > DateTimeMaximumValue || ticks < DateTimeMinimumValue)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 }
 
 DateTime::DateTime(int64 ticks, DateTimeKind kind) : value(ticks), kind(kind) {
   if (ticks > DateTimeMaximumValue || ticks < DateTimeMinimumValue)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 }
 
 DateTime::DateTime(int32 year, int32 month, int32 day) {
@@ -164,7 +164,7 @@ TypeCode DateTime::GetTypeCode() const {
 
 int32 DateTime::DaysInMonth(int32 year, int32 month) {
   if (month < 1 || month > 12)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (month == 2)
     return IsLeapYear(year) ? 29 : 28;
@@ -235,7 +235,7 @@ DateTime DateTime::ToLocalTime() const {
 
   int64 seconds = Native::DateTimeApi::Mkgmtime(year, month, day, hour, minute, second);
   if (seconds == -1)
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 
   return DateTime(seconds * TimeSpan::TicksPerSecond + TicksTo1970, DateTimeKind::Local);
 }
@@ -249,7 +249,7 @@ DateTime DateTime::ToUniversalTime() const {
 
   int64 seconds = Native::DateTimeApi::Mktime(year, month, day, hour, minute, second);
   if (seconds == -1)
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 
   return DateTime(seconds * TimeSpan::TicksPerSecond + TicksTo1970, DateTimeKind::Utc);
 }
@@ -269,7 +269,7 @@ void DateTime::SetDateTime(int32 year, int32 month, int32 day, int32 hour, int32
     (year == minYear && month == minMonth && day == minDay && hour  < minHour) ||
     (year == minYear && month == minMonth && day == minDay && hour == minHour && minute  < minMinute) ||
     (year == minYear && month == minMonth && day == minDay && hour == minHour && minute == minMinute && second < minSecond))
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (year  > maxYear ||
     (year == maxYear && month  > maxMonth) ||
@@ -277,11 +277,11 @@ void DateTime::SetDateTime(int32 year, int32 month, int32 day, int32 hour, int32
     (year == maxYear && month == maxMonth && day == maxDay && hour > maxHour) ||
     (year == maxYear && month == maxMonth && day == maxDay && hour == maxHour && minute > maxMinute) ||
     (year == maxYear && month == maxMonth && day == maxDay && hour == maxHour && minute == maxMinute && second > maxSecond))
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   int64 seconds = kind == DateTimeKind::Local ? Native::DateTimeApi::Mktime(year, month, day, hour, minute, second) : Native::DateTimeApi::Mkgmtime(year, month, day, hour, minute, second);
   if (seconds == -1)
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 
   this->kind = kind;
   this->value = seconds * TimeSpan::TicksPerSecond + (int64)millisecond * TimeSpan::TicksPerMillisecond + TicksTo1970;
@@ -333,15 +333,15 @@ int32 DateTime::CompareTo(const IComparable& obj) const {
 }
 
 bool DateTime::ToBoolean(const IFormatProvider& provider) const {
-  throw InvalidCastException(_caller);
+  throw InvalidCastException(caller_);
 }
 
 byte DateTime::ToByte(const IFormatProvider& provider) const {
-  throw InvalidCastException(_caller);
+  throw InvalidCastException(caller_);
 }
 
 char32 DateTime::ToChar(const IFormatProvider& provider) const {
-  throw InvalidCastException(_caller);
+  throw InvalidCastException(caller_);
 }
 
 DateTime DateTime::ToDateTime(const IFormatProvider& provider) const {
@@ -354,20 +354,20 @@ double DateTime::ToDouble(const IFormatProvider& provider) const {
 
 int16 DateTime::ToInt16(const IFormatProvider& provider) const {
   if (this->value < Int16::MinValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   if (this->value > Int16::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (int16)this->value;
 }
 
 int32 DateTime::ToInt32(const IFormatProvider& provider) const {
   if (this->value < Int32::MinValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   if (this->value > Int32::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (int32)this->value;
 }
@@ -378,40 +378,40 @@ int64 DateTime::ToInt64(const IFormatProvider& provider) const {
 
 uint16 DateTime::ToUInt16(const IFormatProvider& provider) const {
   if (this->value < UInt16::MinValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   if (this->value > UInt16::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (uint16)this->value;
 }
 
 uint32 DateTime::ToUInt32(const IFormatProvider& provider) const {
   if (this->value < static_cast<int32>(UInt32::MinValue))
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   if (this->value > UInt32::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (uint32)this->value;
 }
 
 uint64 DateTime::ToUInt64(const IFormatProvider& provider) const {
   if (this->value < static_cast<int64>(UInt64::MinValue))
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   if ((uint64)this->value > UInt64::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (uint64)this->value;
 }
 
 sbyte DateTime::ToSByte(const IFormatProvider& provider) const {
   if (this->value < SByte::MinValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   if (this->value > SByte::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (sbyte)this->value;
 }

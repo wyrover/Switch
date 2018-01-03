@@ -12,7 +12,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       Console::WriteLine("Press Ctrl+C to quit...");
-      Thread server(ThreadStart(_delegate {
+      Thread server(ThreadStart(delegate_ {
         TcpListener tcpListener(IPAddress::Any, 9050);
         tcpListener.Start();
         StreamReader streamReader(tcpListener.AcceptTcpClient().GetStream());
@@ -22,7 +22,7 @@ namespace Examples {
       }));
       server.Start();
 
-      Thread client(ThreadStart(_delegate {
+      Thread client(ThreadStart(delegate_ {
         StreamWriter streamWriter(TcpClient("127.0.0.1", 9050).GetStream());
         int counter = Random().Next(1, 20000);
         while (true) {
@@ -39,7 +39,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::TcpClientExample);
+startup_(Examples::TcpClientExample);
 
 // This code example can produce the following output:
 //

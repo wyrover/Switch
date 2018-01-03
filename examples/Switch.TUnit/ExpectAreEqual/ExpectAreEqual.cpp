@@ -4,21 +4,21 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  class _TestFixture(UserTest) {
-    void _Test(PassedTestAreEqual) {
+  class TestFixture_(UserTest) {
+    void Test_(PassedTestAreEqual) {
       string s = "One";
-      Expect::AreEqual("One", s, _caller);
+      Expect::AreEqual("One", s, caller_);
     }
 
-    void _Test(FailedTestAreEqual) {
+    void Test_(FailedTestAreEqual) {
       int32 i = 42;
-      Expect::AreEqual(123, i, _caller);
+      Expect::AreEqual(123, i, caller_);
     }
   };
 
-  _AddTestFixture(UserTest);
-  _AddTest(UserTest, PassedTestAreEqual);
-  _AddTest(UserTest, FailedTestAreEqual);
+  AddTestFixture_(UserTest);
+  AddTest_(UserTest, PassedTestAreEqual);
+  AddTest_(UserTest, FailedTestAreEqual);
 }
 
 // This code produces the following output:

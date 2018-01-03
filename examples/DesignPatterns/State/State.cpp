@@ -8,7 +8,7 @@ namespace DesignPatterns {
   namespace Behavioral {
     class Context;
     // The 'State' abstract class
-    class State _abstract {
+    class State abstract_ {
     public:
       virtual void Handle(Context& context) = 0;
     };
@@ -22,9 +22,9 @@ namespace DesignPatterns {
       }
 
       // Gets or sets the state
-      _property<refptr<DesignPatterns::Behavioral::State>> State {
-        _get { return this->state; },
-        _set {
+      property_<refptr<DesignPatterns::Behavioral::State>> State {
+        get_ { return this->state; },
+        set_ {
           this->state = value;
           Console::WriteLine("State: " + this->state->GetType().Name);
         }
@@ -58,7 +58,7 @@ namespace DesignPatterns {
       context.State = ref_new<ConcreteStateA>();
     }
 
-    // MainApp _startup class for Behavioral
+    // MainApp startup_ class for Behavioral
     // State Design Pattern.
     class MainApp {
     public:
@@ -78,7 +78,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 
 // This code produces the following output:
 //

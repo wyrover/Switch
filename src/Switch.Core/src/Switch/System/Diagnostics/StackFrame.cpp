@@ -7,7 +7,7 @@ using namespace System::Diagnostics;
 
 void StackFrame::FillFrame(int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   stacktrace::call_stack st;
   FillFrame(&st, skipFrames, needFileInfo);
@@ -15,7 +15,7 @@ void StackFrame::FillFrame(int32 skipFrames, bool needFileInfo) {
 
 void StackFrame::FillFrame(void* callStack, int32 skipFrames, bool needFileInfo) {
   if (skipFrames < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (skipFrames < GetFrameCount(callStack)) {
     if (needFileInfo) {

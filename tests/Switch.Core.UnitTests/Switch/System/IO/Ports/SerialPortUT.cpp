@@ -15,7 +15,7 @@ namespace {
   void ReceiveChars() {
     Console::WriteLine("Start Receiver...");
     if (RS232_OpenComport(ReceiverPort, BaudRate, Mode) != 0)
-      throw System::IO::IOException(_caller);
+      throw System::IO::IOException(caller_);
 
     while (!Quit) {
       byte buf[4096] = {0};
@@ -46,13 +46,13 @@ namespace {
     Console::WriteLine("Start Transmitter...");
 
     if (RS232_OpenComport(TransmitterPort, BaudRate, Mode) != 0)
-      throw System::IO::IOException(_caller);
+      throw System::IO::IOException(caller_);
 
     string str = "The quick brown fox jumped over the lazy grey dog.";
 
     while (!Quit) {
       if (RS232_SendBuf(TransmitterPort, (unsigned char*)str.Data(), str.Length()) != str.Length())
-        throw System::IO::IOException(_caller);
+        throw System::IO::IOException(caller_);
 
       Console::WriteLine("{0} sent: {1}", ++nbSend, str);
 

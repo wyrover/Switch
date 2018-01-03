@@ -24,7 +24,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Provides static methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of System::IO::FileStream objects.
-      class _export File _static {
+      class export_ File static_ {
       public:
         /// @brief Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the specified lines to the file, and then closes the file.
         /// @param path The file to write to.

@@ -27,7 +27,7 @@ namespace Switch {
       using IOrderedEnumerable = System::Collections::Generic::IEnumerable<T>;
 
       /// @brief Provides a set of static methods for querying objects that implement IEnumerable<T>.
-      class _export Enumerable _static {
+      class export_ Enumerable static_ {
       public:
         /// @brief Applies an accumulator function over a sequence.
         /// @param source An IEnumerable<T> to aggregate over.
@@ -162,7 +162,7 @@ namespace Switch {
             ++count;
           }
           if (count == 0)
-            throw InvalidOperationException(_caller);
+            throw InvalidOperationException(caller_);
           return average / count;
         }
 
@@ -181,7 +181,7 @@ namespace Switch {
             ++count;
           }
           if (count == 0)
-            throw InvalidOperationException(_caller);
+            throw InvalidOperationException(caller_);
           return average / count;
         }
 
@@ -200,7 +200,7 @@ namespace Switch {
             ++count;
           }
           if (count == 0)
-            throw InvalidOperationException(_caller);
+            throw InvalidOperationException(caller_);
           return average / count;
         }
 
@@ -219,7 +219,7 @@ namespace Switch {
             ++count;
           }
           if (count == 0)
-            throw InvalidOperationException(_caller);
+            throw InvalidOperationException(caller_);
           return average / count;
         }
 
@@ -343,7 +343,7 @@ namespace Switch {
         template<typename TSource, typename TKey>
         static refptr<EnumerableCollection<TSource>> OrderBy(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, TKey>& keySelector) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>(source);
-          System::Comparison<const TSource&> comparer = _delegate(const TSource & x, const TSource & y) {
+          System::Comparison<const TSource&> comparer = delegate_(const TSource & x, const TSource & y) {
             if (keySelector(x) < keySelector(y)) return -1;
             if (keySelector(x) == keySelector(y)) return 0;
             return 1;
@@ -358,7 +358,7 @@ namespace Switch {
         template<typename TSource, typename TKey>
         static refptr<EnumerableCollection<TSource>> OrderByDescending(const Collections::Generic::IEnumerable<TSource>& source, const System::Func<const TSource&, TKey>& keySelector) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>(source);
-          System::Comparison<const TSource&> comparer = _delegate(const TSource & x, const TSource & y) {
+          System::Comparison<const TSource&> comparer = delegate_(const TSource & x, const TSource & y) {
             if (keySelector(x) < keySelector(y)) return 1;
             if (keySelector(x) == keySelector(y)) return 0;
             return -1;

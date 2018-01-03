@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Strategy' abstract class
-    class Strategy _abstract {
+    class Strategy abstract_ {
     public:
       virtual void AlgorithmInterface() = 0;
     };
@@ -56,7 +56,7 @@ namespace DesignPatterns {
       refptr<Strategy> strategy;
     };
 
-    // MainApp _startup class for Behavioral
+    // MainApp startup_ class for Behavioral
     // Strategy Design Pattern.
     class MainApp {
     public:
@@ -79,7 +79,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 
 // This code produces the following output:
 //

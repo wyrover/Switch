@@ -16,13 +16,13 @@ namespace Switch {
       /// @remarks The IPEndPoint class contains the host and local or remote port information needed by an application to connect to a service on a host. By combining the host's IP address and port number of a service, the IPEndPoint class forms a connection point to a service.
       /// @par Library
       /// Switch.System
-      class _export IPEndPoint : public EndPoint {
+      class export_ IPEndPoint : public EndPoint {
       public:
         /// @brief Specifies the minimum value that can be assigned to the Port property. The MinPort value is set to 0x00000000. This field is read-only.
-        static _property<int32, _readonly> MinPort;
+        static property_<int32, readonly_> MinPort;
 
         /// @brief Specifies the maximum value that can be assigned to the Port property. The MaxPort value is set to 0x0000FFFF. This field is read-only.
-        static _property<int32, _readonly> MaxPort;
+        static property_<int32, readonly_> MaxPort;
 
         /// @brief Initializes a new instance of the EndPoint class.
         /// @param address The IP address of the Internet host.
@@ -51,17 +51,17 @@ namespace Switch {
         /// @brief Gets the IP address of the endpoint.
         /// @param value An IPAddress instance containing the IP address of the endpoint.
         /// @exception ArgumentNullException The address parameter is a null.
-        _property<const IPAddress&> Address{
-          _get->const IPAddress& { return this->address; },
-          _set {this->SetAddress(value);}
+        property_<const IPAddress&> Address{
+          get_->const IPAddress& { return this->address; },
+          set_ {this->SetAddress(value);}
         };
 
         /// @brief Gets or sets the port number of the endpoint.
         /// @param value An integer value in the range MinPort to MaxPort indicating the port number of the endpoint.
         /// @exception ArgumentOutOfRangeException port is less than IPEndPoint::MinPort. -or- port is greater than IPEndPoint::MaxPort.
-        _property<int32> Port {
-          _get { return this->port; },
-          _set {this->SetPort(value);}
+        property_<int32> Port {
+          get_ { return this->port; },
+          set_ {this->SetPort(value);}
         };
 
         /// @brief Serializes endpoint information into a SocketAddress instance.

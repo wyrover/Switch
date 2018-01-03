@@ -24,7 +24,7 @@ void Native::ApplicationApi::Exit() {
 }
 
 void Native::ApplicationApi::MessageLoop(const System::Windows::Forms::Form& mainForm, EventHandler idle) {
-  Glib::signal_idle().connect(_delegate {
+  Glib::signal_idle().connect(delegate_ {
     idle.Invoke(object(), EventArgs::Empty());
     return mainForm.Visible() && !idle.IsEmpty();
   });

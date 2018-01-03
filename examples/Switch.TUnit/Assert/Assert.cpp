@@ -5,32 +5,32 @@ using namespace System;
 
 namespace UnitTests {
   // The class TimeSpanTest must be inherited from TestFixture
-  class _TestFixture(TimeSpanTest) {
+  class TestFixture_(TimeSpanTest) {
     // Used Assert::AreEqual method to test value
-    void _Test(CreateTimeSpanFromDateTime) {
+    void Test_(CreateTimeSpanFromDateTime) {
       DateTime n = DateTime(2015, 9, 5, 9, 15, 0);
       TimeSpan ts(n.Ticks);
-      Assert::AreEqual(9, ts.Hours, _caller);
-      Assert::AreEqual(15, ts.Minutes, _caller);
+      Assert::AreEqual(9, ts.Hours, caller_);
+      Assert::AreEqual(15, ts.Minutes, caller_);
     }
 
     // Used Assert::IsTrue to virifie if a condition is true
-    void _Test(TimeSpanIsEqualToAnotherTimeSpan) {
+    void Test_(TimeSpanIsEqualToAnotherTimeSpan) {
       TimeSpan ts(10, 42, 24);
-      Assert::IsTrue(ts.Equals(TimeSpan(10, 42, 24)), _caller);
+      Assert::IsTrue(ts.Equals(TimeSpan(10, 42, 24)), caller_);
     }
 
     // Used Assert::IsFalse to virifie if a condition is false
-    void _Test(DefaultTimeSpanIsEqualToZero) {
-      Assert::IsFalse(TimeSpan(1) == TimeSpan::Zero(), _caller);
+    void Test_(DefaultTimeSpanIsEqualToZero) {
+      Assert::IsFalse(TimeSpan(1) == TimeSpan::Zero(), caller_);
     }
   };
 
-  // Used _AddTest to add unit test to execute at the unit test suit.
-  _AddTestFixture(TimeSpanTest);
-  _AddTest(TimeSpanTest, CreateTimeSpanFromDateTime);
-  _AddTest(TimeSpanTest, TimeSpanIsEqualToAnotherTimeSpan);
-  _AddTest(TimeSpanTest, DefaultTimeSpanIsEqualToZero);
+  // Used AddTest_ to add unit test to execute at the unit test suit.
+  AddTestFixture_(TimeSpanTest);
+  AddTest_(TimeSpanTest, CreateTimeSpanFromDateTime);
+  AddTest_(TimeSpanTest, TimeSpanIsEqualToAnotherTimeSpan);
+  AddTest_(TimeSpanTest, DefaultTimeSpanIsEqualToZero);
 }
 
 // This code produces the following output:

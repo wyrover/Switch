@@ -17,7 +17,7 @@ namespace Switch {
       /// @brief Provides a container class for Internet host address information.
       /// @par Library
       /// Switch.System
-      class _export IPHostEntry : public Object {
+      class export_ IPHostEntry : public Object {
       public:
         /// @brief Initializes a new instance of the IPHostEntry.
         IPHostEntry() {}
@@ -33,20 +33,20 @@ namespace Switch {
 
         /// @brief Get List of IP addresses that are associated with a host.
         /// @return Array<IPAddress> An IPAddress array on List of IP addresses that are associated with a host.
-        _property<const Array<IPAddress>&, _readonly> AddressList {
-          _get->const Array<IPAddress>& {return this->GetAddressList();}
+        property_<const Array<IPAddress>&, readonly_> AddressList {
+          get_->const Array<IPAddress>& {return this->GetAddressList();}
         };
 
         /// @brief Get List of aliases that are associated with a host.
         /// @return Array<string> A string array on List of aliases that are associated with a host.
-        _property<const Array<string>&, _readonly> Aliases {
-          _get->const Array<string>& {return this->GetAliases();}
+        property_<const Array<string>&, readonly_> Aliases {
+          get_->const Array<string>& {return this->GetAliases();}
         };
 
         /// @brief Get the DNS name of the host.
         /// @return string A string represent the DNS name of the host.
-        _property<const string&, _readonly> HostName {
-          _get->const string& {return this->GetHostName();}
+        property_<const string&, readonly_> HostName {
+          get_->const string& {return this->GetHostName();}
         };
 
       private:

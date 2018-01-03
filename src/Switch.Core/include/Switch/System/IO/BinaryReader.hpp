@@ -18,7 +18,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Reads primitive data types as binary values in a specific encoding.
-      class _export BinaryReader : public Object {
+      class export_ BinaryReader : public Object {
       public:
         /// @brief Initializes a new instance of the System::IO::BinaryReader class.
         BinaryReader() {}
@@ -32,7 +32,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (!stream.CanRead())
-            throw ArgumentException(_caller);
+            throw ArgumentException(caller_);
         }
 
         /// @brief Initializes a new instance of the System::IO::BinaryReader class for the specified Sream pointer.
@@ -41,7 +41,7 @@ namespace Switch {
         /// @exception ArgumentException stream is not readable.
         BinaryReader(refptr<Stream> stream) : stream(stream) {
           if (!stream->CanRead())
-            throw ArgumentException(_caller);
+            throw ArgumentException(caller_);
         }
 
         /// @cond
@@ -50,8 +50,8 @@ namespace Switch {
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
         /// @return The stream this BinaryReader is reading from.
-        _property<Stream&, _readonly> BaseStream {
-          _get->Stream& {return this->GetBaseStream();}
+        property_<Stream&, readonly_> BaseStream {
+          get_->Stream& {return this->GetBaseStream();}
         };
 
         /// @brief Closes the current BinaryReader object and the underlying stream.
@@ -113,7 +113,7 @@ namespace Switch {
         virtual Array<byte> ReadBytes(int32 count) {
           Array<byte> values(count);
           if (Read(values, 0, count) != count)
-            throw EndOfStreamException(_caller);
+            throw EndOfStreamException(caller_);
           return values;
         }
 

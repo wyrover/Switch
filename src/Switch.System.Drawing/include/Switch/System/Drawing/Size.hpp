@@ -19,10 +19,10 @@ namespace Switch {
       /// @brief Stores an ordered pair of integers, which specify a Height and Width.
       /// @par Library
       /// Switch.System.Drawing
-      class _export Size : public object {
+      class export_ Size : public object {
       public:
         /// @brief Gets a Size class that has a Height and Width value of 0. This field is constant.
-        static _property<Size, _readonly> Empty;
+        static property_<Size, readonly_> Empty;
 
         /// @brief Initializes a new instance of the Size class that has a Height and Width value of 0.
         Size() = default;
@@ -44,17 +44,17 @@ namespace Switch {
         /// @brief Gets or sets the vertical component of this Size Class.
         /// @return int32 The vertical component of this Size class, typically measured in pixels.
         /// @remarks The unit for the Height and Width of the Size class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        _property<int32> Height {
-          _get {return this->height;},
-          _set {this->height = value;}
+        property_<int32> Height {
+          get_ {return this->height;},
+          set_ {this->height = value;}
         };
 
         /// @brief Gets or sets the horizontal component of this Size class.
         /// @return int32 The horizontal component of this Size class, typically measured in pixels.
         /// @remarks The unit for the Height and Width of the Size class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        _property<int32> Width {
-          _get {return this->width;},
-          _set {this->width = value;}
+        property_<int32> Width {
+          get_ {return this->width;},
+          set_ {this->width = value;}
         };
 
         /// @brief Determines whether this instance of Size and a specified object, which must also be a Size object, have the same value.

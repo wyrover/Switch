@@ -18,16 +18,16 @@ namespace {
     ProcessInfo(pid_t pid, const string &name, const string& path) : pid(pid), name(name), path(path) {}
     ProcessInfo(const ProcessInfo& pi) : pid(pi.pid),  name(pi.name), path(pi.path) {}
 
-    _property<intptr, _readonly> Id {
-      _get {return this->pid;}
+    property_<intptr, readonly_> Id {
+      get_ {return this->pid;}
     };
 
-    _property<string, _readonly> Name {
-      _get {return this->name;}
+    property_<string, readonly_> Name {
+      get_ {return this->name;}
     };
 
-    _property<string, _readonly> Path {
-      _get {return this->path;}
+    property_<string, readonly_> Path {
+      get_ {return this->path;}
     };
 
     String ToString() const override {return string::Format("{{pid={0}, Name={1}, Path={2}}}", this->pid, this->name, this->path);}
@@ -41,7 +41,7 @@ namespace {
   string GetProcessPath(pid_t id) {
     char path[PROC_PIDPATHINFO_SIZE + 1] = {0};
     if (proc_pidinfo(id, PROC_PIDPATHINFO, 0, &path, PROC_PIDPATHINFO_SIZE) != 0)
-      throw System::InvalidOperationException(_caller);
+      throw System::InvalidOperationException(caller_);
     return path;
   }
 

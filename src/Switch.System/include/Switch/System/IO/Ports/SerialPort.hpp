@@ -20,7 +20,7 @@ namespace Switch {
         /// @brief Represents a serial port resource.
         /// @par Library
         /// Switch.System
-        class _export SerialPort : public Object {
+        class export_ SerialPort : public Object {
         public:
           SerialPort() {}
           /// @cond
@@ -40,24 +40,24 @@ namespace Switch {
 
           static Array<String> GetPortNames();
 
-          _property<int32, _readonly> BaudRate {
-            _get {return this->baudRate;}
+          property_<int32, readonly_> BaudRate {
+            get_ {return this->baudRate;}
           };
 
-          _property<int32, _readonly> DataBits {
-            _get {return this->dataBits;}
+          property_<int32, readonly_> DataBits {
+            get_ {return this->dataBits;}
           };
 
-          _property<System::IO::Ports::Parity, _readonly> Parity {
-            _get {return this->parity;}
+          property_<System::IO::Ports::Parity, readonly_> Parity {
+            get_ {return this->parity;}
           };
 
-          _property<const string&, _readonly> Port {
-            _get->const string& {return this->port;}
+          property_<const string&, readonly_> Port {
+            get_->const string& {return this->port;}
           };
 
-          _property<System::IO::Ports::StopBits, _readonly> StopBits {
-            _get {return this->stopBits;}
+          property_<System::IO::Ports::StopBits, readonly_> StopBits {
+            get_ {return this->stopBits;}
           };
 
         private:

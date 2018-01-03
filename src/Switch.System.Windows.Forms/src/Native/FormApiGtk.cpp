@@ -19,12 +19,12 @@ namespace Native {
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
 
-      this->signal_show().connect(_delegate {
+      this->signal_show().connect(delegate_ {
         this->scrolledWindow.show();
         this->fixed.show();
       });
 
-      this->signal_hide().connect(_delegate {
+      this->signal_hide().connect(delegate_ {
         System::Windows::Forms::Control::FromHandle((intptr)this)().Visible = false;
       });
     }

@@ -62,7 +62,7 @@ namespace System {
 * **Interface** : PascalCasing
 
 ```c++
-class IEnumerable _interface {
+class IEnumerable interface_ {
   ...
 };
 ```
@@ -81,9 +81,9 @@ public:
 ```c++
 class String : public object {
 public:
-  _property<int> Length {
-    _get {return this->length;},
-    _set {this->length = value;}
+  property_<int> Length {
+    get_ {return this->length;},
+    set_ {this->length = value;}
   }
 };
 ```

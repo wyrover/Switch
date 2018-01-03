@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Switch::Caller class and #_caller keyword.
+/// @brief Contains Switch::Caller class and #caller_ keyword.
 #pragma once
 
 #include "../../../Types.hpp"
@@ -18,7 +18,7 @@ namespace Switch {
         /// @par Examples
         /// The following example shows how to use the Caller
         /// @include Caller.cpp
-        class _export Caller : public System::Object {
+        class export_ Caller : public System::Object {
         public:
           Caller() {}
           Caller(const System::String& filePath, int32 lineNumber) : filePath(filePath), lineNumber(lineNumber) {}
@@ -36,20 +36,20 @@ namespace Switch {
 
           /// @brief Gets the member name
           /// @return string member name
-          _property<const System::String&, _readonly> MemberNamne {
-            _get->const System::String& {return this->memberNamne;}
+          property_<const System::String&, readonly_> MemberNamne {
+            get_->const System::String& {return this->memberNamne;}
           };
 
           /// @brief Gets the file path
           /// @return string file path
-          _property<const System::String&, _readonly> FilePath {
-            _get->const System::String& {return this->filePath;}
+          property_<const System::String&, readonly_> FilePath {
+            get_->const System::String& {return this->filePath;}
           };
 
           /// @brief Gets the line number
           /// @return int32 line number
-          _property<int32, _readonly> LineNumber {
-            _get {return this->lineNumber;}
+          property_<int32, readonly_> LineNumber {
+            get_ {return this->lineNumber;}
           };
 
           System::String ToString() const override {
@@ -72,10 +72,10 @@ namespace Switch {
   /// @brief Get Switch::System::Runtime::CompilerServices::Caller informations
   /// @return Switch::System::Runtime::CompilerServices::Caller caller informations.
   /// @par Examples
-  /// The following example shows how to use the #_caller.
+  /// The following example shows how to use the #caller_.
   /// @include Caller.cpp
   /// @ingroup Keywords
-#define _caller \
+#define caller_ \
   Switch::System::Runtime::CompilerServices::Caller(__func__, __FILE__, __LINE__)
 }
 

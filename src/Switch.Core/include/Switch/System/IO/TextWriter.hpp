@@ -35,7 +35,7 @@ namespace Switch {
       /// @endcond
 
       /// @brief Represents a writer that can write a sequential series of characters.
-      class _export TextWriter: public Object {
+      class export_ TextWriter: public Object {
       public:
         /// @brief Provides a TextWriter with no backing store that can be written to, but not read from.
         /// @remarks Use cNull to redirect output to a stream that will not consume any operating system resources.
@@ -43,14 +43,14 @@ namespace Switch {
         static NullTextWriter& Null();
 
         /// @brief When overridden in a derived class, returns the character encoding in which the output is written.
-        _property<Text::Encoding&, _readonly> Encoding {
-          _get->Text::Encoding& {return this->GetEncoding();}
+        property_<Text::Encoding&, readonly_> Encoding {
+          get_->Text::Encoding& {return this->GetEncoding();}
         };
 
         /// @brief Gets or sets the line terminator string used by the current TextWriter.
-        _property<const string&> NewLine {
-          _get->const string& {return this->GetNewLine();},
-          _set {this->SetNewLine(value);}
+        property_<const string&> NewLine {
+          get_->const string& {return this->GetNewLine();},
+          set_ {this->SetNewLine(value);}
         };
 
         /// @brief Closes the current writer and releases any system resources associated with the writer.

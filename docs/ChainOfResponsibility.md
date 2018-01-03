@@ -27,7 +27,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Handler' abstract class
-    class Handler _abstract {
+    class Handler abstract_ {
     public:
       void SetSuccessor(refptr<Handler> successor) {this->successor = successor;}
       
@@ -98,7 +98,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 ```
 
 # Output

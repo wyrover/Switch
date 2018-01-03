@@ -18,7 +18,7 @@ namespace Switch {
         /// @remarks Label controls are typically used to provide descriptive text for a control. For example, you can use a Label to add descriptive text for a TextBox control to inform the user about the type of data expected in the control. Label controls can also be used to add descriptive text to a Form to provide the user with helpful information. For example, you can add a Label to the top of a Form that provides instructions to the user on how to input data in the controls on the form. Label controls can be also used to display run time information on the status of an application. For example, you can add a Label control to a form to display the status of each file as a list of files is processed.
         /// @remarks A Label participates in the tab order of a form, but does not receive focus (the next control in the tab order receives focus). For example, if the UseMnemonic property is set to true, and a mnemonic character—the first character after an ampersand (&)—is specified in the Text property of the control, when a user presses ALT+ the mnemonic key, focus moves to the next control in the tab order. This feature provides keyboard navigation for a form. In addition to displaying text, the Label control can also display an image using the Image property, or a combination of the ImageIndex and ImageList properties.
         /// @note A Label can be made transparent by setting its BackColor property to Color.Transparent. When you use a transparent label, use only the current device coordinate system to draw on the container, or the Label background might paint improperly.
-        class _export ProgressBar : public Control {
+        class export_ ProgressBar : public Control {
         public:
           ProgressBar() : Control("", 0, 0, 100, System::Environment::OSVersion().Platform == System::PlatformID::MacOSX ? 20 : 23) {
             this->SetStyle(ControlStyles::UserPaint, false);
@@ -29,29 +29,29 @@ namespace Switch {
           ProgressBar(const ProgressBar& progressBar) : Control(progressBar), marqueeAnimationSpeed(progressBar.marqueeAnimationSpeed), maximum(progressBar.maximum), minimum(progressBar.minimum), style(progressBar.style), value(progressBar.value) {}
           /// @endcond
 
-          _property<int32> MarqueeAnimationSpeed {
-            _get{ return this->marqueeAnimationSpeed; },
-            _set{ this->SetMarqueeAnimationSpeed(value); },
+          property_<int32> MarqueeAnimationSpeed {
+            get_{ return this->marqueeAnimationSpeed; },
+            set_{ this->SetMarqueeAnimationSpeed(value); },
           };
 
-          _property<int32> Maximum{
-            _get{ return this->maximum; },
-            _set{ this->SetMaximum(value); },
+          property_<int32> Maximum{
+            get_{ return this->maximum; },
+            set_{ this->SetMaximum(value); },
           };
 
-          _property<int32> Minimum{
-            _get{ return this->minimum; },
-            _set{ this->SetMinimum(value); },
+          property_<int32> Minimum{
+            get_{ return this->minimum; },
+            set_{ this->SetMinimum(value); },
           };
 
-          _property<ProgressBarStyle> Style{
-            _get{ return this->style; },
-            _set{ this->SetProgressStyle(value); },
+          property_<ProgressBarStyle> Style{
+            get_{ return this->style; },
+            set_{ this->SetProgressStyle(value); },
           };
 
-          _property<int32> Value{
-            _get{ return this->value; },
-            _set{ this->SetValue(value); },
+          property_<int32> Value{
+            get_{ return this->value; },
+            set_{ this->SetValue(value); },
           };
 
         protected:

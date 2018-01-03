@@ -28,7 +28,7 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Component' abstract class
-    class Component _abstract {
+    class Component abstract_ {
     public:
       // Constructor
       Component(const string& name) : name(name) {}
@@ -107,7 +107,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Structural::MainApp);
+startup_(DesignPatterns::Structural::MainApp);
 ```
 
 # Output

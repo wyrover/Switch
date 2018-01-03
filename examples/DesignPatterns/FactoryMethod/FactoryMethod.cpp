@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Creational {
     // The 'Product' abstract class
-    class Product _abstract {
+    class Product abstract_ {
     public:
       ~Product() = 0;
     };
@@ -23,7 +23,7 @@ namespace DesignPatterns {
     };
 
     // The 'Creator' abstract class
-    class Creator _abstract {
+    class Creator abstract_ {
     public:
       virtual refptr<Product> FactoryMethod() const = 0;
     };
@@ -40,7 +40,7 @@ namespace DesignPatterns {
       refptr<Product> FactoryMethod() const override {return ref_new<ConcreteProductB>();}
     };
 
-    // MainApp _startup class for Creational
+    // MainApp startup_ class for Creational
     // Factory Method Design Pattern.
     class MainApp {
     public:
@@ -63,7 +63,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Creational::MainApp);
+startup_(DesignPatterns::Creational::MainApp);
 
 // This code produces the following output:
 //

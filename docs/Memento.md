@@ -36,8 +36,8 @@ namespace DesignPatterns {
       Memento(const Memento& memento) : state(memento.state) {}
       
       // Gets or sets state
-      _property<string, _readonly> State {
-        _get { return this->state; }
+      property_<string, readonly_> State {
+        get_ { return this->state; }
       };
  
     private:
@@ -48,9 +48,9 @@ namespace DesignPatterns {
     class Originator : public object {
     public:
       // Property
-      _property<string> State {
-        _get { return this->state; },
-        _set {
+      property_<string> State {
+        get_ { return this->state; },
+        set_ {
           this->state = value;
           Console::WriteLine("State = " + this->state);
         }
@@ -77,9 +77,9 @@ namespace DesignPatterns {
       Caretaker() {}
       
       // Gets or sets memento
-      _property<DesignPatterns::Behavioral::Memento> Memento {
-        _get { return this->memento; },
-        _set { this->memento = value; }
+      property_<DesignPatterns::Behavioral::Memento> Memento {
+        get_ { return this->memento; },
+        set_ { this->memento = value; }
       };
  
     private:
@@ -110,7 +110,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 ```
 
 # Output

@@ -12,7 +12,7 @@ namespace DesignPatterns {
     };
 
     // The 'AbstractExpression' abstract class
-    class AbstractExpression _abstract {
+    class AbstractExpression abstract_ {
     public:
       virtual void Interpret(const Context& context) const = 0;
     };
@@ -29,7 +29,7 @@ namespace DesignPatterns {
       void Interpret(const Context& context) const override {Console::WriteLine("Called Nonterminal.Interpret()");}
     };
 
-    // MainApp _startup class for Behavioral
+    // MainApp startup_ class for Behavioral
     // Interpreter Design Pattern.
     class MainApp {
     public:
@@ -55,7 +55,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 
 // This code produces the following output:
 //

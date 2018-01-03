@@ -16,7 +16,7 @@ void Timer::SetEnabled(bool enabled) {
 
 void Timer::SetInterval(int32 interval) {
   if (interval < 1)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (this->interval != interval) {
     this->interval = interval;

@@ -27,7 +27,7 @@ void StringWriter::Close() {
 
 void StringWriter::Write(const String& value) {
   if (this->data->close)
-    throw ObjectDisposedException(_caller);
+    throw ObjectDisposedException(caller_);
   this->data->str += value;
 
 }

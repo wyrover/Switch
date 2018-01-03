@@ -15,4 +15,4 @@ namespace ManualTests {
   };
 }
 
-_startup(ManualTests::Program);
+startup_(ManualTests::Program);

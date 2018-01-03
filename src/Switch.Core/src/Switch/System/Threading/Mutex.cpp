@@ -41,7 +41,7 @@ void Mutex::Close() {
 
 Mutex Mutex::OpenExisting(const string& name) {
   if (!mutexes.Conatains(name))
-    throw WaitHandleCannotBeOpenedException(_caller);
+    throw WaitHandleCannotBeOpenedException(caller_);
   bool createNew;
   Mutex value = mutexes.AddOrCreate(name, createNew);
   return value;

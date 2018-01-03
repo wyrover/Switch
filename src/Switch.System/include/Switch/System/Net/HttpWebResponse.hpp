@@ -15,16 +15,16 @@ namespace Switch {
       /// @brief Provides an HTTP-specific implementation of the WebResponse class.
       /// @par Library
       /// Switch.System
-      class _export HttpWebResponse : public System::Net::WebResponse {
+      class export_ HttpWebResponse : public System::Net::WebResponse {
       public:
         virtual ~HttpWebResponse();
 
-        _property<System::Net::HttpStatusCode, _readonly> StatusCode {
-          _get {return this->GetStatusCode();}
+        property_<System::Net::HttpStatusCode, readonly_> StatusCode {
+          get_ {return this->GetStatusCode();}
         };
 
-        _property<string, _readonly> StatusDescription {
-          _get {return this->GetStatusDescription();}
+        property_<string, readonly_> StatusDescription {
+          get_ {return this->GetStatusDescription();}
         };
 
         WebResponse::WebResponseStream GetResponseStream() override;

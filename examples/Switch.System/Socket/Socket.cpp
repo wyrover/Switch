@@ -13,7 +13,7 @@ namespace Examples {
     static void Main() {
       Console::WriteLine("Press Ctrl+C to quit...");
       bool terminate = false;
-      Thread server(ThreadStart(_delegate {
+      Thread server(ThreadStart(delegate_ {
         Socket socket(AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::Tcp);
         socket.Bind(IPEndPoint(IPAddress::Any, 9050));
         socket.Listen((int)SocketOptionName::MaxConnections);
@@ -26,7 +26,7 @@ namespace Examples {
       }));
       server.Start();
 
-      Thread client(ThreadStart(_delegate {
+      Thread client(ThreadStart(delegate_ {
         Socket socket(AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::Tcp);
         socket.Connect("127.0.0.1", 9050);
         int counter  = Random().Next(1, 20000);
@@ -44,7 +44,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::SocketExample);
+startup_(Examples::SocketExample);
 
 // This code example can produce the following output:
 //

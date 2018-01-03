@@ -19,7 +19,7 @@ namespace Switch {
         /// @remarks This class is used with the DataReceived event.
         /// @par Library
         /// Switch.System
-        class _export SerialDataReceivedEventArgs : public System::EventArgs {
+        class export_ SerialDataReceivedEventArgs : public System::EventArgs {
         public:
           SerialDataReceivedEventArgs(SerialData eventType) : eventType(eventType) {}
           SerialDataReceivedEventArgs(const SerialDataReceivedEventArgs& sdrea) : eventType(sdrea.eventType) {}
@@ -27,8 +27,8 @@ namespace Switch {
           /// @brief Gets the event type.
           /// @return One of the SerialData values.
           /// @remarks This property provides information about the event type that caused the DataReceived event.
-          _property<SerialData, _readonly> EventType {
-            _get {return this->eventType;}
+          property_<SerialData, readonly_> EventType {
+            get_ {return this->eventType;}
           };
 
         private:

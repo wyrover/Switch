@@ -15,7 +15,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Provides the base class for both System::IO::FileInfo and System::IO::DirectoryInfo objects.
-      class _export FileSystemInfo _abstract {
+      class export_ FileSystemInfo abstract_ {
       protected:
         /// @brief Initializes a new instance of the System::IO::FileSystemInfo class.
         FileSystemInfo() { }
@@ -29,74 +29,74 @@ namespace Switch {
         /// @brief Gets the System::IO::FileAttributes of the current System::IO::FileSystemInfo.
         /// @return System::IO::FileAttributes of the current System::IO::FileSystemInfo.
         /// @exception IOErrorException system error when retrieving the file information
-        _property<FileAttributes, _readonly> Attributes {
-          _get {return this->GetAttributes();}
+        property_<FileAttributes, readonly_> Attributes {
+          get_ {return this->GetAttributes();}
         };
 
         /// @brief Gets the creation time
         /// @return The creation date and time
         /// @exception IOErrorException system error when retrieving the file information
-        _property<DateTime, _readonly> CreationTime {
-          _get {return this->GetCreationTime();}
+        property_<DateTime, readonly_> CreationTime {
+          get_ {return this->GetCreationTime();}
         };
 
         /// @brief Gets the creation time, in coordinated universal time (UTC)
         /// @return The creation date and time
         /// @exception IOErrorException system error when retrieving the file information
-        _property<DateTime, _readonly> CreationTimeUtc {
-          _get {return this->GetCreationTimeUtc();}
+        property_<DateTime, readonly_> CreationTimeUtc {
+          get_ {return this->GetCreationTimeUtc();}
         };
 
         /// @brief Gets a value indicating whether the file or directory exists.
         /// @return true if the file or directory exists; otherwise, false.
-        _property<bool, _readonly> Exists {
-          _get {return this->GetExists();}
+        property_<bool, readonly_> Exists {
+          get_ {return this->GetExists();}
         };
 
         /// @brief Gets the string representing the extension part of the file.
         /// @return A string containing the System::IO::FileSystemInfo extension.
-        _property<String, _readonly> Extension {
-          _get {return this->GetExtension();}
+        property_<String, readonly_> Extension {
+          get_ {return this->GetExtension();}
         };
 
         /// @brief Gets the full path of the directory or file.
         /// @return A string containing the full path.
-        _property<String, _readonly> FullName {
-          _get {return this->GetFullName();}
+        property_<String, readonly_> FullName {
+          get_ {return this->GetFullName();}
         };
 
         /// @brief Gets the time the current file or directory was last accessed.
         /// @return The time that the current file or directory was last accessed.
         /// @exception IOErrorException system error when retrieving the file information
-        _property<DateTime, _readonly> LastAccessTime {
-          _get {return this->GetLastAccessTime();}
+        property_<DateTime, readonly_> LastAccessTime {
+          get_ {return this->GetLastAccessTime();}
         };
 
         /// @brief Gets the time, in coordinated universal time (UTC), of the current file or directory was last accessed.
         /// @return The time that the current file or directory was last accessed.
         /// @exception IOErrorException system error when retrieving the file information
-        _property<DateTime, _readonly> LastAccessTimeUtc {
-          _get {return this->GetLastAccessTimeUtc();}
+        property_<DateTime, readonly_> LastAccessTimeUtc {
+          get_ {return this->GetLastAccessTimeUtc();}
         };
 
         /// @brief Gets or sets the time when the current file or directory was last written to.
         /// @return The time the current file was last written.
         /// @exception IOErrorException system error when retrieving the file information
-        _property<DateTime, _readonly> LastWriteTime {
-          _get {return this->GetLastWriteTime();}
+        property_<DateTime, readonly_> LastWriteTime {
+          get_ {return this->GetLastWriteTime();}
         };
 
         /// @brief Gets or sets the time, in coordinated universal time (UTC), when the current file or directory was last written to.
         /// @return The time the current file was last written.
         /// @exception IOErrorException system error when retrieving the file information
-        _property<DateTime, _readonly> LastWriteTimeUtc {
-          _get {return this->GetLastWriteTimeUtc();}
+        property_<DateTime, readonly_> LastWriteTimeUtc {
+          get_ {return this->GetLastWriteTimeUtc();}
         };
 
         /// @brief For files, gets the name of the file. For directories, gets the name of the last directory in the hierarchy if a hierarchy exists. Otherwise, the Name property gets the name of the directory.
         /// @return A string that is the name of the parent directory, the name of the last directory in the hierarchy, or the name of a file, including the file name extension.
-        _property<String, _readonly> Name {
-          _get {return this->GetName();}
+        property_<String, readonly_> Name {
+          get_ {return this->GetName();}
         };
 
         /// @brief Deletes a file or directory.

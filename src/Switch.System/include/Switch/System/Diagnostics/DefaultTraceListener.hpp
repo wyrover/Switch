@@ -16,7 +16,7 @@ namespace Switch {
       /// @brief Provides the default output methods and behavior for tracing.
       /// @par Library
       /// Switch.System
-      class _export DefaultTraceListener : public TraceListener {
+      class export_ DefaultTraceListener : public TraceListener {
       public:
         DefaultTraceListener() {}
 
@@ -58,9 +58,9 @@ namespace Switch {
         }
 
         /// @brief Get or Sets the name of a log file to write trace or debug msgs to.
-        _property<String> LogFileName {
-          _get {return this->data->logFileName;},
-          _set {
+        property_<String> LogFileName {
+          get_ {return this->data->logFileName;},
+          set_ {
             this->data->logFileName = value;
             this->data->logWriter = new System::IO::StreamWriter(this->data->logFileName);
           }

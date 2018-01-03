@@ -21,7 +21,7 @@ namespace Switch {
         /// @include UdpClientListener.cpp
         /// This example show how to use UdpClient class as talker :
         /// @include UdpClientTalker.cpp
-        class _export UdpClient : public Object {
+        class export_ UdpClient : public Object {
         public:
           /// @brief Initializes a new instance of the UdpClient class
           /// This constructor creates a new UdpClient and allows the underlying service

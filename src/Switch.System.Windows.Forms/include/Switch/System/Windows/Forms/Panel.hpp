@@ -14,7 +14,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Used to group collections of controls.
-        class _export Panel : public ContainerControl {
+        class export_ Panel : public ContainerControl {
         public:
           Panel() {
             this->SetStyle(ControlStyles::UserPaint, false);
@@ -24,9 +24,9 @@ namespace Switch {
           Panel(const Panel& panel) : ContainerControl(panel), borderStyle(panel.borderStyle) {}
           /// @endcond
 
-          _property<System::Windows::Forms::BorderStyle> BorderStyle {
-            _get{return this->borderStyle;},
-            _set{this->SetBorderStyle(value);}
+          property_<System::Windows::Forms::BorderStyle> BorderStyle {
+            get_{return this->borderStyle;},
+            set_{this->SetBorderStyle(value);}
           };
 
         protected:

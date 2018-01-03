@@ -184,7 +184,7 @@ namespace Test {
         else if (IsArray(item.Value().Value().ToObject()))
           Console::Write(" is Array");
         else
-          throw InvalidCastException(_caller);
+          throw InvalidCastException(caller_);
         Console::WriteLine();
       }
     }

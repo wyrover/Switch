@@ -27,7 +27,7 @@ namespace Switch {
       /// @note This class contains a link demand and an inheritance demand at the class level that applies to all members. A SecurityException is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see Link Demands.
       /// @par Library
       /// Switch.System
-      class _export Process : public Object {
+      class export_ Process : public Object {
         refptr<IO::Stream> GetStandardOutput() const;
       public:
         /// @cond
@@ -48,33 +48,33 @@ namespace Switch {
         /// | 8            | Normal        |
         /// | 13           | High          |
         /// | 24           | RealTime      |
-        _property<int32, _readonly> BasePriority {
-          _get {return this->data->basePriority;}
+        property_<int32, readonly_> BasePriority {
+          get_ {return this->data->basePriority;}
         };
 
-        _property<int32, _readonly> ExitCode {
-          _get {return this->data->exitCode;}
+        property_<int32, readonly_> ExitCode {
+          get_ {return this->data->exitCode;}
         };
 
-        _property<int32, _readonly> Id {
-          _get {return *((int32*)&this->data->handle);}
+        property_<int32, readonly_> Id {
+          get_ {return *((int32*)&this->data->handle);}
         };
 
-        _property<string, _readonly> ProcessName {
-          _get {return this->GetName();}
+        property_<string, readonly_> ProcessName {
+          get_ {return this->GetName();}
         };
 
-        _property<string, _readonly> Path {
-          _get {return this->GetPath();}
+        property_<string, readonly_> Path {
+          get_ {return this->GetPath();}
         };
 
-        _property<ProcessStartInfo&> StartInfo {
-          _get->ProcessStartInfo& {return this->data->startInfo;},
-          _set {this->data->startInfo = value;}
+        property_<ProcessStartInfo&> StartInfo {
+          get_->ProcessStartInfo& {return this->data->startInfo;},
+          set_ {this->data->startInfo = value;}
         };
 
-        _property<System::IO::StreamReader, _readonly> StandardOutput {
-          _get {return this->GetStreamReader();}
+        property_<System::IO::StreamReader, readonly_> StandardOutput {
+          get_ {return this->GetStreamReader();}
         };
 
         void Close();

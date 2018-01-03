@@ -36,7 +36,7 @@ namespace Switch {
           /// @param collection The collection whose elements are copied to the new ConcurrentStack<T>.
           /// @exception ArgumentNullException collection is a null reference.
           ConcurrentStack(const Generic::IEnumerable<T>& collection) {
-            _lock(this->stack.SyncRoot) {
+            lock_(this->stack.SyncRoot) {
               for (T item : collection)
                 this->stack.Insert(0, item);
             }
@@ -44,7 +44,7 @@ namespace Switch {
 
           /// @cond
           ConcurrentStack(InitializerList<T> il)  {
-            _lock(this->stack.SyncRoot) {
+            lock_(this->stack.SyncRoot) {
               for (T item : il)
                 this->stack.Insert(0, item);
             }
@@ -53,8 +53,8 @@ namespace Switch {
 
           /// @brief Gets a value that indicates whether the ConcurrentStack<T> is empty.
           /// @return Boolean true if the ConcurrentStack<T> is empty; otherwise, false.
-          _property<bool, _readonly> IsEmpty {
-            _get {
+          property_<bool, readonly_> IsEmpty {
+            get_ {
               return this->stack.Count == 0;
             }
           };
@@ -62,7 +62,7 @@ namespace Switch {
           /// @brief Inserts multiple objects at the top of the ConcurrentStack<T> atomically.
           /// @param item The object to be inserted to the ConcurrentStack<T>.
           void Push(const T& item) {
-            _lock(this->stack.SyncRoot)
+            lock_(this->stack.SyncRoot)
             this->stack.Insert(0, item);
           }
 
@@ -80,12 +80,12 @@ namespace Switch {
           /// @exception ArgumentException startIndex + count is greater than the length of items.
           void PushRange(const System::Array<T>& items, int32 startIndex, int32 count) {
             if (startIndex < 0 || count < 0 || startIndex > items.Length)
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
 
             if (startIndex + count > items.Length)
-              throw ArgumentException(_caller);
+              throw ArgumentException(caller_);
 
-            _lock(this->stack.SyncRoot) {
+            lock_(this->stack.SyncRoot) {
               for (int32 i = startIndex; i < startIndex + count; i++)
                 this->stack.Insert(0, items[i]);
             }
@@ -93,7 +93,7 @@ namespace Switch {
 
           /// @brief Removes all objects from the ConcurrentStack<T>.
           void Clear() override {
-            _lock(this->stack.SyncRoot)
+            lock_(this->stack.SyncRoot)
             this->stack.Clear();
           }
 
@@ -101,14 +101,14 @@ namespace Switch {
           /// @param array TThe one-dimensional Array that is the destination of the elements copied from the IProducerConsumerCollection<T>. The array must have zero-based indexing.
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
-            _lock(this->stack.SyncRoot)
+            lock_(this->stack.SyncRoot)
             this->stack.CopyTo(array, index);
           }
 
           /// @brief Copies the elements contained in the IProducerConsumerCollection<T> to a new array.
           /// @return A new array containing the elements copied from the IProducerConsumerCollection<T>.
           System::Array<T> ToArray() const override {
-            _lock(this->stack.SyncRoot)
+            lock_(this->stack.SyncRoot)
             return this->stack.ToArray();
             return this->stack.ToArray();
           }
@@ -116,7 +116,7 @@ namespace Switch {
           /// @brief Returns an enumerator that iterates through the ConcurrentStack<T>.
           /// @return Int32 A List<T>::Enumerator for the List<T>.
           Generic::Enumerator<T> GetEnumerator() const override {
-            _lock(this->stack.SyncRoot)
+            lock_(this->stack.SyncRoot)
             return Generic::Enumerator<T>(new Enumerator(this));
             return Generic::Enumerator<T>(new Enumerator(this));
           }
@@ -125,7 +125,7 @@ namespace Switch {
           /// @param result When this method returns, result contains an object from the ConcurrentStack<T> or the default value of T if the operation failed.
           /// @return true if and object was returned successfully; otherwise, false.
           bool TryPeek(T& result) {
-            _lock(this->stack.SyncRoot) {
+            lock_(this->stack.SyncRoot) {
               if (this->stack.Count > 0) {
                 result = this->stack[0];
                 return true;
@@ -138,7 +138,7 @@ namespace Switch {
           /// @param result When this method returns, if the object was removed and returned successfully, item contains the removed object. If no object was available to be removed, the value is unspecified.
           /// @return true if an object was removed and returned successfully; otherwise, false.
           bool TryPop(T& result) {
-            _lock(this->stack.SyncRoot) {
+            lock_(this->stack.SyncRoot) {
               if (this->stack.Count > 0) {
                 result = this->stack[0];
                 this->stack.RemoveAt(0);
@@ -164,13 +164,13 @@ namespace Switch {
           /// @exception ArgumentException startIndex + count is greater than the length of items.
           int32 TryPopRange(System::Array<T>& results, int32 startIndex, int32 count) {
             if (startIndex < 0 || count < 0 || startIndex > results.Length)
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
 
             if (startIndex + count > results.Length)
-              throw ArgumentException(_caller);
+              throw ArgumentException(caller_);
 
             int32 nbItemPoped = 0;
-            _lock(this->stack.SyncRoot) {
+            lock_(this->stack.SyncRoot) {
               for (int32 i = startIndex; i < startIndex + count; i++) {
                 if (this->stack.Count == 0)
                   break;
@@ -195,7 +195,7 @@ namespace Switch {
           void Add(const T& item) override {Push(item);}
 
           bool Contains(const T& value) const override {
-            _lock(this->stack.SyncRoot)
+            lock_(this->stack.SyncRoot)
             return this->stack.Contains(value);
             return this->stack.Contains(value);
           }
@@ -218,7 +218,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
-                throw InvalidOperationException(_caller);
+                throw InvalidOperationException(caller_);
               return this->array[this->index];
             }
 

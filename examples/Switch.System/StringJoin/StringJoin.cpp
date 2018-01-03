@@ -8,7 +8,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      string output = String::Join(" ", *GetAlphabet(true).Where(_delegate(const string & letter) {return letter.CompareTo("M") >= 0;}));
+      string output = String::Join(" ", *GetAlphabet(true).Where(delegate_(const string & letter) {return letter.CompareTo("M") >= 0;}));
       Console::WriteLine(output);
     }
 
@@ -23,7 +23,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // The example displays the following output:
 //

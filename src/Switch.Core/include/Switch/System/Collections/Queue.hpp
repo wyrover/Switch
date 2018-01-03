@@ -95,13 +95,13 @@ namespace Switch {
         /// @exception System::InvalidOperationException The System::Collections::Generic::Queue<T> is empty.
         const any& Peek() const {
           if (this->queue.Count == 0)
-            throw InvalidOperationException(_caller);
+            throw InvalidOperationException(caller_);
           return this->queue[0];
         }
 
         any& Peek() {
           if (this->queue.Count == 0)
-            throw InvalidOperationException(_caller);
+            throw InvalidOperationException(caller_);
           return this->queue[0];
         }
 

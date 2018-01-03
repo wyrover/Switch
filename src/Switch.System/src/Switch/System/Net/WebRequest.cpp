@@ -30,12 +30,12 @@ WebRequest::WebRequest(const Uri& uri) : uri(uri) {
 
 void WebRequest::InitWebRequest() {
   if (Native::CurlApi::GetOSSupportsWebOperations() == false || (pendingRequest == 0 && Native::CurlApi::GlobalInit() != 0))
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   Native::CurlApi::Init(this->requestHandle);
 
   if (this->requestHandle == IntPtr::Zero)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   pendingRequest++;
   Native::CurlApi::SetUrl(this->requestHandle, uri.ToString());
@@ -54,7 +54,7 @@ WebRequest::~WebRequest() {
 
 refptr<WebRequest> WebRequest::Create(const Uri& requestUriString) {
   if (Native::CurlApi::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   if (requestUriString.Scheme == Uri::UriSchemeFtp)
     return new FtpWebRequest(requestUriString);
@@ -65,7 +65,7 @@ refptr<WebRequest> WebRequest::Create(const Uri& requestUriString) {
   if (requestUriString.Scheme == Uri::UriSchemeHttps)
     return new HttpWebRequest(requestUriString);
 
-  throw NotSupportedException(_caller);
+  throw NotSupportedException(caller_);
 }
 
 NetworkCredential&  WebRequest::GetCredential() {
@@ -82,10 +82,10 @@ bool WebRequest::IsResponseStreamNeeded() const {
 
 void WebRequest::SetCredential(const NetworkCredential& credential) {
   if (Native::CurlApi::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   if (this->requestHandle == IntPtr::Zero)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   Native::CurlApi::SetUserName(this->requestHandle, credential.UserName);
   Native::CurlApi::SetPassword(this->requestHandle, credential.Password);
@@ -94,7 +94,7 @@ void WebRequest::SetCredential(const NetworkCredential& credential) {
 
 void WebRequest::ProccessRequestThread() {
   if (Native::CurlApi::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   try {
     this->internalError = Native::CurlApi::Perform(this->GetRequestHandle());
@@ -114,19 +114,19 @@ void WebRequest::ProccessRequestThread() {
 
 void WebRequest::Finished(int32 error) {
   if (!Native::CurlApi::GetOSSupportsWebOperations())
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   //Unlock write thread if finished before sending
   this->requestStream.data->readEvent.Set();
   GetInternalResponse().EndTransfert();
 
   if (error != 0)
-    throw System::Net::WebException(_caller);
+    throw System::Net::WebException(caller_);
 }
 
 void WebRequest::ProccessRequest() {
   if (!Native::CurlApi::GetOSSupportsWebOperations())
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   //Thread already opened by the other stream (response or request)
   if (this->requestThread.IsAlive())
@@ -173,16 +173,16 @@ System::Net::WebRequest::WebRequestStream WebRequest::GetRequestStream() {
 }
 
 int64 WebRequest::WebRequestStream::Seek(int64, System::IO::SeekOrigin) {
-  throw NotSupportedException(_caller);
+  throw NotSupportedException(caller_);
 }
 
 void WebRequest::WebRequestStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
   if (offset < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
   if (IsClosed())
-    throw ObjectDisposedException(_caller);
+    throw ObjectDisposedException(caller_);
   if (!CanWrite())
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   if (CanWrite())
     Write((void*)&buffer.Data()[offset], count);
@@ -190,7 +190,7 @@ void WebRequest::WebRequestStream::Write(const Array<byte>& buffer, int32 offset
 
 void WebRequest::WebRequestStream::Write(const void* handle, int32 count) {
   if (IsClosed())
-    throw IO::IOException(_caller);
+    throw IO::IOException(caller_);
 
   //If the request is not started launch the writing thread
   if (!this->data->started) {
@@ -207,11 +207,11 @@ void WebRequest::WebRequestStream::Write(const void* handle, int32 count) {
     //Wait read is finished
 
     if (!this->data->readEvent.WaitOne(this->data->webRequest->Timeout()))
-      throw TimeoutException(_caller);
+      throw TimeoutException(caller_);
   } else {
     //release read
     this->data->writeEvent.Set();
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
   }
 }
 
@@ -219,7 +219,7 @@ int32 WebRequest::WebRequestStream::Send(void* handle, int32 count) {
   int32 byteToCopy = 0;
   // Wait data to read
   if (!this->data->writeEvent.WaitOne(this->data->webRequest->Timeout()))
-    throw TimeoutException(_caller);
+    throw TimeoutException(caller_);
 
   if (this->data->webRequest->internalError == 0) {
     byteToCopy = Math::Min(count, (this->data->bufferSize - this->data->bufferOffset));

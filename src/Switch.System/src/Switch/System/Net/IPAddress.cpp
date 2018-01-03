@@ -13,31 +13,31 @@ using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
 
-_property<IPAddress, _readonly> IPAddress::Any {
+property_<IPAddress, readonly_> IPAddress::Any {
   [] {return IPAddress(0x0000000000000000LL);}
 };
 
-_property<IPAddress, _readonly> IPAddress::Broadcast {
+property_<IPAddress, readonly_> IPAddress::Broadcast {
   [] {return IPAddress(0x00000000FFFFFFFFLL);}
 };
 
-_property<IPAddress, _readonly> IPAddress::IPv6Any {
+property_<IPAddress, readonly_> IPAddress::IPv6Any {
   [] {return IPAddress(Array<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});}
 };
 
-_property<IPAddress, _readonly> IPAddress::IPv6Loopback {
+property_<IPAddress, readonly_> IPAddress::IPv6Loopback {
   [] {return IPAddress(Array<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1});}
 };
 
-_property<IPAddress, _readonly> IPAddress::IPv6None {
+property_<IPAddress, readonly_> IPAddress::IPv6None {
   [] {return IPAddress(Array<byte> {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});}
 };
 
-_property<IPAddress, _readonly> IPAddress::Loopback {
+property_<IPAddress, readonly_> IPAddress::Loopback {
   [] {return IPAddress(0x000000000100007FLL);}
 };
 
-_property<IPAddress, _readonly> IPAddress::None {
+property_<IPAddress, readonly_> IPAddress::None {
   [] {return IPAddress(0x00000000FFFFFFFFLL);}
 };
 
@@ -46,7 +46,7 @@ IPAddress::IPAddress() {
 
 IPAddress::IPAddress(int64 address) {
   if (address < 0 || address > 0x0000000FFFFFFFFLL)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   this->address = Convert::ToUInt32(address);
 }
@@ -68,7 +68,7 @@ IPAddress& IPAddress::operator =(const IPAddress& address) {
 
 IPAddress::IPAddress(const Array<byte>& address) {
   if (address.Length != 4 && address.Length != 16)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (address.Length == 4) {
     this->family = Sockets::AddressFamily::InterNetwork;
@@ -83,7 +83,7 @@ IPAddress::IPAddress(const Array<byte>& address) {
 
 IPAddress::IPAddress(const std::vector<byte>& address) {
   if (address.size() != 4 && address.size() != 16)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (address.size() == 4) {
     this->family = Sockets::AddressFamily::InterNetwork;
@@ -99,10 +99,10 @@ IPAddress::IPAddress(const std::vector<byte>& address) {
 
 IPAddress::IPAddress(const Array<byte>& address, int64 scopeId) : family(Sockets::AddressFamily::InterNetworkV6) {
   if (address.Length != 16)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (scopeId < 0 || scopeId > 0x00000000FFFFFFFFLL)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   this->scopeId = Convert::ToUInt32(scopeId);
   Buffer::BlockCopy(address, 0, this->numbers, 0, 16);
@@ -164,7 +164,7 @@ int32 IPAddress::GetHashCode() const {
 
 int64 IPAddress::GetScopeId() const {
   if (this->family == Sockets::AddressFamily::InterNetwork)
-    throw SocketException(_caller);
+    throw SocketException(caller_);
 
   return this->scopeId;
 }
@@ -275,7 +275,7 @@ IPAddress IPAddress::Parse(const string& str) {
   string workIpString = ((str[0] == '[' && str[str.Length() - 1] == ']') ? str.Substring(1, str.Length() - 2) : str);
 
   // Parse IP v4 Address
-  _using(Array<String> addressParts = workIpString.Split('.')) {
+  using_(Array<String> addressParts = workIpString.Split('.')) {
     if (addressParts.Length == 4) {
       Array<byte> addresses(4);
       for (int32 index = 0; index < addressParts.Length; index++)
@@ -292,7 +292,7 @@ IPAddress IPAddress::Parse(const string& str) {
   };
 
   // Parse IP v6 Address
-  _using(Array<String> addressParts = workIpString.Split(':')) {
+  using_(Array<String> addressParts = workIpString.Split(':')) {
     if (addressParts.Length == 8) {
       for (int32 index = 0; index < addressParts.Length; index++)
         value.numbers[index] = UInt16::Parse(addressParts[index]);
@@ -300,15 +300,15 @@ IPAddress IPAddress::Parse(const string& str) {
     }
   }
 
-  throw ArgumentException(_caller);
+  throw ArgumentException(caller_);
 }
 
 void IPAddress::SetScopeId(int64 scopeId) {
   if (this->family == Sockets::AddressFamily::InterNetwork)
-    throw SocketException(_caller);
+    throw SocketException(caller_);
 
   if (scopeId < 0 || scopeId > 0xFFFFFFFF)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   this->scopeId = Convert::ToUInt32(scopeId);
 }

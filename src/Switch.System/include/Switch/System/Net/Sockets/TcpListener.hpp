@@ -30,7 +30,7 @@ namespace Switch {
         /// @note The 0 for local port functionality is not available.
         /// @par Library
         /// Switch.System
-        class _export TcpListener : public Object {
+        class export_ TcpListener : public Object {
         public:
           /// @brief Initializes a new instance of the TcpListener class with the specified local endpoint.
           /// @param ipEndPoint An IPEndPoint that represents the local endpoint to which to bind the listener Socket.
@@ -76,11 +76,11 @@ namespace Switch {
           /// @remarks You can use the exclusiveAddressUse property to prevent multiple listeners from listening to a specific port.
           /// @remarks Set this property before calling Start, or call the Stop method and then set this property.
           /// @note Not available on MacOs/Linux/Android
-          _property<bool> ExclusiveAddressUse {
-            _get {return this->data->serverSocket.ExclusiveAddressUse(); },
-            _set {
+          property_<bool> ExclusiveAddressUse {
+            get_ {return this->data->serverSocket.ExclusiveAddressUse(); },
+            set_ {
               if (this->data->active)
-                throw ApplicationException(_caller); // tcplistener must be stopped
+                throw ApplicationException(caller_); // tcplistener must be stopped
 
               this->data->serverSocket.ExclusiveAddressUse = value;
             }
@@ -91,8 +91,8 @@ namespace Switch {
           /// @remarks You can use the LocalEndpoint property to identify the local network interface and port number being used to listen for incoming client connection requests,
           /// @remarks after a socket connection has been made. You must first cast this EndPoint to an IPEndPoint. You can then call the IPEndPoint::Address property to retrieve
           /// @remarks the local IP address, and the IPEndPoint::Port property to retrieve the local port number.
-          _property<const EndPoint&, _readonly> LocalEndPoint {
-            _get->const EndPoint& { return this->data->serverSocket.LocalEndPoint(); }
+          property_<const EndPoint&, readonly_> LocalEndPoint {
+            get_->const EndPoint& { return this->data->serverSocket.LocalEndPoint(); }
           };
 
           /// @brief Gets the underlying network Socket.
@@ -102,8 +102,8 @@ namespace Switch {
           /// @note The Server property only returns the Socket used to listen for incoming client connection requests. Use the AcceptSocket method to accept a pending connection
           /// @note request and obtain a Socket for sending and receiving data. You can also use the AcceptTcpClient method to accept a pending connection request and obtain a
           /// @note TcpClient for sending and receiving data.
-          _property<Socket, _readonly> Server {
-            _get {return this->data->serverSocket; }
+          property_<Socket, readonly_> Server {
+            get_ {return this->data->serverSocket; }
           };
 
           /// @brief Creates a new TcpListener instance to listen on the specified port.
@@ -180,8 +180,8 @@ namespace Switch {
           /// @return true if TcpListener is actively listening; otherwise, false.
           /// @remarks Classes deriving from TcpListener can use this property to determine if the Socket is currently listening for incoming connection attempts.
           /// @remarks The Active property can be used to avoid redundant Start attempts.
-          _property<bool, _readonly> Active {
-            _get {return this->data->active; }
+          property_<bool, readonly_> Active {
+            get_ {return this->data->active; }
           };
 
         private:

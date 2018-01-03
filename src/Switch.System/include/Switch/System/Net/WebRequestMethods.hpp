@@ -17,75 +17,75 @@ namespace Switch {
       /// @brief Container class for WebRequestMethods.Ftp, WebRequestMethods.File, and WebRequestMethods.Http classes. This class cannot be inherited
       /// @par Library
       /// Switch.System
-      class _export WebRequestMethods _static {
+      class export_ WebRequestMethods static_ {
       public:
-        class File _static {
+        class File static_ {
         public:
           /// @brief Represents the FILE GET protocol method that is used to retrieve a file from a specified location.
           /// @return string
-          static _property<string, _readonly> DownloadFile;
+          static property_<string, readonly_> DownloadFile;
 
           /// @brief Represents the FILE PUT protocol method that is used to copy a file to a specified location.
           /// @return string
-          static _property<string, _readonly> UploadFile;
+          static property_<string, readonly_> UploadFile;
         };
 
         /// @brief Represents the types of FTP protocol methods that can be used with an FTP request. This class cannot be inherited.
         /// @par Library
         /// Switch.System
-        class Ftp _static {
+        class Ftp static_ {
         public:
           /// @brief
           /// @return string
-          static _property<string, _readonly> UploadFile;
+          static property_<string, readonly_> UploadFile;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> DownloadFile;
+          static property_<string, readonly_> DownloadFile;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> ListDirectory;
+          static property_<string, readonly_> ListDirectory;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> ListDirectoryDetails;
+          static property_<string, readonly_> ListDirectoryDetails;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> MakeDirectory;
+          static property_<string, readonly_> MakeDirectory;
         };
 
         /// @brief Represents the types of HTTP protocol methods that can be used with an HTTP request.
-        class Http _static {
+        class Http static_ {
         public:
           /// @brief
           /// @return string
-          static _property<string, _readonly> Get;
+          static property_<string, readonly_> Get;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> Head;
+          static property_<string, readonly_> Head;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> Post;
+          static property_<string, readonly_> Post;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> Put;
+          static property_<string, readonly_> Put;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> Delete;
+          static property_<string, readonly_> Delete;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> Trace;
+          static property_<string, readonly_> Trace;
 
           /// @brief
           /// @return string
-          static _property<string, _readonly> Options;
+          static property_<string, readonly_> Options;
         };
       };
     }

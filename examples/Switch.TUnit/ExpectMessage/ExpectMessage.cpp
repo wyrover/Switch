@@ -4,21 +4,21 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  class _TestFixture(UserTest) {
+  class TestFixture_(UserTest) {
     // With your own message
     void TestWithUserMessage() {
-      Expect::False(true, "true can never be equal to false", _caller);
+      Expect::False(true, "true can never be equal to false", caller_);
     }
 
     // Without your own message
     void TestWithoutUserMessage() {
-      Expect::False(true, _caller);
+      Expect::False(true, caller_);
     }
   };
 
-  _AddTestFixture(UserTest);
-  _AddTest(UserTest, TestWithUserMessage);
-  _AddTest(UserTest, TestWithoutUserMessage);
+  AddTestFixture_(UserTest);
+  AddTest_(UserTest, TestWithUserMessage);
+  AddTest_(UserTest, TestWithoutUserMessage);
 }
 
 // This code produces the following output:

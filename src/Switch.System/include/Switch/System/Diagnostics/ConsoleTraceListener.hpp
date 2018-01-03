@@ -14,7 +14,7 @@ namespace Switch {
       /// @brief Directs tracing or debugging output to either the standard output or the standard error stream.
       /// @par Library
       /// Switch.System
-      class _export ConsoleTraceListener : public TextWriterTraceListener {
+      class export_ ConsoleTraceListener : public TextWriterTraceListener {
       public:
         /// @brief Initializes a new instance of the ConsoleTraceListener class with trace output written to the standard output stream.
         /// @remarks This constructor initializes a ConsoleTraceListener object to write messages to either the Console.Out or the Console.Error stream. Its Name property is initialized to an empty string ("").

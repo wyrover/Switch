@@ -46,11 +46,11 @@ namespace Switch {
           if (!pp || !info) {
             if (pp)
               png_destroy_read_struct(&pp, null, null);
-            throw OutOfMemoryException(_caller);
+            throw OutOfMemoryException(caller_);
           }
           if (setjmp(png_jmpbuf(pp))) {
             png_destroy_read_struct(&pp, &info, null);
-            throw OutOfMemoryException(_caller);
+            throw OutOfMemoryException(caller_);
           }
 
           Array<byte> streamData((int32)reader->BaseStream().Length());

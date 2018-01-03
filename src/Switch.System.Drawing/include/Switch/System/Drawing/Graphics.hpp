@@ -40,19 +40,19 @@ namespace Switch {
         Far
       };
 
-      class _export StringFormat {
+      class export_ StringFormat {
       public:
         StringFormat() {}
         StringFormat(const StringFormat& stringFormat) : alignment(stringFormat.alignment), lineAlignment(stringFormat.lineAlignment) {}
 
-        _property<StringAlignment> Alignment {
-          _get {return this->alignment;},
-          _set {this->alignment = value;}
+        property_<StringAlignment> Alignment {
+          get_ {return this->alignment;},
+          set_ {this->alignment = value;}
         };
 
-        _property<StringAlignment> LineAlignment {
-          _get {return this->lineAlignment;},
-          _set {this->lineAlignment = value;}
+        property_<StringAlignment> LineAlignment {
+          get_ {return this->lineAlignment;},
+          set_ {this->lineAlignment = value;}
         };
 
       private:
@@ -60,14 +60,14 @@ namespace Switch {
         StringAlignment lineAlignment = StringAlignment::Near;
       };
 
-      class _export _export Graphics : public Object {
+      class export_ export_ Graphics : public Object {
       public:
         /// @cond
         ~Graphics();
         /// @endcond
 
-        _property<RectangleF, _readonly> ClipBounds {
-          _get { return this->clipRectangle; }
+        property_<RectangleF, readonly_> ClipBounds {
+          get_ { return this->clipRectangle; }
         };
 
         void Clear(const Color& color);

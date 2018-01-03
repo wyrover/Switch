@@ -66,7 +66,7 @@ string Path::GetFileNameWithoutExtension(const string& path) {
 
 string Path::GetFullPath(const string& path) {
   if (path.IndexOfAny(GetInvalidPathChars()) != -1)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   return Native::DirectoryApi::GetFullPath(path);
 }

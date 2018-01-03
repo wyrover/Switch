@@ -33,7 +33,7 @@ namespace DesignPatterns {
     };
     
     // The 'Command' abstract class
-    class Command _abstract {
+    class Command abstract_ {
     public:
       // Constructor
       Command(refptr<Receiver> receiver) : receiver(receiver) {}
@@ -86,7 +86,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 ```
 
 # Output

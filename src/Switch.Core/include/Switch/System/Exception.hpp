@@ -18,14 +18,14 @@ namespace Switch {
     /// @section ErrorsAndExceptionsSection Errors and exceptions
     /// Run-time errors can occur for a variety of reasons. However, not all errors should be handled as exceptions in your code. Here are some categories of errors that can occur at run time and the appropriate ways to respond to them.
     /// * <b>Usage errors</b>. A usage error represents an error in program logic that can result in an exception. However, the error should be addressed not through exception handling but by modifying the faulty code. For example, the override of the Object.Equals(Object) method in the following example assumes that the obj argument must always be non-null.
-    class _export Exception: public Object, public std::exception {
+    class export_ Exception: public Object, public std::exception {
     public:
       /// @brief Create a new instance of class Exception
       /// @remarks Message is set with the default message associate to the error.
       Exception();
 
       /// @brief Create a new instance of class Exception
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       /// @remarks Message is set with the default message associate to the error.
       explicit Exception(const System::Runtime::CompilerServices::Caller& information);
 
@@ -35,7 +35,7 @@ namespace Switch {
 
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       Exception(const String& message, const System::Runtime::CompilerServices::Caller& information);
 
       /// @brief Create a new instance of class Exception
@@ -46,7 +46,7 @@ namespace Switch {
       /// @brief Create a new instance of class Exception
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       Exception(const String& message, const Exception& innerException, const System::Runtime::CompilerServices::Caller& information);
 
       /// @cond
@@ -56,50 +56,50 @@ namespace Switch {
 
       /// @brief Get file path where Exception occurred
       /// @return string A string represent file path where Exception occurred
-      _property<const String&, _readonly> FilePath {
-        _get->const string& {return this->caller.FilePath();}
+      property_<const String&, readonly_> FilePath {
+        get_->const string& {return this->caller.FilePath();}
       };
 
       /// @brief Gets a link to the help file associated with this exception.
       /// @return string A string represent a link to Help file associated with Exception
-      _property<const String&, _readonly> HelpLink {
-        _get->const string& {return this->helpLink;}
+      property_<const String&, readonly_> HelpLink {
+        get_->const string& {return this->helpLink;}
       };
 
       /// @brief Get Error associate to the Exception
       /// @return Error A ErrorCode represent a Error associate to the Exception
-      _property<int32, _readonly> HResult {
-        _get {return this->hresult;}
+      property_<int32, readonly_> HResult {
+        get_ {return this->hresult;}
       };
 
       /// @brief Gets If other Exception instance that caused the current exception.
       /// @return Exception An instance of Exception that describes the error that caused the current exception. The InnerException property returns the same value as was passed into the constructor, or a null reference if the inner exception value was not supplied to the constructor.
-      _property<bool, _readonly> HasInnerException {
-        _get {return this->innerException != null;}
+      property_<bool, readonly_> HasInnerException {
+        get_ {return this->innerException != null;}
       };
 
       /// @brief Gets the Exception instance that caused the current exception.
       /// @return Exception An instance of Exception that describes the error that caused the current exception. The InnerException property returns the same value as was passed into the constructor, or a null reference if the inner exception value was not supplied to the constructor.
-      _property<const Exception&, _readonly> InnerException {
-        _get->const Exception& {return this->innerException();}
+      property_<const Exception&, readonly_> InnerException {
+        get_->const Exception& {return this->innerException();}
       };
 
       /// @brief Get Line number where the Exception occurred
       /// @return Int32 the line number where Exception occurred
-      _property<int32, _readonly> LineNumber {
-        _get {return this->caller.LineNumber();}
+      property_<int32, readonly_> LineNumber {
+        get_ {return this->caller.LineNumber();}
       };
 
       /// @brief Get message associate to the Exception
       /// @return string A string represent a massage associate to the Exception
-      _property<const String&, _readonly> Message {
-        _get->const string& {return this->GetMessage();}
+      property_<const String&, readonly_> Message {
+        get_->const string& {return this->GetMessage();}
       };
 
       /// @brief Gets a string representation of the immediate frames on the call stack.
       /// @return string A string that describes the immediate frames of the call stack.
-      _property<String, _readonly> StackTrace {
-        _get {return this->GetStackTrace();}
+      property_<String, readonly_> StackTrace {
+        get_ {return this->GetStackTrace();}
       };
 
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a DelegateItem object, have the same value.

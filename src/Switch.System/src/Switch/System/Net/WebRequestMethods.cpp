@@ -3,58 +3,58 @@
 using namespace System;
 using namespace System::Net;
 
-_property<string, _readonly> WebRequestMethods::File::DownloadFile {
+property_<string, readonly_> WebRequestMethods::File::DownloadFile {
   [] {return "GET";}
 };
 
-_property<string, _readonly> WebRequestMethods::File::UploadFile {
+property_<string, readonly_> WebRequestMethods::File::UploadFile {
   [] {return "PUT";}
 };
 
-_property<string, _readonly> WebRequestMethods::Ftp::DownloadFile {
+property_<string, readonly_> WebRequestMethods::Ftp::DownloadFile {
   [] {return "FtpDownloadFile";}
 };
 
-_property<string, _readonly> WebRequestMethods::Ftp::UploadFile {
+property_<string, readonly_> WebRequestMethods::Ftp::UploadFile {
   [] {return "FtpUploadFile";}
 };
 
-_property<string, _readonly> WebRequestMethods::Ftp::ListDirectory {
+property_<string, readonly_> WebRequestMethods::Ftp::ListDirectory {
   [] {return "ListDirectory";}
 };
 
-_property<string, _readonly> WebRequestMethods::Ftp::ListDirectoryDetails {
+property_<string, readonly_> WebRequestMethods::Ftp::ListDirectoryDetails {
   [] {return "ListDirectoryDetails";}
 };
 
-_property<string, _readonly> WebRequestMethods::Ftp::MakeDirectory {
+property_<string, readonly_> WebRequestMethods::Ftp::MakeDirectory {
   [] {return "MakeDirectory";}
 };
 
-_property<string, _readonly> WebRequestMethods::Http::Get {
+property_<string, readonly_> WebRequestMethods::Http::Get {
   [] {return "GET";}
 };
 
-_property<string, _readonly> WebRequestMethods::Http::Head {
+property_<string, readonly_> WebRequestMethods::Http::Head {
   [] {return "HEAD";}
 };
 
-_property<string, _readonly> WebRequestMethods::Http::Post {
+property_<string, readonly_> WebRequestMethods::Http::Post {
   [] {return "POST";}
 };
 
-_property<string, _readonly> WebRequestMethods::Http::Put {
+property_<string, readonly_> WebRequestMethods::Http::Put {
   [] {return "PUT";}
 };
 
-_property<string, _readonly> WebRequestMethods::Http::Delete {
+property_<string, readonly_> WebRequestMethods::Http::Delete {
   [] {return "DELETE";}
 };
 
-_property<string, _readonly> WebRequestMethods::Http::Trace {
+property_<string, readonly_> WebRequestMethods::Http::Trace {
   [] {return "TRACE";}
 };
 
-_property<string, _readonly> WebRequestMethods::Http::Options {
+property_<string, readonly_> WebRequestMethods::Http::Options {
   [] {return "OPTIONS";}
 };

@@ -11,7 +11,7 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char* str) : string(s
 
 __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t startIndex, int32_t length) {
   if (str == null)
-    throw System::ArgumentNullException(_caller);
+    throw System::ArgumentNullException(caller_);
 
   __opaque_unicode_string__ other(str);
 
@@ -35,7 +35,7 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t st
   }
 
   if (begin == -1)
-    throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(caller_);
 
   if (end == -1) {
     this->string = other.string.substr(begin);
@@ -48,7 +48,7 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t st
 
 __opaque_unicode_string__::__opaque_unicode_string__(const char32_t* str, int32_t startIndex, int32_t length) {
   if (startIndex < 0 || length < 0)
-    throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(caller_);
   this->stringSize = 0;
   for (int i = 0; i < length; i++)
     append(str[i]);
@@ -56,24 +56,24 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char32_t* str, int32_
 
 char32_t __opaque_unicode_string__::operator[](int i) const {
   if (i < 0)
-    throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(caller_);
 
   for (__opaque_unicode_string__::const_iterator it = (*this).begin(); it != (*this).end(); it++)
     if (it.get_logical_index() == i)
       return *it;
 
-  throw System::ArgumentOutOfRangeException(_caller);
+  throw System::ArgumentOutOfRangeException(caller_);
 }
 
 char32_t& __opaque_unicode_string__::operator[](int i) {
   if (i < 0)
-    throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(caller_);
 
   for (__opaque_unicode_string__::iterator it = (*this).begin(); it != (*this).end(); it++)
     if (it.get_logical_index() == i)
       return *it;
 
-  throw System::ArgumentOutOfRangeException(_caller);
+  throw System::ArgumentOutOfRangeException(caller_);
 }
 
 __opaque_unicode_string__& __opaque_unicode_string__::erase(size_t pos, size_t len) {
@@ -90,7 +90,7 @@ __opaque_unicode_string__& __opaque_unicode_string__::erase(size_t pos, size_t l
   }
 
   if (byteIndexIn == -1)
-    throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(caller_);
 
   if (len == npos) {
     this->string.erase(byteIndexIn);
@@ -222,7 +222,7 @@ size_t __opaque_unicode_string__::find(const __opaque_unicode_string__& match, s
       return it.get_logical_index();
   }
   if (pos != npos && pos > len)
-    throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(caller_);
   return npos;
 }
 
@@ -240,7 +240,7 @@ size_t __opaque_unicode_string__::find(char32_t match, size_t pos, size_t count)
       return it.get_logical_index();
   }
   if (pos != npos && pos > len)
-    throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(caller_);
   return npos;
 }
 
@@ -259,7 +259,7 @@ size_t __opaque_unicode_string__::find_any(const std::vector<char32_t>& any, siz
         return it.get_logical_index();
   }
   if (pos != npos && pos > len)
-    throw System::ArgumentOutOfRangeException(_caller);
+    throw System::ArgumentOutOfRangeException(caller_);
   return npos;
 }
 

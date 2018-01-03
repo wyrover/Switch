@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Provides focus-management functionality for controls that can function as a container for other controls.
-        class _export ContainerControl: public ScrollableControl {
+        class export_ ContainerControl: public ScrollableControl {
         public:
           /// @brief Initializes a new instance of the ContainerControl class with default settings.
           ContainerControl() {}
@@ -36,8 +36,8 @@ namespace Switch {
           ContainerControl(const ContainerControl& containerControl) : ScrollableControl(containerControl) {}
           /// @endcond
 
-          _property<const System::ComponentModel::IContainer&, _readonly> Container {
-            _get->const System::ComponentModel::IContainer& {return this->GetContainer();}
+          property_<const System::ComponentModel::IContainer&, readonly_> Container {
+            get_->const System::ComponentModel::IContainer& {return this->GetContainer();}
           };
 
           virtual const System::ComponentModel::IContainer& GetContainer() const {return ref<NullContainer>::Null();}

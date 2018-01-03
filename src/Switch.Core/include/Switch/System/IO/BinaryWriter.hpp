@@ -16,7 +16,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Writes primitive types in binary to a stream and supports writing strings in a specific encoding.
-      class _export BinaryWriter : public Object {
+      class export_ BinaryWriter : public Object {
       public:
         /// @brief Initializes a new instance of the System::IO::BinaryWriter class.
         BinaryWriter() {}
@@ -30,7 +30,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (!stream.CanWrite())
-            throw ArgumentException(_caller);
+            throw ArgumentException(caller_);
         }
 
         /// @brief Initializes a new instance of the System::IO::BinaryWriter class for the specified file on the specified stream pointer.
@@ -39,7 +39,7 @@ namespace Switch {
         /// @exception ArgumentException stream is not writable.
         BinaryWriter(refptr<Stream> stream) : stream(stream) {
           if (!stream->CanWrite())
-            throw ArgumentException(_caller);
+            throw ArgumentException(caller_);
         }
 
         /// @cond
@@ -48,8 +48,8 @@ namespace Switch {
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
         /// @return The stream this StreamWriter is writing to.
-        _property<Stream&, _readonly> BaseStream {
-          _get->Stream& {return this->GetBaseStream();}
+        property_<Stream&, readonly_> BaseStream {
+          get_->Stream& {return this->GetBaseStream();}
         };
 
         /// @brief Closes the current BinaryWriter object and the underlying stream.

@@ -21,7 +21,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents the version number of an assembly, operating system, or the common language runtime. This class cannot be inherited.
-    class _export Version final : public Object, public ICloneable, public IComparable, public Runtime::Serialization::ISerializable {
+    class export_ Version final : public Object, public ICloneable, public IComparable, public Runtime::Serialization::ISerializable {
     public:
       /// @brief Initializes a new instance of the Version class.
       /// @remarks Version is initialized with default values :
@@ -35,7 +35,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException major or minor is less than zero.
       Version(int32 major, int32 minor) : major(major), minor(minor) {
         if (major < 0 || minor < 0)
-          throw ArgumentOutOfRangeException(_caller);
+          throw ArgumentOutOfRangeException(caller_);
       }
 
       /// @brief Initializes a new instance of the Version class using the specified major, minor and build values.
@@ -45,7 +45,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException major, minor or build is less than zero.
       Version(int32 major, int32 minor, int32 build) : major(major), minor(minor), build(build) {
         if (major < 0 || minor < 0 || build < 0)
-          throw ArgumentOutOfRangeException(_caller);
+          throw ArgumentOutOfRangeException(caller_);
       }
 
       /// @brief Initializes a new instance of the Version class using the specified major, minor, build and revision values.
@@ -56,7 +56,7 @@ namespace Switch {
       /// @exception ArgumentOutOfRangeException major, minor, build or revision is less than zero.
       Version(int32 major, int32 minor, int32 build, int32 revision) : major(major), minor(minor), build(build), revision(revision) {
         if (major < 0 || minor < 0 || build < 0 || revision < 0)
-          throw ArgumentOutOfRangeException(_caller);
+          throw ArgumentOutOfRangeException(caller_);
       }
 
       /// @brief Initializes a new instance of the Version class using the specified string.
@@ -86,14 +86,14 @@ namespace Switch {
 
       /// @brief Gets the value of the build component of the version number for the current Version object.
       /// @return int32 The build number, or -1 if the build number is undefined.
-      _property<int32, _readonly> Build {
-        _get {return this->build;}
+      property_<int32, readonly_> Build {
+        get_ {return this->build;}
       };
 
       /// @brief Gets the value of the major component of the version number for the current Version object.
       /// @return int32 The major version number.
-      _property<int32, _readonly> Major {
-        _get {return this->major;}
+      property_<int32, readonly_> Major {
+        get_ {return this->major;}
       };
 
       /// @brief Gets the high 16 bits of the revision number.
@@ -102,14 +102,14 @@ namespace Switch {
       /// @remarks The temporary version does not warrant a new revision number, but it does need to be identified as a different version.
       /// @remarks In this case, encode the identification information in the high and low 16-bit portions of the 32-bit revision number.
       /// @remarks Use the Revision property to obtain the entire revision number, use the MajorRevision property to obtain the high 16 bits, and use the MinorRevision property to obtain the low 16 bits.
-      _property<int16, _readonly> MajorRevision {
-        _get {return (int16)((this->revision & 0xFFFF0000) >> 16);}
+      property_<int16, readonly_> MajorRevision {
+        get_ {return (int16)((this->revision & 0xFFFF0000) >> 16);}
       };
 
       /// @brief Gets the value of the minor component of the version number for the current Version object.
       /// @return int32 The minor version number.
-      _property<int32, _readonly> Minor {
-        _get {return this->minor;}
+      property_<int32, readonly_> Minor {
+        get_ {return this->minor;}
       };
 
       /// @brief Gets the low 16 bits of the revision number.
@@ -118,14 +118,14 @@ namespace Switch {
       /// @remarks The temporary version does not warrant a new revision number, but it does need to be identified as a different version.
       /// @remarks In this case, encode the identification information in the high and low 16-bit portions of the 32-bit revision number.
       /// @remarks Use the Revision property to obtain the entire revision number, use the MajorRevision property to obtain the high 16 bits, and use the MinorRevision property to obtain the low 16 bits.
-      _property<int16, _readonly> MinorRevision {
-        _get {return (int16)(this->revision & 0x0000FFFF);}
+      property_<int16, readonly_> MinorRevision {
+        get_ {return (int16)(this->revision & 0x0000FFFF);}
       };
 
       /// @brief Gets the value of the revision component of the version number for the current Version object.
       /// @return int32 The revision number, or -1 if the revision number is undefined.
-      _property<int32, _readonly> Revision {
-        _get {return this->revision;}
+      property_<int32, readonly_> Revision {
+        get_ {return this->revision;}
       };
 
       /// @brief Returns a new Version object whose value is the same as the current Version object.
@@ -197,7 +197,7 @@ namespace Switch {
         case 3: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]));;
         case 4: return Version(Convert::ToInt32(versions[0]), Convert::ToInt32(versions[1]), Convert::ToInt32(versions[2]), Convert::ToInt32(versions[3]));
         }
-        throw ArgumentException(_caller);
+        throw ArgumentException(caller_);
       }
 
       static bool TryParse(const String& version, Version& result) {
@@ -216,7 +216,7 @@ namespace Switch {
 
       String ToString(int32 fieldCount) const {
         if (fieldCount < 0 || fieldCount > 4 || (fieldCount >= 3 && this->build == -1) || (fieldCount == 4 && this->revision == -1))
-          throw ArgumentOutOfRangeException(_caller);
+          throw ArgumentOutOfRangeException(caller_);
         string result;
         if (fieldCount >= 1)
           result += string::Format("{0}", this->major);

@@ -17,7 +17,7 @@ namespace Native {
       this->add(this->scrolledWindow);
       this->scrolledWindow.add(this->fixed);
 
-      this->signal_show().connect(_delegate {
+      this->signal_show().connect(delegate_ {
         this->scrolledWindow.show();
         this->fixed.show();
       });

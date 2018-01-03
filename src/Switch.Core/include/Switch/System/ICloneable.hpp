@@ -20,7 +20,7 @@ namespace Switch {
   namespace System {
     /// @interface ICloneable
     /// @brief Supports cloning, which creates a new instance of a class with the same value as an existing instance.
-    class _export ICloneable _interface {
+    class export_ ICloneable interface_ {
     public:
       /// @brief Creates a new object that is a copy of the current instance.
       /// @return object A new object that is a copy of this instance.

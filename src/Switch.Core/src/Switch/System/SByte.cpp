@@ -102,7 +102,7 @@ bool SByte::ToBoolean(const IFormatProvider&) const {
 
 byte SByte::ToByte(const IFormatProvider&) const {
   if (this->value < Byte::MinValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (sbyte)this->value;
 }
@@ -133,21 +133,21 @@ int64 SByte::ToInt64(const IFormatProvider&) const {
 
 uint16 SByte::ToUInt16(const IFormatProvider&) const {
   if (this->value < UInt16::MinValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (uint16)this->value;
 }
 
 uint32 SByte::ToUInt32(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (uint32)this->value;
 }
 
 uint64 SByte::ToUInt64(const IFormatProvider&) const {
   if (this->value < 0)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (uint64)this->value;
 }
@@ -190,7 +190,7 @@ SByte& SByte::operator *=(const SByte& value) {
 
 SByte& SByte::operator /=(const SByte& value) {
   if (value == 0)
-    throw DivideByZeroException(_caller);
+    throw DivideByZeroException(caller_);
 
   this->value /= value.value;
   return *this;
@@ -198,7 +198,7 @@ SByte& SByte::operator /=(const SByte& value) {
 
 SByte& SByte::operator %=(const SByte& value) {
   if (value == 0)
-    throw DivideByZeroException(_caller);
+    throw DivideByZeroException(caller_);
 
   this->value %= value;
   return *this;

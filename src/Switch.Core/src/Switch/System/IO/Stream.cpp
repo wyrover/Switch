@@ -7,7 +7,7 @@ using namespace System::IO;
 using namespace System::Threading;
 
 int32 Stream::ReadByte() {
-  if (this->closed) throw ObjectDisposedException(_caller);
+  if (this->closed) throw ObjectDisposedException(caller_);
   static Array<byte> b(1);
   if (Read(b, 0, 1) == 1)
     return int32(b[0]);
@@ -20,7 +20,7 @@ Stream& Stream::Synchronised(Stream& stream) {
 }
 
 void Stream::WriteByte(byte value) {
-  if (this->closed) throw ObjectDisposedException(_caller);
+  if (this->closed) throw ObjectDisposedException(caller_);
   Array<byte> b = {value};
   Write(b, 0, 1);
 }

@@ -17,7 +17,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Represents a window or dialog box that makes up an application's user interface.
-        class _export Form : public ContainerControl {
+        class export_ Form : public ContainerControl {
         public:
           Form() : ContainerControl("", 0, 0, 300, 300) {
             this->visible = false;
@@ -29,24 +29,24 @@ namespace Switch {
           Form(const Form& form) : ContainerControl(form), formBorderStyle(form.formBorderStyle), maximizeBox(form.maximizeBox), minimizeBox(form.minimizeBox), startPosition(form.startPosition), messageActions(form.messageActions) {}
           /// @endcond
 
-          _property<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
-            _get{return this->formBorderStyle;},
-            _set{this->formBorderStyle = value;}
+          property_<System::Windows::Forms::FormBorderStyle> FormBorderStyle {
+            get_{return this->formBorderStyle;},
+            set_{this->formBorderStyle = value;}
           };
 
-          _property<bool> MaximizeBox {
-            _get {return this->maximizeBox;},
-            _set {this->maximizeBox = value;}
+          property_<bool> MaximizeBox {
+            get_ {return this->maximizeBox;},
+            set_ {this->maximizeBox = value;}
           };
 
-          _property<bool> MinimizeBox {
-            _get {return this->minimizeBox;},
-            _set {this->minimizeBox = value;}
+          property_<bool> MinimizeBox {
+            get_ {return this->minimizeBox;},
+            set_ {this->minimizeBox = value;}
           };
 
-          _property<FormStartPosition> StartPosition{
-            _get{return this->startPosition;},
-            _set{this->startPosition = value;}
+          property_<FormStartPosition> StartPosition{
+            get_{return this->startPosition;},
+            set_{this->startPosition = value;}
           };
 
           void Close() override;

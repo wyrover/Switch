@@ -14,14 +14,14 @@ namespace Examples {
         if (File::Exists(path))
           File::Delete(path);
 
-        _using(StreamWriter sw(path)) {
+        using_(StreamWriter sw(path)) {
           sw.WriteLine("This");
           sw.WriteLine("is some text");
           sw.WriteLine("to test");
           sw.WriteLine("Reading");
         }
 
-        _using(StreamReader sr(path)) {
+        using_(StreamReader sr(path)) {
           while (sr.Peek() >= 0)
             Console::WriteLine(sr.ReadLine());
         }
@@ -32,7 +32,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

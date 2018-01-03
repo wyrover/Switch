@@ -3,7 +3,7 @@
 
 namespace Switch {
   namespace System {
-    class __HResults _static {
+    class __HResults static_ {
     public:
       static const int32 RO_E_CLOSED = (int32)0x80000013;
       static const int32 E_BOUNDS = (int32)0x8000000B;

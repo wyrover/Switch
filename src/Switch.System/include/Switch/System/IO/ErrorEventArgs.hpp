@@ -16,7 +16,7 @@ namespace Switch {
       /// @remarks ErrorEventArgs contains the Exception that caused the FileSystemWatcher.Error event. This class provides the GetException method to retrieve the exception.
       /// @par Library
       /// Switch.System
-      class _export ErrorEventArgs : public EventArgs {
+      class export_ ErrorEventArgs : public EventArgs {
       public:
         /// @brief Initializes a new instance of the ErrorEventArgs class.
         template<typename T>

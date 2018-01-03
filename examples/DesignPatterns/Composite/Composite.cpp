@@ -8,7 +8,7 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Component' abstract class
-    class Component _abstract {
+    class Component abstract_ {
     public:
       // Constructor
       Component(const string& name) : name(name) {}
@@ -56,7 +56,7 @@ namespace DesignPatterns {
       void Remove(refptr<Component> c) override {throw InvalidOperationException("Cannot remove from a leaf");}
     };
 
-    // MainApp _startup class for Structural
+    // MainApp startup_ class for Structural
     // Composite Design Pattern.
     class MainApp {
     public:
@@ -87,7 +87,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Structural::MainApp);
+startup_(DesignPatterns::Structural::MainApp);
 
 // This code produces the following output:
 //

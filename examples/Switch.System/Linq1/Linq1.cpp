@@ -12,9 +12,9 @@ namespace Examples {
       Array<string> names = { "Burke", "Connor", "Frank", "Everett", "Albert", "George", "Harris", "David" };
 
       refptr<IEnumerable<string>> query = from<string>(names)
-      | where<string>(_delegate(string s) {return s.Length == 5;})
-      | orderby<string>(_delegate(string s) {return s;})
-      | select<string>(_delegate(string s) {return s.ToUpper();});
+      | where<string>(delegate_(string s) {return s.Length == 5;})
+      | orderby<string>(delegate_(string s) {return s;})
+      | select<string>(delegate_(string s) {return s.ToUpper();});
 
       for (string item : *query)
         Console::WriteLine(item);
@@ -22,7 +22,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code example produces the following output:
 //

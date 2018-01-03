@@ -18,16 +18,16 @@ MemoryStream::MemoryStream(Array<byte>& buffer, bool writable) {
 }
 
 int64 MemoryStream::GetLength() const {
-  if (IsClosed()) throw ObjectDisposedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(caller_);
   if (IsDynamic()) return this->data->dynamicBuffer.Count;
   return this->data->staticBuffer->Length;
 }
 
 void MemoryStream::SetLength(int64 value) {
   if (!CanWrite() || (!IsDynamic() && value > Capacity()))
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
   if (value < 0 || value > Int32::MaxValue)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (IsDynamic()) {
     if (static_cast<int32>(value) < this->data->dynamicBuffer.Count) {
@@ -41,16 +41,16 @@ void MemoryStream::SetLength(int64 value) {
 }
 
 int32 MemoryStream::GetCapacity() const {
-  if (IsClosed()) throw ObjectDisposedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(caller_);
   if (IsDynamic())
     return this->data->dynamicBuffer.Capacity;
   return this->data->staticBufferCapacity;
 }
 
 void MemoryStream::SetCapacity(int32 newCapacity) {
-  if (newCapacity < Length()) throw ArgumentOutOfRangeException(_caller);
-  if (IsClosed()) throw ObjectDisposedException(_caller);
-  if (!IsDynamic()) throw NotSupportedException(_caller);
+  if (newCapacity < Length()) throw ArgumentOutOfRangeException(caller_);
+  if (IsClosed()) throw ObjectDisposedException(caller_);
+  if (!IsDynamic()) throw NotSupportedException(caller_);
   this->data->dynamicBuffer.Capacity = newCapacity;
 }
 
@@ -63,11 +63,11 @@ const byte* MemoryStream::Buffer() const {
 
 int32 MemoryStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
   if (offset < 0 || count < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
   if (buffer.Length - offset < count)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
   if (IsClosed())
-    throw ObjectDisposedException(_caller);
+    throw ObjectDisposedException(caller_);
 
   int32 nbRead = Convert::ToInt32(Length()) - this->data->position;
   if (count < nbRead) nbRead = count;
@@ -77,13 +77,13 @@ int32 MemoryStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
 }
 
 int32 MemoryStream::ReadByte() {
-  if (IsClosed()) throw ObjectDisposedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(caller_);
   if (this->data->position >= Length()) return -1;
   return static_cast<int32>(AbstractReadByteUnChecked());
 }
 
 int64 MemoryStream::Seek(int64 offset, SeekOrigin origin) {
-  if (IsClosed()) throw ObjectDisposedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(caller_);
   int64 newPosition = 0;
   bool invalidSeekOrigin = false; /* used in order to be able to have the same priorities of thrown exceptions (cf. .Net) */
   if (origin == SeekOrigin::Begin)
@@ -95,10 +95,10 @@ int64 MemoryStream::Seek(int64 offset, SeekOrigin origin) {
   else
     invalidSeekOrigin = true;
 
-  if (newPosition < 0) throw IOException(_caller);
+  if (newPosition < 0) throw IOException(caller_);
   if (offset > Int32::MaxValue || newPosition > Int32::MaxValue)
-    throw ArgumentOutOfRangeException(_caller);
-  if (invalidSeekOrigin) throw ArgumentException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
+  if (invalidSeekOrigin) throw ArgumentException(caller_);
   this->data->position = static_cast<int32>(newPosition);
   return newPosition;
 }
@@ -111,15 +111,15 @@ Array<byte> MemoryStream::ToArray() const {
 
 void MemoryStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
   if (IsClosed())
-    throw ObjectDisposedException(_caller);
+    throw ObjectDisposedException(caller_);
   if (!CanWrite())
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
   if (!IsDynamic() && (this->data->position + count > this->data->staticBufferCapacity))
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
   if (buffer.Length - offset < count)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
   if (offset < 0 || count < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   while (count-- > 0) {
     byte b = buffer[offset++];
@@ -128,9 +128,9 @@ void MemoryStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
 }
 
 void MemoryStream::WriteByte(byte value) {
-  if (IsClosed()) throw ObjectDisposedException(_caller);
-  if (!CanWrite()) throw NotSupportedException(_caller);
-  if (!IsDynamic() && (this->data->position + 1 > this->data->staticBufferCapacity)) throw NotSupportedException(_caller);
+  if (IsClosed()) throw ObjectDisposedException(caller_);
+  if (!CanWrite()) throw NotSupportedException(caller_);
+  if (!IsDynamic() && (this->data->position + 1 > this->data->staticBufferCapacity)) throw NotSupportedException(caller_);
   AbstractWriteByteUnChecked(value);
 }
 

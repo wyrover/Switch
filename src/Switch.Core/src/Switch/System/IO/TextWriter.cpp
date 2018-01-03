@@ -26,6 +26,6 @@ SynchronizedTextWriter::SynchronizedTextWriter(System::IO::TextWriter& writer) :
 }
 
 void SynchronizedTextWriter::Write(const string& value) {
-  _lock(*this->writer)
+  lock_(*this->writer)
   this->writer->Write(value);
 }

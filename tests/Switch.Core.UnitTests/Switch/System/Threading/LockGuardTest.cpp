@@ -11,7 +11,7 @@ namespace SwitchUnitTests {
     int value = 0;
     object lock;
 
-    _lock(lock)
+    lock_(lock)
     ++value;
     ASSERT_EQ(1, value);
   }
@@ -21,9 +21,9 @@ namespace SwitchUnitTests {
     object lock;
     object lock2;
 
-    _lock(lock) {
+    lock_(lock) {
       ++value;
-      _lock(lock2)
+      lock_(lock2)
       ++value;
     }
 
@@ -34,9 +34,9 @@ namespace SwitchUnitTests {
     int value = 0;
     object lock;
 
-    _lock(lock) {
+    lock_(lock) {
       ++value;
-      _lock(lock)
+      lock_(lock)
       ++value;
     }
 
@@ -48,7 +48,7 @@ namespace SwitchUnitTests {
     int value = 0;
     int64 start = std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000;
 
-    _lock(lock)
+    lock_(lock)
     ++value;
 
     ASSERT_LE(std::chrono::nanoseconds(std::chrono::high_resolution_clock::now().time_since_epoch()).count() / 1000000 - start, 1);
@@ -57,14 +57,14 @@ namespace SwitchUnitTests {
   TEST(LockGuardTest, Thread) {
     string s;
     object lock;
-    std::thread t1(_delegate {
-      _lock(lock) {
+    std::thread t1(delegate_ {
+      lock_(lock) {
         for (int i = 0; i < 500; i++)
           s += '1';
       }
     });
-    std::thread t2(_delegate {
-      _lock(lock) {
+    std::thread t2(delegate_ {
+      lock_(lock) {
         for (int i = 0; i < 500; i++)
           s += '2';
       }

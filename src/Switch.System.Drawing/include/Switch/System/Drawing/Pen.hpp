@@ -31,7 +31,7 @@ namespace Switch {
     /// @par Library
     /// Switch.System.Drawing
     namespace Drawing {
-      class _export Pen : public object {
+      class export_ Pen : public object {
       public:
         Pen() {}
 
@@ -55,18 +55,18 @@ namespace Switch {
 
         Pen(System::Drawing::Color color, float width) : brush(as<System::Drawing::Brush>(ref_new<SolidBrush>(color))), width(width) { this->Create(); }
 
-        _property<const System::Drawing::Brush&> Brush{
-          _get->const System::Drawing::Brush& { return this->brush(); },
-          _set {this->brush = as<System::Drawing::Brush>(value.Clone()); }
+        property_<const System::Drawing::Brush&> Brush{
+          get_->const System::Drawing::Brush& { return this->brush(); },
+          set_ {this->brush = as<System::Drawing::Brush>(value.Clone()); }
         };
 
-        _property<System::Drawing::Color, _readonly> Color{
-          _get{ return as<SolidBrush>(this->brush)().Color(); }
+        property_<System::Drawing::Color, readonly_> Color{
+          get_{ return as<SolidBrush>(this->brush)().Color(); }
         };
 
-        _property<System::Drawing::Drawing2D::DashStyle> DashStyle {
-          _get {return this->dashStyle;},
-          _set {
+        property_<System::Drawing::Drawing2D::DashStyle> DashStyle {
+          get_ {return this->dashStyle;},
+          set_ {
             if (this->dashStyle != value) {
               this->dashStyle = value;
               this->Create();
@@ -74,9 +74,9 @@ namespace Switch {
           }
         };
 
-        _property<float> Width{
-          _get {return this->width;},
-          _set {this->width = value;}
+        property_<float> Width{
+          get_ {return this->width;},
+          set_ {this->width = value;}
         };
 
       private:

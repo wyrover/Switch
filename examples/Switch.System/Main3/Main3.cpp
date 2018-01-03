@@ -17,8 +17,8 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
-// _startup(Examples::Program); is same as :
+startup_(Examples::Program);
+// startup_(Examples::Program); is same as :
 //
 // int main(int argc, char* argv[]) {
 //   Examples::Program::Main(Environment::SetCommandLineArgs(argv, argc));

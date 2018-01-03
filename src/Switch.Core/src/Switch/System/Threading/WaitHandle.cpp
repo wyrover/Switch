@@ -13,7 +13,7 @@ bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles) {
 
 bool WaitHandle::WaitAll(Array<ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
   if (millisecondsTimeout < Timeout::Infinite)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (millisecondsTimeout == Timeout::Infinite) {
     for (auto& item : waitHandles)
@@ -43,7 +43,7 @@ int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles) {
 
 int32 WaitHandle::WaitAny(Array<ref<WaitHandle>> waitHandles, int32 millisecondsTimeout) {
   if (millisecondsTimeout < Timeout::Infinite)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (millisecondsTimeout == Timeout::Infinite) {
     for (int32 index = 0; index < waitHandles.Count; index++) {

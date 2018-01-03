@@ -7,15 +7,15 @@ using namespace System;
 namespace DesignPatterns {
   namespace Creational {
     // The 'Prototype' abstract class
-    class Prototype _abstract {
+    class Prototype abstract_ {
     public:
       // Constructor
       Prototype(const string& id) : id(id) {}
       Prototype(const Prototype& prototype) : id(prototype.id) {}
 
       // Gets id
-      _property<string, _readonly> Id {
-        _get {return this->id;}
+      property_<string, readonly_> Id {
+        get_ {return this->id;}
       };
 
       virtual refptr<Prototype> Clone() const = 0;
@@ -44,7 +44,7 @@ namespace DesignPatterns {
       refptr<Prototype> Clone() const override {return as<Prototype>(this->MemberwiseClone<ConcretePrototype2>());}
     };
 
-    // MainApp _startup class for Creational
+    // MainApp startup_ class for Creational
     // Prototype Design Pattern.
     class MainApp {
     public:
@@ -65,7 +65,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Creational::MainApp);
+startup_(DesignPatterns::Creational::MainApp);
 
 // This code produces the following output:
 //

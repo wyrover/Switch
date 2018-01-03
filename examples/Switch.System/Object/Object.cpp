@@ -31,7 +31,7 @@ namespace ObjectTest {
     int y;
   };
 
-  class App _static {
+  class App static_ {
   public:
     static void Main() {
       // Construct a Point object.
@@ -58,7 +58,7 @@ namespace ObjectTest {
   };
 }
 
-_startup(ObjectTest::App);
+startup_(ObjectTest::App);
 
 // This code produces the following output:
 //

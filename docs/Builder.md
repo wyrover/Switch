@@ -45,7 +45,7 @@ namespace DesignPatterns {
     };
 ​
     // The 'Builder' abstract class
-    class Builder _abstract {
+    class Builder abstract_ {
     public:
       virtual void BuildPartA() = 0;
       virtual void BuildPartB() = 0;
@@ -109,7 +109,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Creational::MainApp);
+startup_(DesignPatterns::Creational::MainApp);
 ```
 
 # Output

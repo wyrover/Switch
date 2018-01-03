@@ -20,7 +20,7 @@ string Exception::GetStackTrace() const {
   return string::Join("\n", this->stackTrace());
 }
 
-Exception::Exception() : caller(_caller) {
+Exception::Exception() : caller(caller_) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }
@@ -39,7 +39,7 @@ Exception::Exception(const Exception& value) {
   this-> stackTrace = value.stackTrace;
 }
 
-Exception::Exception(const string& message) : message(message), caller(_caller) {
+Exception::Exception(const string& message) : message(message), caller(caller_) {
   this->SetStackTrace(*this);
   this->SetHResult(__HResults::COR_E_EXCEPTION);
 }

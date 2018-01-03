@@ -18,7 +18,7 @@
 #include "../../include/Switch/Types.hpp"
 
 namespace Native {
-  class ConsoleApi _static {
+  class ConsoleApi static_ {
   public:
     static void Beep(int32 freq, int32 dur);
     static void Clrscr();
@@ -62,7 +62,7 @@ namespace Native {
     static bool SetWindowWidth(int32 width);
   };
 
-  struct DateTimeApi _static {
+  struct DateTimeApi static_ {
   public:
     static int32 Ftime(int64& seconds, int32& milliseconds, int32& timeZone, bool& daylight);
     static int32 Gmtime(int64 time, int32& year, int32& month, int32& day, int32& hour, int32& minute, int32& second, int32& dayOfYear, int32& dayOfWeek);
@@ -73,7 +73,7 @@ namespace Native {
     static bool IsDaylight(int64 localTime);
   };
 
-  class DirectoryApi _static {
+  class DirectoryApi static_ {
   public:
     static char32 AltDirectorySeparatorChar();
     static char32 DirectorySeparatorChar();
@@ -96,7 +96,7 @@ namespace Native {
     static string GetTempPath();
   };
 
-  class DriveApi _static {
+  class DriveApi static_ {
   public:
     static bool GetAvailableFreeSpace(const string& rootPathName, int64& freeBytes, int64& totalNumberOfBytes, int64& totalNumberOfFreeBytes);
     static System::IO::DriveType GetDriveType(const string& rootPathName);
@@ -105,7 +105,7 @@ namespace Native {
     static bool SetVolumeLabel(const string& rootPathName, const string& volumeName);
   };
 
-  class EnvironmentApi _static {
+  class EnvironmentApi static_ {
   public:
     static string NewLine();
     static System::PlatformID GetOsPlatformID();
@@ -122,7 +122,7 @@ namespace Native {
     static System::Guid NewGuid();
   };
 
-  class FormatApi _static {
+  class FormatApi static_ {
   public:
     static const string& Integer();
     static const string& IntegerWithPrecision();
@@ -132,7 +132,7 @@ namespace Native {
     static const string& LowerHexadecimalWithPrecision();
   };
 
-  class InterlockedApi _static {
+  class InterlockedApi static_ {
   public:
     static int32 Add(int32& location, int32 value);
     static int64 Add(int64& location, int64 value);
@@ -150,7 +150,7 @@ namespace Native {
     static int64 Increment(int64& location);
   };
 
-  class RegistryApi _static {
+  class RegistryApi static_ {
   public:
     static int32 CloseKey(intptr key);
     static int32 CreateSubKey(intptr rootKey, const string& subKey, intptr& key);
@@ -170,7 +170,7 @@ namespace Native {
     static int32 SetValue(intptr key, const string& keyName, Microsoft::Win32::RegistryValueKind type, const byte* data, int32 length);
   };
 
-  class SecurityApi _static {
+  class SecurityApi static_ {
   public:
     static System::Security::SecureString ToSecureSecureString(const string& unsecureString);
     static string ToSecureString(const string& unsecureString);
@@ -178,7 +178,7 @@ namespace Native {
     static string ToUnsecureString(const string& secureString);
   };
 
-  class ThreadApi _static {
+  class ThreadApi static_ {
   public:
     static bool Cancel(intptr handle);
     static intptr GetCurrent();
@@ -188,12 +188,12 @@ namespace Native {
     static void Suspend(intptr handle);
   };
 
-  class TypeApi _static {
+  class TypeApi static_ {
   public:
     static string Demangle(const string& name);
   };
 
-  class UnicodeCharactersApi _static {
+  class UnicodeCharactersApi static_ {
   public:
     static bool ValidateCodePoint(uint32 codePoint);
     static bool IsAlpha(uint32 codePoint);
@@ -201,13 +201,13 @@ namespace Native {
     static bool IsPunctuation(uint32 codePoint);
   };
 
-  class UnicodeEncodingsApi _static {
+  class UnicodeEncodingsApi static_ {
   public:
-    class ASCII _static {
+    class ASCII static_ {
     public:
     };
 
-    class UTF8 _static {
+    class UTF8 static_ {
     public:
       static byte GetFormat(byte b);
       static int32 GetNextCodeIndex(const std::string& str, int32 pos);
@@ -222,7 +222,7 @@ namespace Native {
       static System::Array<byte> ToBytes(uint32 code);
     };
 
-    class UTF16 _static {
+    class UTF16 static_ {
     public:
       static int32 GetByteCount(uint32 code);
       static int32 Encode(uint32 code, byte bytes[], bool big_endian);
@@ -230,7 +230,7 @@ namespace Native {
       static int32 GetLength(const byte* bytes, uint32 nb_bytes, bool big_endian);
     };
 
-    class UTF32 _static {
+    class UTF32 static_ {
     public:
       static void Encode(uint32 code, byte& b1, byte& b2, byte& b3, byte& b4, bool big_endian);
       static uint32 Decode(byte b1, byte b2, byte b3, byte b4, bool big_endian);

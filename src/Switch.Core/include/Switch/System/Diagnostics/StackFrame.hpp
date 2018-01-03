@@ -17,7 +17,7 @@ namespace Switch {
       /// @endcond
 
       /// @brief Provides information about a StackFrame, which represents a function call on the call stack for the current thread.
-      class _export StackFrame : public Object {
+      class export_ StackFrame : public Object {
         /// @cond
         friend class StackTrace;
         /// @endcond

@@ -51,7 +51,7 @@ struct Nullable : public T {
 
 ```c++
 template<typename TSession = ISession>
-class ISessionChannel _interface {
+class ISessionChannel interface_ {
   virtual TSession GetSession() = 0;
 };
 ```

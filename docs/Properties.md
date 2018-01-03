@@ -26,15 +26,15 @@ public:
   Person(const Person& person) : name(person.name), age(person.age) {}
   
   // Declare a Name property of type string:
-  _property<string> Name {
-    _get {return this->name;},
-    _set {this->name = value;}
+  property_<string> Name {
+    get_ {return this->name;},
+    set_ {this->name = value;}
   };
   
   // Declare an Age property of type int:
-  _property<int> Age {
-    _get {return this->age;},
-    _set {this->age = value;}
+  property_<int> Age {
+    get_ {return this->age;},
+    set_ {this->age = value;}
   };
   
   string ToString() const override {
@@ -65,7 +65,7 @@ private:
   int age = 0;
 };
  
-_startup(Person);
+startup_(Person);
 ```
 
 **Output**
@@ -82,9 +82,9 @@ Person details - Name = Joe, Age = 100
 Notice the way that the properties are declared, for example, consider the Name property: 
 
 ```c++
-_property<string> Name {
-  _get {return this->name;}
-  _set {this->name = value;}
+property_<string> Name {
+  get_ {return this->name;}
+  set_ {this->name = value;}
 }
 ```
 

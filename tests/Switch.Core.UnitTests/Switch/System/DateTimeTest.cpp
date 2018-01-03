@@ -13,14 +13,14 @@ namespace Switch {
   namespace System {
     class DateTime2 : public object {
     public:
-      static _property<DateTime2, _readonly> MinValue;
-      static _property<DateTime2, _readonly> MaxValue;
+      static property_<DateTime2, readonly_> MinValue;
+      static property_<DateTime2, readonly_> MaxValue;
 
       DateTime2() {}
 
       explicit DateTime2(int64 ticks) {
         if (ticks < MinTicks || ticks > MaxTicks)
-          throw ArgumentOutOfRangeException(_caller);
+          throw ArgumentOutOfRangeException(caller_);
         this->dateData = Convert::ToUInt64(ticks);
       }
 
@@ -33,9 +33,9 @@ namespace Switch {
 
       DateTime2(int64 ticks, DateTimeKind kind) {
         if (ticks < MinTicks || ticks > MaxTicks)
-          throw ArgumentOutOfRangeException(_caller);
+          throw ArgumentOutOfRangeException(caller_);
         if (kind < DateTimeKind::Unspecified || kind > DateTimeKind::Local)
-          throw ArgumentOutOfRangeException(_caller);
+          throw ArgumentOutOfRangeException(caller_);
         this->dateData = Convert::ToUInt64(ticks) | (Convert::ToUInt64(kind) << KindShift);
       }
 
@@ -45,34 +45,34 @@ namespace Switch {
 
       DateTime2(int32 year, int32 month, int32 day, int32 hour, int32 minute, int32 second, DateTimeKind kind) : dateData((Convert::ToUInt64(DateToTicks(year, month, day) + TimeToTicks(hour, minute, second)) | (Convert::ToUInt64(kind) << KindShift))) {
         if (kind < DateTimeKind::Unspecified || kind > DateTimeKind::Local)
-          throw ArgumentException(_caller);
+          throw ArgumentException(caller_);
       }
 
-      _property<DateTime2, _readonly> Date {
-        _get {
+      property_<DateTime2, readonly_> Date {
+        get_ {
           int64 ticks = this->InternalTicks;
           return DateTime2(Convert::ToUInt64(ticks - ticks % TicksPerDay) | this->InternalKind);
         }
       };
 
-      _property<int32, _readonly> Day {
-        _get {return this->GetDatePart(DatePartDay);}
+      property_<int32, readonly_> Day {
+        get_ {return this->GetDatePart(DatePartDay);}
       };
 
-      _property<System::DayOfWeek, _readonly> DayOfWeek {
-        _get {return (System::DayOfWeek)((this->InternalTicks / TicksPerDay + 1) % 7);}
+      property_<System::DayOfWeek, readonly_> DayOfWeek {
+        get_ {return (System::DayOfWeek)((this->InternalTicks / TicksPerDay + 1) % 7);}
       };
 
-      _property<int32, _readonly> DayOfYear {
-        _get {return GetDatePart(DatePartDayOfYear);}
+      property_<int32, readonly_> DayOfYear {
+        get_ {return GetDatePart(DatePartDayOfYear);}
       };
 
-      _property<int32, _readonly> Hour {
-        _get {return Convert::ToInt32((this->InternalTicks / TicksPerHour) % 24);}
+      property_<int32, readonly_> Hour {
+        get_ {return Convert::ToInt32((this->InternalTicks / TicksPerHour) % 24);}
       };
 
-      _property<DateTimeKind, _readonly> Kind {
-        _get {
+      property_<DateTimeKind, readonly_> Kind {
+        get_ {
           switch (this->InternalKind) {
           case KindUnspecified: return DateTimeKind::Unspecified;
           case KindUtc: return DateTimeKind::Utc;
@@ -81,38 +81,38 @@ namespace Switch {
         }
       };
 
-      _property<int32, _readonly> Millisecond {
-        _get {return Convert::ToInt32((this->InternalTicks / TicksPerMillisecond) % 1000);}
+      property_<int32, readonly_> Millisecond {
+        get_ {return Convert::ToInt32((this->InternalTicks / TicksPerMillisecond) % 1000);}
       };
 
-      _property<int32, _readonly> Minute {
-        _get {return Convert::ToInt32((InternalTicks / TicksPerMinute) % 60);}
+      property_<int32, readonly_> Minute {
+        get_ {return Convert::ToInt32((InternalTicks / TicksPerMinute) % 60);}
       };
 
-      _property<int32, _readonly> Month {
-        _get {return this->GetDatePart(DatePartMonth);}
+      property_<int32, readonly_> Month {
+        get_ {return this->GetDatePart(DatePartMonth);}
       };
 
-      static _property<DateTime2, _readonly> Now;
+      static property_<DateTime2, readonly_> Now;
 
-      _property<int32, _readonly> Second {
-        _get {return Convert::ToInt32((InternalTicks / TicksPerSecond) % 60);}
+      property_<int32, readonly_> Second {
+        get_ {return Convert::ToInt32((InternalTicks / TicksPerSecond) % 60);}
       };
 
-      _property<int64, _readonly> Ticks {
-        _get {return this->InternalTicks();}
+      property_<int64, readonly_> Ticks {
+        get_ {return this->InternalTicks();}
       };
 
-      _property<TimeSpan, _readonly> TimeOfDay {
-        _get {return TimeSpan(this->InternalTicks & TicksPerDay);}
+      property_<TimeSpan, readonly_> TimeOfDay {
+        get_ {return TimeSpan(this->InternalTicks & TicksPerDay);}
       };
 
-      static _property<DateTime2, _readonly> ToDay;
+      static property_<DateTime2, readonly_> ToDay;
 
-      static _property<DateTime2, _readonly> UtcNow;
+      static property_<DateTime2, readonly_> UtcNow;
 
-      _property<int32, _readonly> Year {
-        _get {return this->GetDatePart(DatePartYear);}
+      property_<int32, readonly_> Year {
+        get_ {return this->GetDatePart(DatePartYear);}
       };
 
       bool IsDaylightSavingTime() const {
@@ -124,7 +124,7 @@ namespace Switch {
 
       static bool IsLeapYear(int32 year) {
         if (year < 1 || year > 9999)
-          throw ArgumentOutOfRangeException(_caller);
+          throw ArgumentOutOfRangeException(caller_);
         return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
       }
 
@@ -156,16 +156,16 @@ namespace Switch {
 
       DateTime2(int64 ticks, DateTimeKind kind, bool isAmbiguousDst) {
         if (ticks < MinTicks || ticks > MaxTicks)
-          throw ArgumentOutOfRangeException(_caller);
+          throw ArgumentOutOfRangeException(caller_);
         dateData = (Convert::ToUInt64(ticks) | (isAmbiguousDst ? KindLocalAmbiguousDst : KindLocal));
       }
 
-      _property<int64, _readonly> InternalTicks {
-        _get {return Convert::ToInt64(this->dateData & TicksMask);}
+      property_<int64, readonly_> InternalTicks {
+        get_ {return Convert::ToInt64(this->dateData & TicksMask);}
       };
 
-      _property<uint64, _readonly> InternalKind {
-        _get {return this->dateData & FlagsMask;}
+      property_<uint64, readonly_> InternalKind {
+        get_ {return this->dateData & FlagsMask;}
       };
 
       // Number of 100ns dateData per time unit
@@ -248,7 +248,7 @@ namespace Switch {
             return n * TicksPerDay;
           }
         }
-        throw ArgumentOutOfRangeException(_caller);
+        throw ArgumentOutOfRangeException(caller_);
       }
 
       int32 GetDatePart(int part) const {
@@ -303,10 +303,10 @@ namespace Switch {
         if (hour >= 0 && hour < 24 && minute >= 0 && minute < 60 && second >= 0 && second < 60) {
           int64 totalSeconds = Convert::ToInt64(hour * 3600) + Convert::ToInt64(minute * 60) + Convert::ToInt64(second);
           if (totalSeconds > MaxSeconds || totalSeconds < MinSeconds)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           return totalSeconds * TicksPerSecond;
         }
-        throw ArgumentOutOfRangeException(_caller);
+        throw ArgumentOutOfRangeException(caller_);
       }
     };
   }
@@ -321,11 +321,11 @@ using namespace Switch;
 
 using namespace System;
 
-_property<DateTime2, _readonly> DateTime2::MinValue {
+property_<DateTime2, readonly_> DateTime2::MinValue {
   [] {return DateTime2(0, DateTimeKind::Unspecified);}
 };
 
-_property<DateTime2, _readonly> DateTime2::MaxValue{
+property_<DateTime2, readonly_> DateTime2::MaxValue{
   [] { return DateTime2((int64)3652059 * 10000 * 1000 * 60 * 60 * 24 - 1, DateTimeKind::Unspecified);}
 };
 
@@ -334,19 +334,19 @@ int64 GetSystemTimeAsFileTime() {
   return (int64)std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count() / 100 + TicksSince1601To1970;
 }
 
-_property<DateTime2, _readonly> DateTime2::Now {
+property_<DateTime2, readonly_> DateTime2::Now {
   []()->DateTime2 {
     return DateTime2::__get_now();
   }
 };
 
-_property<DateTime2, _readonly> DateTime2::ToDay {
+property_<DateTime2, readonly_> DateTime2::ToDay {
   []()->DateTime2 {
     return DateTime2::Now().Date;
   }
 };
 
-_property<DateTime2, _readonly> DateTime2::UtcNow {
+property_<DateTime2, readonly_> DateTime2::UtcNow {
   []()->DateTime2 {
     int64 ticks = GetSystemTimeAsFileTime();
     const int64 kindUtc = 0x4000000000000000;

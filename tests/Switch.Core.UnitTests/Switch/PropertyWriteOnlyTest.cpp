@@ -7,8 +7,8 @@ using namespace System;
 namespace SwitchUnitTests {
   TEST(PropertyWriteOnlyTest, CreatePropertyAndSetItWithEqualOperator) {
     int32 v = 42;
-    _property<int32, _writeonly> Value {
-      _set {v = value;}
+    property_<int32, writeonly_> Value {
+      set_ {v = value;}
     };
 
     Value = 24;
@@ -17,8 +17,8 @@ namespace SwitchUnitTests {
 
   TEST(PropertyWriteOnlyTest, CreatePropertyAndSetItWithSetFunction) {
     int32 v = 42;
-    _property<int32, _writeonly> Value {
-      _set {v = value;}
+    property_<int32, writeonly_> Value {
+      set_ {v = value;}
     };
 
     Value.Set(24);
@@ -27,8 +27,8 @@ namespace SwitchUnitTests {
 
   TEST(PropertyWriteOnlyTest, CreatePropertyAndSetItWithFunctor) {
     int32 v = 42;
-    _property<int32, _writeonly> Value {
-      _set {v = value;}
+    property_<int32, writeonly_> Value {
+      set_ {v = value;}
     };
 
     Value(24);
@@ -40,8 +40,8 @@ namespace SwitchUnitTests {
     PropertyWriteTestClass() {}
     PropertyWriteTestClass(const PropertyWriteTestClass& property) : name(property.name) {}
 
-    _property<string, _writeonly> Name {
-      _set {this->name = value;}
+    property_<string, writeonly_> Name {
+      set_ {this->name = value;}
     };
 
   public:

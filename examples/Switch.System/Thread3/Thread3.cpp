@@ -23,7 +23,7 @@ namespace Examples {
 
   private:
     static void ShowThreadInformation(const Object& state) {
-      _lock(obj) {
+      lock_(obj) {
         auto th  = Thread::CurrentThread();
         Console::WriteLine("Managed thread #{0}: ", th.ManagedThreadId);
         Console::WriteLine("   Background thread: {0}", th.IsBackground);
@@ -38,7 +38,7 @@ namespace Examples {
   Object Program::obj;
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces output similar to the following:
 //

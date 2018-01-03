@@ -10,38 +10,38 @@
 namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
-  /// This example how to use TestFixture class, Assert class and #_AddTest method:
+  /// This example how to use TestFixture class, Assert class and #AddTest_ method:
   /// @include Assert.cpp
   /// @par Examples
-  /// This example how to use TestFixture class, Expect class and #_AddTest method:
+  /// This example how to use TestFixture class, Expect class and #AddTest_ method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The TUnit::Constrains conatains ConstraintValue that contain vaule to verify, the base class Contraints, the base class ConstraintExpression, all Constraint inherited classes and all ContraintExpression inherited classes.
     namespace Constraints {
-      class _export Constraint _abstract {
+      class export_ Constraint abstract_ {
       public:
-        _property< System::Runtime::CompilerServices::Caller> Caller {
-          _get {return this->caller;},
-          _set {this->caller = value;}
+        property_< System::Runtime::CompilerServices::Caller> Caller {
+          get_ {return this->caller;},
+          set_ {this->caller = value;}
         };
 
-        _property<ConstraintValue> Actual {
-          _get {return this->actual;},
-          _set {this->actual = value;}
+        property_<ConstraintValue> Actual {
+          get_ {return this->actual;},
+          set_ {this->actual = value;}
         };
 
-        _property<ConstraintValue> Expect {
-          _get {return this->expect;},
-          _set {this->expect = value;}
+        property_<ConstraintValue> Expect {
+          get_ {return this->expect;},
+          set_ {this->expect = value;}
         };
 
-        _property<string, _readonly> Error {
-          _get {return string::Format("Expected: {0}{2}But was:  {1}", ToString(), this->actual, System::Environment::NewLine);}
+        property_<string, readonly_> Error {
+          get_ {return string::Format("Expected: {0}{2}But was:  {1}", ToString(), this->actual, System::Environment::NewLine);}
         };
 
-        _property<string> Message {
-          _get {return this->message;},
-          _set {this->message = value;}
+        property_<string> Message {
+          get_ {return this->message;},
+          set_ {this->message = value;}
         };
 
         template<typename T>

@@ -17,7 +17,7 @@ namespace Switch {
       /// @brief Provides a set of methods and properties that enable applications to trace the execution of code and associate trace messages with their source.
       /// @par Library
       /// Switch.System
-      class _export TraceSource :  public Object {
+      class export_ TraceSource :  public Object {
       public:
         TraceSource() {}
 
@@ -27,14 +27,14 @@ namespace Switch {
         ~TraceSource() {}
         /// @endcond
 
-        _property<TraceListenerCollection&> Listeners {
-          _get->TraceListenerCollection& {return this->data->listeners;},
-          _set {this->data->listeners = value;}
+        property_<TraceListenerCollection&> Listeners {
+          get_->TraceListenerCollection& {return this->data->listeners;},
+          set_ {this->data->listeners = value;}
         };
 
-        _property<string> Name {
-          _get {return this->data->name;},
-          _set {this->data->name = value;}
+        property_<string> Name {
+          get_ {return this->data->name;},
+          set_ {this->data->name = value;}
         };
 
         /// @brief Writes trace data to the trace listeners in the Listeners collection using the specified event type, event identifier, and trace data.

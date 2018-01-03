@@ -432,11 +432,11 @@ namespace {
     }
 
  static void MakeTest<T>(String s, T prototype, String fmt) {
- String type = _typeof(T).Name;
+ String type = typeof_(T).Name;
  String suffix = type == "Single" ? "f" : "";
 
  try {
- MethodInfo method = _typeof(T).GetMethod("Parse", new Type[] {_typeof(String)});
+ MethodInfo method = typeof_(T).GetMethod("Parse", new Type[] {typeof_(String)});
  T value = (T)method.Invoke(prototype, new object[] {s});
  Console.WriteLine("ASSERT_EQ({0}{3}, {1}::Parse(\"{2}\"));",
  (value as IFormattable).ToString(fmt, System::Globalization::CultureInfo.CreateSpecificCulture("en-US")), type, s, suffix);

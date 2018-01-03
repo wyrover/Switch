@@ -15,106 +15,106 @@ namespace Switch {
       /// @remarks Better performance is achieved by using the properties of the System::Drawing::SystemPens or System::Drawing::SystemBrushes classes rather than creating a new pen or brush based on a value from System::Drawing::SystemColors. For example, if you wanted to get a brush for the face color of a 3-D element, use the SystemBrushes.Control property because it gets a brush that already exists, whereas calling the SolidBrush.#ctor(Color) constructor with a parameter value of SystemColors::Control will create a new brush.
       /// @par Library
       /// Switch.System.Drawing
-      class _export SystemColors _static {
+      class export_ SystemColors static_ {
       public:
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD4D0C8. This field is constant.
-        static _property<Color, _readonly> ActiveBorder;
+        static property_<Color, readonly_> ActiveBorder;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF0054E3. This field is constant.
-        static _property<Color, _readonly> ActiveCaption;
+        static property_<Color, readonly_> ActiveCaption;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static _property<Color, _readonly> ActiveCaptionText;
+        static property_<Color, readonly_> ActiveCaptionText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF808080. This field is constant.
-        static _property<Color, _readonly> AppWorkspace;
+        static property_<Color, readonly_> AppWorkspace;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFECE9D8. This field is constant.
-        static _property<Color, _readonly> Control;
+        static property_<Color, readonly_> Control;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFACA899. This field is constant.
-        static _property<Color, _readonly> ControlDark;
+        static property_<Color, readonly_> ControlDark;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF716F64. This field is constant.
-        static _property<Color, _readonly> ControlDarkDark;
+        static property_<Color, readonly_> ControlDarkDark;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFF1EFE2. This field is constant.
-        static _property<Color, _readonly> ControlLight;
+        static property_<Color, readonly_> ControlLight;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static _property<Color, _readonly> ControlLightLight;
+        static property_<Color, readonly_> ControlLightLight;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static _property<Color, _readonly> ControlText;
+        static property_<Color, readonly_> ControlText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF004E98. This field is constant.
-        static _property<Color, _readonly> Desktop;
+        static property_<Color, readonly_> Desktop;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFACA899. This field is constant.
-        static _property<Color, _readonly> GrayText;
+        static property_<Color, readonly_> GrayText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF316AC5. This field is constant.
-        static _property<Color, _readonly> Highlight;
+        static property_<Color, readonly_> Highlight;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static _property<Color, _readonly> HighlightText;
+        static property_<Color, readonly_> HighlightText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000080. This field is constant.
-        static _property<Color, _readonly> HotTrack;
+        static property_<Color, readonly_> HotTrack;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD4D0C8. This field is constant.
-        static _property<Color, _readonly> InactiveBorder;
+        static property_<Color, readonly_> InactiveBorder;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF7A96DF. This field is constant.
-        static _property<Color, _readonly> InactiveCaption;
+        static property_<Color, readonly_> InactiveCaption;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD8E4F8. This field is constant.
-        static _property<Color, _readonly> InactiveCaptionText;
+        static property_<Color, readonly_> InactiveCaptionText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFE1. This field is constant.
-        static _property<Color, _readonly> Info;
+        static property_<Color, readonly_> Info;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static _property<Color, _readonly> InfoText;
+        static property_<Color, readonly_> InfoText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static _property<Color, _readonly> Menu;
+        static property_<Color, readonly_> Menu;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static _property<Color, _readonly> MenuText;
+        static property_<Color, readonly_> MenuText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD4D0C8. This field is constant.
-        static _property<Color, _readonly> ScrollBar;
+        static property_<Color, readonly_> ScrollBar;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static _property<Color, _readonly> Window;
+        static property_<Color, readonly_> Window;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static _property<Color, _readonly> WindowFrame;
+        static property_<Color, readonly_> WindowFrame;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF000000. This field is constant.
-        static _property<Color, _readonly> WindowText;
+        static property_<Color, readonly_> WindowText;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFECE9D8. This field is constant.
-        static _property<Color, _readonly> ButtonFace;
+        static property_<Color, readonly_> ButtonFace;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFFFFFFF. This field is constant.
-        static _property<Color, _readonly> ButtonHighlight;
+        static property_<Color, readonly_> ButtonHighlight;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFACA899. This field is constant.
-        static _property<Color, _readonly> ButtonShadow;
+        static property_<Color, readonly_> ButtonShadow;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF3D95FF. This field is constant.
-        static _property<Color, _readonly> GradientActiveCaption;
+        static property_<Color, readonly_> GradientActiveCaption;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF9DB9EB. This field is constant.
-        static _property<Color, _readonly> GradientInactiveCaption;
+        static property_<Color, readonly_> GradientInactiveCaption;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFECE9D8. This field is constant.
-        static _property<Color, _readonly> MenuBar;
+        static property_<Color, readonly_> MenuBar;
 
         /// @brief Gets a system-defined color that has an ARGB value of 0xFF316AC5. This field is constant.
-        static _property<Color, _readonly> MenuHighlight;
+        static property_<Color, readonly_> MenuHighlight;
       };
     }
   }

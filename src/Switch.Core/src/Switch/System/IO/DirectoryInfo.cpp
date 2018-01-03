@@ -39,7 +39,7 @@ DirectoryInfo DirectoryInfo::GetRoot() const {
 
 void DirectoryInfo::Create() {
   if (Native::DirectoryApi::CreateDirectory(this->fullPath) != 0)
-    throw IOException(_caller);
+    throw IOException(caller_);
 }
 
 DirectoryInfo DirectoryInfo::CreateSubdirectory(const string& path) {
@@ -51,7 +51,7 @@ DirectoryInfo DirectoryInfo::CreateSubdirectory(const string& path) {
 
 void DirectoryInfo::Delete(bool recursive) {
   if (!this->Exists())
-    throw Security::SecurityException(_caller);
+    throw Security::SecurityException(caller_);
 
   if (recursive) {
     for (string item : Native::DirectoryApi::EnumerateFiles(this->fullPath, "*"))
@@ -61,7 +61,7 @@ void DirectoryInfo::Delete(bool recursive) {
   }
 
   if (Native::DirectoryApi::RemoveDirectory(this->fullPath) != 0)
-    throw IOException(_caller);
+    throw IOException(caller_);
 }
 
 Array<FileInfo> DirectoryInfo::GetFiles(const string& searchPattern) const {
@@ -82,10 +82,10 @@ void DirectoryInfo::MoveTo(const string& destDirName) {
   DirectoryInfo destDirInfo(destDirName);
 
   if (destDirName == "" || destDirInfo.Exists() || Equals(destDirInfo) || !Path::GetPathRoot(this->FullName).Equals(Path::GetPathRoot(destDirInfo.FullName)) || destDirInfo.FullName().StartsWith(this->FullName))
-    throw IOException(_caller);
+    throw IOException(caller_);
 
   if (!destDirInfo.Exists())
-    throw DirectoryNotFoundException(_caller);
+    throw DirectoryNotFoundException(caller_);
 
   string targetDirName = Path::Combine(destDirName, this->fullPath.Substring(this->fullPath.LastIndexOf(Path::DirectorySeparatorChar()) + 1));
   Directory::CreateDirectory(targetDirName);

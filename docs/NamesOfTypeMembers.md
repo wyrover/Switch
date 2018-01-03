@@ -30,9 +30,9 @@ Unlike other members, properties should be given noun phrase or adjective names.
 **X DO NOT** have properties that match the name of "Get" or "Set" methods as in the following example: 
 
 ```c++
-_property<string> TextWriter {
-  _get { ... },
-  _set { ... }
+property_<string> TextWriter {
+  get_ { ... },
+  set_ { ... }
 };
 string GetTextWriter(int32 value) { ... }
 ```
@@ -54,9 +54,9 @@ namespace Windows {
 ​
   class Control : public object {
   public:
-    _property<Forms::Color> Color {
-      _get { ... },
-      _set { ... }
+    property_<Forms::Color> Color {
+      get_ { ... },
+      set_ { ... }
     };
   };
 }

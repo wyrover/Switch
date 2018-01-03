@@ -172,19 +172,19 @@ namespace SwitchUnitTests {
   }
 
   TEST(StringTest, OperatorLitteralChar) {
-    ASSERT_EQ("Switch::System::String", _typeof("Test"_S).ToString());
+    ASSERT_EQ("Switch::System::String", typeof_("Test"_S).ToString());
   }
 
   TEST(StringTest, OperatorLitteralChar16) {
-    ASSERT_EQ("Switch::System::String", _typeof(u"Test"_S).ToString());
+    ASSERT_EQ("Switch::System::String", typeof_(u"Test"_S).ToString());
   }
 
   TEST(StringTest, OperatorLitteralChar32) {
-    ASSERT_EQ("Switch::System::String", _typeof(U"Test"_S).ToString());
+    ASSERT_EQ("Switch::System::String", typeof_(U"Test"_S).ToString());
   }
 
   TEST(StringTest, OperatorLitteralWChar) {
-    ASSERT_EQ("Switch::System::String", _typeof(L"Test"_S).ToString());
+    ASSERT_EQ("Switch::System::String", typeof_(L"Test"_S).ToString());
   }
 
   TEST(StringTest, OperatorAddConstCharPointer) {

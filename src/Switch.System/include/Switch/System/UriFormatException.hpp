@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The exception that is thrown when an invalid Uniform Resource Identifier (URI) is detected.
     /// @par Library
     /// Switch.System
-    class _export UriFormatException : public FormatException {
+    class export_ UriFormatException : public FormatException {
     public:
       /// @brief Create a new instance of class UriFormatException
       /// @remarks Message is set with the default message associate to the error.
@@ -23,7 +23,7 @@ namespace Switch {
       UriFormatException(const UriFormatException& value) : FormatException(value) {}
 
       /// @brief Create a new instance of class UriFormatException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       /// @remarks Message is set with the default message associate to the error.
       UriFormatException(const System::Runtime::CompilerServices::Caller& information) : FormatException(information) {}
 
@@ -33,13 +33,13 @@ namespace Switch {
 
       /// @brief Create a new instance of class UriFormatException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       UriFormatException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : FormatException(message, information) {}
 
       /// @brief Create a new instance of class UriFormatException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       UriFormatException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : FormatException(message, innerException, information) {}
 
     private:

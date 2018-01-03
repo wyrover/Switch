@@ -7,8 +7,8 @@ using namespace System;
 namespace SwitchUnitTests {
   TEST(PropertyReadOnlyTest, CreatePropertyAndGetItWithImplicitCastOperator) {
     int32 v = 42;
-    _property<int32, _readonly> Value {
-      _get {return v;}
+    property_<int32, readonly_> Value {
+      get_ {return v;}
     };
 
     ASSERT_EQ(42, v);
@@ -17,8 +17,8 @@ namespace SwitchUnitTests {
 
   TEST(PropertyReadOnlyTest, CreatePropertyAndGetItWithGetFunction) {
     int32 v = 42;
-    _property<int32, _readonly> Value {
-      _get {return v;}
+    property_<int32, readonly_> Value {
+      get_ {return v;}
     };
 
     ASSERT_EQ(42, v);
@@ -27,8 +27,8 @@ namespace SwitchUnitTests {
 
   TEST(PropertyReadOnlyTest, CreatePropertyAndGetItWithFunctor) {
     int32 v = 42;
-    _property<int32, _readonly> Value {
-      _get {return v;}
+    property_<int32, readonly_> Value {
+      get_ {return v;}
     };
 
     ASSERT_EQ(42, v);
@@ -37,8 +37,8 @@ namespace SwitchUnitTests {
 
   TEST(PropertyReadOnlyTest, PropertyEqualityOperator) {
     int32 v = 42;
-    _property<int32, _readonly> Value {
-      _get {return v;}
+    property_<int32, readonly_> Value {
+      get_ {return v;}
     };
 
     ASSERT_TRUE(Value == 42);
@@ -47,8 +47,8 @@ namespace SwitchUnitTests {
 
   TEST(PropertyReadOnlyTest, PropertyInequalityOperator) {
     int32 v = 42;
-    _property<int32, _readonly> Value {
-      _get {return v;}
+    property_<int32, readonly_> Value {
+      get_ {return v;}
     };
 
     ASSERT_TRUE(Value != 24);
@@ -60,8 +60,8 @@ namespace SwitchUnitTests {
     PropertyReadClass() {}
     PropertyReadClass(const PropertyReadClass& property) : name(property.name) {}
 
-    _property<string, _readonly> Name {
-      _get {return this->name;}
+    property_<string, readonly_> Name {
+      get_ {return this->name;}
     };
 
   private:

@@ -104,14 +104,14 @@ namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {
-        class _export FormClosingEventArgs : public ComponentModel::CancelEventArgs {
+        class export_ FormClosingEventArgs : public ComponentModel::CancelEventArgs {
         public:
           FormClosingEventArgs() {}
           FormClosingEventArgs(bool cancel, System::Windows::Forms::CloseReason closeReason) : ComponentModel::CancelEventArgs(cancel), closeReason(closeReason) {}
           FormClosingEventArgs(const FormClosingEventArgs& e) : ComponentModel::CancelEventArgs(e), closeReason(e.closeReason) {}
 
-          _property<System::Windows::Forms::CloseReason, _readonly> CloseReason {
-            _get { return this->closeReason; }
+          property_<System::Windows::Forms::CloseReason, readonly_> CloseReason {
+            get_ { return this->closeReason; }
           };
 
         private:
@@ -224,7 +224,7 @@ const System::Timespan MyClass::MaxDuration = 12_s;
 **√ DO** But instead use template method for macros.
 
 ```c++
-class Arithmetics _static {
+class Arithmetics static_ {
 public:
   template<typename T>
   T Max(T value1, T value2) {return value1 >= value2 ? value1 : value2;} // equivalent : #define Max(value1, value2) (value1 >= value2 1 value1 : value2)
@@ -310,7 +310,7 @@ namespace Switch {
     /// @par Examples
     /// The following example defines a Point type derived from the Object class and virtuals many of the virtual methods of the Object class. In addition, the example shows how to call many of the static and instance methods of the Object class.
     /// @include Object.cpp
-    class _export Object {
+    class export_ Object {
     public:
       /// @brief Create a new instance of the ultimate base class Object
       /// @remarks This constructor is called by constructors in derived classes, but it can also be used to directly create an instance of the Object class.
@@ -473,11 +473,11 @@ void Example() {
 **X DO NOT** Place open brace on new line for properties
 
 ```c++
-_property<int> Example {
-  _get {
+property_<int> Example {
+  get_ {
     return 1;
   },
-  _set {
+  set_ {
     // nothing
   }
 };
@@ -487,11 +487,11 @@ _property<int> Example {
 **X DO NOT** Place open brace on new line for property accessors
 
 ```c++
-_property<int> Example {
-  _get {
+property_<int> Example {
+  get_ {
     return 1;
   },
-  _set {
+  set_ {
     // nothing
   }
 };
@@ -502,7 +502,7 @@ _property<int> Example {
 
 ```c++
 void Example() {
-  auto del = _delegate(int i, int j) {
+  auto del = delegate_(int i, int j) {
   };
 }
 ```

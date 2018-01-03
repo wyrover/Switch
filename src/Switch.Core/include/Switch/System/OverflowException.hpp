@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an arithmetic, casting, or conversion operation in a checked context results in an overflow.
-    class _export OverflowException : public ArithmeticException {
+    class export_ OverflowException : public ArithmeticException {
     public:
       /// @brief Create a new instance of class OverflowException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       OverflowException(const OverflowException& value) : ArithmeticException(value) {}
 
       /// @brief Create a new instance of class OverflowException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       /// @remarks Message is set with the default message associate to the error.
       explicit OverflowException(const System::Runtime::CompilerServices::Caller& information) : ArithmeticException(information) {}
 
@@ -31,13 +31,13 @@ namespace Switch {
 
       /// @brief Create a new instance of class OverflowException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       OverflowException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : ArithmeticException(message, information) {}
 
       /// @brief Create a new instance of class OverflowException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       OverflowException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : ArithmeticException(message, innerException, information) {}
 
     private:

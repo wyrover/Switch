@@ -7,14 +7,14 @@ namespace Examples {
   class TestAsync : public object {
   public:
     async<Task<>> CounterTask {
-      _delegate {
+      delegate_ {
         for (int counter = 1; counter <= 5; counter++)
           Console::WriteLine("counter --> {0}", counter);
       }
     };
 
     async<Task<string>> ComputeStringTask {
-      _delegate {
+      delegate_ {
         return "My result";
       }
     };
@@ -31,7 +31,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::TestAsync);
+startup_(Examples::TestAsync);
 
 // This code produces output similar to the following:
 //

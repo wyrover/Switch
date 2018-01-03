@@ -46,7 +46,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::ThreadExample);
+startup_(Examples::ThreadExample);
 
 // This code produces the following output:
 //

@@ -6,7 +6,7 @@
 Member overloading means creating two or more members on the same type that differ only in the number or type of parameters but have the same name. For example, in the following, the WriteLine method is overloaded:
 
 ```c++
-class Console _static {
+class Console static_ {
 public:
   static void WriteLine();
   static void WriteLine(const string& value);

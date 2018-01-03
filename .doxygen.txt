@@ -2068,17 +2068,17 @@ INCLUDE_FILE_PATTERNS  =
 # recursively expanded use the := operator instead of the = operator.
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
-PREDEFINED             = "_abstract=: public Abstract" \
-                         _async= \
-                         "_await=await() <<" \
-                         _delegate=[&] \
-                         _export= \
-                         _get=[&]() \
+PREDEFINED             = "abstract_=: public Abstract" \
+                         async_= \
+                         "await_=await() <<" \
+                         delegate_=[&] \
+                         export_= \
+                         get_=[&]() \
                          _global= \
-                         "_interface=: public Interface" \
-                         "_set=[&](auto value)" \
-                         "_static=final: public Static" \
-                         _using=
+                         "interface_=: public Interface" \
+                         "set_=[&](auto value)" \
+                         "static_=final: public Static" \
+                         using_=
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

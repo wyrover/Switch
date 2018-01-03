@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Creational {
     // The 'AbstractProductA' abstract class
-    class AbstractProductA _abstract {
+    class AbstractProductA abstract_ {
     public:
       ~AbstractProductA() = 0;
     };
@@ -15,13 +15,13 @@ namespace DesignPatterns {
     inline AbstractProductA::~AbstractProductA() {}
 
     // The 'AbstractProductB' abstract class
-    class AbstractProductB _abstract {
+    class AbstractProductB abstract_ {
     public:
       virtual void Interact(const AbstractProductA& a) const = 0;
     };
 
     // The 'AbstractFactory' abstract class
-    class AbstractFactory _abstract {
+    class AbstractFactory abstract_ {
     public:
       virtual refptr<AbstractProductA> CreateProductA() const = 0;
       virtual refptr<AbstractProductB> CreateProductB() const = 0;
@@ -77,7 +77,7 @@ namespace DesignPatterns {
       refptr<AbstractProductB> abstractProductB;
     };
 
-    // MainApp _startup class for Creational
+    // MainApp startup_ class for Creational
     // Abstract Factory Design Pattern.
     class MainApp {
     public:
@@ -98,7 +98,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Creational::MainApp);
+startup_(DesignPatterns::Creational::MainApp);
 
 // This code produces the following output:
 //

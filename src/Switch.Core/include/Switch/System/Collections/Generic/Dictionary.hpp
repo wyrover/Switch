@@ -123,7 +123,7 @@ public:
           /// @include DictionaryAdd.cpp
           void Add(const TKey& key, const TValue& value) override {
             if (ContainsKey(key))
-              throw ArgumentException(_caller);
+              throw ArgumentException(caller_);
             (*this)[key] = value;
           }
 
@@ -169,7 +169,7 @@ public:
           /// @remarks The elements are copied to the Array in the same order in which the enumerator iterates through the List<T>.
           void CopyTo(System::Array<KeyValuePair<TKey, TValue>>& array, int32 index) const override {
             if (index < 0 || array.Length < index + this->Count)
-              throw System::ArgumentOutOfRangeException(_caller);
+              throw System::ArgumentOutOfRangeException(caller_);
             int32 count = 0;
             for (const Item& item : *this)
               array[count++] = Item(item);
@@ -241,7 +241,7 @@ public:
           /// @include DictionaryOperators.cpp
           const TValue& operator[](const TKey& key) const override {
             if (! ContainsKey(key))
-              throw ArgumentException(_caller);
+              throw ArgumentException(caller_);
             return const_cast<std::unordered_map<TKey, TValue, Hasher, EqualTo, TAllocator>&>(this->hashmap)[key];
           }
 
@@ -317,7 +317,7 @@ public:
 
             virtual bool MoveNext() {
               if (this->operationNumber != this->dictionary.operationNumber)
-                throw System::InvalidOperationException(_caller);
+                throw System::InvalidOperationException(caller_);
 
               if (IsFinished())
                 return false;
@@ -337,7 +337,7 @@ public:
           protected:
             const KeyValuePair<TKey, TValue>& GetCurrent() const {
               if (this->beforeFirst || IsFinished())
-                throw System::InvalidOperationException(_caller);
+                throw System::InvalidOperationException(caller_);
               return *this->currentKeyValuePair;
             }
 

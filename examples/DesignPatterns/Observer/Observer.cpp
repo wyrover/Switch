@@ -8,13 +8,13 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Observer' abstract class
-    class Observer _abstract {
+    class Observer abstract_ {
     public:
       virtual void Update() = 0;
     };
 
     // The 'Subject' abstract class
-    class Subject _abstract {
+    class Subject abstract_ {
     public:
       void Attach(refptr<Observer> observer) {this->observers.Add(observer);}
 
@@ -33,9 +33,9 @@ namespace DesignPatterns {
     class ConcreteSubject : public Subject {
     public:
       // Gets or sets subject state
-      _property<string> SubjectState {
-        _get { return this->subjectState; },
-        _set { this->subjectState = value; }
+      property_<string> SubjectState {
+        get_ { return this->subjectState; },
+        set_ { this->subjectState = value; }
       };
 
     private:
@@ -54,9 +54,9 @@ namespace DesignPatterns {
       }
 
       // Gets or sets subject
-      _property<refptr<ConcreteSubject>> Subject {
-        _get { return this->subject; },
-        _set { this->subject = value; }
+      property_<refptr<ConcreteSubject>> Subject {
+        get_ { return this->subject; },
+        set_ { this->subject = value; }
       };
 
     private:
@@ -65,7 +65,7 @@ namespace DesignPatterns {
       string name;
     };
 
-    // MainApp _startup class for Behavioral
+    // MainApp startup_ class for Behavioral
     // Observer Design Pattern.
     class MainApp {
     public:
@@ -87,7 +87,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 
 // This code produces the following output:
 //

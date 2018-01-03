@@ -23,7 +23,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a 8-bit unsigned integer.
-    struct _export Byte final : public ValueType, public IComparable, public IConvertible, public IFormattable {
+    struct export_ Byte final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Create a new instance of struct Byte
       /// @remarks Byte is initialized by default to 0.
@@ -44,8 +44,8 @@ namespace Switch {
       template<typename T> Byte& operator+=(T value) {this->value += value.value; return *this;}
       template<typename T> Byte& operator-=(T value) {this->value -= value; return *this;}
       template<typename T> Byte& operator*=(T value) {this->value *= value; return *this;}
-      template<typename T> Byte& operator/=(T value) {if (value.value == 0) throw DivideByZeroException(_caller); this->value /= value.value; return *this;}
-      template<typename T> Byte& operator%=(T value) {if (value.value == 0) throw DivideByZeroException(_caller); this->value %= value.value; return *this;}
+      template<typename T> Byte& operator/=(T value) {if (value.value == 0) throw DivideByZeroException(caller_); this->value /= value.value; return *this;}
+      template<typename T> Byte& operator%=(T value) {if (value.value == 0) throw DivideByZeroException(caller_); this->value %= value.value; return *this;}
       template<typename T> Byte& operator&=(T value) {this->value &= value; return *this;}
       template<typename T> Byte& operator|=(T value) {this->value |= value; return *this;}
       template<typename T> Byte& operator^=(T value) {this->value ^= value; return *this;}
@@ -175,7 +175,7 @@ namespace Switch {
       uint16 ToUInt16(const IFormatProvider& provider) const override {return this->value;}
       uint32 ToUInt32(const IFormatProvider& provider) const override {return this->value;}
       uint64 ToUInt64(const IFormatProvider& provider) const override {return this->value;}
-      sbyte ToSByte(const IFormatProvider& provider) const override {if (this->value > std::numeric_limits<sbyte>::max()) throw OverflowException(_caller); return this->value;}
+      sbyte ToSByte(const IFormatProvider& provider) const override {if (this->value > std::numeric_limits<sbyte>::max()) throw OverflowException(caller_); return this->value;}
       float ToSingle(const IFormatProvider& provider) const override {return this->value;}
       String ToString(const IFormatProvider& provider) const override {return ToString();}
 

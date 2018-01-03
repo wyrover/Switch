@@ -27,7 +27,7 @@ namespace Switch {
         /// @par Examples
         /// This example show how to receive and send with ClientWebSocket :
         /// @include ClientWebSocket.cpp
-        class _export ClientWebSocket : public WebSocket {
+        class export_ ClientWebSocket : public WebSocket {
         public:
           /// @brief Creates an instance of the ClientWebSocket class.
           ClientWebSocket();
@@ -37,7 +37,7 @@ namespace Switch {
           /// @endcond
 
           /// @brief Aborts the WebSocket connection and cancels any pending IO operations.
-          void Abort() override {throw NotSupportedException(_caller);}
+          void Abort() override {throw NotSupportedException(caller_);}
 
           /// @brief Connect to a WebSocket server.
           /// @param uri The URI of the WebSocket server to connect to.
@@ -74,7 +74,7 @@ namespace Switch {
             case WebSocketCloseStatus::InvalidPayloadData: return "(1007) The client or server is terminating the connection because it has received data inconsistent with the message type.";
             case WebSocketCloseStatus::PolicyViolation: return "(1008) The connection will be closed because an endpoint has received a message that violates its policy.";
             case WebSocketCloseStatus::MandatoryExtension: return "(1010) The client is terminating the connection because it expected the server to negotiate an extension.";
-            default : throw InvalidOperationException(_caller);
+            default : throw InvalidOperationException(caller_);
             }
           }
 

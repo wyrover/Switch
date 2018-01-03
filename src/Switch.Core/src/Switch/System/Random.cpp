@@ -17,7 +17,7 @@ Random::Random(int32 seed) {
 
 int32 Random::Next(int32 minValue, int32 maxValue) const {
   if (minValue > maxValue)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (maxValue == minValue)
     return minValue;

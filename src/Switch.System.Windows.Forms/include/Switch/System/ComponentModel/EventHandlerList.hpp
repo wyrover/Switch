@@ -16,7 +16,7 @@ namespace Switch {
     namespace ComponentModel {
       /// @brief Provides a simple list of delegates. This class cannot be inherited.
       template<typename Result, typename... Arguments>
-      class _export EventHandlerList final : public object {
+      class export_ EventHandlerList final : public object {
       public:
         /// @brief Initializes a new instance of the EventHandlerList class.
         EventHandlerList() {}

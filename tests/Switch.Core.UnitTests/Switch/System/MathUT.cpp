@@ -222,104 +222,104 @@ namespace {
   }
 
   TEST(MathTest, DivRemInt32) {
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(1073741, Math::DivRem(Int32::MaxValue, int32(2000), remainder));
       ASSERT_EQ(1647, remainder);
     }
 
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(6, Math::DivRem(int32(13952), int32(2000), remainder));
       ASSERT_EQ(1952, remainder);
     }
 
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(0, Math::DivRem(int32(0), int32(2000), remainder));
       ASSERT_EQ(0, remainder);
     }
 
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(-7, Math::DivRem(int32(-14032), int32(2000), remainder));
       ASSERT_EQ(-32, remainder);
     }
 
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(-1073741, Math::DivRem(Int32::MinValue, int32(2000), remainder));
       ASSERT_EQ(-1648, remainder);
     }
 
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(-1073741, Math::DivRem(Int32::MaxValue, int32(-2000), remainder));
       ASSERT_EQ(1647, remainder);
     }
 
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(-6, Math::DivRem(int32(13952), int32(-2000), remainder));
       ASSERT_EQ(1952, remainder);
     }
 
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(0, Math::DivRem(int32(0), int32(-2000), remainder));
       ASSERT_EQ(0, remainder);
     }
 
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(7, Math::DivRem(int32(-14032), int32(-2000), remainder));
       ASSERT_EQ(-32, remainder);
     }
 
-    _using(int32 remainder = 0) {
+    using_(int32 remainder = 0) {
       ASSERT_EQ(1073741, Math::DivRem(Int32::MinValue, int32(-2000), remainder));
       ASSERT_EQ(-1648, remainder);
     }
   }
 
   TEST(MathTest, DivRemInt64) {
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(4611686018427387LL, Math::DivRem(Int64::MaxValue, int64(2000), remainder));
       ASSERT_EQ(1807, remainder);
     }
 
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(6, Math::DivRem(int64(13952), int64(2000), remainder));
       ASSERT_EQ(1952, remainder);
     }
 
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(0, Math::DivRem(int64(0), int64(2000), remainder));
       ASSERT_EQ(0, remainder);
     }
 
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(-7, Math::DivRem(int64(-14032), int64(2000), remainder));
       ASSERT_EQ(-32, remainder);
     }
 
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(-4611686018427387LL, Math::DivRem(Int64::MinValue, int64(2000), remainder));
       ASSERT_EQ(-1808, remainder);
     }
 
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(-4611686018427387LL, Math::DivRem(Int64::MaxValue, int64(-2000), remainder));
       ASSERT_EQ(1807, remainder);
     }
 
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(-6, Math::DivRem(int64(13952), int64(-2000), remainder));
       ASSERT_EQ(1952, remainder);
     }
 
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(0, Math::DivRem(int64(0), int64(-2000), remainder));
       ASSERT_EQ(0, remainder);
     }
 
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(7, Math::DivRem(int64(-14032), int64(-2000), remainder));
       ASSERT_EQ(-32, remainder);
     }
 
-    _using(int64 remainder = 0) {
+    using_(int64 remainder = 0) {
       ASSERT_EQ(4611686018427387LL, Math::DivRem(Int64::MinValue, int64(-2000), remainder));
       ASSERT_EQ(-1808, remainder);
     }

@@ -56,22 +56,22 @@ namespace Switch {
 
         /// @brief Gets whether Value is initialized on the current thread.
         /// @return true if Value is initialized on the current thread; otherwise false.
-        _property<bool, _readonly> IsValueCreated {
-          _get {return this->values.ContainsKey(Thread::CurrentThread().ManagedThreadId);}
+        property_<bool, readonly_> IsValueCreated {
+          get_ {return this->values.ContainsKey(Thread::CurrentThread().ManagedThreadId);}
         };
 
         /// @brief Gets or sets the value of this instance for the current thread.
         /// @return Returns an instance of the object that this ThreadLocal is responsible for initializing.
-        _property<T> Value {
-          _get {return this->GetValue();},
-          _set {this->SetValue(value);}
+        property_<T> Value {
+          get_ {return this->GetValue();},
+          set_ {this->SetValue(value);}
         };
 
         /// @brief Gets a list for all of the values currently stored by all of the threads that have accessed this instance.
         /// @return A array for all of the values currently stored by all of the threads that have accessed this instance.
         /// @exception InvalidOperationException Values stored by all threads are not available because this instance was initialized with the trackAllValues argument set to false in the call to a class constructor.
-        _property<Array<T>, _readonly> Values {
-          _get {return this->GetValues();}
+        property_<Array<T>, readonly_> Values {
+          get_ {return this->GetValues();}
         };
 
         /// @brief Creates and returns a string representation of this instance for the current thread
@@ -80,7 +80,7 @@ namespace Switch {
 
       private:
         const T& GetValue() const {
-          _lock(this->values.SyncRoot) {
+          lock_(this->values.SyncRoot) {
             if (!this->valueFactory.IsEmpty() && !this->IsValueCreated)
               this->values[Thread::CurrentThread().ManagedThreadId] = this->valueFactory();
             return this->values[Thread::CurrentThread().ManagedThreadId];
@@ -89,15 +89,15 @@ namespace Switch {
         }
 
         void SetValue(const T& value) {
-          _lock(this->values.SyncRoot) {
+          lock_(this->values.SyncRoot) {
             this->values[Thread::CurrentThread().ManagedThreadId] = value;
           }
         }
 
         Array<T> GetValues() const {
           if (!trackAllValues)
-            throw InvalidOperationException(_caller);
-          _lock(this->values.SyncRoot) {
+            throw InvalidOperationException(caller_);
+          lock_(this->values.SyncRoot) {
             return Array<T>(this->values.Values());
           }
           return Array<T>(this->values.Values());

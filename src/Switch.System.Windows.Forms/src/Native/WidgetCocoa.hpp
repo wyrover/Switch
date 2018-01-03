@@ -6,7 +6,7 @@
 #include "Api.hpp"
 
 namespace Native {
-  class IWidget _interface {
+  class IWidget interface_ {
   public:
   };
 }

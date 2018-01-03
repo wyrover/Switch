@@ -34,7 +34,7 @@ Encoding::Encoding() {
 }
 
 Encoding::Encoding(int32 codePage) {
-  if (codePage < 0) throw ArgumentOutOfRangeException(_caller);
+  if (codePage < 0) throw ArgumentOutOfRangeException(caller_);
   this->codePage = codePage;
 }
 
@@ -78,7 +78,7 @@ refptr<Encoding> Encoding::CreateEncoding(int32 codePage) {
   case 28592 : { return ref_new<CodePage28592Encoding>(); }
   case 65001 : { return ref_new<UTF8Encoding>(); }
   }
-  throw NotSupportedException(_caller);
+  throw NotSupportedException(caller_);
 }
 
 refptr<Encoding> Encoding::CreateEncoding(const string& codePageName) {
@@ -91,7 +91,7 @@ refptr<Encoding> Encoding::CreateEncoding(const string& codePageName) {
   if (codePageName == "IBM437") return CreateEncoding(437);
   if (codePageName == "utf-32") return CreateEncoding(12000);
   if (codePageName == "utf-32BE") return CreateEncoding(12001);
-  throw NotSupportedException(_caller);
+  throw NotSupportedException(caller_);
 }
 
 Array<byte> Encoding::Convert(const Encoding& srcEncoding, const Encoding& dstEncoding, const byte bytes[], int32 bytesSize) {
@@ -192,7 +192,7 @@ int32 Encoding::GetBytes(const char32 chars[], int32 charsSize, int32 charIndex,
   ArrayAlgorithms::ValidateRange(charsSize, charIndex, charCount);
   ArrayAlgorithms::ValidateIndex(byteIndex, bytesSize);
 
-  if (byteIndex < 0) throw ArgumentOutOfRangeException(_caller);
+  if (byteIndex < 0) throw ArgumentOutOfRangeException(caller_);
   int32 count = 0;
   for (int32 i = charIndex; i < charIndex + charCount; i += 1)
     count += GetBytes(chars[i], bytes, bytesSize, byteIndex + count);
@@ -216,7 +216,7 @@ int32 Encoding::GetBytes(const String& source, int32 charIndex, int32 charCount,
   }
 
   if (iteration <= charIndex && charIndex > 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   return index;
 }
@@ -264,7 +264,7 @@ int32 Encoding::GetChars(const byte bytes[], int32 bytesLength, int32 byteIndex,
     decoder->Add(bytes[i]);
     if (decoder->CodePointDefined()) {
       if (index >= charsLength)
-        throw ArgumentException(_caller);
+        throw ArgumentException(caller_);
       chars[index++] = decoder->CodePoint();
     }
   }
@@ -304,7 +304,7 @@ string Encoding::GetString(const byte bytes[], int32 bytesSize) const {
 }
 
 string Encoding::GetString(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
+  if (bytes == null && bytesSize != 0) throw ArgumentNullException(caller_);
 
   if (bytesSize == 0) return string();
   int32 nbChars = GetCharCount(bytes, bytesSize, index, count);
@@ -326,22 +326,22 @@ string Encoding::ToString() const {
 
 void Encoding::ValidateGBC(int32 charsLength, int32 index, int32 count) const {
   if (index < 0 || count < 0 || index > charsLength || index + count > charsLength)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 }
 
 void Encoding::ValidateGCC(int32 bytesLength, int32 index, int32 count) const {
   if (index < 0 || count < 0 || (index > bytesLength && index > 0))
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (index + count > bytesLength)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 }
 
 void Encoding::ValidateGC(int32 bytesLength, int32 byteIndex, int32 byteCount, int32 charsLength, int32 charIndex) const {
   if (byteIndex < 0 || byteCount < 0 || byteIndex > bytesLength || byteIndex + byteCount > bytesLength)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (charIndex < 0 || charIndex >= charsLength)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 }
 

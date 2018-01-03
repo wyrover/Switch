@@ -78,7 +78,7 @@ public:
   }
 };
 ​
-_startup(Program);
+startup_(Program);
 ```
 
 The syntax for a namespace definition is:
@@ -120,7 +120,7 @@ public:
   }
 };
 ​
-_startup(Program);
+startup_(Program);
 ```
 
 Unlike other declarative regions, the definition of a namespace can be split over several parts of a single translation unit.
@@ -150,7 +150,7 @@ public:
   }
 };
  
-_startup(Program);
+startup_(Program);
 ```
 
 When a namespace is continued in this manner, after its initial definition, the continuation is called an extension namespace definition. The original definition of that namespace is known as an original namespace definition. Usage of this notation might be cumbersome with longer names or in large programs. The using declaration, using directive, and namespace aliases provide more straightforward ways to reference namespace members. A namespace declaration, whether it involves a new namespace, an unnamed namespace, or an extended namespace definition, must be accompanied by a namespace body enclosed within curly braces. The statement

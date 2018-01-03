@@ -14,7 +14,7 @@ namespace Switch {
       /// @brief The exception that is thrown when an error is made adding a Cookie to a CookieContainer.
       /// @par Library
       /// Switch.System
-      class _export CookieException : public FormatException {
+      class export_ CookieException : public FormatException {
       public:
         /// @brief Create a new instance of class CookieException
         /// @remarks Message is set with the default message associate to the error.
@@ -26,7 +26,7 @@ namespace Switch {
         CookieException(const CookieException& value) : FormatException(value) {}
 
         /// @brief Create a new instance of class CookieException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         /// @remarks Message is set with the default message associate to the error.
         CookieException(const System::Runtime::CompilerServices::Caller& information) : FormatException(information) {}
 
@@ -36,13 +36,13 @@ namespace Switch {
 
         /// @brief Create a new instance of class CookieException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         CookieException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : FormatException(message, information) {}
 
         /// @brief Create a new instance of class CookieException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         CookieException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : FormatException(message, innerException, information) {}
 
       private:

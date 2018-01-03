@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception thrown when the internal buffer overflows.
-      class _export InternalBufferOverflowException : public IOException {
+      class export_ InternalBufferOverflowException : public IOException {
       public:
         /// @brief Create a new instance of class InternalBufferOverflowException
         /// @remarks Message is set with the default message associate to the error.
@@ -23,7 +23,7 @@ namespace Switch {
         InternalBufferOverflowException(const InternalBufferOverflowException& value) : IOException(value) {}
 
         /// @brief Create a new instance of class InternalBufferOverflowException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         /// @remarks Message is set with the default message associate to the error.
         InternalBufferOverflowException(const System::Runtime::CompilerServices::Caller& information) : IOException(information) {}
 
@@ -33,13 +33,13 @@ namespace Switch {
 
         /// @brief Create a new instance of class InternalBufferOverflowException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         InternalBufferOverflowException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : IOException(message, information) {}
 
         /// @brief Create a new instance of class InternalBufferOverflowException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         InternalBufferOverflowException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : IOException(message, innerException, information) {}
 
       private:

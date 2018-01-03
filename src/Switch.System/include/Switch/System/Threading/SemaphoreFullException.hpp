@@ -14,7 +14,7 @@ namespace Switch {
       /// @brief The exception that is thrown when the Semaphore.Release method is called on a semaphore whose count is already at the maximum.
       /// @par Library
       /// Switch.System
-      class _export SemaphoreFullException : public SystemException {
+      class export_ SemaphoreFullException : public SystemException {
       public:
         /// @brief Create a new instance of class SemaphoreFullException
         /// @remarks Message is set with the default message associate to the error.
@@ -26,7 +26,7 @@ namespace Switch {
         SemaphoreFullException(const SemaphoreFullException& value) : SystemException(value) {}
 
         /// @brief Create a new instance of class SemaphoreFullException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         /// @remarks Message is set with the default message associate to the error.
         SemaphoreFullException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
 
@@ -36,13 +36,13 @@ namespace Switch {
 
         /// @brief Create a new instance of class SemaphoreFullException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         SemaphoreFullException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, information) {}
 
         /// @brief Create a new instance of class SemaphoreFullException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         SemaphoreFullException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       private:

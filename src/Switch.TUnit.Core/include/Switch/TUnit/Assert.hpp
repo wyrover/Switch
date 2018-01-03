@@ -17,17 +17,17 @@
 namespace Switch {
   /// @brief The TUnit namespace contains a unit test framework.
   /// @par Examples
-  /// This example shows how to use TestFixture class, Assert class and #_AddTest method:c
+  /// This example shows how to use TestFixture class, Assert class and #AddTest_ method:c
   /// @include Assert.cpp
   /// @par Examples
-  /// This example how to use TestFixture class, Expect class and #_AddTest method:
+  /// This example how to use TestFixture class, Expect class and #AddTest_ method:
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief The Assert class contains a collection of static methods that implement the most common assertions used in Switch::TUnit.
     /// @par Examples
     /// This example show how to used some methods :
     /// @include Assert.cpp
-    class _export Assert : private object {
+    class export_ Assert : private object {
     public:
       /// @brief Verifies that two type are equal. If they are not, then an Switch::TUnit::AssertionException is thrown.
       /// @param expected the expected value.
@@ -58,8 +58,8 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreEqual(24, int32(24), _caller); // test ok
-      /// TUnit::Assert::AreEqual(23, int32(24), _caller); // test throws an AssertionException.
+      /// TUnit::Assert::AreEqual(24, int32(24), caller_); // test ok
+      /// TUnit::Assert::AreEqual(23, int32(24), caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreEqual(const TExpected& expected, const TActual& actual, const System::Runtime::CompilerServices::Caller& caller) {AreEqual(expected, actual, "", caller);}
@@ -71,8 +71,8 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreEqual(24, int32(24), "User message...", _caller); // test ok
-      /// TUnit::Assert::AreEqual(23, int32(24), "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::AreEqual(24, int32(24), "User message...", caller_); // test ok
+      /// TUnit::Assert::AreEqual(23, int32(24), "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreEqual(const TExpected& expected, const TActual& actual, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -99,8 +99,8 @@ namespace Switch {
       /// @param message A message to display if the assertion fails. This message can be seen in the unit test results.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", _caller); // test ok
-      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", caller_); // test ok
+      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const string& message) {AreNotEqual(expected, actual, message, System::Runtime::CompilerServices::Caller());}
@@ -111,8 +111,8 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", _caller); // test ok
-      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", caller_); // test ok
+      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const System::Runtime::CompilerServices::Caller& caller) {AreNotEqual(expected, actual, "", caller);}
@@ -124,8 +124,8 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", _caller); // test ok
-      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotEqual(23, int32(24), "User message...", caller_); // test ok
+      /// TUnit::Assert::AreNotEqual(24, int32(24), "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreNotEqual(const TExpected& expected, const TActual& actual, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -173,8 +173,8 @@ namespace Switch {
       /// int32 a = 24;
       /// int32& b = a;
       /// int32 c=  24;
-      /// TUnit::Assert::AreNotSame(c, a, _caller); // test ok
-      /// TUnit::Assert::AreNotSame(b, a, _caller); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotSame(c, a, caller_); // test ok
+      /// TUnit::Assert::AreNotSame(b, a, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreNotSame(const TExpected& expected, const TActual& actual, const System::Runtime::CompilerServices::Caller& caller) {AreNotSame(expected, actual, "", caller);}
@@ -189,8 +189,8 @@ namespace Switch {
       /// int32 a = 24;
       /// int32& b = a;
       /// int32 c=  24;
-      /// TUnit::Assert::AreNotSame(c, a, "User message...", _caller); // test ok
-      /// TUnit::Assert::AreNotSame(b, a, "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::AreNotSame(c, a, "User message...", caller_); // test ok
+      /// TUnit::Assert::AreNotSame(b, a, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreNotSame(const TExpected& expected, const TActual& actual, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -238,8 +238,8 @@ namespace Switch {
       /// int32 a = 24;
       /// int32& b = a;
       /// int32 c=  24;
-      /// TUnit::Assert::AreSame(b, a, _caller); // test ok
-      /// TUnit::Assert::AreSame(c, a, _caller); // test throws an AssertionException.
+      /// TUnit::Assert::AreSame(b, a, caller_); // test ok
+      /// TUnit::Assert::AreSame(c, a, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreSame(const TExpected& expected, const TActual& actual, const System::Runtime::CompilerServices::Caller& caller) {AreSame(expected, actual, "", caller);}
@@ -254,8 +254,8 @@ namespace Switch {
       /// int32 a = 24;
       /// int32& b = a;
       /// int32 c=  24;
-      /// TUnit::Assert::AreSame(b, a, "User message...", _caller); // test ok
-      /// TUnit::Assert::AreSame(c, a, "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::AreSame(b, a, "User message...", caller_); // test ok
+      /// TUnit::Assert::AreSame(c, a, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TExpected, typename TActual>
       static inline void AreSame(const TExpected& expected, const TActual& actual, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -297,8 +297,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int> a1 = {0, 1, 2, 3};
-      /// TUnit::Assert::Contains(2, a1, _caller); // test ok
-      /// TUnit::Assert::Contains(4, a1, _caller); // test throws an AssertionException.
+      /// TUnit::Assert::Contains(2, a1, caller_); // test ok
+      /// TUnit::Assert::Contains(4, a1, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TItem, typename TItemCollection>
       static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection, const System::Runtime::CompilerServices::Caller& caller) {Contains(item, collection, "", caller);}
@@ -311,8 +311,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int> a1 = {0, 1, 2, 3};
-      /// TUnit::Assert::Contains(2, a1, "User message...", _caller); // test ok
-      /// TUnit::Assert::Contains(4, a1, "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::Contains(2, a1, "User message...", caller_); // test ok
+      /// TUnit::Assert::Contains(4, a1, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TItem, typename TItemCollection>
       static inline void Contains(const TItem& item, const System::Collections::Generic::ICollection<TItemCollection>& collection, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -327,8 +327,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::DoesNotThrows(_delegate {a[2];}); // test ok
-      /// Assert::DoesNotThrows(_delegate {a[5];}); // test throws an AssertionException.
+      /// Assert::DoesNotThrows(delegate_ {a[2];}); // test ok
+      /// Assert::DoesNotThrows(delegate_ {a[5];}); // test throws an AssertionException.
       /// @endcode
       static inline void DoesNotThrows(const System::Delegate<void>& statement) {DoesNotThrows(statement, "", System::Runtime::CompilerServices::Caller());}
 
@@ -338,8 +338,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::DoesNotThrows(_delegate {a[2];}, "User message..."); // test ok
-      /// Assert::DoesNotThrows(_delegate {a[5];}, "User message..."); // test throws an AssertionException.
+      /// Assert::DoesNotThrows(delegate_ {a[2];}, "User message..."); // test ok
+      /// Assert::DoesNotThrows(delegate_ {a[5];}, "User message..."); // test throws an AssertionException.
       /// @endcode
       static inline void DoesNotThrows(const System::Delegate<void>& statement, const string& message) {DoesNotThrows(statement, message, System::Runtime::CompilerServices::Caller());}
 
@@ -349,8 +349,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::DoesNotThrows(_delegate {a[2];}, _caller); // test ok
-      /// Assert::DoesNotThrows(_delegate {a[5];}, _caller); // test throws an AssertionException.
+      /// Assert::DoesNotThrows(delegate_ {a[2];}, caller_); // test ok
+      /// Assert::DoesNotThrows(delegate_ {a[5];}, caller_); // test throws an AssertionException.
       /// @endcode
       static inline void DoesNotThrows(const System::Delegate<void>& statement, const System::Runtime::CompilerServices::Caller& caller) {DoesNotThrows(statement, "", caller);}
 
@@ -361,8 +361,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::DoesNotThrows(_delegate {a[2];}, "User message...", _caller); // test ok
-      /// Assert::DoesNotThrows(_delegate {a[5];}, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::DoesNotThrows(delegate_ {a[2];}, "User message...", caller_); // test ok
+      /// Assert::DoesNotThrows(delegate_ {a[5];}, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void DoesNotThrows(const System::Delegate<void>& statement, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
         try {
@@ -378,7 +378,7 @@ namespace Switch {
       }
 
       /// @brief The Equals method throws an Switch::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
-      static inline bool Equals(const Object&, const Object&) { throw AssertionException(_caller); }
+      static inline bool Equals(const Object&, const Object&) { throw AssertionException(caller_); }
 
       /// @brief Throws an Switch::TUnit::AssertionException. This is used by the other Assert functions.
       static inline void Fail() {Fail("", "", System::Runtime::CompilerServices::Caller());}
@@ -437,8 +437,8 @@ namespace Switch {
       /// @code
       /// string s1 = "Anything";
       /// string s2;
-      /// Assert::False(String::IsNullOrEmpty(s1), _caller); // test ok
-      /// Assert::False(String::IsNullOrEmpty(s2), _caller); // test throws an AssertionException.
+      /// Assert::False(String::IsNullOrEmpty(s1), caller_); // test ok
+      /// Assert::False(String::IsNullOrEmpty(s2), caller_); // test throws an AssertionException.
       /// @endcode
       static inline void False(bool condition, const System::Runtime::CompilerServices::Caller& caller) {IsFalse(condition, "", caller);}
 
@@ -450,8 +450,8 @@ namespace Switch {
       /// @code
       /// string s1 = "Anything";
       /// string s2;
-      /// Assert::False(String::IsNullOrEmpty(s1), "User message...", _caller); // test ok
-      /// Assert::False(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
+      /// Assert::False(String::IsNullOrEmpty(s1), "User message...", caller_); // test ok
+      /// Assert::False(String::IsNullOrEmpty(s2), "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void False(bool condition, const string& message, const System::Runtime::CompilerServices::Caller& caller) {IsFalse(condition, message, caller);}
 
@@ -484,8 +484,8 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::Greater(24, 12, _caller); // test ok
-      /// TUnit::Assert::Greater(24, 48, _caller); // test throws an AssertionException.
+      /// TUnit::Assert::Greater(24, 12, caller_); // test ok
+      /// TUnit::Assert::Greater(24, 48, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void Greater(const TValue1& val1, const TValue2& val2, const System::Runtime::CompilerServices::Caller& caller) {Greater(val1, val2, "", caller);}
@@ -497,8 +497,8 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::Greater(24, 12, "User message...", _caller); // test ok
-      /// TUnit::Assert::Greater(24, 48, "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::Greater(24, 12, "User message...", caller_); // test ok
+      /// TUnit::Assert::Greater(24, 48, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void Greater(const TValue1& val1, const TValue2& val2, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -539,9 +539,9 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::GreaterOrEqual(24, 12, _caller); // test ok
-      /// TUnit::Assert::GreaterOrEqual(24, 24, _caller); // test ok
-      /// TUnit::Assert::GreaterOrEqual(24, 48, _caller); // test throws an AssertionException.
+      /// TUnit::Assert::GreaterOrEqual(24, 12, caller_); // test ok
+      /// TUnit::Assert::GreaterOrEqual(24, 24, caller_); // test ok
+      /// TUnit::Assert::GreaterOrEqual(24, 48, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2, const System::Runtime::CompilerServices::Caller& caller) {GreaterOrEqual(val1, val2, "", caller);}
@@ -553,9 +553,9 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::GreaterOrEqual(24, 12, "User message...", _caller); // test ok
-      /// TUnit::Assert::GreaterOrEqual(24, 24, "User message...", _caller); // test ok
-      /// TUnit::Assert::GreaterOrEqual(24, 48, "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::GreaterOrEqual(24, 12, "User message...", caller_); // test ok
+      /// TUnit::Assert::GreaterOrEqual(24, 24, "User message...", caller_); // test ok
+      /// TUnit::Assert::GreaterOrEqual(24, 48, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void GreaterOrEqual(const TValue1& val1, const TValue2& val2, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -595,8 +595,8 @@ namespace Switch {
       /// @code
       /// string v1;
       /// string v2 = "Not empty";
-      /// Assert::IsEmpty(v1, _caller); // test ok
-      /// Assert::IsEmpty(v2, _caller); // test throws an AssertionException.
+      /// Assert::IsEmpty(v1, caller_); // test ok
+      /// Assert::IsEmpty(v2, caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsEmpty(const string& value, const System::Runtime::CompilerServices::Caller& caller) {IsEmpty(value, "", caller);}
 
@@ -608,8 +608,8 @@ namespace Switch {
       /// @code
       /// string v1;
       /// string v2 = "Not empty";
-      /// Assert::IsEmpty(v1, "User message...", _caller); // test ok
-      /// Assert::IsEmpty(v2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsEmpty(v1, "User message...", caller_); // test ok
+      /// Assert::IsEmpty(v2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsEmpty(const string& value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
         if (string::IsNullOrEmpty(value))
@@ -650,8 +650,8 @@ namespace Switch {
       /// @code
       /// Array<int> c1;
       /// Array<int> c2 = {0, 1, 2};
-      /// Assert::IsEmpty(c1, _caller); // test ok
-      /// Assert::IsEmpty(c2, _caller); // test throws an AssertionException.
+      /// Assert::IsEmpty(c1, caller_); // test ok
+      /// Assert::IsEmpty(c2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
       static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const System::Runtime::CompilerServices::Caller& caller) {IsEmpty(collection, "", caller);}
@@ -664,8 +664,8 @@ namespace Switch {
       /// @code
       /// Array<int> c1;
       /// Array<int> c2 = {0, 1, 2};
-      /// Assert::IsEmpty(c1, "User message...", _caller); // test ok
-      /// Assert::IsEmpty(c2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsEmpty(c1, "User message...", caller_); // test ok
+      /// Assert::IsEmpty(c2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
       static inline void IsEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -705,8 +705,8 @@ namespace Switch {
       /// @code
       /// string s1 = "Anything";
       /// string s2;
-      /// Assert::IsFalse(String::IsNullOrEmpty(s1), _caller); // test ok
-      /// Assert::IsFalse(String::IsNullOrEmpty(s2), _caller); // test throws an AssertionException.
+      /// Assert::IsFalse(String::IsNullOrEmpty(s1), caller_); // test ok
+      /// Assert::IsFalse(String::IsNullOrEmpty(s2), caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsFalse(bool condition, const System::Runtime::CompilerServices::Caller& caller) {IsFalse(condition, "", caller);}
 
@@ -718,8 +718,8 @@ namespace Switch {
       /// @code
       /// string s1 = "Anything";
       /// string s2;
-      /// Assert::IsFalse(String::IsNullOrEmpty(s1), "User message...", _caller); // test ok
-      /// Assert::IsFalse(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsFalse(String::IsNullOrEmpty(s1), "User message...", caller_); // test ok
+      /// Assert::IsFalse(String::IsNullOrEmpty(s2), "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsFalse(bool condition, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
         if (condition == false)
@@ -782,7 +782,7 @@ namespace Switch {
         if (is<TT>(value))
           Succeed(message, caller);
         else
-          Fail(string::Format("Expected: instance of <{0}>{1}But was:  <{2}>", _typeof(value), System::Environment::NewLine, _typeof<TT>()), message, caller);
+          Fail(string::Format("Expected: instance of <{0}>{1}But was:  <{2}>", typeof_(value), System::Environment::NewLine, typeof_<TT>()), message, caller);
       }
 
       /// @brief Verify that an object is of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -867,8 +867,8 @@ namespace Switch {
       /// @code
       /// double v1 = Double::NaN;
       /// double v2 = Math::PI;
-      /// Assert::IsNaN(v1, _caller); // test ok
-      /// Assert::IsNaN(v2, _caller); // test throws an AssertionException.
+      /// Assert::IsNaN(v1, caller_); // test ok
+      /// Assert::IsNaN(v2, caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsNaN(double value, const System::Runtime::CompilerServices::Caller& caller) {IsNaN(value, "", caller);}
 
@@ -880,8 +880,8 @@ namespace Switch {
       /// @code
       /// double v1 = Double::NaN;
       /// double v2 = Math::PI;
-      /// Assert::IsNaN(v1, "User message...", _caller); // test ok
-      /// Assert::IsNaN(v2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsNaN(v1, "User message...", caller_); // test ok
+      /// Assert::IsNaN(v2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsNaN(double value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
         if (System::Double::IsNaN(value))
@@ -920,8 +920,8 @@ namespace Switch {
       /// @code
       /// float v1 = Single::NaN;
       /// float v2 = Math::PI;
-      /// Assert::IsNaN(v1, _caller); // test ok
-      /// Assert::IsNaN(v2, _caller); // test throws an AssertionException.
+      /// Assert::IsNaN(v1, caller_); // test ok
+      /// Assert::IsNaN(v2, caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsNaN(float value, const System::Runtime::CompilerServices::Caller& caller) {IsNaN(value, "", caller);}
 
@@ -933,8 +933,8 @@ namespace Switch {
       /// @code
       /// float v1 = Single::NaN;
       /// float v2 = Math::PI;
-      /// Assert::IsNaN(v1, "User message...", _caller); // test ok
-      /// Assert::IsNaN(v2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsNaN(v1, "User message...", caller_); // test ok
+      /// Assert::IsNaN(v2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsNaN(float value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
         if (System::Double::IsNaN(value))
@@ -973,8 +973,8 @@ namespace Switch {
       /// @code
       /// string v1 = "Not empty";
       /// string v2;
-      /// Assert::IsNotEmpty(v1, _caller); // test ok
-      /// Assert::IsNotEmpty(v2, _caller); // test throws an AssertionException.
+      /// Assert::IsNotEmpty(v1, caller_); // test ok
+      /// Assert::IsNotEmpty(v2, caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsNotEmpty(const string& value, const System::Runtime::CompilerServices::Caller& caller) {IsNotEmpty(value, "", caller);}
 
@@ -986,8 +986,8 @@ namespace Switch {
       /// @code
       /// string v1 = "Not empty";
       /// string v2;
-      /// Assert::IsNotEmpty(v1, "User message...", _caller); // test ok
-      /// Assert::IsNotEmpty(v2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsNotEmpty(v1, "User message...", caller_); // test ok
+      /// Assert::IsNotEmpty(v2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsNotEmpty(const string& value, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
         if (!string::IsNullOrEmpty(value))
@@ -1028,8 +1028,8 @@ namespace Switch {
       /// @code
       /// Array<int> c1 = {0, 1, 2};
       /// Array<int> c2;
-      /// Assert::IsNotEmpty(c1, _caller); // test ok
-      /// Assert::IsNotEmpty(c2, _caller); // test throws an AssertionException.
+      /// Assert::IsNotEmpty(c1, caller_); // test ok
+      /// Assert::IsNotEmpty(c2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
       static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const System::Runtime::CompilerServices::Caller& caller) {IsNotEmpty(collection, "", caller);}
@@ -1042,8 +1042,8 @@ namespace Switch {
       /// @code
       /// Array<int> c1 = {0, 1, 2};
       /// Array<int> c2;
-      /// Assert::IsNotEmpty(c1, "User message...", _caller); // test ok
-      /// Assert::IsNotEmpty(c2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsNotEmpty(c1, "User message...", caller_); // test ok
+      /// Assert::IsNotEmpty(c2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TItem>
       static inline void IsNotEmpty(const System::Collections::Generic::IEnumerable<TItem>& collection, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -1107,7 +1107,7 @@ namespace Switch {
         if (!is<TT>(value))
           Succeed(message, caller);
         else
-          Fail(string::Format("Expected: not instance of <{0}>{1}But was:  <{2}>", _typeof(value), System::Environment::NewLine, _typeof<TT>()), message, caller);
+          Fail(string::Format("Expected: not instance of <{0}>{1}But was:  <{2}>", typeof_(value), System::Environment::NewLine, typeof_<TT>()), message, caller);
       }
 
       /// @brief Verify that an object is not of the type supplied or a derived type. If they are not, then an Switch::TUnit::AssertionException is thrown.
@@ -1207,8 +1207,8 @@ namespace Switch {
       /// ...
       /// string* s1 = &str;
       /// string* s2 = null;
-      /// Assert::IsNotNull(s1, _caller); // test ok
-      /// Assert::IsNotNull(s2, _caller); // test throws an AssertionException.
+      /// Assert::IsNotNull(s1, caller_); // test ok
+      /// Assert::IsNotNull(s2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNotNull(const TPointer* pointer, const System::Runtime::CompilerServices::Caller& caller) {IsNotNull(pointer, "", caller);}
@@ -1223,8 +1223,8 @@ namespace Switch {
       /// ...
       /// string* s1 = &str;
       /// string* s2 = null;
-      /// Assert::IsNotNull(s1, "User message..."), _caller); // test ok
-      /// Assert::IsNotNull(s2, "User message..."), _caller); // test throws an AssertionException.
+      /// Assert::IsNotNull(s1, "User message..."), caller_); // test ok
+      /// Assert::IsNotNull(s2, "User message..."), caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNotNull(const TPointer* pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -1266,8 +1266,8 @@ namespace Switch {
       /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
-      /// Assert::IsNotNull(s1, _caller); // test ok
-      /// Assert::IsNotNull(s2, _caller); // test throws an AssertionException.
+      /// Assert::IsNotNull(s1, caller_); // test ok
+      /// Assert::IsNotNull(s2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNotNull(const refptr<TPointer>& pointer, const System::Runtime::CompilerServices::Caller& caller) {IsNotNull(pointer, "", caller);}
@@ -1280,8 +1280,8 @@ namespace Switch {
       /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
-      /// Assert::IsNotNull(s1, "User message...", _caller); // test ok
-      /// Assert::IsNotNull(s2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsNotNull(s1, "User message...", caller_); // test ok
+      /// Assert::IsNotNull(s2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNotNull(const refptr<TPointer>& pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -1336,8 +1336,8 @@ namespace Switch {
       /// ...
       /// string* s1 = null;
       /// string* s2 = &str;
-      /// Assert::IsNull(s1, _caller); // test ok
-      /// Assert::IsNull(s2, _caller); // test throws an AssertionException.
+      /// Assert::IsNull(s1, caller_); // test ok
+      /// Assert::IsNull(s2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const TPointer* pointer, const System::Runtime::CompilerServices::Caller& caller) {IsNull(pointer, "", caller);}
@@ -1352,8 +1352,8 @@ namespace Switch {
       /// ...
       /// string* s1 = null;
       /// string* s2 = &str;
-      /// Assert::IsNull(s1, "User message..."), _caller); // test ok
-      /// Assert::IsNull(s2, "User message..."), _caller); // test throws an AssertionException.
+      /// Assert::IsNull(s1, "User message..."), caller_); // test ok
+      /// Assert::IsNull(s2, "User message..."), caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const TPointer* pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -1395,8 +1395,8 @@ namespace Switch {
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, _caller); // test ok
-      /// Assert::IsNull(s2, _caller); // test throws an AssertionException.
+      /// Assert::IsNull(s1, caller_); // test ok
+      /// Assert::IsNull(s2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const refptr<TPointer>& pointer, const System::Runtime::CompilerServices::Caller& caller) {IsNull(pointer, "", caller);}
@@ -1409,8 +1409,8 @@ namespace Switch {
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, "User message...", _caller); // test ok
-      /// Assert::IsNull(s2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsNull(s1, "User message...", caller_); // test ok
+      /// Assert::IsNull(s2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const refptr<TPointer>& pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -1452,8 +1452,8 @@ namespace Switch {
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, _caller); // test ok
-      /// Assert::IsNull(s2, _caller); // test throws an AssertionException.
+      /// Assert::IsNull(s1, caller_); // test ok
+      /// Assert::IsNull(s2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const ref<TPointer>& pointer, const System::Runtime::CompilerServices::Caller& caller) {IsNull(pointer, "", caller);}
@@ -1466,8 +1466,8 @@ namespace Switch {
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::IsNull(s1, "User message...", _caller); // test ok
-      /// Assert::IsNull(s2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsNull(s1, "User message...", caller_); // test ok
+      /// Assert::IsNull(s2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void IsNull(const ref<TPointer>& pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -1507,8 +1507,8 @@ namespace Switch {
       /// @code
       /// string s1;
       /// string s2 = "Anything";
-      /// Assert::IsTrue(String::IsNullOrEmpty(s1), _caller); // test ok
-      /// Assert::IsTrue(String::IsNullOrEmpty(s2), _caller); // test throws an AssertionException.
+      /// Assert::IsTrue(String::IsNullOrEmpty(s1), caller_); // test ok
+      /// Assert::IsTrue(String::IsNullOrEmpty(s2), caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsTrue(bool condition, const System::Runtime::CompilerServices::Caller& caller) {IsTrue(condition, "", caller);}
 
@@ -1520,8 +1520,8 @@ namespace Switch {
       /// @code
       /// string s1;
       /// string s2 = "Anything";
-      /// Assert::IsTrue(String::IsNullOrEmpty(s1), "User message...", _caller); // test ok
-      /// Assert::IsTrue(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
+      /// Assert::IsTrue(String::IsNullOrEmpty(s1), "User message...", caller_); // test ok
+      /// Assert::IsTrue(String::IsNullOrEmpty(s2), "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void IsTrue(bool condition, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
         if (condition == true)
@@ -1559,8 +1559,8 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::Less(12, 24, _caller); // test ok
-      /// TUnit::Assert::Less(48, 24, _caller); // test throws an AssertionException.
+      /// TUnit::Assert::Less(12, 24, caller_); // test ok
+      /// TUnit::Assert::Less(48, 24, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void Less(const TValue1& val1, const TValue2& val2, const System::Runtime::CompilerServices::Caller& caller) {Less(val1, val2, "", caller);}
@@ -1572,8 +1572,8 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::Less(24, 12, "User message...", _caller); // test ok
-      /// TUnit::Assert::Less(24, 48, "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::Less(24, 12, "User message...", caller_); // test ok
+      /// TUnit::Assert::Less(24, 48, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void Less(const TValue1& val1, const TValue2& val2, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -1614,9 +1614,9 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::LessOrEqual(12, 24, _caller); // test ok
-      /// TUnit::Assert::LessOrEqual(24, 24, _caller); // test ok
-      /// TUnit::Assert::LessOrEqual(48, 24, _caller); // test throws an AssertionException.
+      /// TUnit::Assert::LessOrEqual(12, 24, caller_); // test ok
+      /// TUnit::Assert::LessOrEqual(24, 24, caller_); // test ok
+      /// TUnit::Assert::LessOrEqual(48, 24, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void LessOrEqual(const TValue1& val1, const TValue2& val2, const System::Runtime::CompilerServices::Caller& caller) {LessOrEqual(val1, val2, "", caller);}
@@ -1628,9 +1628,9 @@ namespace Switch {
       /// @param caller Contains information about current file and current line.
       /// @par Examples
       /// @code
-      /// TUnit::Assert::LessOrEqual(12, 24, "User message...", _caller); // test ok
-      /// TUnit::Assert::LessOrEqual(24, 24, "User message...", _caller); // test ok
-      /// TUnit::Assert::LessOrEqual(48, 24, "User message...", _caller); // test throws an AssertionException.
+      /// TUnit::Assert::LessOrEqual(12, 24, "User message...", caller_); // test ok
+      /// TUnit::Assert::LessOrEqual(24, 24, "User message...", caller_); // test ok
+      /// TUnit::Assert::LessOrEqual(48, 24, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TValue1, typename TValue2>
       static inline void LessOrEqual(const TValue1& val1, const TValue2& val2, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -1685,8 +1685,8 @@ namespace Switch {
       /// ...
       /// string* s1 = &str;
       /// string* s2 = null;
-      /// Assert::NotNull(s1, _caller); // test ok
-      /// Assert::NotNull(s2, _caller); // test throws an AssertionException.
+      /// Assert::NotNull(s1, caller_); // test ok
+      /// Assert::NotNull(s2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void NotNull(const TPointer* pointer, const System::Runtime::CompilerServices::Caller& caller) {IsNotNull(pointer, "", caller);}
@@ -1701,8 +1701,8 @@ namespace Switch {
       /// ...
       /// string* s1 = &str;
       /// string* s2 = null;
-      /// Assert::NotNull(s1, "User message..."), _caller); // test ok
-      /// Assert::NotNull(s2, "User message..."), _caller); // test throws an AssertionException.
+      /// Assert::NotNull(s1, "User message..."), caller_); // test ok
+      /// Assert::NotNull(s2, "User message..."), caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void NotNull(const TPointer* pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {IsNotNull(pointer, message, caller);}
@@ -1739,8 +1739,8 @@ namespace Switch {
       /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
-      /// Assert::NotNull(s1, _caller); // test ok
-      /// Assert::NotNull(s2, _caller); // test throws an AssertionException.
+      /// Assert::NotNull(s1, caller_); // test ok
+      /// Assert::NotNull(s2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void NotNull(const refptr<TPointer>& pointer, const System::Runtime::CompilerServices::Caller& caller) {IsNotNull(pointer, "", caller);}
@@ -1753,8 +1753,8 @@ namespace Switch {
       /// @code
       /// refptr<string> s1(new string("A string"));
       /// refptr<string> s2;
-      /// Assert::NotNull(s1, "User message...", _caller); // test ok
-      /// Assert::NotNull(s2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::NotNull(s1, "User message...", caller_); // test ok
+      /// Assert::NotNull(s2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void NotNull(const refptr<TPointer>& pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {IsNotNull(pointer, message, caller);}
@@ -1804,8 +1804,8 @@ namespace Switch {
       /// ...
       /// string* s1 = null;
       /// string* s2 = &str;
-      /// Assert::Null(s1, _caller); // test ok
-      /// Assert::Null(s2, _caller); // test throws an AssertionException.
+      /// Assert::Null(s1, caller_); // test ok
+      /// Assert::Null(s2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void Null(const TPointer* pointer, const System::Runtime::CompilerServices::Caller& caller) {IsNull(pointer, "", caller);}
@@ -1820,8 +1820,8 @@ namespace Switch {
       /// ...
       /// string* s1 = null;
       /// string* s2 = &str;
-      /// Assert::Null(s1, "User message..."), _caller); // test ok
-      /// Assert::Null(s2, "User message..."), _caller); // test throws an AssertionException.
+      /// Assert::Null(s1, "User message..."), caller_); // test ok
+      /// Assert::Null(s2, "User message..."), caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void Null(const TPointer* pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {IsNull(pointer, message, caller);}
@@ -1858,8 +1858,8 @@ namespace Switch {
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::Null(s1, _caller); // test ok
-      /// Assert::Null(s2, _caller); // test throws an AssertionException.
+      /// Assert::Null(s1, caller_); // test ok
+      /// Assert::Null(s2, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void Null(const refptr<TPointer>& pointer, const System::Runtime::CompilerServices::Caller& caller) {IsNull(pointer, "", caller);}
@@ -1872,14 +1872,14 @@ namespace Switch {
       /// @code
       /// refptr<string> s1;
       /// refptr<string> s2(new string("A string"));
-      /// Assert::Null(s1, "User message...", _caller); // test ok
-      /// Assert::Null(s2, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::Null(s1, "User message...", caller_); // test ok
+      /// Assert::Null(s2, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename TPointer>
       static inline void Null(const refptr<TPointer>& pointer, const string& message, const System::Runtime::CompilerServices::Caller& caller) {IsNull(pointer, message, caller);}
 
       /// @brief The ReferenceEquals method throws an Switch::TUnit::AssertionException. This is done to make sure there is no mistake by calling this function.
-      static inline bool ReferenceEquals(const Object&, const Object&) { throw AssertionException(_caller); }
+      static inline bool ReferenceEquals(const Object&, const Object&) { throw AssertionException(caller_); }
 
       /// @brief Generates a success with a generic message. This is used by the other Assert functions.
       static inline void Succeed() {Succeed("", System::Runtime::CompilerServices::Caller());}
@@ -1923,8 +1923,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[5];}); // test ok
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}); // test throws an AssertionException.
+      /// Assert::Throws<ArgumentOutOfRangeException>(delegate_ {a[5];}); // test ok
+      /// Assert::Throws<ArgumentOutOfRangeException>(delegate_ {a[2];}); // test throws an AssertionException.
       /// @endcode
       template<typename ExceptionType>
       static inline void Throws(const System::Delegate<void>& statement) {Throws<ExceptionType>(statement, System::Runtime::CompilerServices::Caller());}
@@ -1936,8 +1936,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[5];}, "User message..."); // test ok
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}, "User message..."); // test throws an AssertionException.
+      /// Assert::Throws<ArgumentOutOfRangeException>(delegate_ {a[5];}, "User message..."); // test ok
+      /// Assert::Throws<ArgumentOutOfRangeException>(delegate_ {a[2];}, "User message..."); // test throws an AssertionException.
       /// @endcode
       template<typename ExceptionType>
       static inline void Throws(const System::Delegate<void>& statement, const string& message) {Throws<ExceptionType>(statement, message, System::Runtime::CompilerServices::Caller());}
@@ -1949,8 +1949,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[5];}, _caller); // test ok
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}, _caller); // test throws an AssertionException.
+      /// Assert::Throws<ArgumentOutOfRangeException>(delegate_ {a[5];}, caller_); // test ok
+      /// Assert::Throws<ArgumentOutOfRangeException>(delegate_ {a[2];}, caller_); // test throws an AssertionException.
       /// @endcode
       template<typename ExceptionType>
       static inline void Throws(const System::Delegate<void>& statement, const System::Runtime::CompilerServices::Caller& caller) {Throws<ExceptionType>(statement, "", caller);}
@@ -1968,22 +1968,22 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[5];}, "User message...", _caller); // test ok
-      /// Assert::Throws<ArgumentOutOfRangeException>(_delegate {a[2];}, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::Throws<ArgumentOutOfRangeException>(delegate_ {a[5];}, "User message...", caller_); // test ok
+      /// Assert::Throws<ArgumentOutOfRangeException>(delegate_ {a[2];}, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       template<typename ExceptionType>
       static inline void Throws(const System::Delegate<void>& statement, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
         try {
           statement();
-          Fail(string::Format("Expected: <{0}>{1}But was:  <nothing>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, caller);
+          Fail(string::Format("Expected: <{0}>{1}But was:  <nothing>", typeof_<ExceptionType>().FullName(), System::Environment::NewLine), message, caller);
         } catch (const AssertionException&) {
           throw;
         } catch (const ExceptionType&) {
           Succeed(message, caller);
         } catch (const System::Exception& exception) {
-          Fail(string::Format("Expected: <{0}>{1}But was:  <{2}>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine, exception.GetType().FullName()), message, caller);
+          Fail(string::Format("Expected: <{0}>{1}But was:  <{2}>", typeof_<ExceptionType>().FullName(), System::Environment::NewLine, exception.GetType().FullName()), message, caller);
         } catch (...) {
-          Fail(string::Format("Expected: <{0}>{1}But was:  <exception>", _typeof<ExceptionType>().FullName(), System::Environment::NewLine), message, caller);
+          Fail(string::Format("Expected: <{0}>{1}But was:  <exception>", typeof_<ExceptionType>().FullName(), System::Environment::NewLine), message, caller);
         }
       }
 
@@ -1996,8 +1996,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::ThrowsAny(_delegate {a[5];}); // test ok
-      /// Assert::ThrowsAny(_delegate {a[2];}); // test throws an AssertionException.
+      /// Assert::ThrowsAny(delegate_ {a[5];}); // test ok
+      /// Assert::ThrowsAny(delegate_ {a[2];}); // test throws an AssertionException.
       /// @endcode
       static inline void ThrowsAny(const System::Delegate<void>& statement) {ThrowsAny(statement, "", System::Runtime::CompilerServices::Caller());}
 
@@ -2007,8 +2007,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::ThrowsAny(_delegate {a[5];}, "User message..."); // test ok
-      /// Assert::ThrowsAny(_delegate {a[2];}, "User message..."); // test throws an AssertionException.
+      /// Assert::ThrowsAny(delegate_ {a[5];}, "User message..."); // test ok
+      /// Assert::ThrowsAny(delegate_ {a[2];}, "User message..."); // test throws an AssertionException.
       /// @endcode
       static inline void ThrowsAny(const System::Delegate<void>& statement, const string& message) {ThrowsAny(statement, message, System::Runtime::CompilerServices::Caller());}
 
@@ -2018,8 +2018,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::ThrowsAny(_delegate {a[5];}, _caller); // test ok
-      /// Assert::ThrowsAny(_delegate {a[2];}, _caller); // test throws an AssertionException.
+      /// Assert::ThrowsAny(delegate_ {a[5];}, caller_); // test ok
+      /// Assert::ThrowsAny(delegate_ {a[2];}, caller_); // test throws an AssertionException.
       /// @endcode
       static inline void ThrowsAny(const System::Delegate<void>& statement, const System::Runtime::CompilerServices::Caller& caller) {ThrowsAny(statement, "", caller);}
 
@@ -2030,8 +2030,8 @@ namespace Switch {
       /// @par Examples
       /// @code
       /// Array<int32> a = {1, 2 ,3, 4};
-      /// Assert::ThrowsAny(_delegate {a[5];}, "User message...", _caller); // test ok
-      /// Assert::ThrowsAny(_delegate {a[2];}, "User message...", _caller); // test throws an AssertionException.
+      /// Assert::ThrowsAny(delegate_ {a[5];}, "User message...", caller_); // test ok
+      /// Assert::ThrowsAny(delegate_ {a[2];}, "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void ThrowsAny(const System::Delegate<void>& statement, const string& message, const System::Runtime::CompilerServices::Caller& caller) {
         try {
@@ -2074,8 +2074,8 @@ namespace Switch {
       /// @code
       /// string s1;
       /// string s2 = "Anything";
-      /// Assert::True(String::IsNullOrEmpty(s1), _caller); // test ok
-      /// Assert::True(String::IsNullOrEmpty(s2), _caller); // test throws an AssertionException.
+      /// Assert::True(String::IsNullOrEmpty(s1), caller_); // test ok
+      /// Assert::True(String::IsNullOrEmpty(s2), caller_); // test throws an AssertionException.
       /// @endcode
       static inline void True(bool condition, const System::Runtime::CompilerServices::Caller& caller) {IsTrue(condition, "", caller);}
 
@@ -2087,8 +2087,8 @@ namespace Switch {
       /// @code
       /// string s1;
       /// string s2 = "Anything";
-      /// Assert::True(String::IsNullOrEmpty(s1), "User message...", _caller); // test ok
-      /// Assert::True(String::IsNullOrEmpty(s2), "User message...", _caller); // test throws an AssertionException.
+      /// Assert::True(String::IsNullOrEmpty(s1), "User message...", caller_); // test ok
+      /// Assert::True(String::IsNullOrEmpty(s2), "User message...", caller_); // test throws an AssertionException.
       /// @endcode
       static inline void True(bool condition, const string& message, const System::Runtime::CompilerServices::Caller& caller) {IsTrue(condition, message, caller);}
 
@@ -2170,7 +2170,7 @@ namespace Switch {
       }
 
       template<typename TValue, typename TAttribute>
-      static System::String ValueToString(const _property<TValue, TAttribute>& value) {return ValueToString(value());}
+      static System::String ValueToString(const property_<TValue, TAttribute>& value) {return ValueToString(value());}
 
       template<typename TValue>
       static System::String ValueToString(const TValue* value) {return ValueToString((const void*)value);}

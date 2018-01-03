@@ -18,7 +18,7 @@ WebResponse::WebResponseStream HttpWebResponse::GetResponseStream() {
   if (this->webRequest->Method() == WebRequestMethods::Http::Get || this->webRequest->Method() == WebRequestMethods::Http::Post)
     return WebResponse::GetResponseStream();
   else
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 }
 
 HttpStatusCode HttpWebResponse::GetStatusCode() const {

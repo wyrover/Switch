@@ -16,7 +16,7 @@ namespace Switch {
   }
 }
 
-class _export __opaque_unicode_string__ {
+class export_ __opaque_unicode_string__ {
   friend class Switch::System::String;
   __opaque_unicode_string__() {}
   explicit __opaque_unicode_string__(const char* str);

@@ -12,7 +12,7 @@ using namespace System::Net::Sockets;
 
 NetworkStream::NetworkStream(const System::Net::Sockets::Socket& socket, FileAccess access) {
   if (!socket.Connected || socket.SocketType != SocketType::Stream || !socket.Blocking)
-    throw IOException(_caller);
+    throw IOException(caller_);
 
   this->data->streamSocket = socket;
   switch (access) {
@@ -36,16 +36,16 @@ void NetworkStream::Close() {
 
 int32 NetworkStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
   if (offset < 0 || offset >= buffer.Length)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
   if (!this->data->readable)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
   return this->data->streamSocket.Receive(buffer, offset, count, SocketFlags::None);
 }
 
 void NetworkStream::Write(const Array<byte>& buffer, int32 offset, int32 count) {
   if (offset < 0 || offset >= buffer.Length)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
   if (!this->data->writeable)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
   this->data->streamSocket.Send(buffer, offset, count, SocketFlags::None);
 }

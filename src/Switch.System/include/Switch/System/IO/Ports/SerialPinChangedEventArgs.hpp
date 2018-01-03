@@ -19,7 +19,7 @@ namespace Switch {
         /// @remarks This class is used with the PinChanged event.|
         /// @par Library
         /// Switch.System
-        class _export SerialPinChangedEventArgs : public System::EventArgs {
+        class export_ SerialPinChangedEventArgs : public System::EventArgs {
         public:
           SerialPinChangedEventArgs(SerialPinChange eventType) : eventType(eventType) {}
           SerialPinChangedEventArgs(const SerialPinChangedEventArgs& spcea) : eventType(spcea.eventType) {}
@@ -27,8 +27,8 @@ namespace Switch {
           /// @brief Gets the event type.
           /// @return One of the SerialPinChange values.
           /// @remarks This property provides information about the event type that caused the PinChanged event.
-          _property<SerialPinChange, _readonly> EventType {
-            _get {return this->eventType;}
+          property_<SerialPinChange, readonly_> EventType {
+            get_ {return this->eventType;}
           };
 
         private:

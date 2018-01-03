@@ -18,7 +18,7 @@ namespace SwitchUnitTests {
    ASSERT_TRUE(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT")));
    ASSERT_NO_THROW(Environment::SetEnvironmentVariable("TEST_ENVIRONEMENT", "1"));
    ASSERT_EQ("1", Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT"));
-   ASSERT_NO_THROW(_delegate {Environment::SetEnvironmentVariable("TEST_ENVIRONEMENT", "");});
+   ASSERT_NO_THROW(delegate_ {Environment::SetEnvironmentVariable("TEST_ENVIRONEMENT", "");});
    ASSERT_TRUE(string::IsNullOrEmpty(Environment::GetEnvironmentVariable("TEST_ENVIRONEMENT")));
    } */
 }

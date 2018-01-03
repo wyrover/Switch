@@ -18,10 +18,10 @@ namespace Examples {
       Reader() = delete;
       Reader(const Reader& reader) = delete;
       NetworkStream stream;
-      Thread readThread {ThreadStart(_delegate {
+      Thread readThread {ThreadStart(delegate_ {
           StreamReader streamReader(this->stream);
           while (true) {
-            _lock(lock) {
+            lock_(lock) {
               Console::WriteLine(streamReader.ReadLine());
             }
           }
@@ -34,7 +34,7 @@ namespace Examples {
       Console::WriteLine("Press Ctrl+C to quit...");
 
       // create server thread
-      Thread server(ThreadStart(_delegate {
+      Thread server(ThreadStart(delegate_ {
         TcpListener tcpListener(IPAddress::Any, 9050);
         tcpListener.Start();
         List<refptr<Reader>> readers;
@@ -50,7 +50,7 @@ namespace Examples {
       // Create 10 client threads
       List<Thread> clients;
       for (int i = 0; i < 10; i++) {
-        clients.Add(Thread(ThreadStart(_delegate {
+        clients.Add(Thread(ThreadStart(delegate_ {
           StreamWriter streamWriter(TcpClient("127.0.0.1", 9050).GetStream());
           int counter = 1;
           while (true) {
@@ -70,7 +70,7 @@ namespace Examples {
 object Examples::TcpClientExample::Reader::lock;
 
 
-_startup(Examples::TcpClientExample);
+startup_(Examples::TcpClientExample);
 
 // This code example can produce the following output:
 //

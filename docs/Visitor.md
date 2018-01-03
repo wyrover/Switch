@@ -30,7 +30,7 @@ namespace DesignPatterns {
     class Visitor;
     
     // The 'Element' abstract class
-    class Element _abstract {
+    class Element abstract_ {
     public:
       virtual void Accept(refptr<Visitor> visitor) = 0;
     };
@@ -54,7 +54,7 @@ namespace DesignPatterns {
     };
     
     // The 'Visitor' abstract class
-    class Visitor _abstract {
+    class Visitor abstract_ {
     public:
       virtual void VisitConcreteElementA(const ConcreteElementA& concreteElementA) = 0;
       virtual void VisitConcreteElementB(const ConcreteElementB& concreteElementB) = 0;
@@ -135,7 +135,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 ```
 
 # Output

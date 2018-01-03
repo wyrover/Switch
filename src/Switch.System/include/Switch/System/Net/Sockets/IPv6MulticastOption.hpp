@@ -17,7 +17,7 @@ namespace Switch {
         /// @brief Contains option values for joining an IPv6 multicast group.
         /// @par Library
         /// Switch.System
-        class _export IPv6MulticastOption : public Object {
+        class export_ IPv6MulticastOption : public Object {
         public:
           /// @brief Initializes a new version of the IPv6MulticastOption class for the specified IP multicast group.
           /// @param group The IPAddress of the multicast group.
@@ -39,20 +39,20 @@ namespace Switch {
           /// @param group An IPAddress that contains the Internet address of a multicast group.
           /// @return IPAddress An IPAddress that contains the Internet address of a multicast group.
           /// @exception ArgumentNullException group is null.
-          _property<const IPAddress&> Group {
-            _get->const IPAddress& {return this->group;},
-            _set {this->group = value;}
+          property_<const IPAddress&> Group {
+            get_->const IPAddress& {return this->group;},
+            set_ {this->group = value;}
           };
 
           /// @brief Gets the interface index that is associated with a multicast group.
           /// @param interfaceIndex A Int64 value that specifies the address of the interface.
           /// @return int64 A Int64 value that specifies the address of the interface.
           /// @exception ArgumentOutOfRangeException interfaceIndex is less than 0. -or- interfaceIndex is greater than 0x00000000FFFFFFFF.
-          _property<int64> InterfaceIndex {
-            _get {return this->interfaceIndex;},
-            _set {
+          property_<int64> InterfaceIndex {
+            get_ {return this->interfaceIndex;},
+            set_ {
               if (value < 0 || value > 0x00000000FFFFFFFF)
-                throw ArgumentOutOfRangeException(_caller);
+                throw ArgumentOutOfRangeException(caller_);
               this->interfaceIndex = int32(value);
             }
           };

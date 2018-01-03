@@ -20,7 +20,7 @@ namespace Examples {
   private:
     template<typename T>
     static void PrintValues(const Array<T>& myArr)  {
-      _<System::Collections::Generic::IEnumerator<T>> myEnumerator = myArr.GetEnumerator();
+      $<System::Collections::Generic::IEnumerator<T>> myEnumerator = myArr.GetEnumerator();
       int i = 0;
       int cols = myArr.GetLength(myArr.Rank - 1);
       while (myEnumerator->MoveNext())  {
@@ -37,7 +37,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

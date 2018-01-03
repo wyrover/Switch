@@ -18,7 +18,7 @@ namespace Switch {
       /// @remarks To draw an System::Drawing::Image on a Windows Form, you should use one of the Graphics::DrawImage(Image, Point) methods.
       /// @par Library
       /// Switch.System.Drawing
-      class _export Bitmap : public Image {
+      class export_ Bitmap : public Image {
       public:
         Bitmap(const Image& image) : Image(image) {}
 

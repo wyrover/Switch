@@ -23,10 +23,10 @@ namespace Switch {
       /// @remarks For more advanced shapes, use a Region object.
       /// @par Library
       /// Switch.System.Drawing
-      class _export RectangleF : public object {
+      class export_ RectangleF : public object {
       public:
         /// @brief Represents a Rectangle structure with its properties left uninitialized.
-        static _property<RectangleF, _readonly> Empty;
+        static property_<RectangleF, readonly_> Empty;
 
         /// @brief Initializes a new instance of the Point class that has a X and Y value of 0.
         RectangleF() {}
@@ -55,29 +55,29 @@ namespace Switch {
         /// @brief Gets the y-coordinate that is the sum of the Y and Height property values of this Rectangle structure.
         /// @return int32 The height of this Rectangle structure. The default is 0.
         /// @remarks The value of the Bottom property represents the y-coordinate of the first point at the bottom edge of the Rectangle that is not contained in the Rectangle.
-        _property<float, _readonly> Bottom {
-          _get {return this->y + this->height;}
+        property_<float, readonly_> Bottom {
+          get_ {return this->y + this->height;}
         };
 
         /// @brief Gets or sets the height of this Rectangle structure.
         /// @return int32 The height of this Rectangle structure. The default is 0.
         /// @remarks Changing the Height property will also cause a change in the Bottom property of the Rectangle. The units the rectangle is drawn in is determined by the PageUnit and PageScale properties of the graphics object used for drawing. The default unit is pixels.
-        _property<float> Height {
-          _get {return this->height;},
-          _set {this->height = value;}
+        property_<float> Height {
+          get_ {return this->height;},
+          set_ {this->height = value;}
         };
 
         /// @brief Gets the x-coordinate of the left edge of this Rectangle structure.
         /// @return int32 The x-coordinate of the left edge of this Rectangle structure.
-        _property<float, _readonly> Left {
-          _get {return this->x;}
+        property_<float, readonly_> Left {
+          get_ {return this->x;}
         };
 
         /// @brief Gets or sets the coordinates of the upper-left corner of this Rectangle structure.
         /// @return A Point that represents the upper-left corner of this Rectangle structure.
-        _property<PointF> Location {
-          _get {return PointF(this->x, this->y);},
-          _set {
+        property_<PointF> Location {
+          get_ {return PointF(this->x, this->y);},
+          set_ {
             this->x = value.X;
             this->y = value.Y;
           }
@@ -86,15 +86,15 @@ namespace Switch {
         /// @brief Gets the x-coordinate that is the sum of X and Width property values of this Rectangle structure.
         /// @return int32 The x-coordinate that is the sum of X and Width of this Rectangle.
         /// @remarks The value of the Right property represents the x-coordinate of the first point at the right edge of the rectangle that is not contained in the rectangle.
-        _property<float, _readonly> Right {
-          _get {return this->x + this->width;}
+        property_<float, readonly_> Right {
+          get_ {return this->x + this->width;}
         };
 
         /// @brief Gets the size of this Rectangle.
         /// @return A Size that represents the width and height of this Rectangle structure.
-        _property<SizeF> Size {
-          _get {return SizeF(this->width, this->height);},
-          _set {
+        property_<SizeF> Size {
+          get_ {return SizeF(this->width, this->height);},
+          set_ {
             this->width = value.Width;
             this->height = value.Height;
           }
@@ -102,32 +102,32 @@ namespace Switch {
 
         /// @brief Gets the y-coordinate of the top edge of this Rectangle structure.
         /// @return int32 The y-coordinate of the top edge of this Rectangle structure.
-        _property<float, _readonly> Top {
-          _get {return this->y;}
+        property_<float, readonly_> Top {
+          get_ {return this->y;}
         };
 
         /// @brief Gets or sets the wisth of this Rectangle structure.
         /// @return int32 The width of this Rectangle structure. The default is 0.
         /// @remarks Changing the Width property will also cause a change in the Rigth property of the Rectangle. The units the rectangle is drawn in is determined by the PageUnit and PageScale properties of the graphics object used for drawing. The default unit is pixels.
-        _property<float> Width {
-          _get {return this->width;},
-          _set {this->width = value;}
+        property_<float> Width {
+          get_ {return this->width;},
+          set_ {this->width = value;}
         };
 
         /// @brief Gets or sets the x-coordinate of the upper-left corner of this Rectangle structure.
         /// @return int32 The x-coordinate of the upper-left corner of this Rectangle structure. The default is 0.
         /// @remarks Changing the X property will also cause a change in the Right property of the Rectangle.
-        _property<float> X {
-          _get {return this->x;},
-          _set {this->x = value;}
+        property_<float> X {
+          get_ {return this->x;},
+          set_ {this->x = value;}
         };
 
         /// @brief Gets or sets the y-coordinate of the upper-left corner of this Rectangle structure.
         /// @return int32 The y-coordinate of the upper-left corner of this Rectangle structure. The default is 0.
         /// @remarks Changing the y property will also cause a change in the Bottom property of the Rectangle.
-        _property<float> Y {
-          _get {return this->y;},
-          _set {this->y = value;}
+        property_<float> Y {
+          get_ {return this->y;},
+          set_ {this->y = value;}
         };
 
         /// @brief Determines if the specified point is contained within this Rectangle structure.

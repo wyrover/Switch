@@ -13,7 +13,7 @@ namespace {
   };
 
   TEST(PrediacateTest, Static) {
-    _using(Predicate<const string&> p(&MyClass::IsEmpty)) {
+    using_(Predicate<const string&> p(&MyClass::IsEmpty)) {
       ASSERT_FALSE(p("Not empty"));
       ASSERT_TRUE(p(""));
     }
@@ -21,14 +21,14 @@ namespace {
 
   TEST(PrediacateTest, Member) {
     MyClass m;
-    _using(Predicate<const string&> p(m, &MyClass::IsNotEmpty)) {
+    using_(Predicate<const string&> p(m, &MyClass::IsNotEmpty)) {
       ASSERT_TRUE(p("Not empty"));
       ASSERT_FALSE(p(""));
     }
   }
 
   TEST(PrediacateTest, Empty) {
-    _using(Predicate<const string&> p) {
+    using_(Predicate<const string&> p) {
       ASSERT_NO_THROW(p("Not empty"));
       ASSERT_NO_THROW(p(""));
     }

@@ -13,7 +13,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Implements a System::IO::TextWriter for writing characters to a stream in a particular encoding.
-      class _export StreamWriter : public TextWriter {
+      class export_ StreamWriter : public TextWriter {
       public:
         static StreamWriter& Null() {
           static StreamWriter nullStreamWriter;
@@ -28,7 +28,7 @@ namespace Switch {
           static_assert(!std::is_same<System::IO::Stream, TStream>::value, "Must not be System::IO::Stream but inherited");
           static_assert(std::is_base_of<System::IO::Stream, TStream>::value, "Is not inherited from System::IO::Stream");
           if (!stream.CanWrite())
-            throw ArgumentException(_caller);
+            throw ArgumentException(caller_);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
         }
 
@@ -37,7 +37,7 @@ namespace Switch {
         /// @exception ArgumentException stream is not writable.
         StreamWriter(refptr<Stream> stream) {
           if (!stream->CanWrite())
-            throw ArgumentException(_caller);
+            throw ArgumentException(caller_);
           this->data->stream = stream;
         }
 
@@ -51,7 +51,7 @@ namespace Switch {
           CheckStreamType()(stream);
 
           if (!stream.CanWrite())
-            throw ArgumentException(_caller);
+            throw ArgumentException(caller_);
           this->data->stream = stream.template MemberwiseClone<TStream>().template As<Stream>();
         }
 
@@ -87,15 +87,15 @@ namespace Switch {
         /// @brief Gets or Sets a value indicating whether the System::IO::StreamWriter will flush its buffer to the underlying stream after every call to System::IO::StreamWriter.Write(System::Char).
         /// @param autoFlush true to force System::IO::StreamWriter to flush its buffer; otherwise, false.
         /// @return bool true to force System::IO::StreamWriter to flush its buffer; otherwise, false.
-        _property<bool> AutoFlush {
-          _get {return this->GetAutoFlush();},
-          _set {this->SetAutoFlush(value);}
+        property_<bool> AutoFlush {
+          get_ {return this->GetAutoFlush();},
+          set_ {this->SetAutoFlush(value);}
         };
 
         /// @brief Gets the underlying stream that interfaces with a backing store.
         /// @return refptr<Stream> The stream this StreamWriter is writing to.
-        _property<Stream&, _readonly> BaseStream {
-          _get->Stream& {return this->GetBaseStream();}
+        property_<Stream&, readonly_> BaseStream {
+          get_->Stream& {return this->GetBaseStream();}
         };
 
         /// @brief Closes the current StreamWriter object and the underlying stream. (Overrides TextWriter::Close().).

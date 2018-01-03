@@ -15,7 +15,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class _export MouseEventArgs : public EventArgs {
+        class export_ MouseEventArgs : public EventArgs {
         public:
           MouseEventArgs() {}
 
@@ -33,28 +33,28 @@ namespace Switch {
           }
           /// @endcond
 
-          _property<MouseButtons, _readonly> Button {
-            _get {return this->button;}
+          property_<MouseButtons, readonly_> Button {
+            get_ {return this->button;}
           };
 
-          _property<const System::Drawing::Point&, _readonly> Location {
-            _get->const System::Drawing::Point& {return this->location;}
+          property_<const System::Drawing::Point&, readonly_> Location {
+            get_->const System::Drawing::Point& {return this->location;}
           };
 
-          _property<int32, _readonly> Clicks {
-            _get {return this->clicks;}
+          property_<int32, readonly_> Clicks {
+            get_ {return this->clicks;}
           };
 
-          _property<int32, _readonly> Delta {
-            _get {return this->delta;}
+          property_<int32, readonly_> Delta {
+            get_ {return this->delta;}
           };
 
-          _property<int32, _readonly> X {
-            _get {return this->Location().X();}
+          property_<int32, readonly_> X {
+            get_ {return this->Location().X();}
           };
 
-          _property<int32, _readonly> Y {
-            _get {return this->Location().Y();}
+          property_<int32, readonly_> Y {
+            get_ {return this->Location().Y();}
           };
 
         private:

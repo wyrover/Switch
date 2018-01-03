@@ -17,7 +17,7 @@ namespace Switch {
       /// @brief Defines a particular format for text, including font face, size, and style attributes. This class cannot be inherited.
       /// @par Library
       /// Switch.System.Drawing
-      class _export Font : public object {
+      class export_ Font : public object {
       public:
         Font(const string& name) {this->FromName(name, this->data().size, this->data().fontStyle);}
 
@@ -32,36 +32,36 @@ namespace Switch {
         Font(const System::Drawing::Font& font) : data(font.data) {}
         /// @endcond
 
-        _property<bool, _readonly> Bold{
-          _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Bold) == System::Drawing::FontStyle::Bold; }
+        property_<bool, readonly_> Bold{
+          get_{ return (this->data().fontStyle & System::Drawing::FontStyle::Bold) == System::Drawing::FontStyle::Bold; }
         };
 
-        _property<System::Drawing::FontFamily, _readonly> FontFamily{
-          _get{ return this->data().fontFamily; }
+        property_<System::Drawing::FontFamily, readonly_> FontFamily{
+          get_{ return this->data().fontFamily; }
         };
 
-        _property<bool, _readonly> Italic{
-          _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Italic) == System::Drawing::FontStyle::Italic; }
+        property_<bool, readonly_> Italic{
+          get_{ return (this->data().fontStyle & System::Drawing::FontStyle::Italic) == System::Drawing::FontStyle::Italic; }
         };
 
-        _property<bool, _readonly> Strikeout{
-          _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Strikeout) == System::Drawing::FontStyle::Strikeout; }
+        property_<bool, readonly_> Strikeout{
+          get_{ return (this->data().fontStyle & System::Drawing::FontStyle::Strikeout) == System::Drawing::FontStyle::Strikeout; }
         };
 
-        _property<bool, _readonly> Underline{
-          _get{ return (this->data().fontStyle & System::Drawing::FontStyle::Underline) == System::Drawing::FontStyle::Underline; }
+        property_<bool, readonly_> Underline{
+          get_{ return (this->data().fontStyle & System::Drawing::FontStyle::Underline) == System::Drawing::FontStyle::Underline; }
         };
 
-        _property<const string&, _readonly> Name {
-          _get->const string& {return this->data().name;}
+        property_<const string&, readonly_> Name {
+          get_->const string& {return this->data().name;}
         };
 
-        _property<System::Drawing::FontStyle, _readonly> Style {
-          _get {return this->data().fontStyle;}
+        property_<System::Drawing::FontStyle, readonly_> Style {
+          get_ {return this->data().fontStyle;}
         };
 
-        _property<float, _readonly> Size {
-          _get {return this->data().size;}
+        property_<float, readonly_> Size {
+          get_ {return this->data().size;}
         };
 
         static System::Drawing::Font FromHdc(intptr hdc);

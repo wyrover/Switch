@@ -2,46 +2,46 @@
 
 using namespace System;
 
-_property<string, _readonly> Uri::SchemeDelimiter {
+property_<string, readonly_> Uri::SchemeDelimiter {
   [] {return "://";}
 };
 
-_property<string, _readonly> Uri::UriSchemeFile {
+property_<string, readonly_> Uri::UriSchemeFile {
   [] {return "file";}
 };
 
-_property<string, _readonly> Uri::UriSchemeFtp {
+property_<string, readonly_> Uri::UriSchemeFtp {
   [] {return "ftp";}
 };
 
-_property<string, _readonly> Uri::UriSchemeGopher {
+property_<string, readonly_> Uri::UriSchemeGopher {
   [] {return "gopher";}
 };
 
-_property<string, _readonly> Uri::UriSchemeHttp {
+property_<string, readonly_> Uri::UriSchemeHttp {
   [] {return "http";}
 };
 
-_property<string, _readonly> Uri::UriSchemeHttps {
+property_<string, readonly_> Uri::UriSchemeHttps {
   [] {return "https";}
 };
 
-_property<string, _readonly> Uri::UriSchemeMailto {
+property_<string, readonly_> Uri::UriSchemeMailto {
   [] {return "mailto";}
 };
 
-_property<string, _readonly> Uri::UriSchemeNetPipe {
+property_<string, readonly_> Uri::UriSchemeNetPipe {
   [] {return "net.pipe";}
 };
 
-_property<string, _readonly> Uri::UriSchemeNetTcp {
+property_<string, readonly_> Uri::UriSchemeNetTcp {
   [] {return "net.tcp";}
 };
 
-_property<string, _readonly> Uri::UriSchemeNews {
+property_<string, readonly_> Uri::UriSchemeNews {
   [] {return "news";}
 };
 
-_property<string, _readonly> Uri::UriSchemeNntp {
+property_<string, readonly_> Uri::UriSchemeNntp {
   [] {return "nntp";}
 };

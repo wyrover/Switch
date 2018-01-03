@@ -13,7 +13,7 @@ namespace DesignPatterns {
     };
 
     // The 'Command' abstract class
-    class Command _abstract {
+    class Command abstract_ {
     public:
       // Constructor
       Command(refptr<Receiver> receiver) : receiver(receiver) {}
@@ -46,7 +46,7 @@ namespace DesignPatterns {
       refptr<Command> command;
     };
 
-    // MainApp _startup class for Behavioral
+    // MainApp startup_ class for Behavioral
     // Command Design Pattern.
     class MainApp {
     public:
@@ -66,7 +66,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 
 // This code produces the following output:
 //

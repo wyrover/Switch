@@ -19,10 +19,10 @@ namespace Switch {
       /// @brief Stores an ordered pair of singles, which specify a X and Y.
       /// @par Library
       /// Switch.System.Drawing
-      class _export PointF : public object {
+      class export_ PointF : public object {
       public:
         /// @brief Gets a PointF class that has a X and Y value of 0. This field is constant.
-        static _property<PointF, _readonly> Empty;
+        static property_<PointF, readonly_> Empty;
 
         /// @brief Initializes a new instance of the PointF class that has a X and Y value of 0.0f.
         PointF() = default;
@@ -45,17 +45,17 @@ namespace Switch {
         /// @brief Gets or sets the X component of this PointF Class.
         /// @return int32 The X component of this PointF class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the PointF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        _property<float> X {
-          _get {return this->x;},
-          _set {this->x = value;}
+        property_<float> X {
+          get_ {return this->x;},
+          set_ {this->x = value;}
         };
 
         /// @brief Gets or sets the Y component of this PointF class.
         /// @return int32 The Y component of this PointF class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the PointF class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        _property<float> Y {
-          _get {return this->y;},
-          _set {this->y = value;}
+        property_<float> Y {
+          get_ {return this->y;},
+          set_ {this->y = value;}
         };
 
         /// @brief Determines whether this instance of PointF and a specified object, which must also be a PointF object, have the same value.

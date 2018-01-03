@@ -148,7 +148,7 @@ namespace {
   TEST(Queue, GetSyncRoot) {
     Queue<int32> myQueue(10);
 
-    _lock(myQueue.SyncRoot) {
+    lock_(myQueue.SyncRoot) {
       myQueue.Enqueue(1);
       myQueue.Enqueue(2);
       myQueue.Enqueue(3);

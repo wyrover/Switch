@@ -14,15 +14,15 @@ public:
   }
 
   // Declare a Name property of type string:
-  _property<string> Name {
-    _get {return this->name;},
-    _set {this->name = value;}
+  property_<string> Name {
+    get_ {return this->name;},
+    set_ {this->name = value;}
   };
 
   // Declare an Age property of type int:
-  _property<int> Age {
-    _get {return this->age;},
-    _set {this->age = value;}
+  property_<int> Age {
+    get_ {return this->age;},
+    set_ {this->age = value;}
   };
 
   string ToString() const noexcept override {
@@ -53,7 +53,7 @@ private:
   int age = 0;
 };
 
-_startup(Person);
+startup_(Person);
 
 // This code produces the following output :
 //

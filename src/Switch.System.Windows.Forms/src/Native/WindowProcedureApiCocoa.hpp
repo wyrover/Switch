@@ -9,7 +9,7 @@
 #include "WindowMessageKey.hpp"
 
 namespace Native {
-  class WindowProcedure _static {
+  class WindowProcedure static_ {
   public:
     using ControlDictionary = System::Collections::Generic::Dictionary<intptr, ref<System::Windows::Forms::Control>>;
 

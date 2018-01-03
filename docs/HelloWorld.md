@@ -22,7 +22,7 @@ public:
   }
 };
 ​
-_startup(Hello1);
+startup_(Hello1);
 ```
 
 **Output**
@@ -50,7 +50,7 @@ public:
   }
 };
 ​
-_startup(Hello2);
+startup_(Hello2);
 ```
 
 **Output**
@@ -81,7 +81,7 @@ public:
   }
 };
 ​
-_startup(Hello3);
+startup_(Hello3);
 ```
 
 **Output**
@@ -113,7 +113,7 @@ public:
   }
 };
  
-_startup(Hello4);
+startup_(Hello4);
 ```
 
 **Output**

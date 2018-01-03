@@ -37,35 +37,35 @@ namespace Switch {
       /// @par Examples
       /// The following example uses Trace to indicate the beginning and the end of a program's execution. The example also uses the Trace.Indent and Trace.Unindent methods to distinguish the tracing output.
       /// @include Trace.cpp
-      class _export Trace _static {
+      class export_ Trace static_ {
       public:
         /// @brief Gets or sets whether Flush should be called on the Listeners after every write.
         /// @return bool true if Flush is called on the Listeners after every write; otherwise, false.
         /// @remarks The default is false.
         /// @remarks Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or Close. Setting AutoFlush to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.
-        static _property<bool> AutoFlush;
+        static property_<bool> AutoFlush;
 
         /// @brief Gets or sets the indent level.
         /// @return int32 The indent level. The default is zero.
         /// @remarks The IndentLevel property represents the number of times the indent of size IndentSize is applied. This property is stored on per-thread/per-request basis.
-        static _property<int32> IndentLevel;
+        static property_<int32> IndentLevel;
 
         /// @brief Gets or sets the number of spaces in an indent.
         /// @return int32 The number of spaces in an indent. The default is four.
         /// @remarks A TextWriterTraceListener interprets this number as spaces. An EventLogTraceListener ignores this value.
         /// @remarks This property is stored on per-thread/per-request basis.
-        static _property<int32> IndentSize;
+        static property_<int32> IndentSize;
 
         /// @brief Gets the collection of listeners that is monitoring the trace output.
         /// @return TraceListenerCollection A TraceListenerCollection that represents a collection of type TraceListener monitoring the trace output.
         /// @remarks The listeners produce formatted output from the trace output. By default, the collection contains an instance of the DefaultTraceListener class. If you want to remove the default listener, call the Remove method, and pass it the instance of the DefaultTraceListener. To redirect output to the console window, add an instance of the ConsoleTraceListener class.
         /// @note The Listeners collection is shared by both the Debug and the Trace classes; adding a trace listener to either class adds the listener to both.
-        static _property<TraceListenerCollection&, _readonly> Listeners;
+        static property_<TraceListenerCollection&, readonly_> Listeners;
 
         /// @brief Gets or sets a value indicating whether the global lock should be used.
         /// @return bool true if the global lock is to be used; otherwise, false. The default is true.
         /// @remarks The global lock is always used if the trace listener is not thread safe, regardless of the value of UseGlobalLock. The IsThreadSafe property is used to determine if the listener is thread safe. The global lock is not used only if the value of UseGlobalLock is false and the value of IsThreadSafe is true. The default behavior is to use the global lock.
-        static _property<bool> UseGlobalLock;
+        static property_<bool> UseGlobalLock;
 
         /// @brief Checks for a condition; if the condition is false, displays a message box that shows the call stack.
         /// @param condition The conditional expression to evaluate. If the condition is true, a failure message is not sent and the message box is not displayed.
@@ -105,7 +105,7 @@ namespace Switch {
           TraceEventCache eventCache;
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.Fail(message);
             } else
               listener.Fail(message);
@@ -124,7 +124,7 @@ namespace Switch {
           TraceEventCache eventCache;
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.Fail(message, detailMessage);
             } else
               listener.Fail(message, detailMessage);
@@ -210,7 +210,7 @@ namespace Switch {
           #if defined(TRACE)
           for (auto& listener : Listeners())
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.Write(value);
             } else
               listener.Write(value);
@@ -229,7 +229,7 @@ namespace Switch {
           #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.Write(value, category);
             } else
               listener.Write(value, category);
@@ -247,7 +247,7 @@ namespace Switch {
           #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.Write(message);
             } else
               listener.Write(message);
@@ -267,7 +267,7 @@ namespace Switch {
           #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.Write(message, category);
             } else
               listener.Write(message, category);
@@ -285,7 +285,7 @@ namespace Switch {
           #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.WriteLine(value);
             } else
               listener.WriteLine(value);
@@ -305,7 +305,7 @@ namespace Switch {
           #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.WriteLine(value, category);
             } else
               listener.WriteLine(value, category);
@@ -323,7 +323,7 @@ namespace Switch {
           #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.WriteLine(message);
             } else
               listener.WriteLine(message);
@@ -343,7 +343,7 @@ namespace Switch {
           #if defined(TRACE)
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.WriteLine(message, category);
             } else
               listener.WriteLine(message, category);
@@ -417,7 +417,7 @@ namespace Switch {
           static string sourceName = System::IO::Path::GetFileName(Environment::GetCommandLineArgs()[0]);
           for (auto& listener : Listeners()) {
             if (!listener.IsThreadSafe && UseGlobalLock) {
-              _lock(lock)
+              lock_(lock)
               listener.TraceEvent(eventCache, sourceName, traceEventType, 0, message);
             } else
               listener.TraceEvent(eventCache, sourceName, traceEventType, 0, message);

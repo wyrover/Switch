@@ -7,15 +7,15 @@
 namespace Switch {
   namespace System {
     namespace ComponentModel {
-      class _export CancelEventArgs : public EventArgs {
+      class export_ CancelEventArgs : public EventArgs {
       public:
         CancelEventArgs() {}
         CancelEventArgs(const CancelEventArgs& ce) : cancel(ce.cancel) {}
         CancelEventArgs(bool cancel) : cancel(cancel) {}
 
-        _property<bool> Cancel {
-          _get {return cancel;},
-          _set {this->cancel = value;}
+        property_<bool> Cancel {
+          get_ {return cancel;},
+          set_ {this->cancel = value;}
         };
 
       private:

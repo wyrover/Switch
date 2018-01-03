@@ -294,183 +294,183 @@ namespace {
   }
 
   TEST(ValueTypeTest, Format) {
-    _using(Byte value = 32) {
+    using_(Byte value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(Int16 value = 32) {
+    using_(Int16 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(Int32 value = 32) {
+    using_(Int32 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(Int64 value = 32) {
+    using_(Int64 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(IntPtr value = 32) {
+    using_(IntPtr value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(SByte value = 32) {
+    using_(SByte value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(UInt16 value = 32) {
+    using_(UInt16 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(UInt32 value = 32) {
+    using_(UInt32 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(UInt64 value = 32) {
+    using_(UInt64 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(UInt64 value = 32) {
+    using_(UInt64 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(UIntPtr value = uint32(32)) {
+    using_(UIntPtr value = uint32(32)) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(Char value = 32) {
+    using_(Char value = 32) {
       ASSERT_EQ(" ", string::Format("{0}", value));
     }
 
-    _using(Boolean value = true) {
+    using_(Boolean value = true) {
       ASSERT_EQ("True", string::Format("{0}", value));
     }
 
-    _using(Single value = 32) {
+    using_(Single value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(Double value = 32) {
+    using_(Double value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(string value = "32") {
+    using_(string value = "32") {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(byte value = 32) {
+    using_(byte value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(int16 value = 32) {
+    using_(int16 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(int32 value = 32) {
+    using_(int32 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(int64 value = 32) {
+    using_(int64 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(sbyte value = 32) {
+    using_(sbyte value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(uint16 value = 32) {
+    using_(uint16 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(uint32 value = 32) {
+    using_(uint32 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(uint64 value = 32) {
+    using_(uint64 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(uint64 value = 32) {
+    using_(uint64 value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(char32 value = 32) {
+    using_(char32 value = 32) {
       ASSERT_EQ(" ", string::Format("{0}", value));
     }
 
-    _using(bool value = true) {
+    using_(bool value = true) {
       ASSERT_EQ("True", string::Format("{0}", value));
     }
 
-    _using(float value = 32) {
+    using_(float value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(double value = 32) {
+    using_(double value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(char* value = (char*)"32") {
+    using_(char* value = (char*)"32") {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(const char* value = "32") {
+    using_(const char* value = "32") {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(char value = 32) {
+    using_(char value = 32) {
       ASSERT_EQ(" ", string::Format("{0}", value));
     }
 
-    _using(unsigned char value = 32) {
+    using_(unsigned char value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(short value = 32) {
+    using_(short value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(unsigned short value = 32) {
+    using_(unsigned short value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(short int value = 32) {
+    using_(short int value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(unsigned short int value = 32) {
+    using_(unsigned short int value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(int value = 32) {
+    using_(int value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(unsigned int value = 32) {
+    using_(unsigned int value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(long value = 32) {
+    using_(long value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(unsigned long value = 32) {
+    using_(unsigned long value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(long int value = 32) {
+    using_(long int value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(unsigned long int value = 32) {
+    using_(unsigned long int value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(long long value = 32) {
+    using_(long long value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
 
-    _using(unsigned long long value = 32) {
+    using_(unsigned long long value = 32) {
       ASSERT_EQ("32", string::Format("{0}", value));
     }
   }

@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief Provides the base class for trace filter implementations.
       /// @par Library
       /// Switch.System
-      class _export TraceFilter _abstract {
+      class export_ TraceFilter abstract_ {
       public:
         /// @brief Initializes a new instance of the TraceFilter class.
         TraceFilter() {}

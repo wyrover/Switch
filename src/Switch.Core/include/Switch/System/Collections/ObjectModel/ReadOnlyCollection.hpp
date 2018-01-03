@@ -128,12 +128,12 @@ namespace Switch {
           /// @param index The zero-based index of the element to get.
           /// @return  T The element at the specified index.
           /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.
-          T& operator[](int32 index) override {throw NotSupportedException("Collection is read-only.", _caller);}
+          T& operator[](int32 index) override {throw NotSupportedException("Collection is read-only.", caller_);}
 
           /// @brief Clear the Collection and insert the element of the Collection given in argument.
           /// @param collection the Collection which elements will be inserted from
           /// @return Collection<T> the Collection
-          ReadOnlyCollection<T>& operator=(const ReadOnlyCollection<T>& collection) {throw NotSupportedException("Collection is read-only.", _caller);}
+          ReadOnlyCollection<T>& operator=(const ReadOnlyCollection<T>& collection) {throw NotSupportedException("Collection is read-only.", caller_);}
 
         protected:
           /// @cond
@@ -146,11 +146,11 @@ namespace Switch {
           bool GetIsReadOnly() const override {return true;}
           bool GetIsSynchronized() const override {return false;}
           const Object& GetSyncRoot() const override {return this->list.SyncRoot;}
-          void Add(const T&) override {throw NotSupportedException("Collection is read-only.", _caller);}
-          void Clear() override {throw NotSupportedException("Collection is read-only.", _caller);}
-          void Insert(int32, const T&) override {throw NotSupportedException("Collection is read-only.", _caller);}
-          bool Remove(const T&) override {throw NotSupportedException("Collection is read-only.", _caller);}
-          void RemoveAt(int32 index) override {throw NotSupportedException("Collection is read-only.", _caller);}
+          void Add(const T&) override {throw NotSupportedException("Collection is read-only.", caller_);}
+          void Clear() override {throw NotSupportedException("Collection is read-only.", caller_);}
+          void Insert(int32, const T&) override {throw NotSupportedException("Collection is read-only.", caller_);}
+          bool Remove(const T&) override {throw NotSupportedException("Collection is read-only.", caller_);}
+          void RemoveAt(int32 index) override {throw NotSupportedException("Collection is read-only.", caller_);}
         };
       }
     }

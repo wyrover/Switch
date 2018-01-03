@@ -105,8 +105,8 @@ namespace Switch {
           ///            array.
           virtual void CopyTo(System::Array<T>& array, int32 arrayIndex) const override {
             //_list.CopyTo(array, arrayIndex);
-            if (arrayIndex < 0) throw ArgumentOutOfRangeException(_caller);
-            if (arrayIndex + this->Count > array.Length) throw ArgumentException(_caller);
+            if (arrayIndex < 0) throw ArgumentOutOfRangeException(caller_);
+            if (arrayIndex + this->Count > array.Length) throw ArgumentException(caller_);
 
             typename std::list<T, TAllocator>::const_iterator it;
             for (it = this->queue.begin(); it != this->queue.end() ; it++)
@@ -143,14 +143,14 @@ namespace Switch {
           /// @exception System::InvalidOperationException The System::Collections::Generic::Queue<T> is empty.
           const T& Peek() const {
             if (this->queue.size() == 0)
-              throw InvalidOperationException(_caller);
+              throw InvalidOperationException(caller_);
 
             return this->queue.front();
           }
 
           T& Peek() {
             if (this->queue.size() == 0)
-              throw InvalidOperationException(_caller);
+              throw InvalidOperationException(caller_);
 
             return this->queue.front();
           }
@@ -222,7 +222,7 @@ namespace Switch {
 
             virtual bool MoveNext() {
               if (this->operationNumber != this->queue.operationNumber)
-                throw InvalidOperationException(_caller);
+                throw InvalidOperationException(caller_);
 
               if (IsFinished())
                 return false;
@@ -238,7 +238,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->beforeFirst || IsFinished())
-                throw InvalidOperationException(_caller);
+                throw InvalidOperationException(caller_);
 
               return *this->iterator;
             }

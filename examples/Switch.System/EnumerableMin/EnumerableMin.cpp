@@ -16,12 +16,12 @@ namespace Examples {
         return *this;
       }
 
-      _property<int, _readonly> Age {
-        _get {return this->age;}
+      property_<int, readonly_> Age {
+        get_ {return this->age;}
       };
 
-      _property<string, _readonly> Name {
-        _get {return this->name;}
+      property_<string, readonly_> Name {
+        get_ {return this->name;}
       };
 
       virtual int CompareTo(const IComparable& other) const { return Int32(this->age).CompareTo(as<Pet>(other).age); }
@@ -47,7 +47,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

@@ -13,7 +13,7 @@ namespace Switch {
       /// @brief Thrown when an error occurs within a named pipe.
       /// @par Library
       /// Switch.System.ServiceModel
-      class _export PipeException : public IOException {
+      class export_ PipeException : public IOException {
       public:
         /// @brief Create a new instance of class PipeException
         /// @remarks Message is set with the default message associate to the error.
@@ -25,7 +25,7 @@ namespace Switch {
         PipeException(const PipeException& value) : IOException(value) {}
 
         /// @brief Create a new instance of class PipeException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         /// @remarks Message is set with the default message associate to the error.
         PipeException(const System::Runtime::CompilerServices::Caller& information) : IOException(information) {}
 
@@ -35,13 +35,13 @@ namespace Switch {
 
         /// @brief Create a new instance of class PipeException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         PipeException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : IOException(message, information) {}
 
         /// @brief Create a new instance of class PipeException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         PipeException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : IOException(message, innerException, information) {}
 
       private:

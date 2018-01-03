@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Switch::Static class and #_static keyword.
+/// @brief Contains Switch::Static class and #static_ keyword.
 #pragma once
 
 #include "Types.hpp"
@@ -8,7 +8,7 @@
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Represent a static class. A static class can't be instancied (constructors are deleted).
-  struct _export Static {
+  struct export_ Static {
     /// @cond
     Static() = delete;
     Static(const Static&) = delete;
@@ -20,13 +20,13 @@ namespace Switch {
 /// @brief This keyword is use to represent a static class. A static class can't be instancied (constructors are deleted).
 /// @par Examples
 /// @code
-/// class Foo _static {
+/// class Foo static_ {
 /// public:
 ///   static string ToString() {return "Foo";}
 /// };
 /// @endcode
 /// @ingroup Keywords
-#define _static \
+#define static_ \
   final : Static
 
 using namespace Switch;

@@ -14,7 +14,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a globally unique identifier (GUID). A GUID is a 128-bit integer (16 bytes) that can be used across all computers and networks wherever a unique identifier is required. Such an identifier has a very low probability of being duplicated.
-    struct _export Guid : public object, public IComparable {
+    struct export_ Guid : public object, public IComparable {
     public:
       /// @brief Initializes a new instance of the Guid structure.
       Guid() {}
@@ -28,7 +28,7 @@ namespace Switch {
       /// @exception System::ArgumentException bytes is not 16 bytes long.
       explicit Guid(const Array<byte>& bytes) {
         if (bytes.Length != this->data.Length)
-          throw ArgumentException(_caller);
+          throw ArgumentException(caller_);
         this->data = bytes;
       }
 
@@ -38,9 +38,9 @@ namespace Switch {
       template<int32 dataSize>
       Guid(const byte bytes[dataSize]) {
         if (bytes == null)
-          throw ArgumentNullException(_caller);
+          throw ArgumentNullException(caller_);
         if (dataSize != this->data.Length)
-          throw ArgumentException(_caller);
+          throw ArgumentException(caller_);
         this->data = Array<byte>(bytes);
       }
 
@@ -49,7 +49,7 @@ namespace Switch {
       /// @exception System::ArgumentNullException bytes is null.
       Guid(const byte bytes[16]) {
         if (bytes == null)
-          throw ArgumentNullException(_caller);
+          throw ArgumentNullException(caller_);
         this->data = Array<byte>(bytes, 16);
       }
 
@@ -58,9 +58,9 @@ namespace Switch {
       /// @exception System::ArgumentNullException bytes is null.
       Guid(const byte* bytes, int32 dataSize) {
         if (bytes == null)
-          throw ArgumentNullException(_caller);
+          throw ArgumentNullException(caller_);
         if (dataSize != this->data.Length)
-          throw ArgumentException(_caller);
+          throw ArgumentException(caller_);
         this->data = Array<byte>(bytes, dataSize);
       }
 
@@ -72,7 +72,7 @@ namespace Switch {
       /// @exception ArgumentException bytes is not 16 bytes long.
       Guid(int32 a, int16 b, int16 c, const Array<byte>& d) {
         if (d.Length != 8)
-          throw ArgumentException(_caller);
+          throw ArgumentException(caller_);
 
         this->data[0] = (byte)((a & 0xFF000000) >> 24);
         this->data[1] = (byte)((a & 0x00FF0000) >> 16);
@@ -97,9 +97,9 @@ namespace Switch {
       template<int32 dataSize>
       Guid(int32 a, int16 b, int16 c, const byte d[dataSize]) {
         if (d == null)
-          throw ArgumentNullException(_caller);
+          throw ArgumentNullException(caller_);
         if (dataSize != 8)
-          throw ArgumentException(_caller);
+          throw ArgumentException(caller_);
 
         this->data[0] = (byte)((a & 0xFF000000) >> 24);
         this->data[1] = (byte)((a & 0x00FF0000) >> 16);
@@ -123,7 +123,7 @@ namespace Switch {
       /// @exception Pf::System::ArgumentException bytes is not 8 bytes long.
       Guid(int32 a, int16 b, int16 c, const byte d[8]) {
         if (d == null)
-          throw ArgumentNullException(_caller);
+          throw ArgumentNullException(caller_);
 
         this->data[0] = (byte)((a & 0xFF000000) >> 24);
         this->data[1] = (byte)((a & 0x00FF0000) >> 16);
@@ -298,7 +298,7 @@ namespace Switch {
         string result;
 
         if (fmt.Length() != 1 || formats.IndexOf(fmt) == -1)
-          throw FormatException(_caller);
+          throw FormatException(caller_);
 
         bool hyphens = fmt != "n" && fmt != "x";
         bool braces = fmt == "b";

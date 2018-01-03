@@ -27,7 +27,7 @@ String::String() {}
 
 String::String(const char* str) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   this->string = StringType(str);
 }
@@ -38,7 +38,7 @@ String::String(const char* str) {
 
 String::String(const char16* str) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   int i = 0;
   while (str[i] != 0)
@@ -47,7 +47,7 @@ String::String(const char16* str) {
 
 String::String(const char32* str) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   int i = 0;
   while (str[i] != 0)
@@ -56,7 +56,7 @@ String::String(const char32* str) {
 
 String::String(const wchar* str) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   int i = 0;
   while (str[i] != 0)
@@ -65,7 +65,7 @@ String::String(const wchar* str) {
 
 String::String(const sbyte* str) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   this->string = StringType(reinterpret_cast<const char*>(str));
 }
@@ -83,13 +83,13 @@ String::String(const Array<char32>& chars) : string(chars.Data, 0, chars.Length)
 
 String::String(const char* str, int32 startIndex, int32 length) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   if (startIndex < 0  || length < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (static_cast<uint32>(startIndex + length) >  strlen(str))
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (length != 0)
     this->string = StringType(str, startIndex, length);
@@ -97,10 +97,10 @@ String::String(const char* str, int32 startIndex, int32 length) {
 
 String::String(const char* str, int32 maxSize) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   if (maxSize < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (maxSize > 0)
     this->string = StringType(str, 0, maxSize);
@@ -108,10 +108,10 @@ String::String(const char* str, int32 maxSize) {
 
 String::String(const char32* chars, int32 maxSize) {
   if (chars == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   if (maxSize < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (maxSize == 0)
     return;
@@ -125,13 +125,13 @@ String::String(const char32* chars, int32 maxSize) {
 
 String::String(const char32 chars[], int32 charsSize, int32 index, int32 count) {
   if (chars == null && count > 0)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   if (charsSize < 0 || index < 0  || count < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   if (index + count >  charsSize)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   this->string.reserve(count * 4);
   for (int32 i = index; i < index + count; i += 1)
@@ -268,7 +268,7 @@ String String::Copy(const String& str) {
 
 void String::CopyTo(int32 sourceIndex, Array<char32>& destination, int32 destinationIndex, int32 count) const {
   if (destinationIndex + count >= destination.Length && static_cast<uint32>(sourceIndex + count) > this->string.length())
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   int32 i = 0;
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++) {
@@ -331,7 +331,7 @@ static char32 ReadUnicodeLitteral(ref<CharEnum> enumerator) {
     else
       toParse += Char(c);
   } while (enumerator().MoveNext());
-  throw FormatException("An opened bracket '{' is !closed by '}'", _caller);
+  throw FormatException("An opened bracket '{' is !closed by '}'", caller_);
 }
 
 struct FormatInformation {
@@ -367,7 +367,7 @@ static void ReadFormat(ref<CharEnum> enumerator, FormatInformation& info) {
     } else
       format += Char(c);
   } while (enumerator().MoveNext());
-  throw FormatException("An opened bracket '{' is !closed by '}'", _caller);
+  throw FormatException("An opened bracket '{' is !closed by '}'", caller_);
 }
 
 String String::Format(const String& format, const Array<ref<Object>>& args) {
@@ -387,7 +387,7 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
     char32 c = enumerator.Current;
     if (c == '{') {
       if (!enumerator.MoveNext())
-        throw FormatException("An opened bracket '{' is !closed by '}'", _caller);
+        throw FormatException("An opened bracket '{' is !closed by '}'", caller_);
 
       c = enumerator.Current;
 
@@ -400,14 +400,14 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
         // unicode litteral case
         if (c == 'u' || c == 'U') {
           if (!enumerator.MoveNext())
-            throw FormatException("An opened bracket '{' is !closed by '}'", _caller);
+            throw FormatException("An opened bracket '{' is !closed by '}'", caller_);
           char32 litteral = ReadUnicodeLitteral(enumerator);
           output.append(litteral);
         } else { // format {x,a:f} string case
           FormatInformation info;
           ReadFormat(enumerator, info);
           if (info.index < 0 || info.index >= args.Length)
-            throw FormatException(Format("Index out of bounds (used {0} where the number of Arguments is {1})", info.index, args.Length), _caller);
+            throw FormatException(Format("Index out of bounds (used {0} where the number of Arguments is {1})", info.index, args.Length), caller_);
 
           StringType formatted;
           formatted.reserve(2048);
@@ -429,10 +429,10 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
       }
     } else if (c == '}') {
       if (!enumerator.MoveNext())
-        throw FormatException("Closing bracket '}' found without matching '{'", _caller);
+        throw FormatException("Closing bracket '}' found without matching '{'", caller_);
       c = enumerator.Current;
       if (c != '}')
-        throw FormatException("Closing bracket '}' found without matching '{'", _caller);
+        throw FormatException("Closing bracket '}' found without matching '{'", caller_);
       output.append(c);
     } else
       output.append(c);
@@ -449,7 +449,7 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
     char32 c = enumerator.Current;
     if (c == '{') {
       if (!enumerator.MoveNext())
-        throw FormatException("An opened bracket '{' is !closed by '}'", _caller);
+        throw FormatException("An opened bracket '{' is !closed by '}'", caller_);
 
       c = enumerator.Current;
 
@@ -462,14 +462,14 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
         // unicode litteral case
         if (c == 'u' || c == 'U') {
           if (!enumerator.MoveNext())
-            throw FormatException("An opened bracket '{' is !closed by '}'", _caller);
+            throw FormatException("An opened bracket '{' is !closed by '}'", caller_);
           char32 litteral = ReadUnicodeLitteral(enumerator);
           output.append(litteral);
         } else { // format {x,a:f} string case
           FormatInformation info;
           ReadFormat(enumerator, info);
           if (info.index < 0 || info.index >= args.Length)
-            throw FormatException(Format("Index out of bounds (used {0} where the number of Arguments is {1})", info.index, args.Length), _caller);
+            throw FormatException(Format("Index out of bounds (used {0} where the number of Arguments is {1})", info.index, args.Length), caller_);
 
           StringType formatted;
           formatted.reserve(2048);
@@ -491,10 +491,10 @@ String String::FormatToString(const IFormatProvider& provider, const String& for
       }
     } else if (c == '}') {
       if (!enumerator.MoveNext())
-        throw FormatException("Closing bracket '}' found without matching '{'", _caller);
+        throw FormatException("Closing bracket '}' found without matching '{'", caller_);
       c = enumerator.Current;
       if (c != '}')
-        throw FormatException("Closing bracket '}' found without matching '{'", _caller);
+        throw FormatException("Closing bracket '}' found without matching '{'", caller_);
       output.append(c);
     } else
       output.append(c);
@@ -532,7 +532,7 @@ bool String::IsDistant(StringType::const_iterator& it, const StringType::const_i
 
 int32 String::IndexOf(char32 value, int32 startIndex) const {
   if (startIndex < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++) {
     if (startIndex > 0)
@@ -544,14 +544,14 @@ int32 String::IndexOf(char32 value, int32 startIndex) const {
   }
 
   if (startIndex > 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   return -1;
 }
 
 int32 String::IndexOf(char32 value, int32 startIndex, int32 count) const {
   if (startIndex < 0 || count < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++) {
     if (startIndex > 0)
@@ -561,7 +561,7 @@ int32 String::IndexOf(char32 value, int32 startIndex, int32 count) const {
         count -= 1;
         if (value == *it) {
           if (!IsDistant(it, this->string.end(), count))
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           return it.get_logical_index();
         }
       }
@@ -569,7 +569,7 @@ int32 String::IndexOf(char32 value, int32 startIndex, int32 count) const {
   }
 
   if (startIndex > 0 || count > 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   return -1;
 }
@@ -583,11 +583,11 @@ int32 String::IndexOf(const String& value, int32 startIndex) const {
 }
 
 int32 String::IndexOf(const String& value, int32 startIndex, int32 count) const {
-  if (startIndex < 0 || count < 0) throw ArgumentOutOfRangeException(_caller);
+  if (startIndex < 0 || count < 0) throw ArgumentOutOfRangeException(caller_);
 
   size_t length = this->string.size();
   if ((static_cast<uint32>(startIndex) > length || static_cast<uint32>(startIndex + count) > length))
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   return static_cast<int32>(this->string.find(value.string, startIndex, count));
 }
@@ -597,7 +597,7 @@ int32 String::IndexOfAny(const Array<char32>& anyOf) const {
 }
 
 int32 String::IndexOfAny(const char32 anyOf[], int32 anyOfSize) const {
-  if (anyOf == null) throw ArgumentNullException(_caller);
+  if (anyOf == null) throw ArgumentNullException(caller_);
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++) {
     if (ArrayAlgorithms::Contains(anyOf, anyOfSize, char32(*it)))
       return it.get_logical_index();
@@ -606,7 +606,7 @@ int32 String::IndexOfAny(const char32 anyOf[], int32 anyOfSize) const {
 }
 
 int32 String::IndexOfAny(const Array<char32>& anyOf, int32 startIndex) const {
-  if (startIndex < 0) throw ArgumentOutOfRangeException(_caller);
+  if (startIndex < 0) throw ArgumentOutOfRangeException(caller_);
 
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++) {
     if (startIndex > 0)
@@ -616,7 +616,7 @@ int32 String::IndexOfAny(const Array<char32>& anyOf, int32 startIndex) const {
         return it.get_logical_index();
     }
   }
-  if (startIndex > 0) throw ArgumentOutOfRangeException(_caller);
+  if (startIndex > 0) throw ArgumentOutOfRangeException(caller_);
   return -1;
 }
 
@@ -629,8 +629,8 @@ int32 String::IndexOfAny(const Array<char32>& anyOf, int32 startIndex, int32 cou
 }
 
 int32 String::IndexOfAny(const char32 anyOf[], int32 anyOfSize, int32 startIndex, int32 count) const {
-  if (anyOf == null) throw ArgumentNullException(_caller);
-  if (startIndex < 0 || count < 0) throw ArgumentOutOfRangeException(_caller);
+  if (anyOf == null) throw ArgumentNullException(caller_);
+  if (startIndex < 0 || count < 0) throw ArgumentOutOfRangeException(caller_);
 
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++) {
     if (startIndex > 0)
@@ -640,18 +640,18 @@ int32 String::IndexOfAny(const char32 anyOf[], int32 anyOfSize, int32 startIndex
         count -= 1;
         if (ArrayAlgorithms::Contains(anyOf, anyOfSize, char32(*it))) {
           if (!IsDistant(it, this->string.end(), count))
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           return it.get_logical_index();
         }
       }
     }
   }
-  if (startIndex > 0 || count > 0) throw ArgumentOutOfRangeException(_caller);
+  if (startIndex > 0 || count > 0) throw ArgumentOutOfRangeException(caller_);
   return -1;
 }
 
 String String::Insert(int32 startIndex, const String& value) const {
-  if (startIndex < 0) throw ArgumentOutOfRangeException(_caller);
+  if (startIndex < 0) throw ArgumentOutOfRangeException(caller_);
 
   StringType inserted;
   for (StringType::const_iterator it = (this->string).begin(); it != (this->string).end(); it++) {
@@ -672,7 +672,7 @@ String String::Insert(int32 startIndex, const String& value) const {
       inserted.append(c);
   }
 
-  if (startIndex > 0) throw ArgumentOutOfRangeException(_caller);
+  if (startIndex > 0) throw ArgumentOutOfRangeException(caller_);
   return inserted;
 }
 
@@ -685,7 +685,7 @@ String String::Join(const String& separator, const Array<String>& values) {
 }
 
 String String::Join(const String& separator, const Array<String>& values, int32 startIndex, int32 count) {
-  if (startIndex + count > values.Length) throw ArgumentOutOfRangeException(_caller);
+  if (startIndex + count > values.Length) throw ArgumentOutOfRangeException(caller_);
 
   StringType str;
   for (int32 i = startIndex; i < startIndex + count; i++) {
@@ -701,8 +701,8 @@ String String::Join(const String& separator, const String value[], int32 length)
 }
 
 String String::Join(const String& separator, const String value[], int32 length, int32 startIndex, int32 count) {
-  if (value == null) throw ArgumentNullException(_caller);
-  if (startIndex + count > length) throw ArgumentOutOfRangeException(_caller);
+  if (value == null) throw ArgumentNullException(caller_);
+  if (startIndex + count > length) throw ArgumentOutOfRangeException(caller_);
 
   String str;
   for (int32 i = startIndex; i < startIndex + count; i++) {
@@ -722,7 +722,7 @@ int32 String::LastIndexOf(char32 value, int32 startIndex) const {
 
 int32 String::LastIndexOf(char32 value, int32 startIndex, int32 count) const {
   if (startIndex > static_cast<int32>(this->string.length()) || (startIndex + count) > static_cast<int32>(this->string.length()))
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   int32 index = static_cast<int32>(this->string.rfind(value, startIndex + count - 1));
   if (index < startIndex) return -1;
@@ -739,7 +739,7 @@ int32 String::LastIndexOf(const String& value, int32 startIndex) const {
 
 int32 String::LastIndexOf(const String& value, int32 startIndex, int32 count) const {
   if (startIndex > static_cast<int32>(this->string.length()) || (startIndex + count) > static_cast<int32>(this->string.length()))
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   int32 index = static_cast<int32>(this->string.rfind(value.string, startIndex + count - static_cast<int32>(value.string.length())));
   if (index < startIndex) return -1;
@@ -793,8 +793,8 @@ String String::Remove(int32 startIndex) const {
 
 String String::Remove(int32 startIndex, int32 count) const {
   if (static_cast<uint32>(startIndex) > this->string.length() || static_cast<uint32>(startIndex + count) > this->string.length())
-    throw ArgumentOutOfRangeException(_caller);
-  if (startIndex < 0 || count < 0) throw ArgumentException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
+  if (startIndex < 0 || count < 0) throw ArgumentException(caller_);
 
   String str(*this);
   str.string.erase(startIndex, count);
@@ -847,7 +847,7 @@ bool String::IsLastElement(const StringType::const_iterator& it, const StringTyp
 }
 
 Array<String> String::Split(const Array<char32>& splitCharSeparators, int32 count, const StringSplitOptions& options) const {
-  if (count < 0) throw ArgumentOutOfRangeException(_caller);
+  if (count < 0) throw ArgumentOutOfRangeException(caller_);
 
   Collections::Generic::List<String> list;
   if (count == 0) return list.ToArray();
@@ -932,7 +932,7 @@ Array<char> String::ToCCharArray(int32 startIndex, int32 length) const  {
 Array<char> String::ToCCharArray(int32 codePage) const {
   refptr<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
   if (!encoding->IsSingleByte())
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 
   Array<char> result(encoding().GetByteCount(*this) + 1);
   encoding().GetBytes(*this, (byte*)const_cast<char*>(result.Data()), result.Count);
@@ -942,7 +942,7 @@ Array<char> String::ToCCharArray(int32 codePage) const {
 Array<char> String::ToCCharArray(int32 startIndex, int32 length, int32 codePage) const {
   refptr<Text::Encoding> encoding = Text::Encoding::CreateEncoding(codePage);
   if (!encoding->IsSingleByte())
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 
   String str = this->Substring(startIndex, length);
   Array<char> result(encoding().GetByteCount(str) + 1);
@@ -1102,7 +1102,7 @@ String& String::operator=(const String& str) {
 
 String& String::operator=(const char str[]) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   this->string = StringType(str);
   return *this;
@@ -1110,7 +1110,7 @@ String& String::operator=(const char str[]) {
 
 char32 String::operator [](int32 index) const {
   if (static_cast<uint32>(index) > this->string.length())
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   return char32(this->string[index]);
 }
@@ -1176,7 +1176,7 @@ String& String::operator+=(const object& value) {
 
 String& String::operator+=(const char str[]) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   this->string.append(StringType(str));
   return *this;
@@ -1188,13 +1188,13 @@ String String::operator+(const object& obj) const {
 
 String System::operator+(const char str[], const object& obj) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
   return String(str, obj.ToString());
 }
 
 String System::operator+(const object& obj, const char str[]) {
   if (str == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
   return String(obj.ToString(), str);
 }
 
@@ -1297,7 +1297,7 @@ String::Enumerator::~Enumerator() { }
 
 const char32& String::Enumerator::GetCurrent() const {
   if (this->beforeFirst || IsFinished())
-    throw System::InvalidOperationException(_caller);
+    throw System::InvalidOperationException(caller_);
 
   Enumerator* enmerator = (Enumerator*)this;
   enmerator->value =  *this->iterator;
@@ -1313,7 +1313,7 @@ void String::Enumerator::Reset() {
 bool String::Enumerator::MoveNext() {
   // todo
   /*if (_operationNumber != this->string->_operationNumber)
-    throw System::InvalidOperationException(_caller);*/
+    throw System::InvalidOperationException(caller_);*/
 
   if (IsFinished())
     return false;
@@ -1359,7 +1359,7 @@ String::ReverseEnumerator::~ReverseEnumerator() {
 
 const char32& String::ReverseEnumerator::GetCurrent() const {
   if (this->beforeFirst || IsFinished())
-    throw System::InvalidOperationException(_caller);
+    throw System::InvalidOperationException(caller_);
 
   ReverseEnumerator* enumerator = (ReverseEnumerator*)this;
   enumerator->value =  *this->iterator;
@@ -1375,7 +1375,7 @@ void String::ReverseEnumerator::Reset() {
 bool String::ReverseEnumerator::MoveNext() {
   // todo
   /*if (_operationNumber != this->string->_operationNumber)
-    throw System::InvalidOperationException(_caller);*/
+    throw System::InvalidOperationException(caller_);*/
 
   if (IsFinished())
     return false;

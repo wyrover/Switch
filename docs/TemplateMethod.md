@@ -27,7 +27,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'AbstractClass' abstract class
-    class AbstractClass _abstract {
+    class AbstractClass abstract_ {
     public:
       virtual void PrimitiveOperation1() = 0;
       virtual void PrimitiveOperation2() = 0;
@@ -81,7 +81,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 ```
 
 # Output

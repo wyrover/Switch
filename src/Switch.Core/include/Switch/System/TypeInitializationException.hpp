@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown as a wrapper around the exception thrown by the class initializer.
-    class _export TypeInitializationException : public SystemException {
+    class export_ TypeInitializationException : public SystemException {
     public:
       TypeInitializationException(const System::TypeInitializationException& exception) : SystemException(exception) {
         this->fullTypeName = exception.fullTypeName;

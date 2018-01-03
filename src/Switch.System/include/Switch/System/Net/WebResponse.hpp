@@ -25,7 +25,7 @@ namespace Switch {
       /// @brief Provides a response from a Uniform Resource Identifier (URI). This is an abstract class.
       /// @par Library
       /// Switch.System
-      class _export WebResponse : public Object {
+      class export_ WebResponse : public Object {
       public:
         class WebResponseStream: public System::IO::Stream {
         public:
@@ -69,13 +69,13 @@ namespace Switch {
           refptr<WebRequestStreamData> data = ref_new<WebRequestStreamData>();
         };
 
-        _property<int64> ContentLength {
-          _get {return this->GetContentLength();},
-          _set {this->SetContentLength(value);}
+        property_<int64> ContentLength {
+          get_ {return this->GetContentLength();},
+          set_ {this->SetContentLength(value);}
         };
 
-        _property<string, _readonly> ContentType {
-          _get {return this->GetContentType();}
+        property_<string, readonly_> ContentType {
+          get_ {return this->GetContentType();}
         };
 
         virtual ~WebResponse();

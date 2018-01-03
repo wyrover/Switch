@@ -22,30 +22,30 @@ namespace Switch {
   namespace System {
     /// @interface IAsyncResult
     /// @brief Represents the status of an asynchronous operation.
-    class _export IAsyncResult _interface {
+    class export_ IAsyncResult interface_ {
     public:
       /// @brief Gets a user-defined object that qualifies or contains information about an asynchronous operation.
       /// @return A user-defined object that qualifies or contains information about an asynchronous operation.
-      _property<const Object&, _readonly> AsyncState {
-        _get->const object& {return this->GetAsyncState();}
+      property_<const Object&, readonly_> AsyncState {
+        get_->const object& {return this->GetAsyncState();}
       };
 
       /// @brief Gets a WaitHandle that is used to wait for an asynchronous operation to complete.
       /// @return A WaitHandle that is used to wait for an asynchronous operation to complete.
-      _property<const System::Threading::WaitHandle&, _readonly> AsyncWaitHandle {
-        _get->const System::Threading::WaitHandle& {return this->GetAsyncWaitHandle();}
+      property_<const System::Threading::WaitHandle&, readonly_> AsyncWaitHandle {
+        get_->const System::Threading::WaitHandle& {return this->GetAsyncWaitHandle();}
       };
 
       /// @brief Gets an indication of whether the asynchronous operation completed synchronously.
       /// @return true if the asynchronous operation completed synchronously; otherwise, false.
-      _property<bool, _readonly> CompletedSynchronously {
-        _get {return this->GetCompletedSynchronously();}
+      property_<bool, readonly_> CompletedSynchronously {
+        get_ {return this->GetCompletedSynchronously();}
       };
 
       /// @brief Gets an indication whether the asynchronous operation has completed.
       /// @return true if the operation is complete; otherwise, false.
-      _property<bool, _readonly> IsCompleted {
-        _get {return this->GetIsCompleted();}
+      property_<bool, readonly_> IsCompleted {
+        get_ {return this->GetIsCompleted();}
       };
 
     protected:

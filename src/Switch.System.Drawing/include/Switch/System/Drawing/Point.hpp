@@ -20,10 +20,10 @@ namespace Switch {
       /// @brief Stores an ordered pair of integers, which specify a X and Y.
       /// @par Library
       /// Switch.System.Drawing
-      class _export Point : public object {
+      class export_ Point : public object {
       public:
         /// @brief Gets a Point class that has a X and Y value of 0. This field is constant.
-        static _property<Point, _readonly> Empty;
+        static property_<Point, readonly_> Empty;
 
         /// @brief Initializes a new instance of the Point class that has a X and Y value of 0.
         Point() = default;
@@ -48,17 +48,17 @@ namespace Switch {
         /// @brief Gets or sets the X component of this Point Class.
         /// @return int32 The X component of this Point class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the Point class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        _property<int32> X {
-          _get {return this->x;},
-          _set {this->x = value;}
+        property_<int32> X {
+          get_ {return this->x;},
+          set_ {this->x = value;}
         };
 
         /// @brief Gets or sets the Y component of this Point class.
         /// @return int32 The Y component of this Point class, typically measured in pixels.
         /// @remarks The unit for the X and Y of the Point class depend on the PageUnit and PageScale settings for the Graphics object that is used to draw.
-        _property<int32> Y {
-          _get {return this->y;},
-          _set {this->y = value;}
+        property_<int32> Y {
+          get_ {return this->y;},
+          set_ {this->y = value;}
         };
 
         /// @brief Determines whether this instance of Point and a specified object, which must also be a Point object, have the same value.

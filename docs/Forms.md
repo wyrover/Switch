@@ -49,10 +49,10 @@ b. Create an instance of the form and run it.
     }
 ```
 
-5. Add _startup command to specity to Switch the class that contains the main method.
+5. Add startup_ command to specity to Switch the class that contains the main method.
 
 ```c++
-_startup (Form1);
+startup_ (Form1);
 ```
 
 ## To create the CMakeLists.txt
@@ -247,7 +247,7 @@ namespace FormWithButton {
   };
 }
 
-_startup (FormWithButton::Form1);
+startup_ (FormWithButton::Form1);
 ```
 
 CMakeLists.txt:

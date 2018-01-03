@@ -34,7 +34,7 @@ namespace DesignPatterns {
       Adaptee adaptee;
     };
 
-    // MainApp _startup class for Structural
+    // MainApp startup_ class for Structural
     // Adapter Design Pattern.
     class MainApp {
     public:
@@ -49,7 +49,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Structural::MainApp);
+startup_(DesignPatterns::Structural::MainApp);
 
 // This code produces the following output:
 //

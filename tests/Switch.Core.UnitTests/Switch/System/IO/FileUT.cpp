@@ -28,15 +28,15 @@ namespace {
   }
 
   TEST(FileTest, AppendText) {
-    _using(IO::StreamWriter sw = IO::File::CreateText("Test.txt")) {
+    using_(IO::StreamWriter sw = IO::File::CreateText("Test.txt")) {
       sw.WriteLine("First line");
     }
 
-    _using(IO::StreamWriter sw = IO::File::AppendText("Test.txt")) {
+    using_(IO::StreamWriter sw = IO::File::AppendText("Test.txt")) {
       sw.WriteLine("Second line");
     }
 
-    _using(Array<string> lines = IO::File::ReadAllLines("Test.txt")) {
+    using_(Array<string> lines = IO::File::ReadAllLines("Test.txt")) {
       ASSERT_EQ(2, lines.Length);
       int32 index = 0;
       ASSERT_EQ("First line", lines[index++]);
@@ -52,7 +52,7 @@ namespace {
     ASSERT_TRUE(IO::File::Exists("2copy.txt"));
     ASSERT_TRUE(IO::File::Exists("copied.txt"));
 
-    _using(Array<string> lines = IO::File::ReadAllLines("copied.txt")) {
+    using_(Array<string> lines = IO::File::ReadAllLines("copied.txt")) {
       ASSERT_EQ(4, lines.Length);
       int32 index = 0;
       ASSERT_EQ("First line", lines[index++]);
@@ -72,7 +72,7 @@ namespace {
     ASSERT_TRUE(IO::File::Exists("2copy.txt"));
     ASSERT_TRUE(IO::File::Exists("copied.txt"));
 
-    _using(Array<string> lines = IO::File::ReadAllLines("copied.txt")) {
+    using_(Array<string> lines = IO::File::ReadAllLines("copied.txt")) {
       ASSERT_EQ(4, lines.Length);
       int32 index = 0;
       ASSERT_EQ("First line", lines[index++]);

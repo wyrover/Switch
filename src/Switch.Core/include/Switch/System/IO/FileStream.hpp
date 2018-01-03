@@ -19,7 +19,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Exposes a System::IO::Stream around a file, supporting both synchronous and asynchronous read and write operations.
-      class _export FileStream: public Stream {
+      class export_ FileStream: public Stream {
       public:
         /// @brief Initializes a new instance of the System::IO::FileStream class.
         /// @param path A relative or absolute path for the file that the current FileStream object will encapsulate
@@ -87,8 +87,8 @@ namespace Switch {
 
         /// @brief Gets the name of the FileStream that was passed to the constructor.
         /// @return string that is the name of the FileStream.
-        _property<String, _readonly> Name {
-          _get {return this->data->fullPath;}
+        property_<String, readonly_> Name {
+          get_ {return this->data->fullPath;}
         };
 
         /// @brief Closes the current FileStream and releases any resources (such as sockets and file handles) associated with the current stream.

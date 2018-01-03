@@ -54,8 +54,8 @@ namespace Examples {
       }
 
       // Define properties to return the note's tone and duration.
-      _property<Tone, _readonly> NoteTone { _get{ return toneVal; } };
-      _property<Duration, _readonly> NoteDuration { _get{ return durVal; } };
+      property_<Tone, readonly_> NoteTone { get_{ return toneVal; } };
+      property_<Duration, readonly_> NoteDuration { get_{ return durVal; } };
     };
 
   public:
@@ -94,7 +94,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following result:
 //

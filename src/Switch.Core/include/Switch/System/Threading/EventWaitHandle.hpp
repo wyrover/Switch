@@ -21,7 +21,7 @@ namespace Switch {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Represents a thread synchronization event.
-      class _export EventWaitHandle: public WaitHandle {
+      class export_ EventWaitHandle: public WaitHandle {
       public:
         /// @brief Initializes a new instance of the System::Threading::EventWaitHandle class.
         /// @exception IO::IOException A Win32 error occurred.
@@ -83,7 +83,7 @@ namespace Switch {
         /// @return true if the operation succeeds; otherwise, false.
         bool Reset() {
           if (this->guard == null)
-            throw ObjectDisposedException(_caller);
+            throw ObjectDisposedException(caller_);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = false;
           return true;
@@ -93,7 +93,7 @@ namespace Switch {
         /// @return true if the operation succeeds; otherwise, false.
         bool Set() {
           if (this->guard == null)
-            throw ObjectDisposedException(_caller);
+            throw ObjectDisposedException(caller_);
           std::unique_lock<std::mutex> lock(*this->guard);
           *this->event = true;
           this->signal->notify_all();
@@ -117,9 +117,9 @@ namespace Switch {
 
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->guard == null)
-            throw ObjectDisposedException(_caller);
+            throw ObjectDisposedException(caller_);
           if (millisecondsTimeOut < -1)
-            throw AbandonedMutexException(_caller);
+            throw AbandonedMutexException(caller_);
 
           std::unique_lock<std::mutex> lock(*this->guard);
           while (*this->event == false) {

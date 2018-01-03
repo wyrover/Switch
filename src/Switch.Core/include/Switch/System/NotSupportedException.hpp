@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an invoked method is not supported, or when there is an attempt to read, seek, or write to a stream that does not support the invoked functionality.
-    class _export NotSupportedException : public SystemException {
+    class export_ NotSupportedException : public SystemException {
     public:
       /// @brief Create a new instance of class NotSupportedException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       NotSupportedException(const NotSupportedException& value) : SystemException(value) {}
 
       /// @brief Create a new instance of class NotSupportedException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       /// @remarks Message is set with the default message associate to the error.
       explicit NotSupportedException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
 
@@ -31,13 +31,13 @@ namespace Switch {
 
       /// @brief Create a new instance of class NotSupportedException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       NotSupportedException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, information) {}
 
       /// @brief Create a new instance of class NotSupportedException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       NotSupportedException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
     private:

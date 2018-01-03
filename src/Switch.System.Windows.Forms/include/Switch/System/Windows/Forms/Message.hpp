@@ -12,42 +12,42 @@ namespace Switch {
     namespace Windows {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
-        struct _export Message : public object {
+        struct export_ Message : public object {
         public:
           /// @cond
           Message() {}
           Message(const Message& message) : hwnd(message.hwnd), msg(message.msg), wParam(message.wParam), lParam(message.lParam), result(message.result) {}
           /// @cond
 
-          _property<intptr> HWnd {
-            _get {return this->hwnd;},
-            _set {this->hwnd = value;}
+          property_<intptr> HWnd {
+            get_ {return this->hwnd;},
+            set_ {this->hwnd = value;}
           };
 
-          _property<intptr> LParam {
-            _get{return this->lParam;},
-            _set{this->lParam = value;}
+          property_<intptr> LParam {
+            get_{return this->lParam;},
+            set_{this->lParam = value;}
           };
 
-          _property<int32> Msg {
-            _get{return this->msg;},
-            _set{this->msg = value;}
+          property_<int32> Msg {
+            get_{return this->msg;},
+            set_{this->msg = value;}
           };
 
-          _property<intptr> Result {
-            _get{return this->result;},
-            _set{this->result = value;}
+          property_<intptr> Result {
+            get_{return this->result;},
+            set_{this->result = value;}
           };
 
-          _property<intptr> WParam {
-            _get{return this->wParam;},
-            _set{this->wParam = value;}
+          property_<intptr> WParam {
+            get_{return this->wParam;},
+            set_{this->wParam = value;}
           };
 
           /// @cond
-          _property<intptr> Handle {
-            _get{return this->handle;},
-            _set{this->handle = value;}
+          property_<intptr> Handle {
+            get_{return this->handle;},
+            set_{this->handle = value;}
           };
           /// @endcond
 

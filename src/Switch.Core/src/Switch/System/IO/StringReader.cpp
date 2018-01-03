@@ -31,7 +31,7 @@ void StringReader::Close() {
 
 int32 StringReader::Peek() const {
   if (this->closed)
-    throw ObjectDisposedException(_caller);
+    throw ObjectDisposedException(caller_);
 
   if (this->finished)
     return -1;
@@ -61,7 +61,7 @@ string StringReader::ReadLine() {
 
 string StringReader::ReadToEnd() {
   if (this->closed)
-    throw ObjectDisposedException(_caller);
+    throw ObjectDisposedException(caller_);
   this->finished = true;
   return this->input.Substring(this->position);
 }

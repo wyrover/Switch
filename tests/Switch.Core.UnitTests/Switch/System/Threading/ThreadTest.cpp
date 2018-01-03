@@ -70,7 +70,7 @@ namespace {
   TEST(ThreadTest, GetMainThreadThenAbort) {
     Thread thread = Thread::CurrentThread();
     // If you uncomments the next line, the unit tests will be aborted ;-)
-    //ASSERT_NO_THROW(_delegate {thread.Abort());
+    //ASSERT_NO_THROW(delegate_ {thread.Abort());
   }
 
   TEST(ThreadTest, GetMainThreadThenSetIsBackgroundToTrue) {
@@ -120,13 +120,13 @@ namespace {
 
   TEST(ThreadTest, GetMainThreadThenStartWithThreadStart) {
     Thread thread = Thread::CurrentThread();
-    ThreadStart threadStart = _delegate {};
+    ThreadStart threadStart = delegate_ {};
     ASSERT_THROW(thread.Start(threadStart), ThreadStateException);
   }
 
   TEST(ThreadTest, GetMainThreadThenStartWithParameterizedThreadStart) {
     Thread thread = Thread::CurrentThread();
-    ParameterizedThreadStart parameterizedTeadStart = _delegate(const object&) {};
+    ParameterizedThreadStart parameterizedTeadStart = delegate_(const object&) {};
     ASSERT_THROW(thread.Start(parameterizedTeadStart), ThreadStateException);
   }
 
@@ -309,7 +309,7 @@ namespace {
   TEST(ThreadTest, CreateUnmanagedThreadThenStartWithThreadStart) {
     std::function<void()> threadStart = [] {
       Thread thread = Thread::CurrentThread();
-      ThreadStart threadStart = _delegate {};
+      ThreadStart threadStart = delegate_ {};
       ASSERT_THROW(thread.Start(threadStart), ThreadStateException);
     };
     std::thread thread(threadStart);
@@ -319,7 +319,7 @@ namespace {
   TEST(ThreadTest, CreateUnmanagedThreadThenStartWithParameterizedThreadStart) {
     std::function<void()> threadStart = [] {
       Thread thread = Thread::CurrentThread();
-      ParameterizedThreadStart parameterizedTeadStart = _delegate(const object&) {};
+      ParameterizedThreadStart parameterizedTeadStart = delegate_(const object&) {};
       ASSERT_THROW(thread.Start(parameterizedTeadStart), ThreadStateException);
     };
     std::thread thread(threadStart);
@@ -450,7 +450,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenGetManagedThreadId) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -460,7 +460,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenGetHandle) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -470,7 +470,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenIsAlive) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -480,7 +480,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenIsAlive) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       Thread::Sleep(10);
       counter++;
     };
@@ -492,7 +492,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenIsBackground) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -502,7 +502,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenGetName) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -512,7 +512,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenGetPriority) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -522,7 +522,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenGetThreadState) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -532,7 +532,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenSetName) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -543,7 +543,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenSetPriority) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -554,7 +554,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenAbort) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -565,7 +565,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenAbort) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       Thread::Sleep(100);
       counter++;
     };
@@ -579,7 +579,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenSetIsBackgroundToTrue) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -589,7 +589,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenGetHashCode) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -599,7 +599,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenInterrupt) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -609,7 +609,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenInterrupt) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       Thread::Sleep(100);
       counter++;
     };
@@ -622,7 +622,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenSuspend) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -632,7 +632,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenResume) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -642,7 +642,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenResume) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -653,7 +653,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItSuspendThenResume) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       Thread::Sleep(10);
       counter++;
     };
@@ -666,7 +666,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenStart) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -676,18 +676,18 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenStartWithParameterizedThreadStart) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
-    ParameterizedThreadStart parameterizedTeadStart = _delegate(const object&) {};
+    ParameterizedThreadStart parameterizedTeadStart = delegate_(const object&) {};
     ASSERT_THROW(thread.Start(parameterizedTeadStart), InvalidOperationException);
   }
 
   TEST(ThreadTest, CreateThreadWithThreadStartThenJoin) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -697,7 +697,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenJoin) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -709,7 +709,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenJoinWithBadTimeout) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -719,7 +719,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenJoinWithBadTimeout) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -730,7 +730,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenJoinWithInfiniteTimeout) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -742,7 +742,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartThenJoinWithTimeout) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -752,7 +752,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenJoinWithTimeout) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -764,7 +764,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenJoinWithTimeSpanTimeout) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       counter++;
     };
     Thread thread(threadStart);
@@ -776,7 +776,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenJoinWithToShortTimeout) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       Thread::Sleep(20);
       counter++;
     };
@@ -789,7 +789,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithThreadStartStartItThenJoinWithToShortTimeSpanTimeout) {
     static int32 counter;
     counter = 0;
-    ThreadStart threadStart = _delegate {
+    ThreadStart threadStart = delegate_ {
       Thread::Sleep(20);
       counter++;
     };
@@ -802,7 +802,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenGetManagedThreadId) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       counter++;
     };
     Thread thread(parameterizedThreadStart);
@@ -812,7 +812,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenGetHandle) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       counter++;
     };
     Thread thread(parameterizedThreadStart);
@@ -822,7 +822,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenIsAlive) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       counter++;
     };
     Thread thread(parameterizedThreadStart);
@@ -832,7 +832,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenIsAlive) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       Thread::Sleep(10);
       counter++;
     };
@@ -844,7 +844,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenIsBackground) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       counter++;
     };
     Thread thread(parameterizedThreadStart);
@@ -854,7 +854,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenGetName) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       counter++;
     };
     Thread thread(parameterizedThreadStart);
@@ -864,7 +864,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenGetPriority) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       counter++;
     };
     Thread thread(parameterizedThreadStart);
@@ -874,7 +874,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenGetThreadState) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       counter++;
     };
     Thread thread(parameterizedThreadStart);
@@ -884,7 +884,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenSetName) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -895,7 +895,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenSetPriority) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -906,7 +906,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenAbort) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -917,7 +917,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenAbort) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       Thread::Sleep(100);
       ASSERT_EQ(0, as<Int32>(param));
     };
@@ -931,7 +931,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenSetIsBackgroundToTrue) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -941,7 +941,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenGetHashCode) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -951,7 +951,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenInterrupt) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -961,7 +961,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenInterrupt) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       Thread::Sleep(100);
       ASSERT_EQ(0, as<Int32>(param));
     };
@@ -974,7 +974,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenSuspend) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -984,7 +984,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenResume) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -994,7 +994,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenResume) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1005,7 +1005,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItSuspendThenResume) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       Thread::Sleep(10);
       ASSERT_EQ(0, as<Int32>(param));
     };
@@ -1018,7 +1018,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenStart) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_TRUE(is<Thread>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1028,7 +1028,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenStartWithThreadStart) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1038,7 +1038,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenJoin) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1048,7 +1048,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenJoin) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1060,7 +1060,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenJoinWithBadTimeout) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1070,7 +1070,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenJoinWithBadTimeout) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1081,7 +1081,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenJoinWithInfiniteTimeout) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1093,7 +1093,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartThenJoinWithTimeout) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1103,7 +1103,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenJoinWithTimeout) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1115,7 +1115,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenJoinWithTimeSpanTimeout) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       ASSERT_EQ(0, as<Int32>(param));
     };
     Thread thread(parameterizedThreadStart);
@@ -1127,7 +1127,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenJoinWithToShortTimeout) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       Thread::Sleep(20);
       ASSERT_EQ(0, as<Int32>(param));
     };
@@ -1140,7 +1140,7 @@ namespace {
   TEST(ThreadTest, CreateThreadWithParameterizedThreadStartStartItThenJoinWithToShortTimeSpanTimeout) {
     static Int32 counter;
     counter = 0;
-    ParameterizedThreadStart parameterizedThreadStart = _delegate(const object & param) {
+    ParameterizedThreadStart parameterizedThreadStart = delegate_(const object & param) {
       Thread::Sleep(20);
       ASSERT_EQ(0, as<Int32>(param));
     };

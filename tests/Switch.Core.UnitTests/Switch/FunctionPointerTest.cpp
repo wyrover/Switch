@@ -19,7 +19,7 @@ namespace SwitchUnitTests {
   }
 
   TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaThenInvoke) {
-    __opaque_function_pointer__<> fct(_delegate {
+    __opaque_function_pointer__<> fct(delegate_ {
       result = "fct called";
     });
     ASSERT_FALSE(fct.IsEmpty());
@@ -28,7 +28,7 @@ namespace SwitchUnitTests {
   }
 
   TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaAndWithArgumentThenInvoke) {
-    __opaque_function_pointer__<void, const string&> fct(_delegate(const string & value) {
+    __opaque_function_pointer__<void, const string&> fct(delegate_(const string & value) {
       result = value;
     });
     ASSERT_FALSE(fct.IsEmpty());
@@ -37,7 +37,7 @@ namespace SwitchUnitTests {
   }
 
   TEST_F(FunctionPointerTest, CreateFunctionPointerWithLambdaAndWithReturnThenInvoke) {
-    __opaque_function_pointer__<string> fct(_delegate {
+    __opaque_function_pointer__<string> fct(delegate_ {
       return "fct called";
     });
     ASSERT_FALSE(fct.IsEmpty());

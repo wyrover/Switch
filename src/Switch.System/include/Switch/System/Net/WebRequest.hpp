@@ -28,7 +28,7 @@ namespace Switch {
       ///@brief Makes a request to a Uniform Resource Identifier (URI). This is an abstract class.
       /// @par Library
       /// Switch.System
-      class _export WebRequest _abstract {
+      class export_ WebRequest abstract_ {
         /// @cond
         friend class System::Net::WebResponse;
         /// @endcond
@@ -97,28 +97,28 @@ namespace Switch {
         /// @note This member outputs trace information when you enable network tracing in your application. For more information, see Network Tracing.
         static refptr<WebRequest> Create(const Uri& requestUriString);
 
-        _property<int64> ContentLength {
-          _get {return this->GetContentLength();},
-          _set {this->SetContentLength(value);}
+        property_<int64> ContentLength {
+          get_ {return this->GetContentLength();},
+          set_ {this->SetContentLength(value);}
         };
 
-        _property<string> Method {
-          _get {return this->GetMethod();},
-          _set {this->SetMethod(value);}
+        property_<string> Method {
+          get_ {return this->GetMethod();},
+          set_ {this->SetMethod(value);}
         };
 
-        _property<const System::Net::NetworkCredential&> Credentials {
-          _get->System::Net::NetworkCredential& {return this->GetCredential();},
-          _set {this->SetCredential(value);}
+        property_<const System::Net::NetworkCredential&> Credentials {
+          get_->System::Net::NetworkCredential& {return this->GetCredential();},
+          set_ {this->SetCredential(value);}
         };
 
-        _property<System::Uri, _readonly> RequestUri {
-          _get {return this->GetRequestUri();}
+        property_<System::Uri, readonly_> RequestUri {
+          get_ {return this->GetRequestUri();}
         };
 
-        _property<int32> Timeout {
-          _get {return this->timeout;},
-          _set {this->timeout = value;}
+        property_<int32> Timeout {
+          get_ {return this->timeout;},
+          set_ {this->timeout = value;}
         };
 
         virtual WebResponse& GetResponse() = 0;

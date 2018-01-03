@@ -16,7 +16,7 @@ namespace Switch {
       /// @brief Provides credentials for password-based authentication schemes such as basic, digest, NTLM, and Kerberos authentication.
       /// @par Library
       /// Switch.System
-      class _export NetworkCredential : public Object {
+      class export_ NetworkCredential : public Object {
       public:
         NetworkCredential() {}
 
@@ -30,14 +30,14 @@ namespace Switch {
         }
         /// @endcond
 
-        _property<const string&> UserName {
-          _get->const string& {return this->userName;},
-          _set {this->userName = value;}
+        property_<const string&> UserName {
+          get_->const string& {return this->userName;},
+          set_ {this->userName = value;}
         };
 
-        _property<const string&> Password {
-          _get->const string& {return this->password;},
-          _set {this->password = value;}
+        property_<const string&> Password {
+          get_->const string& {return this->password;},
+          set_ {this->password = value;}
         };
 
       private:

@@ -13,7 +13,7 @@ Array<System::Drawing::FontFamily> Native::FontFamilyApi::GetInstalledFontFamili
 }
 
 System::Drawing::FontFamily Native::FontFamilyApi::GetFontFamilyFromName(const string& name) {
-  throw ArgumentException(_caller);
+  throw ArgumentException(caller_);
 }
 
 string Native::FontFamilyApi::GetName(intptr handle) {

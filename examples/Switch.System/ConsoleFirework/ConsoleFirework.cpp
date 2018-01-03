@@ -3,13 +3,13 @@
 using namespace System;
 
 namespace Examples {
-  class Firework _abstract {
+  class Firework abstract_ {
   public:
     Firework(int x, int y, ConsoleColor color, int delay) : x(x), y(y), color(color), delay(delay) {}
     Firework(const Firework& firework) : x(firework.x), y(firework.y), color(firework.color), delay(firework.delay) {}
 
-    _property<int, _readonly> Delay {
-      _get {return this->delay;}
+    property_<int, readonly_> Delay {
+      get_ {return this->delay;}
     };
 
     virtual void Paint() const = 0;
@@ -133,19 +133,19 @@ namespace Examples {
       Console::Clear();
 
       Random rand;
-      System::Collections::Generic::List<_<Firework>> fireworks;
+      System::Collections::Generic::List<$<Firework>> fireworks;
       Array<ConsoleColor> colors = {ConsoleColor::Blue, ConsoleColor::Green, ConsoleColor::Cyan, ConsoleColor::Red, ConsoleColor::Magenta, ConsoleColor::Yellow, ConsoleColor::White};
 
       while (!Console::KeyAvailable) {
-        fireworks.Add(_new<FireworkStart>(rand.Next(2, Console::WindowWidth - 2), rand.Next(2, Console::WindowHeight - 2), colors[rand.Next(colors.Length)], rand.Next(1, 5)));
+        fireworks.Add(new_<FireworkStart>(rand.Next(2, Console::WindowWidth - 2), rand.Next(2, Console::WindowHeight - 2), colors[rand.Next(colors.Length)], rand.Next(1, 5)));
 
-        System::Collections::Generic::List<_<Firework>> fireworksToRemove;
-        for (_<Firework>& firework : fireworks) {
+        System::Collections::Generic::List<$<Firework>> fireworksToRemove;
+        for ($<Firework>& firework : fireworks) {
           if (is<FireworkEnd>(firework))
             fireworksToRemove.Add(firework);
           Explode(firework);
         }
-        fireworksToRemove.ForEach(_delegate(_<Examples::Firework> firework) {fireworks.Remove(firework);});
+        fireworksToRemove.ForEach(delegate_($<Examples::Firework> firework) {fireworks.Remove(firework);});
 
         System::Threading::Thread::Sleep(100);
       }
@@ -155,16 +155,16 @@ namespace Examples {
       Console::CursorVisible = true;
     }
 
-    static void Explode(_<Firework>& firework) {
+    static void Explode($<Firework>& firework) {
       firework->Paint();
-      if (is<FireworkStartExpanded4>(firework)) firework = _new<FireworkEnd>(*firework);
-      if (is<FireworkStartExpanded3>(firework)) firework = _new<FireworkStartExpanded4>(*firework);
-      if (is<FireworkStartExpanded2>(firework)) firework = _new<FireworkStartExpanded3>(*firework);
-      if (is<FireworkStartExpanded1>(firework)) firework = _new<FireworkStartExpanded2>(*firework);
-      if (is<FireworkExploded>(firework)) firework = _new<FireworkStartExpanded1>(*firework);
-      if (DateTime::Now().Ticks % firework->Delay == 0 && is<FireworkStart>(firework)) firework = _new<FireworkExploded>(*firework);
+      if (is<FireworkStartExpanded4>(firework)) firework = new_<FireworkEnd>(*firework);
+      if (is<FireworkStartExpanded3>(firework)) firework = new_<FireworkStartExpanded4>(*firework);
+      if (is<FireworkStartExpanded2>(firework)) firework = new_<FireworkStartExpanded3>(*firework);
+      if (is<FireworkStartExpanded1>(firework)) firework = new_<FireworkStartExpanded2>(*firework);
+      if (is<FireworkExploded>(firework)) firework = new_<FireworkStartExpanded1>(*firework);
+      if (DateTime::Now().Ticks % firework->Delay == 0 && is<FireworkStart>(firework)) firework = new_<FireworkExploded>(*firework);
     }
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);

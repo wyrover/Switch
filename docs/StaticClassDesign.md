@@ -15,11 +15,11 @@ Static classes should be used only as supporting classes for the object-oriented
 
 **X DO NOT** declare or override instance members in static classes.
 
-**√ DO** declare static classes as abstract, and add a private instance constructor or add Switch keyword _static because C++ language does not have built-in support for static classes.
+**√ DO** declare static classes as abstract, and add a private instance constructor or add Switch keyword static_ because C++ language does not have built-in support for static classes.
 
 ```c++
 namespace System {
-  class Environment _static {
+  class Environment static_ {
   public:
     static void Exit(int exitCode) {
       ...

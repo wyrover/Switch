@@ -24,7 +24,7 @@ namespace Switch {
       /// @brief Limits the number of threads that can access a resource or pool of resources concurrently.
       /// @par Library
       /// Switch.System
-      class _export Semaphore: public WaitHandle {
+      class export_ Semaphore: public WaitHandle {
       public:
         /// @brief Initializes a new instance of the System::Threading::Semaphore class
         /// @remarks The count is equals to 0 and the maximumCount is equal to Int32::MaxValue.
@@ -103,10 +103,10 @@ namespace Switch {
         /// @exception IO::IOException An Io error occurred.
         int32 Release(int32 releaseCount) {
           if (this->guard == null)
-            throw ObjectDisposedException(_caller);
+            throw ObjectDisposedException(caller_);
           std::unique_lock<std::mutex> lock(*this->guard);
           if (*this->count + releaseCount > *this->maxCount)
-            throw SemaphoreFullException(_caller);
+            throw SemaphoreFullException(caller_);
           *this->count += releaseCount;
           this->signal->notify_all();
           return *this->count - releaseCount;
@@ -126,9 +126,9 @@ namespace Switch {
 
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->guard == null)
-            throw ObjectDisposedException(_caller);
+            throw ObjectDisposedException(caller_);
           if (millisecondsTimeOut < -1)
-            throw AbandonedMutexException(_caller);
+            throw AbandonedMutexException(caller_);
 
           std::unique_lock<std::mutex> lock(*this->guard);
           while (*this->count == 0) {

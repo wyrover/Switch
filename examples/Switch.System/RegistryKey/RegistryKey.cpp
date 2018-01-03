@@ -12,7 +12,7 @@ namespace Examples {
       Environment::SetEnvironmentVariable("SWITCH_REGISTRY_KEY_TEST", "My Environment Variable");
 
       // Create a new regiqstry sub key "HKEY_CURRENT_USER\SwitchRegistryKeyTest" and add values
-      _using(RegistryKey key = Registry::CurrentUser().CreateSubKey("SwitchRegistryKeyTest")) {
+      using_(RegistryKey key = Registry::CurrentUser().CreateSubKey("SwitchRegistryKeyTest")) {
         key.SetValue("Key1", "Value1");
         key.SetValue("Key2", "%SWITCH_REGISTRY_KEY_TEST%", RegistryValueKind::ExpandString);
         key.SetValue("Key3", Array<byte> {1, 2, 3, 4, 5}, RegistryValueKind::Binary);
@@ -49,7 +49,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

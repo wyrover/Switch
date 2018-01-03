@@ -15,9 +15,9 @@ namespace SwitchEvents {
       return *this;
     }
 
-    _property<string> Message {
-      _get { return this->message; },
-      _set { this->message = value; }
+    property_<string> Message {
+      get_ { return this->message; },
+      set_ { this->message = value; }
     };
 
   private:
@@ -28,7 +28,7 @@ namespace SwitchEvents {
   class Publisher : public object {
   public:
     // Declare the event using EventHandler<T>
-    _event<Publisher, GenericEventHandler<const CustomEventArgs&>> RaiseCustomEvent;
+    event_<Publisher, GenericEventHandler<const CustomEventArgs&>> RaiseCustomEvent;
 
     void DoSomething() {
       // Write some code that does something useful here
@@ -87,7 +87,7 @@ namespace SwitchEvents {
   };
 }
 
-_startup(SwitchEvents::Program);
+startup_(SwitchEvents::Program);
 
 // This code produces output similar to the following:
 //

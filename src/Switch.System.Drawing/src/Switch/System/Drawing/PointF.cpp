@@ -4,7 +4,7 @@
 using namespace System;
 using namespace System::Drawing;
 
-_property<PointF, _readonly> PointF::Empty {
+property_<PointF, readonly_> PointF::Empty {
   [] {return PointF();}
 };
 

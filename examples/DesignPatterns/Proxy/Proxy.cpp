@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Subject' abstract class
-    class Subject _abstract {
+    class Subject abstract_ {
     public:
       virtual void Request() const = 0;
     };
@@ -29,7 +29,7 @@ namespace DesignPatterns {
       RealSubject realSubject;
     };
 
-    // MainApp _startup class for Structural
+    // MainApp startup_ class for Structural
     // Proxy Design Pattern.
     class MainApp {
     public:
@@ -44,7 +44,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Structural::MainApp);
+startup_(DesignPatterns::Structural::MainApp);
 
 // This code produces the following output:
 //

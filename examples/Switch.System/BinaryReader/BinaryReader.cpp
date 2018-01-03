@@ -9,7 +9,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       // Create and write into binary file stream.
-      _using(BinaryWriter binaryWriter(FileStream(Path::Combine(Path::GetTempPath(), "SwitchTest.bin"), FileMode::Create))) {
+      using_(BinaryWriter binaryWriter(FileStream(Path::Combine(Path::GetTempPath(), "SwitchTest.bin"), FileMode::Create))) {
         binaryWriter.Write(true);
         binaryWriter.Write(1.25);
         binaryWriter.Write(4);
@@ -18,7 +18,7 @@ namespace Examples {
       }
 
       // Open and read from binary file stream.
-      _using(BinaryReader binaryReader(FileStream(Path::Combine(Path::GetTempPath(), "SwitchTest.bin"), FileMode::Open))) {
+      using_(BinaryReader binaryReader(FileStream(Path::Combine(Path::GetTempPath(), "SwitchTest.bin"), FileMode::Open))) {
         Console::WriteLine("Boolean: {0}", binaryReader.ReadBoolean());
         Console::WriteLine("Double: {0}", binaryReader.ReadDouble());
         Console::WriteLine("Array<byte>: {{{0}}}", string::Join(", ", binaryReader.ReadBytes(binaryReader.ReadInt32())));
@@ -31,7 +31,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

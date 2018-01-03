@@ -15,12 +15,12 @@ using namespace System::Threading;
 
 WebResponse::WebResponse() {
   if (!Native::CurlApi::GetOSSupportsWebOperations())
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 }
 
 void WebResponse::SetWebRequest(WebRequest& webRequest) {
   if (!Native::CurlApi::GetOSSupportsWebOperations())
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   this->webRequest = &webRequest;
   this->responseStream.SetWebRequest(this->webRequest);
@@ -55,7 +55,7 @@ void WebResponse::EndTransfert() {
 
 int64 WebResponse::GetResponseCode() const {
   if (!Native::CurlApi::GetOSSupportsWebOperations())
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   int64 code = 0;
   Native::CurlApi::GetResponseCode(this->webRequest->GetRequestHandle(), code);
@@ -76,21 +76,21 @@ void WebResponse::WebResponseStream::StartTransfert() {
     this->data->webRequest->ProccessRequest();
     //Wait the first response packet
     if (!this->data->writeEvent.WaitOne(this->data->webRequest->Timeout))
-      throw TimeoutException(_caller);
+      throw TimeoutException(caller_);
   }
 }
 
 int64 WebResponse::WebResponseStream::Seek(int64, System::IO::SeekOrigin) {
-  throw NotSupportedException(_caller);
+  throw NotSupportedException(caller_);
 }
 
 int32 WebResponse::WebResponseStream::Read(Array<byte>& buffer, int32 offset, int32 count) {
   if (offset < 0)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
   if (IsClosed())
-    throw IOException(_caller);
+    throw IOException(caller_);
   if (!CanRead())
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   int32 nbBytesRead = 0;
   if (CanRead())
@@ -122,7 +122,7 @@ int32 WebResponse::WebResponseStream::Read(void* handle, int32 count) {
       }
     } else {
       if (isTimeout)
-        throw TimeoutException(_caller);
+        throw TimeoutException(caller_);
 
       //Transfer is finished
       this->data->finished = true;
@@ -142,7 +142,7 @@ int32 WebResponse::WebResponseStream::Read(void* handle, int32 count) {
 int32 WebResponse::WebResponseStream::Receive(const void* handle, int32 count) {
   //Wait previous read is finished
   if (!this->data->readEvent.WaitOne(ReadTimeout()))
-    throw TimeoutException(_caller);
+    throw TimeoutException(caller_);
 
   if (this->data->webRequest->internalError != 0)
     return 0;
@@ -157,7 +157,7 @@ int32 WebResponse::WebResponseStream::Receive(const void* handle, int32 count) {
 
     //Wait end of read
     if (!this->data->readEvent.WaitOne(ReadTimeout()))
-      throw TimeoutException(_caller);
+      throw TimeoutException(caller_);
   }
 
   return count;

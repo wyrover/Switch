@@ -18,7 +18,7 @@ namespace Switch {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief A synchronization primitive that can also be used for interprocess synchronization.
-      class _export Mutex: public WaitHandle {
+      class export_ Mutex: public WaitHandle {
       private:
       public:
         /// @brief Initializes a new instance of the System::Threading::Mutex class with a Boolean value that indicates whether the calling thread should have initial ownership of the mutex.
@@ -89,7 +89,7 @@ namespace Switch {
         /// @exception ApplicationException The calling thread does not own the mutex.
         void ReleaseMutex() {
           if (this->mutex == null)
-            throw ObjectDisposedException(_caller);
+            throw ObjectDisposedException(caller_);
           this->mutex->unlock();
         }
 
@@ -117,9 +117,9 @@ namespace Switch {
 
         bool Wait(int32 millisecondsTimeOut) override {
           if (this->mutex == null)
-            throw ObjectDisposedException(_caller);
+            throw ObjectDisposedException(caller_);
           if (millisecondsTimeOut < -1)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           if (millisecondsTimeOut == -1) {
             this->mutex->lock();
             return true;

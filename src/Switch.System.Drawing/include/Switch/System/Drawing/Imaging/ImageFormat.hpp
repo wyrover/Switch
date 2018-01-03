@@ -14,27 +14,27 @@ namespace Switch {
     namespace Drawing {
       /// @brief The System::Drawing::Imaging namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the System::Drawing namespace.
       namespace Imaging {
-        class _export ImageFormat : public object {
+        class export_ ImageFormat : public object {
         public:
-          static _property<ImageFormat, _readonly> Bmp;
+          static property_<ImageFormat, readonly_> Bmp;
 
-          static _property<ImageFormat, _readonly> Emf;
+          static property_<ImageFormat, readonly_> Emf;
 
-          static _property<ImageFormat, _readonly> Exif;
+          static property_<ImageFormat, readonly_> Exif;
 
-          static _property<ImageFormat, _readonly> Gif;
+          static property_<ImageFormat, readonly_> Gif;
 
-          static _property<ImageFormat, _readonly> Icon;
+          static property_<ImageFormat, readonly_> Icon;
 
-          static _property<ImageFormat, _readonly> Jpeg;
+          static property_<ImageFormat, readonly_> Jpeg;
 
-          static _property<ImageFormat, _readonly> MemoryBmp;
+          static property_<ImageFormat, readonly_> MemoryBmp;
 
-          static _property<ImageFormat, _readonly> Png;
+          static property_<ImageFormat, readonly_> Png;
 
-          static  _property<ImageFormat, _readonly> Tiff;
+          static  property_<ImageFormat, readonly_> Tiff;
 
-          static _property<ImageFormat, _readonly> Wmf;
+          static property_<ImageFormat, readonly_> Wmf;
 
           ImageFormat() = default;
           ImageFormat(const Guid& guid) : guid(guid) {}
@@ -42,12 +42,12 @@ namespace Switch {
           ImageFormat(const string name, const string& guid) : name(name), guid(guid) {}
           ImageFormat(const ImageFormat& format) : name(format.name), guid(format.guid) {}
 
-          _property<System::Guid, _readonly> Guid {
-            _get {return this->guid;}
+          property_<System::Guid, readonly_> Guid {
+            get_ {return this->guid;}
           };
 
-          _property<string, _readonly> Name {
-            _get {return this->name;}
+          property_<string, readonly_> Name {
+            get_ {return this->name;}
           };
 
         private:

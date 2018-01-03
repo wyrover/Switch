@@ -11,7 +11,7 @@ namespace {
 
     uint64 value = x + y;
     if (value < x)
-      throw OverflowException(_caller);
+      throw OverflowException(caller_);
     return value;
   }
 
@@ -62,19 +62,19 @@ namespace Switch {
       if (base == 16) {
         if (c == 'x' || c == 'X') {
           ++it;
-          if (it == end) throw FormatException(_caller);
+          if (it == end) throw FormatException(caller_);
           c = *it;
-          if (c != '0') throw FormatException(_caller);
+          if (c != '0') throw FormatException(caller_);
           it++;
         }
       }
       if (base == 2) {
         if (c == 'b' || c == 'B') {
           if (it == end)
-            throw FormatException(_caller);
+            throw FormatException(caller_);
           c = *it;
           if (c != '0')
-            throw FormatException(_caller);
+            throw FormatException(caller_);
           ++it;
         }
       }
@@ -101,7 +101,7 @@ namespace Switch {
         }
         if (c == ' ')
           return sign;
-        throw FormatException(_caller);
+        throw FormatException(caller_);
       } while (it != end);
       return sign;
     }
@@ -113,7 +113,7 @@ namespace Switch {
       if (sign == '-') {
         ++it;
         if (value > 9223372036854775808ULL)
-          throw OverflowException(_caller);
+          throw OverflowException(caller_);
         if (value == 9223372036854775808ULL)
           return Int64::MinValue;
         return -Convert::ToInt64(value);
@@ -129,7 +129,7 @@ namespace Switch {
         c = *it;
         if (!IsDigit(c, base)) {
           if (oneDigitSeen) return value;
-          throw FormatException(_caller);
+          throw FormatException(caller_);
         } else {
           uint32 curDigit = ToDigit(c);
           oneDigitSeen = true;
@@ -161,22 +161,22 @@ namespace Switch {
 
     int64 NumericalParsing::ParseSigned(const string& str, int32 base, int32 nbBits) {
       if (base < 2 || base > 32)
-        throw ArgumentException(_caller);
+        throw ArgumentException(caller_);
 
       string::const_reverse_iterator it = str.rbegin();
       if (it == str.rend())
-        throw FormatException(_caller);
+        throw FormatException(caller_);
       char32 c;
 
       // trim
       IgnoreSpaces(it, str.rend(), c);
       if (it == str.rend())
-        throw FormatException(_caller);
+        throw FormatException(caller_);
 
       // suffix
       IgnoreValidSuffix(it, str.rend(), c, base);
       if (it == str.rend())
-        throw FormatException(_caller);
+        throw FormatException(caller_);
 
       // digits
       uint64 value = ReadInteger(it, str.rend(), c, base);
@@ -196,7 +196,7 @@ namespace Switch {
       //trim out
       IgnoreSpaces(it, str.rend(), c);
       if (it != str.rend())
-        throw FormatException(_caller);
+        throw FormatException(caller_);
       else return value;
     }
 
@@ -207,27 +207,27 @@ namespace Switch {
         return;
       }
       if (sign == '-')
-        throw OverflowException(_caller);
+        throw OverflowException(caller_);
     }
 
     uint64 NumericalParsing::ParseUnsigned(const string& str, int32 base) {
       if (base < 2 || base > 32)
-        throw ArgumentException(_caller);
+        throw ArgumentException(caller_);
 
       string::const_reverse_iterator it = str.rbegin();
       if (it == str.rend())
-        throw FormatException(_caller);
+        throw FormatException(caller_);
       char32 c;
 
       // trim
       IgnoreSpaces(it, str.rend(), c);
       if (it == str.rend())
-        throw FormatException(_caller);
+        throw FormatException(caller_);
 
       // suffix
       IgnoreValidSuffix(it, str.rend(), c, base);
       if (it == str.rend())
-        throw FormatException(_caller);
+        throw FormatException(caller_);
 
       // digits
       uint64 value = ReadInteger(it, str.rend(), c, base);
@@ -247,7 +247,7 @@ namespace Switch {
       //trim out
       IgnoreSpaces(it, str.rend(), c);
       if (it != str.rend())
-        throw FormatException(_caller);
+        throw FormatException(caller_);
       else return value;
     }
 

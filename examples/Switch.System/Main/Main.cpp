@@ -14,7 +14,7 @@ namespace Examples {
         return -1;
       }
 
-      Console::WriteLine("The Factorial of {0} is {1}", number, _delegate {
+      Console::WriteLine("The Factorial of {0} is {1}", number, delegate_ {
         int64 result = 1;
         for (int i = 1; i <= number; ++i)
           result *= i;
@@ -25,7 +25,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output if 3 is entered on command line:
 //

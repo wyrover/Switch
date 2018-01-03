@@ -11,7 +11,7 @@ namespace Examples {
       Array<int> myArray = {10, 20, 30, 40, 50, 60, 70};
 
       Console::WriteLine("Items of myArray : ");
-      _lock(myArray.SyncRoot) {
+      lock_(myArray.SyncRoot) {
         for (int item : myArray)
           Console::Write("{0} ", item);
       }
@@ -20,7 +20,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

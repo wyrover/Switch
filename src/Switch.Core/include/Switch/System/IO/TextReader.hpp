@@ -18,7 +18,7 @@ namespace Switch {
       /// @endcond
 
       /// @brief Represents a reader that can read a sequential series of characters.
-      class _export TextReader: public Object {
+      class export_ TextReader: public Object {
       public:
         /// @brief Provides a TextReader with no data to read from.
         /// @remarks Reading from the cNull text reader is similar to reading from the end of a stream:
@@ -67,7 +67,7 @@ namespace Switch {
       class SynchronizedTextReader : public TextReader {
       public:
         int32 Read() override {
-          _lock(reader)
+          lock_(reader)
           return this->reader.Read();
           return 0;
         }

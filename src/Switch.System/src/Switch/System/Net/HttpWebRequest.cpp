@@ -37,7 +37,7 @@ WebRequest::WebRequestStream HttpWebRequest::GetRequestStream() {
     return WebRequest::GetRequestStream();
   }
 
-  throw InvalidOperationException(_caller);
+  throw InvalidOperationException(caller_);
 }
 
 WebResponse& HttpWebRequest::GetInternalResponse() {
@@ -57,14 +57,14 @@ void HttpWebRequest::Finished(int32 error) {
 
 bool HttpWebRequest::GetAllowAutoRedirect() const {
   if (Native::CurlApi::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   return this->allowAutoRedirect;
 }
 
 void HttpWebRequest::SetAllowAutoRedirect(bool autoRedirect) {
   if (Native::CurlApi::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   this->allowAutoRedirect = autoRedirect;
   Native::CurlApi::SetAllowRedirection(this->requestHandle, this->allowAutoRedirect ? 1L : 0L);
@@ -72,14 +72,14 @@ void HttpWebRequest::SetAllowAutoRedirect(bool autoRedirect) {
 
 const string& HttpWebRequest::GetContentType() const {
   if (Native::CurlApi::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   return this->contentType;
 }
 
 void HttpWebRequest::SetContentType(const string& contentType) {
   if (Native::CurlApi::GetOSSupportsWebOperations() == false)
-    throw NotSupportedException(_caller);
+    throw NotSupportedException(caller_);
 
   this->contentType = contentType;
 }

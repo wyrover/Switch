@@ -61,7 +61,7 @@ namespace Switch {
         ///   }
         /// }
         /// @endcode
-        class _export DragEventArgs : public EventArgs {
+        class export_ DragEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the DragEventArgs class.
           DragEventArgs() {}
@@ -83,12 +83,12 @@ namespace Switch {
 
           /// @brief Gets which drag-and-drop operations are allowed by the originator (or source) of the drag event.
           /// @return One of the DragDropEffects values.
-          _property<DragDropEffects, _readonly> AllowedEffect {
-            _get {return this->allowedEffect;}
+          property_<DragDropEffects, readonly_> AllowedEffect {
+            get_ {return this->allowedEffect;}
           };
 
-          _property<const object&, _readonly> Data {
-            _get->const object& {return *this->data;}
+          property_<const object&, readonly_> Data {
+            get_->const object& {return *this->data;}
           };
 
           /// @brief Gets or sets the target drop effect in a drag-and-drop operation.
@@ -142,9 +142,9 @@ namespace Switch {
           ///   }
           /// }
           /// @endcode
-          _property<DragDropEffects> Effect {
-            _get {return this->effect;},
-            _set {this->effect = value;}
+          property_<DragDropEffects> Effect {
+            get_ {return this->effect;},
+            set_ {this->effect = value;}
           };
 
           /// @brief Gets the current state of the SHIFT, CTRL, and ALT keys, as well as the state of the mouse buttons.
@@ -208,16 +208,16 @@ namespace Switch {
           ///   }
           /// }
           /// @endcode
-          _property<int32, _readonly> KeyState {
-            _get {return this->keyState;}
+          property_<int32, readonly_> KeyState {
+            get_ {return this->keyState;}
           };
 
-          _property<int32, _readonly> X {
-            _get {return this->x;}
+          property_<int32, readonly_> X {
+            get_ {return this->x;}
           };
 
-          _property<int32, _readonly> Y {
-            _get {return this->y;}
+          property_<int32, readonly_> Y {
+            get_ {return this->y;}
           };
 
         private:

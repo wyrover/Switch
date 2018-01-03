@@ -37,7 +37,7 @@ namespace Switch {
           /// @param collection The collection whose elements are copied to the new ConcurrentQueue<T>.
           /// @exception ArgumentNullException collection is a null reference.
           ConcurrentQueue(const Generic::IEnumerable<T>& collection) {
-            _lock(this->queue.SyncRoot) {
+            lock_(this->queue.SyncRoot) {
               for (T item : collection)
                 this->queue.Add(item);
             }
@@ -45,7 +45,7 @@ namespace Switch {
 
           /// @cond
           ConcurrentQueue(InitializerList<T> il)  {
-            _lock(this->queue.SyncRoot) {
+            lock_(this->queue.SyncRoot) {
               for (T item : il)
                 this->queue.Add(item);
             }
@@ -54,8 +54,8 @@ namespace Switch {
 
           /// @brief Gets a value that indicates whether the ConcurrentQueue<T> is empty.
           /// @return Boolean true if the ConcurrentQueue<T> is empty; otherwise, false.
-          _property<bool, _readonly> IsEmpty {
-            _get {
+          property_<bool, readonly_> IsEmpty {
+            get_ {
               return this->queue.Count == 0;
             }
           };
@@ -63,13 +63,13 @@ namespace Switch {
           /// @brief Enqueue an object to the ConcurrentQueue<T>.
           /// @param item The object to be Enqueued to the ConcurrentQueue<T>.
           void Enqueue(const T& item) {
-            _lock(this->queue.SyncRoot)
+            lock_(this->queue.SyncRoot)
             this->queue.Add(item);
           }
 
           /// @brief Removes all objects from the ConcurrentQueue<T>.
           void Clear() override {
-            _lock(this->queue.SyncRoot)
+            lock_(this->queue.SyncRoot)
             this->queue.Clear();
           }
 
@@ -78,9 +78,9 @@ namespace Switch {
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
             if (index + this->queue.Count > array.Length)
-              throw System::ArgumentOutOfRangeException(_caller);
+              throw System::ArgumentOutOfRangeException(caller_);
 
-            _lock(this->queue.SyncRoot) {
+            lock_(this->queue.SyncRoot) {
               System::Int32 pos = index;
               for (T item : this->queue)
                 array[pos++] = item;
@@ -90,7 +90,7 @@ namespace Switch {
           /// @brief Copies the elements contained in the IProducerConsumerCollection<T> to a new array.
           /// @return A new array containing the elements copied from the IProducerConsumerCollection<T>.
           System::Array<T> ToArray() const override {
-            _lock(this->queue.SyncRoot)
+            lock_(this->queue.SyncRoot)
             return this->queue.ToArray();
             return this->queue.ToArray();
           }
@@ -100,7 +100,7 @@ namespace Switch {
           /// @remarks The enumeration represents a moment-in-time snapshot of the contents of the queue. It does not reflect any updates to the collection after GetEnumerator was called. The enumerator is safe to use concurrently with reads from and writes to the queue.
           /// @remarks The enumerator returns the collection elements in the order in which they were added, which is FIFO order (first-in, first-out).
           Generic::Enumerator<T> GetEnumerator() const override {
-            _lock(this->queue.SyncRoot)
+            lock_(this->queue.SyncRoot)
             return Generic::Enumerator<T>(new Enumerator(this));
             return Generic::Enumerator<T>(new Enumerator(this));
           }
@@ -109,7 +109,7 @@ namespace Switch {
           /// @param result When this method returns, result contains an object from the ConcurrentQueue<T> or the default value of T if the operation failed.
           /// @return true if and object was returned successfully; otherwise, false.
           bool TryPeek(T& result) {
-            _lock(this->queue.SyncRoot) {
+            lock_(this->queue.SyncRoot) {
               if (this->queue.Count > 0) {
                 result = this->queue[0];
                 return true;
@@ -122,7 +122,7 @@ namespace Switch {
           /// @param result When this method returns, if the object was removed and returned successfully, item contains the removed object. If no object was available to be removed, the value is unspecified.
           /// @return true if an object was removed and returned successfully; otherwise, false.
           bool TryDequeue(T& result) {
-            _lock(this->queue.SyncRoot) {
+            lock_(this->queue.SyncRoot) {
               if (this->queue.Count > 0) {
                 result = this->queue[0];
                 this->queue.RemoveAt(0);
@@ -144,7 +144,7 @@ namespace Switch {
           void Add(const T& item) override {Enqueue(item);}
 
           bool Contains(const T& value) const override {
-            _lock(this->queue.SyncRoot)
+            lock_(this->queue.SyncRoot)
             return this->queue.Contains(value);
             return false;
           }
@@ -167,7 +167,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
-                throw InvalidOperationException(_caller);
+                throw InvalidOperationException(caller_);
 
               return this->array[this->index];
             }

@@ -104,14 +104,14 @@ bool UInt32::ToBoolean(const IFormatProvider&) const {
 
 byte UInt32::ToByte(const IFormatProvider&) const {
   if (this->value > Byte::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (sbyte)this->value;
 }
 
 char32 UInt32::ToChar(const IFormatProvider&) const {
   if (this->value > Char::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (char32)this->value;
 }
@@ -126,14 +126,14 @@ double UInt32::ToDouble(const IFormatProvider&) const {
 
 int16 UInt32::ToInt16(const IFormatProvider&) const {
   if (this->value > (uint32)Int16::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (int16)this->value;
 }
 
 int32 UInt32::ToInt32(const IFormatProvider&) const {
   if (this->value > (uint32)Int32::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (int32)this->value;
 }
@@ -144,7 +144,7 @@ int64 UInt32::ToInt64(const IFormatProvider&) const {
 
 uint16 UInt32::ToUInt16(const IFormatProvider&) const {
   if (this->value > UInt16::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (uint16)this->value;
 }
@@ -159,7 +159,7 @@ uint64 UInt32::ToUInt64(const IFormatProvider&) const {
 
 sbyte UInt32::ToSByte(const IFormatProvider&) const {
   if (this->value > (uint32)SByte::MaxValue)
-    throw OverflowException(_caller);
+    throw OverflowException(caller_);
 
   return (sbyte)this->value;
 }
@@ -198,7 +198,7 @@ UInt32& UInt32::operator *=(const UInt32& value) {
 
 UInt32& UInt32::operator /=(const UInt32& value) {
   if (value.value == 0)
-    throw DivideByZeroException(_caller);
+    throw DivideByZeroException(caller_);
 
   this->value /= value.value;
   return *this;
@@ -206,7 +206,7 @@ UInt32& UInt32::operator /=(const UInt32& value) {
 
 UInt32& UInt32::operator %=(const UInt32& value) {
   if (value.value == 0)
-    throw DivideByZeroException(_caller);
+    throw DivideByZeroException(caller_);
 
   this->value %= value;
   return *this;

@@ -4,7 +4,7 @@ using namespace TUnit::Framework;
 using namespace System;
 
 namespace UnitTests {
-  // The class DirectoryTest must be declared with _TestFixture
+  // The class DirectoryTest must be declared with TestFixture_
   class Test : public TestFixture {
     OneTimeSetUpAttribute oneTimeInitAttribute {"OneTimeInit", *this, &Test::OneTimeInit};
     void OneTimeInit() {
@@ -40,7 +40,7 @@ namespace UnitTests {
   // Used TestFixtureAttribute<> to add unit test suit.
   TestFixtureAttribute<Test> testAttribute {"Test"};
 
-  class Program _static {
+  class Program static_ {
   public:
     static int Main(const Array<string>& args) {
       return UnitTest(args).Run();
@@ -49,4 +49,4 @@ namespace UnitTests {
 
 }
 
-_startup(UnitTests::Program)
+startup_(UnitTests::Program)

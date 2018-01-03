@@ -20,12 +20,12 @@ object Trace::lock;
 #pragma warning(pop)
 #endif
 
-_property<bool> Trace::AutoFlush {
+property_<bool> Trace::AutoFlush {
   [] {return autoFlush;},
   [](bool value) {autoFlush = value;}
 };
 
-_property<int32> Trace::IndentLevel {
+property_<int32> Trace::IndentLevel {
   [] {return indentLevel;},
   [](int32 value) {
     indentLevel = value;
@@ -34,7 +34,7 @@ _property<int32> Trace::IndentLevel {
   }
 };
 
-_property<int32> Trace::IndentSize {
+property_<int32> Trace::IndentSize {
   [] {return indentSize;},
   [](int32 value) {
     indentSize = value;
@@ -43,11 +43,11 @@ _property<int32> Trace::IndentSize {
   }
 };
 
-_property<TraceListenerCollection&, _readonly> Trace::Listeners {
+property_<TraceListenerCollection&, readonly_> Trace::Listeners {
   []()->TraceListenerCollection& {return __get_listeners__();}
 };
 
-_property<bool> Trace::UseGlobalLock {
+property_<bool> Trace::UseGlobalLock {
   [] {return useGlobalLock;},
   [](bool value) {useGlobalLock = value;}
 };

@@ -15,14 +15,14 @@ namespace Switch {
       /// @brief Encapsulates a File Transfer Protocol (FTP) server's response to a request.
       /// @par Library
       /// Switch.System
-      class _export FtpWebResponse : public System::Net::WebResponse {
+      class export_ FtpWebResponse : public System::Net::WebResponse {
       public:
-        _property<System::Net::FtpStatusCode, _readonly> StatusCode {
-          _get {return this->GetStatusCode();}
+        property_<System::Net::FtpStatusCode, readonly_> StatusCode {
+          get_ {return this->GetStatusCode();}
         };
 
-        _property<string, _readonly> StatusDescription {
-          _get {return this->GetStatusDescription();}
+        property_<string, readonly_> StatusDescription {
+          get_ {return this->GetStatusDescription();}
         };
 
         WebResponse::WebResponseStream GetResponseStream() override;

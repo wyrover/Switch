@@ -16,7 +16,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Exposes instance methods for creating, moving, and enumerating through directories and subdirectories. This class cannot be inherited.
-      class _export DirectoryInfo final : public FileSystemInfo {
+      class export_ DirectoryInfo final : public FileSystemInfo {
       public:
         /// @brief Represents the uninitialized directory object. This field is constant.
         static const DirectoryInfo Empty;
@@ -36,14 +36,14 @@ namespace Switch {
 
         /// @brief Gets the parent directory of a specified subdirectory.
         /// @return The parent directory, or the empty directory if the path is null or if the file path denotes a root (such as "\", "C:", or * "\\server\share").
-        _property<DirectoryInfo, _readonly> Parent {
-          _get {return this->GetParent();}
+        property_<DirectoryInfo, readonly_> Parent {
+          get_ {return this->GetParent();}
         };
 
         /// @brief Gets the root portion of a path.
         /// @return A System::IO::DirectoryInfo object representing the root of a path.
-        _property<DirectoryInfo, _readonly> Root {
-          _get {return this->GetRoot();}
+        property_<DirectoryInfo, readonly_> Root {
+          get_ {return this->GetRoot();}
         };
 
         /// @brief Creates a directory.

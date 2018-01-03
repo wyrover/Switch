@@ -36,39 +36,39 @@ namespace ManualTests {
 
   TestFixtureAttribute<Test1> __Test1Attribute {"Test1"};
 
-  class _TestFixture(Test2) {
+  class TestFixture_(Test2) {
     void _OneTimeSetUp(OneTimeInit) {
     }
 
     void _OneTimeTearDown(OneTimeCleanup) {
     }
 
-    void _SetUp(Init) {
+    void SetUp_(Init) {
     }
 
-    void _TearDown(Cleanup) {
+    void TearDown_(Cleanup) {
     }
 
-    void _Test(TestCase1) {
+    void Test_(TestCase1) {
     }
 
-    void _Test(TestCase2) {
+    void Test_(TestCase2) {
     }
 
-    void _IgnoreTest(TestCase3) {
+    void IgnoreTest_(TestCase3) {
     }
   };
 
-  _AddTestFixture(Test2);
+  AddTestFixture_(Test2);
 
-  class _TestFixture(Test3) {
+  class TestFixture_(Test3) {
     void _OneTimeSetUp(OneTimeInit) {
     }
 
     void _OneTimeTearDown(OneTimeCleanup) {
     }
 
-    void _Test(TestCase1) {
+    void Test_(TestCase1) {
     }
   };
 
@@ -79,11 +79,11 @@ namespace ManualTests {
     void _OneTimeTearDown(OneTimeCleanup) {
     }
 
-    void _Test(TestCase2) {
+    void Test_(TestCase2) {
     }
   };
 
-  _AddTestFixture(Test4);
+  AddTestFixture_(Test4);
 
   class MainTest {
   public:
@@ -93,5 +93,5 @@ namespace ManualTests {
   };
 }
 
-_startup(ManualTests::MainTest)
+startup_(ManualTests::MainTest)
 

@@ -22,7 +22,7 @@ namespace Switch {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Encapsulates operating system specific objects that wait for exclusive access to shared resources.
-      class _export WaitHandle _abstract {
+      class export_ WaitHandle abstract_ {
         /// @cond
         friend class RegisteredWaitHandle;
         friend class Thread;
@@ -81,7 +81,7 @@ namespace Switch {
         /// @exception ArgumentException millisecondsTimeout is a negative number other than -1, which represents an infinite time-out.
         virtual bool WaitOne(int32 millisecondsTimeOut) {
           if (millisecondsTimeOut < Timeout::Infinite)
-            throw ArgumentException(_caller);
+            throw ArgumentException(caller_);
           return Wait(millisecondsTimeOut);
         }
 

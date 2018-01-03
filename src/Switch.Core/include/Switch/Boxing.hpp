@@ -79,7 +79,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);                     // console output : ready = 1
   /// Console::WriteLine("ready = {0}", TypeBoxer::Boxing(ready));  // console output : ready = true
   /// @endcode
-  class _export TypeBoxer {
+  class export_ TypeBoxer {
   public:
     /// @cond
     TypeBoxer() = delete;
@@ -207,7 +207,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);                         // console output : ready = true
   /// Console::WriteLine("ready = {0}", TypeUnboxer::Unboxing(ready));  // console output : ready = 1
   /// @endcode
-  class _export TypeUnboxer {
+  class export_ TypeUnboxer {
   public:
     /// @cond
     TypeUnboxer() = delete;
@@ -534,7 +534,7 @@ namespace Switch {
   inline const T& Box(const T& value) {return TypeBoxer::Boxing(value);}
 
   template<typename T, typename Attribute>
-  inline T Box(const _property<T, Attribute>& value) {return T(Box(value()));}
+  inline T Box(const property_<T, Attribute>& value) {return T(Box(value()));}
   /// @endcond
 
   /// @brief Support unboxing of type

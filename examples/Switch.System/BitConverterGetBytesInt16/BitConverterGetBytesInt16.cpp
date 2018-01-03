@@ -34,7 +34,7 @@ namespace Examples {
   const string Program::formatter = "{0,10}{1,13}";
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

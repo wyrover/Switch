@@ -14,7 +14,7 @@ namespace Examples {
       // Create a barrier with three participants
       // Provide a post-phase action that will print out certain information
       // And the third time through, it will throw an exception
-      Barrier barrier = Barrier(3, _delegate(const Barrier & b) {
+      Barrier barrier = Barrier(3, delegate_(const Barrier & b) {
         Console::WriteLine("Post-Phase action: count={0}, phase={1}", count, b.CurrentPhaseNumber);
         if (b.CurrentPhaseNumber() == 2) throw Exception("D'oh!");
       });
@@ -27,7 +27,7 @@ namespace Examples {
 
 
       // This is the logic run by all participants
-      Action<> action = _delegate {
+      Action<> action = delegate_ {
         Interlocked::Increment(count);
         barrier.SignalAndWait(); // during the post-phase action, count should be 4 and phase should be 0
         Interlocked::Increment(count);
@@ -52,7 +52,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code example produces the following output:
 //

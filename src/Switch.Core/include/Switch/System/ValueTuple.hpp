@@ -56,58 +56,58 @@ namespace Switch {
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's first component.
       /// @param T1 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's first component.
-      _property<T1> Item1 {
-        _get {return std::get<0>(this->tuple);},
-        _set {std::get<0>(this->tuple) = value;}
+      property_<T1> Item1 {
+        get_ {return std::get<0>(this->tuple);},
+        set_ {std::get<0>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's second component.
       /// @param T2 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's second component.
-      _property<T2> Item2 {
-        _get {return std::get<1>(this->tuple);},
-        _set {std::get<1>(this->tuple) = value;}
+      property_<T2> Item2 {
+        get_ {return std::get<1>(this->tuple);},
+        set_ {std::get<1>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's third component.
       /// @param T3 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's third component.
-      _property<T3> Item3 {
-        _get {return std::get<2>(this->tuple);},
-        _set {std::get<2>(this->tuple) = value;}
+      property_<T3> Item3 {
+        get_ {return std::get<2>(this->tuple);},
+        set_ {std::get<2>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's fourth component.
       /// @param T4 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's fourth component.
-      _property<T4> Item4 {
-        _get {return std::get<3>(this->tuple);},
-        _set {std::get<3>(this->tuple) = value;}
+      property_<T4> Item4 {
+        get_ {return std::get<3>(this->tuple);},
+        set_ {std::get<3>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's fifth component.
       /// @param T5 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's fifth component.
-      _property<T5> Item5 {
-        _get {return std::get<4>(this->tuple);},
-        _set {std::get<4>(this->tuple) = value;}
+      property_<T5> Item5 {
+        get_ {return std::get<4>(this->tuple);},
+        set_ {std::get<4>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's sixth component.
       /// @param T6 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's sixth component.
-      _property<T6> Item6 {
-        _get {return std::get<5>(this->tuple);},
-        _set {std::get<5>(this->tuple) = value;}
+      property_<T6> Item6 {
+        get_ {return std::get<5>(this->tuple);},
+        set_ {std::get<5>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's seventh component.
       /// @param T7 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's seventh component.
-      _property<T7> Item7 {
-        _get {return std::get<6>(this->tuple);},
-        _set {std::get<6>(this->tuple) = value;}
+      property_<T7> Item7 {
+        get_ {return std::get<6>(this->tuple);},
+        set_ {std::get<6>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's remaining component.
       /// @param TRest The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest> object's remaining component.
-      _property<TRest> Rest {
-        _get {return std::get<7>(this->tuple);},
-        _set {std::get<7>(this->tuple) = value;}
+      property_<TRest> Rest {
+        get_ {return std::get<7>(this->tuple);},
+        set_ {std::get<7>(this->tuple) = value;}
       };
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -185,51 +185,51 @@ namespace Switch {
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's first component.
       /// @param T1 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's first component.
-      _property<T1> Item1 {
-        _get {return std::get<0>(this->tuple);},
-        _set {std::get<0>(this->tuple) = value;}
+      property_<T1> Item1 {
+        get_ {return std::get<0>(this->tuple);},
+        set_ {std::get<0>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's second component.
       /// @param T2 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's second component.
-      _property<T2> Item2 {
-        _get {return std::get<1>(this->tuple);},
-        _set {std::get<1>(this->tuple) = value;}
+      property_<T2> Item2 {
+        get_ {return std::get<1>(this->tuple);},
+        set_ {std::get<1>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's third component.
       /// @param T3 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's third component.
-      _property<T3> Item3 {
-        _get {return std::get<2>(this->tuple);},
-        _set {std::get<2>(this->tuple) = value;}
+      property_<T3> Item3 {
+        get_ {return std::get<2>(this->tuple);},
+        set_ {std::get<2>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's fourth component.
       /// @param T4 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's fourth component.
-      _property<T4> Item4 {
-        _get {return std::get<3>(this->tuple);},
-        _set {std::get<3>(this->tuple) = value;}
+      property_<T4> Item4 {
+        get_ {return std::get<3>(this->tuple);},
+        set_ {std::get<3>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's fifth component.
       /// @param T5 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's fifth component.
-      _property<T5> Item5 {
-        _get {return std::get<4>(this->tuple);},
-        _set {std::get<4>(this->tuple) = value;}
+      property_<T5> Item5 {
+        get_ {return std::get<4>(this->tuple);},
+        set_ {std::get<4>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's sixth component.
       /// @param T6 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's sixth component.
-      _property<T6> Item6 {
-        _get {return std::get<5>(this->tuple);},
-        _set {std::get<5>(this->tuple) = value;}
+      property_<T6> Item6 {
+        get_ {return std::get<5>(this->tuple);},
+        set_ {std::get<5>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's seventh component.
       /// @param T7 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6, T7> object's seventh component.
-      _property<T7> Item7 {
-        _get {return std::get<6>(this->tuple);},
-        _set {std::get<6>(this->tuple) = value;}
+      property_<T7> Item7 {
+        get_ {return std::get<6>(this->tuple);},
+        set_ {std::get<6>(this->tuple) = value;}
       };
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -305,44 +305,44 @@ namespace Switch {
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's first component.
       /// @param T1 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's first component.
-      _property<T1> Item1 {
-        _get {return std::get<0>(this->tuple);},
-        _set {std::get<0>(this->tuple) = value;}
+      property_<T1> Item1 {
+        get_ {return std::get<0>(this->tuple);},
+        set_ {std::get<0>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's second component.
       /// @param T2 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's second component.
-      _property<T2> Item2 {
-        _get {return std::get<1>(this->tuple);},
-        _set {std::get<1>(this->tuple) = value;}
+      property_<T2> Item2 {
+        get_ {return std::get<1>(this->tuple);},
+        set_ {std::get<1>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's third component.
       /// @param T3 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's third component.
-      _property<T3> Item3 {
-        _get {return std::get<2>(this->tuple);},
-        _set {std::get<2>(this->tuple) = value;}
+      property_<T3> Item3 {
+        get_ {return std::get<2>(this->tuple);},
+        set_ {std::get<2>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's fourth component.
       /// @param T4 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's fourth component.
-      _property<T4> Item4 {
-        _get {return std::get<3>(this->tuple);},
-        _set {std::get<3>(this->tuple) = value;}
+      property_<T4> Item4 {
+        get_ {return std::get<3>(this->tuple);},
+        set_ {std::get<3>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's fifth component.
       /// @param T5 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's fifth component.
-      _property<T5> Item5 {
-        _get {return std::get<4>(this->tuple);},
-        _set {std::get<4>(this->tuple) = value;}
+      property_<T5> Item5 {
+        get_ {return std::get<4>(this->tuple);},
+        set_ {std::get<4>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's sixth component.
       /// @param T6 The value of the current ValueTuple <T1, T2, T3, T4, T5, T6> object's sixth component.
-      _property<T6> Item6 {
-        _get {return std::get<5>(this->tuple);},
-        _set {std::get<5>(this->tuple) = value;}
+      property_<T6> Item6 {
+        get_ {return std::get<5>(this->tuple);},
+        set_ {std::get<5>(this->tuple) = value;}
       };
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -416,37 +416,37 @@ namespace Switch {
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5> object's first component.
       /// @param T1 The value of the current ValueTuple <T1, T2, T3, T4, T5> object's first component.
-      _property<T1> Item1 {
-        _get {return std::get<0>(this->tuple);},
-        _set {std::get<0>(this->tuple) = value;}
+      property_<T1> Item1 {
+        get_ {return std::get<0>(this->tuple);},
+        set_ {std::get<0>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5> object's second component.
       /// @param T2 The value of the current ValueTuple <T1, T2, T3, T4, T5> object's second component.
-      _property<T2> Item2 {
-        _get {return std::get<1>(this->tuple);},
-        _set {std::get<1>(this->tuple) = value;}
+      property_<T2> Item2 {
+        get_ {return std::get<1>(this->tuple);},
+        set_ {std::get<1>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5> object's third component.
       /// @param T3 The value of the current ValueTuple <T1, T2, T3, T4, T5> object's third component.
-      _property<T3> Item3 {
-        _get {return std::get<2>(this->tuple);},
-        _set {std::get<2>(this->tuple) = value;}
+      property_<T3> Item3 {
+        get_ {return std::get<2>(this->tuple);},
+        set_ {std::get<2>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5> object's fourth component.
       /// @param T4 The value of the current ValueTuple <T1, T2, T3, T4, T5> object's fourth component.
-      _property<T4> Item4 {
-        _get {return std::get<3>(this->tuple);},
-        _set {std::get<3>(this->tuple) = value;}
+      property_<T4> Item4 {
+        get_ {return std::get<3>(this->tuple);},
+        set_ {std::get<3>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4, T5> object's fifth component.
       /// @param T5 The value of the current ValueTuple <T1, T2, T3, T4, T5> object's fifth component.
-      _property<T5> Item5 {
-        _get {return std::get<4>(this->tuple);},
-        _set {std::get<4>(this->tuple) = value;}
+      property_<T5> Item5 {
+        get_ {return std::get<4>(this->tuple);},
+        set_ {std::get<4>(this->tuple) = value;}
       };
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -518,30 +518,30 @@ namespace Switch {
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4> object's first component.
       /// @param T1 The value of the current ValueTuple <T1, T2, T3, T4> object's first component.
-      _property<T1> Item1 {
-        _get {return std::get<0>(this->tuple);},
-        _set {std::get<0>(this->tuple) = value;}
+      property_<T1> Item1 {
+        get_ {return std::get<0>(this->tuple);},
+        set_ {std::get<0>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4> object's second component.
       /// @param T2 The value of the current ValueTuple <T1, T2, T3, T4> object's second component.
-      _property<T2> Item2 {
-        _get {return std::get<1>(this->tuple);},
-        _set {std::get<1>(this->tuple) = value;}
+      property_<T2> Item2 {
+        get_ {return std::get<1>(this->tuple);},
+        set_ {std::get<1>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4> object's third component.
       /// @param T3 The value of the current ValueTuple <T1, T2, T3, T4> object's third component.
-      _property<T3> Item3 {
-        _get {return std::get<2>(this->tuple);},
-        _set {std::get<2>(this->tuple) = value;}
+      property_<T3> Item3 {
+        get_ {return std::get<2>(this->tuple);},
+        set_ {std::get<2>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3, T4> object's fourth component.
       /// @param T4 The value of the current ValueTuple <T1, T2, T3, T4> object's fourth component.
-      _property<T4> Item4 {
-        _get {return std::get<3>(this->tuple);},
-        _set {std::get<3>(this->tuple) = value;}
+      property_<T4> Item4 {
+        get_ {return std::get<3>(this->tuple);},
+        set_ {std::get<3>(this->tuple) = value;}
       };
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -611,23 +611,23 @@ namespace Switch {
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3> object's first component.
       /// @param T1 The value of the current ValueTuple <T1, T2, T3> object's first component.
-      _property<T1> Item1 {
-        _get {return std::get<0>(this->tuple);},
-        _set {std::get<0>(this->tuple) = value;}
+      property_<T1> Item1 {
+        get_ {return std::get<0>(this->tuple);},
+        set_ {std::get<0>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3> object's second component.
       /// @param T2 The value of the current ValueTuple <T1, T2, T3> object's second component.
-      _property<T2> Item2 {
-        _get {return std::get<1>(this->tuple);},
-        _set {std::get<1>(this->tuple) = value;}
+      property_<T2> Item2 {
+        get_ {return std::get<1>(this->tuple);},
+        set_ {std::get<1>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2, T3> object's third component.
       /// @param T3 The value of the current ValueTuple <T1, T2, T3> object's third component.
-      _property<T3> Item3 {
-        _get {return std::get<2>(this->tuple);},
-        _set {std::get<2>(this->tuple) = value;}
+      property_<T3> Item3 {
+        get_ {return std::get<2>(this->tuple);},
+        set_ {std::get<2>(this->tuple) = value;}
       };
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -686,7 +686,7 @@ namespace Switch {
     /// @remarks To provide easy access to, and manipulation of, a data set. The following example defines an array of ValueTuple<T1, T2> objects that contain the names of students and their corresponding test scores. It then iterates the array to calculate the mean test score.
     /// @include ValueTuple2.cpp
     /// @remarks To return multiple values from a method without the use of out parameters. For example, the following example uses a ValueTuple<T1, T2> object to return the quotient and the remainder that result from integer division.
-    /// @remarks To pass multiple values to a method through a single parameter. For example, the Thread.Start(object) method has a single parameter that lets you supply one value to the method that the thread executes at _startup. If you supply a ValueTuple<T1, T2> object as the method argument, you can supply the thread’s _startup routine with two items of data.
+    /// @remarks To pass multiple values to a method through a single parameter. For example, the Thread.Start(object) method has a single parameter that lets you supply one value to the method that the thread executes at startup_. If you supply a ValueTuple<T1, T2> object as the method argument, you can supply the thread’s startup_ routine with two items of data.
     template<typename T1, typename T2>
     class ValueTuple<T1, T2> : public ValueTupleObject, public IComparable {
     public:
@@ -703,16 +703,16 @@ namespace Switch {
 
       /// @brief Gets the value of the current ValueTuple <T1, T2> object's first component.
       /// @param T1 The value of the current ValueTuple <T1, T2> object's first component.
-      _property<T1> Item1 {
-        _get {return std::get<0>(this->tuple);},
-        _set {std::get<0>(this->tuple) = value;}
+      property_<T1> Item1 {
+        get_ {return std::get<0>(this->tuple);},
+        set_ {std::get<0>(this->tuple) = value;}
       };
 
       /// @brief Gets the value of the current ValueTuple <T1, T2> object's second component.
       /// @param T2 The value of the current ValueTuple <T1, T2> object's second component.
-      _property<T2> Item2 {
-        _get {return std::get<1>(this->tuple);},
-        _set {std::get<1>(this->tuple) = value;}
+      property_<T2> Item2 {
+        get_ {return std::get<1>(this->tuple);},
+        set_ {std::get<1>(this->tuple) = value;}
       };
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -778,9 +778,9 @@ namespace Switch {
 
       /// @brief Gets the value of the current ValueTuple <T1> object's first component.
       /// @param T1 The value of the current ValueTuple <T1> object's first component.
-      _property<T1> Item1 {
-        _get {return std::get<0>(this->tuple);},
-        _set {std::get<0>(this->tuple) = value;}
+      property_<T1> Item1 {
+        get_ {return std::get<0>(this->tuple);},
+        set_ {std::get<0>(this->tuple) = value;}
       };
 
       /// @brief Compares the current Version object to a specified object and returns an indication of their relative values.
@@ -827,7 +827,7 @@ namespace Switch {
     /// @see System::ValueTuple <T1, T2, T3, T4, T5, T6, T7>
     /// @see System::ValueTuple <T1, T2, T3, T4, T5, T6, T7, TRest>
     template<>
-    class ValueTuple<> _static {
+    class ValueTuple<> static_ {
     public:
       /// @brief Creates a new 8-tuple, or octuple.
       /// @param item1 The value of the first component of the tuple.

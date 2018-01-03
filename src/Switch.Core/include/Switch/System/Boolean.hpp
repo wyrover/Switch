@@ -44,7 +44,7 @@ namespace Switch {
     /// and
     /// @include Boolean8.cpp
     /// are equivalent, but the second is more compact. However, both techniques offer comparable performance.
-    struct _export Boolean final : public ValueType, public IComparable, public IConvertible {
+    struct export_ Boolean final : public ValueType, public IComparable, public IConvertible {
     public:
       /// @brief Create a new instance of struct Boolean
       /// @remarks Boolean is initialized by default to false.

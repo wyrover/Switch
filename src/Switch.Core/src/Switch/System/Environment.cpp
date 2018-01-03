@@ -88,23 +88,23 @@ namespace {
 
     static void SignalIllegalInstructionHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalIllegalInstructionHandler);
-      throw System::InvalidOperationException(_caller);
+      throw System::InvalidOperationException(caller_);
     }
 
     static void SignalAbortExceptionHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalAbortExceptionHandler);
-      //throw System::Threading::ThreadAbortException(_caller);
+      //throw System::Threading::ThreadAbortException(caller_);
       exit(-1);
     }
 
     static void SignalFloatingPointExceptionHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalFloatingPointExceptionHandler);
-      throw System::ArithmeticException(_caller);
+      throw System::ArithmeticException(caller_);
     }
 
     static void SignalSegmentationViolationHandler(int32 signal) {
       ::signal(signal, SignalCatcher::SignalSegmentationViolationHandler);
-      throw System::AccessViolationException(_caller);
+      throw System::AccessViolationException(caller_);
     }
   };
 
@@ -117,7 +117,7 @@ namespace {
     return envs;
   }
 
-  _property<Collections::Generic::Dictionary<string, string>&, _readonly> EnvironmentVariables {
+  property_<Collections::Generic::Dictionary<string, string>&, readonly_> EnvironmentVariables {
     []()->Collections::Generic::Dictionary<string, string>& {
       static Collections::Generic::Dictionary<string, string> environmentVariables = GetEnvironmentVariables();
       return environmentVariables;
@@ -133,10 +133,10 @@ namespace {
   refptr<SignalCatcher> signalCatcher;
 }
 
-_property<String, _readonly> Environment::CommandLine {
+property_<String, readonly_> Environment::CommandLine {
   [] {
     if (commandLineArgs->Length == 0)
-      throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", _caller);
+      throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", caller_);
 
     string commandLine = string::Format("\"{0}\" ", commandLineArgs.ToObject()[0]);
     int32 index = 1;
@@ -147,46 +147,46 @@ _property<String, _readonly> Environment::CommandLine {
   }
 };
 
-_property<string> Environment::CurrentDirectory {
+property_<string> Environment::CurrentDirectory {
   [] {return Native::DirectoryApi::GetCurrentDirectory();},
   [](string value) {
     if (String::IsNullOrEmpty(value))
-      throw ArgumentException(_caller);
+      throw ArgumentException(caller_);
     if (!System::IO::Directory::Exists(value))
-      throw IO::DirectoryNotFoundException(_caller);
+      throw IO::DirectoryNotFoundException(caller_);
     if (Native::DirectoryApi::SetCurrentDirectory(value) != 0)
-      throw IO::IOException(_caller);
+      throw IO::IOException(caller_);
   }
 };
 
-_property<int32, _readonly> Environment::CurrentManagedThreadId {
+property_<int32, readonly_> Environment::CurrentManagedThreadId {
   [] {return System::Threading::Thread::CurrentThread().ManagedThreadId();}
 };
 
-_property<int32> Environment::ExitCode {
+property_<int32> Environment::ExitCode {
   [] {return exitCode;},
   [](int32 value) {exitCode = value;}
 };
 
-_property<bool, _readonly> Environment::HasShutdownStarted {
+property_<bool, readonly_> Environment::HasShutdownStarted {
   [] {return false;}
 };
 
-_property<bool, _readonly> Environment::Is64BitOperatingSystem {
+property_<bool, readonly_> Environment::Is64BitOperatingSystem {
   [] {return Native::EnvironmentApi::IsOs64Bit();}
 };
 
-_property<bool, _readonly> Environment::Is64BitProcess {
+property_<bool, readonly_> Environment::Is64BitProcess {
   [] {return IntPtr::Size == 8;}
 };
 
-_property<String, _readonly> Environment::MachineName {
+property_<String, readonly_> Environment::MachineName {
   [] {return Native::EnvironmentApi::GetMachineName();}
 };
 
 const String Environment::NewLine = Native::EnvironmentApi::NewLine();
 
-_property<const OperatingSystem&, _readonly> Environment::OSVersion {
+property_<const OperatingSystem&, readonly_> Environment::OSVersion {
   []()->const OperatingSystem& {
     static OperatingSystem os(PlatformID::Unknown, System::Version());
     if (os.Platform == PlatformID::Unknown) {
@@ -198,46 +198,46 @@ _property<const OperatingSystem&, _readonly> Environment::OSVersion {
   }
 };
 
-_property<int32, _readonly> Environment::ProcessorCount {
+property_<int32, readonly_> Environment::ProcessorCount {
   [] {
     static int32 processorCount = as<int32>(std::thread::hardware_concurrency());
     return processorCount;
   }
 };
 
-_property<String, _readonly> Environment::StackTrace {
+property_<String, readonly_> Environment::StackTrace {
   [] {return Diagnostics::StackTrace(3, true).ToString();}
 };
 
-_property<String, _readonly> Environment::SystemDirectory {
+property_<String, readonly_> Environment::SystemDirectory {
   [] {return GetFolderPath(Environment::SpecialFolder::System);}
 };
 
-_property<int32, _readonly> Environment::SystemPageSize {
+property_<int32, readonly_> Environment::SystemPageSize {
   [] {return 4096;}
 };
 
-_property<int32, _readonly> Environment::TickCount {
+property_<int32, readonly_> Environment::TickCount {
   [] {return Native::EnvironmentApi::GetTickCount();}
 };
 
-_property<String, _readonly> Environment::UserDomainName {
+property_<String, readonly_> Environment::UserDomainName {
   [] {return Native::EnvironmentApi::GetUserDomainName();}
 };
 
-_property<bool, _readonly> Environment::UserInteractive {
+property_<bool, readonly_> Environment::UserInteractive {
   [] {return ::userInteractive;}
 };
 
-_property<String, _readonly> Environment::UserName {
+property_<String, readonly_> Environment::UserName {
   [] {return Native::EnvironmentApi::GetUserName();}
 };
 
-_property<const System::Version, _readonly> Environment::Version {
+property_<const System::Version, readonly_> Environment::Version {
   [] {return Native::EnvironmentApi::GetVersion();}
 };
 
-_property<int64, _readonly> Environment::WorkingSet {
+property_<int64, readonly_> Environment::WorkingSet {
   [] {return Native::EnvironmentApi::GetWorkingSet();}
 };
 
@@ -267,13 +267,13 @@ String Environment::ExpandEnvironmentVariables(const String& name) {
 
 const Array<String>& Environment::GetCommandLineArgs() {
   if (commandLineArgs->Length == 0)
-    throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", _caller);
+    throw InvalidOperationException("You must call System::Environment::SetCommandLineArgs(argv, argc); method in main before.", caller_);
   return commandLineArgs();
 }
 
 String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target) {
   if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (target == EnvironmentVariableTarget::Process) {
     char* value = getenv(variable.Data());
@@ -285,7 +285,7 @@ String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVa
 
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables(EnvironmentVariableTarget target) {
   if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (target == EnvironmentVariableTarget::Process)
     return EnvironmentVariables;
@@ -300,7 +300,7 @@ const Collections::Generic::IDictionary<String, String>& Environment::GetEnviron
 
 String Environment::GetFolderPath(Environment::SpecialFolder folder, Environment::SpecialFolderOption option) {
   if (!Enum<Environment::SpecialFolderOption>::GetValues().Contains(option))
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   string path = Native::DirectoryApi::GetKnowFolderPath(folder);
 
@@ -319,17 +319,17 @@ Array<String> Environment::GetLogicalDrives() {
 
 void Environment::SetEnvironmentVariable(const String& name, const String& value, EnvironmentVariableTarget target) {
   if (string::IsNullOrEmpty(name))
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (target == EnvironmentVariableTarget::Process) {
     if (string::IsNullOrEmpty(value)) {
       EnvironmentVariables().Remove(name);
       if (Native::EnvironmentApi::UnsetEnv(name) != 0)
-        throw ArgumentException(_caller);
+        throw ArgumentException(caller_);
     } else {
       EnvironmentVariables()[name] = value;
       if (Native::EnvironmentApi::SetEnv(name, value) != 0)
-        throw ArgumentException(_caller);
+        throw ArgumentException(caller_);
     }
   } else {
     Microsoft::Win32::RegistryKey key = target == EnvironmentVariableTarget::User ? Microsoft::Win32::Registry::CurrentUser().CreateSubKey("Environment") : Microsoft::Win32::Registry::LocalMachine().CreateSubKey("System").CreateSubKey("CurrentControlSet").CreateSubKey("Control").CreateSubKey("Session Manager").CreateSubKey("Environment");
@@ -342,7 +342,7 @@ void Environment::SetEnvironmentVariable(const String& name, const String& value
 
 Array<string> Environment::SetCommandLineArgs(char* argv[], int argc) {
   if (commandLineArgs != null)
-    throw InvalidOperationException("Can be called only once", _caller);
+    throw InvalidOperationException("Can be called only once", caller_);
 
   socketInit = ref_new<SocketInit>();
   consoleChangeCodePage = ref_new<ConsoleChangeCodePage>();

@@ -29,7 +29,7 @@ namespace Examples {
 }
 
 // The main entry point for the application.
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

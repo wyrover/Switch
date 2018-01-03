@@ -27,7 +27,7 @@
 #include "WindowMessageKey.hpp"
 
 namespace Native {
-  class ApplicationApi _static {
+  class ApplicationApi static_ {
   public:
     static void EnableVisualStyles() { visualStylesEnabled = true; }
     static void Exit();
@@ -41,20 +41,20 @@ namespace Native {
     static bool visualStylesEnabled;
   };
 
-  class ButtonApi _static {
+  class ButtonApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::Button& button);
     static void SetIsDefault(const System::Windows::Forms::Button& button);
   };
 
-  class CheckBoxApi _static {
+  class CheckBoxApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::CheckBox& checkBox);
     static void SetAutoCheck(const System::Windows::Forms::CheckBox& checkBox);
     static void SetChecked(const System::Windows::Forms::CheckBox& checkBox);
   };
 
-  class ControlApi _static {
+  class ControlApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::Control& control);
     static void DefWndProc(System::Windows::Forms::Message& message);
@@ -88,29 +88,29 @@ namespace Native {
     }
   };
 
-  class FormApi _static {
+  class FormApi static_ {
   public:
     static void Close(System::Windows::Forms::Form& form);
     static intptr Create(System::Windows::Forms::Form& form);
   };
 
-  class GroupBoxApi _static {
+  class GroupBoxApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::GroupBox& groupBox);
   };
 
-  class LabelApi _static {
+  class LabelApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::Label& label);
   };
 
-  class PanelApi _static {
+  class PanelApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::Panel& panel);
     static void SetBorderStyle(const System::Windows::Forms::Panel& panel);
   };
 
-  class ProgressBarApi _static {
+  class ProgressBarApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::ProgressBar& progressBar);
     static void SetMaximum(const System::Windows::Forms::ProgressBar& progressBar);
@@ -119,14 +119,14 @@ namespace Native {
     static void SetValue(const System::Windows::Forms::ProgressBar& progressBar);
   };
 
-  class RadioButtonApi _static {
+  class RadioButtonApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::RadioButton& radioButton);
     static void SetChecked(const System::Windows::Forms::RadioButton& radioButton);
     static void SetGroup(const System::Windows::Forms::RadioButton& radioButton);
   };
 
-  class SystemInformationApi _static {
+  class SystemInformationApi static_ {
   public:
     static int32 GetActiveWindowTrackingDelay();
     static System::Windows::Forms::ArrangeDirection GetArrangeDirection();
@@ -188,24 +188,24 @@ namespace Native {
     static int32 GetMenuHeight();
   };
 
-  class TabPageApi _static {
+  class TabPageApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::TabPage& tabPage);
   };
 
-  class TabControlApi _static {
+  class TabControlApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::TabControl& tabControl);
     static void SetAlignment(const System::Windows::Forms::TabControl& tabControl);
   };
 
-  class TimerApi _static {
+  class TimerApi static_ {
   public:
     static intptr Create(int32 interval, delegate<void> tick);
     static void Destroy(intptr handle);
   };
 
-  class TrackBarApi _static {
+  class TrackBarApi static_ {
   public:
     static intptr Create(const System::Windows::Forms::TrackBar& trackBar);
     static void SetLargeChange(const System::Windows::Forms::TrackBar& trackBar);

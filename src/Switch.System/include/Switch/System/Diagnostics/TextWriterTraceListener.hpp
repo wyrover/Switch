@@ -26,7 +26,7 @@ namespace Switch {
       ///
       /// After running this sample, you can open the TestFile.txt file to see the output.
       /// @include TextWriterTraceListener.cpp
-      class _export TextWriterTraceListener : public TraceListener {
+      class export_ TextWriterTraceListener : public TraceListener {
         struct InitTextWriter {
           template<typename TTextWriter>
           void operator()(const TTextWriter& textWriter, TextWriterTraceListener& twtl) {
@@ -74,8 +74,8 @@ namespace Switch {
 
         /// @brief Gets the text writer that receives the tracing or debugging output.
         /// @return System::IO::TextWriter A TextWriter that represents the writer that receives the tracing or debugging output.
-        _property<System::IO::TextWriter&, _readonly> Writer {
-          _get->System::IO::TextWriter& {return *this->textWriter;}
+        property_<System::IO::TextWriter&, readonly_> Writer {
+          get_->System::IO::TextWriter& {return *this->textWriter;}
         };
 
         void Write(const String& message) override {

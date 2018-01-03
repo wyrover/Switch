@@ -13,7 +13,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This example produces results similar to the following:
 //

@@ -17,14 +17,14 @@ namespace SwitchUnitTests {
       ~NotInheritedFromAnInterface() {result += "~NotInheritedFromAnInterface";}
     };
 
-    _using(refptr<NotAnInterface> value = ref_new<NotInheritedFromAnInterface>());
+    using_(refptr<NotAnInterface> value = ref_new<NotInheritedFromAnInterface>());
     ASSERT_EQ("~NotAnInterface", result);
   }
 
   TEST(InterfaceTest, CreateClassInheritedFromAnInterface) {
     static string result;
     result = "";
-    struct AnInterface _abstract {
+    struct AnInterface abstract_ {
       ~AnInterface() {result += "~AnInterface";}
     };
 
@@ -32,7 +32,7 @@ namespace SwitchUnitTests {
       ~InheritedFromAnInterface() {result += "~InheritedFromAnInterface";}
     };
 
-    _using(refptr<AnInterface> value = ref_new<InheritedFromAnInterface>());
+    using_(refptr<AnInterface> value = ref_new<InheritedFromAnInterface>());
     ASSERT_EQ("~InheritedFromAnInterface~AnInterface", result);
   }
 }

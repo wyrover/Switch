@@ -23,8 +23,8 @@ namespace Switch {
 
           /// @brief Gets a value indicating whether the IList has a fixed size.
           /// @return Boolean true if the IList has a fixed size; otherwise, false.
-          _property<bool, _readonly> IsFixedSize {
-            _get {return this->GetIsFixedSize();}
+          property_<bool, readonly_> IsFixedSize {
+            get_ {return this->GetIsFixedSize();}
           };
 
           /// @brief Determines the index of a specific item in the IList.

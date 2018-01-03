@@ -5,239 +5,239 @@ using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
-_property<int32, _readonly> SystemInformation::ActiveWindowTrackingDelay {
+property_<int32, readonly_> SystemInformation::ActiveWindowTrackingDelay {
   [] {return Native::SystemInformationApi::GetActiveWindowTrackingDelay();}
 };
 
-_property<System::Windows::Forms::ArrangeDirection, _readonly> SystemInformation::ArrangeDirection{
+property_<System::Windows::Forms::ArrangeDirection, readonly_> SystemInformation::ArrangeDirection{
   [] {return Native::SystemInformationApi::GetArrangeDirection(); }
 };
 
-_property<System::Windows::Forms::ArrangeStartingPosition, _readonly> SystemInformation::ArrangeStartingPosition{
+property_<System::Windows::Forms::ArrangeStartingPosition, readonly_> SystemInformation::ArrangeStartingPosition{
   [] {return Native::SystemInformationApi::GetArrangeStartingPosition(); }
 };
 
-_property<System::Windows::Forms::BootMode, _readonly> SystemInformation::BootMode{
+property_<System::Windows::Forms::BootMode, readonly_> SystemInformation::BootMode{
   [] {return Native::SystemInformationApi::GetBootMode(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::Border3DSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::Border3DSize{
   [] {return Native::SystemInformationApi::GetBorder3DSize(); }
 };
 
-_property<int32, _readonly> SystemInformation::BorderMultiplierFactor{
+property_<int32, readonly_> SystemInformation::BorderMultiplierFactor{
   [] {return Native::SystemInformationApi::GetBorderMultiplierFactor(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::BorderSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::BorderSize{
   [] {return Native::SystemInformationApi::GetBorderSize(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::CaptionButtonSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::CaptionButtonSize{
   [] {return Native::SystemInformationApi::GetCaptionButtonSize(); }
 };
 
-_property<int32, _readonly> SystemInformation::CaptionHeight {
+property_<int32, readonly_> SystemInformation::CaptionHeight {
   [] {return Native::SystemInformationApi::GetCaptionHeight();}
 };
 
-_property<int32, _readonly> SystemInformation::CaretBlinkTime{
+property_<int32, readonly_> SystemInformation::CaretBlinkTime{
   [] {return Native::SystemInformationApi::GetCaretBlinkTime(); }
 };
 
-_property<int32, _readonly> SystemInformation::CaretWidth{
+property_<int32, readonly_> SystemInformation::CaretWidth{
   [] {return Native::SystemInformationApi::GetCaretWidth(); }
 };
 
-_property<string, _readonly> SystemInformation::ComputerName{
+property_<string, readonly_> SystemInformation::ComputerName{
   [] {return Environment::MachineName(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::CursorSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::CursorSize{
   [] {return Native::SystemInformationApi::GetCursorSize(); }
 };
 
-_property<bool, _readonly> SystemInformation::DbcsEnabled{
+property_<bool, readonly_> SystemInformation::DbcsEnabled{
   [] {return Native::SystemInformationApi::GetDbcsEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::DebugOS{
+property_<bool, readonly_> SystemInformation::DebugOS{
   [] {return Native::SystemInformationApi::GetDebugOS(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::DoubleClickSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::DoubleClickSize{
   [] {return Native::SystemInformationApi::GetDoubleClickSize(); }
 };
 
-_property<int32, _readonly> SystemInformation::DoubleClickTime{
+property_<int32, readonly_> SystemInformation::DoubleClickTime{
   [] {return Native::SystemInformationApi::GetDoubleClickTime(); }
 };
 
-_property<bool, _readonly> SystemInformation::DragFullWindows{
+property_<bool, readonly_> SystemInformation::DragFullWindows{
   [] {return Native::SystemInformationApi::GetDragFullWindows(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::DragSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::DragSize{
   [] {return Native::SystemInformationApi::GetDragSize(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::FixedFrameBorderSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::FixedFrameBorderSize{
   [] {return Native::SystemInformationApi::GetFixedFrameBorderSize(); }
 };
 
-_property<int32, _readonly> SystemInformation::FontSmoothingContrast{
+property_<int32, readonly_> SystemInformation::FontSmoothingContrast{
   [] {return Native::SystemInformationApi::GetFontSmoothingContrast(); }
 };
 
-_property<int32, _readonly> SystemInformation::FontSmoothingType{
+property_<int32, readonly_> SystemInformation::FontSmoothingType{
   [] {return Native::SystemInformationApi::GetFontSmoothingType(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::FrameBorderSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::FrameBorderSize{
   [] {return Native::SystemInformationApi::GetFrameBorderSize(); }
 };
 
-_property<bool, _readonly> SystemInformation::HighContrast{
+property_<bool, readonly_> SystemInformation::HighContrast{
   [] {return Native::SystemInformationApi::GetHighContrast(); }
 };
 
-_property<int32, _readonly> SystemInformation::HorizontalFocusThickness{
+property_<int32, readonly_> SystemInformation::HorizontalFocusThickness{
   [] {return Native::SystemInformationApi::GetHorizontalFocusThickness(); }
 };
 
-_property<int32, _readonly> SystemInformation::HorizontalResizeBorderThickness{
+property_<int32, readonly_> SystemInformation::HorizontalResizeBorderThickness{
   [] {return Native::SystemInformationApi::GetHorizontalResizeBorderThickness(); }
 };
 
-_property<int32, _readonly> SystemInformation::HorizontalScrollBarArrowWidth{
+property_<int32, readonly_> SystemInformation::HorizontalScrollBarArrowWidth{
   [] {return Native::SystemInformationApi::GetHorizontalScrollBarArrowWidth(); }
 };
 
-_property<int32, _readonly> SystemInformation::HorizontalScrollBarHeight{
+property_<int32, readonly_> SystemInformation::HorizontalScrollBarHeight{
   [] {return Native::SystemInformationApi::GetHorizontalScrollBarHeight(); }
 };
 
-_property<int32, _readonly> SystemInformation::HorizontalScrollBarThumbWidth{
+property_<int32, readonly_> SystemInformation::HorizontalScrollBarThumbWidth{
   [] {return Native::SystemInformationApi::GetHorizontalScrollBarThumbWidth(); }
 };
 
-_property<int32, _readonly> SystemInformation::IconHorizontalSpacing{
+property_<int32, readonly_> SystemInformation::IconHorizontalSpacing{
   [] {return Native::SystemInformationApi::GetIconHorizontalSpacing(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::IconSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::IconSize{
   [] {return Native::SystemInformationApi::GetIconSize(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::IconSpacingSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::IconSpacingSize{
   [] {return Native::SystemInformationApi::GetIconSpacingSize(); }
 };
 
-_property<int32, _readonly> SystemInformation::IconVerticalSpacing{
+property_<int32, readonly_> SystemInformation::IconVerticalSpacing{
   [] {return Native::SystemInformationApi::GetIconVerticalSpacing(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsActiveWindowTrackingEnabled{
+property_<bool, readonly_> SystemInformation::IsActiveWindowTrackingEnabled{
   [] {return Native::SystemInformationApi::GetIsActiveWindowTrackingEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsComboBoxAnimationEnabled{
+property_<bool, readonly_> SystemInformation::IsComboBoxAnimationEnabled{
   [] {return Native::SystemInformationApi::GetIsComboBoxAnimationEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsDropShadowEnabled{
+property_<bool, readonly_> SystemInformation::IsDropShadowEnabled{
   [] {return Native::SystemInformationApi::GetIsDropShadowEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsFlatMenuEnabled{
+property_<bool, readonly_> SystemInformation::IsFlatMenuEnabled{
   [] {return Native::SystemInformationApi::GetIsFlatMenuEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsFontSmoothingEnabled{
+property_<bool, readonly_> SystemInformation::IsFontSmoothingEnabled{
   [] {return Native::SystemInformationApi::GetIsFontSmoothingEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsHotTrackingEnabled{
+property_<bool, readonly_> SystemInformation::IsHotTrackingEnabled{
   [] {return Native::SystemInformationApi::GetIsHotTrackingEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsIconTitleWrappingEnabled{
+property_<bool, readonly_> SystemInformation::IsIconTitleWrappingEnabled{
   [] {return Native::SystemInformationApi::GetIsIconTitleWrappingEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsKeyboardPreferred{
+property_<bool, readonly_> SystemInformation::IsKeyboardPreferred{
   [] {return Native::SystemInformationApi::GetIsKeyboardPreferred(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsListBoxSmoothScrollingEnabled{
+property_<bool, readonly_> SystemInformation::IsListBoxSmoothScrollingEnabled{
   [] {return Native::SystemInformationApi::GetIsListBoxSmoothScrollingEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsMenuAnimationEnabled{
+property_<bool, readonly_> SystemInformation::IsMenuAnimationEnabled{
   [] {return Native::SystemInformationApi::GetIsMenuAnimationEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsMenuFadeEnabled{
+property_<bool, readonly_> SystemInformation::IsMenuFadeEnabled{
   [] {return Native::SystemInformationApi::GetIsMenuFadeEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsMinimizeRestoreAnimationEnabled{
+property_<bool, readonly_> SystemInformation::IsMinimizeRestoreAnimationEnabled{
   [] {return Native::SystemInformationApi::GetIsMinimizeRestoreAnimationEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsSelectionFadeEnabled{
+property_<bool, readonly_> SystemInformation::IsSelectionFadeEnabled{
   [] {return Native::SystemInformationApi::GetIsSelectionFadeEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsSnapToDefaultEnabled{
+property_<bool, readonly_> SystemInformation::IsSnapToDefaultEnabled{
   [] {return Native::SystemInformationApi::GetIsSnapToDefaultEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsTitleBarGradientEnabled{
+property_<bool, readonly_> SystemInformation::IsTitleBarGradientEnabled{
   [] {return Native::SystemInformationApi::GetIsTitleBarGradientEnabled(); }
 };
 
-_property<bool, _readonly> SystemInformation::IsToolTipAnimationEnabled{
+property_<bool, readonly_> SystemInformation::IsToolTipAnimationEnabled{
   [] {return Native::SystemInformationApi::GetIsToolTipAnimationEnabled(); }
 };
 
-_property<int32, _readonly> SystemInformation::KanjiWindowHeight{
+property_<int32, readonly_> SystemInformation::KanjiWindowHeight{
   [] {return Native::SystemInformationApi::GetKanjiWindowHeight(); }
 };
 
-_property<int32, _readonly> SystemInformation::KeyboardDelay{
+property_<int32, readonly_> SystemInformation::KeyboardDelay{
   [] {return Native::SystemInformationApi::GetKeyboardDelay(); }
 };
 
-_property<int32, _readonly> SystemInformation::KeyboardSpeed{
+property_<int32, readonly_> SystemInformation::KeyboardSpeed{
   [] {return Native::SystemInformationApi::GetKeyboardSpeed(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::MaxWindowTrackSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::MaxWindowTrackSize{
   [] {return Native::SystemInformationApi::GetMaxWindowTrackSize(); }
 };
 
-_property<bool, _readonly> SystemInformation::MenuAccessKeysUnderlined{
+property_<bool, readonly_> SystemInformation::MenuAccessKeysUnderlined{
   [] {return Native::SystemInformationApi::GetMenuAccessKeysUnderlined(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::MenuBarButtonSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::MenuBarButtonSize{
   [] {return Native::SystemInformationApi::GetMenuBarButtonSize(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::MenuButtonSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::MenuButtonSize{
   [] {return Native::SystemInformationApi::GetMenuButtonSize(); }
 };
 
-_property<System::Drawing::Size, _readonly> SystemInformation::MenuCheckSize{
+property_<System::Drawing::Size, readonly_> SystemInformation::MenuCheckSize{
   [] {return Native::SystemInformationApi::GetMenuCheckSize(); }
 };
 
-_property<System::Drawing::Font, _readonly> SystemInformation::MenuFont{
+property_<System::Drawing::Font, readonly_> SystemInformation::MenuFont{
   [] {return Native::SystemInformationApi::GetMenuFont(); }
 };
 
-_property<int32, _readonly> SystemInformation::MenuHeight{
+property_<int32, readonly_> SystemInformation::MenuHeight{
   [] {return Native::SystemInformationApi::GetMenuHeight(); }
 };
 

@@ -35,7 +35,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents type declarations: class types, interface types, array types, value types, enumeration types, type parameters, generic type definitions, and open or closed constructed generic types.
-    class _export Type : public Object {
+    class export_ Type : public Object {
     public:
       /// @cond
       Type(const Type& type);
@@ -44,17 +44,17 @@ namespace Switch {
       /// @brief Gets the fully qualified name of the Type, including the namespace of the Type.
       /// @return The fully qualified name of the Type, including the namespace of the Type.
       /// @remarks For example, the fully qualified name of the String type is String.
-      _property<String, _readonly> FullName;
+      property_<String, readonly_> FullName;
 
       /// @brief Gets the name of the Type.
       /// @return The name of the Type.
       /// @remarks For example, the name of the String type is String.
-      _property<String, _readonly> Name;
+      property_<String, readonly_> Name;
 
       /// @brief Gets the namespace of the Type.
       /// @return The namespace of the Type.
       /// @remarks For example, the namespace of the String type is System::
-      _property<String, _readonly> Namespace;
+      property_<String, readonly_> Namespace;
 
       /// @brief Determines whether the specified Object is equal to the current Object.
       /// @param obj The Object to compare with the current Object.
@@ -125,13 +125,13 @@ namespace __s__ {
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
-  /// @brief Used to obtain the type Object for a type. A _typeof expression takes the following form:
+  /// @brief Used to obtain the type Object for a type. A typeof_ expression takes the following form:
   /// @par Examples
   /// @code
-  /// Type type1 = _typeof<Int32>();
+  /// Type type1 = typeof_<Int32>();
   ///
   /// Int32 i = 42;
-  /// Type type2 = _typeof(i);
+  /// Type type2 = typeof_(i);
   /// @endcode
   /// @par Examples
   /// To obtain the run-time type of an expression, you can use the Switch method GetType, as in the following example:
@@ -139,10 +139,10 @@ namespace Switch {
   /// Int32 42 = 0;
   /// System::Type Type = i.GetType();
   /// @endcode
-  /// @remarks The _typeof operator cannot be overloaded.
+  /// @remarks The typeof_ operator cannot be overloaded.
   /// @see System::Type
   /// @ingroup Keywords
-#define _typeof  \
+#define typeof_  \
   __s__::__typeof_
 }
 

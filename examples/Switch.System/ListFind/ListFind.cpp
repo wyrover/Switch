@@ -32,14 +32,14 @@ namespace Examples {
       DisplayResults(books, "All books:");
 
       // Find a book by its iD.
-      Book result = books.Find(_delegate(const Book & book) {return book.iD.Equals(idToFind);});
+      Book result = books.Find(delegate_(const Book & book) {return book.iD.Equals(idToFind);});
       if (result != Book::Empty())
         DisplayResult(result, String::Format("Find by iD: {0}", idToFind));
       else
         Console::WriteLine("\nNot found: " + idToFind);
 
       // Find last book in collection published before 2001.
-      result = books.FindLast(_delegate(const Book & book) {return book.publishDate < DateTime(2001, 1, 1);});
+      result = books.FindLast(delegate_(const Book & book) {return book.publishDate < DateTime(2001, 1, 1);});
       if (result != Book::Empty())
         DisplayResult(result, "Last book in collection published before 2001:");
       else
@@ -53,7 +53,7 @@ namespace Examples {
         Console::WriteLine("\nNo books found.");
 
       // Find all books under $10.00.
-      results = books.FindAll(_delegate(const Book & book) {return book.price < 10;});
+      results = books.FindAll(delegate_(const Book & book) {return book.price < 10;});
       if (results.Count != 0)
         DisplayResults(results, "Books under $10:");
       else
@@ -88,7 +88,7 @@ namespace Examples {
         );
       }
 
-      _using(System::IO::StreamReader reader(System::IO::Path::Combine(System::IO::Path::GetTempPath(), "books.csv"))) {
+      using_(System::IO::StreamReader reader(System::IO::Path::Combine(System::IO::Path::GetTempPath(), "books.csv"))) {
         Array<string> columns = reader.ReadLine().Split(';');
 
         while (!reader.EndOfStream()) {
@@ -139,4 +139,4 @@ namespace Examples {
   List<Book> Program::books;
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);

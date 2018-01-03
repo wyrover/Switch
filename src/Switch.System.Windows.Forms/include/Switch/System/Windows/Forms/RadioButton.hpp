@@ -18,21 +18,21 @@ namespace Switch {
         /// @remarks When you display a form using the ShowDialog method, you can use the DialogResult property of a button to specify the return value of ShowDialog.
         /// @remarks You can change the button's appearance. For example, to make it appear flat for a Web look, set the FlatStyle property to FlatStyle.Flat. The FlatStyle property can also be set to FlatStyle.Popup, which appears flat until the mouse pointer passes over the button; then the button takes on the standard Windows button appearance.
         /// @note If the control that has focus accepts and processes the ENTER key press, the Button does not process it. For example, if a multiline TextBox or another button has focus, that control processes the ENTER key press instead of the accept button.
-        class _export RadioButton : public ButtonBase {
+        class export_ RadioButton : public ButtonBase {
         public:
           RadioButton() : ButtonBase("", 0, 0, 104, 24) { this->SetStyle(ControlStyles::UserPaint, false); }
 
-          _property<bool> AutoCheck {
-            _get {return this->autoCheck;},
-            _set {
+          property_<bool> AutoCheck {
+            get_ {return this->autoCheck;},
+            set_ {
               if (this->autoCheck != value)
                 this->autoCheck = value;
             }
           };
 
-          _property<bool> Checked{
-            _get {return this->checked;},
-            _set {this->SetChecked(value);}
+          property_<bool> Checked{
+            get_ {return this->checked;},
+            set_ {this->SetChecked(value);}
           };
 
           EventHandler CheckedChanged;

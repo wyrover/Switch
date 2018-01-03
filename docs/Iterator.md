@@ -28,7 +28,7 @@ using namespace System::Collections;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Iterator' abstract class
-    class Iterator _abstract {
+    class Iterator abstract_ {
     public:
       virtual any First() const = 0;
       virtual any Next() const = 0;
@@ -37,7 +37,7 @@ namespace DesignPatterns {
     };
     
     // The 'Aggregate' abstract class
-    class Aggregate _abstract {
+    class Aggregate abstract_ {
     public:
       virtual refptr<Iterator> CreateIterator() = 0;
     };
@@ -75,8 +75,8 @@ namespace DesignPatterns {
       }
       
       // Gets item count
-      _property<int, _readonly> Count {
-        _get { return this->items.Count(); }
+      property_<int, readonly_> Count {
+        get_ { return this->items.Count(); }
       };
       
       void Insert(int index, any item) {
@@ -149,7 +149,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 ```
 
 # Output

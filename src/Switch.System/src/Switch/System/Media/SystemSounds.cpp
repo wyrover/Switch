@@ -9,22 +9,22 @@ struct __opaque_sound_access__ {
   }
 };
 
-_property<SystemSound, _readonly> SystemSounds::Asterisk {
+property_<SystemSound, readonly_> SystemSounds::Asterisk {
   [] {return __opaque_sound_access__()(Native::SoundType::Asterisk);}
 };
 
-_property<SystemSound, _readonly> SystemSounds::Beep {
+property_<SystemSound, readonly_> SystemSounds::Beep {
   [] {return __opaque_sound_access__()(Native::SoundType::Beep);}
 };
 
-_property<SystemSound, _readonly> SystemSounds::Exclamation {
+property_<SystemSound, readonly_> SystemSounds::Exclamation {
   [] {return __opaque_sound_access__()(Native::SoundType::Exclamation);}
 };
 
-_property<SystemSound, _readonly> SystemSounds::Hand {
+property_<SystemSound, readonly_> SystemSounds::Hand {
   [] {return __opaque_sound_access__()(Native::SoundType::Hand);}
 };
 
-_property<SystemSound, _readonly> SystemSounds::Question {
+property_<SystemSound, readonly_> SystemSounds::Question {
   [] {return __opaque_sound_access__()(Native::SoundType::Question);}
 };

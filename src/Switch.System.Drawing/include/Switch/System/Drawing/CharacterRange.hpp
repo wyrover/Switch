@@ -14,7 +14,7 @@ namespace Switch {
       /// @brief Specifies a range of character positions within a string.
       /// @par Library
       /// Switch.System.Drawing
-      class _export CharacterRange : public object {
+      class export_ CharacterRange : public object {
       public:
         /// @brief Initializes a new instance of the CharacterRange structure, with default value (0, 0).
         CharacterRange() {}
@@ -39,15 +39,15 @@ namespace Switch {
         /// @endcond
 
         /// @brief Gets or sets the position in the string of the first character of this CharacterRange.
-        _property<int32> First {
-          _get {return this->first;},
-          _set {this->first = value;}
+        property_<int32> First {
+          get_ {return this->first;},
+          set_ {this->first = value;}
         };
 
         /// @brief Gets or sets the number of positions in this CharacterRange.
-        _property<int32> Length {
-          _get {return this->length;},
-          _set {this->length = value;}
+        property_<int32> Length {
+          get_ {return this->length;},
+          set_ {this->length = value;}
         };
 
         /// @brief Determines whether this instance of CharacterRange and a specified object, which must also be a CharacterRange object, have the same value.

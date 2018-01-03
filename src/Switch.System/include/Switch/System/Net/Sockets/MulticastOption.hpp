@@ -27,7 +27,7 @@ namespace Switch {
         /// @remarks Use DropMembership to drop a multicast group.
         /// @par Library
         /// Switch.System
-        class _export MulticastOption : public Object {
+        class export_ MulticastOption : public Object {
         public:
           /// @brief Initializes a new version of the MulticastOption class for the specified IP multicast group.
           /// @param group The IPAddress of the multicast group.
@@ -56,20 +56,20 @@ namespace Switch {
           /// @brief Gets or sets the IP address of a multicast group.
           /// @param group An IPAddress that contains the Internet address of a multicast group.
           /// @return IPAddress An IPAddress that contains the Internet address of a multicast group.
-          _property<const IPAddress&> Group {
-            _get->const IPAddress& {return this->group;},
-            _set {this->group = value;}
+          property_<const IPAddress&> Group {
+            get_->const IPAddress& {return this->group;},
+            set_ {this->group = value;}
           };
 
           /// @brief Gets or sets the interface index that is associated with a multicast group.
           /// @param interfaceIndex A int32 value that specifies the address of the interface.
           /// @return int32 A Int32 value that specifies the address of the interface.
           /// @exception ArgumentOutOfRangeException interfaceIndex is less than 0.
-          _property<int32> InterfaceIndex {
-            _get {return this->interfaceIndex;},
-            _set {
+          property_<int32> InterfaceIndex {
+            get_ {return this->interfaceIndex;},
+            set_ {
               if (value < 0)
-                throw ArgumentOutOfRangeException(_caller);
+                throw ArgumentOutOfRangeException(caller_);
               this->interfaceIndex = value;
             }
           };
@@ -78,9 +78,9 @@ namespace Switch {
           /// @param localAddress An IPAddress that contains the local address associated with a multicast group.
           /// @return IPAddress An IPAddress that contains the local address associated with a multicast group.
           /// @remarks The LocalAddress property contains the IP address of the interface associated with the multicast group membership. If LocalAddress is set to Any, the default interface is used.
-          _property<const IPAddress&> LocalAddress {
-            _get->const IPAddress& {return this->localAddress;},
-            _set {this->localAddress = value;}
+          property_<const IPAddress&> LocalAddress {
+            get_->const IPAddress& {return this->localAddress;},
+            set_ {this->localAddress = value;}
           };
 
         private:

@@ -77,41 +77,41 @@ namespace Switch {
           /// @brief The identifier that is assigned by the system to this Task instance.
           /// @remarks Task IDs are assigned on-demand and do not necessarily represent the order in which task instances are created. Note that although collisions are very rare, task identifiers are not guaranteed to be unique.
           /// @remarks To get the task ID of the currently executing task from within code that that task is executing, use the CurrentId property.
-          _property<int32, _readonly> Id {
-            _get {return this->data->id;}
+          property_<int32, readonly_> Id {
+            get_ {return this->data->id;}
           };
 
           /// @brief Gets whether this Task instance has completed execution due to being canceled.
           /// @return true if the task has completed due to being canceled; otherwise false.
-          _property<bool, _readonly> IsCanceled {
-            _get {return this->data->status == TaskStatus::Canceled;}
+          property_<bool, readonly_> IsCanceled {
+            get_ {return this->data->status == TaskStatus::Canceled;}
           };
 
           /// @brief Gets whether this Task has completed.
           /// @return rue if the task has completed; otherwise false.
           /// @remarks IsCompleted will return true when the task is in one of the three final states: RanToCompletion, Faulted, or Canceled.
-          _property<bool, _readonly> IsCompleted {
-            _get {return this->data->status == TaskStatus::RanToCompletion || this->data->status == TaskStatus::Faulted || this->data->status == TaskStatus::Canceled;}
+          property_<bool, readonly_> IsCompleted {
+            get_ {return this->data->status == TaskStatus::RanToCompletion || this->data->status == TaskStatus::Faulted || this->data->status == TaskStatus::Canceled;}
           };
 
           /// @brief Gets whether the Task completed due to an unhandled exception.
           /// @return true if the task has thrown an unhandled exception; otherwise false.
           /// @remarks If IsFaulted is true, the task's Status is equal to Faulted, and its Exception property will be non-null.
-          _property<bool, _readonly> IsFaulted {
-            _get {return this->data->status == TaskStatus::Faulted;}
+          property_<bool, readonly_> IsFaulted {
+            get_ {return this->data->status == TaskStatus::Faulted;}
           };
 
           /// @brief Gets the TaskStatus of this task.
           /// @return The current TaskStatus of this task instance.
-          _property<TaskStatus, _readonly> Status {
-            _get {return this->data->status;}
+          property_<TaskStatus, readonly_> Status {
+            get_ {return this->data->status;}
           };
 
           /// @brief Gets the result value of this Task<TResult>.
           /// @return The result value of this Task<TResult>, which is the same type as the task's type parameter.
           /// @remarks Accessing the property's get accessor blocks the calling thread until the asynchronous operation is complete; it is equivalent to calling the Wait method.
-          _property<TResult, _readonly> Result {
-            _get {
+          property_<TResult, readonly_> Result {
+            get_ {
               this->Wait();
               return this->data->result;
             }
@@ -206,7 +206,7 @@ namespace Switch {
           /// @remarks Tasks executed by calling the RunSynchronously method are instantiated by calling a Task or Task<TResult> class constructor. The task to be run synchronously must be in the TaskStatus.Created state. A task may be started and run only once. Any attempts to schedule a task a second time results in an exception.
           void RunSynchronously() {
             if (this->data->status != TaskStatus::Created || (this->data->millisecondsDelay == -2 && this->data->task.IsEmpty() && this->data->parameterizedTask.IsEmpty() && this->data->constParameterizedTask.IsEmpty()))
-              throw InvalidOperationException(_caller);
+              throw InvalidOperationException(caller_);
 
             this->data->status = TaskStatus::WaitingToRun;
             this->data->waitOrTimerCallback(*this->data->state, false);
@@ -221,7 +221,7 @@ namespace Switch {
           /// @remarks For information on handling exceptions thrown by task operations, see Exception Handling (Task Parallel Library).
           void Start() override {
             if (this->data->status != TaskStatus::Created)
-              throw InvalidOperationException(_caller);
+              throw InvalidOperationException(caller_);
             this->data->status = TaskStatus::WaitingForActivation;
             ThreadPool::RegisterWaitForSingleObject(this->data->startEvent, this->data->waitOrTimerCallback, *this->data->state, Timeout::Infinite, true);
             this->data->status = TaskStatus::WaitingToRun;
@@ -516,7 +516,7 @@ namespace Switch {
             TResult result;
             int32 millisecondsDelay = -2;
             AggregateException aggregateException;
-            WaitOrTimerCallback waitOrTimerCallback = _delegate(object& state, bool timeout) {
+            WaitOrTimerCallback waitOrTimerCallback = delegate_(object& state, bool timeout) {
               __opaque_task_id_generator__::currentId = this->id;
               this->status = TaskStatus::Running;
               try {
@@ -531,7 +531,7 @@ namespace Switch {
                 this->status = TaskStatus::WaitingForChildrenToComplete;
                 this->endEvent.Set();
               } catch (...) {
-                this->aggregateException = AggregateException(Array<ExceptionPtr> {excptr::CurrentException()}, _caller);
+                this->aggregateException = AggregateException(Array<ExceptionPtr> {excptr::CurrentException()}, caller_);
                 this->status = TaskStatus::Faulted;
                 this->endEvent.Set();
               }

@@ -24,12 +24,12 @@ namespace Switch {
         /// @remarks The FontCollection allows you to get a list of the font families contained in the collection with its Families property. For additional information on fonts and text, including example code, see Using Fonts and Text.
         /// @par Library
         /// Switch.System.Drawing
-        class _export FontCollection : public object {
+        class export_ FontCollection : public object {
         public:
           /// @brief Gets the array of FontFamily objects associated with this FontCollection.
           /// @return Array<FontFamily> An array of FontFamily objects.
-          _property<const Array<FontFamily>&, _readonly> Families{
-            _get->const Array<FontFamily>& {return this->families;}
+          property_<const Array<FontFamily>&, readonly_> Families{
+            get_->const Array<FontFamily>& {return this->families;}
           };
 
         protected:

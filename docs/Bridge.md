@@ -27,7 +27,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Implementor' abstract class
-    class Implementor _abstract {
+    class Implementor abstract_ {
     public:
       virtual void Operation() const = 0;
     };
@@ -36,8 +36,8 @@ namespace DesignPatterns {
     class Abstraction : public object {
     public:
       // Property
-      _property<refptr<DesignPatterns::Structural::Implementor>, _writeonly> Implementor {
-        _set {this->implementor = value;}
+      property_<refptr<DesignPatterns::Structural::Implementor>, writeonly_> Implementor {
+        set_ {this->implementor = value;}
       };
       
       virtual void Operation() const {
@@ -93,7 +93,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Structural::MainApp);
+startup_(DesignPatterns::Structural::MainApp);
 ```
 
 # Output

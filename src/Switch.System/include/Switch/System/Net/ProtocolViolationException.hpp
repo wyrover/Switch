@@ -14,7 +14,7 @@ namespace Switch {
       /// @brief The exception that is thrown when an error is made while using a network protocol.
       /// @par Library
       /// Switch.System
-      class _export ProtocolViolationException : public InvalidOperationException {
+      class export_ ProtocolViolationException : public InvalidOperationException {
       public:
         /// @brief Create a new instance of class ProtocolViolationException
         /// @remarks Message is set with the default message associate to the error.
@@ -26,7 +26,7 @@ namespace Switch {
         ProtocolViolationException(const ProtocolViolationException& value) : InvalidOperationException(value) {}
 
         /// @brief Create a new instance of class ProtocolViolationException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         /// @remarks Message is set with the default message associate to the error.
         ProtocolViolationException(const System::Runtime::CompilerServices::Caller& information) : InvalidOperationException(information) {}
 
@@ -36,13 +36,13 @@ namespace Switch {
 
         /// @brief Create a new instance of class ProtocolViolationException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         ProtocolViolationException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : InvalidOperationException(message, information) {}
 
         /// @brief Create a new instance of class ProtocolViolationException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         ProtocolViolationException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : InvalidOperationException(message, innerException, information) {}
 
       private:

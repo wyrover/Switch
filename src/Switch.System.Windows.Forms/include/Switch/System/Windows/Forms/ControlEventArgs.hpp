@@ -61,7 +61,7 @@ namespace Switch {
         ///   }
         /// }
         /// @endcode
-        class _export ControlEventArgs : public EventArgs {
+        class export_ ControlEventArgs : public EventArgs {
         public:
           /// @brief nitializes a new instance of the ControlEventArgs class.
           ControlEventArgs() {}

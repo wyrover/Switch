@@ -23,7 +23,7 @@ namespace Switch {
         /// @remarks Do not use the InstalledFontCollection class to install a font to Windows. Instead use the GDI AddFontResource function. An InstalledFontCollection object sees only fonts that are installed in Windows before the object is created.
         /// @par Library
         /// Switch.System.Drawing
-        class _export InstalledFontCollection final : public FontCollection {
+        class export_ InstalledFontCollection final : public FontCollection {
         public:
           /// @brief Initializes a new instance of the InstalledFontCollection class.
           InstalledFontCollection();

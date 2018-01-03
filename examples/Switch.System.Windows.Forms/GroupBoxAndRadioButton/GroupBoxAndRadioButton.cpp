@@ -65,6 +65,6 @@ namespace RadioButtonExample {
   };
 }
 
-_startup(RadioButtonExample::Form1);
+startup_(RadioButtonExample::Form1);
 
 

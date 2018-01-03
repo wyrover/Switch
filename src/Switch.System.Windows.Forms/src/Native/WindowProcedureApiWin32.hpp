@@ -6,7 +6,7 @@
   typedef HWND__* HWND;
 
 namespace Native {
-  class WindowProcedure _static {
+  class WindowProcedure static_ {
   public:
     #if _WIN64
     static System::Collections::Generic::Dictionary<int64, intptr(__stdcall*)(HWND, uint32, uintptr, int64)> DefWindowProcs;

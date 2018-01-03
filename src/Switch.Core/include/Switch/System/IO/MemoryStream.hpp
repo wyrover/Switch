@@ -16,7 +16,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Exposes a System::IO::Stream in memory, supporting synchronous read and write operations.
-      class _export MemoryStream : public Stream {
+      class export_ MemoryStream : public Stream {
         int64 GetLength() const override;
         void SetLength(int64 len) override;
         bool GetCanRead() const override {return ! IsClosed();}
@@ -26,9 +26,9 @@ namespace Switch {
         int64 GetPosition() const override {return static_cast<int64>(this->data->position);}
         void SetPosition(int64 newPosition) override {
           if (newPosition < 0 || newPosition > static_cast<int64>(Int32::MaxValue))
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           if (IsClosed())
-            throw ObjectDisposedException(_caller);
+            throw ObjectDisposedException(caller_);
           this->data->position = static_cast<int32>(newPosition);
         }
 
@@ -72,9 +72,9 @@ namespace Switch {
         /// @exception System::ArgumentOutOfRangeException A capacity is set that is negative or less than the current length of the stream.
         /// @exception System::ObjectDisposedException The current stream is IsClosed().
         /// @exception System::NotSupportedException set is invoked on a stream whose capacity cannot be modified.
-        _property<int32> Capacity {
-          _get {return this->GetCapacity();},
-          _set {this->SetCapacity(value);}
+        property_<int32> Capacity {
+          get_ {return this->GetCapacity();},
+          set_ {this->SetCapacity(value);}
         };
 
         /// @brief Returns the array of unsigned bytes from which this stream was created.

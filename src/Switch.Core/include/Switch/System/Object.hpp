@@ -11,10 +11,9 @@
 namespace Switch {
   /// @cond
   template<typename T>
-  class _;
+  class $;
   template<typename T>
-
-  using refptr = _<T>;
+  using refptr = $<T>;
   /// @endcond
 
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
@@ -30,7 +29,7 @@ namespace Switch {
     /// @par Examples
     /// The following example defines a Point type derived from the Object class and virtuals many of the virtual methods of the Object class. In addition, the example shows how to call many of the static and instance methods of the Object class.
     /// @include Object.cpp
-    class _export Object {
+    class export_ Object {
     public:
       /// @brief Create a new instance of the ultimate base class Object
       /// @remarks This constructor is called by constructors in derived classes, but it can also be used to directly create an instance of the Object class.

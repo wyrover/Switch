@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The Switch::System::ComponentModel namespace provides classes that are used to implement the run-time and design-time behavior of components and controls. This namespace includes the base classes and interfaces for implementing attributes and type converters, binding to data sources, and licensing components.
     namespace ComponentModel {
       /// @brief The exception thrown when using invalid arguments that are enumerators.
-      class _export InvalidEnumArgumentException : public ArgumentException {
+      class export_ InvalidEnumArgumentException : public ArgumentException {
       public:
         /// @brief Create a new instance of class InvalidEnumArgumentException
         /// @remarks Message is set with the default message associate to the error.
@@ -23,7 +23,7 @@ namespace Switch {
         InvalidEnumArgumentException(const InvalidEnumArgumentException& value) : ArgumentException(value) {}
 
         /// @brief Create a new instance of class InvalidEnumArgumentException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         /// @remarks Message is set with the default message associate to the error.
         InvalidEnumArgumentException(const System::Runtime::CompilerServices::Caller& information) : ArgumentException(information) {}
 
@@ -33,13 +33,13 @@ namespace Switch {
 
         /// @brief Create a new instance of class InvalidEnumArgumentException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         InvalidEnumArgumentException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : ArgumentException(message, information) {}
 
         /// @brief Create a new instance of class InvalidEnumArgumentException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         InvalidEnumArgumentException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : ArgumentException(message, innerException, information) {}
       };
     }

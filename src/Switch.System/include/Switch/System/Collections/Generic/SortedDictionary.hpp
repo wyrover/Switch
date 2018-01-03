@@ -126,7 +126,7 @@ public:
           /// @exception System::ArgumentException An element with the same key already exists in the System::Collections::Generic::SortedDictionary<TKey,TValue>.
           void Add(const TKey& key, const TValue& value) override {
             if (ContainsKey(key))
-              throw System::ArgumentException(_caller);
+              throw System::ArgumentException(caller_);
 
             (*this)[key] = value;
           }
@@ -182,7 +182,7 @@ public:
           /// @exception System::ArgumentException The number of elements in the source System::Collections::Generic::SortedDictionary<TKey,TValue> is greater than the available space from index to the end of the destination array.
           void CopyTo(System::Array<KeyValuePair<TKey, TValue>>& array, int32 index) const override {
             if (index < 0 || array.Length < index + this->Count)
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
 
             int32 count = index;
             for (auto elem : *this)
@@ -255,7 +255,7 @@ public:
           /// @include SortedDictionaryOperators.cpp
           const TValue& operator[](const TKey& key) const override {
             if (! ContainsKey(key))
-              throw ArgumentException(_caller);
+              throw ArgumentException(caller_);
 
             return const_cast<std::map<TKey, TValue, MapComparer, TAllocator>&>(this->map)[key];
           }
@@ -339,7 +339,7 @@ public:
             virtual bool MoveNext() {
 
               if (this->operationNumber != this->dictionary.operationNumber)
-                throw InvalidOperationException(_caller);
+                throw InvalidOperationException(caller_);
 
               if (IsFinished())
                 return false;
@@ -359,7 +359,7 @@ public:
           protected:
             const KeyValuePair<TKey, TValue>& GetCurrent() const  {
               if (this->beforeFirst || IsFinished())
-                throw InvalidOperationException(_caller);
+                throw InvalidOperationException(caller_);
               return this->currentKeyValuePair;
             }
 

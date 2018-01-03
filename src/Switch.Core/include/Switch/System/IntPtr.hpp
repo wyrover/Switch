@@ -19,7 +19,7 @@ namespace Switch {
     /// @endcond
 
     /// @brief A platform-specific type that is used to represent a pointer or a handle.
-    struct _export IntPtr final : public object, public IComparable, public IFormattable {
+    struct export_ IntPtr final : public object, public IComparable, public IFormattable {
     public:
       /// @brief A read-only field that represents a pointer or handle that has been initialized to zero.
       static constexpr intptr Zero = 0;

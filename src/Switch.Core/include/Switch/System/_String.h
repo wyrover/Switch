@@ -126,10 +126,10 @@ private:
   __opaque_format_item__(Any value) : value(new Any(value)) {}
 
   template<typename T, typename Attribute>
-  __opaque_format_item__(const _property<const T&, Attribute>& value) : __opaque_format_item__(value()) {}
+  __opaque_format_item__(const property_<const T&, Attribute>& value) : __opaque_format_item__(value()) {}
 
   template<typename T, typename Attribute>
-  __opaque_format_item__(const _property<T, Attribute>& value) : __opaque_format_item__(value(), true) {}
+  __opaque_format_item__(const property_<T, Attribute>& value) : __opaque_format_item__(value(), true) {}
 
   template<typename T>
   __opaque_format_item__(const T& value) : value(ObjectOrEnumOrOtherToAny<T>()(value, false)) {}
@@ -197,7 +197,7 @@ System::String System::String::Concat(const System::Collections::Generic::IEnume
 template<typename T, int32 length>
 System::String System::String::Concat(const T(&objs)[length]) {
   if (objs == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   int32 size = 0;
   for (int32 index = 0; index < length; index ++)
@@ -218,7 +218,7 @@ System::String System::String::Join(const System::String& separator, const Syste
 template<typename T>
 System::String System::String::Join(const System::String& separator, const System::Array<T>& objs, int32 startIndex, int32 count) {
   if (startIndex < 0 || count < 0 || startIndex + count > objs.Length)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
   System::String str;
   bool first = true;
   for (int32 i = startIndex; i < startIndex + count; i++) {
@@ -248,7 +248,7 @@ System::String System::String::Join(const System::String& separator, const Syste
 template<typename T>
 System::String System::String::Join(const System::String& separator, const System::Collections::Generic::IEnumerable<T>& objs, int32 startIndex, int32 count) {
   if (startIndex < 0 || count < 0 || startIndex + count > objs.Length)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
   System::String str;
   bool first = true;
   int32 index = 0;

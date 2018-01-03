@@ -11,7 +11,7 @@
 #include "../../include/Switch/System/Net/IPAddress.hpp"
 
 namespace Native {
-  class CurlApi _static {
+  class CurlApi static_ {
   public:
     static int32 Cleanup(intptr request);
 
@@ -49,12 +49,12 @@ namespace Native {
     static int32 SetHttpHeader(intptr request, intptr list);
   };
 
-  struct DebuggerApi _static {
+  struct DebuggerApi static_ {
   public:
     static void Log(int32 level, const string& category, const string& message);
   };
 
-  class DnsApi _static {
+  class DnsApi static_ {
   public:
     static void Destroy(intptr host);
     static void EndHostent();
@@ -67,7 +67,7 @@ namespace Native {
     static void SetHostent(bool stayOpen);
   };
 
-  class ProcessApi _static {
+  class ProcessApi static_ {
   public:
     static intptr Start(const System::Diagnostics::ProcessStartInfo& processStartInfo);
     static bool Close(intptr handle);
@@ -81,7 +81,7 @@ namespace Native {
     static bool WaitForExit(intptr handle, int32 timeout, int32& exitCode);
   };
 
-  class SecurityApi _static {
+  class SecurityApi static_ {
   public:
     static System::Security::SecureString ToSecureSecureString(const string& unsecureString);
     static string ToSecureString(const string& unsecureString);
@@ -89,7 +89,7 @@ namespace Native {
     static string ToUnsecureString(const string& secureString);
   };
 
-  class SocketApi _static {
+  class SocketApi static_ {
   public:
     static int32 AddressFamilyToNative(System::Net::Sockets::AddressFamily addressFamily);
     static System::Net::Sockets::AddressFamily NativeToAddressFamily(int32 addressFamily);
@@ -124,7 +124,7 @@ namespace Native {
     Asterisk = 0x00000040,
   };
 
-  class SystemSoundApi _static {
+  class SystemSoundApi static_ {
   public:
     static void Play(SoundType type);
   };

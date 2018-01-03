@@ -27,7 +27,7 @@ namespace Switch {
     namespace Text {
       /// @brief Represents a mutable string of characters. This class cannot be inherited.
       /// @remarks This class represents a string-like object whose value is a mutable sequence of characters.
-      class _export StringBuilder final : public Object {
+      class export_ StringBuilder final : public Object {
         #if defined(_WIN32)
         using __char32 = __int32;
         #else
@@ -68,7 +68,7 @@ namespace Switch {
         /// @endcode
         explicit StringBuilder(int32 capacity) {
           if (capacity < 0)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           this->string.reserve(capacity);
         }
 
@@ -85,7 +85,7 @@ namespace Switch {
         /// @endcode
         StringBuilder(int32 capacity, int32 maxCapacity) : maxCapacity(maxCapacity) {
           if (maxCapacity < 1 || capacity < 0 || maxCapacity < capacity)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           this->string.reserve(capacity);
         }
 
@@ -112,7 +112,7 @@ namespace Switch {
         /// @endcode
         StringBuilder(const String& value, int32 capacity) : string((const char32*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().from_bytes(value.Data()).c_str()) {
           if (capacity < 0)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           this->string.reserve(capacity);
         }
 
@@ -132,11 +132,11 @@ namespace Switch {
         /// @endcode
         StringBuilder(const String& value, int32 startIndex, int32 length, int32 capacity) {
           if (startIndex < 0 || length < 0)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           if (startIndex + length > value.Length())
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           if (capacity < 0)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
 
           this->string = std::u32string((const char32*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().from_bytes(value.Data()).c_str(), startIndex, length);
           this->string.reserve(capacity);
@@ -153,7 +153,7 @@ namespace Switch {
         /// @include StringBuilder.cpp
         char32 operator [](int32 index) const {
           if (index < 0 || index >= static_cast<int32>(this->string.size()))
-            throw IndexOutOfRangeException(_caller);
+            throw IndexOutOfRangeException(caller_);
           return this->string[index];
         }
 
@@ -168,7 +168,7 @@ namespace Switch {
         /// @include StringBuilder.cpp
         char32& operator [](int32 index) {
           if (index < 0 || index >= static_cast<int32>(this->string.size()))
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           return this->string[index];
         }
 
@@ -180,11 +180,11 @@ namespace Switch {
         /// @par Examples
         /// The following example demonstrates the Capacity property.
         /// @include StringBuilder.Capacity.cpp
-        _property<int32> Capacity {
-          _get {return static_cast<int32>(this->string.capacity());},
-          _set {
+        property_<int32> Capacity {
+          get_ {return static_cast<int32>(this->string.capacity());},
+          set_ {
             if (value < static_cast<int32>(this->string.size()) || value > this->maxCapacity)
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
             this->string.reserve(value);
           }
         };
@@ -199,11 +199,11 @@ namespace Switch {
         /// @par Examples
         /// The following example demonstrates the Legnth property.
         /// @include StringBuilder.Capacity.cpp
-        _property<int32> Length {
-          _get {return static_cast<int32>(this->string.size());},
-          _set {
+        property_<int32> Length {
+          get_ {return static_cast<int32>(this->string.size());},
+          set_ {
             if (value < 0 || value >= MaxCapacity())
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
             if (value > static_cast<int32>(this->string.size()))
               this->string.append(value - static_cast<int32>(this->string.size()), 0);
             else
@@ -215,8 +215,8 @@ namespace Switch {
         /// @return The maximum number of characters this instance can hold.
         /// @remarks The maximum capacity for this implementation is Int32.MaxValue. However, this value is implementation-specific and might be different in other or later implementations. You can explicitly set the maximum capacity of a StringBuilder object by calling the StringBuilder(Int32, Int32) constructor.
         /// @remarks In the Switch when you instantiate the StringBuilder object by calling the StringBuilder(Int32, Int32) constructor, both the length and the capacity of the StringBuilder instance can grow beyond the value of its MaxCapacity property. This can occur particularly when you call the Append and AppendFormat methods to append small strings.
-        _property<int32, _readonly> MaxCapacity {
-          _get {return this->maxCapacity;}
+        property_<int32, readonly_> MaxCapacity {
+          get_ {return this->maxCapacity;}
         };
 
         /// @brief Appends the string representation of a specified bool value to this instance.
@@ -307,7 +307,7 @@ namespace Switch {
         /// @remarks The capacity of this instance is adjusted as needed.
         StringBuilder& Append(const char* value, int32 valueCount) {
           if (valueCount < 0)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           for (int index = 0; index < valueCount; index++)
             this->Append(Char(value[index]).ToString());
           return *this;
@@ -323,7 +323,7 @@ namespace Switch {
         /// @remarks The capacity of this instance is adjusted as needed.
         StringBuilder& Append(const char32* value, int32 valueCount) {
           if (valueCount < 0)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           for (int index = 0; index < valueCount; index++)
             this->Append(Char(value[index]).ToString());
           return *this;
@@ -349,7 +349,7 @@ namespace Switch {
         /// @endcode
         StringBuilder& Append(char32 value, int32 repeatCount) {
           if (repeatCount < 0)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           this->Capacity += repeatCount;
           this->string.append(repeatCount, value);
           return *this;
@@ -393,7 +393,7 @@ namespace Switch {
         /// @endcode
         StringBuilder& Append(const Array<char32>& value, int32 startIndex, int32 count) {
           if (startIndex < 0 || count < 0 || startIndex + count > value.Length)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           this->Capacity += value.Count();
           for (int i = startIndex; i < startIndex + count; i++)
             this->Append(value[i]);
@@ -552,7 +552,7 @@ namespace Switch {
         /// @endcode
         StringBuilder& Append(const String& value) {
           if (this->Length() + value.Length() > this->MaxCapacity())
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
           this->string.append((const char32*)std::wstring_convert<std::codecvt_utf8<__char32>, __char32>().from_bytes(value.Data()).c_str());
           return *this;
         }
@@ -590,7 +590,7 @@ namespace Switch {
         }
 
         template<typename T, typename Attribute>
-        StringBuilder& Append(const _property<T, Attribute>& value) {return this->Append(value());}
+        StringBuilder& Append(const property_<T, Attribute>& value) {return this->Append(value());}
         /// @endcond
 
         /// @brief Appends the string representation of a specified 16-bit unsigned integer to this instance.

@@ -27,15 +27,15 @@ using namespace System;
 namespace DesignPatterns {
   namespace Creational {
     // The 'Prototype' abstract class
-    class Prototype _abstract {
+    class Prototype abstract_ {
     public:
       // Constructor
       Prototype(const string& id) : id(id) {}
       Prototype(const Prototype& prototype) : id(prototype.id) {}
       
       // Gets id
-      _property<string, _readonly> Id {
-        _get {return this->id;}
+      property_<string, readonly_> Id {
+        get_ {return this->id;}
       };
       
       virtual refptr<Prototype> Clone() const = 0;
@@ -85,7 +85,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Creational::MainApp);
+startup_(DesignPatterns::Creational::MainApp);
 ```
 
 # Output

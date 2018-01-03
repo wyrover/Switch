@@ -198,7 +198,7 @@ namespace Switch {
 
       static Collections::Generic::Dictionary<int64, String>& Values();
       void LoadValues() {
-        _lock(this->values) {
+        lock_(this->values) {
           if (values.Count == 0)
             this->InitValues(values);
         }

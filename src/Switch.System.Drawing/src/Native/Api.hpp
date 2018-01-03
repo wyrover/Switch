@@ -10,19 +10,19 @@
 #include "../../include/Switch/System/Drawing/Rectangle.hpp"
 
 namespace Native {
-  class BrushApi _static {
+  class BrushApi static_ {
   public:
     static intptr CreateSolidBrush(const System::Drawing::Color& color);
     static void DeleteBrush(intptr handle);
   };
 
-  class PenApi _static {
+  class PenApi static_ {
   public:
     static intptr CreatePen(const System::Drawing::Drawing2D::DashStyle& dashStyle, int32 width, const System::Drawing::Color& color);
     static void DeletePen(intptr handle);
   };
 
-  class FontFamilyApi _static {
+  class FontFamilyApi static_ {
   public:
     static System::Array<System::Drawing::FontFamily> GetInstalledFontFamilies();
     static System::Drawing::FontFamily GetFontFamilyFromName(const string& name);
@@ -31,7 +31,7 @@ namespace Native {
     static void ReleaseResource(intptr handle);
   };
 
-  class GdiApi _static {
+  class GdiApi static_ {
   public:
     //static intptr BeginPaint(intptr hwnd, System::Drawing::Rectangle& clipRectangle);
     //static void EndPaint(intptr hwnd, intptr hdc);
@@ -44,7 +44,7 @@ namespace Native {
     static void FillRectangle(intptr hdc, const System::Drawing::Brush& brush, int32 x, int32 y, int32 w, int32 h);
   };
 
-  class SystemColorsApi _static {
+  class SystemColorsApi static_ {
   public:
     static int32 GetActiveBorder();
     static int32 GetActiveCaption();

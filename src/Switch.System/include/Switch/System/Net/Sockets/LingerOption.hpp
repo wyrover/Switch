@@ -20,7 +20,7 @@ namespace Switch {
         /// @remarks The IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a Socket when the LingerState property is not set and for a TcpClient when the LingerState property is not set.
         /// @par Library
         /// Switch.System
-        class _export LingerOption : public Object {
+        class export_ LingerOption : public Object {
         public:
           /// @brief Initializes a new version of the LingerOption class.
           /// @remarks There may still be data available in the outgoing network buffer after you close the Socket. Use the enable parameter to specify whether you would like the Socket to continue transmitting unsent data after the close method is called. Use the seconds parameter to indicate how long you would like the Socket to attempt transferring unsent data before timing out. If you specify true for the enable parameter and 0 for the seconds parameter, the Socket will attempt to send data until there is no data left in the outgoing network buffer. If you specify false for the enable parameter, the Socket will close immediately and any unsent data will be lost.
@@ -69,9 +69,9 @@ namespace Switch {
           /// | true (enabled)                      | A zero timeout.                            | Discards any pending data. For connection-oriented socket (TCP, for example), Winsock resets the connection.                      |
           /// @remarks The IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the LingerState property is not set.
           /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
-          _property<bool> Enabled {
-            _get {return this->enabled;},
-            _set {this->enabled = value;}
+          property_<bool> Enabled {
+            get_ {return this->enabled;},
+            set_ {this->enabled = value;}
           };
 
           /// @brief Gets the amount of time to remain connected after calling the Socket.Close method if data remains to be sent.
@@ -87,9 +87,9 @@ namespace Switch {
           /// | true (enabled)                      | A zero timeout.                            | Discards any pending data. For connection-oriented socket (TCP, for example), Winsock resets the connection.                      |
           /// @remarks The IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the LingerState property is not set.
           /// @remarks When the LingerTime property stored in the LingerState property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and virtual.
-          _property<int32> LingerTime {
-            _get {return this->lingerTime;},
-            _set {this->lingerTime = value;}
+          property_<int32> LingerTime {
+            get_ {return this->lingerTime;},
+            set_ {this->lingerTime = value;}
           };
 
         private:

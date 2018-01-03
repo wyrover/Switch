@@ -15,15 +15,15 @@ namespace Switch {
       /// Switch.System
       class SystemSounds {
       public:
-        static _property<SystemSound, _readonly> Asterisk;
+        static property_<SystemSound, readonly_> Asterisk;
 
-        static _property<SystemSound, _readonly> Beep;
+        static property_<SystemSound, readonly_> Beep;
 
-        static _property<SystemSound, _readonly> Exclamation;
+        static property_<SystemSound, readonly_> Exclamation;
 
-        static _property<SystemSound, _readonly> Hand;
+        static property_<SystemSound, readonly_> Hand;
 
-        static _property<SystemSound, _readonly> Question;
+        static property_<SystemSound, readonly_> Question;
       };
     }
   }

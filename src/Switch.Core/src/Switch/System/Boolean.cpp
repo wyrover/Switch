@@ -14,7 +14,7 @@ const String Boolean::TrueString = "True";
 bool Boolean::Parse(const String& str) {
   bool value;
   if (TryParse(str, value) == false)
-    throw FormatException(_caller);
+    throw FormatException(caller_);
   return value;
 }
 

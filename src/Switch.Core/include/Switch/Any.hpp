@@ -29,7 +29,7 @@ namespace Switch {
   /// @par Examples
   /// This example show how to use Any:
   /// @include Any.cpp
-  class _export Any : public System::IComparable, public object {
+  class export_ Any : public System::IComparable, public object {
     template <typename T, typename Bool>
     struct EnumOrOtherToAny {};
 
@@ -106,11 +106,11 @@ namespace Switch {
     Any(llong value) : value(sizeof(long) == 8 ? (object*)new System::Int64(value) : (object*)new System::Int32(value)) {}
     Any(ullong value) : value(sizeof(long) == 8 ? (object*)new System::UInt64(value) : (object*)new System::UInt32(value)) {}
     template<typename T, typename Attribute>
-    Any(const _property<T, Attribute>& value) : value(ObjectOrEnumOrOtherToAny<T>()(value())) {}
+    Any(const property_<T, Attribute>& value) : value(ObjectOrEnumOrOtherToAny<T>()(value())) {}
     template <typename T>
     operator T() const {
       if (!this->HasValue)
-        throw System::InvalidOperationException(_caller);
+        throw System::InvalidOperationException(caller_);
       return To<T>();
     }
 
@@ -161,17 +161,17 @@ namespace Switch {
     /// @brief Gets a value indicating whether the current Nullable<T> object has a valid value of its underlying type.
     /// @return true if the current Nullable<T> object has a value; false if the current Nullable<T> object has no value.
     /// @remarks If the HasValue property is true, the value of the current Nullable<T> object can be accessed with the Value property. Otherwise, attempting to access its value throws an InvalidOperationException exception.
-    _property<bool, _readonly> HasValue {
-      _get {return this->value != null;}
+    property_<bool, readonly_> HasValue {
+      get_ {return this->value != null;}
     };
 
     /// @brief Gets the value of the current Any object if it has been assigned a valid underlying value.
     /// @return The value of the current Any object if the HasValue property is true. An exception is thrown if the HasValue property is false.
     /// @exception InvalidOperationException The HasValue property is false.
-    _property<const object&, _readonly> Value {
-      _get->const object& {
+    property_<const object&, readonly_> Value {
+      get_->const object& {
         if (!this->HasValue)
-          throw System::InvalidOperationException(_caller);
+          throw System::InvalidOperationException(caller_);
         return this->value.ToObject();
       }
     };
@@ -186,7 +186,7 @@ namespace Switch {
     template<typename T>
     T& As() {
       if (!this->HasValue)
-        throw System::InvalidOperationException(_caller);
+        throw System::InvalidOperationException(caller_);
       return as<T>(this->value.ToObject());
     }
 
@@ -200,7 +200,7 @@ namespace Switch {
     template<typename T>
     const T& As() const {
       if (!this->HasValue)
-        throw System::InvalidOperationException(_caller);
+        throw System::InvalidOperationException(caller_);
       return as<T>(this->value.ToObject());
     }
 

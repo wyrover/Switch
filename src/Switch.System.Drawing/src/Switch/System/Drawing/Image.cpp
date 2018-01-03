@@ -23,7 +23,7 @@ using namespace System;
 using namespace System::Drawing;
 using namespace System::IO;
 
-_property<Image, _readonly> Image::None {
+property_<Image, readonly_> Image::None {
   [] {return Image();}
 };
 
@@ -105,6 +105,6 @@ void Image::ReadStream(refptr<System::IO::Stream> stream) {
   case 0x5089: Png(stream).Read(*this); break;
   case 0x4949: Tif(stream).Read(*this); break;
   case 0x4D4D: Tif(stream).Read(*this); break;
-  default: throw OutOfMemoryException(_caller); break;
+  default: throw OutOfMemoryException(caller_); break;
   }
 }

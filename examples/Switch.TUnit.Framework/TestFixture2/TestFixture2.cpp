@@ -4,8 +4,8 @@ using namespace TUnit::Framework;
 using namespace System;
 
 namespace UnitTests {
-  // The class DirectoryTest must be declared with _TestFixture
-  class _TestFixture(Test) {
+  // The class DirectoryTest must be declared with TestFixture_
+  class TestFixture_(Test) {
     void _OneTimeSetUp(OneTimeInit) {
     }
 
@@ -13,27 +13,27 @@ namespace UnitTests {
     }
 
     // This is the method that is called before any tests in a fixture are run.
-    void _SetUp(Init) {
+    void SetUp_(Init) {
     }
 
     // This is the method that is called after any tests in a fixture are run.
-    void _TearDown(Cleanup) {
+    void TearDown_(Cleanup) {
     }
 
-    void _Test(TestCase1) {
+    void Test_(TestCase1) {
     }
 
-    void _Test(TestCase2) {
+    void Test_(TestCase2) {
     }
 
-    void _IgnoreTest(TestCase3) {
+    void IgnoreTest_(TestCase3) {
     }
   };
 
-  // Used _AddTestFixture to add unit test suit.
-  _AddTestFixture(Test);
+  // Used AddTestFixture_ to add unit test suit.
+  AddTestFixture_(Test);
 
-  class Program _static {
+  class Program static_ {
   public:
     static int Main(const Array<string>& args) {
       return UnitTest(args).Run();
@@ -42,7 +42,7 @@ namespace UnitTests {
 
 }
 
-_startup(UnitTests::Program)
+startup_(UnitTests::Program)
 
 
 // This code produces the following output if directory Downloads exists and Potatos doesn't exist in your home direcory:

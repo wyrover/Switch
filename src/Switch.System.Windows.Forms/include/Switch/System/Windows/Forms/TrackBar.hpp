@@ -19,7 +19,7 @@ namespace Switch {
         /// @remarks The TrackBar is a scrollable control similar to the ScrollBar control. You can configure ranges through which the value of the Value property of a track bar scrolls by setting the Minimum property to specify the lower end of the range and the Maximum property to specify the upper end of the range.
         /// @remarks The LargeChange property defines the increment to add or subtract from the Value property when clicks occur on either side of the scroll box. The track bar can be displayed horizontally or vertically.
         /// @remarks You can use this control to input numeric data obtained through the Value property. You can display this numeric data in a control or use it in code.
-        class _export TrackBar : public Control {
+        class export_ TrackBar : public Control {
         public:
           TrackBar() : Control("", 0, 0, 104, 45) {
             this->SetStyle(ControlStyles::UserPaint, false);
@@ -30,47 +30,47 @@ namespace Switch {
           TrackBar(const TrackBar& trackBar) : Control(trackBar), largeChange(trackBar.largeChange), maximum(trackBar.maximum), minimum(trackBar.minimum), smallChange(trackBar.smallChange), style(trackBar.style), tickFrequency(trackBar.tickFrequency), value(trackBar.value) {}
           /// @endcond
 
-          _property<int32> LargeChange {
-            _get{ return this->largeChange; },
-            _set{ this->SetLargeChange(value); },
+          property_<int32> LargeChange {
+            get_{ return this->largeChange; },
+            set_{ this->SetLargeChange(value); },
           };
 
-          _property<Forms::Orientation> Orientation {
-            _get{ return this->orientation; },
-            _set{ this->SetOrientation(value); },
+          property_<Forms::Orientation> Orientation {
+            get_{ return this->orientation; },
+            set_{ this->SetOrientation(value); },
           };
 
-          _property<int32> Maximum {
-            _get{ return this->maximum; },
-            _set{ this->SetMaximum(value); },
+          property_<int32> Maximum {
+            get_{ return this->maximum; },
+            set_{ this->SetMaximum(value); },
           };
 
-          _property<int32> Minimum {
-            _get{ return this->minimum; },
-            _set{ this->SetMinimum(value); },
+          property_<int32> Minimum {
+            get_{ return this->minimum; },
+            set_{ this->SetMinimum(value); },
           };
 
-          _property<int32> SmallChange{
-            _get{ return this->smallChange; },
-            _set{ this->SetSmallChange(value); },
+          property_<int32> SmallChange{
+            get_{ return this->smallChange; },
+            set_{ this->SetSmallChange(value); },
           };
 
-          _property<TickStyle> Style {
-            _get{ return this->style; },
-            _set{ this->SetTickStyle(value); },
+          property_<TickStyle> Style {
+            get_{ return this->style; },
+            set_{ this->SetTickStyle(value); },
           };
 
-          _property<int32> TickFrequency {
-            _get{ return this->tickFrequency; },
-            _set{ this->SetTickFrequency(value); },
+          property_<int32> TickFrequency {
+            get_{ return this->tickFrequency; },
+            set_{ this->SetTickFrequency(value); },
           };
 
-          _property<int32> Value {
-            _get {
+          property_<int32> Value {
+            get_ {
               this->value = this->GetValue();
               return this->value;
             },
-            _set{ this->SetValue(value); },
+            set_{ this->SetValue(value); },
           };
 
           EventHandler Scroll;

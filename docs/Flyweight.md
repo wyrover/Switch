@@ -28,7 +28,7 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Flyweight' abstract class
-    class Flyweight _abstract {
+    class Flyweight abstract_ {
     public:
       virtual void Operation(int extrinsicstate) const = 0;
     };
@@ -92,7 +92,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Structural::MainApp);
+startup_(DesignPatterns::Structural::MainApp);
 ```
 
 # Output

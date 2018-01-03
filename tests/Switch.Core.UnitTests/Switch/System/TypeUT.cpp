@@ -12,8 +12,8 @@ namespace {
     //ASSERT_EQ("Object", type.Name());
     //ASSERT_EQ("System", type.Namespace());
 
-    //ASSERT_TRUE(type == _typeof<Object>());
-    //ASSERT_TRUE(type != _typeof<ValueType>());
+    //ASSERT_TRUE(type == typeof_<Object>());
+    //ASSERT_TRUE(type != typeof_<ValueType>());
 
     ASSERT_TRUE(type == Object().GetType());
 
@@ -42,8 +42,8 @@ namespace {
     //ASSERT_EQ(type.GetType().GetNamespace(), "System");
     //ASSERT_EQ(type.GetType().ToString(), "System::Type");
 
-    //ASSERT_TRUE(type.GetType() == _typeof<Type>());
-    //ASSERT_TRUE(type.GetType() != _typeof<ValueType>());
+    //ASSERT_TRUE(type.GetType() == typeof_<Type>());
+    //ASSERT_TRUE(type.GetType() != typeof_<ValueType>());
 
     ASSERT_EQ(Type::GetTypeCode(obj), TypeCode::Object);
 
@@ -72,8 +72,8 @@ namespace {
     //ASSERT_EQ(string("System"), i32.GetType().GetNamespace());
     //ASSERT_EQ(string("System::Int32"), i32.GetType().ToString());
 
-    //ASSERT_TRUE(i32.GetType() == _typeof<Int32>());
-    //ASSERT_TRUE(i32.GetType() != _typeof<ValueType>());
+    //ASSERT_TRUE(i32.GetType() == typeof_<Int32>());
+    //ASSERT_TRUE(i32.GetType() != typeof_<ValueType>());
 
     ASSERT_TRUE(i32.GetType() == Int32().GetType());
 

@@ -27,13 +27,13 @@ namespace Examples {
       function4("Function pointer on Functor");
 
       // Declare a function pointer on a lambda expression
-      Write function5 = _delegate(const string & value) {
+      Write function5 = delegate_(const string & value) {
         Function1(value);
       };
       function5("Function pointer on Lambda expression");
 
       // Declare a function pointer on a lambda expression with this
-      Write function6 = _delegate(const string & value) {
+      Write function6 = delegate_(const string & value) {
         //this->Function2(value);
       };
       function6("Function pointer on Lambda expression with this");
@@ -71,4 +71,4 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);

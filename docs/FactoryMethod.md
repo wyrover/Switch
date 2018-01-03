@@ -27,7 +27,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Creational {
     // The 'Product' abstract class
-    class Product _abstract {
+    class Product abstract_ {
     public:
       ~Product() = 0;
     };
@@ -43,7 +43,7 @@ namespace DesignPatterns {
     };
     
     // The 'Creator' abstract class
-    class Creator _abstract {
+    class Creator abstract_ {
     public:
       virtual refptr<Product> FactoryMethod() const = 0;
     };
@@ -83,7 +83,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Creational::MainApp);
+startup_(DesignPatterns::Creational::MainApp);
 ```
 
 # Output

@@ -40,18 +40,18 @@ namespace Switch {
       /// @remarks To draw an System::Drawing::Image on a Windows Form, you should use one of the Graphics::DrawImage(Image, Point) methods.
       /// @par Library
       /// Switch.System.Drawing
-      class _export Image : public object, public IComparable {
+      class export_ Image : public object, public IComparable {
       public:
         /// @cond
         Image();
         Image(const Image& image);
         /// @endcond
 
-        _property<const byte*, _readonly> Data {
-          _get {return this->rawData.Data();}
+        property_<const byte*, readonly_> Data {
+          get_ {return this->rawData.Data();}
         };
 
-        static _property<Image, _readonly> None;
+        static property_<Image, readonly_> None;
 
         /// @brief Gets attribute flags for the pixel data of this System::Drawing::Image.
         /// @return a value of System::Drawing::Imaging::ImageFlags.
@@ -73,54 +73,54 @@ namespace Switch {
         /// | IImageFlagsReadOnly          | 65536                  |
         /// | IImageFlagsCaching           | 131072                 |
         /// @remarks For example, if the Image::Flags property for an image returned 77960, the System::Drawing::Imaging::ImageFlags for the image would be System::Drawing::Imaging::ImageFlags::ReadOnly, System::Drawing::Imaging::ImageFlags::HasRealDpi, System::Drawing::Imaging::ImageFlags::HasRealPixelSize, System::Drawing::Imaging::ImageFlags::ColorSpaceYcbcr, and System::Drawing::Imaging::ImageFlags::PartiallyScalable.
-        _property<int32, _readonly> Flags {
-          _get {return (int32)this->flags;}
+        property_<int32, readonly_> Flags {
+          get_ {return (int32)this->flags;}
         };
 
-        _property<Array<System::Guid>, _readonly> FrameDimensionsList {
-          _get {return frameDimensionList;}
+        property_<Array<System::Guid>, readonly_> FrameDimensionsList {
+          get_ {return frameDimensionList;}
         };
 
-        _property<int32, _readonly> Height {
-          _get {return this->size.Height();}
+        property_<int32, readonly_> Height {
+          get_ {return this->size.Height();}
         };
 
-        _property<float, _readonly> HorizontalResolution {
-          _get {return this->horizontalResolution;}
+        property_<float, readonly_> HorizontalResolution {
+          get_ {return this->horizontalResolution;}
         };
 
-        _property<Imaging::ColorPalette> Palette {
-          _get {return this->palette;},
-          _set {this->palette = value;}
+        property_<Imaging::ColorPalette> Palette {
+          get_ {return this->palette;},
+          set_ {this->palette = value;}
         };
 
-        _property<SizeF, _readonly> PhysicalDimension {
-          _get {return SizeF(Convert::ToSingle(this->size.Width()) * this->horizontalResolution, Convert::ToSingle(this->size.Height()) * this->verticalResolution);}
+        property_<SizeF, readonly_> PhysicalDimension {
+          get_ {return SizeF(Convert::ToSingle(this->size.Width()) * this->horizontalResolution, Convert::ToSingle(this->size.Height()) * this->verticalResolution);}
         };
 
-        _property<Imaging::PixelFormat, _readonly> PixelFormat {
-          _get {return this->pixelFormat;}
+        property_<Imaging::PixelFormat, readonly_> PixelFormat {
+          get_ {return this->pixelFormat;}
         };
 
-        _property<Imaging::ImageFormat, _readonly> RawFormat {
-          _get {return this->rawFormat;}
+        property_<Imaging::ImageFormat, readonly_> RawFormat {
+          get_ {return this->rawFormat;}
         };
 
-        _property<System::Drawing::Size, _readonly> Size {
-          _get {return this->size;}
+        property_<System::Drawing::Size, readonly_> Size {
+          get_ {return this->size;}
         };
 
-        _property<const object&> Tag {
-          _get->const object& {return *this->tag;},
-          _set {this->tag = &value;}
+        property_<const object&> Tag {
+          get_->const object& {return *this->tag;},
+          set_ {this->tag = &value;}
         };
 
-        _property<float, _readonly> VerticalResolution {
-          _get {return this->verticalResolution;}
+        property_<float, readonly_> VerticalResolution {
+          get_ {return this->verticalResolution;}
         };
 
-        _property<int32, _readonly> Width {
-          _get {return this->size.Width();}
+        property_<int32, readonly_> Width {
+          get_ {return this->size.Width();}
         };
 
         static refptr<Image> FromFile(const string& fileName);

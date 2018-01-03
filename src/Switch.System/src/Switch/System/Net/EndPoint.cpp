@@ -5,7 +5,7 @@ using namespace System::Net;
 using namespace System::Net::Sockets;
 
 refptr<EndPoint> EndPoint::Create(const SocketAddress&) const {
-  throw NotSupportedException(_caller);
+  throw NotSupportedException(caller_);
 }
 
 string EndPoint::ToString() const {

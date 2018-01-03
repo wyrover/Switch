@@ -18,7 +18,7 @@ namespace Switch {
       /// @brief The exception that is thrown when a security error is detected.
       /// @remarks SecureString is a string type that provides a measure of security. It tries to avoid storing potentially sensitive strings in process memory as plain text. (For limitations, however, see the How secure is SecureString? section.) The value of an instance of SecureString is automatically protected using a mechanism supported by the underlying platform when the instance is initialized or when the value is modified. Your application can render the instance immutable and prevent further modification by invoking the MakeReadOnly method.
       /// @remarks The maximum length of a SecureString instance is 65,536 characters.
-      class _export SecureString final : public object {
+      class export_ SecureString final : public object {
       public:
         /// @brief Initializes a new instance of the SecureString class.
         SecureString() {}
@@ -39,8 +39,8 @@ namespace Switch {
 
         /// @brief Gets the number of characters in the current secure string.
         /// @return int32 The number of System.Char objects in this secure string.
-        _property<int32, _readonly> Length {
-          _get {return this->data.Count();}
+        property_<int32, readonly_> Length {
+          get_ {return this->data.Count();}
         };
 
         /// @brief Appends a character to the end of the current secure string.

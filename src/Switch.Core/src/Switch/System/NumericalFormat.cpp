@@ -325,7 +325,7 @@ namespace Switch {
 
       int32 split = s.IndexOf('.');
       if (split == -1) // in case of "." is not used as separator anymore, and code needs refactoring
-        throw FormatException(_caller);
+        throw FormatException(caller_);
 
       // multiply by 100
       s = s.Remove(split, 1);
@@ -352,7 +352,7 @@ namespace Switch {
 
       int32 split = s.IndexOf('.');
       if (split == -1) // in case of "." is not used as separator anymore, and code needs refactoring
-        throw FormatException(_caller);
+        throw FormatException(caller_);
 
       // multiply by 100
       s = s.Remove(split, 1);

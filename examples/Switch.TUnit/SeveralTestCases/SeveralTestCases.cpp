@@ -4,62 +4,62 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  class _TestFixture(TeastCase1) {
-    void _Test(TestOne) {
-      Assert::IsTrue(true, _caller);
+  class TestFixture_(TeastCase1) {
+    void Test_(TestOne) {
+      Assert::IsTrue(true, caller_);
     }
 
-    void _Test(TestTwo) {
-      Assert::IsFalse(false, _caller);
+    void Test_(TestTwo) {
+      Assert::IsFalse(false, caller_);
     }
 
-    void _Test(TestThree) {
-      Assert::IsEmpty("", _caller);
-    }
-  };
-
-  class _TestFixture(TeastCase2) {
-    void _Test(TestOne) {
-      Assert::IsTrue(true, _caller);
-    }
-
-    void _Test(TestTwo) {
-      Assert::IsFalse(false, _caller);
-    }
-
-    void _Test(TestThree) {
-      Assert::IsEmpty("", _caller);
-    }
-
-    void _Test(TestFour) {
-      Assert::IsEmpty({}, _caller);
+    void Test_(TestThree) {
+      Assert::IsEmpty("", caller_);
     }
   };
 
-  class _TestFixture(TeastCase3) {
-    void _Test(TestOne) {
-      Assert::IsNull(null, _caller);
+  class TestFixture_(TeastCase2) {
+    void Test_(TestOne) {
+      Assert::IsTrue(true, caller_);
     }
 
-    void _Test(TestTwo) {
-      _<string> str;
-      Assert::IsNull(str, _caller);
+    void Test_(TestTwo) {
+      Assert::IsFalse(false, caller_);
+    }
+
+    void Test_(TestThree) {
+      Assert::IsEmpty("", caller_);
+    }
+
+    void Test_(TestFour) {
+      Assert::IsEmpty({}, caller_);
     }
   };
 
-  // Used _Test to add unit test to execute at the unit test suit.
-  _AddTestFixture(TeastCase1);
-  _AddTest(TeastCase1, TestOne);
-  _AddTest(TeastCase1, TestTwo);
-  _AddTest(TeastCase1, TestThree);
-  _AddTestFixture(TeastCase2);
-  _AddTest(TeastCase2, TestOne);
-  _AddTest(TeastCase2, TestTwo);
-  _AddTest(TeastCase2, TestThree);
-  _AddTest(TeastCase2, TestFour);
-  _AddTestFixture(TeastCase3);
-  _AddTest(TeastCase3, TestOne);
-  _AddTest(TeastCase3, TestTwo);
+  class TestFixture_(TeastCase3) {
+    void Test_(TestOne) {
+      Assert::IsNull(null, caller_);
+    }
+
+    void Test_(TestTwo) {
+      $<string> str;
+      Assert::IsNull(str, caller_);
+    }
+  };
+
+  // Used Test_ to add unit test to execute at the unit test suit.
+  AddTestFixture_(TeastCase1);
+  AddTest_(TeastCase1, TestOne);
+  AddTest_(TeastCase1, TestTwo);
+  AddTest_(TeastCase1, TestThree);
+  AddTestFixture_(TeastCase2);
+  AddTest_(TeastCase2, TestOne);
+  AddTest_(TeastCase2, TestTwo);
+  AddTest_(TeastCase2, TestThree);
+  AddTest_(TeastCase2, TestFour);
+  AddTestFixture_(TeastCase3);
+  AddTest_(TeastCase3, TestOne);
+  AddTest_(TeastCase3, TestTwo);
 }
 
 // This code produces the following output:

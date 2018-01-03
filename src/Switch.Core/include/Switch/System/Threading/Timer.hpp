@@ -21,7 +21,7 @@ namespace Switch {
       /// @par Examples
       /// This example show how to use Timer class
       /// @include Timer.cpp
-      class _export Timer : public Object {
+      class export_ Timer : public Object {
       public:
         /// @brief Initializes a new instance of the Timer class with an infinite period and an infinite due time, using the newly created Timer object as the state object.
         /// @param callback the address of a method to be executed
@@ -130,9 +130,9 @@ namespace Switch {
         /// @exception ArgumentOutOfRangeException The dueTime or period parameter is negative and is not equal to Timeout::Infinite.
         void Change(int32 dueTime, int32 period) {
           if (this->data->callback.IsEmpty())
-            throw InvalidOperationException(_caller);
+            throw InvalidOperationException(caller_);
           if (dueTime < Timeout::Infinite || period < Timeout::Infinite)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
 
           this->data->dueTime = dueTime;
           this->data->period = period;
@@ -173,7 +173,7 @@ namespace Switch {
           AutoResetEvent event {false};
           int32 period {-1};
           Object* state{this};
-          Thread thread {ThreadStart {_delegate {
+          Thread thread {ThreadStart {delegate_ {
                 bool runOnce = false;
                 while (!this->closed) {
                   if (!this->event.WaitOne(runOnce ? this->period : this->dueTime)) {

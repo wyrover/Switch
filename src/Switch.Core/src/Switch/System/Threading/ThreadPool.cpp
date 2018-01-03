@@ -42,10 +42,10 @@ namespace {
     int32 Release() {return this->Release(1);}
     int32 Release(int32 releaseCount) {
       if (this->guard == null)
-        throw ObjectDisposedException(_caller);
+        throw ObjectDisposedException(caller_);
       std::unique_lock<std::mutex> lock(*this->guard);
       if (*this->count + releaseCount > *this->maxCount)
-        throw InvalidOperationException(_caller);
+        throw InvalidOperationException(caller_);
       *this->count += releaseCount;
       this->signal->notify_all();
       return *this->count - releaseCount;
@@ -59,9 +59,9 @@ namespace {
 
     bool Wait(int32 millisecondsTimeOut) override {
       if (this->guard == null)
-        throw ObjectDisposedException(_caller);
+        throw ObjectDisposedException(caller_);
       if (millisecondsTimeOut < -1)
-        throw AbandonedMutexException(_caller);
+        throw AbandonedMutexException(caller_);
 
       std::unique_lock<std::mutex> lock(*this->guard);
       while (*this->count == 0) {
@@ -138,7 +138,7 @@ void ThreadPool::GetMinThreads(int32& workerThreads, int32& completionPortThread
 bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack) {
   if (threads.Count == 0)
     CreateThreads();
-  _lock(threadPoolItems.SyncRoot) {
+  lock_(threadPoolItems.SyncRoot) {
     if (threadPoolItems.Count() == maxThreads)
       return false;
     threadPoolItems.Add(new ThreadPoolItem(callBack));
@@ -150,7 +150,7 @@ bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack) {
 bool ThreadPool::QueueUserWorkItem(const WaitCallback& callBack, object& state) {
   if (threads.Count == 0)
     CreateThreads();
-  _lock(threadPoolItems.SyncRoot) {
+  lock_(threadPoolItems.SyncRoot) {
     if (threadPoolItems.Count() == maxThreads)
       return false;
     threadPoolItems.Add(new ThreadPoolItem(callBack, state));
@@ -163,7 +163,7 @@ RegisteredWaitHandle ThreadPool::RegisterWaitForSingleObject(WaitHandle& waitObj
   if (asynchronousIOThreads.Count == 0)
     CreateAsynchronousIOThreads();
   RegisteredWaitHandle result;
-  _lock(threadPoolAsynchronousIOItems.SyncRoot) {
+  lock_(threadPoolAsynchronousIOItems.SyncRoot) {
     if (threadPoolAsynchronousIOItems.Count() == maxAsynchronousIOThreads)
       return result;
     refptr<ThreadPoolAsynchronousIOItem> item = new ThreadPoolAsynchronousIOItem(callBack, state, waitObject, millisecondsTimeoutInterval, executeOnlyOnce);
@@ -181,9 +181,9 @@ bool ThreadPool::SetMaxThreads(int32 workerThreads, int32 completionPortThreads)
   maxThreads = workerThreads;
   maxAsynchronousIOThreads = completionPortThreads;
 
-  _lock(threadPoolItems.SyncRoot)
+  lock_(threadPoolItems.SyncRoot)
   semaphore = Semaphore(semaphore.Release(), maxThreads);
-  _lock(threadPoolAsynchronousIOItems.SyncRoot)
+  lock_(threadPoolAsynchronousIOItems.SyncRoot)
   asynchronousIOSemaphore = Semaphore(asynchronousIOSemaphore.Release(), maxAsynchronousIOThreads);
 
   return true;
@@ -232,7 +232,7 @@ void ThreadPool::Run() {
     semaphore.WaitOne();
     if (!closed) {
       refptr<ThreadPoolItem> item;
-      _lock(threadPoolItems.SyncRoot)
+      lock_(threadPoolItems.SyncRoot)
       item = threadPoolItems[0];
       threadPoolItems.RemoveAt(0);
       item->callback(*item->state);
@@ -245,7 +245,7 @@ void ThreadPool::AsynchronousIORun() {
     asynchronousIOSemaphore.WaitOne();
     if (!closed) {
       refptr<ThreadPoolAsynchronousIOItem> item;
-      _lock(threadPoolAsynchronousIOItems.SyncRoot)
+      lock_(threadPoolAsynchronousIOItems.SyncRoot)
       item = threadPoolAsynchronousIOItems[0];
       threadPoolAsynchronousIOItems.RemoveAt(0);
 

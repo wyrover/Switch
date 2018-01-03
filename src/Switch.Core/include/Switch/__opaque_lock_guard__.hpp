@@ -5,7 +5,7 @@
 #include "System/Object.hpp"
 
 /// @cond
-class _export __opaque_lock_guard__ : public object {
+class export_ __opaque_lock_guard__ : public object {
 public:
   explicit __opaque_lock_guard__(const object& lock);
   ~__opaque_lock_guard__();

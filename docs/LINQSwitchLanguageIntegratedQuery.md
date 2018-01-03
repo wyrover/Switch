@@ -39,9 +39,9 @@ namespace Examples {
     static void Main() {
       Array<string> names = { "Burke", "Connor", "Frank", "Everett", "Albert", "George", "Harris", "David" };
       refptr<IEnumerable<string>> query = from<string>(names)
-                                          | where<string>(_delegate(string s) {return s.Length == 5;})
-                                          | orderby<string>(_delegate(string s) {return s;})
-                                          | select<string>(_delegate(string s) {return s.ToUpper();});
+                                          | where<string>(delegate_(string s) {return s.Length == 5;})
+                                          | orderby<string>(delegate_(string s) {return s;})
+                                          | select<string>(delegate_(string s) {return s.ToUpper();});
 ​
       for (string item : *query)
         Console::WriteLine(item);
@@ -49,7 +49,7 @@ namespace Examples {
   };
 }
 ​
-_startup(Examples::Program);
+startup_(Examples::Program);
 ```
 
 If you were to compile and run this program, you'd see this as output:
@@ -64,9 +64,9 @@ To understand how language-integrated query works, we need to dissect the
 first statement of our program.
  
   refptr<IEnumerable<string>> query = from<string>(names)
-                                      | where<string>(_delegate(string s) {return s.Length == 5;})
-                                      | orderby<string>(_delegate(string s) {return s;})
-                                      | select<string>(_delegate(string s) {return s.ToUpper();});
+                                      | where<string>(delegate_(string s) {return s.Length == 5;})
+                                      | orderby<string>(delegate_(string s) {return s;})
+                                      | select<string>(delegate_(string s) {return s.ToUpper();});
 ```
 
 The local variable query is initialized with a query expression. A query expression operates on one or more information sources by applying one or more query operators from either the standard query operators or domain-specific operators. This expression uses three of the standard query operators: Where, OrderBy, and Select.
@@ -74,9 +74,9 @@ The local variable query is initialized with a query expression. A query express
 C++ statements shown here use query expressions. Like the foreach statement, query expressions are convenient declarative shorthand over code you could write manually. The statements above are semantically identical to the following explicit syntax shown in c++: 
 
 ```c++
-refptr<IEnumerable<string>> query = names.Where(_delegate(string s) {return s.Length == 5;})
-                                    ->OrderBy<string>(_delegate(string s) {return s;})
-                                    ->Select<string>(_delegate(string s) {return s.ToUpper();});
+refptr<IEnumerable<string>> query = names.Where(delegate_(string s) {return s.Length == 5;})
+                                    ->OrderBy<string>(delegate_(string s) {return s;})
+                                    ->Select<string>(delegate_(string s) {return s.ToUpper();});
 ```
 
 This form of query is called a method-based query. The arguments to the Where, OrderBy, and Select operators are called lambda expressions, which are fragments of code much like delegates. They allow the standard query operators to be defined individually as methods and strung together using dot notation. Together, these methods form the basis for an extensible query language.
@@ -90,15 +90,15 @@ LINQ is built entirely on general purpose language features, some of which are n
 Many query operators allow the user to provide a function that performs filtering, projection, or key extraction. The query facilities build on the concept of lambda expressions, which provide developers with a convenient way to write functions that can be passed as arguments for subsequent evaluation. Lambda expressions are similar to CLR delegates and must adhere to a method signature defined by a delegate type. To illustrate this, we can expand the statement above into an equivalent but more explicit form using the Func delegate type:
 
 ```c++
-Func<string, bool> filter = _delegate(string s) {
+Func<string, bool> filter = delegate_(string s) {
   return s.Length == 5;
 };
 ​
-Func<string, string> extract = _delegate(string s) {
+Func<string, string> extract = delegate_(string s) {
   return s;
 };
  
-Func<string, string> project = _delegate(string s) {
+Func<string, string> project = delegate_(string s) {
   return s.ToUpper();
 };
  

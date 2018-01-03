@@ -9,7 +9,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      TraceMessage("Something happened.", _caller);
+      TraceMessage("Something happened.", caller_);
     }
 
     static void TraceMessage(const string& message, const System::Runtime::CompilerServices::Caller& caller) {
@@ -21,7 +21,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

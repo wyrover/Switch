@@ -236,7 +236,7 @@ namespace Examples {
   string Program::myVarD = "D" + myVarSuffix;
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 
 // This example produces the following results:

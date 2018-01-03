@@ -38,7 +38,7 @@ namespace Switch {
           /// @param collection The collection whose elements are copied to the new ConcurrentBag<T>.
           /// @exception ArgumentNullException collection is a null reference.
           ConcurrentBag(const Generic::IEnumerable<T>& collection) {
-            _lock(this->list.SyncRoot) {
+            lock_(this->list.SyncRoot) {
               for (T item : collection)
                 this->list.Add(item);
             }
@@ -46,7 +46,7 @@ namespace Switch {
 
           /// @cond
           ConcurrentBag(InitializerList<T> il)  {
-            _lock(this->list.SyncRoot) {
+            lock_(this->list.SyncRoot) {
               for (T item : il)
                 this->list.Add(item);
             }
@@ -55,8 +55,8 @@ namespace Switch {
 
           /// @brief Gets a value that indicates whether the ConcurrentBag<T> is empty.
           /// @return Boolean true if the ConcurrentBag<T> is empty; otherwise, false.
-          _property<bool, _readonly> IsEmpty {
-            _get {
+          property_<bool, readonly_> IsEmpty {
+            get_ {
               return this->list.Count == 0;
             }
           };
@@ -64,7 +64,7 @@ namespace Switch {
           /// @brief Adds an object to the ConcurrentBag<T>.
           /// @param item The object to be added to the ConcurrentBag<T>.
           void Add(const T& item) override {
-            _lock(this->list.SyncRoot)
+            lock_(this->list.SyncRoot)
             this->list.Add(item);
           }
 
@@ -73,9 +73,9 @@ namespace Switch {
           /// @param index The zero-based index in array at which copying begins;
           void CopyTo(System::Array<T>& array, int32 index) const override {
             if (index + this->list.Count > array.Length)
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
 
-            _lock(this->list.SyncRoot) {
+            lock_(this->list.SyncRoot) {
               for (T item : this->list)
                 array[index++] = item;
             }
@@ -84,7 +84,7 @@ namespace Switch {
           /// @brief Copies the elements contained in the IProducerConsumerCollection<T> to a new array.
           /// @return A new array containing the elements copied from the IProducerConsumerCollection<T>.
           System::Array<T> ToArray() const override {
-            _lock(this->list.SyncRoot)
+            lock_(this->list.SyncRoot)
             return this->list.ToArray();
             return this->list.ToArray();
           }
@@ -92,7 +92,7 @@ namespace Switch {
           /// @brief Returns an enumerator that iterates through the ConcurrentBag<T>.
           /// @return Int32 A List<T>::Enumerator for the List<T>.
           Generic::Enumerator<T> GetEnumerator() const override {
-            _lock(this->list.SyncRoot)
+            lock_(this->list.SyncRoot)
             return Generic::Enumerator<T>(new Enumerator(this));
             return Generic::Enumerator<T>(new Enumerator(this));
           }
@@ -102,7 +102,7 @@ namespace Switch {
           /// @return true if the object was added successfully; otherwise, false.
           /// @exception ArgumentException The item was invalid for this collection.
           bool TryAdd(const T& item) override {
-            _lock(this->list.SyncRoot) {
+            lock_(this->list.SyncRoot) {
               try {
                 this->list.Add(item);
                 return true;
@@ -117,7 +117,7 @@ namespace Switch {
           /// @param result When this method returns, result contains an object from the ConcurrentBag<T> or the default value of T if the operation failed.
           /// @return true if and object was returned successfully; otherwise, false.
           bool TryPeek(T& result) {
-            _lock(this->list.SyncRoot) {
+            lock_(this->list.SyncRoot) {
               if (this->list.Count > 0) {
                 result = this->list[this->Count - 1];
                 return true;
@@ -130,7 +130,7 @@ namespace Switch {
           /// @param result When this method returns, if the object was removed and returned successfully, item contains the removed object. If no object was available to be removed, the value is unspecified.
           /// @return true if an object was removed and returned successfully; otherwise, false.
           bool TryTake(T& result) override {
-            _lock(this->list.SyncRoot) {
+            lock_(this->list.SyncRoot) {
               if (this->list.Count > 0) {
                 result = this->list[this->Count - 1];
                 this->list.RemoveAt(this->Count - 1);
@@ -150,18 +150,18 @@ namespace Switch {
           const object& GetSyncRoot() const override {return this->list.SyncRoot;}
 
           void Clear() override {
-            _lock(this->list.SyncRoot)
+            lock_(this->list.SyncRoot)
             this->list.Clear();
           }
 
           bool Contains(const T& value) const override {
-            _lock(this->list.SyncRoot)
+            lock_(this->list.SyncRoot)
             return this->list.Contains(value);
             return this->list.Contains(value);
           }
 
           bool Remove(const T& value) override {
-            _lock(this->list.SyncRoot)
+            lock_(this->list.SyncRoot)
             return this->list.Remove(value);
             return this->list.Remove(value);
           }
@@ -175,7 +175,7 @@ namespace Switch {
           protected:
             const T& GetCurrent() const {
               if (this->index < 0 || this->index >= this->array.Length)
-                throw InvalidOperationException(_caller);
+                throw InvalidOperationException(caller_);
               return this->array[this->index];
             }
 

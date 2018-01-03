@@ -12,7 +12,7 @@ namespace ManualTests {
     }
   };
 
-  _AddTest(TestFixture1, Test1)
+  AddTest_(TestFixture1, Test1)
 
   class Program {
   public:
@@ -23,4 +23,4 @@ namespace ManualTests {
   };
 }
 
-_startup(ManualTests::Program);
+startup_(ManualTests::Program);

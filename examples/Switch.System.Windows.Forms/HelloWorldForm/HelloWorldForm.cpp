@@ -14,7 +14,7 @@ namespace HelloWorld {
       Button button;
       button.Text = "Click me";
       button.Location = Point(10, 10);
-      button.Click += _delegate(const object & sender, const EventArgs & e) {
+      button.Click += delegate_(const object & sender, const EventArgs & e) {
         MessageBox::Show("Hello, World!");
       };
 
@@ -27,4 +27,4 @@ namespace HelloWorld {
   };
 }
 
-_startup(HelloWorld::Program);
+startup_(HelloWorld::Program);

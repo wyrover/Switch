@@ -20,17 +20,17 @@ namespace Switch {
   /// @include Nameof.cpp
   /// @remarks The argument to nameof must be a simple name, qualified name, member access, base access with a specified member, or this access with a specified member. The argument expression identifies a code definition, but it is never evaluated.
   /// @remarks Because the argument needs to be an expression syntactically, there are many things disallowed that are not useful to list. The following are worth mentioning that produce errors: predefined types (for example, int or void), nullable types (Point?), array types (Customer[,]), pointer types (Buffer*), qualified alias (A::B), and unbound generic types (Dictionary<,>), preprocessing symbols (DEBUG), and labels (loop:).
-  /// @remarks If you need to get the fully-qualified name, you can use the _typeof expression along with nameof. For example:
+  /// @remarks If you need to get the fully-qualified name, you can use the typeof_ expression along with nameof. For example:
   /// @code
   /// class C {
   /// public:
   ///   void f(int i) {
-  ///     Log(string::Format("{0}.{1}", _typeof(C), _nameof(f)), "method entry");
+  ///     Log(string::Format("{0}.{1}", typeof_(C), nameof_(f)), "method entry");
   ///   }
   /// }
   /// @endcode
   /// @ingroup Keywords
-#define _nameof(value) \
+#define nameof_(value) \
   System::String(#value)
 }
 

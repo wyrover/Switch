@@ -20,7 +20,7 @@ Doing this helps to validate the design of the abstract class. For example, Syst
 ```c++
 namespace System {
   namespace IO {
-    class Stream _abstract {
+    class Stream abstract_ {
       public:
       virtual int Read(const Array<byte>& buffer, int offset, int count) const = 0;
       ...

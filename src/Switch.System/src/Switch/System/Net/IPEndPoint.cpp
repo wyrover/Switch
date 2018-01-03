@@ -7,11 +7,11 @@ using namespace System;
 using namespace System::Net;
 using namespace System::Net::Sockets;
 
-_property<int32, _readonly> IPEndPoint::MinPort {
+property_<int32, readonly_> IPEndPoint::MinPort {
   [] {return 0;}
 };
 
-_property<int32, _readonly> IPEndPoint::MaxPort {
+property_<int32, readonly_> IPEndPoint::MaxPort {
   [] {return 0xFFFF;}
 };
 
@@ -61,7 +61,7 @@ void IPEndPoint::SetAddress(const IPAddress& address) {
 
 void IPEndPoint::SetPort(int32 port) {
   if (port < MinPort || port > MaxPort)
-    throw ArgumentOutOfRangeException(_caller);
+    throw ArgumentOutOfRangeException(caller_);
 
   this->port = port;
 }

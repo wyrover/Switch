@@ -17,11 +17,11 @@ namespace Examples {
         return *this;
       }
 
-      _property<string, _readonly> Company {
+      property_<string, readonly_> Company {
         [&] { return this->company; }
       };
 
-      _property<double, _readonly> Weight {
+      property_<double, readonly_> Weight {
         [&] { return this->weight; }
       };
 
@@ -45,7 +45,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

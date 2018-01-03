@@ -6,12 +6,12 @@ using namespace System::Threading::Tasks;
 namespace Examples {
   class TestAsync : public object {
   public:
-    _async(Task<>, CounterTask, {
+    async_(Task<>, CounterTask, {
       for (int counter = 1; counter <= 5; counter++)
         Console::WriteLine("counter --> {0}", counter);
     });
 
-    _async(Task<string>, ComputeStringTask, {
+    async_(Task<string>, ComputeStringTask, {
       return "My result";
     });
 
@@ -19,15 +19,15 @@ namespace Examples {
     static void Main() {
       TestAsync testAsync;
 
-      _await testAsync.CounterTask;
+      await_ testAsync.CounterTask;
 
-      string value = _await testAsync.ComputeStringTask;
+      string value = await_ testAsync.ComputeStringTask;
       Console::WriteLine(value);
     }
   };
 }
 
-_startup(Examples::TestAsync);
+startup_(Examples::TestAsync);
 
 // This code produces output similar to the following:
 //

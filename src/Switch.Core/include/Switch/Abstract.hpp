@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains #_abstract keyword.
+/// @brief Contains #abstract_ keyword.
 #pragma once
 
 #include "System/Object.hpp"
@@ -8,7 +8,7 @@
 namespace Switch {
   /// @brief Represent an abstract class.
   /// @ingroup SwitchCore
-  struct _export Abstract : public System::Object {
+  struct export_ Abstract : public System::Object {
     ~Abstract() override = 0;
   };
 
@@ -24,7 +24,7 @@ namespace Switch {
   /// using namespace System;
   ///
   /// namespace TestReader {
-  ///   class TextReader _abstract {
+  ///   class TextReader abstract_ {
   ///   public:
   ///     virtual int ReadByte() = 0;
   ///
@@ -68,10 +68,10 @@ namespace Switch {
   ///   };
   /// }
   ///
-  /// _startup(TestReader::Program)
+  /// startup_(TestReader::Program)
   /// @endcode
   /// @ingroup Keywords
-#define _abstract \
+#define abstract_ \
 : public Abstract
 }
 

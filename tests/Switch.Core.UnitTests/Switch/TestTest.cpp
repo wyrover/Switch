@@ -34,7 +34,7 @@ TEST_F(GTestTest, AreNotEqualString) {
 }
 
 TEST_F(GTestTest, ThrowException) {
-  throw ArgumentNullException(_caller);
+  throw ArgumentNullException(caller_);
 }
 
 TEST_F(GTestTest, IsTrueBoolean) {
@@ -43,11 +43,11 @@ TEST_F(GTestTest, IsTrueBoolean) {
 }
 
 TEST_F(GTestTest, ThrowArgumentNullException) {
-  ASSERT_THROW(throw ArgumentNullException(_caller), ArgumentNullException);
+  ASSERT_THROW(throw ArgumentNullException(caller_), ArgumentNullException);
 }
 
 TEST_F(GTestTest, ThrowIndexOutOfRangeException) {
-  ASSERT_THROW(throw ArgumentNullException(_caller), IndexOutOfRangeException);
+  ASSERT_THROW(throw ArgumentNullException(caller_), IndexOutOfRangeException);
 }
 
 namespace SwitchUnitTests {
@@ -79,7 +79,7 @@ namespace SwitchUnitTests {
     }
 
     void ThrowException() {
-      throw ArgumentNullException(_caller);
+      throw ArgumentNullException(caller_);
     }
 
     void IsTrueBoolean() {
@@ -87,21 +87,21 @@ namespace SwitchUnitTests {
     }
 
     void ThrowArgumentNullException() {
-      Assert::Throws<ArgumentNullException>(_delegate {throw ArgumentNullException(_caller);}, _caller);
+      Assert::Throws<ArgumentNullException>(delegate_ {throw ArgumentNullException(caller_);}, caller_);
     }
 
     void ThrowIndexOutOfRangeException() {
-      Assert::Throws<IndexOutOfRangeException>(_delegate {throw ArgumentNullException(_caller);}, _caller);
+      Assert::Throws<IndexOutOfRangeException>(delegate_ {throw ArgumentNullException(caller_);}, caller_);
     }
   };
 
-  _AddTest(TUnitTest, AreEqualInt32);
-  _AddTest(TUnitTest, AreNotEqualInt32);
-  _AddTest(TUnitTest, AreEqualtring);
-  _AddTest(TUnitTest, AreNotEqualString);
-  _AddTest(TUnitTest, ThrowException);
-  _AddTest(TUnitTest, IsTrueBoolean);
-  _AddTest(TUnitTest, ThrowArgumentNullException);
-  _AddTest(TUnitTest, ThrowIndexOutOfRangeException);
+  AddTest_(TUnitTest, AreEqualInt32);
+  AddTest_(TUnitTest, AreNotEqualInt32);
+  AddTest_(TUnitTest, AreEqualtring);
+  AddTest_(TUnitTest, AreNotEqualString);
+  AddTest_(TUnitTest, ThrowException);
+  AddTest_(TUnitTest, IsTrueBoolean);
+  AddTest_(TUnitTest, ThrowArgumentNullException);
+  AddTest_(TUnitTest, ThrowIndexOutOfRangeException);
 }
 */

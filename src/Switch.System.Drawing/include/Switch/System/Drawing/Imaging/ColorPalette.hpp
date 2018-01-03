@@ -21,17 +21,17 @@ namespace Switch {
       /// @par Library
       /// Switch.System.Drawing
       namespace Imaging {
-        class _export ColorPalette : public object {
+        class export_ ColorPalette : public object {
         public:
           /// @cond
           ColorPalette(const ColorPalette& colorPalette) : entries(colorPalette.entries), flags(colorPalette.flags) {}
           /// @endcond
-          _property<Array<Color>, _readonly> Entries {
-            _get {return this->entries;}
+          property_<Array<Color>, readonly_> Entries {
+            get_ {return this->entries;}
           };
 
-          _property<int32, _readonly> Falgs {
-            _get {return this->flags;}
+          property_<int32, readonly_> Falgs {
+            get_ {return this->flags;}
           };
 
         private:

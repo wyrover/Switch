@@ -16,11 +16,11 @@ namespace Switch {
       /// @brief Implements a File Transfer Protocol (FTP) client.
       /// @par Library
       /// Switch.System
-      class _export FtpWebRequest: public System::Net::WebRequest {
+      class export_ FtpWebRequest: public System::Net::WebRequest {
       public:
-        _property<bool> UseBinary {
-          _get {return this->GetUseBinary();},
-          _set {this->SetUseBinary(value);}
+        property_<bool> UseBinary {
+          get_ {return this->GetUseBinary();},
+          set_ {this->SetUseBinary(value);}
         };
 
         WebResponse& GetResponse() override;

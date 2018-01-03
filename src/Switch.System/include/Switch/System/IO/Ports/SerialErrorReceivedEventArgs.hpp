@@ -19,7 +19,7 @@ namespace Switch {
         /// @remarks This class is used with the ErrorReceived event.
         /// @par Library
         /// Switch.System
-        class _export SerialErrorReceivedEventArgs : public System::EventArgs {
+        class export_ SerialErrorReceivedEventArgs : public System::EventArgs {
         public:
           SerialErrorReceivedEventArgs(SerialError eventType) : eventType(eventType) {}
           SerialErrorReceivedEventArgs(const SerialErrorReceivedEventArgs& serea) : eventType(serea.eventType) {}
@@ -27,8 +27,8 @@ namespace Switch {
           /// @brief Gets the event type.
           /// @return One of the SerialError values.
           /// @remarks This property provides information about the event type that caused the ErrorReceived event.
-          _property<SerialError, _readonly> EventType {
-            _get {return this->eventType;}
+          property_<SerialError, readonly_> EventType {
+            get_ {return this->eventType;}
           };
 
         private:

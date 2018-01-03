@@ -28,7 +28,7 @@ namespace Switch {
     /// @par Examples
     /// The following example generates a random integer that it uses as an index to retrieve a string value from an array.
     /// @include Random3.cpp
-    class _export Random : public Object {
+    class export_ Random : public Object {
     public:
       /// @brief Initializes a new instance of the Random class, using a time-dependent default seed value
       Random();

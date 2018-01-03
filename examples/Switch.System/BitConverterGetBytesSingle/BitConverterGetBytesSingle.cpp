@@ -44,7 +44,7 @@ namespace Examples {
   const string Program::formatter = "{0,16:E7}{1,20}";
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

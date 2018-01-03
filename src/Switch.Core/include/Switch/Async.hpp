@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains Switch::Async class and #_async keyword.
+/// @brief Contains Switch::Async class and #async_ keyword.
 #pragma once
 
 #include "System/Threading/Tasks/Task.hpp"
@@ -38,7 +38,7 @@ namespace Switch {
   /// This example demontrate how to use async and await
   /// @include Async2.cpp
   /// @ingroup Keywords
-#define _async(Task, name, method) \
+#define async_(Task, name, method) \
   async<Task> name{[&] method}
 }
 

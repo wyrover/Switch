@@ -21,7 +21,7 @@ namespace Switch {
       /// @brief Provides a thread-safe list of TraceListener objects.
       /// @par Library
       /// Switch.System
-      class _export TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
+      class export_ TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
         friend class Trace;
         friend class TraceSource;
         TraceListenerCollection() = default;
@@ -36,7 +36,7 @@ namespace Switch {
 
         template<typename TTraceListener>
         void Add(const TTraceListener& value) {
-          _lock(this->SyncRoot()) {
+          lock_(this->SyncRoot()) {
             static_assert(!std::is_same<TraceListener, TTraceListener>::value, "Must not be System::Diagnostics::TraceListener but inherited");
             static_assert(std::is_base_of<TraceListener, TTraceListener>::value, "Is not inherited from System::Diagnostics::TraceListener");
             this->list.Add(value.template MemberwiseClone<TTraceListener>().template As<System::Diagnostics::TraceListener>());
@@ -44,7 +44,7 @@ namespace Switch {
         }
 
         void Clear() override {
-          _lock(this->SyncRoot()) {
+          lock_(this->SyncRoot()) {
             this->list.Clear();
           }
         }
@@ -78,7 +78,7 @@ namespace Switch {
 
         template<typename TTraceListener>
         void Insert(int32 index, const TTraceListener& value) {
-          _lock(this->SyncRoot()) {
+          lock_(this->SyncRoot()) {
             static_assert(!std::is_same<TraceListener, TTraceListener>::value, "Must not be System::Diagnostics::TraceListener but inherited");
             static_assert(std::is_base_of<TraceListener, TTraceListener>::value, "Is not inherited from System::Diagnostics::TraceListener");
             this->list.Insert(index, value.template MemberwiseClone<TTraceListener>().template As<System::Diagnostics::TraceListener>());
@@ -106,7 +106,7 @@ namespace Switch {
         }
 
         bool Remove(const TraceListener& value) override {
-          _lock(this->SyncRoot()) {
+          lock_(this->SyncRoot()) {
             int32 index = IndexOf(value);
             if (index == -1)return false;
             this->RemoveAt(index);
@@ -115,7 +115,7 @@ namespace Switch {
         }
 
         void RemoveAt(int32 index) override {
-          _lock(this->SyncRoot()) {
+          lock_(this->SyncRoot()) {
             this->list.RemoveAt(index);
           }
         }
@@ -128,9 +128,9 @@ namespace Switch {
         const Object& GetSyncRoot() const override {return this->list.SyncRoot();}
 
       private:
-        void Add(const TraceListener& traceListener) override {throw InvalidOperationException(_caller);}
-        void CopyTo(System::Array<TraceListener>& array, int32 index) const override {throw InvalidOperationException(_caller);}
-        void Insert(int32 index, const TraceListener& value) override {throw InvalidOperationException(_caller);}
+        void Add(const TraceListener& traceListener) override {throw InvalidOperationException(caller_);}
+        void CopyTo(System::Array<TraceListener>& array, int32 index) const override {throw InvalidOperationException(caller_);}
+        void Insert(int32 index, const TraceListener& value) override {throw InvalidOperationException(caller_);}
 
         System::Collections::Generic::List<refptr<TraceListener>> list;
       };

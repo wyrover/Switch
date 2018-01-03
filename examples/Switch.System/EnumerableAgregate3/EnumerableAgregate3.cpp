@@ -13,11 +13,11 @@ namespace Examples {
       // Determine whether any string in the array is longer than "banana".
       string longestName =
         fruits.Agregate<string, string>("bananas",
-      _delegate(const string & longest, const string & next) {
+      delegate_(const string & longest, const string & next) {
         return next.Length > longest.Length ? next : longest;
       },
       // Return the final result as an upper case string.
-      _delegate(const string & fruit) {
+      delegate_(const string & fruit) {
         return fruit.ToUpper();
       });
 
@@ -26,7 +26,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

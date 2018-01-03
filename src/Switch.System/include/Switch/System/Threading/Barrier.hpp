@@ -23,7 +23,7 @@ namespace Switch {
       /// @par Examples
       /// The following example shows how to use a barrier:
       /// @include Barrier.cpp
-      class _export Barrier : public object {
+      class export_ Barrier : public object {
       public:
         /// @brief Initializes a new instance of the Barrier class.
         /// @param participantCount The number of participating threads.
@@ -48,21 +48,21 @@ namespace Switch {
 
         /// @brief Gets the number of the barrier's current phase.
         /// @return Returns the number of the barrier's current phase.
-        _property<int64, _readonly> CurrentPhaseNumber {
-          _get {return this->data->currentPhaseNumber;}
+        property_<int64, readonly_> CurrentPhaseNumber {
+          get_ {return this->data->currentPhaseNumber;}
         };
 
         /// @brief Gets the total number of participants in the barrier.
         /// @return Returns the total number of participants in the barrier.
-        _property<int32, _readonly> ParticipantCount {
-          _get {return this->data->participantCount;}
+        property_<int32, readonly_> ParticipantCount {
+          get_ {return this->data->participantCount;}
         };
 
         /// @brief Gets the number of participants in the barrier that haven’t yet signaled in the current phase.
         /// @return Returns the number of participants in the barrier that haven’t yet signaled in the current phase.
         /// @remarks This could be 0 during a post-phase action delegate execution or if the ParticipantCount is 0.
-        _property<int32, _readonly> ParticipantsRemaining {
-          _get {return this->data->participantsRemaining;}
+        property_<int32, readonly_> ParticipantsRemaining {
+          get_ {return this->data->participantsRemaining;}
         };
 
         /// @brief Notifies the Barrier that there will be an additional participant.
@@ -79,11 +79,11 @@ namespace Switch {
         /// @exception InvalidOperation The method was invoked from within a post-phase action.
         /// @remarks If the barrier is currently executing a post phase action, this call is blocked until the post phase action completes and the barrier has moved on to the next phase.
         int64 AddParticipants(int32 participantCount) {
-          _lock(*this) {
+          lock_(*this) {
             if (participantCount < 0 || as<int64>(this->data->participantCount) + participantCount > as<int64>(Int32::MaxValue))
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
             if (this->data->runPostPhaseAction)
-              throw InvalidOperationException(_caller);
+              throw InvalidOperationException(caller_);
             this->data->participantCount += participantCount;
             this->data->participantsRemaining += participantCount;
             return this->data->currentPhaseNumber;
@@ -105,13 +105,13 @@ namespace Switch {
         /// @exception ArgumentoutOfRangeException The total participant count is less than the specified participantCount.
         /// @remarks If the barrier is currently executing a post phase action, this call is blocked until the post phase action completes and the barrier has moved on to the next phase.
         int64 RemoveParticipants(int32 participantCount) {
-          _lock(*this) {
+          lock_(*this) {
             if (participantCount < 0)
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
             if (this->data->participantCount == 0 || this->data->runPostPhaseAction || this->data->participantsRemaining < this->data->participantCount - participantCount)
-              throw InvalidOperationException(_caller);
+              throw InvalidOperationException(caller_);
             if (this->data->participantCount < participantCount)
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
             this->data->participantCount -= participantCount;
             this->data->participantsRemaining -= participantCount;
             return this->data->currentPhaseNumber;
@@ -132,7 +132,7 @@ namespace Switch {
         /// @return if all participants reached the barrier within the specified time; otherwise false.
         bool SignalAndWait(int32 millisecondsTimeout) {
           if (millisecondsTimeout < -1)
-            throw ArgumentOutOfRangeException(_caller);
+            throw ArgumentOutOfRangeException(caller_);
 
           std::unique_lock<std::mutex> lock(this->data->mutex);
           int64 currentPhaseNumber = this->data->currentPhaseNumber;
@@ -149,14 +149,14 @@ namespace Switch {
               result = this->data->cond.wait_for(lock, std::chrono::milliseconds(millisecondsTimeout)) == std::cv_status::no_timeout;
 
             if (this->data->participantsPostPhaseExceptionRemainin-- > 0)
-              throw BarrierPostPhaseException(_caller);
+              throw BarrierPostPhaseException(caller_);
           }
           return result;
         }
 
       private:
         bool Signal() {
-          _lock(*this) {
+          lock_(*this) {
             if (--this->data->participantsRemaining == 0) {
               this->data->runPostPhaseAction = true;
               try {
@@ -167,7 +167,7 @@ namespace Switch {
                 this->data->participantsRemaining = this->data->participantCount;
                 this->data->participantsPostPhaseExceptionRemainin = this->data->participantCount - 1;
                 this->data->cond.notify_all();
-                throw BarrierPostPhaseException(_caller);
+                throw BarrierPostPhaseException(caller_);
               }
               this->data->runPostPhaseAction = false;
               this->data->currentPhaseNumber++;

@@ -42,14 +42,14 @@ namespace Switch {
 
           /// @brief Gets the key in the key/value pair.
           /// @return TKey A TKey that is the key of the KeyValuePair<TKey, TValue>.
-          _property<const TKey&, _readonly> Key {
-            _get->const TKey& {return this->pair.first;}
+          property_<const TKey&, readonly_> Key {
+            get_->const TKey& {return this->pair.first;}
           };
 
           /// @brief Gets the value in the key/value pair.
           /// @return TValue A TValue that is the value of the KeyValuePair<TKey, TValue>.
-          _property<const TValue&, _readonly> Value {
-            _get->const TValue& {return this->pair.second;}
+          property_<const TValue&, readonly_> Value {
+            get_->const TValue& {return this->pair.second;}
           };
 
           /// @brief Returns a String representation of the KeyValuePair<TKey, TValue>, using the String representations of the key and value.

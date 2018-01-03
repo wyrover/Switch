@@ -31,18 +31,18 @@ int32 ANSIEncoding::GetByteCount(char32) const {
 }
 
 int32 ANSIEncoding::GetCharCount(const byte bytes[], int32 bytesSize, int32 index, int32 count) const {
-  if (bytes == null && bytesSize != 0) throw ArgumentNullException(_caller);
+  if (bytes == null && bytesSize != 0) throw ArgumentNullException(caller_);
   ValidateGCC(bytesSize, index, count);
   return count;
 }
 
 int32 ANSIEncoding::GetMaxByteCount(int32 charCount) const {
-  if (charCount < 0) throw ArgumentOutOfRangeException(_caller);
+  if (charCount < 0) throw ArgumentOutOfRangeException(caller_);
   return charCount;
 }
 
 int32 ANSIEncoding::GetMaxCharCount(int32 byteCount) const {
-  if (byteCount < 0) throw ArgumentOutOfRangeException(_caller);
+  if (byteCount < 0) throw ArgumentOutOfRangeException(caller_);
   return byteCount;
 }
 
@@ -67,11 +67,11 @@ refptr<Encoding::Encoder> CodePage437Encoding::CreateEncoder() const {
 }
 
 int32 CodePage437Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if (index < 0) throw ArgumentOutOfRangeException(_caller);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(caller_);
+  if (index < 0) throw ArgumentOutOfRangeException(caller_);
 
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(caller_);
 
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -91,11 +91,11 @@ refptr<Encoding::Encoder> CodePage28591Encoding::CreateEncoder() const {
 }
 
 int32 CodePage28591Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if (index < 0) throw ArgumentOutOfRangeException(_caller);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(caller_);
+  if (index < 0) throw ArgumentOutOfRangeException(caller_);
 
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(caller_);
 
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);
@@ -117,11 +117,11 @@ refptr<Encoding::Encoder> CodePage28592Encoding::CreateEncoder() const {
 }
 
 int32 CodePage28592Encoding::GetBytes(char32 c, byte bytes[], int32 bytesLength, int32 index) const {
-  if (bytes == null && bytesLength > 0) throw ArgumentNullException(_caller);
-  if (index < 0) throw ArgumentOutOfRangeException(_caller);
+  if (bytes == null && bytesLength > 0) throw ArgumentNullException(caller_);
+  if (index < 0) throw ArgumentOutOfRangeException(caller_);
 
   int32 count = GetByteCount(c);
-  if (index + count > bytesLength) throw ArgumentOutOfRangeException(_caller);
+  if (index + count > bytesLength) throw ArgumentOutOfRangeException(caller_);
 
   Encoder encoder;
   encoder.Encode(c, &bytes[index]);

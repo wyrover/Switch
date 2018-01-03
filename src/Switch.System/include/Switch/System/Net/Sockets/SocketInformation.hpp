@@ -21,7 +21,7 @@ namespace Switch {
         /// @remarks Socket::DuplicateAndClose creates a SocketInformation instance for use with the Socket::Socket(SocketInformation) constructor.
         /// @par Library
         /// Switch.System
-        class _export SocketInformation : public Object {
+        class export_ SocketInformation : public Object {
         public:
           /// @brief Create a new instance of SocketInformation class.
           SocketInformation() {}
@@ -34,17 +34,17 @@ namespace Switch {
           /// @brief Gets or sets the options for a Socket.
           /// @param options A SocketInformationOptions instance.
           /// @return SocketInformationOptions A SocketInformationOptions instance.
-          _property<const SocketInformationOptions&> Options {
-            _get->const SocketInformationOptions& {return this->options;},
-            _set {this->options = value;}
+          property_<const SocketInformationOptions&> Options {
+            get_->const SocketInformationOptions& {return this->options;},
+            set_ {this->options = value;}
           };
 
           /// @brief Gets or sets the protocol information for a Socket.
           /// @param protocolInformation An array of type Byte.
           /// @return Array<Byte> An array of type Byte.
-          _property<const Array<byte>&> ProtocolInformation {
-            _get->const Array<byte>& {return this->protocolInfrmation;},
-            _set {this->protocolInfrmation = value;}
+          property_<const Array<byte>&> ProtocolInformation {
+            get_->const Array<byte>& {return this->protocolInfrmation;},
+            set_ {this->protocolInfrmation = value;}
           };
 
         private:

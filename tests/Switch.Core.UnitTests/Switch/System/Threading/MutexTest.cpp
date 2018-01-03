@@ -33,7 +33,7 @@ namespace SwitchUnitTests {
 
   TEST(MutexTest, CreateMutexWithInitiallyOwnedToFalse) {
     Mutex mutex(false);
-    Thread thread(ThreadStart(_delegate {
+    Thread thread(ThreadStart(delegate_ {
       ASSERT_TRUE(mutex.WaitOne(0));
     }));
     thread.Start();
@@ -42,7 +42,7 @@ namespace SwitchUnitTests {
 
   TEST(MutexTest, CreateMutexWithInitiallyOwnedToTrue) {
     Mutex mutex(true);
-    Thread thread(ThreadStart(_delegate {
+    Thread thread(ThreadStart(delegate_ {
       ASSERT_FALSE(mutex.WaitOne(0));
     }));
     thread.Start();

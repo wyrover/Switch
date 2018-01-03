@@ -10,14 +10,14 @@ using namespace System::IO;
 
 DriveInfo::DriveInfo(const String& name) {
   if (String::IsNullOrEmpty(name))
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
   this->driveName = name;
 }
 
 int64 DriveInfo::GetAvailableFreeSpace() const {
   int64 freeBytes = 0, dummy;
   if (!Native::DriveApi::GetAvailableFreeSpace(this->driveName.Data(), freeBytes, dummy, dummy))
-    throw IOException(_caller);
+    throw IOException(caller_);
 
   return freeBytes;
 }
@@ -25,7 +25,7 @@ int64 DriveInfo::GetAvailableFreeSpace() const {
 String DriveInfo::GetDriveFormat() const {
   string volumeName, fileSystemName;
   if (!Native::DriveApi::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
-    throw IOException(_caller);
+    throw IOException(caller_);
 
   return fileSystemName;
 }
@@ -50,7 +50,7 @@ DirectoryInfo DriveInfo::GetRootDirectory() const {
 int64 DriveInfo::GetTotalFreeSpace() const {
   int64 totalNumberOfFreeBytes = 0, dummy;
   if (!Native::DriveApi::GetAvailableFreeSpace(this->driveName.Data(), dummy, dummy, totalNumberOfFreeBytes))
-    throw IOException(_caller);
+    throw IOException(caller_);
 
   return totalNumberOfFreeBytes;
 }
@@ -58,7 +58,7 @@ int64 DriveInfo::GetTotalFreeSpace() const {
 int64 DriveInfo::GetTotalSize() const {
   int64 totalNumberOfBytes = 0, dummy;
   if (!Native::DriveApi::GetAvailableFreeSpace(this->driveName.Data(), dummy, totalNumberOfBytes, dummy))
-    throw IOException(_caller);
+    throw IOException(caller_);
 
   return totalNumberOfBytes;
 }
@@ -66,17 +66,17 @@ int64 DriveInfo::GetTotalSize() const {
 string DriveInfo::GetVolumeLabel() const {
   string volumeName, fileSystemName;
   if (!Native::DriveApi::GetVolumeInformation(this->driveName, volumeName, fileSystemName))
-    throw IOException(_caller);
+    throw IOException(caller_);
   return volumeName;
 }
 
 void DriveInfo::SetVolumeLabel(const String& label) {
   System::IO::DriveType drive = DriveType();
   if (drive == System::IO::DriveType::CDRom || drive == System::IO::DriveType::Network)
-    throw UnauthorizedAccessException(_caller);
+    throw UnauthorizedAccessException(caller_);
 
   if (!Native::DriveApi::SetVolumeLabel(this->driveName.Data(), label.Data()))
-    throw IOException(_caller);
+    throw IOException(caller_);
 }
 
 Array<DriveInfo> DriveInfo::GetDrives() {

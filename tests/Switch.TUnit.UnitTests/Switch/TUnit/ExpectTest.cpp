@@ -18,7 +18,7 @@ namespace SwitchUnitTests {
     }
 
     void AreEqualInternalValue() {
-      Expect::AreEqual(42, this->value, _caller);
+      Expect::AreEqual(42, this->value, caller_);
     }
 
     void AreEqualInt32() {
@@ -28,7 +28,7 @@ namespace SwitchUnitTests {
 
     void AreEqualInt32WithCurrentInformation() {
       int32 fourtyTwo = 42;
-      Expect::AreEqual(42, fourtyTwo, _caller);
+      Expect::AreEqual(42, fourtyTwo, caller_);
     }
 
     void AreEqualInt32WithMessage() {
@@ -38,7 +38,7 @@ namespace SwitchUnitTests {
 
     void AreEqualInt32WithMessageAndCurrentInformation() {
       int32 fourtyTwo = 42;
-      Expect::AreEqual(42, fourtyTwo, "My message", _caller);
+      Expect::AreEqual(42, fourtyTwo, "My message", caller_);
     }
 
     void AreEqualConstCharPointer() {
@@ -48,7 +48,7 @@ namespace SwitchUnitTests {
 
     void AreEqualConstCharPointerWithCurrentInformation() {
       const char* fourtyTwo = "Forty two";
-      Expect::AreEqual("Forty two", fourtyTwo, _caller);
+      Expect::AreEqual("Forty two", fourtyTwo, caller_);
     }
 
     void AreEqualConstCharPointerWithMessage() {
@@ -58,7 +58,7 @@ namespace SwitchUnitTests {
 
     void AreEqualConstCharPointerWithMessageAndCurrentInformation() {
       const char* fourtyTwo = "Forty two";
-      Expect::AreEqual("Forty two", fourtyTwo, "My message", _caller);
+      Expect::AreEqual("Forty two", fourtyTwo, "My message", caller_);
     }
 
     void AreEqualString() {
@@ -68,7 +68,7 @@ namespace SwitchUnitTests {
 
     void AreEqualStringWithCurrentInformation() {
       string fourtyTwo = "Forty two";
-      Expect::AreEqual("Forty two", fourtyTwo, _caller);
+      Expect::AreEqual("Forty two", fourtyTwo, caller_);
     }
 
     void AreEqualStringWithMessage() {
@@ -78,111 +78,111 @@ namespace SwitchUnitTests {
 
     void AreEqualStringWithMessageAndCurrentInformation() {
       string fourtyTwo = "Forty two";
-      Expect::AreEqual("Forty two", fourtyTwo, "My message", _caller);
+      Expect::AreEqual("Forty two", fourtyTwo, "My message", caller_);
     }
 
     void AreNotEqual() {
       System::String string = "Test";
-      Expect::AreNotEqual("Tes", string, _caller);
+      Expect::AreNotEqual("Tes", string, caller_);
     }
 
     void AreNotSame() {
       System::Version ver1(1, 2, 3);
       System::Version ver2(1, 2, 3);
-      Expect::AreNotSame(ver1, ver2, _caller);
+      Expect::AreNotSame(ver1, ver2, caller_);
     }
 
     void AreSame() {
       System::DateTime date1 = System::DateTime::Now();
       System::DateTime* date2 = &date1;
-      Expect::AreSame(date1, *date2, _caller);
+      Expect::AreSame(date1, *date2, caller_);
     }
 
     void DoesNotThrows() {
       const char* string1 = "Not null";
-      Expect::DoesNotThrows(_delegate {System::String string2(string1);}, _caller);
+      Expect::DoesNotThrows(delegate_ {System::String string2(string1);}, caller_);
     }
 
     void Greater() {
       int32 fourtyTwo = 42;
-      Expect::Greater(fourtyTwo, 40, _caller);
+      Expect::Greater(fourtyTwo, 40, caller_);
     }
 
     void GreaterOrEqual() {
       int32 fourtyTwo = 42;
-      Expect::GreaterOrEqual(fourtyTwo, 40, _caller);
-      Expect::GreaterOrEqual(fourtyTwo, 42, _caller);
+      Expect::GreaterOrEqual(fourtyTwo, 40, caller_);
+      Expect::GreaterOrEqual(fourtyTwo, 42, caller_);
     }
 
     void IsFalse() {
       bool boolean = false;
-      Expect::IsFalse(boolean, _caller);
+      Expect::IsFalse(boolean, caller_);
     }
 
     void IsNull() {
       System::Object* pointer = null;
-      Expect::IsNull(pointer, _caller);
+      Expect::IsNull(pointer, caller_);
     }
 
     void IsTrue() {
       bool boolean = true;
-      Expect::IsTrue(boolean, _caller);
+      Expect::IsTrue(boolean, caller_);
     }
 
     void Less() {
       int32 fourtyTwo = 42;
-      Expect::Less(fourtyTwo, 44, _caller);
+      Expect::Less(fourtyTwo, 44, caller_);
     }
 
     void LessOrEqual() {
       int32 fourtyTwo = 42;
-      Expect::LessOrEqual(fourtyTwo, 44, _caller);
-      Expect::LessOrEqual(fourtyTwo, 42, _caller);
+      Expect::LessOrEqual(fourtyTwo, 44, caller_);
+      Expect::LessOrEqual(fourtyTwo, 42, caller_);
     }
 
     void Throws() {
       const char* string1 = null;
-      Expect::Throws<System::ArgumentNullException>(_delegate {System::String string2(string1);}, _caller);
+      Expect::Throws<System::ArgumentNullException>(delegate_ {System::String string2(string1);}, caller_);
     }
 
     void ThrowsAny() {
       System::Array<System::String> array(10);
-      Expect::ThrowsAny(_delegate {array[10];}, _caller);
+      Expect::ThrowsAny(delegate_ {array[10];}, caller_);
     }
 
     void AnyTest() {
-      Expect::AreEqual(10, 10, _caller);
+      Expect::AreEqual(10, 10, caller_);
     }
 
   private:
     int32 value;
   };
 
-  _AddTest(ExpectTest, AreEqualInternalValue)
-  _AddTest(ExpectTest, AreEqualInt32)
-  _AddTest(ExpectTest, AreEqualInt32WithCurrentInformation)
-  _AddTest(ExpectTest, AreEqualInt32WithMessage)
-  _AddTest(ExpectTest, AreEqualInt32WithMessageAndCurrentInformation)
-  _AddTest(ExpectTest, AreEqualConstCharPointer)
-  _AddTest(ExpectTest, AreEqualConstCharPointerWithCurrentInformation)
-  _AddTest(ExpectTest, AreEqualConstCharPointerWithMessage)
-  _AddTest(ExpectTest, AreEqualConstCharPointerWithMessageAndCurrentInformation)
-  _AddTest(ExpectTest, AreEqualString)
-  _AddTest(ExpectTest, AreEqualStringWithCurrentInformation)
-  _AddTest(ExpectTest, AreEqualStringWithMessage)
-  _AddTest(ExpectTest, AreEqualStringWithMessageAndCurrentInformation)
-  _AddTest(ExpectTest, AreNotEqual)
-  _AddTest(ExpectTest, AreNotSame)
-  _AddTest(ExpectTest, AreSame)
-  _AddTest(ExpectTest, DoesNotThrows)
-  _AddTest(ExpectTest, Greater)
-  _AddTest(ExpectTest, GreaterOrEqual)
-  _AddTest(ExpectTest, IsFalse)
-  _AddTest(ExpectTest, IsNull)
-  _AddTest(ExpectTest, IsTrue)
-  _AddTest(ExpectTest, Less)
-  _AddTest(ExpectTest, LessOrEqual)
-  _AddTest(ExpectTest, Throws)
-  _AddTest(ExpectTest, ThrowsAny)
-  _AddTest(ExpectTest, AnyTest)
+  AddTest_(ExpectTest, AreEqualInternalValue)
+  AddTest_(ExpectTest, AreEqualInt32)
+  AddTest_(ExpectTest, AreEqualInt32WithCurrentInformation)
+  AddTest_(ExpectTest, AreEqualInt32WithMessage)
+  AddTest_(ExpectTest, AreEqualInt32WithMessageAndCurrentInformation)
+  AddTest_(ExpectTest, AreEqualConstCharPointer)
+  AddTest_(ExpectTest, AreEqualConstCharPointerWithCurrentInformation)
+  AddTest_(ExpectTest, AreEqualConstCharPointerWithMessage)
+  AddTest_(ExpectTest, AreEqualConstCharPointerWithMessageAndCurrentInformation)
+  AddTest_(ExpectTest, AreEqualString)
+  AddTest_(ExpectTest, AreEqualStringWithCurrentInformation)
+  AddTest_(ExpectTest, AreEqualStringWithMessage)
+  AddTest_(ExpectTest, AreEqualStringWithMessageAndCurrentInformation)
+  AddTest_(ExpectTest, AreNotEqual)
+  AddTest_(ExpectTest, AreNotSame)
+  AddTest_(ExpectTest, AreSame)
+  AddTest_(ExpectTest, DoesNotThrows)
+  AddTest_(ExpectTest, Greater)
+  AddTest_(ExpectTest, GreaterOrEqual)
+  AddTest_(ExpectTest, IsFalse)
+  AddTest_(ExpectTest, IsNull)
+  AddTest_(ExpectTest, IsTrue)
+  AddTest_(ExpectTest, Less)
+  AddTest_(ExpectTest, LessOrEqual)
+  AddTest_(ExpectTest, Throws)
+  AddTest_(ExpectTest, ThrowsAny)
+  AddTest_(ExpectTest, AnyTest)
 }

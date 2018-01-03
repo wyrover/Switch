@@ -22,14 +22,14 @@ namespace Switch {
           ~Timer() {this->Enabled = false;}
           /// @endcond
 
-          _property<bool> Enabled {
-            _get {return this->enabled;},
-            _set {this->SetEnabled(value);}
+          property_<bool> Enabled {
+            get_ {return this->enabled;},
+            set_ {this->SetEnabled(value);}
           };
 
-          _property<int32> Interval {
-            _get {return this->interval;},
-            _set {this->SetInterval(value);}
+          property_<int32> Interval {
+            get_ {return this->interval;},
+            set_ {this->SetInterval(value);}
           };
 
           Switch::System::EventHandler Tick;
@@ -41,7 +41,7 @@ namespace Switch {
           int32 interval = 100;
           bool enabled = false;
           intptr handle = IntPtr::Zero;
-          delegate<void> tick = _delegate {
+          delegate<void> tick = delegate_ {
             Tick(*this, System::EventArgs::Empty);
           };
         };

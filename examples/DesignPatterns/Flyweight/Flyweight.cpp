@@ -8,7 +8,7 @@ using namespace System::Collections::Generic;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Flyweight' abstract class
-    class Flyweight _abstract {
+    class Flyweight abstract_ {
     public:
       virtual void Operation(int extrinsicstate) const = 0;
     };
@@ -43,7 +43,7 @@ namespace DesignPatterns {
       void Operation(int extrinsicstate) const override  {Console::WriteLine("UnsharedConcreteFlyweight: {0}", extrinsicstate);}
     };
 
-    // MainApp _startup class for Structural
+    // MainApp startup_ class for Structural
     // Flyweight Design Pattern.
     class MainApp {
     public:
@@ -72,7 +72,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Structural::MainApp);
+startup_(DesignPatterns::Structural::MainApp);
 
 // This code produces the following output:
 //

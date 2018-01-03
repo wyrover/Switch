@@ -15,7 +15,7 @@ namespace FormExample {
     Form1() {
       button.Text = "Close";
       button.Location = System::Drawing::Point(10, 10);
-      button.Click += _delegate(const object & sender, const EventArgs & e) {
+      button.Click += delegate_(const object & sender, const EventArgs & e) {
         this->Close();
       };
 
@@ -24,7 +24,7 @@ namespace FormExample {
       this->Location = System::Drawing::Point(300, 200);
       this->Size = System::Drawing::Size(640, 480);
       this->Controls().Add(this->button);
-      this->FormClosing += _delegate(const object & sender, FormClosingEventArgs & e) {
+      this->FormClosing += delegate_(const object & sender, FormClosingEventArgs & e) {
         e.Cancel = MessageBox::Show("Are you sure you want exit?", "Close Form", MessageBoxButtons::YesNo, MessageBoxIcon::Question) ==  DialogResult::No;
       };
     }
@@ -34,4 +34,4 @@ namespace FormExample {
   };
 }
 
-_startup(FormExample::Form1);
+startup_(FormExample::Form1);

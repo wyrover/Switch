@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an attempt to load a class fails due to the absence of an entry method.
-    class _export ExecutionEngineException : public SystemException {
+    class export_ ExecutionEngineException : public SystemException {
     public:
       /// @brief Create a new instance of class ExecutionEngineException
       /// @remarks Message is set with the default message associate to the error.
@@ -21,7 +21,7 @@ namespace Switch {
       ExecutionEngineException(const ExecutionEngineException& value) : SystemException(value) {}
 
       /// @brief Create a new instance of class ExecutionEngineException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       /// @remarks Message is set with the default message associate to the error.
       ExecutionEngineException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
 
@@ -31,13 +31,13 @@ namespace Switch {
 
       /// @brief Create a new instance of class ExecutionEngineException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       ExecutionEngineException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, information) {}
 
       /// @brief Create a new instance of class ExecutionEngineException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       ExecutionEngineException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
     private:

@@ -7,7 +7,7 @@
 #include "Api.hpp"
 
 namespace Native {
-  class IWidget _interface {
+  class IWidget interface_ {
   public:
     virtual const Gtk::Widget& ToWidget() const = 0;
     virtual Gtk::Widget& ToWidget() = 0;
@@ -39,7 +39,7 @@ namespace Native {
     Gtk::RadioButtonGroup& RadioButtonGroup() {return this->radioButtonGroup;}
 
     virtual void RegisterEvent() {
-      this->ToWidget().signal_event().connect(_delegate(GdkEvent * event)->bool {
+      this->ToWidget().signal_event().connect(delegate_(GdkEvent * event)->bool {
         System::Collections::Generic::Dictionary<int32, System::Delegate<int32, GdkEvent&>> events {
           {GDK_BUTTON_PRESS, {*this, &Widget::GdkButtonPress}},
           {GDK_BUTTON_RELEASE, {*this, &Widget::GdkButtonRelease}},
@@ -76,25 +76,25 @@ namespace Native {
   private:
     int32 GetMouseButtonDown() const {
       switch (this->button) {
-      case 0: throw System::Exception(_caller);
+      case 0: throw System::Exception(caller_);
       case 1: return WM_LBUTTONDOWN;
       case 2 : return WM_MBUTTONDOWN;
       case 3 : return WM_RBUTTONDOWN;
       case 4 : return WM_XBUTTONDOWN;
       case 5 : return WM_XBUTTONDOWN;
-      default: throw System::Exception(_caller);
+      default: throw System::Exception(caller_);
       }
     }
 
     int32 GetMouseButtonUp() const {
       switch (this->button) {
-      case 0: throw System::Exception(_caller);
+      case 0: throw System::Exception(caller_);
       case 1: return WM_LBUTTONUP;
       case 2 : return WM_MBUTTONUP;
       case 3 : return WM_RBUTTONUP;
       case 4 : return WM_XBUTTONUP;
       case 5 : return WM_XBUTTONUP;
-      default: throw System::Exception(_caller);
+      default: throw System::Exception(caller_);
       }
     }
 

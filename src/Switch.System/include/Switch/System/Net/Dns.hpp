@@ -19,7 +19,7 @@ namespace Switch {
       /// @brief Provides simple domain name resolution functionality.
       /// @par Library
       /// Switch.System
-      class _export Dns _static {
+      class export_ Dns static_ {
       public:
         /// @brief Returns the Internet Protocol (IP) addresses for the specified host.
         /// @param hostNameOrAddress The host name or IP address to resolve.

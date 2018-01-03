@@ -42,7 +42,7 @@ namespace HelloWorld {
   };
 }
 
-_startup(HelloWorld::Program);
+startup_(HelloWorld::Program);
 ```
 
 CMakeLists.txt:
@@ -75,7 +75,7 @@ namespace HelloWorld {
       Button button;
       button.Text = "Click me";
       button.Location = Point(10, 10);
-      button.Click += _delegate(const object& sender, const EventArgs& e) {
+      button.Click += delegate_(const object& sender, const EventArgs& e) {
         MessageBox::Show("Hello, World!");
       };
       
@@ -88,7 +88,7 @@ namespace HelloWorld {
   };
 }
 
-_startup(HelloWorld::Program);
+startup_(HelloWorld::Program);
 ```
 
 CMakeLists.txt:
@@ -112,19 +112,19 @@ using namespace TUnit::Framework;
 using namespace System;
 
 namespace UnitTests {
-  class _TestFixture(HelloWorldTest) {
-    void _Test(CreateStringFromLiteral) {
+  class TestFixture_(HelloWorldTest) {
+    void Test_(CreateStringFromLiteral) {
       string s = "Hello, World!";
       Assert::AreEqual("Hello, World!", s);
     }
 
-    void _Test(CreateStringFromChars) {
+    void Test_(CreateStringFromChars) {
       string s = {'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!'};
       Assert::AreEqual("Hello, World!", s);
     }
   };
 
-  _AddTestFixture(HelloWorldTest);
+  AddTestFixture_(HelloWorldTest);
 }
 ```
 

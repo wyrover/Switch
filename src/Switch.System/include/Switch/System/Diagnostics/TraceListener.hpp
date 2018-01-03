@@ -28,7 +28,7 @@ namespace Switch {
       /// @note <b>to Inheritors:</b> Inherit from this class to implement a custom listener for the Debug and Trace classes. At a minimum, you must implement the Write and WriteLine methods. Additionally, you can implement the Fail, Close and Flush methods.
       /// @par Library
       /// Switch.System
-      class _export TraceListener _abstract {
+      class export_ TraceListener abstract_ {
       public:
         /// @brief Initializes a new instance of the TraceListener class.
         /// @remarks The following table shows initial property values for an instance of TraceListener.
@@ -51,32 +51,32 @@ namespace Switch {
         /// @brief Gets the custom trace listener attributes defined in the application configuration file.
         /// @return A StringDictionary containing the custom attributes for the trace listener.
         /// @remarks Classes that inherit from the TraceListener class can add custom attributes by overriding the GetSupportedAttributes method and returning a string array of custom attribute names. The Attributes property identifies the custom attributes that are referenced in the application's configuration file. For example, in the following configuration file excerpt the DelimitedListTraceListener custom attribute "delimiter" is referenced. In this case, the Attributes property returns a StringDictionary containing the string "delimiter".
-        _property<const Collections::Specialized::StringDictionary&, _readonly> Attributes {
-          _get->const Collections::Specialized::StringDictionary& {return this->data->attibutes;}
+        property_<const Collections::Specialized::StringDictionary&, readonly_> Attributes {
+          get_->const Collections::Specialized::StringDictionary& {return this->data->attibutes;}
         };
 
-        _property<const TraceFilter&> Filter {
-          _get->const TraceFilter& {return *this->data->filter;},
-          _set {this->data->filter = &value;}
+        property_<const TraceFilter&> Filter {
+          get_->const TraceFilter& {return *this->data->filter;},
+          set_ {this->data->filter = &value;}
         };
 
         /// @brief Gets or sets the indent level.
         /// @return int32 The indent level. The default is zero.
         /// @remarks The IndentLevel property represents the number of times that the indent specified by the IndentSize property is applied. This property is stored on per-thread/per-request basis.
-        _property<int32> IndentLevel {
-          _get {return this->data->indentLevel;},
-          _set {this->data->indentLevel = value;}
+        property_<int32> IndentLevel {
+          get_ {return this->data->indentLevel;},
+          set_ {this->data->indentLevel = value;}
         };
 
         /// @brief Gets or sets the number of spaces in an indent.
         /// @return int32 The number of spaces in an indent. The default is four spaces.
         /// @exception ArgumentOutOfRangeException Set operation failed because the value is less than zero.
         /// @remarks The property is stored on per-thread/per-request basis.
-        _property<int32> IndentSize {
-          _get {return this->data->indentSize;},
-          _set {
+        property_<int32> IndentSize {
+          get_ {return this->data->indentSize;},
+          set_ {
             if (value < 0)
-              throw ArgumentOutOfRangeException(_caller);
+              throw ArgumentOutOfRangeException(caller_);
             this->data->indentSize = value;
           }
         };
@@ -84,16 +84,16 @@ namespace Switch {
         /// @brief Gets a value indicating whether the trace listener is thread safe.
         /// @return bool true if the trace listener is thread safe; otherwise, false. The default is false.
         /// @remarks The value of IsThreadSafe is used to determine whether to use a global lock when writing to the listener. If the value of IsThreadSafe is false, the global lock is used regardless of the value of UseGlobalLock. The global lock is not used only if the value of IsThreadSafe is true and the value of UseGlobalLock is false. The default behavior is to use the global lock whenever writing to the listener.
-        _property<bool, _readonly> IsThreadSafe {
-          _get {return this->data->isThreadSafe;}
+        property_<bool, readonly_> IsThreadSafe {
+          get_ {return this->data->isThreadSafe;}
         };
 
         /// @brief Gets or sets a name for this TraceListener.
         /// @return string A name for this TraceListener. The default is an empty string ("").
         /// @remarks The name can be used to organize and access listeners in a TraceListenerCollection collection.
-        _property<string> Name {
-          _get {return this->data->name;},
-          _set {this->data->name = value;}
+        property_<string> Name {
+          get_ {return this->data->name;},
+          set_ {this->data->name = value;}
         };
 
         /// @brief Gets or sets the trace output options.
@@ -103,9 +103,9 @@ namespace Switch {
         /// * The EventLogTraceListener class, because it can cause a large volume of data to be written to the log.
         /// * The Write and WriteLine methods of the ConsoleTraceListener, DefaultTraceListener, and TextWriterTraceListener classes.
         /// * The Write and WriteLine methods of the TraceListener class when they are not overridden in a derived class.
-        _property<TraceOptions> TraceOutputOptions {
-          _get {return this->data->traceOutputOptions;},
-          _set {this->data->traceOutputOptions = value;}
+        property_<TraceOptions> TraceOutputOptions {
+          get_ {return this->data->traceOutputOptions;},
+          set_ {this->data->traceOutputOptions = value;}
         };
 
         /// @brief When overridden in a derived class, closes the output stream so it no longer receives tracing or debugging output.
@@ -293,9 +293,9 @@ namespace Switch {
         /// @brief Gets or sets a value indicating whether to indent the output.
         /// @return bool true if the output should be indented; otherwise, false.
         /// @remarks The WriteIndent method, called by the DefaultTraceListener and TextWriterTraceListener classes, sets the NeedIndent property value to false to prevent later, unnecessary indents. You must set the NeedIndent property to true each time you wish to indent trace output.
-        _property<bool> NeedIndent {
-          _get {return this->data->needIndent;},
-          _set {this->data->needIndent = value;}
+        property_<bool> NeedIndent {
+          get_ {return this->data->needIndent;},
+          set_ {this->data->needIndent = value;}
         };
 
         /// @brief Writes the indent to the listener you create when you implement this class, and resets the NeedIndent property to false.

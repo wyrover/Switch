@@ -20,7 +20,7 @@ namespace Switch {
         /// @brief The WebSocket class allows applications to send and receive data after the WebSocket upgrade has completed.
         /// @par Library
         /// Switch.System
-        class _export WebSocket _abstract {
+        class export_ WebSocket abstract_ {
         protected:
           /// @brief Creates an instance of the WebSocket class.
           WebSocket() {}
@@ -28,27 +28,27 @@ namespace Switch {
         public:
           /// @brief Indicates the reason why the remote endpoint initiated the close handshake.
           /// @property value Returns WebSocketCloseStatus.
-          _property<WebSocketCloseStatus, _readonly> CloseStatus {
-            _get {return this->GetCloseStatus();}
+          property_<WebSocketCloseStatus, readonly_> CloseStatus {
+            get_ {return this->GetCloseStatus();}
           };
 
           /// @brief Allows the remote endpoint to describe the reason why the connection was closed.
-          _property<string, _readonly> CloseStatusDescription {
-            _get {return this->GetCloseStatusDescription();}
+          property_<string, readonly_> CloseStatusDescription {
+            get_ {return this->GetCloseStatusDescription();}
           };
 
           /// @brief Gets the default WebSocket protocol keep-alive interval in milliseconds.
           /// @property The default WebSocket protocol keep-alive interval in milliseconds. The typical value for this interval is 30 seconds.
-          static _property<TimeSpan, _readonly> DefaultKeepAliveInterval;
+          static property_<TimeSpan, readonly_> DefaultKeepAliveInterval;
 
           /// @brief Allows the remote endpoint to describe the reason why the connection was closed.
-          _property<WebSocketState, _readonly> State {
-            _get {return this->GetState();}
+          property_<WebSocketState, readonly_> State {
+            get_ {return this->GetState();}
           };
 
           /// @brief The subprotocol that was negotiated during the opening handshake.
-          _property<string, _readonly> SubProtocol {
-            _get {return this->GetSubProtocol();}
+          property_<string, readonly_> SubProtocol {
+            get_ {return this->GetSubProtocol();}
           };
 
           /// @brief Aborts the WebSocket connection and cancels any pending IO operations.

@@ -31,7 +31,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::UdpClientTalker);
+startup_(Examples::UdpClientTalker);
 
 // This code example can produce the following output:
 //

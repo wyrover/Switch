@@ -7,9 +7,9 @@ using namespace System;
 namespace SwitchUnitTests {
   TEST(PropertyTest, CreateReadWritePropertyAndGetIt) {
     int32 v = 42;
-    _property<int32> Value {
-      _get {return v;},
-      _set {v = value;}
+    property_<int32> Value {
+      get_ {return v;},
+      set_ {v = value;}
     };
 
     ASSERT_EQ(42, v);
@@ -20,9 +20,9 @@ namespace SwitchUnitTests {
 
   TEST(PropertyTest, CreateReadWritePropertyAndSetItAndGetIt) {
     int32 v = 42;
-    _property<int32> Value {
-      _get {return v;},
-      _set {v = value;}
+    property_<int32> Value {
+      get_ {return v;},
+      set_ {v = value;}
     };
 
     Value = 24;
@@ -40,8 +40,8 @@ namespace SwitchUnitTests {
 
   TEST(PropertyTest, CreateReadOnlyPropertyAndGetIt) {
     int32 v = 42;
-    _property<int32, _readonly> Value {
-      _get {return v;}
+    property_<int32, readonly_> Value {
+      get_ {return v;}
     };
 
     ASSERT_EQ(42, v);
@@ -52,8 +52,8 @@ namespace SwitchUnitTests {
 
   TEST(PropertyTest, CreateWriteOnlyPropertyAndSetIt) {
     int32 v = 42;
-    _property<int32, _writeonly> Value {
-      _set {v = value;}
+    property_<int32, writeonly_> Value {
+      set_ {v = value;}
     };
 
     ASSERT_EQ(42, v);
@@ -73,8 +73,8 @@ namespace SwitchUnitTests {
     PropertyReadOnly() {}
     PropertyReadOnly(const PropertyReadOnly& propertyReadOnly) : name(propertyReadOnly.name) {}
 
-    _property<string, _readonly> Name {
-      _get {return this->name;}
+    property_<string, readonly_> Name {
+      get_ {return this->name;}
     };
 
   private:
@@ -101,8 +101,8 @@ namespace SwitchUnitTests {
     PropertyWriteOnly() {}
     PropertyWriteOnly(const PropertyWriteOnly& propertyWriteOnly) : name(propertyWriteOnly.name) {}
 
-    _property<string, _writeonly> Name {
-      _set {this->name = value;}
+    property_<string, writeonly_> Name {
+      set_ {this->name = value;}
     };
 
     string name = "Test property";
@@ -130,9 +130,9 @@ namespace SwitchUnitTests {
     PropertyReadWrite() {}
     PropertyReadWrite(const PropertyReadWrite& propertyReadWrite) : name(propertyReadWrite.name) {}
 
-    _property<string> Name {
-      _get {return this->name;},
-      _set {this->name = value;}
+    property_<string> Name {
+      get_ {return this->name;},
+      set_ {this->name = value;}
     };
 
   private:

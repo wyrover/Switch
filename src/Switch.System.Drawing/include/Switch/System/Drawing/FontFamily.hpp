@@ -16,7 +16,7 @@ namespace Switch {
       /// @brief Defines a group of type faces having a similar basic design and certain variations in styles. This class cannot be inherited.
       /// @par Library
       /// Switch.System.Drawing
-      class _export FontFamily final : public object {
+      class export_ FontFamily final : public object {
       public:
         FontFamily(const string& name);
         FontFamily(System::Drawing::Text::GenericFontFamilies genericFamily);
@@ -30,16 +30,16 @@ namespace Switch {
 
         /// @brief Returns an array that contains all the FontFamily objects associated with the current graphics context.
         /// @return Array<FontFamily> An array of FontFamily objects associated with the current graphics context.
-        static _property<Array<FontFamily>, _readonly> Families;
+        static property_<Array<FontFamily>, readonly_> Families;
 
-        static _property<FontFamily, _readonly> GenericMonospace;
+        static property_<FontFamily, readonly_> GenericMonospace;
 
-        static _property<FontFamily, _readonly> GenericSansSerif;
+        static property_<FontFamily, readonly_> GenericSansSerif;
 
-        static _property<FontFamily, _readonly> GenericSerif;
+        static property_<FontFamily, readonly_> GenericSerif;
 
-        _property<string, _readonly> Name{
-          _get {return this->GetName();}
+        property_<string, readonly_> Name{
+          get_ {return this->GetName();}
         };
 
         bool IsStyleAvailable(FontStyle style) const;

@@ -15,18 +15,18 @@ namespace Switch {
       /// @brief Provides an HTTP-specific implementation of the WebRequest class.
       /// @par Library
       /// Switch.System
-      class _export HttpWebRequest: public System::Net::WebRequest {
+      class export_ HttpWebRequest: public System::Net::WebRequest {
       public:
         ~HttpWebRequest();
 
-        _property<bool> AllowAutoRedirect {
-          _get {return this->GetAllowAutoRedirect();},
-          _set {this->SetAllowAutoRedirect(value);}
+        property_<bool> AllowAutoRedirect {
+          get_ {return this->GetAllowAutoRedirect();},
+          set_ {this->SetAllowAutoRedirect(value);}
         };
 
-        _property<const string&> ContentType {
-          _get->const string& {return this->GetContentType();},
-          _set {this->SetContentType(value);}
+        property_<const string&> ContentType {
+          get_->const string& {return this->GetContentType();},
+          set_ {this->SetContentType(value);}
         };
 
         WebResponse& GetResponse() override;

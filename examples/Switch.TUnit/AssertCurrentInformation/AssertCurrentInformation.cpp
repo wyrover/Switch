@@ -4,10 +4,10 @@ using namespace TUnit;
 using namespace System;
 
 namespace UnitTests {
-  class _TestFixture(UserTest) {
+  class TestFixture_(UserTest) {
     // With current information
-    void _Test(TestWithCurrentInformation) {
-      Assert::False(true, _caller);
+    void Test_(TestWithCurrentInformation) {
+      Assert::False(true, caller_);
     }
 
     // Without current information
@@ -16,9 +16,9 @@ namespace UnitTests {
     }
   };
 
-  _AddTestFixture(UserTest);
-  _AddTest(UserTest, TestWithCurrentInformation);
-  _AddTest(UserTest, TestWithoutCurrentInformation);
+  AddTestFixture_(UserTest);
+  AddTest_(UserTest, TestWithCurrentInformation);
+  AddTest_(UserTest, TestWithoutCurrentInformation);
 }
 
 // This code produces the following output:

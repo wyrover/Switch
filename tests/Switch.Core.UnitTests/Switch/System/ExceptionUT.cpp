@@ -147,21 +147,21 @@ namespace {
   TEST(ExceptionTest, Constructor) {
     ASSERT_TRUE(is<Exception>(Exception()));
     ASSERT_EQ((int32)0x80131500, Exception().HResult());
-    ASSERT_NE(_caller.FilePath, Exception().FilePath());
-    ASSERT_NE(_caller.LineNumber, Exception().LineNumber());
+    ASSERT_NE(caller_.FilePath, Exception().FilePath());
+    ASSERT_NE(caller_.LineNumber, Exception().LineNumber());
     ASSERT_FALSE(Exception().HasInnerException);
 
-    ASSERT_TRUE(is<Exception>(Exception(_caller)));
-    ASSERT_EQ((int32)0x80131500, Exception(_caller).HResult());
-    ASSERT_EQ(_caller.FilePath, Exception(_caller).FilePath());
-    ASSERT_EQ(_caller.LineNumber, Exception(_caller).LineNumber());
-    ASSERT_FALSE(Exception(_caller).HasInnerException);
+    ASSERT_TRUE(is<Exception>(Exception(caller_)));
+    ASSERT_EQ((int32)0x80131500, Exception(caller_).HResult());
+    ASSERT_EQ(caller_.FilePath, Exception(caller_).FilePath());
+    ASSERT_EQ(caller_.LineNumber, Exception(caller_).LineNumber());
+    ASSERT_FALSE(Exception(caller_).HasInnerException);
 
-    ASSERT_TRUE(is<Exception>(Exception("Value is invalid.", _caller)));
-    ASSERT_EQ((int32)0x80131500, Exception("Value is invalid.", _caller).HResult());
-    ASSERT_EQ(_caller.FilePath, Exception("Value is invalid.", _caller).FilePath());
-    ASSERT_EQ(_caller.LineNumber, Exception("Value is invalid.", _caller).LineNumber());
-    ASSERT_FALSE(Exception("Value is invalid.", _caller).HasInnerException);
+    ASSERT_TRUE(is<Exception>(Exception("Value is invalid.", caller_)));
+    ASSERT_EQ((int32)0x80131500, Exception("Value is invalid.", caller_).HResult());
+    ASSERT_EQ(caller_.FilePath, Exception("Value is invalid.", caller_).FilePath());
+    ASSERT_EQ(caller_.LineNumber, Exception("Value is invalid.", caller_).LineNumber());
+    ASSERT_FALSE(Exception("Value is invalid.", caller_).HasInnerException);
   }
 
   TEST(ExceptionTest, GetStackTrace) {
@@ -170,93 +170,93 @@ namespace {
   }
 
   TEST(ExceptionTest, GetMessage) {
-    try { throw Exception(_caller); } catch (const Exception& e) { ASSERT_EQ("Exception of type 'Switch::System::Exception' was thrown.", e.Message()); }
-    try { throw SystemException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "System error."); }
-    try { throw AccessViolationException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to read or write protected memory. This is often an indication that other memory is corrupt."); }
-    //try { throw AggregateException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "One or more errors occured."); }
-    try { throw AppDomainUnloadedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access an unloaded AppDomain."); }
-    try { throw ApplicationException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Error in the application."); }
-    try { throw ArgumentException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Value does not fall within the expected range."); }
-    try { throw ArgumentNullException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Value cannot be null."); }
-    try { throw ArgumentOutOfRangeException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Specified argument is out of range of valid values."); }
-    try { throw ArithmeticException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Overflow or underflow in the arithmetic operation."); }
-    try { throw ArrayTypeMismatchException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to access an element as a type incompatible with the array."); }
+    try { throw Exception(caller_); } catch (const Exception& e) { ASSERT_EQ("Exception of type 'Switch::System::Exception' was thrown.", e.Message()); }
+    try { throw SystemException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "System error."); }
+    try { throw AccessViolationException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to read or write protected memory. This is often an indication that other memory is corrupt."); }
+    //try { throw AggregateException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "One or more errors occured."); }
+    try { throw AppDomainUnloadedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access an unloaded AppDomain."); }
+    try { throw ApplicationException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Error in the application."); }
+    try { throw ArgumentException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Value does not fall within the expected range."); }
+    try { throw ArgumentNullException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Value cannot be null."); }
+    try { throw ArgumentOutOfRangeException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Specified argument is out of range of valid values."); }
+    try { throw ArithmeticException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Overflow or underflow in the arithmetic operation."); }
+    try { throw ArrayTypeMismatchException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to access an element as a type incompatible with the array."); }
 
-    try { throw BadImageFormatException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Format for the executable or library is invalid."); }
-    try { throw CannotUnloadAppDomainException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to unload the AppDomain failed."); }
-    try { throw ContextMarshalException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to marshal an object across a context boundary."); }
-    try { throw DataMisalignedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "A datatype misalignment was detected in a load or store instruction."); }
-    try { throw DivideByZeroException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to divide by zero."); }
-    try { throw DllNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Dll was not found."); }
-    try { throw DuplicateWaitObjectException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Duplicate object in argument."); }
-    try { throw EntryPointNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Entry point was not found."); }
-    try { throw ExecutionEngineException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Internal error in the runtime."); }
-    try { throw MemberAccessException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Cannot acces member."); }
-    try { throw FieldAccessException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access a field that is not accessible by the caller."); }
-    try { throw FormatException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "One of identified items is an invalid format."); }
-    try { throw IndexOutOfRangeException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Index was outside the bounds of the array."); }
-    try { throw InsufficientExecutionStackException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Insufficient stack to continue executing the program safety. This can happen from having too many functions on the call stack using too much stack space."); }
-    try { throw OutOfMemoryException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Insufficient memory to continue the execution of the program."); }
-    try { throw InsufficientMemoryException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Insufficient memory to continue the execution of the program."); }
-    try { throw InvalidCastException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Specified cast is not valid."); }
-    try { throw InvalidOperationException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Operation is not valid due to the current state of the object."); }
-    try { throw InvalidProgramException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The system detected an invalid program."); }
-    try { throw InvalidTimeZoneException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The time zone information is not valid."); }
-    try { throw MethodAccessException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to acces the method failed."); }
-    try { throw MissingMemberException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to acces a missing member."); }
-    try { throw MissingFieldException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to acces a non-existing field."); }
-    try { throw MissingMethodException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to acces a missing method."); }
-    try { throw MulticastNotSupportedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to add multiple callbacks to a delegate that does not support multicast."); }
-    try { throw NotFiniteNumberException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Number encountered was not a finite quantity."); }
-    try { throw NotImplementedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The method or operation is not implemented."); }
-    try { throw NotSupportedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Specified method is not supported."); }
-    try { throw NullPointerException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Object pointer not set to an instance of an object."); }
-    try { throw NullReferenceException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Object reference not set to an instance of an object."); }
-    try { throw ObjectDisposedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Cannot access a disposed object."); }
-    try { throw OperationCanceledException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The operation was canceled."); }
-    try { throw OverflowException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Arithmetic operation resulted in an overflow."); }
-    try { throw PlatformNotSupportedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Operation is not supported on this platform."); }
-    try { throw RankException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to operate on an array with the incorrect number of dimensions."); }
-    try { throw StackOverflowException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Operation caused a stack overflow."); }
-    try { throw TimeoutException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The operation has timed out."); }
-    try { throw TimeZoneNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The time zone cannot be found."); }
-    try { throw TypeAccessException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to access the type failed."); }
-    //try { throw TypeInitializationException(Type::GetName(Int32()), NullReferenceException(), _caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The type initializer for '" + Type::GetName(Int32()) + "' threw an exception."); }
-    try { throw TypeUnloadedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Type had been unloaded."); }
-    try { throw UnauthorizedAccessException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to perform an unauthorized operation."); }
+    try { throw BadImageFormatException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Format for the executable or library is invalid."); }
+    try { throw CannotUnloadAppDomainException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to unload the AppDomain failed."); }
+    try { throw ContextMarshalException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to marshal an object across a context boundary."); }
+    try { throw DataMisalignedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "A datatype misalignment was detected in a load or store instruction."); }
+    try { throw DivideByZeroException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to divide by zero."); }
+    try { throw DllNotFoundException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Dll was not found."); }
+    try { throw DuplicateWaitObjectException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Duplicate object in argument."); }
+    try { throw EntryPointNotFoundException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Entry point was not found."); }
+    try { throw ExecutionEngineException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Internal error in the runtime."); }
+    try { throw MemberAccessException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Cannot acces member."); }
+    try { throw FieldAccessException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access a field that is not accessible by the caller."); }
+    try { throw FormatException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "One of identified items is an invalid format."); }
+    try { throw IndexOutOfRangeException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Index was outside the bounds of the array."); }
+    try { throw InsufficientExecutionStackException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Insufficient stack to continue executing the program safety. This can happen from having too many functions on the call stack using too much stack space."); }
+    try { throw OutOfMemoryException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Insufficient memory to continue the execution of the program."); }
+    try { throw InsufficientMemoryException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Insufficient memory to continue the execution of the program."); }
+    try { throw InvalidCastException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Specified cast is not valid."); }
+    try { throw InvalidOperationException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Operation is not valid due to the current state of the object."); }
+    try { throw InvalidProgramException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The system detected an invalid program."); }
+    try { throw InvalidTimeZoneException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The time zone information is not valid."); }
+    try { throw MethodAccessException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to acces the method failed."); }
+    try { throw MissingMemberException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to acces a missing member."); }
+    try { throw MissingFieldException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to acces a non-existing field."); }
+    try { throw MissingMethodException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to acces a missing method."); }
+    try { throw MulticastNotSupportedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to add multiple callbacks to a delegate that does not support multicast."); }
+    try { throw NotFiniteNumberException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Number encountered was not a finite quantity."); }
+    try { throw NotImplementedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The method or operation is not implemented."); }
+    try { throw NotSupportedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Specified method is not supported."); }
+    try { throw NullPointerException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Object pointer not set to an instance of an object."); }
+    try { throw NullReferenceException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Object reference not set to an instance of an object."); }
+    try { throw ObjectDisposedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Cannot access a disposed object."); }
+    try { throw OperationCanceledException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The operation was canceled."); }
+    try { throw OverflowException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Arithmetic operation resulted in an overflow."); }
+    try { throw PlatformNotSupportedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Operation is not supported on this platform."); }
+    try { throw RankException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to operate on an array with the incorrect number of dimensions."); }
+    try { throw StackOverflowException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Operation caused a stack overflow."); }
+    try { throw TimeoutException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The operation has timed out."); }
+    try { throw TimeZoneNotFoundException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The time zone cannot be found."); }
+    try { throw TypeAccessException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to access the type failed."); }
+    //try { throw TypeInitializationException(Type::GetName(Int32()), NullReferenceException(), caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The type initializer for '" + Type::GetName(Int32()) + "' threw an exception."); }
+    try { throw TypeUnloadedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Type had been unloaded."); }
+    try { throw UnauthorizedAccessException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempt to perform an unauthorized operation."); }
 
-    try { throw KeyNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ("The given key was not present in the dictionnary.", e.Message()); }
+    try { throw KeyNotFoundException(caller_); } catch (const Exception& e) { ASSERT_EQ("The given key was not present in the dictionnary.", e.Message()); }
 
-    try { throw IOException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "I/O error occured."); }
-    try { throw DirectoryNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access a path that is not on the disk."); }
-    try { throw DriveNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access a drive that is not avaible."); }
-    try { throw EndOfStreamException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to read past the end of the stream."); }
-    try { throw FileFormatException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Input file or data stream does not conform to the expected file format specification."); }
-    try { throw FileLoadException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Could not load the specified file."); }
-    try { throw FileNotFoundException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Unable to find the specified file."); }
-    try { throw PathTooLongException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The specified path, file name, or both are too long. The fully ualified file name must be less than 260 caracters, and the directory name must be less than 248 caracters."); }
+    try { throw IOException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "I/O error occured."); }
+    try { throw DirectoryNotFoundException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access a path that is not on the disk."); }
+    try { throw DriveNotFoundException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to access a drive that is not avaible."); }
+    try { throw EndOfStreamException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Attempted to read past the end of the stream."); }
+    try { throw FileFormatException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Input file or data stream does not conform to the expected file format specification."); }
+    try { throw FileLoadException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Could not load the specified file."); }
+    try { throw FileNotFoundException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Unable to find the specified file."); }
+    try { throw PathTooLongException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The specified path, file name, or both are too long. The fully ualified file name must be less than 260 caracters, and the directory name must be less than 248 caracters."); }
 
-    try { throw SerializationException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Serialization error."); }
+    try { throw SerializationException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Serialization error."); }
 
-    try { throw AbandonedMutexException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The wait completed due to an abandoned mutex."); }
-    try { throw LockRecursionException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Exception of type 'Switch::System::Threading::LockRecursionException' was thrown."); }
-    try { throw SynchronizationLockException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Object synchronization method was called from an unsynchronized block of code."); }
-    try { throw ThreadAbortException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Thread was aborted."); }
-    try { throw ThreadInterruptedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Thread was interrupted from a waiting state."); }
-    try { throw ThreadStartException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Thread start failure."); }
-    try { throw ThreadStateException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Thread was in an invalid state for the operation being executed."); }
-    try { throw WaitHandleCannotBeOpenedException(_caller); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "No handle of the given name exists."); }
+    try { throw AbandonedMutexException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "The wait completed due to an abandoned mutex."); }
+    try { throw LockRecursionException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Exception of type 'Switch::System::Threading::LockRecursionException' was thrown."); }
+    try { throw SynchronizationLockException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Object synchronization method was called from an unsynchronized block of code."); }
+    try { throw ThreadAbortException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Thread was aborted."); }
+    try { throw ThreadInterruptedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Thread was interrupted from a waiting state."); }
+    try { throw ThreadStartException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Thread start failure."); }
+    try { throw ThreadStateException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "Thread was in an invalid state for the operation being executed."); }
+    try { throw WaitHandleCannotBeOpenedException(caller_); } catch (const Exception& e) { ASSERT_EQ(e.Message(), "No handle of the given name exists."); }
   }
 
   TEST(ExceptionTest, ThrowException) {
     try {
-      throw Exception(_caller);
+      throw Exception(caller_);
     } catch (const Exception& e) {
       ASSERT_TRUE(is<Exception>(e));
     }
 
     try {
-      throw Exception(_caller);
+      throw Exception(caller_);
     } catch (const MyFirstOwnException& /*e*/) {
       ASSERT_TRUE(false);
     } catch (const MyFirstGroupException& /*e*/) {
@@ -266,7 +266,7 @@ namespace {
     }
 
     try {
-      throw Exception("My First Exception", _caller);
+      throw Exception("My First Exception", caller_);
     } catch (const MyFirstOwnException& /*e*/) {
       ASSERT_TRUE(false);
     } catch (const MyFirstGroupException& /*e*/) {
@@ -278,7 +278,7 @@ namespace {
 
   TEST(ExceptionTest, ThrowMyFirstGroupException) {
     try {
-      throw MyFirstGroupException(_caller);
+      throw MyFirstGroupException(caller_);
     } catch (const Exception& e) {
       if (is<MyFirstGroupException>(e))
         ASSERT_EQ(e.Message(), "My First Group Exception");
@@ -287,7 +287,7 @@ namespace {
     }
 
     try {
-      throw MyFirstGroupException(_caller);
+      throw MyFirstGroupException(caller_);
     }  catch (const MyFirstOwnException& /*e*/) {
       ASSERT_TRUE(false);
     } catch (const MyFirstGroupException& e) {
@@ -300,7 +300,7 @@ namespace {
 
   TEST(ExceptionTest, ThrowMyFirstOwnException) {
     try {
-      throw MyFirstOwnException(_caller);
+      throw MyFirstOwnException(caller_);
     } catch (const Exception& e) {
       if (is<MyFirstOwnException>(e))
         ASSERT_EQ(e.Message(), "My First Own Exception");
@@ -309,7 +309,7 @@ namespace {
     }
 
     try {
-      throw MyFirstOwnException(_caller);
+      throw MyFirstOwnException(caller_);
     } catch (const MyFirstGroupException& e) {
       if (is<MyFirstOwnException>(e))
         ASSERT_EQ(e.Message(), "My First Own Exception");
@@ -318,7 +318,7 @@ namespace {
     }
 
     try {
-      throw MyFirstOwnException(_caller);
+      throw MyFirstOwnException(caller_);
     } catch (const MyFirstOwnException& e) {
       ASSERT_EQ(e.Message(), "My First Own Exception");
     } catch (const MyFirstGroupException& /*e*/) {

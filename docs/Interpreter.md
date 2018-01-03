@@ -32,7 +32,7 @@ namespace DesignPatterns {
     };
     
     // The 'AbstractExpression' abstract class
-    class AbstractExpression _abstract {
+    class AbstractExpression abstract_ {
     public:
       virtual void Interpret(const Context& context) const =0;
     };
@@ -76,7 +76,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 ```
 
 # Output

@@ -18,15 +18,15 @@ ClientWebSocket::~ClientWebSocket() {
 void ClientWebSocket::Connect(const string& uri) {
   this->socket = easywsclient::WebSocket::from_url(uri.Data());
   if (this->socket == null)
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 
-  this->thread = System::Threading::Thread(System::Threading::ThreadStart(_delegate {
+  this->thread = System::Threading::Thread(System::Threading::ThreadStart(delegate_ {
     while (this->State == WebSocketState::Connecting)
       System::Threading::Thread::Sleep(10);
     while (this->State == WebSocketState::Open) {
       //this->startReceive.WaitOne();
       this->socket->poll();
-      this->socket->dispatch(_delegate(const std::string & message) {
+      this->socket->dispatch(delegate_(const std::string & message) {
         this->items.Enqueue(message.c_str());
         this->itemsReceive.Release();
       });
@@ -46,7 +46,7 @@ void ClientWebSocket::Close(WebSocketCloseStatus closeStatus, const string& stat
 
 ArraySegment<byte> ClientWebSocket::Receive() {
   if (this->socket == null)
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 
   string buffer;
   if (this->items.TryDequeue(buffer) == false) {
@@ -58,12 +58,12 @@ ArraySegment<byte> ClientWebSocket::Receive() {
 
 void ClientWebSocket::Send(const ArraySegment<byte>& buffer, WebSocketMessageType messageType, bool endOfMessage) {
   if (this->socket == null)
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 
   switch (messageType) {
   case WebSocketMessageType::Text: this->socket->send(std::string(reinterpret_cast<const char*>(buffer.Data()), buffer.Length)); break;
   case WebSocketMessageType::Binary: this->socket->sendBinary(std::vector<byte>(buffer.Data(), buffer.Data() + buffer.Length)); break;
-  default: throw InvalidOperationException(_caller);
+  default: throw InvalidOperationException(caller_);
   }
 }
 

@@ -3,134 +3,134 @@
 using namespace System;
 using namespace System::Drawing;
 
-_property<Color, _readonly> SystemColors::ActiveBorder {
+property_<Color, readonly_> SystemColors::ActiveBorder {
   [] {return Color::FromKnownColor(KnownColor::ActiveBorder);}
 };
 
-_property<Color, _readonly> SystemColors::ActiveCaption {
+property_<Color, readonly_> SystemColors::ActiveCaption {
   [] {return Color::FromKnownColor(KnownColor::ActiveCaption);}
 };
 
-_property<Color, _readonly> SystemColors::ActiveCaptionText {
+property_<Color, readonly_> SystemColors::ActiveCaptionText {
   [] {return Color::FromKnownColor(KnownColor::ActiveCaptionText);}
 };
 
-_property<Color, _readonly> SystemColors::AppWorkspace {
+property_<Color, readonly_> SystemColors::AppWorkspace {
   [] {return Color::FromKnownColor(KnownColor::AppWorkspace);}
 };
 
-_property<Color, _readonly> SystemColors::Control {
+property_<Color, readonly_> SystemColors::Control {
   [] {return Color::FromKnownColor(KnownColor::Control);}
 };
 
-_property<Color, _readonly> SystemColors::ControlDark {
+property_<Color, readonly_> SystemColors::ControlDark {
   [] {return Color::FromKnownColor(KnownColor::ControlDark);}
 };
 
-_property<Color, _readonly> SystemColors::ControlDarkDark {
+property_<Color, readonly_> SystemColors::ControlDarkDark {
   [] {return Color::FromKnownColor(KnownColor::ControlDarkDark);}
 };
 
-_property<Color, _readonly> SystemColors::ControlLight {
+property_<Color, readonly_> SystemColors::ControlLight {
   [] {return Color::FromKnownColor(KnownColor::ControlLight);}
 };
 
-_property<Color, _readonly> SystemColors::ControlLightLight {
+property_<Color, readonly_> SystemColors::ControlLightLight {
   [] {return Color::FromKnownColor(KnownColor::ControlLightLight);}
 };
 
-_property<Color, _readonly> SystemColors::ControlText {
+property_<Color, readonly_> SystemColors::ControlText {
   [] {return Color::FromKnownColor(KnownColor::ControlText);}
 };
 
-_property<Color, _readonly> SystemColors::Desktop {
+property_<Color, readonly_> SystemColors::Desktop {
   [] {return Color::FromKnownColor(KnownColor::Desktop);}
 };
 
-_property<Color, _readonly> SystemColors::GrayText {
+property_<Color, readonly_> SystemColors::GrayText {
   [] {return Color::FromKnownColor(KnownColor::GrayText);}
 };
 
-_property<Color, _readonly> SystemColors::Highlight {
+property_<Color, readonly_> SystemColors::Highlight {
   [] {return Color::FromKnownColor(KnownColor::Highlight);}
 };
 
-_property<Color, _readonly> SystemColors::HighlightText {
+property_<Color, readonly_> SystemColors::HighlightText {
   [] {return Color::FromKnownColor(KnownColor::HighlightText);}
 };
 
-_property<Color, _readonly> SystemColors::HotTrack {
+property_<Color, readonly_> SystemColors::HotTrack {
   [] {return Color::FromKnownColor(KnownColor::HotTrack);}
 };
 
-_property<Color, _readonly> SystemColors::InactiveBorder {
+property_<Color, readonly_> SystemColors::InactiveBorder {
   [] {return Color::FromKnownColor(KnownColor::InactiveBorder);}
 };
 
-_property<Color, _readonly> SystemColors::InactiveCaption {
+property_<Color, readonly_> SystemColors::InactiveCaption {
   [] {return Color::FromKnownColor(KnownColor::InactiveCaption);}
 };
 
-_property<Color, _readonly> SystemColors::InactiveCaptionText {
+property_<Color, readonly_> SystemColors::InactiveCaptionText {
   [] {return Color::FromKnownColor(KnownColor::InactiveCaptionText);}
 };
 
-_property<Color, _readonly> SystemColors::Info {
+property_<Color, readonly_> SystemColors::Info {
   [] {return Color::FromKnownColor(KnownColor::Info);}
 };
 
-_property<Color, _readonly> SystemColors::InfoText {
+property_<Color, readonly_> SystemColors::InfoText {
   [] {return Color::FromKnownColor(KnownColor::InfoText);}
 };
 
-_property<Color, _readonly> SystemColors::Menu {
+property_<Color, readonly_> SystemColors::Menu {
   [] {return Color::FromKnownColor(KnownColor::Menu);}
 };
 
-_property<Color, _readonly> SystemColors::MenuText {
+property_<Color, readonly_> SystemColors::MenuText {
   [] {return Color::FromKnownColor(KnownColor::MenuText);}
 };
 
-_property<Color, _readonly> SystemColors::ScrollBar {
+property_<Color, readonly_> SystemColors::ScrollBar {
   [] {return Color::FromKnownColor(KnownColor::ScrollBar);}
 };
 
-_property<Color, _readonly> SystemColors::Window {
+property_<Color, readonly_> SystemColors::Window {
   [] {return Color::FromKnownColor(KnownColor::Window);}
 };
 
-_property<Color, _readonly> SystemColors::WindowFrame {
+property_<Color, readonly_> SystemColors::WindowFrame {
   [] {return Color::FromKnownColor(KnownColor::WindowFrame);}
 };
 
-_property<Color, _readonly> SystemColors::WindowText {
+property_<Color, readonly_> SystemColors::WindowText {
   [] {return Color::FromKnownColor(KnownColor::WindowText);}
 };
 
-_property<Color, _readonly> SystemColors::ButtonFace {
+property_<Color, readonly_> SystemColors::ButtonFace {
   [] {return Color::FromKnownColor(KnownColor::ButtonFace);}
 };
 
-_property<Color, _readonly> SystemColors::ButtonHighlight {
+property_<Color, readonly_> SystemColors::ButtonHighlight {
   [] {return Color::FromKnownColor(KnownColor::ButtonHighlight);}
 };
 
-_property<Color, _readonly> SystemColors::ButtonShadow {
+property_<Color, readonly_> SystemColors::ButtonShadow {
   [] {return Color::FromKnownColor(KnownColor::ButtonShadow);}
 };
 
-_property<Color, _readonly> SystemColors::GradientActiveCaption {
+property_<Color, readonly_> SystemColors::GradientActiveCaption {
   [] {return Color::FromKnownColor(KnownColor::GradientActiveCaption);}
 };
 
-_property<Color, _readonly> SystemColors::GradientInactiveCaption {
+property_<Color, readonly_> SystemColors::GradientInactiveCaption {
   [] {return Color::FromKnownColor(KnownColor::GradientInactiveCaption);}
 };
 
-_property<Color, _readonly> SystemColors::MenuBar {
+property_<Color, readonly_> SystemColors::MenuBar {
   [] {return Color::FromKnownColor(KnownColor::MenuBar);}
 };
 
-_property<Color, _readonly> SystemColors::MenuHighlight {
+property_<Color, readonly_> SystemColors::MenuHighlight {
   [] {return Color::FromKnownColor(KnownColor::MenuHighlight);}
 };

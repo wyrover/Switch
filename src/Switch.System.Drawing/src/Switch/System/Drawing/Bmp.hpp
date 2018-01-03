@@ -138,7 +138,7 @@ namespace Switch {
             case 16: ReadLine16Bits(ptr, width, pixelFormatInfo); break;
             case 24: ReadLine24Bits(ptr, width, pixelFormatInfo); break;
             case 32: ReadLine32Bits(ptr, width); break;
-            default: throw OutOfMemoryException(_caller); break;
+            default: throw OutOfMemoryException(caller_); break;
             }
           }
 

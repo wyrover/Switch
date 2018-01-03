@@ -15,7 +15,7 @@ namespace Test {
       Console::WriteLine("*p1 = {0}", *p1);
       Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
 
-      _using(refptr<string> p2 = p1) {
+      using_(refptr<string> p2 = p1) {
         Console::WriteLine("*p2 = {0}", *p2);
         Console::WriteLine("p1 UseCount =  {0}{1}", p1.GetUseCount(), Environment::NewLine);
 
@@ -36,7 +36,7 @@ namespace Test {
   };
 }
 
-_startup(Test::Program);
+startup_(Test::Program);
 
 // This code produces the following output :
 //

@@ -42,7 +42,7 @@ System::Array<System::Drawing::FontFamily> Native::FontFamilyApi::GetInstalledFo
 
 System::Drawing::FontFamily Native::FontFamilyApi::GetFontFamilyFromName(const string& name) {
   if ([[NSFontManager sharedFontManager] availableMembersOfFontFamily:[NSString stringWithUTF8String:name.c_str()]] == nil)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
   LogFont* logFont = new LogFont();
   logFont->lfFaceName = name;
   return System::Drawing::FontFamily((intptr)logFont);

@@ -169,11 +169,11 @@ namespace Switch {
         if (this->functions.size() == 0) return Result();
         for (size_t index = 0; index < this->functions.size() - 1; index++) {
           if (this->functions[index] == null)
-            throw NullReferenceException(_caller);
+            throw NullReferenceException(caller_);
           this->functions[index](arguments...);
         }
         if (this->functions.back() == null)
-          throw NullReferenceException(_caller);
+          throw NullReferenceException(caller_);
         return this->functions.back()(arguments...);
       }
 
@@ -317,12 +317,12 @@ namespace Switch {
   /// @brief The declaration of a delegate type is similar to a method signature. It has a return value and any number of parameters of any type
   /// @par Examples
   /// @code
-  /// button.Click += _delegate(const object& sender, const EventArgs& e) {
+  /// button.Click += delegate_(const object& sender, const EventArgs& e) {
   ///   MessageBox::Show("Button click!", "Message", MessageBoxButtons::OK);
   /// };
   /// @endcode
   /// @ingroup Keywords
-#define _delegate \
+#define delegate_ \
   [&]
 }
 

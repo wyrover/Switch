@@ -12,7 +12,7 @@ namespace Switch {
     /// @par Examples
     /// The following example demonstrates how to throw and catch an ArgumentException.
     /// @include ArgumentException.cpp
-    class _export ArgumentException : public SystemException {
+    class export_ ArgumentException : public SystemException {
     public:
       /// @brief Create a new instance of class ArgumentException
       /// @remarks Message is set with the default message associate to the error.
@@ -24,7 +24,7 @@ namespace Switch {
       ArgumentException(const ArgumentException& value) : SystemException(value) {}
 
       /// @brief Create a new instance of class ArgumentException
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       /// @remarks Message is set with the default message associate to the error.
       explicit ArgumentException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
 
@@ -34,13 +34,13 @@ namespace Switch {
 
       /// @brief Create a new instance of class ArgumentException
       /// @param message Message string associate to the error.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       ArgumentException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, information) {}
 
       /// @brief Create a new instance of class ArgumentException
       /// @param message Message string associate to the error.
       /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+      /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
       ArgumentException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       /// @cond

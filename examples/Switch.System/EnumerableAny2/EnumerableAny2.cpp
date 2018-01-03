@@ -17,16 +17,16 @@ namespace Examples {
         return *this;
       }
 
-      _property<int, _readonly> Age {
-        _get { return this->age; }
+      property_<int, readonly_> Age {
+        get_ { return this->age; }
       };
 
-      _property<bool, _readonly> IsVaccinated {
-        _get { return this->vaccinated; }
+      property_<bool, readonly_> IsVaccinated {
+        get_ { return this->vaccinated; }
       };
 
-      _property<string, _readonly> Name {
-        _get { return this->name; }
+      property_<string, readonly_> Name {
+        get_ { return this->name; }
       };
 
     private:
@@ -46,7 +46,7 @@ namespace Examples {
       };
 
       // Determine whether any pets over age 1 are also unvaccinated.
-      bool unvaccinated = pets.Any(_delegate(const Pet & pet) {
+      bool unvaccinated = pets.Any(delegate_(const Pet & pet) {
         return pet.IsVaccinated == false && pet.Age > 1;
       });
 
@@ -55,7 +55,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // This code produces the following output:
 //

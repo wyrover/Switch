@@ -30,7 +30,7 @@ namespace Switch {
       /// @remarks use the ToString method.
       /// @par Library
       /// Switch.System
-      class _export SocketAddress : public Object {
+      class export_ SocketAddress : public Object {
       public:
         /// @brief Creates a new instance of the SocketAddress class for the given address family.
         SocketAddress(Sockets::AddressFamily addressFamily) : SocketAddress(addressFamily, 32) {}
@@ -48,14 +48,14 @@ namespace Switch {
 
         /// @brief Gets the address family to which the endpoint belongs.
         /// @return One of the AddressFamily values.
-        _property<Sockets::AddressFamily, _readonly> AddressFamily {
-          _get {return this->GetAddressFamily();}
+        property_<Sockets::AddressFamily, readonly_> AddressFamily {
+          get_ {return this->GetAddressFamily();}
         };
 
         /// @brief Gets the underlying buffer size of the SocketAddress.
         /// @return int32 The underlying buffer size of the SocketAddress.
-        _property<int32, _readonly> Size {
-          _get {return this->bytes.Length();}
+        property_<int32, readonly_> Size {
+          get_ {return this->bytes.Length();}
         };
 
         /// @brief Gets or sets the specified index element in the underlying buffer.

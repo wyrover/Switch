@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System.Security namespaces contain classes that represent the Switch Framework security system and permissions. Child namespaces provide types that control access to and audit securable objects, allow authentication, provide crytographic services, control access to operations and resources based on policy, and support rights management of application-created content.
     namespace Security {
       /// @brief The exception that is thrown when a security error is detected.
-      class _export SecurityException : public SystemException {
+      class export_ SecurityException : public SystemException {
       public:
         /// @brief Create a new instance of class SecurityException
         /// @remarks Message is set with the default message associate to the error.
@@ -23,7 +23,7 @@ namespace Switch {
         SecurityException(const SecurityException& value) : SystemException(value) {}
 
         /// @brief Create a new instance of class SecurityException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         /// @remarks Message is set with the default message associate to the error.
         SecurityException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
 
@@ -33,13 +33,13 @@ namespace Switch {
 
         /// @brief Create a new instance of class SecurityException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         SecurityException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, information) {}
 
         /// @brief Create a new instance of class SecurityException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         SecurityException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       private:

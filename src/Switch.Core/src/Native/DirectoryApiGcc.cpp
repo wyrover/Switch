@@ -47,7 +47,7 @@ namespace {
   protected:
     const string& GetCurrent() const override {
       if (this->handle == null)
-        throw System::InvalidOperationException(_caller);
+        throw System::InvalidOperationException(caller_);
       return this->current;
     }
 

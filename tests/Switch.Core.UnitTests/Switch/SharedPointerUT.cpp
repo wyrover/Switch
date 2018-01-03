@@ -51,7 +51,7 @@ namespace {
   int TestPointer::cpt = 0;
 
   TEST(RefPtrTest, SetNull) {
-    _using(refptr<int> ptr) {
+    using_(refptr<int> ptr) {
       ASSERT_THROW(ptr.ToPointer(), std::exception);
       ASSERT_TRUE(ptr == null);
       ASSERT_THROW(*ptr, std::exception);
@@ -61,7 +61,7 @@ namespace {
 
   TEST(RefPtrTest, SetNotNull) {
     TestPointer::ResetCpt();
-    _using(refptr<TestPointer> ptr(new TestPointer())) {
+    using_(refptr<TestPointer> ptr(new TestPointer())) {
       ASSERT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       ASSERT_FALSE(ptr == null);
@@ -75,7 +75,7 @@ namespace {
     TestPointer::ResetCpt();
     TestPointer* tp = new TestPointer();
     ASSERT_EQ(1, TestPointer::GetCpt());
-    _using(refptr<TestPointer> ptr(tp)) {
+    using_(refptr<TestPointer> ptr(tp)) {
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       ASSERT_FALSE(ptr == null);
       ASSERT_NO_THROW(*ptr);
@@ -87,7 +87,7 @@ namespace {
 
   TEST(RefPtrTest, SetFromEqual) {
     TestPointer::ResetCpt();
-    _using(refptr<TestPointer> ptr = new TestPointer()) {
+    using_(refptr<TestPointer> ptr = new TestPointer()) {
       ASSERT_EQ(1, TestPointer::GetCpt());
       EXPECT_NE((TestPointer*)null, ptr.ToPointer());
       ASSERT_FALSE(ptr == null);
@@ -99,9 +99,9 @@ namespace {
 
   TEST(RefPtrTest, SetFromSharedPointer) {
     TestPointer::ResetCpt();
-    _using(refptr<TestPointer> ptr1(new TestPointer())) {
+    using_(refptr<TestPointer> ptr1(new TestPointer())) {
       ASSERT_EQ(1, TestPointer::GetCpt());
-      _using(refptr<TestPointer> ptr2(ptr1)) {
+      using_(refptr<TestPointer> ptr2(ptr1)) {
         ASSERT_EQ(1, TestPointer::GetCpt());
         ASSERT_EQ(2, ptr1.GetUseCount());
         ASSERT_EQ(2, ptr2.GetUseCount());
@@ -123,9 +123,9 @@ namespace {
 
   TEST(RefPtrTest, SetFromEqualSharedPointer) {
     TestPointer::ResetCpt();
-    _using(refptr<TestPointer> ptr1(new TestPointer())) {
+    using_(refptr<TestPointer> ptr1(new TestPointer())) {
       ASSERT_EQ(1, TestPointer::GetCpt());
-      _using(refptr<TestPointer> ptr2 = ptr1) {
+      using_(refptr<TestPointer> ptr2 = ptr1) {
         ASSERT_EQ(1, TestPointer::GetCpt());
         ASSERT_EQ(2, ptr1.GetUseCount());
         ASSERT_EQ(2, ptr2.GetUseCount());

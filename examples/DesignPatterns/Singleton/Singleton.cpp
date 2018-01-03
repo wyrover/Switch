@@ -23,7 +23,7 @@ namespace DesignPatterns {
 
     Singleton Singleton::instance;
 
-    // MainApp _startup class for Creational
+    // MainApp startup_ class for Creational
     // Singleton Design Pattern.
     class MainApp {
     public:
@@ -42,7 +42,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Creational::MainApp);
+startup_(DesignPatterns::Creational::MainApp);
 
 // This code produces the following output:
 //

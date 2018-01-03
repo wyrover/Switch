@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception that is thrown when an I/O error occurs.
-      class _export IOException : public SystemException {
+      class export_ IOException : public SystemException {
       public:
         /// @brief Create a new instance of class IOException
         /// @remarks Message is set with the default message associate to the error.
@@ -23,7 +23,7 @@ namespace Switch {
         IOException(const IOException& value) : SystemException(value) {}
 
         /// @brief Create a new instance of class IOException
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         /// @remarks Message is set with the default message associate to the error.
         explicit IOException(const System::Runtime::CompilerServices::Caller& information) : SystemException(information) {}
 
@@ -33,13 +33,13 @@ namespace Switch {
 
         /// @brief Create a new instance of class IOException
         /// @param message Message string associate to the error.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         IOException(const System::String& message, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, information) {}
 
         /// @brief Create a new instance of class IOException
         /// @param message Message string associate to the error.
         /// @param innerException The exception that is the cause of the current exception, or a null reference if no inner exception is specified.
-        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #_caller.
+        /// @param information Conatains current information of file and Number of line in the file where the exception is occurred. Typically #caller_.
         IOException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       private:

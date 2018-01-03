@@ -27,7 +27,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Component' abstract class
-    class Component _abstract {
+    class Component abstract_ {
     public:
       virtual void Operation() const = 0;
     };
@@ -96,7 +96,7 @@ namespace DesignPatterns {
 }
  
 // Specify the Main entry point to System
-_startup(DesignPatterns::Structural::MainApp);
+startup_(DesignPatterns::Structural::MainApp);
 ```
 
 # Output

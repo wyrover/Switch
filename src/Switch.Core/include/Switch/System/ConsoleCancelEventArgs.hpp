@@ -13,7 +13,7 @@ namespace Switch {
     /// @brief Provides data for the Console::CancelKeyPress event. This class cannot be inherited.
     /// @remarks A user can interrupt a console application process by simultaneously pressing the Control modifier key and the C console key (Ctrl+C), or the Control modifier key and the Break console key (Ctrl+Break). The Switch consequently provides a ConsoleCancelEventArgs object to the event handler for the Console.CancelKeyPress event to specify whether the process should be cancelled.
     /// @remarks If the Cancel property is set to true in the event handler, the process is resumed; otherwise, the process is terminated. By default, the value of the ConsoleCancelEventArgs property is false, and the process terminates.
-    class _export ConsoleCancelEventArgs final : public EventArgs {
+    class export_ ConsoleCancelEventArgs final : public EventArgs {
     public:
       /// @brief Initializes a new instance of the GiveFeedbackEventArgs class.
       ConsoleCancelEventArgs() {}
@@ -34,15 +34,15 @@ namespace Switch {
 
       /// @brief Gets or sets a value that indicates whether simultaneously pressing the Control modifier key and the C console key (Ctrl+C) or the Ctrl+Break keys terminates the current process. The default is false, which terminates the current process.
       /// @return true if the current process should resume when the event handler concludes; false if the current process should terminate. The default value is false; the current process terminates when the event handler returns. If true, the current process continues.
-      _property<bool> Cancel {
-        _get {return this->cancel;},
-        _set {this->cancel = value;}
+      property_<bool> Cancel {
+        get_ {return this->cancel;},
+        set_ {this->cancel = value;}
       };
 
       /// @brief Gets the combination of modifier and console keys that interrupted the current process.
       /// @return One of the enumeration values that specifies the key combination that interrupted the current process. There is no default value.
-      _property<ConsoleSpecialKey, _readonly> SpecialKey {
-        _get {return this->specialKey;}
+      property_<ConsoleSpecialKey, readonly_> SpecialKey {
+        get_ {return this->specialKey;}
       };
 
     private:

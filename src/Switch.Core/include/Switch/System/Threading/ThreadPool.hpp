@@ -21,7 +21,7 @@ namespace Switch {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Provides a pool of threads that can be used to post work items, process asynchronous I/O, wait on behalf of other threads, and process timers.
-      class _export ThreadPool _static {
+      class export_ ThreadPool static_ {
       public:
         /// @brief Retrieves the difference between the maximum number of thread pool threads returned by the GetMaxThreads method, and the number currently active.
         /// @param workerThreads The number of available worker threads

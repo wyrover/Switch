@@ -19,36 +19,36 @@ namespace Switch {
       /// @brief Provides an Internet Protocol (IP) address.
       /// @par Library
       /// Switch.System
-      class _export IPAddress : public Object {
+      class export_ IPAddress : public Object {
       public:
         /// @brief Provides an IP address that indicates that the server must listen for client activity on all network interfaces. This field is constant.
         /// @remarks The cAny field is equivalent to 0.0.0.0 in dotted-quad notation
-        static _property<IPAddress, _readonly> Any;
+        static property_<IPAddress, readonly_> Any;
 
         /// @brief Provides the IP broadcast address. This field is constant.
         /// @remarks The cBroadcast field is equivalent to 255.255.255.255 in dotted-quad notation.
-        static _property<IPAddress, _readonly> Broadcast;
+        static property_<IPAddress, readonly_> Broadcast;
 
         /// @brief The Socket::Bind method uses the cIPv6Any field to indicate that a Socket must listen for client activity on all network interfaces. This field is constant.
         /// @remarks The cIPv6Any field is equivalent to 0:0:0:0:0:0:0:0 in colon-hexadecimal notation, or to :: in compact notation.
-        static _property<IPAddress, _readonly> IPv6Any;
+        static property_<IPAddress, readonly_> IPv6Any;
 
         /// @brief Provides the IP loopback address. This field is constant.
         /// @remarks The cIPv6Loopback field is equivalent to 0:0:0:0:0:0:0:1 in colon-hexadecimal notation, or to ::1 in compact notation.
-        static _property<IPAddress, _readonly> IPv6Loopback;
+        static property_<IPAddress, readonly_> IPv6Loopback;
 
         /// @brief Provides an IP address that indicates that no network interface should be used. This field is constant.
         /// @remarks The Socket::Bind method uses the cIPv6None field to indicate that a Socket must not listen for client activity.
         /// @remarks The cIPv6None field is equivalent to 0:0:0:0:0:0:0:0 in colon-hexadecimal notation, or to ::0 in compact notation.
-        static _property<IPAddress, _readonly> IPv6None;
+        static property_<IPAddress, readonly_> IPv6None;
 
         /// @brief Provides the IP loopback address. This field is constant.
         /// @remarks The cLoopback field is equivalent to 127.0.0.1 in dotted-quad notation.
-        static _property<IPAddress, _readonly> Loopback;
+        static property_<IPAddress, readonly_> Loopback;
 
         /// @brief Provides an IP address that indicates that no network interface should be used. This field is constant.
         /// @remarks The cNone field is equivalent to 255.255.255.255 in dotted-quad notation.
-        static _property<IPAddress, _readonly> None;
+        static property_<IPAddress, readonly_> None;
 
         /// @brief Initializes a new instance of the IPAddress class with the address specified as an Int64.
         /// @remarks IPAddress is initialized by default value cNone.
@@ -90,8 +90,8 @@ namespace Switch {
 
         /// @brief Gets the address family of the IP address.
         /// @return Returns InterNetwork for IPv4 or InterNetworkV6 for IPv6.
-        _property<Sockets::AddressFamily, _readonly> AddressFamily {
-          _get {return this->GetAddressFamily();}
+        property_<Sockets::AddressFamily, readonly_> AddressFamily {
+          get_ {return this->GetAddressFamily();}
         };
 
         /// @brief Gets the IPv6 address scope identifier.
@@ -99,27 +99,27 @@ namespace Switch {
         /// @exception SocketException AddressFamily = AddressFamilyInterNetwork
         /// @exception SocketException AddressFamily = AddressFamilyInterNetwork
         /// @exception ArgumentOutOfRangeException scopeId < 0 or scopeId > 0x00000000FFFFFFFF.
-        _property<int64> ScopeId {
-          _get {return this->GetScopeId();},
-          _set {this->SetScopeId(value);}
+        property_<int64> ScopeId {
+          get_ {return this->GetScopeId();},
+          set_ {this->SetScopeId(value);}
         };
 
         /// @brief Gets whether the address is an IPv6 link local address.
         /// @return bool true if the IP address is an IPv6 link local address; otherwise, false.
-        _property<bool, _readonly> IsIPv6LinkLocal {
-          _get {return this->GetIsIPv6LinkLocal();}
+        property_<bool, readonly_> IsIPv6LinkLocal {
+          get_ {return this->GetIsIPv6LinkLocal();}
         };
 
         /// @brief Gets whether the address is an IPv6 multicast global address.
         /// @return bool true if the IP address is an IPv6 multicast global address; otherwise, false.
-        _property<bool, _readonly> IsIPv6Multicast {
-          _get {return this->GetIsIPv6Multicast();}
+        property_<bool, readonly_> IsIPv6Multicast {
+          get_ {return this->GetIsIPv6Multicast();}
         };
 
         /// @brief Gets whether the address is an IPv6 site local address.
         /// @return bool true if the IP address is an IPv6 site local address; otherwise, false.
-        _property<bool, _readonly> IsIPv6SiteLocal {
-          _get {return this->GetIsIPv6SiteLocal();}
+        property_<bool, readonly_> IsIPv6SiteLocal {
+          get_ {return this->GetIsIPv6SiteLocal();}
         };
 
         /// @brief Determines whether this instance of IPAddress and a specified object, which must also be a IPAddress object, have the same value.

@@ -28,20 +28,20 @@ namespace Switch {
 
           /// @brief Gets the number of elements contained in the ICollection.
           /// @return Int32 The number of elements contained in the ICollection.
-          _property<int32, _readonly> Count {
-            _get {return this->GetCount();}
+          property_<int32, readonly_> Count {
+            get_ {return this->GetCount();}
           };
 
           /// @brief Gets a value indicating whether the ICollection is read-only.
           /// @return Boolean true if the ICollection is read-only; otherwise; otherwise, false.
-          _property<bool, _readonly> IsReadOnly {
-            _get {return this->GetIsReadOnly();}
+          property_<bool, readonly_> IsReadOnly {
+            get_ {return this->GetIsReadOnly();}
           };
 
           /// @brief Gets a value indicating whether access to the ICollection is synchronized (thread safe).
           /// @return Boolean true if access to the ICollection is synchronized (thread safe); otherwise, false.
-          _property<bool, _readonly> IsSynchronized {
-            _get {return this->GetIsSynchronized();}
+          property_<bool, readonly_> IsSynchronized {
+            get_ {return this->GetIsSynchronized();}
           };
 
           /// @brief Gets an object that can be used to synchronize access to the ICollection.
@@ -50,12 +50,12 @@ namespace Switch {
           /// @code
           /// refptr<ICollection> collection;
           /// // Instantiate and populate the collection
-          /// _lock (collection->SyncRoot) {
+          /// lock_ (collection->SyncRoot) {
           ///   // Some operation on the collection, which is now thread safe.
           /// }
           /// @endcode
-          _property<const Object&, _readonly> SyncRoot {
-            _get->const object& {return this->GetSyncRoot();}
+          property_<const Object&, readonly_> SyncRoot {
+            get_->const object& {return this->GetSyncRoot();}
           };
 
           /// @brief Adds an item to the IList.
@@ -105,7 +105,7 @@ namespace Switch {
           /// @code
           /// refptr<ICollection> collection;
           /// // Instantiate and populate the collection
-          /// _lock (collection->SyncRoot) {
+          /// lock_ (collection->SyncRoot) {
           ///   // Some operation on the collection, which is now thread safe.
           /// }
           /// @endcode

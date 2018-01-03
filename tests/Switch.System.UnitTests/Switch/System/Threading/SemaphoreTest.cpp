@@ -34,14 +34,14 @@ namespace SwitchUnitTests {
 
   TEST(SemaphoreTest, CreateSemaphoreWithCountToZero) {
     Semaphore semaphore(0, 1);
-    Thread thread(ThreadStart(_delegate {ASSERT_FALSE(semaphore.WaitOne(0));}));
+    Thread thread(ThreadStart(delegate_ {ASSERT_FALSE(semaphore.WaitOne(0));}));
     thread.Start();
     thread.Join();
   }
 
   TEST(SemaphoreTest, CreateSemaphoreWithCountToOne) {
     Semaphore semaphore(1, 1);
-    Thread thread(ThreadStart(_delegate {ASSERT_TRUE(semaphore.WaitOne(0));}));
+    Thread thread(ThreadStart(delegate_ {ASSERT_TRUE(semaphore.WaitOne(0));}));
     thread.Start();
     thread.Join();
   }

@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Behavioral {
     // The 'Handler' abstract class
-    class Handler _abstract {
+    class Handler abstract_ {
     public:
       void SetSuccessor(refptr<Handler> successor) {this->successor = successor;}
 
@@ -50,7 +50,7 @@ namespace DesignPatterns {
       }
     };
 
-    // MainApp _startup class for Behavioral
+    // MainApp startup_ class for Behavioral
     // Chain Of Responsability Design Pattern.
     class MainApp {
     public:
@@ -74,7 +74,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Behavioral::MainApp);
+startup_(DesignPatterns::Behavioral::MainApp);
 
 // This code produces the following output:
 //

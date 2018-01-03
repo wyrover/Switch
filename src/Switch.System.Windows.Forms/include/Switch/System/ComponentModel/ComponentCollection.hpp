@@ -13,7 +13,7 @@ namespace Switch {
       class IComponent;
 
       /// @brief Provides a read-only container for a collection of IComponent objects.
-      class _export ComponentCollection : public object {
+      class export_ ComponentCollection : public object {
       public:
         /// @brief Initializes a new instance of the ComponentCollection class using the specified array of components.
         /// @param components An array of IComponent objects to initialize the collection with.

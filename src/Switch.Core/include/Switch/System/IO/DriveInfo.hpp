@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief Provides instance methods for the creation, copying, deletion, moving, and
       /// opening of files, and aids in the creation of System::IO::FileStream objects.
       /// This class cannot be inherited.
-      class _export DriveInfo final : public Object {
+      class export_ DriveInfo final : public Object {
       public:
         /// @brief Provides access to information on drive.
         DriveInfo() { }
@@ -38,54 +38,54 @@ namespace Switch {
         /// @brief Indicates the amount of available free space on a drive.
         /// @return The amount of free space available on the drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
-        _property<int64, _readonly> AvailableFreeSpace {
-          _get {return this->GetAvailableFreeSpace();}
+        property_<int64, readonly_> AvailableFreeSpace {
+          get_ {return this->GetAvailableFreeSpace();}
         };
 
         /// @brief Gets the name of the file system, such as NTFS or FAT32.
         /// @return The name of the file system on the specified drive.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
-        _property<string, _readonly> DriveFormat {
-          _get {return this->GetDriveFormat();}
+        property_<string, readonly_> DriveFormat {
+          get_ {return this->GetDriveFormat();}
         };
 
         /// @brief Gets the drive type.
         /// @return One of the System::IO::DriveType values.
         /// @exception IO::IOException An I/O error occurred.
-        _property<System::IO::DriveType, _readonly> DriveType {
-          _get {return this->GetDriveType();}
+        property_<System::IO::DriveType, readonly_> DriveType {
+          get_ {return this->GetDriveType();}
         };
 
         /// @brief Gets a value indicating whether a drive is ready.
         /// @return true if the drive is ready; false if the drive is not ready.
-        _property<bool, _readonly> IsReady {
-          _get {return this->GetIsReady();}
+        property_<bool, readonly_> IsReady {
+          get_ {return this->GetIsReady();}
         };
 
         /// @brief Gets the name of a drive.
         /// @return The name of the drive.
-        _property<String, _readonly> Name {
-          _get {return this->GetName();}
+        property_<String, readonly_> Name {
+          get_ {return this->GetName();}
         };
 
         /// @brief Gets the root directory of a drive.
         /// @return A System::IO::DirectoryInfo object that contains the root directory of the drive.
-        _property<DirectoryInfo, _readonly> RootDirectory {
-          _get {return this->GetRootDirectory();}
+        property_<DirectoryInfo, readonly_> RootDirectory {
+          get_ {return this->GetRootDirectory();}
         };
 
         /// @brief Gets the total amount of free space available on a drive.
         /// @return The total free space available on a drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
-        _property<int64, _readonly> TotalFreeSpace {
-          _get {return this->GetTotalFreeSpace();}
+        property_<int64, readonly_> TotalFreeSpace {
+          get_ {return this->GetTotalFreeSpace();}
         };
 
         /// @brief Gets the total size of storage space on a drive.
         /// @return The total size of the drive, in bytes.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
-        _property<int64, _readonly> TotalSize {
-          _get {return this->GetTotalSize();}
+        property_<int64, readonly_> TotalSize {
+          get_ {return this->GetTotalSize();}
         };
 
         /// @brief Gets or sets the volume label of a drive.
@@ -95,9 +95,9 @@ namespace Switch {
         /// @exception ArgumentNullException volumeLabel is null.
         /// @exception IO::IOException An I/O error occurred (for example, a disk error or a drive was not ready).
         /// @exception UnauthorizedAccessException The volume label is being set on a network or CD-ROM drive.
-        _property<string> VolumeLabel {
-          _get {return this->GetVolumeLabel();},
-          _set {this->SetVolumeLabel(value);}
+        property_<string> VolumeLabel {
+          get_ {return this->GetVolumeLabel();},
+          set_ {this->SetVolumeLabel(value);}
         };
 
         /// @brief Retrieves the drive names of all logical drives on a computer.

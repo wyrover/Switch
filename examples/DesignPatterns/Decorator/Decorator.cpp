@@ -7,7 +7,7 @@ using namespace System;
 namespace DesignPatterns {
   namespace Structural {
     // The 'Component' abstract class
-    class Component _abstract {
+    class Component abstract_ {
     public:
       virtual void Operation() const = 0;
     };
@@ -53,7 +53,7 @@ namespace DesignPatterns {
       void AddedBehavior() const {}
     };
 
-    // MainApp _startup class for Structural
+    // MainApp startup_ class for Structural
     // Decorator Design Pattern.
     class MainApp {
     public:
@@ -75,7 +75,7 @@ namespace DesignPatterns {
 }
 
 // Specify the Main entry point to System
-_startup(DesignPatterns::Structural::MainApp);
+startup_(DesignPatterns::Structural::MainApp);
 
 // This code produces the following output:
 //

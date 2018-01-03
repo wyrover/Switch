@@ -22,19 +22,19 @@ namespace Switch {
       /// @par Examples
       /// The following example demonstrates how to use the Stopwatch class to determine the execution time for an application.
       /// @include Stopwatch.cpp
-      class _export Stopwatch : public Object {
+      class export_ Stopwatch : public Object {
       public:
         /// @brief Gets the frequency of the timer as the number of ticks per second. This field is read-only.
         /// @return The frequency of the timer as the number of ticks per second.
         /// @remarks The timer frequency indicates the timer precision and resolution. For example, a timer frequency of 2 million ticks per second equals a timer resolution of 500 nanoseconds per tick. In other words, because one second equals 1 billion nanoseconds, a timer frequency of 2 million ticks per second is equivalent to 2 million ticks per 1 billion nanoseconds, which can be further simplified to 1 tick per 500 nanoseconds.
         /// @remarks The Frequency value depends on the resolution of the underlying timing mechanism. If the installed hardware and operating system support a high-resolution performance counter, then the Frequency value reflects the frequency of that counter. Otherwise, the Frequency value is based on the system timer frequency.
         /// @remarks Because the Stopwatch frequency depends on the installed hardware and operating system, the Frequency value remains constant while the system is running.
-        static _property<int64, _readonly> Frequency;
+        static property_<int64, readonly_> Frequency;
 
         /// @brief Indicates whether the timer is based on a high-resolution performance counter. This field is read-only.
         /// @return true if the timer is based on a high-resolution performance counte; otherwise, false.
         /// @remarks The timer used by the Stopwatch class depends on the system hardware and operating system. IsHighResolution is true if the Stopwatch timer is based on a high-resolution performance counter. Otherwise, IsHighResolution is false, which indicates that the Stopwatch timer is based on the system timer.
-        static _property<bool, _readonly> IsHighResolution;
+        static property_<bool, readonly_> IsHighResolution;
 
         /// @brief Initializes a new instance of the Stopwatch class.
         /// @remarks The returned Stopwatch instance is stopped, and the elapsed time property of the instance is zero.
@@ -57,8 +57,8 @@ namespace Switch {
         /// @remarks Use the Elapsed property to retrieve the elapsed time value using TimeSpan methods and properties. For example, you can format the returned TimeSpan instance into a text representation, or pass it to another class that requires a TimeSpan parameter.
         /// @remarks You can query the properties Elapsed, ElapsedMilliseconds, and ElapsedTicks while the Stopwatch instance is running or stopped. The elapsed time properties steadily increase while the Stopwatch is running; they remain constant when the instance is stopped.
         /// @remarks By default, the elapsed time value of a Stopwatch instance equals the total of all measured time intervals. Each call to Start begins counting at the cumulative elapsed time; each call to Stop ends the current interval measurement and freezes the cumulative elapsed time value. Use the Reset method to clear the cumulative elapsed time in an existing Stopwatch instance.
-        _property<TimeSpan, _readonly> Elapsed {
-          _get {return TimeSpan::FromTicks(ElapsedTicks);}
+        property_<TimeSpan, readonly_> Elapsed {
+          get_ {return TimeSpan::FromTicks(ElapsedTicks);}
         };
 
         /// @brief Gets the total elapsed time measured by the current instance, in milliseconds.
@@ -66,8 +66,8 @@ namespace Switch {
         /// @remarks This property represents elapsed time rounded down to the nearest whole millisecond value. For higher precision measurements, use the Elapsed or ElapsedTicks properties.
         /// @remarks You can query the properties Elapsed, ElapsedMilliseconds, and ElapsedTicks while the Stopwatch instance is running or stopped. The elapsed time properties steadily increase while the Stopwatch is running; they remain constant when the instance is stopped.
         /// @remarks By default, the elapsed time value of a Stopwatch instance equals the total of all measured time intervals. Each call to Start begins counting at the cumulative elapsed time; each call to Stop ends the current interval measurement and freezes the cumulative elapsed time value. Use the Reset method to clear the cumulative elapsed time in an existing Stopwatch instance.
-        _property<int64, _readonly> ElapsedMilliseconds {
-          _get {return this->GetElapsedTicks() / TimeSpan::TicksPerMillisecond;}
+        property_<int64, readonly_> ElapsedMilliseconds {
+          get_ {return this->GetElapsedTicks() / TimeSpan::TicksPerMillisecond;}
         };
 
         /// @brief Gets the total elapsed time measured by the current instance, in timer ticks.
@@ -75,15 +75,15 @@ namespace Switch {
         /// @remarks This property represents the number of elapsed ticks in the underlying timer mechanism. A tick is the smallest unit of time that the Stopwatch timer can measure. Use the Frequency field to convert the ElapsedTicks value into a number of seconds.
         /// @remarks You can query the properties Elapsed, ElapsedMilliseconds, and ElapsedTicks while the Stopwatch instance is running or stopped. The elapsed time properties steadily increase while the Stopwatch is running; they remain constant when the instance is stopped.
         /// @remarks By default, the elapsed time value of a Stopwatch instance equals the total of all measured time intervals. Each call to Start begins counting at the cumulative elapsed time; each call to Stop ends the current interval measurement and freezes the cumulative elapsed time value. Use the Reset method to clear the cumulative elapsed time in an existing Stopwatch instance.
-        _property<int64, _readonly> ElapsedTicks {
-          _get {return this->GetElapsedTicks();}
+        property_<int64, readonly_> ElapsedTicks {
+          get_ {return this->GetElapsedTicks();}
         };
 
         /// @brief Gets a value indicating whether the Stopwatch timer is running.
         /// @return true if the Stopwatch instance is currently running and measuring elapsed time for an interval; otherwise, false.
         /// @remarks A Stopwatch instance begins running with a call to Start or StartNew. The instance stops running with a call to Stop or Reset.
-        _property<bool, _readonly> IsRunning {
-          _get {return this->running;}
+        property_<bool, readonly_> IsRunning {
+          get_ {return this->running;}
         };
 
         /// @brief Gets the current number of ticks in the timer mechanism.

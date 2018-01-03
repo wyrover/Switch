@@ -353,7 +353,7 @@ namespace SwitchUnitTests {
     for (int32 index = 0; index < 10; index++)
       array[index] = (index + 10) * 2;
 
-    _using(System::Collections::Generic::Enumerator<int32> enumerator = array.GetEnumerator()) {
+    using_(System::Collections::Generic::Enumerator<int32> enumerator = array.GetEnumerator()) {
       int32 index = 0;
       while (enumerator.MoveNext()) {
         ASSERT_EQ((index + 10) * 2, enumerator.Current);

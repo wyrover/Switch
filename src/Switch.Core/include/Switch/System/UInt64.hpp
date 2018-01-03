@@ -16,7 +16,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a 64-bit unsigned integer.
-    struct _export UInt64 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
+    struct export_ UInt64 final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Represents the largest possible value of an UInt64 18446744073709551615 (0xFFFFFFFFFFFFFFFF). This field is constant.
       static constexpr uint64 MaxValue = std::numeric_limits<uint64>::max();

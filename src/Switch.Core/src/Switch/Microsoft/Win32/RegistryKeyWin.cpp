@@ -13,7 +13,7 @@ const RegistryKey RegistryKey::Null;
 
 RegistryKey::RegistryHandle::RegistryHandle(intptr key, const string& name) {
   if (Native::RegistryApi::CreateSubKey(key, name, this->handle) != 0)
-    throw IO::IOException(_caller);
+    throw IO::IOException(caller_);
 }
 
 RegistryKey::RegistryHandle::RegistryHandle(RegistryHive rhive) {
@@ -50,7 +50,7 @@ RegistryKey RegistryKey::CreateSubKey(const string& subKey, RegistryKeyPermissio
     return key;
 
   if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
-    throw UnauthorizedAccessException(_caller);
+    throw UnauthorizedAccessException(caller_);
 
   key.handle = new RegistryHandle(this->handle->Handle(), subKey);
   key.path = string::Format("{0}\\{1}", this->name, subKey);
@@ -62,33 +62,33 @@ RegistryKey RegistryKey::CreateSubKey(const string& subKey, RegistryKeyPermissio
 
 void  RegistryKey::DeleteSubKey(const string& subKey, bool throwOnMissingSubKey) {
   if (subKey == "")
-    throw InvalidOperationException(_caller);
+    throw InvalidOperationException(caller_);
 
   if (IsBaseKey(subKey))
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   //if (Native::RegistryApi::NumberOfSubKey)
 
   int32 result = Native::RegistryApi::DeleteSubKey(this->handle->Handle(), subKey);
 
   if (result == 2 && throwOnMissingSubKey)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (result != 0 && result != 2)
-    throw IO::IOException(_caller);
+    throw IO::IOException(caller_);
 }
 
 void  RegistryKey::DeleteSubKeyTree(const string& subKey, bool throwOnMissingSubKey) {
   if (subKey == "" || IsBaseKey(subKey))
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   int32 result = Native::RegistryApi::DeleteTree(this->handle->Handle(), subKey);
 
   if (result == 2 && throwOnMissingSubKey)
-    throw ArgumentException(_caller);
+    throw ArgumentException(caller_);
 
   if (result != 0 && result != 2)
-    throw IO::IOException(_caller);
+    throw IO::IOException(caller_);
 }
 
 namespace {
@@ -203,7 +203,7 @@ RegistryKey RegistryKey::OpenSubKey(const string& subKeyName, RegistryKeyPermiss
   intptr handle = 0;
 
   if (this->handle == null)
-    throw ArgumentNullException(_caller);
+    throw ArgumentNullException(caller_);
 
   if (Native::RegistryApi::OpenSubKey(this->handle->Handle(), subKeyName.Data(), handle) != 0)
     return RegistryKey::Null();

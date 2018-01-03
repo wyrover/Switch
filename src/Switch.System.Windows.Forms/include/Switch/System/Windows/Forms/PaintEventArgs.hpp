@@ -16,7 +16,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class _export PaintEventArgs : public EventArgs {
+        class export_ PaintEventArgs : public EventArgs {
         public:
           PaintEventArgs() {}
           PaintEventArgs(const System::Drawing::Rectangle& clipRectangle, System::Drawing::Graphics& graphics) : clipRectangle(clipRectangle), graphics(&graphics) {}
@@ -29,12 +29,12 @@ namespace Switch {
           }
           /// @endcond
 
-          _property<const System::Drawing::Rectangle&, _readonly> ClipRectangle {
-            _get->const System::Drawing::Rectangle& {return this->clipRectangle;}
+          property_<const System::Drawing::Rectangle&, readonly_> ClipRectangle {
+            get_->const System::Drawing::Rectangle& {return this->clipRectangle;}
           };
 
-          _property<System::Drawing::Graphics&, _readonly> Graphics {
-            _get->System::Drawing::Graphics& {return *this->graphics;}
+          property_<System::Drawing::Graphics&, readonly_> Graphics {
+            get_->System::Drawing::Graphics& {return *this->graphics;}
           };
 
         private:

@@ -25,7 +25,7 @@ namespace Switch {
     /// The following example demonstrates how to read data from, and write data to, the standard input and output streams. Note that these streams can be redirected by using the SetIn and SetOut methods.
     /// @include Console.cpp
     /// @include ConsoleOut.cpp
-    class _export Console _static {
+    class export_ Console static_ {
     public:
       class StandardInput : public System::IO::TextReader {
       public:
@@ -69,25 +69,25 @@ namespace Switch {
       /// @par Example
       /// The following example saves the values of the ConsoleColor enumeration to an array and stores the current values of the BackgroundColor and ForegroundColor properties to variables. It then changes the foreground color to each color in the ConsoleColor enumeration except to the color that matches the current background, and it changes the background color to each color in the ConsoleColor enumeration except to the color that matches the current foreground. (If the foreground color is the same as the background color, the text isn't visible.) Finally, it calls the ResetColor method to restore the original console colors.
       /// @include ConsoleColor4.cpp
-      static _property<ConsoleColor> BackgroundColor;
+      static property_<ConsoleColor> BackgroundColor;
 
       /// @brief Gets or sets the height of the buffer area.
       /// @param The current height, in rows, of the buffer area.
       /// @par Example
       /// This example demonstrates the BufferHeight and BufferWidth properties. The example reports the dimensions of an operating system window set to a buffer size of 300 rows and 85 columns.
       /// @include ConsoleBuffer.cpp
-      static _property<int32> BufferHeight;
+      static property_<int32> BufferHeight;
 
       /// @brief Gets or sets the width of the buffer area.
       /// @param The current width, in columns, of the buffer area.
       /// @par Example
       /// This example demonstrates the BufferHeight and BufferWidth properties. The example reports the dimensions of an operating system window set to a buffer size of 300 rows and 85 columns.
       /// @include ConsoleBuffer.cpp
-      static _property<int32> BufferWidth;
+      static property_<int32> BufferWidth;
 
       /// @brief Gets a value indicating whether the CAPS LOCK keyboard toggle is turned on or turned off.
       /// @param true if CAPS LOCK is turned on; false if CAPS LOCK is turned off.
-      static _property<bool, _readonly> CapsLock;
+      static property_<bool, readonly_> CapsLock;
 
       /// @brief Gets or sets the column position of the cursor within the buffer area.
       /// @param The current position, in columns, of the cursor.
@@ -95,7 +95,7 @@ namespace Switch {
       /// @par Example
       /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
       /// @include ConsoleCursor.cpp
-      static _property<int32> CursorLeft;
+      static property_<int32> CursorLeft;
 
       /// @brief Gets or sets the height of the cursor within a character cell.
       /// @param size The size of the cursor expressed as a percentage of the height of a character cell. The property value ranges from 1 to 100.
@@ -103,7 +103,7 @@ namespace Switch {
       /// @par Example
       /// This example demonstrates the CursorSize property. The example increases the size of the cursor each time any console key is pressed, then restores the cursor to its original size before terminating.
       /// @include ConsoleCursorSize.cpp
-      static _property<int32> CursorSize;
+      static property_<int32> CursorSize;
 
       /// @brief Gets or sets the row position of the cursor within the buffer area.
       /// @param int32 The current position, in rows, of the cursor.
@@ -111,48 +111,48 @@ namespace Switch {
       /// @par Example
       /// This example demonstrates the CursorLeft and CursorTop properties, and the SetCursorPosition and Clear methods. The example positions the cursor, which determines where the next write will occur, to draw a 5 character by 5 character rectangle using a combination of "+", "|", and "-" strings. Note that the rectangle could be drawn with fewer steps using a combination of other strings.
       /// @include ConsoleCursor.cpp
-      static _property<int32> CursorTop;
+      static property_<int32> CursorTop;
 
       /// @brief Gets or sets a value indicating whether the cursor is visible.
       /// @param true if the cursor is visible; otherwise, false.
       /// @par Example
       /// This example demonstrates the CursorVisible property. The example makes the cursor visible if the first column of input is a '+' character or invisible if the input is a '-' character.
       /// @include ConsoleCursorVisible.cpp
-      static _property<bool> CursorVisible;
+      static property_<bool> CursorVisible;
 
       /// @brief Gets the standard error outpout stream.
       /// @param A TextWriter that represents the standard error output stream.
-      static _property<StandardErrorOutput&, _readonly> Error;
+      static property_<StandardErrorOutput&, readonly_> Error;
 
       /// @brief Gets or sets the foreground color of the console.
       /// @param A ConsoleColor that specifies the foreground color of the console; that is, the color of each character that is displayed.
       /// @par Example
       /// The following example saves the values of the ConsoleColor enumeration to an array and stores the current values of the BackgroundColor and ForegroundColor properties to variables. It then changes the foreground color to each color in the ConsoleColor enumeration except to the color that matches the current background, and it changes the background color to each color in the ConsoleColor enumeration except to the color that matches the current foreground. (If the foreground color is the same as the background color, the text isn't visible.) Finally, it calls the ResetColor method to restore the original console colors.
       /// @include ConsoleColor4.cpp
-      static _property<ConsoleColor> ForegroundColor;
+      static property_<ConsoleColor> ForegroundColor;
 
       /// @brief Gets the standard input stream.
       /// @param A TextReader that represents the standard input stream.
       /// @par Example
       /// The following sample illustrates the use of the In property.
       /// @include ConsoleInOut.cpp
-      static _property<StandardInput&, _readonly> In;
+      static property_<StandardInput&, readonly_> In;
 
       /// @brief Gets or sets the encoding the console uses to read input.
       /// @param The encoding used to read console input.
-      static _property<const refptr<System::Text::Encoding>&> InputEncoding;
+      static property_<const refptr<System::Text::Encoding>&> InputEncoding;
 
       /// @brief Gets a value that indicates whether the error output stream has been redirected from the standard error stream.
       /// @param true if error output is redirected; otherwise, false.
-      static _property<bool, _readonly> IsErrorRedirected;
+      static property_<bool, readonly_> IsErrorRedirected;
 
       /// @brief  Gets a value that indicates whether the input stream has been redirected from the standard input stream.
       /// @param true if input is redirected; otherwise, false.
-      static _property<bool, _readonly> IsInputRedirected;
+      static property_<bool, readonly_> IsInputRedirected;
 
       /// @brief  Gets a value that indicates whether the output stream has been redirected from the standard output stream.
       /// @param true if output is redirected; otherwise, false.
-      static _property<bool, _readonly> IsOutputRedirected;
+      static property_<bool, readonly_> IsOutputRedirected;
 
       /// @brief Gets a value indicating whether a key press is available in the input stream.
       /// @param true if a key press is available; otherwise, false
@@ -161,40 +161,40 @@ namespace Switch {
       /// @par Example
       /// The following example demonstrates how to use the KeyAvailable property to create a loop that runs until a key is pressed.
       /// @include ConsoleKeyAvaible.cpp
-      static _property<bool, _readonly> KeyAvailable;
+      static property_<bool, readonly_> KeyAvailable;
 
       /// @brief Gets the largest possible number of console window rows, based on the current font and screen resolution.
       /// @param The height of the largest possible console window measured in rows.
-      static _property<int32, _readonly> LargestWindowHeight;
+      static property_<int32, readonly_> LargestWindowHeight;
 
       /// @brief Gets the largest possible number of console window columns, based on the current font and screen resolution.
       /// @param The width of the largest possible console window measured in colomns.
-      static _property<int32, _readonly> LargestWindowWidth;
+      static property_<int32, readonly_> LargestWindowWidth;
 
       /// @brief Gets a value indicating whether the NUM LOCK keyboard toggle is turned on or turned off.
       /// @param true if NUM LOCK is turned on; false if NUM LOCK is turned off.
-      static _property<bool, _readonly> NumberLock;
+      static property_<bool, readonly_> NumberLock;
 
       /// @brief Gets the standard output stream.
       /// @param A TextWriter that represents the standard output stream.
-      static _property<StandardOutput&, _readonly> Out;
+      static property_<StandardOutput&, readonly_> Out;
 
       /// @brief Gets the encoding the console uses to write output.
       /// @param The encoding used to write console output.
-      static _property<const refptr<System::Text::Encoding>&> OutputEncoding;
+      static property_<const refptr<System::Text::Encoding>&> OutputEncoding;
 
       /// @brief Gets or sets the title to display in the console title bar.
       /// @param The string to be displayed in the title bar of the console. The maximum length of the title string is 24500 characters.
       /// @par Example
       /// This example demonstrates the Title property. The example displays the current title of the operating system window, waits for a key press, then displays a new title.
       /// @include ConsoleTitle.cpp
-      static _property<string> Title;
+      static property_<string> Title;
 
       /// @brief Gets or sets a value indicating whether the combination of the Control modifier key and C console key (Ctrl+C) is treated as ordinary input or as an interruption that is handled by the operating system.
       /// @param bool true if Ctrl+C is treated as ordinary input; otherwise, false.
       /// @remarks If the value of the TreatControlCAsInput property is false and Ctrl+C is pressed, the pressed keys are not stored in the input buffer and the operating system terminates the currently executing process. This is the default value.
       /// @warning Use this property judiciously because setting it to true has such a dramatic effect. Most users expect Ctrl+C to terminate a console application. If you disable the effect of Ctrl+C, the user must remember to use Ctrl+Break to terminate the application, which is a less familiar key combination.
-      static _property<bool> TreatControlCAsInput;
+      static property_<bool> TreatControlCAsInput;
 
       /// @brief Gets or sets the height of the console window area.
       /// @param The height of the console window measured in rows.
@@ -202,15 +202,15 @@ namespace Switch {
       /// This example demonstrates the SetWindowSize method, and the WindowWidth and WindowHeight properties. You must run the example to see the full effect of changing the console window size.
       /// The example reports the dimensions of a console window set to 85 columns and 43 rows, then waits for a key press. When any key is pressed, the dimensions of the console window are halved, the new dimensions are reported, and the example waits for another key press. Finally, when any key is pressed the console window is restored to its original dimensions and the example terminates.
       /// @include ConsoleWindowSize.cpp
-      static _property<int32> WindowHeight;
+      static property_<int32> WindowHeight;
 
       /// @brief Gets or sets the leftmost position of the console window area relative to the screen buffer.
       /// @param The leftmost console window position measured in columns.
-      static _property<int32> WindowLeft;
+      static property_<int32> WindowLeft;
 
       /// @brief Gets or sets the top position of the console window area relative to the screen buffer.
       /// @param The uppermost console window position measured in rows.
-      static _property<int32> WindowTop;
+      static property_<int32> WindowTop;
 
       /// @brief Gets or sets the width of the console window.
       /// @param The width of the console window measured in columns.
@@ -218,7 +218,7 @@ namespace Switch {
       /// This example demonstrates the SetWindowSize method, and the WindowWidth and WindowHeight properties. You must run the example to see the full effect of changing the console window size.
       /// The example reports the dimensions of a console window set to 85 columns and 43 rows, then waits for a key press. When any key is pressed, the dimensions of the console window are halved, the new dimensions are reported, and the example waits for another key press. Finally, when any key is pressed the console window is restored to its original dimensions and the example terminates.
       /// @include ConsoleWindowSize.cpp
-      static _property<int32> WindowWidth;
+      static property_<int32> WindowWidth;
 
       /// @brief Plays the sound of a beep through the console speaker.
       /// @remarks By default, the beep plays at a frequency of 800 hertz for a duration of 200 milliseconds

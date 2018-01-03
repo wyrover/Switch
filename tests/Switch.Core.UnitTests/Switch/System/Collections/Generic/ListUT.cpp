@@ -854,7 +854,7 @@ namespace {
   static void MyThread(const Object& param) {
     List<string>* dinosaurs = &((List<string>&) param);
 
-    _lock(dinosaurs->SyncRoot) {
+    lock_(dinosaurs->SyncRoot) {
       // Add 9 items
       for (Int32 index = 1; index < 10; index++) {
         dinosaurs->Add("Line " + index);
@@ -870,7 +870,7 @@ namespace {
     Thread myThread((ParameterizedThreadStart)MyThread);
     myThread.Start(dinosaurs);
 
-    _lock(dinosaurs.SyncRoot) {
+    lock_(dinosaurs.SyncRoot) {
       // Add 9 items
       dinosaurs.Add("Tyrannosaurus");
       Thread::Sleep(0);

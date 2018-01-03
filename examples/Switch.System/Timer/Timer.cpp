@@ -8,7 +8,7 @@ namespace Examples {
   public:
     static void Main() {
       int counter = 0;
-      TimerCallback callback = _delegate(object & state) {
+      TimerCallback callback = delegate_(object & state) {
         Console::WriteLine("counter -> {0}", ++counter);
       };
 
@@ -18,7 +18,7 @@ namespace Examples {
   };
 }
 
-_startup(Examples::Program);
+startup_(Examples::Program);
 
 // The example displays the following output:
 //

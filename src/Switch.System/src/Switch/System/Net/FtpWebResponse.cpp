@@ -16,7 +16,7 @@ WebResponse::WebResponseStream FtpWebResponse::GetResponseStream() {
   if (this->webRequest->Method() == WebRequestMethods::Ftp::DownloadFile || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectory || this->webRequest->Method() == WebRequestMethods::Ftp::ListDirectoryDetails)
     return WebResponse::GetResponseStream();
 
-  throw InvalidOperationException(_caller);
+  throw InvalidOperationException(caller_);
 }
 
 FtpStatusCode FtpWebResponse::GetStatusCode() const {

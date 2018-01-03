@@ -19,7 +19,7 @@ namespace Switch {
       /// @brief Identifies a network address. This is an abstract class.
       /// @par Library
       /// Switch.System
-      class _export EndPoint : public Object {
+      class export_ EndPoint : public Object {
       public:
         /// @cond
         EndPoint() {}
@@ -34,8 +34,8 @@ namespace Switch {
 
         /// @brief Gets the address family to which the endpoint belongs.
         /// @return One of the AddressFamily values.
-        _property<Sockets::AddressFamily, _readonly> AddressFamily {
-          _get {return this->addressFamily;}
+        property_<Sockets::AddressFamily, readonly_> AddressFamily {
+          get_ {return this->addressFamily;}
         };
 
         /// @brief Serializes endpoint information into a SocketAddress instance.

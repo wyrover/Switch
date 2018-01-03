@@ -9,7 +9,7 @@ using namespace System::Windows::Forms;
 ref<System::Windows::Forms::Form> __mainForm;
 
 namespace {
-  class ApplicationCocoaApi _static {
+  class ApplicationCocoaApi static_ {
   public:
     static void MessageLoop(EventHandler idle) {
       @autoreleasepool {
@@ -119,7 +119,7 @@ namespace {
   
   bool ApplicationCocoaApi::messageLoopRunning = false;
 
-  class MessageBoxApi _static {
+  class MessageBoxApi static_ {
   public:
     static void MessageBoxAddButtonsOK(NSAlert *alert) {
       [alert addButtonWithTitle:@"OK"];
