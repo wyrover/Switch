@@ -30,7 +30,7 @@ void Native::ApplicationApi::MessageLoop(const System::Windows::Forms::Form& mai
       DispatchMessage(&msg);
       if (msg.message == WM_QUIT) break;
     }
-    idle(object(), EventArgs::Empty());
+    idle(object(), EventArgs::Empty);
   }
 }
 
