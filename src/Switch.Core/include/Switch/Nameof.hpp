@@ -12,8 +12,8 @@ namespace Switch {
   ///
   /// A nameof expression has this form:
   /// @code
-  /// if (x == null) throw  ArgumentNullException(nameof(x));
-  /// WriteLine(nameof(person.Address.ZipCode)); // prints "person.Address.ZipCode"
+  /// if (x == null) throw  ArgumentNullException(nameof_(x));
+  /// WriteLine(nameof_(person.Address.ZipCode)); // prints "person.Address.ZipCode"
   /// @endcode
   /// @par Examples
   /// Some C++ examples:

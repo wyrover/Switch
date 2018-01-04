@@ -11,9 +11,17 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
+      int counter = 2000;
       $<Threading::Thread> thread = new_<Threading::Thread>(Threading::ThreadStart(delegate_ {
-        
+        while (true) {
+          Console::WriteLine("counter = {0}", ++ counter);
+          System::Threading::Thread::Sleep(250);
+        }
       }));
+      thread->Start();
+
+      System::Threading::Thread::Sleep(System::Threading::Timeout::InfiniteTimeSpan);
+      thread->Join();
     }
   };
 }
