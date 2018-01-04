@@ -1,7 +1,11 @@
 #if defined(__linux__)
 #include "Api.hpp"
 
-#include <gtkmm.h>
+#undef get_
+
+#undef interface_
+#undef get_
+#undef set_
 
 using namespace System;
 using namespace System::Drawing;

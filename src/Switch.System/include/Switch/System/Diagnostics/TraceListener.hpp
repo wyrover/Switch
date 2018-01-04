@@ -167,6 +167,20 @@ namespace Switch {
           this->WriteEventCache(eventCache);
         }
 
+        /// @brief Writes trace information, a data object and event information to the listener specific output.
+        /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
+        /// @param source A name used to identify the output, typically the name of the application that generated the trace event.
+        /// @param eventType One of the TraceEventType values specifying the type of event that has caused the trace.
+        /// @param id A numeric identifier for the event.
+        /// @param data The trace data to emit.
+        /// @remarks <b>Important</b> This method is not intended to be called directly by application code but by members of the Debug, Trace, and TraceSource classes to write trace data to output.
+        /// @remarks The default implementation writes the eventCache, source, eventType and id parameters in the header and footer of the trace. The data parameter is written as the body of the trace message. The ToString method of the data object is used to convert the object to a String.
+        template<typename Object>
+        void TraceData(const TraceEventCache& eventCache, const string& source, const TraceEventType& eventType, int32 id, const Array<Object>& data) {
+          this->WriteLine(string::Format("{0} {1}: {2} : {3}", source, eventType, id, data));
+          this->WriteEventCache(eventCache);
+        }
+
         /// @brief Writes trace information, an array of data objects and event information to the listener specific output.
         /// @param eventCache A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
         /// @param source A name used to identify the output, typically the name of the application that generated the trace event.

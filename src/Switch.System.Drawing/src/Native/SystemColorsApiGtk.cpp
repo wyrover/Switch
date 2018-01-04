@@ -1,5 +1,9 @@
 #if defined(__linux__)
 
+#undef interface_
+#undef get_
+#undef set_
+
 #include <gtkmm.h>
 #include "Api.hpp"
 
