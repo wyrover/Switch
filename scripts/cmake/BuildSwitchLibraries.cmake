@@ -2,13 +2,13 @@ macro(BuildSwitchLibraries)
   print("Switch Libraries")
   file(WRITE src/Switch/include/Switch/Switch.hpp "#pragma once\n\n")
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                                               Switch
+  #_______________________________________________________________________________________
+  #                                                                                 Switch
   print("  [X] Switch")
   add_subdirectory("src/Switch")
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                                          Switch.Core
+  #_______________________________________________________________________________________
+  #                                                                            Switch.Core
   if (BUILD_SWITCH_CORE)
     print("  [X] Switch.Core")
     add_subdirectory("src/Switch.Core")
@@ -17,8 +17,8 @@ macro(BuildSwitchLibraries)
     print("  [ ] Switch.Core")
   endif()
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                                        Switch.System
+  #_______________________________________________________________________________________
+  #                                                                          Switch.System
   if (BUILD_SWITCH_SYSTEM)
     print("  [X] Switch.System")
     add_subdirectory("src/Switch.System")
@@ -27,8 +27,8 @@ macro(BuildSwitchLibraries)
     print("  [ ] Switch.System")
   endif()
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                                   Switch.System.Core
+  #_______________________________________________________________________________________
+  #                                                                     Switch.System.Core
   if (BUILD_SWITCH_SYSTEM_CORE)
     print("  [X] Switch.System.Core")
     add_subdirectory("src/Switch.System.Core")
@@ -37,8 +37,8 @@ macro(BuildSwitchLibraries)
     print("  [ ] Switch.System.Core")
   endif()
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                                Switch.System.Drawing
+  #_______________________________________________________________________________________
+  #                                                                  Switch.System.Drawing
   if (BUILD_SWITCH_SYSTEM_DRAWING)
     print("  [X] Switch.System.Drawing")
     add_subdirectory("src/Switch.System.Drawing")
@@ -47,8 +47,8 @@ macro(BuildSwitchLibraries)
     print("  [ ] Switch.System.Drawing")
   endif()
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                           Switch.System.ServiceModel
+  #_______________________________________________________________________________________
+  #                                                             Switch.System.ServiceModel
   if (BUILD_SWITCH_SYSTEM_SERVICEMODEL)
     print("  [X] Switch.System.ServiceModel")
     add_subdirectory("src/Switch.System.ServiceModel")
@@ -57,8 +57,8 @@ macro(BuildSwitchLibraries)
     print("  [ ] Switch.System.ServiceModel")
   endif()
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                          Switch.System.Windows.Forms
+  #_______________________________________________________________________________________
+  #                                                            Switch.System.Windows.Forms
   if (BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
     print("  [X] Switch.System.Windows.Forms")
     add_subdirectory("src/Switch.System.Windows.Forms")
@@ -67,8 +67,8 @@ macro(BuildSwitchLibraries)
     print("  [ ] Switch.System.Windows.Forms")
   endif()
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                                    Switch.TUnit.Core
+  #_______________________________________________________________________________________
+  #                                                                      Switch.TUnit.Core
   if (BUILD_SWITCH_TUNIT_CORE)
     print("  [X] Switch.TUnit.Core")
     add_subdirectory("src/Switch.TUnit.Core")
@@ -77,8 +77,8 @@ macro(BuildSwitchLibraries)
     print("  [ ] Switch.TUnit.Core")
   endif()
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                               Switch.TUnit.Framework
+  #_______________________________________________________________________________________
+  #                                                                 Switch.TUnit.Framework
   if (BUILD_SWITCH_TUNIT_FRAMEWORK)
     print("  [X] Switch.TUnit.Framework")
     add_subdirectory("src/Switch.TUnit.Framework")
@@ -87,8 +87,8 @@ macro(BuildSwitchLibraries)
     print("  [ ] Switch.TUnit.Framework")
   endif()
 
-  #_____________________________________________________________________________________________________________________
-  #                                                                                                    Switch.TUnit.Main
+  #_______________________________________________________________________________________
+  #                                                                      Switch.TUnit.Main
   if (BUILD_SWITCH_TUNIT_MAIN)
     print("  [X] Switch.TUnit.Main")
     add_subdirectory("src/Switch.TUnit.Main")

@@ -102,11 +102,6 @@ list(APPEND CPPCHECK_ARGS
 #--enable=warning,style,performance,portability,unusedFunction
 
 #_________________________________________________________________________________________
-#                                                                             standard C++
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-#_________________________________________________________________________________________
 #                                                              enable USE_FOLDERS property
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
