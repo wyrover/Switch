@@ -1,4 +1,5 @@
-rem Switch build 32 bits
+rem ______________________________________________________________________________________
+rem                                                                   Switch build 32 bits
 if DEFINED SWITCH_BUILD_WIN32 (
   rem create build folder
   mkdir build32
@@ -10,7 +11,8 @@ if DEFINED SWITCH_BUILD_WIN32 (
   cd ..
 )
 
-rem Switch build 64 bits
+rem __________________________________________________________________ ____________________
+rem                                                                   Switch build 64 bits
 if DEFINED SWITCH_BUILD_WIN64 (
   rem create build folder
   mkdir build64

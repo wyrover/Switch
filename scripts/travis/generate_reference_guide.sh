@@ -2,7 +2,8 @@
 
 set -ev
 
-# setup git
+# ________________________________________________________________________________________
+#                                                                                setup git
 git config --global user.email "gammasoft71@gmail.com"
 git config --global user.name "gammasoft71"
 
@@ -10,13 +11,15 @@ git config --global user.name "gammasoft71"
 if [ -d "build/ReferenceGuide" ]; then rm -r -f build/ReferenceGuide; fi
 git clone https://github.com/gammasoft71/Switch-doc.git build/ReferenceGuide
 
-# Generating documentation
+# ________________________________________________________________________________________
+#                                                                 Generating documentation
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=~/usr/local -DCMAKE_CXX_COMPILER=clang++-3.9
 cmake --build . --target Switch.ReferenceGuide
 cd ..
 
-# check doxygen results and display error
+# ________________________________________________________________________________________
+#                                                  check doxygen results and display error
 #if [[ -s build/reference_guide/doxygen_warnings.txt ]]; then
 #  echo "You must fix doxygen before submitting a pull request"
 #  echo ""
@@ -24,7 +27,8 @@ cd ..
 #  exit -1
 #fi
 
-# Publishing documentation
+# ________________________________________________________________________________________
+#                                                                 Publishing documentation
 cd build/ReferenceGuide
 if [[ -e doxygen_warnings.txt ]]; then rm doxygen_warnings.txt; fi
 git add --all

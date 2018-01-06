@@ -2,7 +2,8 @@
 
 set -ev
 
-# create build folder
+# ________________________________________________________________________________________
+#                                                                      create build folder
 mkdir build
 
 #install CMake 3.8 or later
