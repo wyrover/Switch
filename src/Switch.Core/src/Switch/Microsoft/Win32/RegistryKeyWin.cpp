@@ -46,7 +46,7 @@ void RegistryKey::Close() {
 
 RegistryKey RegistryKey::CreateSubKey(const string& subKey, RegistryKeyPermissionCheck permissionCheck) {
   RegistryKey key = OpenSubKey(subKey, permissionCheck);
-  if (key != RegistryKey::Null())
+  if (key != RegistryKey::Null)
     return key;
 
   if (this->permission != RegistryKeyPermissionCheck::ReadWriteSubTree)
@@ -206,7 +206,7 @@ RegistryKey RegistryKey::OpenSubKey(const string& subKeyName, RegistryKeyPermiss
     throw ArgumentNullException(caller_);
 
   if (Native::RegistryApi::OpenSubKey(this->handle->Handle(), subKeyName.Data(), handle) != 0)
-    return RegistryKey::Null();
+    return RegistryKey::Null;
 
   RegistryKey key;
   key.name = this->name + "\\" + subKeyName;

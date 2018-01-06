@@ -93,5 +93,4 @@ namespace ManualTests {
   };
 }
 
-startup_(ManualTests::MainTest)
-
+startup_(ManualTests::MainTest);
