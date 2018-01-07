@@ -5,7 +5,7 @@ using namespace System;
 // Computation of the n'th decimal digit of pi with very little memory.
 // Written by Fabrice Bellard on January 8, 1997.
 // Ported to C# by Chris Sells on May 5, 2002.
-// Ported to Switch C++ by GAMMA Soft on October 3, 2017.
+// Ported to Switch C++ by Gammasoft on October 3, 2017.
 //
 // We use a slightly modified version of the method described by Simon
 // Plouffe in "On the Computation of the n'th decimal digit of various

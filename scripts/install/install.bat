@@ -1,5 +1,5 @@
 @echo off
-echo Install Switch libraries version %switch_version%, copyright GAMMA Soft, 2018
+echo Install Switch libraries version %switch_version%, copyright Gammasoft, 2018
 echo.
 
 rem ______________________________________________________________________________________

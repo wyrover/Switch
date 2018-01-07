@@ -13,10 +13,10 @@ ________________________________________________________________________________
 * [Project](https://sourceforge.net/projects/switchpro) is a link to SourceForge project
 * [Source](https://github.com/gammasoft71/switch) is a link to Github sources
 * [License](License.md) constains the license informations
-* [Contact](Contact.md) is the way to contact GAMMA Soft
-* [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft) is a link to GAMMA Soft website.
+* [Contact](Contact.md) is the way to contact Gammasoft
+* [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft) is a link to Gammasoft website.
 * [Switch](https://gammasoft71.wixsite.com/switch) is a link to Switch website.
 
 ______________________________________________________________________________________________
 
-© 2010 - 2018 by GAMMA Soft.
+© 2010 - 2018 by Gammasoft.

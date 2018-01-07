@@ -5,7 +5,7 @@
 
 ![GPL v3 Logo](Pictures/gplv3-127x51.png)
 
-Switch, Copyright (C) [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft).
+Switch, Copyright (C) [Gammasoft](https://gammasoft71.wixsite.com/gammasoft).
  
 # GNU GENERAL PUBLIC LICENSE
 
@@ -250,4 +250,4 @@ The GNU General Public License does not permit incorporating your program into p
 
 ______________________________________________________________________________________________
 
-© 2010 - 2018 by GAMMA Soft.
+© 2010 - 2018 by Gammasoft.

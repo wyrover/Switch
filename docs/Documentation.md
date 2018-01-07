@@ -20,4 +20,4 @@ This section contains the Switch documentation.
 
 ______________________________________________________________________________________________
 
-© 2010 - 2018 by GAMMA Soft.
+© 2010 - 2018 by Gammasoft.

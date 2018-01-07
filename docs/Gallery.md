@@ -33,8 +33,8 @@
 
 ![GitHub Logo](Pictures/Gallery/GAMMASoft.png)
 
-[GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft)
+[Gammasoft](https://gammasoft71.wixsite.com/gammasoft)
 
 ______________________________________________________________________________________________
 
-© 2010 - 2018 by GAMMA Soft.
+© 2010 - 2018 by Gammasoft.

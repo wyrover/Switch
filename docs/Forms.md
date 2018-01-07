@@ -270,6 +270,6 @@ Other Resources
 
 ______________________________________________________________________________________________
 
-© 2010 - 2017 by GAMMA Soft.
+© 2010 - 2017 by Gammasoft.
 
 <!--https://docs.microsoft.com/en-us/dotnet/framework/winforms/how-to-create-a-windows-forms-application-from-the-command-line-->
