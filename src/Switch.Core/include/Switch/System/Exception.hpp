@@ -101,7 +101,7 @@ namespace Switch {
       property_<String, readonly_> StackTrace {
         get_ {return this->GetStackTrace();}
       };
-      
+
       /// @brief Gets or sets if the generation of the stack trace is enabled.
       static property_<bool> StackTraceEnabled;
 
