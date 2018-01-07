@@ -30,7 +30,7 @@ UnitTest::UnitTest(const System::Array<System::String>& args) {
 }
 
 int32 UnitTest::Run() {
-  System::Exception::StackTraceEnabled(false);
+  System::Exception::StackTraceEnabled = false;
   int32 result = RUN_ALL_TESTS();
   if (this->args.Contains("--tunit_pause")) {
     System::Console::WriteLine("Press any key...");

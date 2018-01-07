@@ -5,7 +5,16 @@
 
 using namespace System;
 
-bool Exception::stackTraceEnabled = true;
+namespace {
+  static bool stackTraceEnabled = true;
+}
+
+property_<bool> Exception::StackTraceEnabled {
+  [] {return stackTraceEnabled;},
+  [](bool value) {
+    stackTraceEnabled = value;
+  }
+};
 
 const string& Exception::GetMessage() const {
   if (string::IsNullOrEmpty(this->message))
@@ -87,7 +96,7 @@ string Exception::GetDefaultMessage() const {
 }
 
 void Exception::SetStackTrace(const Exception& exception) {
-  if (Exception::stackTraceEnabled == false) {
+  if (Exception::StackTraceEnabled == false) {
     this->stackTrace = ref_new<Array<string>>(1);
     this->stackTrace()[0] = String::Format("  in {0}:{1}{2}", this->caller.FilePath, this->caller.LineNumber, Environment::NewLine);
     return;

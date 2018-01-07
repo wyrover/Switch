@@ -101,6 +101,9 @@ namespace Switch {
       property_<String, readonly_> StackTrace {
         get_ {return this->GetStackTrace();}
       };
+      
+      /// @brief Gets or sets if the generation of the stack trace is enabled.
+      static property_<bool> StackTraceEnabled;
 
       /// @brief Determines whether this instance of Exception and a specified object, which must also be a DelegateItem object, have the same value.
       /// @param value The Exception to compare with the current object.
@@ -121,14 +124,6 @@ namespace Switch {
       /// @return Exception& This instance assigned
       Exception& operator=(const Exception& value);
 
-      /// @brief Check if the generation of the stack trace is enabled.
-      /// @return true if stack trace generation is enabled.
-      static bool StackTraceEnabled() { return Exception::stackTraceEnabled; }
-
-      /// @brief Enable / disable the generation of the stack trace.
-      /// @param enabled True to enable the stack trace generation.
-      static void StackTraceEnabled(bool enabled) { Exception::stackTraceEnabled = enabled; }
-
     protected:
       /// @cond
       virtual String GetDefaultMessage() const;
@@ -147,7 +142,6 @@ namespace Switch {
       int32 hresult = 0;
       refptr<Array<String>> stackTrace;
       mutable String whatMessage;
-      static bool stackTraceEnabled;
       /// @endcond
     };
   }
