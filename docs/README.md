@@ -14,7 +14,7 @@ ________________________________________________________________________________
 * [Source](https://github.com/gammasoft71/switch) is a link to Github sources
 * [License](License.md) constains the license informations
 * [Contact](Contact.md) is the way to contact Gammasoft
-* [GAMMA Soft](https://gammasoft71.wixsite.com/gammasoft) is a link to Gammasoft website.
+* [Gammasoft](https://gammasoft71.wixsite.com/gammasoft) is a link to Gammasoft website.
 * [Switch](https://gammasoft71.wixsite.com/switch) is a link to Switch website.
 
 ______________________________________________________________________________________________
