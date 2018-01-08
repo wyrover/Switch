@@ -103,6 +103,8 @@ if(WIN32)
   endif()
 endif()
 
+#install(EXPORT curl DESTINATION cmake)
+install(FILES curlConfig.cmake DESTINATION cmake)
 install(TARGETS ${LIB_NAME} EXPORT Switch
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
