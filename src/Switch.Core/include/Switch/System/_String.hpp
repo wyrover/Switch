@@ -172,7 +172,7 @@ namespace Switch {
           this->string.append(c);
       }
 
-      friend std::ostream& operator<<(std::ostream& output, const String& value) {return output << value.c_str();}
+      friend export_ std::ostream& operator<<(std::ostream& output, const String& value) {return output << value.c_str();}
       /// @endcond
 
       /// @brief Return the length of String
@@ -1094,27 +1094,27 @@ namespace Switch {
     inline bool operator==(const char16* valueA, const String& valueB) {return valueB == valueA;}
     inline bool operator==(const char32* valueA, const String& valueB) {return valueB == valueA;}
 
-    String operator+(const char str[], const Object& obj);
-    String operator+(const Object& obj, const char str[]);
+    export_ String operator+(const char str[], const Object& obj);
+    export_ String operator+(const Object& obj, const char str[]);
 
-    String operator+(const String& str, const char value[]);
-    String operator+(const String& str, bool value);
-    String operator+(const String& str, byte value);
-    String operator+(const String& str, char value);
-    String operator+(const String& str, char16 value);
-    String operator+(const String& str, char32 value);
-    String operator+(const String& str, wchar value);
-    String operator+(const String& str, double value);
-    String operator+(const String& str, int16 value);
-    String operator+(const String& str, int32 value);
-    String operator+(const String& str, int64 value);
-    String operator+(const String& str, sbyte value);
-    String operator+(const String& str, float value);
-    String operator+(const String& str, uint16 value);
-    String operator+(const String& str, uint32 value);
-    String operator+(const String& str, uint64 value);
-    String operator+(const String& str, llong value);
-    String operator+(const String& str, ullong value);
+    export_ String operator+(const String& str, const char value[]);
+    export_ String operator+(const String& str, bool value);
+    export_ String operator+(const String& str, byte value);
+    export_ String operator+(const String& str, char value);
+    export_ String operator+(const String& str, char16 value);
+    export_ String operator+(const String& str, char32 value);
+    export_ String operator+(const String& str, wchar value);
+    export_ String operator+(const String& str, double value);
+    export_ String operator+(const String& str, int16 value);
+    export_ String operator+(const String& str, int32 value);
+    export_ String operator+(const String& str, int64 value);
+    export_ String operator+(const String& str, sbyte value);
+    export_ String operator+(const String& str, float value);
+    export_ String operator+(const String& str, uint16 value);
+    export_ String operator+(const String& str, uint32 value);
+    export_ String operator+(const String& str, uint64 value);
+    export_ String operator+(const String& str, llong value);
+    export_ String operator+(const String& str, ullong value);
 
     template<typename T, typename Attribute>
     String operator+(const char str[], const property_<T, Attribute>& value) { return String(str) + value(); }

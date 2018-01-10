@@ -2,19 +2,20 @@
 /// @brief Contains export_ keyword.
 #pragma once
 
-/// @todo Remove when CMakelists.txt ready
-#define SWITCH_STATIC 1
-
-#if SWITCH_STATIC
+#if SWITCH_STATIC_LIBRARIES
 #  define export_
 #elif WIN32
-#  if SWITCH_EXPORTS
+#  if SWITCH_EXPORT
 #    define export_ __declspec(dllexport)
 #  else
 #    define export_ __declspec(dllimport)
 #  endif
 #elif __GNUC__ >= 4 || defined(__clang__)
-#  define export_ __attribute__((visibility ("default")))
+#  if SWITCH_EXPORT
+#    define export_ __attribute__((visibility ("default")))
+#  else
+#    define export_
+#  endif
 #else
 #  define export_
 #endif

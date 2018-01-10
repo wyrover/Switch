@@ -20,17 +20,21 @@ option(BUILD_SWITCH_TUNIT_MAIN "Build Switch.TUnit.Main library" ON)
 option(BUILD_TESTS "Build Switch tests" OFF)
 
 #_________________________________________________________________________________________
+#                                                            Build shared libraries Option
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+
+#_________________________________________________________________________________________
 #                                                                            Tools Options
 option(DOWNLOAD_ASTYLE "Download and build astyle from Github" OFF)
 option(DOWNLOAD_CPPCHECK "Download and build cppcheck from Github" OFF)
 option(DOWNLOAD_DOXYGEN "Download and build doxygen from Github" OFF)
 
 #_________________________________________________________________________________________
-#                                                                          Verbose Options
+#                                                                           Verbose Option
 option(ENABLE_VERBOSE "Enable verbose" OFF)
 
 #_________________________________________________________________________________________
-#                                                                         Coverage Options
+#                                                                          Coverage Option 
 option(ENABLE_COVERAGE "Enable code coverage" OFF)
 
 #_________________________________________________________________________________________

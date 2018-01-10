@@ -9,6 +9,7 @@
 
 #include "../../Types.hpp"
 #include "../Collections/Generic/Dictionary.hpp"
+#include "../Collections/Generic/List.hpp"
 #include "ManualResetEvent.hpp"
 #include "ParameterizedThreadStart.hpp"
 #include "ThreadAbortException.hpp"
@@ -420,12 +421,11 @@ namespace Switch {
 
           std::lock_guard<std::recursive_mutex> lock(mutex);
           threads.Add(*this);
-          Thread& thread = threads[threads.Count - 1];
-          thread.data->state &= ~System::Threading::ThreadState::Unstarted;
+          this->data->state &= ~System::Threading::ThreadState::Unstarted;
           if (obj == null && !this->data->threadStart.IsEmpty())
-            thread.data->thread = std::thread(std::function<void()>(std::bind(&ThreadItem::Run, thread.data.ToPointer())));
+            this->data->thread = std::thread(std::function<void()>(std::bind(&ThreadItem::Run, this->data.ToPointer())));
           else
-            thread.data->thread = std::thread(std::function<void(const object*)>(std::bind(&ThreadItem::ParameterizedRun, thread.data.ToPointer(), std::placeholders::_1)), obj == null ? this : obj);
+            this->data->thread = std::thread(std::function<void(const object*)>(std::bind(&ThreadItem::ParameterizedRun, this->data.ToPointer(), std::placeholders::_1)), obj == null ? this : obj);
         }
 
         refptr<ThreadItem> data;

@@ -19,7 +19,7 @@ namespace Switch {
       /// @brief Provides a collection of Cursor objects for use by a Windows Forms application.
       /// @par Library
       /// Switch.System
-      class SystemSound : public object {
+      class export_ SystemSound : public object {
       public:
         SystemSound() {}
 

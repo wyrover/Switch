@@ -222,7 +222,7 @@ namespace Switch {
       }
 
       /// @cond
-      friend std::ostream& operator<<(std::ostream& output, const AggregateException& value) {return output << value.ToString();}
+      friend export_ std::ostream& operator<<(std::ostream& output, const AggregateException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

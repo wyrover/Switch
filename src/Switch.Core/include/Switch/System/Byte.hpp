@@ -58,7 +58,7 @@ namespace Switch {
       Byte& operator--() {--this->value; return *this;}
       const Byte operator--(int) {return this->value--;}
 
-      friend std::ostream& operator<<(std::ostream& output, const Byte& value);
+      friend export_ std::ostream& operator<<(std::ostream& output, const Byte& value);
       /// @endcond
 
       /// @brief Represents the largest possible value of an Byte 255 (0xFF). This field is constant.

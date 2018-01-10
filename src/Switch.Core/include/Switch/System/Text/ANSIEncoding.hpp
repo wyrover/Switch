@@ -66,7 +66,7 @@ namespace Switch {
         /// @return The code point corresponding to the byte.
         uint32 GetCodePoint(byte b) const;
 
-        class Decoder : public Encoding::Decoder {
+        class export_ Decoder : public Encoding::Decoder {
         public:
           Decoder(int32 cp) : Encoding::Decoder(), codePage(cp) { }
           Decoder(const Decoder& b);
@@ -106,7 +106,7 @@ namespace Switch {
         /// @endcond
       };
 
-      class CodePage437Encoding : public ANSIEncoding {
+      class export_ CodePage437Encoding : public ANSIEncoding {
       public:
         CodePage437Encoding();
         refptr<Encoding::Decoder> CreateDecoder() const override;
@@ -127,7 +127,7 @@ namespace Switch {
         };
       };
 
-      class CodePage28591Encoding : public ANSIEncoding {
+      class export_ CodePage28591Encoding : public ANSIEncoding {
       public:
         CodePage28591Encoding();
         refptr<Encoding::Decoder> CreateDecoder() const override;
@@ -148,7 +148,7 @@ namespace Switch {
         };
       };
 
-      class CodePage28592Encoding : public ANSIEncoding {
+      class export_ CodePage28592Encoding : public ANSIEncoding {
       public:
         CodePage28592Encoding();
         refptr<Encoding::Decoder> CreateDecoder() const override;
