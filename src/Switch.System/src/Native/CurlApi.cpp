@@ -3,7 +3,6 @@
 #include <Switch/Types.hpp>
 #include <Switch/System/IntPtr.hpp>
 
-#define  CURL_STATICLIB
 #include <curl/curl.h>
 
 int32 Native::CurlApi::Cleanup(intptr request) {
