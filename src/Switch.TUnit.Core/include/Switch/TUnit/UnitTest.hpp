@@ -2,6 +2,7 @@
 /// @brief Contains Switch::TUnit::UnitTest class.
 #pragma once
 
+#include <Switch/Export.hpp>
 #include <Switch/System/Array.hpp>
 #include <Switch/System/String.hpp>
 
@@ -13,7 +14,7 @@ namespace Switch {
   /// @remarks This example how to use TestFixture class, Expect class and #AddTest_ method:
   /// @include Expect.cpp
   namespace TUnit {
-    class UnitTest {
+    class export_ UnitTest {
     public:
       UnitTest(const System::Array<System::String>& args);
 

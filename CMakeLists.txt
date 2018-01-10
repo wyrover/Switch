@@ -17,7 +17,11 @@ option(BUILD_SWITCH_SYSTEM_WINDOWS_FORMS "Build Switch.System.Windows.Forms libr
 option(BUILD_SWITCH_TUNIT_CORE "Build Switch.TUnit.Core library" ON)
 option(BUILD_SWITCH_TUNIT_FRAMEWORK "Build Switch.TUnit.Framework library" OFF)
 option(BUILD_SWITCH_TUNIT_MAIN "Build Switch.TUnit.Main library" ON)
-option(BUILD_TESTS "Build Switch tests" OFF)
+option(BUILD_SWITCH_TESTS "Build Switch tests" OFF)
+
+#_________________________________________________________________________________________
+#                                                            Build shared libraries Option
+option(BUILD_SWITCH_SHARED_LIBS "Build shared libraries" OFF)
 
 #_________________________________________________________________________________________
 #                                                                            Tools Options
@@ -26,11 +30,11 @@ option(DOWNLOAD_CPPCHECK "Download and build cppcheck from Github" OFF)
 option(DOWNLOAD_DOXYGEN "Download and build doxygen from Github" OFF)
 
 #_________________________________________________________________________________________
-#                                                                          Verbose Options
+#                                                                           Verbose Option
 option(ENABLE_VERBOSE "Enable verbose" OFF)
 
 #_________________________________________________________________________________________
-#                                                                         Coverage Options
+#                                                                          Coverage Option 
 option(ENABLE_COVERAGE "Enable code coverage" OFF)
 
 #_________________________________________________________________________________________

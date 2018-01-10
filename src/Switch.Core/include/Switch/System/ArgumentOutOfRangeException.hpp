@@ -41,7 +41,7 @@ namespace Switch {
       ArgumentOutOfRangeException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : ArgumentException(message, innerException, information) {}
 
       /// @cond
-      friend std::ostream& operator<<(std::ostream& output, const ArgumentOutOfRangeException& value) {return output << value.ToString();}
+      friend export_ std::ostream& operator<<(std::ostream& output, const ArgumentOutOfRangeException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

@@ -70,7 +70,7 @@ namespace Switch {
         return *this;
       }
 
-      friend std::ostream& operator<<(std::ostream& output, const GenericArrayObject& value) {
+      friend export_ std::ostream& operator<<(std::ostream& output, const GenericArrayObject& value) {
         if (value.Length == 0)
           return output << "{empty}";
 
@@ -467,7 +467,7 @@ namespace Switch {
         return *this;
       }
 
-      friend std::ostream& operator<<(std::ostream& output, const Array& value) {
+      friend export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
 
@@ -603,7 +603,7 @@ namespace Switch {
         return *this;
       }
 
-      friend std::ostream& operator<<(std::ostream& output, const Array& value) {
+      friend export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
 
@@ -764,7 +764,7 @@ namespace Switch {
         return *this;
       }
 
-      friend std::ostream& operator<<(std::ostream& output, const Array& value) {
+      friend export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
 
@@ -885,7 +885,7 @@ namespace Switch {
         return *this;
       }
 
-      friend std::ostream& operator<<(std::ostream& output, const Array& value) {
+      friend export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
 

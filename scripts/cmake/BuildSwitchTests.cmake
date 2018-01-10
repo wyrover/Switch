@@ -2,13 +2,13 @@ macro(BuildSwitchTests)
   #_______________________________________________________________________________________
   #                                                                           Switch Tests
   print("Switch Tests")
-  if (BUILD_TESTS)
+  if (BUILD_SWITCH_TESTS)
     enable_testing()
   endif()
 
   #_______________________________________________________________________________________
   #                                                                Switch.Core.ManualTests
-  if (BUILD_TESTS AND BUILD_SWITCH_CORE)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_CORE)
     print("  [X] Switch.Core.ManualTests")
     add_subdirectory("tests/Switch.Core.ManualTests")
   else()
@@ -17,7 +17,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                                  Switch.Core.UnitTests
-  if (BUILD_TESTS AND BUILD_SWITCH_CORE)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_CORE)
     print("  [X] Switch.Core.UnitTests")
     add_subdirectory("tests/Switch.Core.UnitTests")
   else()
@@ -26,7 +26,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                              Switch.System.ManualTests
-  if (BUILD_TESTS AND BUILD_SWITCH_SYSTEM)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM)
     print("  [X] Switch.System.ManualTests")
     add_subdirectory("tests/Switch.System.ManualTests")
   else()
@@ -35,7 +35,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                                Switch.System.UnitTests
-  if (BUILD_TESTS AND BUILD_SWITCH_SYSTEM)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM)
     print("  [X] Switch.System.UnitTests")
     add_subdirectory("tests/Switch.System.UnitTests")
   else()
@@ -44,7 +44,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                                Switch.System.UnitTests
-  if (BUILD_TESTS AND BUILD_SWITCH_SYSTEM_CORE)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_CORE)
     print("  [X] Switch.System.Core.UnitTests")
     add_subdirectory("tests/Switch.System.Core.UnitTests")
   else()
@@ -53,7 +53,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                      Switch.System.Drawing.ManualTests
-  if (BUILD_TESTS AND BUILD_SWITCH_SYSTEM_DRAWING)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_DRAWING)
     print("  [X] Switch.System.Drawing.ManualTests")
     add_subdirectory("tests/Switch.System.Drawing.ManualTests")
   else()
@@ -62,7 +62,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                        Switch.System.Drawing.UnitTests
-  if (BUILD_TESTS AND BUILD_SWITCH_SYSTEM_DRAWING)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_DRAWING)
     print("  [X] Switch.System.Drawing.UnitTests")
     add_subdirectory("tests/Switch.System.Drawing.UnitTests")
   else()
@@ -71,7 +71,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                Switch.System.Windows.Forms.ManualTests
-  if (BUILD_TESTS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
     print("  [X] Switch.System.Windows.Forms.ManualTests")
     add_subdirectory("tests/Switch.System.Windows.Forms.ManualTests")
   else()
@@ -80,7 +80,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                  Switch.System.Windows.Forms.UnitTests
-  if (BUILD_TESTS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
     print("  [X] Switch.System.Windows.Forms.UnitTests")
     add_subdirectory("tests/Switch.System.Windows.Forms.UnitTests")
   else()
@@ -89,7 +89,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                          Switch.TUnit.Core.ManualTests
-  if (BUILD_TESTS AND BUILD_SWITCH_TUNIT_CORE)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_TUNIT_CORE)
     print("  [X] Switch.TUnit.ManualTests")
     add_subdirectory("tests/Switch.TUnit.ManualTests")
   else()
@@ -98,7 +98,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                            Switch.TUnit.Core.UnitTests
-  if (BUILD_TESTS AND BUILD_SWITCH_TUNIT_CORE)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_TUNIT_CORE)
     print("  [X] Switch.TUnit.Core.UnitTests")
     add_subdirectory("tests/Switch.TUnit.UnitTests")
   else()
@@ -107,7 +107,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                     Switch.TUnit.Framework.ManualTests
-  if (BUILD_TESTS AND BUILD_SWITCH_TUNIT_FRAMEWORK)
+  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_TUNIT_FRAMEWORK)
     print("  [X] Switch.TUnit.Framework.ManualTests")
     add_subdirectory("tests/Switch.TUnit.Framework.ManualTests")
   else()

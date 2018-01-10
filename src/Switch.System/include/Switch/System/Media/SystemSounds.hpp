@@ -13,7 +13,7 @@ namespace Switch {
       /// @brief Retrieves sounds associated with a set of Windows operating system sound-event types. This class cannot be inherited.
       /// @par Library
       /// Switch.System
-      class SystemSounds {
+      class export_ SystemSounds {
       public:
         static property_<SystemSound, readonly_> Asterisk;
 

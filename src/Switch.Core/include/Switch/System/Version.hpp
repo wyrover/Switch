@@ -81,7 +81,7 @@ namespace Switch {
         return *this;
       }
 
-      friend std::ostream& operator<<(std::ostream& output, const Version& value) {return output << value.ToString();}
+      friend export_ std::ostream& operator<<(std::ostream& output, const Version& value) {return output << value.ToString();}
       /// @endcond
 
       /// @brief Gets the value of the build component of the version number for the current Version object.

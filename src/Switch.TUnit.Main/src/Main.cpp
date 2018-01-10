@@ -10,4 +10,4 @@ namespace {
   };
 }
 
-startup_(MainTest);
+export_ startup_(MainTest);

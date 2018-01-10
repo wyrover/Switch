@@ -41,7 +41,7 @@ namespace Switch {
       virtual ~Object() = default;
       bool operator==(const Object& obj) const {return Equals(obj);}
       bool operator!=(const Object& obj) const {return !this->operator==(obj);}
-      friend std::ostream& operator<<(std::ostream& output, const Object& value);
+      friend export_ std::ostream& operator<<(std::ostream& output, const Object& value);
       /// @endcond
 
       /// @brief Determines whether the specified Object is equal to the current Object.

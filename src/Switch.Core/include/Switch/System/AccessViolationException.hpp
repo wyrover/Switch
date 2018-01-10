@@ -67,7 +67,7 @@ namespace Switch {
       AccessViolationException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       /// @cond
-      friend std::ostream& operator<<(std::ostream& output, const AccessViolationException& value) {return output << value.ToString();}
+      friend export_ std::ostream& operator<<(std::ostream& output, const AccessViolationException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

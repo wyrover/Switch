@@ -28,29 +28,29 @@ elseif(UNIX)
 endif ()
 
 #_________________________________________________________________________________________
-#                                                         set STANDARD_CORE_LINK_LIBRARIES
+#                                                           set SWITCH_CORE_LINK_LIBRARIES
 if(MSVC)
-  set(STANDARD_CORE_LINK_LIBRARIES ws2_32 iphlpapi rpcrt4)
+  set(SWITCH_CORE_LINK_LIBRARIES ws2_32 iphlpapi rpcrt4)
 elseif (APPLE)
-  set(STANDARD_CORE_LINK_LIBRARIES dl ncurses)
+  set(SWITCH_CORE_LINK_LIBRARIES dl)
 elseif(UNIX)
-  set(STANDARD_CORE_LINK_LIBRARIES dl rt uuid)
+  set(SWITCH_CORE_LINK_LIBRARIES dl rt uuid)
 endif ()
 
 #_________________________________________________________________________________________
-#                                                      set STANDARD_GRAPHIC_LINK_LIBRARIES
-if(MSVC)
-  set(STANDARD_GRAPHIC_LINK_LIBRARIES uxtheme comctl32)
-elseif (APPLE)
-  set(STANDARD_GRAPHIC_LINK_LIBRARIES)
-elseif(UNIX)
-  set(STANDARD_GRAPHIC_LINK_LIBRARIES ${GTKMM_LIBRARIES})
-endif ()
-
-#_________________________________________________________________________________________
-#                                                                      set COCOA_FRAMEWORK
+#                                                        set SWITCH_SYSTEM_LINK_FRAMEWORKS
 if (APPLE)
-  set(COCOA_FRAMEWORK "-framework Carbon -framework Cocoa -framework ApplicationServices -framework Foundation")
+  set(SWITCH_SYSTEM_LINK_FRAMEWORKS "-framework Cocoa -framework Foundation")
 else ()
-  set(COCOA_FRAMEWORK)
+  set(SWITCH_SYSTEM_LINK_FRAMEWORKS)
+endif ()
+
+#_________________________________________________________________________________________
+#                                                 set SWITCH_SYSTEM_DRAWING_LINK_LIBRARIES
+if(MSVC)
+  set(SWITCH_SYSTEM_DRAWING_LINK_LIBRARIES uxtheme comctl32)
+elseif (APPLE)
+  set(SWITCH_SYSTEM_DRAWING_LINK_LIBRARIES)
+elseif(UNIX)
+  set(SWITCH_SYSTEM_DRAWING_LINK_LIBRARIES ${GTKMM_LIBRARIES})
 endif ()

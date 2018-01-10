@@ -6,7 +6,7 @@
 #include "../Threading/ThreadLocal.hpp"
 #include "../../Any.hpp"
 
-extern System::Threading::ThreadLocal<any> __enumerable__;
+extern export_ System::Threading::ThreadLocal<any> __enumerable__;
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
