@@ -12,7 +12,7 @@ macro(DownloadTools)
 
   #_______________________________________________________________________________________
   #                                                                                 astyle
-  if (Git_FOUND AND DOWNLOAD_ASTYLE)
+  if (DOWNLOAD_ASTYLE)
     print("  [X] astyle 3.0.1 (*)")
     ExternalProject_Add(astyle GIT_REPOSITORY https://github.com/Bareflank/astyle.git GIT_TAG v1.2 GIT_SHALLOW 1 CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR})
     set(ASTYLE_EXECUTABLE ${CMAKE_BINARY_DIR}/bin/astyle)
@@ -24,7 +24,7 @@ macro(DownloadTools)
 
   #_______________________________________________________________________________________
   #                                                                               cppcheck
-  if (Git_FOUND AND DOWNLOAD_CPPCHECK)
+  if (DOWNLOAD_CPPCHECK)
     print("  [X] cppcheck 1.81 (*)")
     ExternalProject_Add(cppcheck GIT_REPOSITORY https://github.com/danmar/cppcheck.git GIT_TAG 1.81 GIT_SHALLOW 1 CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR})
     set(CPPCHECK_EXECUTABLE ${CMAKE_BINARY_DIR}/bin/cppcheck)
@@ -39,7 +39,7 @@ macro(DownloadTools)
   find_package(Doxygen QUIET)
   if (Doxygen_FOUND)
     print("  [X] Doxygen ${DOXYGEN_VERSION}")
-  elseif(Git_FOUND AND DOWNLOAD_DOXYGEN)
+  elseif(DOWNLOAD_DOXYGEN)
     print("  [X] Doxygen 1.8.13 (*)")
     ExternalProject_Add(doxygen GIT_REPOSITORY https://github.com/doxygen/doxygen.git GIT_TAG Release_1_8_13 GIT_SHALLOW 1 CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR})
     set(Doxygen_FOUND TRUE)
