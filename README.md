@@ -7,7 +7,7 @@ ________________________________________________________________________________
 [![license GPL v3](https://img.shields.io/badge/license-GPL%20v3-004080.svg)](docs/License.md) 
 [![© Gammasoft](https://img.shields.io/badge/©-GAMMA%20Soft-004080.svg)](https://gammasoft71.wixsite.com/gammasoft) 
 [![std c++17 ready](https://img.shields.io/badge/std-c++14-004080.svg)](docs/C++17Ready.md) 
-[![os Windows, macOS, linux](https://img.shields.io/badge/os-Windows,%20macOS,%20linux-004080.svg)](docs/Portability.md)
+[![os Windows, macOS, linux](https://img.shields.io/badge/os-high%20portability-004080.svg)](docs/Portability.md)
 [![development status](https://img.shields.io/badge/dev-status-004080.svg)](docs/SwitchStatus.md) 
 <!--[![Coverage Status](https://coveralls.io/repos/github/gammasoft71/Switch/badge.svg?branch=master)](https://coveralls.io/github/gammasoft71/Switch?branch=master)-->
 <!--[![language c++](https://img.shields.io/badge/language-c++-004080.svg)](https://gammasoft71.github.io/Switch-doc)-->
@@ -17,10 +17,9 @@ ________________________________________________________________________________
 # The Switch framework is...
 * a collection of native C++ classes libraries, similar to the .NET Framework;
 * written in efficient, modern C++14;
-* and highly portable and available on many different platforms (Windows, macOS, Linux);
+* and highly portable and available on many different platforms (Windows, macOS, Linux, iOS and android);
 
 For more information see [Switch website](https://gammasoft71.wixsite.com/switch) (or [markdown Documentations](./docs/Home.md)) and [Reference Guide](https://gammasoft71.github.io/Switch-doc)
-
 
 # Examples
 The classic first application 'Hello World'.

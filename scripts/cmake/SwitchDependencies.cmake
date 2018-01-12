@@ -5,8 +5,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #_________________________________________________________________________________________
 #                                                                    add external packages
-find_package(Threads REQUIRED)
-
 if(NOT APPLE AND UNIX)
   find_package(PkgConfig REQUIRED)
   pkg_check_modules(GTKMM gtkmm-3.0)
@@ -32,9 +30,9 @@ endif ()
 if(MSVC)
   set(SWITCH_CORE_LINK_LIBRARIES ws2_32 iphlpapi rpcrt4)
 elseif (APPLE)
-  set(SWITCH_CORE_LINK_LIBRARIES dl)
+  set(SWITCH_CORE_LINK_LIBRARIES dl pthread)
 elseif(UNIX)
-  set(SWITCH_CORE_LINK_LIBRARIES dl rt uuid)
+  set(SWITCH_CORE_LINK_LIBRARIES dl rt uuid pthread)
 endif ()
 
 #_________________________________________________________________________________________

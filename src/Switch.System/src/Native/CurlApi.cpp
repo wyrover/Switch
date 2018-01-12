@@ -3,6 +3,11 @@
 #include <Switch/Types.hpp>
 #include <Switch/System/IntPtr.hpp>
 
+#if defined(__APPLE__)
+#include "TargetConditionals.h"
+#endif
+
+#if not defined(TARGET_OS_IPHONE)
 #include <curl/curl.h>
 
 int32 Native::CurlApi::Cleanup(intptr request) {
@@ -139,3 +144,129 @@ void Native::CurlApi::FreeList(intptr list) {
 int32 Native::CurlApi::SetHttpHeader(intptr request, intptr list) {
   return curl_easy_setopt((CURL*)request,  CURLOPT_HTTPHEADER, (curl_slist*)list);
 }
+
+#else
+int32 Native::CurlApi::Cleanup(intptr request) {
+  return 0;
+}
+
+bool Native::CurlApi::GetOSSupportsWebOperations() {
+  return true;
+}
+
+int32 Native::CurlApi::GetContentDownloadLength(intptr request, double& value) {
+  return 0;
+}
+
+int32 Native::CurlApi::GetContentType(intptr request, string& value) {
+  return 0;
+}
+
+int32 Native::CurlApi::GetResponseCode(intptr request, int64& value) {
+  return 0;
+}
+
+int32 Native::CurlApi::GlobalCleanup() {
+  return 0;
+}
+
+int32 Native::CurlApi::GlobalInit() {
+  return 0;
+}
+
+int32 Native::CurlApi::Init(intptr& request) {
+  return 0;
+}
+
+int32 Native::CurlApi::Perform(intptr request) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetCarriageReturnLinefeed(intptr request, int32 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetCreateDirectoryIfDirectoryMissing(intptr request) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetDirectoryListOnly(intptr request, int32 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetInFileSize(intptr request, int64 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetPostFieldSize(intptr request, int64 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetUrl(intptr request, const string& value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetTimeout(intptr request, int32 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetPassword(intptr request, const string& value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetReadData(intptr request, void* value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetReadFunction(intptr request, size_t value(void* buffer, size_t size, size_t nmemb, void* stream)) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetUserName(intptr request, const string& value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetTransfertText(intptr request, int32 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetUpload(intptr request, int32 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetVerbose(intptr request, int32 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetWriteData(intptr request, void* value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetWriteFunction(intptr request, size_t value(void* buffer, size_t size, size_t nmemb, void* stream)) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetAllowRedirection(intptr request, int32 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetHttpPut(intptr request, int32 value) {
+  return 0;
+}
+
+int32 Native::CurlApi::SetHttpPost(intptr request, int32 value) {
+  return 0;
+}
+
+intptr Native::CurlApi::AppendToList(intptr list, const string& value) {
+  return 0;
+}
+
+void Native::CurlApi::FreeList(intptr list) {
+}
+
+int32 Native::CurlApi::SetHttpHeader(intptr request, intptr list) {
+  return 0;
+}
+#  endif
+

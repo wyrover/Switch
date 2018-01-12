@@ -78,7 +78,7 @@ int32 Native::EnvironmentApi::GetTickCount() {
   int mib[2] = { CTL_KERN, KERN_BOOTTIME };
   sysctl(mib, 2, &boottime, &len, NULL, 0);
   gettimeofday(&nowtime, NULL);
-  return ((nowtime.tv_sec - boottime.tv_sec) * 1000) + ((nowtime.tv_usec - boottime.tv_usec) / 1000);
+  return (int32)((nowtime.tv_sec - boottime.tv_sec) * 1000) + ((nowtime.tv_usec - boottime.tv_usec) / 1000);
   #else
   // https://stackoverflow.com/questions/1540627/what-api-do-i-call-to-get-the-system-uptime
   struct sysinfo info;

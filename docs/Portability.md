@@ -7,13 +7,13 @@ The Portability section provide informations about Operating System suported, Co
 
 # Operating System Supported
 
-Actualy Switch run on Windows, macOS and Linux Operating System.
+Actualy Switch run on Windows, macOS, Linux, iOS and Android Operating System.
 
 ## Windows 7 - 32 and 64 bits or later
 
 [![Windows](Pictures/OS/Windows.png)](https://microsoft.com/windows)
 
-## macOS 10.11.5 (OS X El Capitan) or later
+## macOS 10.11.5 (OS X El Capitan) - 64 bits or later
 
 [![macOS](Pictures/OS/macOS.jpg)](https://apple.com/macos/)
 
@@ -47,9 +47,32 @@ Actualy Switch run on Windows, macOS and Linux Operating System.
 
 [![Ubuntu](Pictures/OS/Ubuntu.png)](https://ubuntu.com)
 
-## Other distribution (manually installation)
+### Other distribution [manual installation]
 
 [![Linux](Pictures/OS/Linux.png)](https://linux.org)
+
+## iOS 11 - 64 bits or later [manual installation]
+
+[![iOS](Pictures/OS/iOS.png)](https://apple.com/ios)
+
+## android 6.0 (Marshmallow) - 32 and 64 bits or later [manual installation]
+
+[![android](Pictures/OS/Android.png)](https://android.com)
+
+# The Switch libraries portability list
+
+| Library                     | Windows | macOS | Linux | iOS   | Android |
+|-----------------------------|---------|-------|-------|-------|---------|
+| Switch                      | **√**   | **√** | **√** | **√** | **√**   |
+| Switch.Core                 | **√**   | **√** | **√** | **√** | **√**   |
+| Switch.System               | **√**   | **√** | **√** | **√** | **√**   |
+| Switch.System.Core          | **√**   | **√** | **√** | **√** | **√**   |
+| Switch.System.Drawing       | **√**   | **√** | **√** | *X*   | *X*     |
+| Switch.System.ServiceModel  | **√**   | **√** | **√** | **√** | **√**   |
+| Switch.System.Windows.Forms | **√**   | **√** | **√** | *X*   | *X*     |
+| Switch.TUnit.Core           | **√**   | **√** | **√** | **√** | **√**   |
+| Switch.TUnit.Framework      | **√**   | **√** | **√** | **√** | **√**   |
+| Switch.TUnit.Main           | **√**   | **√** | **√** | **√** | **√**   |
 
 # Tests and coverage
 
@@ -69,6 +92,7 @@ Configurations :
 [![TravisCI](Pictures/CI/TravisCI.png)](https://travis-ci.org)
 
 Configurations :
+
 * macOS Xcode 9.1
 * linux clang 3.9
 * Reference Guide generation

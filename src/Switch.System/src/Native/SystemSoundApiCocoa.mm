@@ -1,9 +1,9 @@
 #if defined(__APPLE__)
-#import <Cocoa/Cocoa.h>
-#import <Foundation/Foundation.h>
 #include "Api.hpp"
+#include "TargetConditionals.h"
 
-using namespace System;
+#if not defined(TARGET_OS_IPHONE)
+#import <Cocoa/Cocoa.h>
 
 void Native::SystemSoundApi::Play(SoundType type) {
   @autoreleasepool {
@@ -11,5 +11,9 @@ void Native::SystemSoundApi::Play(SoundType type) {
     [[NSSound soundNamed:[NSString stringWithUTF8String:sounds[type].c_str()]] play];
   }
 }
+#else
+void Native::SystemSoundApi::Play(SoundType type) {
+}
+#endif
 
 #endif

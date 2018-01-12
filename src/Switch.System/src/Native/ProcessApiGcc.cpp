@@ -9,6 +9,10 @@
 #include <Switch/System/Threading/Thread.hpp>
 
 #if defined(__APPLE__)
+#  include "TargetConditionals.h"
+#endif
+
+#if not defined(TARGET_OS_IPHONE)
 #include <libproc.h>
 
 namespace {
