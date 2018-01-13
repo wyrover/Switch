@@ -75,7 +75,7 @@ macro(Build3rdParties)
 
   #_______________________________________________________________________________________
   #                                                                                   CURL
-  if (NOT IOS AND BUILD_SWITCH_SYSTEM)
+  if (NOT IOS AND NOT ANDROID AND BUILD_SWITCH_SYSTEM)
     find_package(CURL QUIET)
     if (CURL_FOUND)
       print("  [X] curl ${CURL_VERSION_STRING}")

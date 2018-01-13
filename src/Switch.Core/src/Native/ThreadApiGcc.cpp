@@ -4,6 +4,12 @@
 #include <pthread.h>
 #include "Api.hpp"
 
+#if defined(__ANDROID__)
+int pthread_cancel(pthread_t handle) {
+  return -1;
+}
+#endif
+
 bool Native::ThreadApi::Cancel(intptr handle) {
   return pthread_cancel((pthread_t)handle) == 0;
 }

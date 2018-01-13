@@ -12,7 +12,7 @@
 #  include "TargetConditionals.h"
 #endif
 
-#if not defined(TARGET_OS_IPHONE)
+#if defined(__APPLE__) && !defined(TARGET_OS_IPHONE)
 #include <libproc.h>
 
 namespace {

@@ -16,7 +16,7 @@
 namespace {
   std::mutex mutex;
   using Hostent = hostent;
-  #if defined(_WIN32)
+  #if defined(_WIN32) || defined(__ANDROID__)
   void sethostent(int) {}
   void endhostent() {}
   #endif

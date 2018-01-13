@@ -2,7 +2,7 @@
 #include "Api.hpp"
 #include "TargetConditionals.h"
 
-#if not defined(TARGET_OS_IPHONE)
+#if !defined(TARGET_OS_IPHONE)
 #import <Cocoa/Cocoa.h>
 
 void Native::SystemSoundApi::Play(SoundType type) {
