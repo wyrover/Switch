@@ -122,7 +122,7 @@
 /// target_link_libraries(HelloWorldTest Switch.TUnit.Main)
 /// @endcode
 ///
-/// For more examples see <a href="https://github.com/gammasoft71/Switch/tree/master/Examples">Examples</a>.
+/// For more examples see <a href="https://github.com/gammasoft71/Switch/tree/master/examples">Examples</a>.
 ///
 /// @section DownloadSection Download Switch
 ///
