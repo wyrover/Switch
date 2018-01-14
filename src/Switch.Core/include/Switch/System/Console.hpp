@@ -27,6 +27,7 @@ namespace Switch {
     /// @include ConsoleOut.cpp
     class export_ Console static_ {
     public:
+      // @cond
       class StandardInput : public System::IO::TextReader {
       public:
         StandardInput() {}
@@ -58,6 +59,7 @@ namespace Switch {
         using TextWriter::Write;
         void Write(const System::String& s) override;
       };
+      /// @endcond
 
       /// @brief Gets or sets the background color of the console.
       /// @param A ConsoleColor that specifies the background color of the console; that is, the color that appears behind each character.
@@ -320,17 +322,9 @@ namespace Switch {
       /// @param value The value to write
       static void Write(char value);
 
-      /// @brief Writes the specified char16 value to the standard output stream.
-      /// @param value The value to write
-      static void Write(char16 value);
-
       /// @brief Writes the specified char32 value to the standard output stream.
       /// @param value The value to write
       static void Write(char32 value);
-
-      /// @brief Writes the specified wchar value to the standard output stream.
-      /// @param value The value to write
-      static void Write(wchar value);
 
       /// @brief Writes the specified double value to the standard output stream.
       /// @param value The value to write
@@ -366,84 +360,25 @@ namespace Switch {
       /// @param value The value to write
       static void Write(uint64 value);
 
-      /// @brief Writes the specified uint64 value to the standard output stream.
-      /// @param value The value to write
-      /// @exception ArgumentNullException The parameters value is null.
-      static void Write(const char value[]);
-
-      /// @brief Writes the specified uint64 value to the standard output stream.
-      /// @param value The value to write
-      /// @exception ArgumentNullException The parameters value is null.
-      static void Write(const char16 value[]);
-
-      /// @brief Writes the specified uint64 value to the standard output stream.
-      /// @param value The value to write
-      /// @exception ArgumentNullException The parameters value is null.
-      static void Write(const char32 value[]);
-
-      /// @brief Writes the specified uint64 value to the standard output stream.
-      /// @param value The value to write
-      /// @exception ArgumentNullException The parameters value is null.
-      static void Write(const wchar value[]);
-
-      static void Write(llong value);
-      static void Write(ullong value);
-
-      static void Write(unsigned char* value);
-
       static void Write(const String& format, const Array< ref<Object>>& array) {
         Write(String::Format(format, array));
       }
 
-      template<typename T0>
-      static void Write(const String& format, const T0& arg0) {
-        Write(String::Format(format, arg0));
+      /// @cond
+      static void Write(char16 value);
+      static void Write(wchar value);
+      static void Write(const char value[]);
+      static void Write(const char16 value[]);
+      static void Write(const char32 value[]);
+      static void Write(const wchar value[]);
+      static void Write(unsigned char* value);
+      static void Write(llong value);
+      static void Write(ullong value);
+      template<typename ...Args>
+      static void Write(const String& format, const Args& ...args) {
+        Write(String::Format(format, args...));
       }
-
-      template<typename T0, typename T1>
-      static void Write(const String& format, const T0& arg0, const T1& arg1) {
-        Write(String::Format(format, arg0, arg1));
-      }
-
-      template<typename T0, typename T1, typename T2>
-      static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2) {
-        Write(String::Format(format, arg0, arg1, arg2));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3>
-      static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3) {
-        Write(String::Format(format, arg0, arg1, arg2, arg3));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4>
-      static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4) {
-        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
-      static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5) {
-        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-      static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6) {
-        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-      static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7) {
-        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-      static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7, const T8& arg8) {
-        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-      static void Write(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7, const T8& arg8, const T9& arg9) {
-        Write(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-      }
+      /// @endcond
 
       /// @brief Writes the current line terminator to the standard output stream.
       static void WriteLine();
@@ -456,17 +391,9 @@ namespace Switch {
       /// @param value The value to write
       static void WriteLine(char value);
 
-      /// @brief Writes the specified char16 value, followed by the current line terminator, to the standard output stream.
-      /// @param value The value to write
-      static void WriteLine(char16 value);
-
       /// @brief Writes the specified char32 value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
       static void WriteLine(char32 value);
-
-      /// @brief Writes the specified wchar value, followed by the current line terminator, to the standard output stream.
-      /// @param value The value to write
-      static void WriteLine(wchar value);
 
       /// @brief Writes the specified double value, followed by the current line terminator, to the standard output stream.
       /// @param value The value to write
@@ -502,84 +429,25 @@ namespace Switch {
       /// @param value The value to write
       static void WriteLine(uint64 value);
 
-      /// @cond
-      static void WriteLine(llong value);
-      static void WriteLine(ullong value);
-      /// @endcond
-
-      /// @brief Writes the specified Format-control String value, followed by the current line terminator, to the standard output stream.
-      /// @param format The value to write
-      /// @exception ArgumentNullException The parameters value is null.
-      static void WriteLine(const char value[]);
-
-      /// @brief Writes the specified Format-control String value, followed by the current line terminator, to the standard output stream.
-      /// @param format The value to write
-      /// @exception ArgumentNullException The parameters value is null.
-      static void WriteLine(const char16 value[]);
-
-      /// @brief Writes the specified Format-control String value, followed by the current line terminator, to the standard output stream.
-      /// @param format The value to write
-      /// @exception ArgumentNullException The parameters value is null.
-      static void WriteLine(const char32 value[]);
-
-      /// @brief Writes the specified Format-control String value, followed by the current line terminator, to the standard output stream.
-      /// @param format The value to write
-      /// @exception ArgumentNullException The parameters value is null.
-      static void WriteLine(const wchar value[]);
 
       static void WriteLine(const String& format, const Array< ref<Object>>& array) {
         WriteLine(String::Format(format, array));
       }
 
-      template<typename T0>
-      static void WriteLine(const String& format, const T0& arg0) {
-        WriteLine(String::Format(format, arg0));
+      /// @cond
+      static void WriteLine(char16 value);
+      static void WriteLine(wchar value);
+      static void WriteLine(const char value[]);
+      static void WriteLine(const char16 value[]);
+      static void WriteLine(const char32 value[]);
+      static void WriteLine(const wchar value[]);
+      static void WriteLine(llong value);
+      static void WriteLine(ullong value);
+      template<typename ...Args>
+      static void WriteLine(const String& format, const Args& ...args) {
+        WriteLine(String::Format(format, args...));
       }
-
-      template<typename T0, typename T1>
-      static void WriteLine(const String& format, const T0& arg0, const T1& arg1) {
-        WriteLine(String::Format(format, arg0, arg1));
-      }
-
-      template<typename T0, typename T1, typename T2>
-      static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2) {
-        WriteLine(String::Format(format, arg0, arg1, arg2));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3>
-      static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3) {
-        WriteLine(String::Format(format, arg0, arg1, arg2, arg3));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4>
-      static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4) {
-        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
-      static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5) {
-        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-      static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6) {
-        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-      static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7) {
-        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-      static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7, const T8& arg8) {
-        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-      }
-
-      template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-      static void WriteLine(const String& format, const T0& arg0, const T1& arg1, const T2& arg2, const T3& arg3, const T4& arg4, const T5& arg5, const T6& arg6, const T7& arg7, const T8& arg8, const T9& arg9) {
-        WriteLine(String::Format(format, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-      }
+      /// @endcond
 
       static void SetError(System::IO::TextWriter& error);
 
@@ -595,7 +463,9 @@ namespace Switch {
       /// @note If your application has simple requirements, you can use the TreatControlCAsInput property instead of this event. By setting this property to false, you can ensure that your application always exits if the user presses Ctrl+C. By setting it to true, you can ensure that pressing Ctrl+C will not terminate the application.
       static ConsoleCancelEventHandler CancelKeyPress;
 
+      /// @cond
       static void __f();
+      /// @endcond
     };
   }
 }

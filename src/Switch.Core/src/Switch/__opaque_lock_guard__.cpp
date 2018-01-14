@@ -1,4 +1,4 @@
-#include "../../include/Switch/Lock.hpp"
+#include "../../include/Switch/__opaque_lock_guard__.hpp"
 #include "../../include/Switch/System/Threading/Monitor.hpp"
 
 __opaque_lock_guard__::__opaque_lock_guard__(const object& lock) : lock(lock) {
