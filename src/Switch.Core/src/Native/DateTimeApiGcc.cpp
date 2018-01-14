@@ -7,13 +7,13 @@
 #include <sys/timeb.h>
 #else
 struct timeb {
-  time_t		time;		/* [XSI] Seconds since the Epoch */
-  unsigned short	millitm;	/* [XSI] Milliseconds since the Epoch */
-  short		timezone;	/* [XSI] Minutes west of CUT */
-  short		dstflag;	/* [XSI] non-zero if DST in effect */
+  time_t    time;   /* [XSI] Seconds since the Epoch */
+  unsigned short  millitm;  /* [XSI] Milliseconds since the Epoch */
+  short   timezone; /* [XSI] Minutes west of CUT */
+  short   dstflag;  /* [XSI] non-zero if DST in effect */
 };
 
-int	ftime(struct timeb *);
+int ftime(struct timeb*);
 #endif
 #include "../../include/Switch/Undef.hpp"
 

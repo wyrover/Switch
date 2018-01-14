@@ -114,10 +114,10 @@ int32 Native::EnvironmentApi::UnsetEnv(const string& name) {
 }
 
 System::Guid Native::EnvironmentApi::NewGuid() {
-#if !defined(__ANDROID__)
+  #if !defined(__ANDROID__)
   byte guid[16];
   uuid_generate(guid);
-#else
+  #else
   // http://tools.ietf.org/html/rfc4122
   //
   // 0                   1                   2                   3
@@ -148,7 +148,7 @@ System::Guid Native::EnvironmentApi::NewGuid() {
   guid[8] |= 0x40;
   guid[7] &= 0x0F;
   guid[7] |= 0x40;
-#endif
+  #endif
   return System::Guid(guid);
 }
 
