@@ -1,5 +1,5 @@
 #include "Api.hpp"
 
 System::Version Native::EnvironmentApi::GetVersion() {
-  return System::Version::Parse("0.6.0");
+  return System::Version::Parse("0.6.1");
 }
