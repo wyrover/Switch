@@ -204,7 +204,12 @@ include(scripts/cmake/MakeLibraryProject.cmake)
 include(scripts/cmake/MakeTestProject.cmake)
 include(scripts/cmake/Print.cmake)
 include(scripts/cmake/SwitchDependencies.cmake)
+include(scripts/cmake/UpdateExport.cmake)
 include(scripts/cmake/UpdateVersionNumber.cmake)
+
+#_________________________________________________________________________________________
+#                                                                             Write export
+UpdateExport()
 
 #_________________________________________________________________________________________
 #                                                                    Update Version Number
