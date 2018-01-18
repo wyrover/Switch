@@ -25,35 +25,25 @@ case "$OSTYPE" in
 esac
 
 # ________________________________________________________________________________________
-#                                                            set clang as default compiler
-
-if [[ "$OSTYPE" != *"Darwin"* ]] && [[ "$OSTYPE" != *"MINGW64"* ]]; then
-  export CC=clang
-  export CXX=clang++
-fi
-
-# ________________________________________________________________________________________
-#                                                                     create build folders
-
-mkdir -p build/examples
-
-# ________________________________________________________________________________________
 #                                                       generate, build and install Switch
 
+mkdir -p build/examples
 cd build
 if [[ "$OSTYPE" == *"Darwin"* ]]; then
   cmake .. -G "Xcode" "$@"
-  cmake --build . --target install --config Debug
-  cmake --build . --target install --config Release
+  cmake --build . --config Debug
+  sudo cmake --build . --target install --config Debug
+  cmake --build . --config Release
+  sudo cmake --build . --target install --config Release
 elif [[ "$OSTYPE" == *"MINGW64"* ]]; then
   cmake .. -DCMAKE_INSTALL_PREFIX=/c/usr/local "$@"
   cmake --build . --target install --config Debug
   cmake --build . --target install --config Release
 else
-  cmake .. -DCMAKE_BUILD_TYPE=Debug "$@"
+  cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=clang++ "$@"
   cmake --build . -- -j8
   sudo cmake --build . --target install
-  cmake .. -DCMAKE_BUILD_TYPE=Release "$@"
+  cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ "$@"
   cmake --build . -- -j8
   sudo cmake --build . --target install
 fi
