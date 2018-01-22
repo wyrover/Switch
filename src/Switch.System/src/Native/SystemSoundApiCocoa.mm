@@ -1,9 +1,9 @@
 #if defined(__APPLE__)
-#include "Api.hpp"
 #include "TargetConditionals.h"
 
-#if !defined(TARGET_OS_IPHONE)
+#if TARGET_OS_IPHONE == 0
 #import <Cocoa/Cocoa.h>
+#include "Api.hpp"
 
 void Native::SystemSoundApi::Play(SoundType type) {
   @autoreleasepool {
@@ -12,6 +12,8 @@ void Native::SystemSoundApi::Play(SoundType type) {
   }
 }
 #else
+#include "Api.hpp"
+
 void Native::SystemSoundApi::Play(SoundType type) {
 }
 #endif

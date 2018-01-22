@@ -53,12 +53,12 @@ void Native::TrackBarApi::SetSmallChange(const System::Windows::Forms::TrackBar&
 }
 
 void Native::TrackBarApi::SetTickFrequency(const System::Windows::Forms::TrackBar& trackBar) {
-  if (trackBar.Style != TickStyle::None)
+  if (trackBar.TickStyle != TickStyle::None)
     [(NSSlider*)trackBar.Handle() setNumberOfTickMarks:(trackBar.Maximum - trackBar.Minimum) / trackBar.TickFrequency];
 }
 
 void Native::TrackBarApi::SetTickStyle(const System::Windows::Forms::TrackBar& trackBar) {
-  if (trackBar.Style == TickStyle::TopLeft)
+  if (trackBar.TickStyle == TickStyle::TopLeft)
     [(NSSlider*)trackBar.Handle() setTickMarkPosition:NSTickMarkPositionAbove];
 }
 

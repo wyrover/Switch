@@ -57,14 +57,14 @@ void Native::TrackBarApi::SetSmallChange(const System::Windows::Forms::TrackBar&
 }
 
 void Native::TrackBarApi::SetTickFrequency(const System::Windows::Forms::TrackBar& trackBar) {
-  if (trackBar.Style == TickStyle::None)
+  if (trackBar.TickStyle == TickStyle::None)
     ((Native::TrackBar*)trackBar.Handle())->clear_marks();
   else {
     Gtk::PositionType position = Gtk::POS_BOTTOM;
     if (trackBar.Orientation == Orientation::Horizontal)
-      position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_TOP : Gtk::POS_BOTTOM;
+      position = trackBar.TickStyle == TickStyle::TopLeft ? Gtk::POS_TOP : Gtk::POS_BOTTOM;
     else
-      position = trackBar.Style == TickStyle::TopLeft ? Gtk::POS_LEFT : Gtk::POS_RIGHT;
+      position = trackBar.TickStyle == TickStyle::TopLeft ? Gtk::POS_LEFT : Gtk::POS_RIGHT;
 
     for (int32 i = 0; i <= trackBar.Maximum - trackBar.Minimum; i +=  trackBar.TickFrequency)
       ((Native::TrackBar*)trackBar.Handle())->add_mark(i, position, "");

@@ -31,16 +31,19 @@ mkdir -p build/examples
 cd build
 if [[ "$OSTYPE" == *"Darwin"* ]]; then
   cmake .. -G "Xcode" "$@"
+  sudo cmake -E remove_directory /usr/local/include/Switch
   cmake --build . --config Debug
   sudo cmake --build . --target install --config Debug
   cmake --build . --config Release
   sudo cmake --build . --target install --config Release
 elif [[ "$OSTYPE" == *"MINGW64"* ]]; then
   cmake .. -DCMAKE_INSTALL_PREFIX=/c/usr/local "$@"
+  cmake -E remove_directory /c/usr/local/include/Switch
   cmake --build . --target install --config Debug
   cmake --build . --target install --config Release
 else
   cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=clang++ "$@"
+  sudo cmake -E remove_directory /usr/local/include/Switch
   cmake --build . -- -j8
   sudo cmake --build . --target install
   cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ "$@"
@@ -61,8 +64,8 @@ elif [[ "$OSTYPE" == *"MINGW64"* ]]; then
   start Examples.sln
 else
   cmake ../../examples -DCMAKE_BUILD_TYPE=Debug  "$@"
-  cd build/examples
-  echo 
+  echo ____________________________________________________________
+  echo
   echo You can now build and execute examples.
   echo 
   echo Type following commands to build and execute HelloWorld :
@@ -72,6 +75,9 @@ else
   echo 
   echo This example produces the following output:
   echo Hello, World!
+  echo
+  echo Remarks: Type following command to obtain the examples target list :
+  echo cmake.exe --build . --target help
   echo
 fi
 cd ../..

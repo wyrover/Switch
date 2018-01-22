@@ -27,7 +27,7 @@ namespace Switch {
           }
 
           /// @cond
-          TrackBar(const TrackBar& trackBar) : Control(trackBar), largeChange(trackBar.largeChange), maximum(trackBar.maximum), minimum(trackBar.minimum), smallChange(trackBar.smallChange), style(trackBar.style), tickFrequency(trackBar.tickFrequency), value(trackBar.value) {}
+          TrackBar(const TrackBar& trackBar) : Control(trackBar), largeChange(trackBar.largeChange), maximum(trackBar.maximum), minimum(trackBar.minimum), smallChange(trackBar.smallChange), tickStyle(trackBar.tickStyle), tickFrequency(trackBar.tickFrequency), value(trackBar.value) {}
           /// @endcond
 
           property_<int32> LargeChange {
@@ -55,8 +55,8 @@ namespace Switch {
             set_{ this->SetSmallChange(value); },
           };
 
-          property_<TickStyle> Style {
-            get_{ return this->style; },
+          property_<Forms::TickStyle> TickStyle {
+            get_{ return this->tickStyle; },
             set_{ this->SetTickStyle(value); },
           };
 
@@ -104,7 +104,7 @@ namespace Switch {
           int32 minimum = 0;
           Forms::Orientation orientation = Forms::Orientation::Horizontal;
           int32 smallChange = 1;
-          Forms::TickStyle style = TickStyle::BottomRight;
+          Forms::TickStyle tickStyle = Forms::TickStyle::BottomRight;
           int32 tickFrequency = 1;
           int32 value = 0;
           /// @endcond

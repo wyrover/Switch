@@ -86,8 +86,8 @@ void TrackBar::SetTickFrequency(int32 tickFrequency) {
 }
 
 void TrackBar::SetTickStyle(System::Windows::Forms::TickStyle style) {
-  if (this->style != style) {
-    this->style = style;
+  if (this->tickStyle != style) {
+    this->tickStyle = style;
     if (this->IsHandleCreated)
       Native::TrackBarApi::SetTickStyle(*this);
   }

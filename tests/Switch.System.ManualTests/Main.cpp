@@ -1,10 +1,6 @@
 #define TRACE
 #include <Switch/Startup.hpp>
-#include <Switch/System/Console.hpp>
-#include <Switch/System/Net/IPAddress.hpp>
-#include <Switch/System/Threading/Monitor.hpp>
-#include <Switch/System/Threading/Thread.hpp>
-#include <Switch/System/Threading/Tasks/Task.hpp>
+#include <Switch/System/Media/SystemSounds.hpp>
 
 using namespace System;
 using namespace System::Threading;
@@ -14,6 +10,7 @@ namespace ManualTests {
   public:
     // The main entry point for the application.
     static void Main() {
+      System::Media::SystemSounds::Asterisk().Play();
     }
   };
 }

@@ -21,7 +21,7 @@ intptr Native::TrackBarApi::Create(const System::Windows::Forms::TrackBar& track
   int32 style = WS_CHILD;
   if (trackBar.Orientation == Orientation::Horizontal) style |= TBS_HORZ;
   else style |= TBS_VERT;
-  switch (trackBar.Style) {
+  switch (trackBar.TickStyle) {
   case TickStyle::None: style |= TBS_NOTICKS; break;
   case TickStyle::TopLeft:
     if (trackBar.Orientation == Orientation::Horizontal) style |= TBS_AUTOTICKS | TBS_TOP;

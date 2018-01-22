@@ -3,7 +3,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-namespace TimerExample {
+namespace TimerFormExample {
   class Form1 : public Form {
   public:
     // The main entry point for the application.
@@ -22,7 +22,7 @@ namespace TimerExample {
       this->label.Text = string::Format("{0:N1}", as<double>(this->counter) / 10);
       this->label.Location = System::Drawing::Point(10, 10);
       //this->label.AutoSize = true;
-      //this->label.Font = System::Drawing::Font("Arial", 60, System::Drawing::FontStyle::Italic);
+      //this->label.Font = System::Drawing::Font("Arial", 48, System::Drawing::FontStyle::Italic);
       this->label.ForeColor = System::Drawing::Color::DodgerBlue;
 
       this->timer.Interval = 100;
@@ -48,4 +48,4 @@ namespace TimerExample {
   };
 }
 
-startup_(TimerExample::Form1);
+startup_(TimerFormExample::Form1);

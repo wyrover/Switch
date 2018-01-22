@@ -3,7 +3,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-namespace RadioButtonExample {
+namespace GroupBoxAndRadioButtonExample {
   class Form1 : public Form {
   public:
     // The main entry point for the application.
@@ -65,6 +65,6 @@ namespace RadioButtonExample {
   };
 }
 
-startup_(RadioButtonExample::Form1);
+startup_(GroupBoxAndRadioButtonExample::Form1);
 
 

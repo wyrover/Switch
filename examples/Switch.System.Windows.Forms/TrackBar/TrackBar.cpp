@@ -19,7 +19,7 @@ namespace TrackBarExample {
       this->trackBar.Location = System::Drawing::Point(20, 50);
       this->trackBar.Maximum = 200;
       this->trackBar.Width = 200;
-      this->trackBar.Style = TickStyle::None;
+      this->trackBar.TickStyle = TickStyle::None;
       this->trackBar.ValueChanged += delegate_(const object & sender, const EventArgs & e) {
         this->progressBar.Value = this->trackBar.Value;
         this->label.Text = string::Format("{0}", this->trackBar.Value);

@@ -13,9 +13,9 @@ namespace FormExample {
     }
 
     Form1() {
-      button.Text = "Close";
-      button.Location = System::Drawing::Point(10, 10);
-      button.Click += delegate_(const object & sender, const EventArgs & e) {
+      this->button.Text = "Close";
+      this->button.Location = System::Drawing::Point(10, 10);
+      this->button.Click += delegate_(const object & sender, const EventArgs & e) {
         this->Close();
       };
 
