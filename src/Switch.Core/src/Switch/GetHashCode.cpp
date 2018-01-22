@@ -1,4 +1,4 @@
-#include "../../include/Switch/Hash.hpp"
+#include "../../include/Switch/GetHashCode.hpp"
 #include "../../include/Switch/System/Byte.hpp"
 #include "../../include/Switch/System/Boolean.hpp"
 #include "../../include/Switch/System/Char.hpp"

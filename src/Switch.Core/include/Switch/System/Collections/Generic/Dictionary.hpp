@@ -17,7 +17,7 @@
 #include "List.hpp"
 #include "../../Linq/Enumerable.hpp"
 
-#include "../../../Hash.hpp"
+#include "../../../GetHashCode.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

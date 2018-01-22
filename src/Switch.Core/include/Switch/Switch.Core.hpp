@@ -269,7 +269,7 @@
 #include "Boxing.hpp"
 #include "Event.hpp"
 #include "ExceptionPtr.hpp"
-#include "Hash.hpp"
+#include "GetHashCode.hpp"
 #include "InitializerList.hpp"
 #include "Interface.hpp"
 #include "Is.hpp"
