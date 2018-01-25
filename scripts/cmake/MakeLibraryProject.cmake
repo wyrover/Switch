@@ -41,7 +41,6 @@ macro(MakeLibraryProject)
   target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>)
   target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES})
   set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER src)
-  add_custom_command (TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_INSTALL_PREFIX}/include/Switch)
 
   install(TARGETS ${PROJECT_NAME} EXPORT Switch DESTINATION lib)
 

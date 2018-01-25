@@ -3,13 +3,10 @@ echo Install Switch libraries version %switch_version%, copyright Gammasoft, 201
 echo.
 
 rem ______________________________________________________________________________________
-rem                                                                   create build folders
-mkdir build\examples
-
-rem ______________________________________________________________________________________
 rem                                                     generate, build and install Switch
+mkdir build\examples
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local %*
+cmake .. -DCMAKE_INSTALL_PREFIX=c:/usr/local %*
 cmake --build . --target install --config Debug
 cmake --build . --target install --config Release
 cd ..
@@ -17,6 +14,6 @@ cd ..
 rem ______________________________________________________________________________________
 rem                                                           generate and launch examples
 cd build\examples
-cmake ../../examples -DCMAKE_INSTALL_PREFIX=/usr/local %*
+cmake ../../examples -DCMAKE_INSTALL_PREFIX=c:/usr/local %*
 start Examples.sln
 cd ..\..
