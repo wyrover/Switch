@@ -52,10 +52,22 @@ template <>
 class AddFlagOperators<System::IO::FileAttributes> : public TrueType {};
 
 template<>
-class EnumToStrings<System::IO::FileAttributes> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::FileAttributes::ReadOnly, "ReadOnly"}, {(int64)System::IO::FileAttributes::Hidden, "Hidden"}, {(int64)System::IO::FileAttributes::System, "System"}, {(int64)System::IO::FileAttributes::Directory, "Directory"}, {(int64)System::IO::FileAttributes::Archive, "Archive"}, {(int64)System::IO::FileAttributes::Device, "Device"}, {(int64)System::IO::FileAttributes::Normal, "Normal"}, {(int64)System::IO::FileAttributes::Temporary, "Temporary"}, {(int64)System::IO::FileAttributes::SparseFile, "SparseFile"}, {(int64)System::IO::FileAttributes::ReparsePoint, "ReparsePoint"}, {(int64)System::IO::FileAttributes::Compressed, "Compressed"}, {(int64)System::IO::FileAttributes::Offline, "Offline"}, {(int64)System::IO::FileAttributes::NotContentIndexed, "NotContentIndexed"}, {(int64)System::IO::FileAttributes::Encrypted, "Encrypted"}};
+struct EnumRegister<System::IO::FileAttributes> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::FileAttributes, string>& values, bool& flags) {
+    values[System::IO::FileAttributes::ReadOnly] = "ReadOnly";
+    values[System::IO::FileAttributes::Hidden] = "Hidden";
+    values[System::IO::FileAttributes::System] = "System";
+    values[System::IO::FileAttributes::Directory] = "Directory";
+    values[System::IO::FileAttributes::Archive] = "Archive";
+    values[System::IO::FileAttributes::Device] = "Device";
+    values[System::IO::FileAttributes::Normal] = "Normal";
+    values[System::IO::FileAttributes::Temporary] = "Temporary";
+    values[System::IO::FileAttributes::SparseFile] = "SparseFile";
+    values[System::IO::FileAttributes::ReparsePoint] = "ReparsePoint";
+    values[System::IO::FileAttributes::Compressed] = "Compressed";
+    values[System::IO::FileAttributes::Offline] = "Offline";
+    values[System::IO::FileAttributes::NotContentIndexed] = "NotContentIndexed";
+    values[System::IO::FileAttributes::Encrypted] = "Encrypted";
     flags = true;
   }
 };

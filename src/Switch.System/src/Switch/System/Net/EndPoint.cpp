@@ -9,7 +9,7 @@ refptr<EndPoint> EndPoint::Create(const SocketAddress&) const {
 }
 
 string EndPoint::ToString() const {
-  return Enum<Sockets::AddressFamily>::ToString(this->addressFamily);
+  return Enum<Sockets::AddressFamily>(this->addressFamily).ToString();
 }
 
 SocketAddress EndPoint::Serialize() const {

@@ -35,10 +35,13 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::IO::Ports::Parity> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::Ports::Parity::None, "None"}, {(int64)System::IO::Ports::Parity::Odd, "Odd"}, {(int64)System::IO::Ports::Parity::Even, "Even"}, {(int64)System::IO::Ports::Parity::Mark, "Mark"}, {(int64)System::IO::Ports::Parity::Space, "Space"}};
+struct EnumRegister<System::IO::Ports::Parity> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::Ports::Parity, string>& values, bool& flags) {
+    values[System::IO::Ports::Parity::None] = "None";
+    values[System::IO::Ports::Parity::Odd] = "Odd";
+    values[System::IO::Ports::Parity::Even] = "Even";
+    values[System::IO::Ports::Parity::Mark] = "Mark";
+    values[System::IO::Ports::Parity::Space] = "Space";
     flags = false;
   }
 };

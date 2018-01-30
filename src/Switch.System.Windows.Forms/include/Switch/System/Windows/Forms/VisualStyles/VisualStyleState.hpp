@@ -31,10 +31,13 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::VisualStyles::VisualStyleState> {
+struct EnumRegister<System::Windows::Forms::VisualStyles::VisualStyleState> {
 public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::VisualStyles::VisualStyleState::NoneEnabled, "NoneEnabled"}, {(int64)System::Windows::Forms::VisualStyles::VisualStyleState::NonClientAreaEnabled, "NonClientAreaEnabled"}, {(int64)System::Windows::Forms::VisualStyles::VisualStyleState::ClientAreaEnabled, "ClientAreaEnabled"}, {(int64)System::Windows::Forms::VisualStyles::VisualStyleState::ClientAndNonClientAreasEnabled, "ClientAndNonClientAreasEnabled"}};
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::VisualStyles::VisualStyleState, string>& values, bool& flags) {
+    values[System::Windows::Forms::VisualStyles::VisualStyleState::NoneEnabled] = "NoneEnabled";
+    values[System::Windows::Forms::VisualStyles::VisualStyleState::NonClientAreaEnabled] = "NonClientAreaEnabled";
+    values[System::Windows::Forms::VisualStyles::VisualStyleState::ClientAreaEnabled] = "ClientAreaEnabled";
+    values[System::Windows::Forms::VisualStyles::VisualStyleState::ClientAndNonClientAreasEnabled] = "ClientAndNonClientAreasEnabled";
     flags = false;
   }
 };

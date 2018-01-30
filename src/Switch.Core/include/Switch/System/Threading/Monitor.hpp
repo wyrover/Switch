@@ -14,6 +14,7 @@
 #include "Mutex.hpp"
 #include "Timeout.hpp"
 #include "../SystemException.hpp"
+#include "../Collections/Generic/Dictionary.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

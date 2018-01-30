@@ -119,10 +119,53 @@ template<>
 class AddFlagOperators<System::Net::Sockets::SocketOptionName> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Net::Sockets::SocketOptionName> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::Sockets::SocketOptionName::Debug, "Debug"}, {(int64)System::Net::Sockets::SocketOptionName::AcceptConnection, "AcceptConnection"}, {(int64)System::Net::Sockets::SocketOptionName::ReuseAddress, "ReuseAddress"}, {(int64)System::Net::Sockets::SocketOptionName::KeepAlive, "KeepAlive"}, {(int64)System::Net::Sockets::SocketOptionName::DontRoute, "DontRoute"}, {(int64)System::Net::Sockets::SocketOptionName::Broadcast, "Broadcast"}, {(int64)System::Net::Sockets::SocketOptionName::UseLoopback, "UseLoopback"}, {(int64)System::Net::Sockets::SocketOptionName::Linger, "Linger"}, {(int64)System::Net::Sockets::SocketOptionName::OutOfBandInline, "OutOfBandInline"}, {(int64)System::Net::Sockets::SocketOptionName::DontLinger, "DontLinger"}, {(int64)System::Net::Sockets::SocketOptionName::ExclusiveAddressUse, "ExclusiveAddressUse"}, {(int64)System::Net::Sockets::SocketOptionName::SendBuffer, "SendBuffer"}, {(int64)System::Net::Sockets::SocketOptionName::ReceiveBuffer, "ReceiveBuffer"}, {(int64)System::Net::Sockets::SocketOptionName::SendLowWater, "SendLowWater"}, {(int64)System::Net::Sockets::SocketOptionName::ReceiveLowWater, "ReceiveLowWater"}, {(int64)System::Net::Sockets::SocketOptionName::SendTimeout, "SendTimeout"}, {(int64)System::Net::Sockets::SocketOptionName::ReceiveTimeout, "ReceiveTimeout"}, {(int64)System::Net::Sockets::SocketOptionName::Error, "Error"}, {(int64)System::Net::Sockets::SocketOptionName::Type, "Type"}, {(int64)System::Net::Sockets::SocketOptionName::MaxConnections, "MaxConnections"}, {(int64)System::Net::Sockets::SocketOptionName::IPOptions, "IPOptions"}, {(int64)System::Net::Sockets::SocketOptionName::HeaderIncluded, "HeaderIncluded"}, {(int64)System::Net::Sockets::SocketOptionName::_typeofService, "_typeofService"}, {(int64)System::Net::Sockets::SocketOptionName::IpTimeToLive, "IpTimeToLive"}, {(int64)System::Net::Sockets::SocketOptionName::MulticastInterface, "MulticastInterface"}, {(int64)System::Net::Sockets::SocketOptionName::MulticastTimeToLive, "MulticastTimeToLive"}, {(int64)System::Net::Sockets::SocketOptionName::MulticastLoopback, "MulticastLoopback"}, {(int64)System::Net::Sockets::SocketOptionName::AddMembership, "AddMembership"}, {(int64)System::Net::Sockets::SocketOptionName::DropMembership, "DropMembership"}, {(int64)System::Net::Sockets::SocketOptionName::DontFragment, "DontFragment"}, {(int64)System::Net::Sockets::SocketOptionName::AddSourceMembership, "AddSourceMembership"}, {(int64)System::Net::Sockets::SocketOptionName::DropSourceMembership, "DropSourceMembership"}, {(int64)System::Net::Sockets::SocketOptionName::BlockSource, "BlockSource"}, {(int64)System::Net::Sockets::SocketOptionName::UnblockSource, "UnblockSource"}, {(int64)System::Net::Sockets::SocketOptionName::PacketInformation, "PacketInformation"}, {(int64)System::Net::Sockets::SocketOptionName::HopLimit, "HopLimit"}, {(int64)System::Net::Sockets::SocketOptionName::IPProtectionLevel, "IPProtectionLevel"}, {(int64)System::Net::Sockets::SocketOptionName::IPv6Only, "IPv6Only"}, {(int64)System::Net::Sockets::SocketOptionName::NoDelay, "NoDelay"}, {(int64)System::Net::Sockets::SocketOptionName::BsdUrgent, "BsdUrgent"}, {(int64)System::Net::Sockets::SocketOptionName::Expedited, "Expedited"}, {(int64)System::Net::Sockets::SocketOptionName::NoChecksum, "NoChecksum"}, {(int64)System::Net::Sockets::SocketOptionName::ChecksumCoverage, "ChecksumCoverage"}, {(int64)System::Net::Sockets::SocketOptionName::UpdateAcceptContext, "UpdateAcceptContext"}, {(int64)System::Net::Sockets::SocketOptionName::UpdateConnectContext, "UpdateConnectContext"}};
+struct EnumRegister<System::Net::Sockets::SocketOptionName> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::SocketOptionName, string>& values, bool& flags) {
+    values[System::Net::Sockets::SocketOptionName::Debug] = "Debug";
+    values[System::Net::Sockets::SocketOptionName::AcceptConnection] = "AcceptConnection";
+    values[System::Net::Sockets::SocketOptionName::ReuseAddress] = "ReuseAddress";
+    values[System::Net::Sockets::SocketOptionName::KeepAlive] = "KeepAlive";
+    values[System::Net::Sockets::SocketOptionName::DontRoute] = "DontRoute";
+    values[System::Net::Sockets::SocketOptionName::Broadcast] = "Broadcast";
+    values[System::Net::Sockets::SocketOptionName::UseLoopback] = "UseLoopback";
+    values[System::Net::Sockets::SocketOptionName::Linger] = "Linger";
+    values[System::Net::Sockets::SocketOptionName::OutOfBandInline] = "OutOfBandInline";
+    values[System::Net::Sockets::SocketOptionName::DontLinger] = "DontLinger";
+    values[System::Net::Sockets::SocketOptionName::ExclusiveAddressUse] = "ExclusiveAddressUse";
+    values[System::Net::Sockets::SocketOptionName::SendBuffer] = "SendBuffer";
+    values[System::Net::Sockets::SocketOptionName::ReceiveBuffer] = "ReceiveBuffer";
+    values[System::Net::Sockets::SocketOptionName::SendLowWater] = "SendLowWater";
+    values[System::Net::Sockets::SocketOptionName::ReceiveLowWater] = "ReceiveLowWater";
+    values[System::Net::Sockets::SocketOptionName::SendTimeout] = "SendTimeout";
+    values[System::Net::Sockets::SocketOptionName::ReceiveTimeout] = "ReceiveTimeout";
+    values[System::Net::Sockets::SocketOptionName::Error] = "Error";
+    values[System::Net::Sockets::SocketOptionName::Type] = "Type";
+    values[System::Net::Sockets::SocketOptionName::MaxConnections] = "MaxConnections";
+    values[System::Net::Sockets::SocketOptionName::IPOptions] = "IPOptions";
+    values[System::Net::Sockets::SocketOptionName::HeaderIncluded] = "HeaderIncluded";
+    values[System::Net::Sockets::SocketOptionName::_typeofService] = "_typeofService";
+    values[System::Net::Sockets::SocketOptionName::IpTimeToLive] = "IpTimeToLive";
+    values[System::Net::Sockets::SocketOptionName::MulticastInterface] = "MulticastInterface";
+    values[System::Net::Sockets::SocketOptionName::MulticastTimeToLive] = "MulticastTimeToLive";
+    values[System::Net::Sockets::SocketOptionName::MulticastLoopback] = "MulticastLoopback";
+    values[System::Net::Sockets::SocketOptionName::AddMembership] = "AddMembership";
+    values[System::Net::Sockets::SocketOptionName::DropMembership] = "DropMembership";
+    values[System::Net::Sockets::SocketOptionName::DontFragment] = "DontFragment";
+    values[System::Net::Sockets::SocketOptionName::AddSourceMembership] = "AddSourceMembership";
+    values[System::Net::Sockets::SocketOptionName::DropSourceMembership] = "DropSourceMembership";
+    values[System::Net::Sockets::SocketOptionName::BlockSource] = "BlockSource";
+    values[System::Net::Sockets::SocketOptionName::UnblockSource] = "UnblockSource";
+    values[System::Net::Sockets::SocketOptionName::PacketInformation] = "PacketInformation";
+    values[System::Net::Sockets::SocketOptionName::HopLimit] = "HopLimit";
+    values[System::Net::Sockets::SocketOptionName::IPProtectionLevel] = "IPProtectionLevel";
+    values[System::Net::Sockets::SocketOptionName::IPv6Only] = "IPv6Only";
+    values[System::Net::Sockets::SocketOptionName::NoDelay] = "NoDelay";
+    values[System::Net::Sockets::SocketOptionName::BsdUrgent] = "BsdUrgent";
+    values[System::Net::Sockets::SocketOptionName::Expedited] = "Expedited";
+    values[System::Net::Sockets::SocketOptionName::NoChecksum] = "NoChecksum";
+    values[System::Net::Sockets::SocketOptionName::ChecksumCoverage] = "ChecksumCoverage";
+    values[System::Net::Sockets::SocketOptionName::UpdateAcceptContext] = "UpdateAcceptContext";
+    values[System::Net::Sockets::SocketOptionName::UpdateConnectContext] = "UpdateConnectContext";
     flags = false;
   }
 };

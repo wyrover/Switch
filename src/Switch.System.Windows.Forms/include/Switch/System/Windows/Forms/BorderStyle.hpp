@@ -21,10 +21,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::BorderStyle > {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::BorderStyle::None, "None"}, {(int64)System::Windows::Forms::BorderStyle::FixedSingle, "FixedSingle"}, {(int64)System::Windows::Forms::BorderStyle::Fixed3D, "Fixed3D"}};
+struct EnumRegister<System::Windows::Forms::BorderStyle> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::BorderStyle, string>& values, bool& flags) {
+    values[System::Windows::Forms::BorderStyle::None] = "None";
+    values[System::Windows::Forms::BorderStyle::FixedSingle] = "FixedSingle";
+    values[System::Windows::Forms::BorderStyle::Fixed3D] = "Fixed3D";
     flags = false;
   }
 };

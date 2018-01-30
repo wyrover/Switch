@@ -31,10 +31,14 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::IO::FileMode> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::FileMode::CreateNew, "CreateNew"}, {(int64)System::IO::FileMode::Create, "Create"}, {(int64)System::IO::FileMode::Open, "Open"}, {(int64)System::IO::FileMode::OpenOrCreate, "OpenOrCreate"}, {(int64)System::IO::FileMode::Truncate, "Truncate"}, {(int64)System::IO::FileMode::Append, "Append"}};
+struct EnumRegister<System::IO::FileMode> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::FileMode, string>& values, bool& flags) {
+    values[System::IO::FileMode::CreateNew] = "CreateNew";
+    values[System::IO::FileMode::Create] = "Create";
+    values[System::IO::FileMode::Open] = "Open";
+    values[System::IO::FileMode::OpenOrCreate] = "OpenOrCreate";
+    values[System::IO::FileMode::Truncate] = "Truncate";
+    values[System::IO::FileMode::Append] = "Append";
     flags = false;
   }
 };

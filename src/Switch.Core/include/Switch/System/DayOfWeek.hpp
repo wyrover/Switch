@@ -32,10 +32,15 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::DayOfWeek> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::DayOfWeek::Sunday, "Sunday"}, {(int64)System::DayOfWeek::Monday, "Monday"}, {(int64)System::DayOfWeek::Tuesday, "Tuesday"}, {(int64)System::DayOfWeek::Wednesday, "Wednesday"}, {(int64)System::DayOfWeek::Thursday, "Thursday"}, {(int64)System::DayOfWeek::Friday, "Friday"}, {(int64)System::DayOfWeek::Saturday, "Saturday"}};
+struct EnumRegister<System::DayOfWeek> {
+  void operator()(System::Collections::Generic::IDictionary<System::DayOfWeek, string>& values, bool& flags) {
+    values[System::DayOfWeek::Sunday] = "Sunday";
+    values[System::DayOfWeek::Monday] = "Monday";
+    values[System::DayOfWeek::Tuesday] = "Tuesday";
+    values[System::DayOfWeek::Wednesday] = "Wednesday";
+    values[System::DayOfWeek::Thursday] = "Thursday";
+    values[System::DayOfWeek::Friday] = "Friday";
+    values[System::DayOfWeek::Saturday] = "Saturday";
     flags = false;
   }
 };

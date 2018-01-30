@@ -360,7 +360,7 @@ namespace Switch {
       /// @param value The value to write
       static void Write(uint64 value);
 
-      static void Write(const String& format, const Array< ref<Object>>& array) {
+      static void Write(const String& format, const Array<ref<Object>>& array) {
         Write(String::Format(format, array));
       }
 
@@ -430,7 +430,7 @@ namespace Switch {
       static void WriteLine(uint64 value);
 
 
-      static void WriteLine(const String& format, const Array< ref<Object>>& array) {
+      static void WriteLine(const String& format, const Array<ref<Object>>& array) {
         WriteLine(String::Format(format, array));
       }
 

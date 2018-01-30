@@ -26,10 +26,12 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::UriPartial> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::UriPartial::Scheme, "Scheme"}, {(int64)System::UriPartial::Authority, "Authority"}, {(int64)System::UriPartial::Path, "Path"}, {(int64)System::UriPartial::Query, "Query"}};
+struct EnumRegister<System::UriPartial> {
+  void operator()(System::Collections::Generic::IDictionary<System::UriPartial, string>& values, bool& flags) {
+    values[System::UriPartial::Scheme] = "Scheme";
+    values[System::UriPartial::Authority] = "Authority";
+    values[System::UriPartial::Path] = "Path";
+    values[System::UriPartial::Query] = "Query";
     flags = false;
   }
 };

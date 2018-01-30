@@ -42,10 +42,25 @@ template <>
 class AddFlagOperators<System::Globalization::NumberStyles> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Globalization::NumberStyles> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Globalization::NumberStyles::None, "None"}, {(int64)System::Globalization::NumberStyles::AllowLeadingWhite, "AllowLeadingWhite"}, {(int64)System::Globalization::NumberStyles::AllowTrailingWhite, "AllowTrailingWhite"}, {(int64)System::Globalization::NumberStyles::AllowLeadingSign, "AllowLeadingSign"}, {(int64)System::Globalization::NumberStyles::AllowTrailingSign, "AllowTrailingSign"}, {(int64)System::Globalization::NumberStyles::AllowParentheses, "AllowParentheses"}, {(int64)System::Globalization::NumberStyles::AllowDecimalPoint, "AllowDecimalPoint"}, {(int64)System::Globalization::NumberStyles::AllowThousands, "AllowThousands"}, {(int64)System::Globalization::NumberStyles::AllowExponent, "AllowExponent"}, {(int64)System::Globalization::NumberStyles::AllowCurrencySymbol, "AllowCurrencySymbol"}, {(int64)System::Globalization::NumberStyles::AllowHexSpecifier, "AllowHexSpecifier"}, {(int64)System::Globalization::NumberStyles::Integer, "Integer"}, {(int64)System::Globalization::NumberStyles::HexNumber, "HexNumber"}, {(int64)System::Globalization::NumberStyles::Number, "Number"}, {(int64)System::Globalization::NumberStyles::Float, "Float"}, {(int64)System::Globalization::NumberStyles::Currency, "Currency"}, {(int64)System::Globalization::NumberStyles::Any, "Any"}};
+struct EnumRegister<System::Globalization::NumberStyles> {
+  void operator()(System::Collections::Generic::IDictionary<System::Globalization::NumberStyles, string>& values, bool& flags) {
+    values[System::Globalization::NumberStyles::None] = "None";
+    values[System::Globalization::NumberStyles::AllowLeadingWhite] = "AllowLeadingWhite";
+    values[System::Globalization::NumberStyles::AllowTrailingWhite] = "AllowTrailingWhite";
+    values[System::Globalization::NumberStyles::AllowLeadingSign] = "AllowLeadingSign";
+    values[System::Globalization::NumberStyles::AllowTrailingSign] = "AllowTrailingSign";
+    values[System::Globalization::NumberStyles::AllowParentheses] = "AllowParentheses";
+    values[System::Globalization::NumberStyles::AllowDecimalPoint] = "AllowDecimalPoint";
+    values[System::Globalization::NumberStyles::AllowThousands] = "AllowThousands";
+    values[System::Globalization::NumberStyles::AllowExponent] = "AllowExponent";
+    values[System::Globalization::NumberStyles::AllowCurrencySymbol] = "AllowCurrencySymbol";
+    values[System::Globalization::NumberStyles::AllowHexSpecifier] = "AllowHexSpecifier";
+    values[System::Globalization::NumberStyles::Integer] = "Integer";
+    values[System::Globalization::NumberStyles::HexNumber] = "HexNumber";
+    values[System::Globalization::NumberStyles::Number] = "Number";
+    values[System::Globalization::NumberStyles::Float] = "Float";
+    values[System::Globalization::NumberStyles::Currency] = "Currency";
+    values[System::Globalization::NumberStyles::Any] = "Any";
     flags = true;
   }
 };

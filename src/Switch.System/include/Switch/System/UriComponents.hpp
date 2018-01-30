@@ -55,10 +55,25 @@ template <>
 class AddFlagOperators<System::UriComponents> : public TrueType {};
 
 template<>
-class EnumToStrings<System::UriComponents> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::UriComponents::None, "None"}, {(int64)System::UriComponents::Scheme, "Scheme"}, {(int64)System::UriComponents::UserInfo, "UserInfo"}, {(int64)System::UriComponents::Host, "Host"}, {(int64)System::UriComponents::Port, "Port"}, {(int64)System::UriComponents::Path, "Path"}, {(int64)System::UriComponents::Query, "Query"}, {(int64)System::UriComponents::Fragment, "Fragment"}, {(int64)System::UriComponents::StrongPort, "StrongPort"}, {(int64)System::UriComponents::KeepDelimiter, "KeepDelimiter"}, {(int64)System::UriComponents::HostAndPort, "HostAndPort"}, {(int64)System::UriComponents::StrongAuthority, "StrongAuthority"}, {(int64)System::UriComponents::AbsoluteUri, "AbsoluteUri"}, {(int64)System::UriComponents::PathAndQuery, "PathAndQuery"}, {(int64)System::UriComponents::HttpRequestUrl, "HttpRequestUrl"}, {(int64)System::UriComponents::SchemeAndServer, "SchemeAndServer"}, {(int64)System::UriComponents::SerializationInfoString, "SerializationInfoString"}};
+struct EnumRegister<System::UriComponents> {
+  void operator()(System::Collections::Generic::IDictionary<System::UriComponents, string>& values, bool& flags) {
+    values[System::UriComponents::None] = "None";
+    values[System::UriComponents::Scheme] = "Scheme";
+    values[System::UriComponents::UserInfo] = "UserInfo";
+    values[System::UriComponents::Host] = "Host";
+    values[System::UriComponents::Port] = "Port";
+    values[System::UriComponents::Path] = "Path";
+    values[System::UriComponents::Query] = "Query";
+    values[System::UriComponents::Fragment] = "Fragment";
+    values[System::UriComponents::StrongPort] = "StrongPort";
+    values[System::UriComponents::KeepDelimiter] = "KeepDelimiter";
+    values[System::UriComponents::HostAndPort] = "HostAndPort";
+    values[System::UriComponents::StrongAuthority] = "StrongAuthority";
+    values[System::UriComponents::AbsoluteUri] = "AbsoluteUri";
+    values[System::UriComponents::PathAndQuery] = "PathAndQuery";
+    values[System::UriComponents::HttpRequestUrl] = "HttpRequestUrl";
+    values[System::UriComponents::SchemeAndServer] = "SchemeAndServer";
+    values[System::UriComponents::SerializationInfoString] = "SerializationInfoString";
     flags = true;
   }
 };

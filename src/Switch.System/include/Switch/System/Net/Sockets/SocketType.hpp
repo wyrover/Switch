@@ -39,10 +39,14 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Net::Sockets::SocketType> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::Sockets::SocketType::Unknown, "Unknown"}, {(int64)System::Net::Sockets::SocketType::Stream, "Stream"}, {(int64)System::Net::Sockets::SocketType::Dgram, "Dgram"}, {(int64)System::Net::Sockets::SocketType::Raw, "Raw"}, {(int64)System::Net::Sockets::SocketType::Rdm, "Rdm"}, {(int64)System::Net::Sockets::SocketType::Seqpacket, "Seqpacket"}};
+struct EnumRegister<System::Net::Sockets::SocketType> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::SocketType, string>& values, bool& flags) {
+    values[System::Net::Sockets::SocketType::Unknown] = "Unknown";
+    values[System::Net::Sockets::SocketType::Stream] = "Stream";
+    values[System::Net::Sockets::SocketType::Dgram] = "Dgram";
+    values[System::Net::Sockets::SocketType::Raw] = "Raw";
+    values[System::Net::Sockets::SocketType::Rdm] = "Rdm";
+    values[System::Net::Sockets::SocketType::Seqpacket] = "Seqpacket";
     flags = false;
   }
 };

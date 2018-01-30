@@ -29,10 +29,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::MessageBoxDefaultButton> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::MessageBoxDefaultButton::Button1, "Button1"}, {(int64)System::Windows::Forms::MessageBoxDefaultButton::Button2, "Button2"}, {(int64)System::Windows::Forms::MessageBoxDefaultButton::Button3, "Button3"}};
+struct EnumRegister<System::Windows::Forms::MessageBoxDefaultButton> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::MessageBoxDefaultButton, string>& values, bool& flags) {
+    values[System::Windows::Forms::MessageBoxDefaultButton::Button1] = "Button1";
+    values[System::Windows::Forms::MessageBoxDefaultButton::Button2] = "Button2";
+    values[System::Windows::Forms::MessageBoxDefaultButton::Button3] = "Button3";
     flags = false;
   }
 };

@@ -23,10 +23,10 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<Microsoft::Win32::RegistryOptions> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)Microsoft::Win32::RegistryOptions::None, "None"}, {(int64)Microsoft::Win32::RegistryOptions::Volatile, "Volatile"}};
+struct EnumRegister<Microsoft::Win32::RegistryOptions> {
+  void operator()(System::Collections::Generic::IDictionary<Microsoft::Win32::RegistryOptions, string>& values, bool& flags) {
+    values[Microsoft::Win32::RegistryOptions::None] = "None";
+    values[Microsoft::Win32::RegistryOptions::Volatile] = "Volatile";
     flags = false;
   }
 };

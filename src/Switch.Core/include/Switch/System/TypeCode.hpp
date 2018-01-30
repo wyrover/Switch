@@ -55,10 +55,24 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::TypeCode> {
-public:
-  void operator ()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::TypeCode::Empty, "Empty"}, {(int64)System::TypeCode::Object, "Object"}, {(int64)System::TypeCode::Boolean, "Boolean"}, {(int64)System::TypeCode::Char, "Char"}, {(int64)System::TypeCode::SByte, "SByte"}, {(int64)System::TypeCode::Byte, "Byte"}, {(int64)System::TypeCode::Int16, "Int16"}, {(int64)System::TypeCode::UInt16, "UInt16"}, {(int64)System::TypeCode::Int32, "Int32"}, {(int64)System::TypeCode::UInt32, "UInt32"}, {(int64)System::TypeCode::Int64, "Int64"}, {(int64)System::TypeCode::UInt64, "UInt64"}, {(int64)System::TypeCode::Single, "Single"}, {(int64)System::TypeCode::Double, "Double"}, {(int64)System::TypeCode::DateTime, "DateTime"}, {(int64)System::TypeCode::String, "String"}};
+struct EnumRegister<System::TypeCode> {
+  void operator()(System::Collections::Generic::IDictionary<System::TypeCode, string>& values, bool& flags) {
+    values[System::TypeCode::Empty] = "Empty";
+    values[System::TypeCode::Object] = "Object";
+    values[System::TypeCode::Boolean] = "Boolean";
+    values[System::TypeCode::Char] = "Char";
+    values[System::TypeCode::SByte] = "SByte";
+    values[System::TypeCode::Byte] = "Byte";
+    values[System::TypeCode::Int16] = "Int16";
+    values[System::TypeCode::UInt16] = "UInt16";
+    values[System::TypeCode::Int32] = "Int32";
+    values[System::TypeCode::UInt32] = "UInt32";
+    values[System::TypeCode::Int64] = "Int64";
+    values[System::TypeCode::UInt64] = "UInt64";
+    values[System::TypeCode::Single] = "Single";
+    values[System::TypeCode::Double] = "Double";
+    values[System::TypeCode::DateTime] = "DateTime";
+    values[System::TypeCode::String] = "String";
     flags = false;
   }
 };

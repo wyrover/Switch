@@ -29,10 +29,10 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::IO::Ports::SerialData> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::Ports::SerialData::Chars, "Chars"}, {(int64)System::IO::Ports::SerialData::Eof, "Eof"}};
+struct EnumRegister<System::IO::Ports::SerialData> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::Ports::SerialData, string>& values, bool& flags) {
+    values[System::IO::Ports::SerialData::Chars] = "Chars";
+    values[System::IO::Ports::SerialData::Eof] = "Eof";
     flags = false;
   }
 };

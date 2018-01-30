@@ -35,10 +35,13 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::IO::Ports::SerialError> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::Ports::SerialError::RXOver, "RXOver"}, {(int64)System::IO::Ports::SerialError::Overrun, "Overrun"}, {(int64)System::IO::Ports::SerialError::RXParity, "RXParity"}, {(int64)System::IO::Ports::SerialError::Frame, "Frame"}, {(int64)System::IO::Ports::SerialError::TXFull, "TXFull"}};
+struct EnumRegister<System::IO::Ports::SerialError> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::Ports::SerialError, string>& values, bool& flags) {
+    values[System::IO::Ports::SerialError::RXOver] = "RXOver";
+    values[System::IO::Ports::SerialError::Overrun] = "Overrun";
+    values[System::IO::Ports::SerialError::RXParity] = "RXParity";
+    values[System::IO::Ports::SerialError::Frame] = "Frame";
+    values[System::IO::Ports::SerialError::TXFull] = "TXFull";
     flags = false;
   }
 };

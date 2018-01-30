@@ -24,10 +24,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::BootMode> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::BootMode::Normal, "Normal"}, {(int64)System::Windows::Forms::BootMode::FailSafe, "FailSafe"}, {(int64)System::Windows::Forms::BootMode::FailSafeWithNetwork, "FailSafeWithNetwork"},};
+struct EnumRegister<System::Windows::Forms::BootMode> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::BootMode, string>& values, bool& flags) {
+    values[System::Windows::Forms::BootMode::Normal] = "Normal";
+    values[System::Windows::Forms::BootMode::FailSafe] = "FailSafe";
+    values[System::Windows::Forms::BootMode::FailSafeWithNetwork] = "FailSafeWithNetwork";
     flags = false;
   }
 };

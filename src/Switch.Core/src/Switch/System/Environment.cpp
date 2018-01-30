@@ -272,7 +272,7 @@ const Array<String>& Environment::GetCommandLineArgs() {
 }
 
 String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVariableTarget target) {
-  if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
+  if (!Enum<>::GetValues<EnvironmentVariableTarget>().Contains(target))
     throw ArgumentException(caller_);
 
   if (target == EnvironmentVariableTarget::Process) {
@@ -284,7 +284,7 @@ String Environment::GetEnvironmentVariable(const String& variable, EnvironmentVa
 }
 
 const Collections::Generic::IDictionary<String, String>& Environment::GetEnvironmentVariables(EnvironmentVariableTarget target) {
-  if (!Enum<EnvironmentVariableTarget>::GetValues().Contains(target))
+  if (!Enum<>::GetValues<EnvironmentVariableTarget>().Contains(target))
     throw ArgumentException(caller_);
 
   if (target == EnvironmentVariableTarget::Process)
@@ -299,7 +299,7 @@ const Collections::Generic::IDictionary<String, String>& Environment::GetEnviron
 }
 
 String Environment::GetFolderPath(Environment::SpecialFolder folder, Environment::SpecialFolderOption option) {
-  if (!Enum<Environment::SpecialFolderOption>::GetValues().Contains(option))
+  if (!Enum<>::GetValues<Environment::SpecialFolderOption>().Contains(option))
     throw ArgumentException(caller_);
 
   string path = Native::DirectoryApi::GetKnowFolderPath(folder);

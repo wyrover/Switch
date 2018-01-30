@@ -122,10 +122,55 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Net::Sockets::SocketError> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::Sockets::SocketError::SockError, "SockError"}, {(int64)System::Net::Sockets::SocketError::Success, "Success"}, {(int64)System::Net::Sockets::SocketError::OperationAborted, "OperationAborted"}, {(int64)System::Net::Sockets::SocketError::IOPending, "IOPending"}, {(int64)System::Net::Sockets::SocketError::Interrupted, "Interrupted"}, {(int64)System::Net::Sockets::SocketError::AccessDenied, "AccessDenied"}, {(int64)System::Net::Sockets::SocketError::Fault, "Fault"}, {(int64)System::Net::Sockets::SocketError::InvalidArgument, "InvalidArgument"}, {(int64)System::Net::Sockets::SocketError::TooManyOpenSockets, "TooManyOpenSockets"}, {(int64)System::Net::Sockets::SocketError::WouldBlock, "WouldBlock"}, {(int64)System::Net::Sockets::SocketError::InProgress, "InProgress"}, {(int64)System::Net::Sockets::SocketError::AlreadyInProgress, "AlreadyInProgress"}, {(int64)System::Net::Sockets::SocketError::NotSocket, "NotSocket"}, {(int64)System::Net::Sockets::SocketError::DestinationAddressRequired, "DestinationAddressRequired"}, {(int64)System::Net::Sockets::SocketError::MessageSize, "MessageSize"}, {(int64)System::Net::Sockets::SocketError::ProtocolType, "ProtocolType"}, {(int64)System::Net::Sockets::SocketError::ProtocolOption, "ProtocolOption"}, {(int64)System::Net::Sockets::SocketError::ProtocolNotSupported, "ProtocolNotSupported"}, {(int64)System::Net::Sockets::SocketError::SocketNotSupported, "SocketNotSupported"}, {(int64)System::Net::Sockets::SocketError::OperationNotSupported, "OperationNotSupported"}, {(int64)System::Net::Sockets::SocketError::ProtocolFamilyNotSupported, "ProtocolFamilyNotSupported"}, {(int64)System::Net::Sockets::SocketError::AddressFamilyNotSupported, "AddressFamilyNotSupported"}, {(int64)System::Net::Sockets::SocketError::AddressAlreadyInUse, "AddressAlreadyInUse"}, {(int64)System::Net::Sockets::SocketError::AddressNotAvailable, "AddressNotAvailable"}, {(int64)System::Net::Sockets::SocketError::NetworkDown, "NetworkDown"}, {(int64)System::Net::Sockets::SocketError::NetworkUnreachable, "NetworkUnreachable"}, {(int64)System::Net::Sockets::SocketError::NetworkReset, "NetworkReset"}, {(int64)System::Net::Sockets::SocketError::ConnectionAborted, "ConnectionAborted"}, {(int64)System::Net::Sockets::SocketError::ConnectionReset, "ConnectionReset"}, {(int64)System::Net::Sockets::SocketError::NoBufferSpaceAvailable, "NoBufferSpaceAvailable"}, {(int64)System::Net::Sockets::SocketError::IsConnected, "IsConnected"}, {(int64)System::Net::Sockets::SocketError::NotConnected, "NotConnected"}, {(int64)System::Net::Sockets::SocketError::Shutdown, "Shutdown"}, {(int64)System::Net::Sockets::SocketError::TimedOut, "TimedOut"}, {(int64)System::Net::Sockets::SocketError::ConnectionRefused, "ConnectionRefused"}, {(int64)System::Net::Sockets::SocketError::HostDown, "HostDown"}, {(int64)System::Net::Sockets::SocketError::HostUnreachable, "HostUnreachable"}, {(int64)System::Net::Sockets::SocketError::ProcessLimit, "ProcessLimit"}, {(int64)System::Net::Sockets::SocketError::SystemNotReady, "SystemNotReady"}, {(int64)System::Net::Sockets::SocketError::VersionNotSupported, "VersionNotSupported"}, {(int64)System::Net::Sockets::SocketError::NotInitialized, "NotInitialized"}, {(int64)System::Net::Sockets::SocketError::Disconnecting, "Disconnecting"}, {(int64)System::Net::Sockets::SocketError::TypeNotFound, "TypeNotFound"}, {(int64)System::Net::Sockets::SocketError::HostNotFound, "HostNotFound"}, {(int64)System::Net::Sockets::SocketError::TryAgain, "TryAgain"}, {(int64)System::Net::Sockets::SocketError::NoRecovery, "NoRecovery"}, {(int64)System::Net::Sockets::SocketError::NoData, "NoData"}};
+struct EnumRegister<System::Net::Sockets::SocketError> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::SocketError, string>& values, bool& flags) {
+    values[System::Net::Sockets::SocketError::SockError] = "SockError";
+    values[System::Net::Sockets::SocketError::Success] = "Success";
+    values[System::Net::Sockets::SocketError::OperationAborted] = "OperationAborted";
+    values[System::Net::Sockets::SocketError::IOPending] = "IOPending";
+    values[System::Net::Sockets::SocketError::Interrupted] = "Interrupted";
+    values[System::Net::Sockets::SocketError::AccessDenied] = "AccessDenied";
+    values[System::Net::Sockets::SocketError::Fault] = "Fault";
+    values[System::Net::Sockets::SocketError::InvalidArgument] = "InvalidArgument";
+    values[System::Net::Sockets::SocketError::TooManyOpenSockets] = "TooManyOpenSockets";
+    values[System::Net::Sockets::SocketError::WouldBlock] = "WouldBlock";
+    values[System::Net::Sockets::SocketError::InProgress] = "InProgress";
+    values[System::Net::Sockets::SocketError::AlreadyInProgress] = "AlreadyInProgress";
+    values[System::Net::Sockets::SocketError::NotSocket] = "NotSocket";
+    values[System::Net::Sockets::SocketError::DestinationAddressRequired] = "DestinationAddressRequired";
+    values[System::Net::Sockets::SocketError::MessageSize] = "MessageSize";
+    values[System::Net::Sockets::SocketError::ProtocolType] = "ProtocolType";
+    values[System::Net::Sockets::SocketError::ProtocolOption] = "ProtocolOption";
+    values[System::Net::Sockets::SocketError::ProtocolNotSupported] = "ProtocolNotSupported";
+    values[System::Net::Sockets::SocketError::SocketNotSupported] = "SocketNotSupported";
+    values[System::Net::Sockets::SocketError::OperationNotSupported] = "OperationNotSupported";
+    values[System::Net::Sockets::SocketError::ProtocolFamilyNotSupported] = "ProtocolFamilyNotSupported";
+    values[System::Net::Sockets::SocketError::AddressFamilyNotSupported] = "AddressFamilyNotSupported";
+    values[System::Net::Sockets::SocketError::AddressAlreadyInUse] = "AddressAlreadyInUse";
+    values[System::Net::Sockets::SocketError::AddressNotAvailable] = "AddressNotAvailable";
+    values[System::Net::Sockets::SocketError::NetworkDown] = "NetworkDown";
+    values[System::Net::Sockets::SocketError::NetworkUnreachable] = "NetworkUnreachable";
+    values[System::Net::Sockets::SocketError::NetworkReset] = "NetworkReset";
+    values[System::Net::Sockets::SocketError::ConnectionAborted] = "ConnectionAborted";
+    values[System::Net::Sockets::SocketError::ConnectionReset] = "ConnectionReset";
+    values[System::Net::Sockets::SocketError::NoBufferSpaceAvailable] = "NoBufferSpaceAvailable";
+    values[System::Net::Sockets::SocketError::IsConnected] = "IsConnected";
+    values[System::Net::Sockets::SocketError::NotConnected] = "NotConnected";
+    values[System::Net::Sockets::SocketError::Shutdown] = "Shutdown";
+    values[System::Net::Sockets::SocketError::TimedOut] = "TimedOut";
+    values[System::Net::Sockets::SocketError::ConnectionRefused] = "ConnectionRefused";
+    values[System::Net::Sockets::SocketError::HostDown] = "HostDown";
+    values[System::Net::Sockets::SocketError::HostUnreachable] = "HostUnreachable";
+    values[System::Net::Sockets::SocketError::ProcessLimit] = "ProcessLimit";
+    values[System::Net::Sockets::SocketError::SystemNotReady] = "SystemNotReady";
+    values[System::Net::Sockets::SocketError::VersionNotSupported] = "VersionNotSupported";
+    values[System::Net::Sockets::SocketError::NotInitialized] = "NotInitialized";
+    values[System::Net::Sockets::SocketError::Disconnecting] = "Disconnecting";
+    values[System::Net::Sockets::SocketError::TypeNotFound] = "TypeNotFound";
+    values[System::Net::Sockets::SocketError::HostNotFound] = "HostNotFound";
+    values[System::Net::Sockets::SocketError::TryAgain] = "TryAgain";
+    values[System::Net::Sockets::SocketError::NoRecovery] = "NoRecovery";
+    values[System::Net::Sockets::SocketError::NoData] = "NoData";
     flags = false;
   }
 };

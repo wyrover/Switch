@@ -27,10 +27,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::IO::SeekOrigin> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::SeekOrigin::Begin, "Begin"}, {(int64)System::IO::SeekOrigin::Current, "Current"}, {(int64)System::IO::SeekOrigin::End, "End"}};
+struct EnumRegister<System::IO::SeekOrigin> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::SeekOrigin, string>& values, bool& flags) {
+    values[System::IO::SeekOrigin::Begin] = "Begin";
+    values[System::IO::SeekOrigin::Current] = "Current";
+    values[System::IO::SeekOrigin::End] = "End";
     flags =  false;
   }
 };

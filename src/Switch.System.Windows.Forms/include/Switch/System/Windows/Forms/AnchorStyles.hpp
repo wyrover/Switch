@@ -36,10 +36,13 @@ template <>
 class AddFlagOperators<System::Windows::Forms::AnchorStyles> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Windows::Forms::AnchorStyles> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::AnchorStyles::None, "None"}, {(int64)System::Windows::Forms::AnchorStyles::Top, "Top"}, {(int64)System::Windows::Forms::AnchorStyles::Bottom, "Bottom"}, {(int64)System::Windows::Forms::AnchorStyles::Left, "Left"}, {(int64)System::Windows::Forms::AnchorStyles::Right, "Right"}};
+struct EnumRegister<System::Windows::Forms::AnchorStyles> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::AnchorStyles, string>& values, bool& flags) {
+    values[System::Windows::Forms::AnchorStyles::None] = "None";
+    values[System::Windows::Forms::AnchorStyles::Top] = "Top";
+    values[System::Windows::Forms::AnchorStyles::Bottom] = "Bottom";
+    values[System::Windows::Forms::AnchorStyles::Left] = "Left";
+    values[System::Windows::Forms::AnchorStyles::Right] = "Right";
     flags = true;
   }
 };

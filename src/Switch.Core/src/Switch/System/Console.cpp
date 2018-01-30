@@ -82,7 +82,7 @@ namespace {
 property_<ConsoleColor> Console::BackgroundColor {
   [] {return Native::ConsoleApi::GetBackgroundColor();},
   [](ConsoleColor value) {
-    if (!Enum<ConsoleColor>::IsDefined(value))
+    if (!Enum<>::IsDefined(value))
       throw ArgumentException(caller_);
     if (!Native::ConsoleApi::SetBackgroundColor(value))
       throw System::IO::IOException(caller_);
@@ -152,7 +152,7 @@ property_<Console::StandardErrorOutput&, readonly_> Console::Error {
 property_<ConsoleColor> Console::ForegroundColor {
   [] {return Native::ConsoleApi::GetForegroundColor();},
   [](ConsoleColor value) {
-    if (!Enum<ConsoleColor>::IsDefined(value))
+    if (!Enum<>::IsDefined(value))
       throw ArgumentException(caller_);
     Native::ConsoleApi::SetForegroundColor(value);
   }

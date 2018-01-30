@@ -31,10 +31,16 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::DialogResult> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::DialogResult::None, "None"}, {(int64)System::Windows::Forms::DialogResult::OK, "OK"}, {(int64)System::Windows::Forms::DialogResult::Cancel, "Cancel"}, {(int64)System::Windows::Forms::DialogResult::Abort, "Abort"}, {(int64)System::Windows::Forms::DialogResult::Retry, "Retry"}, {(int64)System::Windows::Forms::DialogResult::Ignore, "Ignore"}, {(int64)System::Windows::Forms::DialogResult::Yes, "Yes"}, {(int64)System::Windows::Forms::DialogResult::No, "No"}};
+struct EnumRegister<System::Windows::Forms::DialogResult> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::DialogResult, string>& values, bool& flags) {
+    values[System::Windows::Forms::DialogResult::None] = "None";
+    values[System::Windows::Forms::DialogResult::OK] = "OK";
+    values[System::Windows::Forms::DialogResult::Cancel] = "Cancel";
+    values[System::Windows::Forms::DialogResult::Abort] = "Abort";
+    values[System::Windows::Forms::DialogResult::Retry] = "Retry";
+    values[System::Windows::Forms::DialogResult::Ignore] = "Ignore";
+    values[System::Windows::Forms::DialogResult::Yes] = "Yes";
+    values[System::Windows::Forms::DialogResult::No] = "No";
     flags = false;
   }
 };

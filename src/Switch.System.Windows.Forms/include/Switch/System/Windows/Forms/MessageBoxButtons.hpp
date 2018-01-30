@@ -35,10 +35,14 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::MessageBoxButtons> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::MessageBoxButtons::OK, "OK"}, {(int64)System::Windows::Forms::MessageBoxButtons::OKCancel, "OKCancel"}, {(int64)System::Windows::Forms::MessageBoxButtons::AbortRetryIgnore, "AbortRetryIgnore"}, {(int64)System::Windows::Forms::MessageBoxButtons::YesNoCancel, "YesNoCancel"}, {(int64)System::Windows::Forms::MessageBoxButtons::YesNo, "YesNo"}, {(int64)System::Windows::Forms::MessageBoxButtons::RetryCancel, "RetryCancel"}};
+struct EnumRegister<System::Windows::Forms::MessageBoxButtons> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::MessageBoxButtons, string>& values, bool& flags) {
+    values[System::Windows::Forms::MessageBoxButtons::OK] = "OK";
+    values[System::Windows::Forms::MessageBoxButtons::OKCancel] = "OKCancel";
+    values[System::Windows::Forms::MessageBoxButtons::AbortRetryIgnore] = "AbortRetryIgnore";
+    values[System::Windows::Forms::MessageBoxButtons::YesNoCancel] = "YesNoCancel";
+    values[System::Windows::Forms::MessageBoxButtons::YesNo] = "YesNo";
+    values[System::Windows::Forms::MessageBoxButtons::RetryCancel] = "RetryCancel";
     flags = false;
   }
 };

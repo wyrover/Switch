@@ -23,10 +23,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::EnvironmentVariableTarget> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::EnvironmentVariableTarget::Process, "Process"}, {(int64)System::EnvironmentVariableTarget::User, "User"}, {(int64)System::EnvironmentVariableTarget::Machine, "Machine"}};
+struct EnumRegister<System::EnvironmentVariableTarget> {
+  void operator()(System::Collections::Generic::IDictionary<System::EnvironmentVariableTarget, string>& values, bool& flags) {
+    values[System::EnvironmentVariableTarget::Process] = "Process";
+    values[System::EnvironmentVariableTarget::User] = "User";
+    values[System::EnvironmentVariableTarget::Machine] = "Machine";
     flags = false;
   }
 };

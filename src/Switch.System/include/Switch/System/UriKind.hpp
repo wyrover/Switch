@@ -24,10 +24,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::UriKind> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::UriKind::RelativeOrAbsolute, "RelativeOrAbsolute"}, {(int64)System::UriKind::Absolute, "Absolute"}, {(int64)System::UriKind::Relative, "Relative"}};
+struct EnumRegister<System::UriKind> {
+  void operator()(System::Collections::Generic::IDictionary<System::UriKind, string>& values, bool& flags) {
+    values[System::UriKind::RelativeOrAbsolute] = "RelativeOrAbsolute";
+    values[System::UriKind::Absolute] = "Absolute";
+    values[System::UriKind::Relative] = "Relative";
     flags = false;
   }
 };

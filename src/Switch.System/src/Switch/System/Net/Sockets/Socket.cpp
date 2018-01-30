@@ -445,6 +445,6 @@ void Socket::SetTtl(int32 ttl) {
 void Socket::Shutdown(SocketShutdown how) {
   if (this->data->socket == 0)
     throw ObjectDisposedException(caller_);
-  if (Native::SocketApi::Shutdown(this->data->socket, Enum<SocketShutdown>::ToInt32(how)) != 0)
+  if (Native::SocketApi::Shutdown(this->data->socket, (int32)how) != 0)
     throw SocketException(Native::SocketApi::GetLastError(), caller_);
 }

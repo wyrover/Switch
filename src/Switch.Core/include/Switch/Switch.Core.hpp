@@ -157,7 +157,6 @@
 #include "System/BadImageFormatException.hpp"
 #include "System/BitConverter.hpp"
 #include "System/Boolean.hpp"
-#include "System/BoxEnum.hpp"
 #include "System/Buffer.hpp"
 #include "System/Byte.hpp"
 #include "System/CannotUnloadAppDomainException.hpp"

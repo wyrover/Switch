@@ -30,10 +30,15 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<Microsoft::Win32::RegistryHive> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)Microsoft::Win32::RegistryHive::ClassesRoot, "ClassesRoot"}, {(int64)Microsoft::Win32::RegistryHive::CurrentUser, "CurrentUser"}, {(int64)Microsoft::Win32::RegistryHive::LocalMachine, "LocalMachine"}, {(int64)Microsoft::Win32::RegistryHive::Users, "Users"}, {(int64)Microsoft::Win32::RegistryHive::PerformanceData, "PerformanceData"}, {(int64)Microsoft::Win32::RegistryHive::CurrentConfig, "CurrentConfig"}, {(int64)Microsoft::Win32::RegistryHive::DynData, "DynData"}};
+struct EnumRegister<Microsoft::Win32::RegistryHive> {
+  void operator()(System::Collections::Generic::IDictionary<Microsoft::Win32::RegistryHive, string>& values, bool& flags) {
+    values[Microsoft::Win32::RegistryHive::ClassesRoot] = "ClassesRoot";
+    values[Microsoft::Win32::RegistryHive::CurrentUser] = "CurrentUser";
+    values[Microsoft::Win32::RegistryHive::LocalMachine] = "LocalMachine";
+    values[Microsoft::Win32::RegistryHive::Users] = "Users";
+    values[Microsoft::Win32::RegistryHive::PerformanceData] = "PerformanceData";
+    values[Microsoft::Win32::RegistryHive::CurrentConfig] = "CurrentConfig";
+    values[Microsoft::Win32::RegistryHive::DynData] = "DynData";
     flags = false;
   }
 };

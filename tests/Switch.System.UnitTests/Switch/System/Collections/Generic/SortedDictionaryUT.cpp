@@ -11,7 +11,7 @@ namespace {
   }
 
   TEST(SortedDictionaryTest, ConstructorIDictionary) {
-    Dictionary<string, int32> source;
+    SortedDictionary<string, int32> source;
     source["tic et tac"] = 2;
     source["les nains"] = 7;
     source["tortues ninja"] = 4;

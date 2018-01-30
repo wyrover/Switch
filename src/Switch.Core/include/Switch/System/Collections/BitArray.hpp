@@ -294,7 +294,7 @@ namespace Switch {
           return this->valueRef.GetBooleanRef(GetBitValue(index), index);
         }
 
-        /// @brief Gets the element at the specified index.
+        /// @brief Gets or Sets the element at the specified index.
         /// @param index The zero-based index of the element to get.
         /// @return bool The element at the specified index.
         /// @exception ArgumentOutOfRangeException index is less than 0 or index is equal to or greater than Count.

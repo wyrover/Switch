@@ -41,10 +41,17 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::MessageBoxIcon> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = { {(int64)System::Windows::Forms::MessageBoxIcon::None, "None"}, {(int64)System::Windows::Forms::MessageBoxIcon::Asterisk, "Asterisk"}, {(int64)System::Windows::Forms::MessageBoxIcon::Error, "Error"}, {(int64)System::Windows::Forms::MessageBoxIcon::Exclamation, "Exclamation"}, {(int64)System::Windows::Forms::MessageBoxIcon::Hand, "Hand"}, {(int64)System::Windows::Forms::MessageBoxIcon::Information, "Information"}, {(int64)System::Windows::Forms::MessageBoxIcon::Question, "Question"}, {(int64)System::Windows::Forms::MessageBoxIcon::Stop, "Stop"}, {(int64)System::Windows::Forms::MessageBoxIcon::Warning, "Warning"} };
+struct EnumRegister<System::Windows::Forms::MessageBoxIcon> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::MessageBoxIcon, string>& values, bool& flags) {
+    values[System::Windows::Forms::MessageBoxIcon::None] = "None";
+    values[System::Windows::Forms::MessageBoxIcon::Asterisk] = "Asterisk";
+    values[System::Windows::Forms::MessageBoxIcon::Error] = "Error";
+    values[System::Windows::Forms::MessageBoxIcon::Exclamation] = "Exclamation";
+    values[System::Windows::Forms::MessageBoxIcon::Hand] = "Hand";
+    values[System::Windows::Forms::MessageBoxIcon::Information] = "Information";
+    values[System::Windows::Forms::MessageBoxIcon::Question] = "Question";
+    values[System::Windows::Forms::MessageBoxIcon::Stop] = "Stop";
+    values[System::Windows::Forms::MessageBoxIcon::Warning] = "Warning";
     flags = false;
   }
 };

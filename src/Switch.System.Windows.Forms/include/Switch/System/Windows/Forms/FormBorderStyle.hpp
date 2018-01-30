@@ -32,10 +32,15 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::FormBorderStyle > {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::FormBorderStyle::None, "None"}, {(int64)System::Windows::Forms::FormBorderStyle::FixedSingle, "FixedSingle"}, {(int64)System::Windows::Forms::FormBorderStyle::Fixed3D, "Fixed3D"}, {(int64)System::Windows::Forms::FormBorderStyle::FixedDialog, "FixedDialog"}, {(int64)System::Windows::Forms::FormBorderStyle::Sizable, "Sizable"}, {(int64)System::Windows::Forms::FormBorderStyle::FixedToolWindow, "FixedToolWindow"}, {(int64)System::Windows::Forms::FormBorderStyle::Fixed3D, "SizableToolWindow"},};
+struct EnumRegister<System::Windows::Forms::FormBorderStyle> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::FormBorderStyle, string>& values, bool& flags) {
+    values[System::Windows::Forms::FormBorderStyle::None] = "None";
+    values[System::Windows::Forms::FormBorderStyle::FixedSingle] = "FixedSingle";
+    values[System::Windows::Forms::FormBorderStyle::Fixed3D] = "Fixed3D";
+    values[System::Windows::Forms::FormBorderStyle::FixedDialog] = "FixedDialog";
+    values[System::Windows::Forms::FormBorderStyle::Sizable] = "Sizable";
+    values[System::Windows::Forms::FormBorderStyle::FixedToolWindow] = "FixedToolWindow";
+    values[System::Windows::Forms::FormBorderStyle::Fixed3D] = "SizableToolWindow";
     flags = false;
   }
 };

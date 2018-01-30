@@ -177,7 +177,7 @@ namespace Switch {
       /// @exception IOException An I/O error occurred.
       /// @exception DirectoryNotFoundException Attempted to set a local path that cannot be found.
       /// @exception SecurityException The caller does not have the appropriate permission.
-      /// @remarks By definition, if this process starts in the root directory of a local or network drive, the value of this property is the drive name followed by a trailing slash (for example, "C:\"). If this process starts in a subdirectory, the value of this property is the drive and subdirectory path, without a trailing slash (for example, "C:\mySubDirectory").
+      /// @remarks By definition, if this process starts in the root directory of a local or network drive, the value of this property is the drive name followed by a trailing slash (for example] = "C:\"). If this process starts in a subdirectory, the value of this property is the drive and subdirectory path, without a trailing slash (for example] = "C:\mySubDirectory").
       /// @par Example
       /// The following example demonstrates setting the CurrentDirectory property.
       /// @include EnvironmentCurrentDirectory.cpp
@@ -417,7 +417,7 @@ namespace Switch {
       /// | MyApp "alpha with spaces" "beta with spaces" | MyApp, alpha with spaces, beta with spaces |
       /// | MyApp 'alpha with spaces' beta               | MyApp, 'alpha, with, spaces', beta         |
       /// | MyApp \\\alpha \\\\"beta                     | MyApp, \\\alpha, \\beta                    |
-      /// | MyApp \\\\\"alpha \"beta                     | MyApp, \\"alpha, "beta                     |
+      /// | MyApp \\\\\"alpha \"beta                     | MyApp, \\"alpha] = "beta                     |
       /// @remarks To obtain the command line as a single string, use the CommandLine property.
       /// @par Example
       /// The following example displays the application's command line arguments.
@@ -564,19 +564,65 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Environment::SpecialFolder> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Environment::SpecialFolder::Desktop, "Desktop"}, {(int64)System::Environment::SpecialFolder::Programs, "Programs"}, {(int64)System::Environment::SpecialFolder::MyDocuments, "MyDocuments"}, /*{(int64)System::Environment::SpecialFolder::Personal, "Personal"},*/ {(int64)System::Environment::SpecialFolder::Favorites, "Favorites"}, {(int64)System::Environment::SpecialFolder::Startup, "Startup"}, {(int64)System::Environment::SpecialFolder::Recent, "Recent"}, {(int64)System::Environment::SpecialFolder::SendTo, "SendTo"}, {(int64)System::Environment::SpecialFolder::StartMenu, "StartMenu"}, {(int64)System::Environment::SpecialFolder::MyMusic, "MyMusic"}, {(int64)System::Environment::SpecialFolder::MyVideos, "MyVideos"}, {(int64)System::Environment::SpecialFolder::DesktopDirectory, "DesktopDirectory"}, {(int64)System::Environment::SpecialFolder::MyComputer, "MyComputer"}, {(int64)System::Environment::SpecialFolder::NetworkShortcuts, "NetworkShortcuts"}, {(int64)System::Environment::SpecialFolder::Fonts, "Fonts"}, {(int64)System::Environment::SpecialFolder::Templates, "Templates"}, {(int64)System::Environment::SpecialFolder::CommonStartMenu, "CommonStartMenu"}, {(int64)System::Environment::SpecialFolder::CommonPrograms, "CommonPrograms"}, {(int64)System::Environment::SpecialFolder::CommonStartup, "CommonStartup"}, {(int64)System::Environment::SpecialFolder::CommonDesktopDirectory, "CommonDesktopDirectory"}, {(int64)System::Environment::SpecialFolder::ApplicationData, "ApplicationData"}, {(int64)System::Environment::SpecialFolder::PrinterShortcuts, "PrinterShortcuts"}, {(int64)System::Environment::SpecialFolder::LocalApplicationData, "LocalApplicationData"}, {(int64)System::Environment::SpecialFolder::InternetCache, "InternetCache"}, {(int64)System::Environment::SpecialFolder::Cookies, "Cookies"}, {(int64)System::Environment::SpecialFolder::History, "History"}, {(int64)System::Environment::SpecialFolder::CommonApplicationData, "CommonApplicationData"}, {(int64)System::Environment::SpecialFolder::Windows, "Windows"}, {(int64)System::Environment::SpecialFolder::System, "System"}, {(int64)System::Environment::SpecialFolder::ProgramFiles, "ProgramFiles"}, {(int64)System::Environment::SpecialFolder::MyPictures, "MyPictures"}, {(int64)System::Environment::SpecialFolder::UserProfile, "UserProfile"}, {(int64)System::Environment::SpecialFolder::SystemX86, "SystemX86"}, {(int64)System::Environment::SpecialFolder::ProgramFilesX86, "ProgramFilesX86"}, {(int64)System::Environment::SpecialFolder::CommonProgramFiles, "CommonProgramFiles"}, {(int64)System::Environment::SpecialFolder::CommonProgramFilesX86, "CommonProgramFilesX86"}, {(int64)System::Environment::SpecialFolder::CommonTemplates, "CommonTemplates"}, {(int64)System::Environment::SpecialFolder::CommonDocuments, "CommonDocuments"}, {(int64)System::Environment::SpecialFolder::CommonAdminTools, "CommonAdminTools"}, {(int64)System::Environment::SpecialFolder::AdminTools, "AdminTools"}, {(int64)System::Environment::SpecialFolder::CommonMusic, "CommonMusic"}, {(int64)System::Environment::SpecialFolder::CommonPictures, "CommonPictures"}, {(int64)System::Environment::SpecialFolder::CommonVideos, "CommonVideos"}, {(int64)System::Environment::SpecialFolder::Resources, "Resources"}, {(int64)System::Environment::SpecialFolder::LocalizedResources, "LocalizedResources"}, {(int64)System::Environment::SpecialFolder::CommonOemLinks, "CommonOemLinks"}, {(int64)System::Environment::SpecialFolder::CDBurning, "CDBurning"}};
+struct EnumRegister<System::Environment::SpecialFolder> {
+  void operator()(System::Collections::Generic::IDictionary<System::Environment::SpecialFolder, string>& values, bool& flags) {
+    values[System::Environment::SpecialFolder::Desktop] = "Desktop";
+    values[System::Environment::SpecialFolder::Programs] = "Programs";
+    values[System::Environment::SpecialFolder::MyDocuments] = "MyDocuments";
+    //values[System::Environment::SpecialFolder::Personal] = "Personal";
+    values[System::Environment::SpecialFolder::Favorites] = "Favorites";
+    values[System::Environment::SpecialFolder::Startup] = "Startup";
+    values[System::Environment::SpecialFolder::Recent] = "Recent";
+    values[System::Environment::SpecialFolder::SendTo] = "SendTo";
+    values[System::Environment::SpecialFolder::StartMenu] = "StartMenu";
+    values[System::Environment::SpecialFolder::MyMusic] = "MyMusic";
+    values[System::Environment::SpecialFolder::MyVideos] = "MyVideos";
+    values[System::Environment::SpecialFolder::DesktopDirectory] = "DesktopDirectory";
+    values[System::Environment::SpecialFolder::MyComputer] = "MyComputer";
+    values[System::Environment::SpecialFolder::NetworkShortcuts] = "NetworkShortcuts";
+    values[System::Environment::SpecialFolder::Fonts] = "Fonts";
+    values[System::Environment::SpecialFolder::Templates] = "Templates";
+    values[System::Environment::SpecialFolder::CommonStartMenu] = "CommonStartMenu";
+    values[System::Environment::SpecialFolder::CommonPrograms] = "CommonPrograms";
+    values[System::Environment::SpecialFolder::CommonStartup] = "CommonStartup";
+    values[System::Environment::SpecialFolder::CommonDesktopDirectory] = "CommonDesktopDirectory";
+    values[System::Environment::SpecialFolder::ApplicationData] = "ApplicationData";
+    values[System::Environment::SpecialFolder::PrinterShortcuts] = "PrinterShortcuts";
+    values[System::Environment::SpecialFolder::LocalApplicationData] = "LocalApplicationData";
+    values[System::Environment::SpecialFolder::InternetCache] = "InternetCache";
+    values[System::Environment::SpecialFolder::Cookies] = "Cookies";
+    values[System::Environment::SpecialFolder::History] = "History";
+    values[System::Environment::SpecialFolder::CommonApplicationData] = "CommonApplicationData";
+    values[System::Environment::SpecialFolder::Windows] = "Windows";
+    values[System::Environment::SpecialFolder::System] = "System";
+    values[System::Environment::SpecialFolder::ProgramFiles] = "ProgramFiles";
+    values[System::Environment::SpecialFolder::MyPictures] = "MyPictures";
+    values[System::Environment::SpecialFolder::UserProfile] = "UserProfile";
+    values[System::Environment::SpecialFolder::SystemX86] = "SystemX86";
+    values[System::Environment::SpecialFolder::ProgramFilesX86] = "ProgramFilesX86";
+    values[System::Environment::SpecialFolder::CommonProgramFiles] = "CommonProgramFiles";
+    values[System::Environment::SpecialFolder::CommonProgramFilesX86] = "CommonProgramFilesX86";
+    values[System::Environment::SpecialFolder::CommonTemplates] = "CommonTemplates";
+    values[System::Environment::SpecialFolder::CommonDocuments] = "CommonDocuments";
+    values[System::Environment::SpecialFolder::CommonAdminTools] = "CommonAdminTools";
+    values[System::Environment::SpecialFolder::AdminTools] = "AdminTools";
+    values[System::Environment::SpecialFolder::CommonMusic] = "CommonMusic";
+    values[System::Environment::SpecialFolder::CommonPictures] = "CommonPictures";
+    values[System::Environment::SpecialFolder::CommonVideos] = "CommonVideos";
+    values[System::Environment::SpecialFolder::Resources] = "Resources";
+    values[System::Environment::SpecialFolder::LocalizedResources] = "LocalizedResources";
+    values[System::Environment::SpecialFolder::CommonOemLinks] = "CommonOemLinks";
+    values[System::Environment::SpecialFolder::CDBurning] = "CDBurning";
     flags = false;
   }
 };
 
 template<>
-class EnumToStrings<System::Environment::SpecialFolderOption> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Environment::SpecialFolderOption::None, "None"}, {(int64)System::Environment::SpecialFolderOption::DoNotVerify, "DoNotVerify"}, {(int64)System::Environment::SpecialFolderOption::Create, "Create"}};
+struct EnumRegister<System::Environment::SpecialFolderOption> {
+  void operator()(System::Collections::Generic::IDictionary<System::Environment::SpecialFolderOption, string>& values, bool& flags) {
+    values[System::Environment::SpecialFolderOption::None] = "None";
+    values[System::Environment::SpecialFolderOption::DoNotVerify] = "DoNotVerify";
+    values[System::Environment::SpecialFolderOption::Create] = "Create";
     flags = false;
   }
 };

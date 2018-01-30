@@ -87,10 +87,39 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Net::Sockets::ProtocolFamily> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::Sockets::ProtocolFamily::Unknown, "Unknown"}, {(int64)System::Net::Sockets::ProtocolFamily::Unspecified, "Unspecified"}, {(int64)System::Net::Sockets::ProtocolFamily::Unix, "Unix"}, {(int64)System::Net::Sockets::ProtocolFamily::InterNetwork, "InterNetwork"}, {(int64)System::Net::Sockets::ProtocolFamily::ImpLink, "ImpLink"}, {(int64)System::Net::Sockets::ProtocolFamily::Pup, "Pup"}, {(int64)System::Net::Sockets::ProtocolFamily::Chaos, "Chaos"}, /*{(int64)System::Net::Sockets::ProtocolFamily::NS, "NS"},*/ {(int64)System::Net::Sockets::ProtocolFamily::Ipx, "Ipx"}, {(int64)System::Net::Sockets::ProtocolFamily::Iso, "Iso"}, /*{(int64)System::Net::Sockets::ProtocolFamily::Osi, "Osi"},*/ {(int64)System::Net::Sockets::ProtocolFamily::Ecma, "Ecma"}, {(int64)System::Net::Sockets::ProtocolFamily::DataKit, "DataKit"}, {(int64)System::Net::Sockets::ProtocolFamily::Ccitt, "Ccitt"}, {(int64)System::Net::Sockets::ProtocolFamily::Sna, "Sna"}, {(int64)System::Net::Sockets::ProtocolFamily::DecNet, "DecNet"}, {(int64)System::Net::Sockets::ProtocolFamily::DataLink, "DataLink"}, {(int64)System::Net::Sockets::ProtocolFamily::Lat, "Lat"}, {(int64)System::Net::Sockets::ProtocolFamily::HyperChannel, "HyperChannel"}, {(int64)System::Net::Sockets::ProtocolFamily::AppleTalk, "AppleTalk"}, {(int64)System::Net::Sockets::ProtocolFamily::NetBios, "NetBios"}, {(int64)System::Net::Sockets::ProtocolFamily::VoiceView, "VoiceView"}, {(int64)System::Net::Sockets::ProtocolFamily::FireFox, "FireFox"}, {(int64)System::Net::Sockets::ProtocolFamily::Banyan, "Banyan"}, {(int64)System::Net::Sockets::ProtocolFamily::Atm, "Atm"}, {(int64)System::Net::Sockets::ProtocolFamily::InterNetworkV6, "InterNetworkV6"}, {(int64)System::Net::Sockets::ProtocolFamily::Cluster, "Cluster"}, {(int64)System::Net::Sockets::ProtocolFamily::Ieee12844, "Ieee12844"}, {(int64)System::Net::Sockets::ProtocolFamily::Irda, "Irda"}, {(int64)System::Net::Sockets::ProtocolFamily::NetworkDesigners, "NetworkDesigners"}, {(int64)System::Net::Sockets::ProtocolFamily::Max, "Max"}};
+struct EnumRegister<System::Net::Sockets::ProtocolFamily> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::ProtocolFamily, string>& values, bool& flags) {
+    values[System::Net::Sockets::ProtocolFamily::Unknown] = "Unknown";
+    values[System::Net::Sockets::ProtocolFamily::Unspecified] = "Unspecified";
+    values[System::Net::Sockets::ProtocolFamily::Unix] = "Unix";
+    values[System::Net::Sockets::ProtocolFamily::InterNetwork] = "InterNetwork";
+    values[System::Net::Sockets::ProtocolFamily::ImpLink] = "ImpLink";
+    values[System::Net::Sockets::ProtocolFamily::Pup] = "Pup";
+    values[System::Net::Sockets::ProtocolFamily::Chaos] = "Chaos";
+    //values[System::Net::Sockets::ProtocolFamily::NS] = "NS";
+    values[System::Net::Sockets::ProtocolFamily::Ipx] = "Ipx";
+    values[System::Net::Sockets::ProtocolFamily::Iso] = "Iso";
+    //values[System::Net::Sockets::ProtocolFamily::Osi] = "Osi";
+    values[System::Net::Sockets::ProtocolFamily::Ecma] = "Ecma";
+    values[System::Net::Sockets::ProtocolFamily::DataKit] = "DataKit";
+    values[System::Net::Sockets::ProtocolFamily::Ccitt] = "Ccitt";
+    values[System::Net::Sockets::ProtocolFamily::Sna] = "Sna";
+    values[System::Net::Sockets::ProtocolFamily::DecNet] = "DecNet";
+    values[System::Net::Sockets::ProtocolFamily::DataLink] = "DataLink";
+    values[System::Net::Sockets::ProtocolFamily::Lat] = "Lat";
+    values[System::Net::Sockets::ProtocolFamily::HyperChannel] = "HyperChannel";
+    values[System::Net::Sockets::ProtocolFamily::AppleTalk] = "AppleTalk";
+    values[System::Net::Sockets::ProtocolFamily::NetBios] = "NetBios";
+    values[System::Net::Sockets::ProtocolFamily::VoiceView] = "VoiceView";
+    values[System::Net::Sockets::ProtocolFamily::FireFox] = "FireFox";
+    values[System::Net::Sockets::ProtocolFamily::Banyan] = "Banyan";
+    values[System::Net::Sockets::ProtocolFamily::Atm] = "Atm";
+    values[System::Net::Sockets::ProtocolFamily::InterNetworkV6] = "InterNetworkV6";
+    values[System::Net::Sockets::ProtocolFamily::Cluster] = "Cluster";
+    values[System::Net::Sockets::ProtocolFamily::Ieee12844] = "Ieee12844";
+    values[System::Net::Sockets::ProtocolFamily::Irda] = "Irda";
+    values[System::Net::Sockets::ProtocolFamily::NetworkDesigners] = "NetworkDesigners";
+    values[System::Net::Sockets::ProtocolFamily::Max] = "Max";
     flags = false;
   }
 };

@@ -76,10 +76,33 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Net::Sockets::ProtocolType> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::Sockets::ProtocolType::Unknown, "Unknown"}, /*{(int64)System::Net::Sockets::ProtocolType::IPv6HopByHopOptions, "IPv6HopByHopOptions"}, {(int64)System::Net::Sockets::ProtocolType::Unspecified, "Unspecified"}*/ {(int64)System::Net::Sockets::ProtocolType::IP, "IP"}, {(int64)System::Net::Sockets::ProtocolType::Icmp, "Icmp"}, {(int64)System::Net::Sockets::ProtocolType::Igmp, "Igmp"}, {(int64)System::Net::Sockets::ProtocolType::Ggp, "Ggp"}, {(int64)System::Net::Sockets::ProtocolType::IPv4, "IPv4"}, {(int64)System::Net::Sockets::ProtocolType::Tcp, "Tcp"}, {(int64)System::Net::Sockets::ProtocolType::Pup, "Pup"}, {(int64)System::Net::Sockets::ProtocolType::Udp, "Udp"}, {(int64)System::Net::Sockets::ProtocolType::Idp, "Idp"}, {(int64)System::Net::Sockets::ProtocolType::IPv6, "IPv6"}, {(int64)System::Net::Sockets::ProtocolType::IPv6RoutingHeader, "IPv6RoutingHeader"}, {(int64)System::Net::Sockets::ProtocolType::IPv6FragmentHeader, "IPv6FragmentHeader"}, {(int64)System::Net::Sockets::ProtocolType::IPSecEncapsulatingSecurityPayload, "IPSecEncapsulatingSecurityPayload"}, {(int64)System::Net::Sockets::ProtocolType::IPSecAuthenticationHeader, "IPSecAuthenticationHeader"}, {(int64)System::Net::Sockets::ProtocolType::IcmpV6, "IcmpV6"}, {(int64)System::Net::Sockets::ProtocolType::IPv6NoNextHeader, "IPv6NoNextHeader"}, {(int64)System::Net::Sockets::ProtocolType::IPv6DestinationOptions, "IPv6DestinationOptions"}, {(int64)System::Net::Sockets::ProtocolType::ND, "ND"}, {(int64)System::Net::Sockets::ProtocolType::Raw, "Raw"}, {(int64)System::Net::Sockets::ProtocolType::Ipx, "Ipx"}, {(int64)System::Net::Sockets::ProtocolType::Spx, "Spx"}, {(int64)System::Net::Sockets::ProtocolType::SpxII, "SpxII"}};
+struct EnumRegister<System::Net::Sockets::ProtocolType> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::ProtocolType, string>& values, bool& flags) {
+    values[System::Net::Sockets::ProtocolType::Unknown] = "Unknown";
+    //values[System::Net::Sockets::ProtocolType::IPv6HopByHopOptions] = "IPv6HopByHopOptions";
+    //values[System::Net::Sockets::ProtocolType::Unspecified] = "Unspecified";
+    values[System::Net::Sockets::ProtocolType::IP] = "IP";
+    values[System::Net::Sockets::ProtocolType::Icmp] = "Icmp";
+    values[System::Net::Sockets::ProtocolType::Igmp] = "Igmp";
+    values[System::Net::Sockets::ProtocolType::Ggp] = "Ggp";
+    values[System::Net::Sockets::ProtocolType::IPv4] = "IPv4";
+    values[System::Net::Sockets::ProtocolType::Tcp] = "Tcp";
+    values[System::Net::Sockets::ProtocolType::Pup] = "Pup";
+    values[System::Net::Sockets::ProtocolType::Udp] = "Udp";
+    values[System::Net::Sockets::ProtocolType::Idp] = "Idp";
+    values[System::Net::Sockets::ProtocolType::IPv6] = "IPv6";
+    values[System::Net::Sockets::ProtocolType::IPv6RoutingHeader] = "IPv6RoutingHeader";
+    values[System::Net::Sockets::ProtocolType::IPv6FragmentHeader] = "IPv6FragmentHeader";
+    values[System::Net::Sockets::ProtocolType::IPSecEncapsulatingSecurityPayload] = "IPSecEncapsulatingSecurityPayload";
+    values[System::Net::Sockets::ProtocolType::IPSecAuthenticationHeader] = "IPSecAuthenticationHeader";
+    values[System::Net::Sockets::ProtocolType::IcmpV6] = "IcmpV6";
+    values[System::Net::Sockets::ProtocolType::IPv6NoNextHeader] = "IPv6NoNextHeader";
+    values[System::Net::Sockets::ProtocolType::IPv6DestinationOptions] = "IPv6DestinationOptions";
+    values[System::Net::Sockets::ProtocolType::ND] = "ND";
+    values[System::Net::Sockets::ProtocolType::Raw] = "Raw";
+    values[System::Net::Sockets::ProtocolType::Ipx] = "Ipx";
+    values[System::Net::Sockets::ProtocolType::Spx] = "Spx";
+    values[System::Net::Sockets::ProtocolType::SpxII] = "SpxII";
     flags = false;
   }
 };

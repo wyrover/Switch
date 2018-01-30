@@ -34,10 +34,15 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::IO::DriveType> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::DriveType::Unknown, "Unknown"}, {(int64)System::IO::DriveType::NoRootDirectory, "NoRootDirectory"}, {(int64)System::IO::DriveType::Removable, "Removable"}, {(int64)System::IO::DriveType::Fixed, "Fixed"}, {(int64)System::IO::DriveType::Network, "Network"}, {(int64)System::IO::DriveType::CDRom, "CDRom"}, {(int64)System::IO::DriveType::Ram, "Ram"}};
+struct EnumRegister<System::IO::DriveType> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::DriveType, string>& values, bool& flags) {
+    values[System::IO::DriveType::Unknown] = "Unknown";
+    values[System::IO::DriveType::NoRootDirectory] = "NoRootDirectory";
+    values[System::IO::DriveType::Removable] = "Removable";
+    values[System::IO::DriveType::Fixed] = "Fixed";
+    values[System::IO::DriveType::Network] = "Network";
+    values[System::IO::DriveType::CDRom] = "CDRom";
+    values[System::IO::DriveType::Ram] = "Ram";
     flags = false;
   }
 };

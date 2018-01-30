@@ -22,10 +22,10 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::Orientation> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::Orientation::Horizontal, "Horizontal"}, {(int64)System::Windows::Forms::Orientation::Vertical, "Vertical"}};
+struct EnumRegister<System::Windows::Forms::Orientation> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::Orientation, string>& values, bool& flags) {
+    values[System::Windows::Forms::Orientation::Horizontal] = "Horizontal";
+    values[System::Windows::Forms::Orientation::Vertical] = "Vertical";
     flags = false;
   }
 };

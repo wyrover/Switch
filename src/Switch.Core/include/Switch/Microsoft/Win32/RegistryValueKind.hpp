@@ -35,10 +35,16 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<Microsoft::Win32::RegistryValueKind> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)Microsoft::Win32::RegistryValueKind::Unknown, "Unknown"}, {(int64)Microsoft::Win32::RegistryValueKind::String, "String"}, {(int64)Microsoft::Win32::RegistryValueKind::ExpandString, "ExpandString"}, {(int64)Microsoft::Win32::RegistryValueKind::Binary, "Binary"}, {(int64)Microsoft::Win32::RegistryValueKind::DWord, "DWord"}, {(int64)Microsoft::Win32::RegistryValueKind::MultiString, "MultiString"}, {(int64)Microsoft::Win32::RegistryValueKind::QWord, "QWord"}, {(int64)Microsoft::Win32::RegistryValueKind::None, "None"}};
+struct EnumRegister<Microsoft::Win32::RegistryValueKind> {
+  void operator()(System::Collections::Generic::IDictionary<Microsoft::Win32::RegistryValueKind, string>& values, bool& flags) {
+    values[Microsoft::Win32::RegistryValueKind::Unknown] = "Unknown";
+    values[Microsoft::Win32::RegistryValueKind::String] = "String";
+    values[Microsoft::Win32::RegistryValueKind::ExpandString] = "ExpandString";
+    values[Microsoft::Win32::RegistryValueKind::Binary] = "Binary";
+    values[Microsoft::Win32::RegistryValueKind::DWord] = "DWord";
+    values[Microsoft::Win32::RegistryValueKind::MultiString] = "MultiString";
+    values[Microsoft::Win32::RegistryValueKind::QWord] = "QWord";
+    values[Microsoft::Win32::RegistryValueKind::None] = "None";
     flags = false;
   }
 };

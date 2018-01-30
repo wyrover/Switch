@@ -54,10 +54,25 @@ template <>
 class AddFlagOperators<System::Windows::Forms::ControlStyles> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Windows::Forms::ControlStyles> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::ControlStyles::ContainerControl, "ContainerControl"}, {(int64)System::Windows::Forms::ControlStyles::UserPaint, "UserPaint"}, {(int64)System::Windows::Forms::ControlStyles::Opaque, "Opaque"}, {(int64)System::Windows::Forms::ControlStyles::ResizeRedraw, "ResizeRedraw"}, {(int64)System::Windows::Forms::ControlStyles::FixedWidth, "FixedWidth"}, {(int64)System::Windows::Forms::ControlStyles::FixedHeight, "FixedHeight"}, {(int64)System::Windows::Forms::ControlStyles::StandardClick, "StandardClick"}, {(int64)System::Windows::Forms::ControlStyles::Selectable, "Selectable"}, {(int64)System::Windows::Forms::ControlStyles::UserMouse, "UserMouse"}, {(int64)System::Windows::Forms::ControlStyles::SupportsTransparentBackColor, "SupportsTransparentBackColor"}, {(int64)System::Windows::Forms::ControlStyles::StandardDoubleClick, "StandardDoubleClick"}, {(int64)System::Windows::Forms::ControlStyles::AllPaintingInWmPaint, "AllPaintingInWmPaint"}, {(int64)System::Windows::Forms::ControlStyles::CacheText, "CacheText"}, {(int64)System::Windows::Forms::ControlStyles::EnableNotifyMessage, "EnableNotifyMessage"}, {(int64)System::Windows::Forms::ControlStyles::DoubleBuffer, "DoubleBuffer"}, {(int64)System::Windows::Forms::ControlStyles::OptimizedDoubleBuffer, "OptimizedDoubleBuffer"}, {(int64)System::Windows::Forms::ControlStyles::UseTextForAccessibility, "UseTextForAccessibility"},};
+struct EnumRegister<System::Windows::Forms::ControlStyles> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::ControlStyles, string>& values, bool& flags) {
+    values[System::Windows::Forms::ControlStyles::ContainerControl] = "ContainerControl";
+    values[System::Windows::Forms::ControlStyles::UserPaint] = "UserPaint";
+    values[System::Windows::Forms::ControlStyles::Opaque] = "Opaque";
+    values[System::Windows::Forms::ControlStyles::ResizeRedraw] = "ResizeRedraw";
+    values[System::Windows::Forms::ControlStyles::FixedWidth] = "FixedWidth";
+    values[System::Windows::Forms::ControlStyles::FixedHeight] = "FixedHeight";
+    values[System::Windows::Forms::ControlStyles::StandardClick] = "StandardClick";
+    values[System::Windows::Forms::ControlStyles::Selectable] = "Selectable";
+    values[System::Windows::Forms::ControlStyles::UserMouse] = "UserMouse";
+    values[System::Windows::Forms::ControlStyles::SupportsTransparentBackColor] = "SupportsTransparentBackColor";
+    values[System::Windows::Forms::ControlStyles::StandardDoubleClick] = "StandardDoubleClick";
+    values[System::Windows::Forms::ControlStyles::AllPaintingInWmPaint] = "AllPaintingInWmPaint";
+    values[System::Windows::Forms::ControlStyles::CacheText] = "CacheText";
+    values[System::Windows::Forms::ControlStyles::EnableNotifyMessage] = "EnableNotifyMessage";
+    values[System::Windows::Forms::ControlStyles::DoubleBuffer] = "DoubleBuffer";
+    values[System::Windows::Forms::ControlStyles::OptimizedDoubleBuffer] = "OptimizedDoubleBuffer";
+    values[System::Windows::Forms::ControlStyles::UseTextForAccessibility] = "UseTextForAccessibility";
     flags = true;
   }
 };

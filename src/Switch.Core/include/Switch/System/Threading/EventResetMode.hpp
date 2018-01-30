@@ -26,10 +26,10 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Threading::EventResetMode> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Threading::EventResetMode::AutoReset, "AutoReset"}, {(int64)System::Threading::EventResetMode::ManualReset, "ManualReset"}};
+struct EnumRegister<System::Threading::EventResetMode> {
+  void operator()(System::Collections::Generic::IDictionary<System::Threading::EventResetMode, string>& values, bool& flags) {
+    values[System::Threading::EventResetMode::AutoReset] = "AutoReset";
+    values[System::Threading::EventResetMode::ManualReset] = "ManualReset";
     flags = false;
   }
 };
