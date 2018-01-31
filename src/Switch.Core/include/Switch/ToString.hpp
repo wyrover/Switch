@@ -16,13 +16,13 @@ namespace Switch {
   /// @return string A string value that represent value.
   /// @exception System::ArgumentNullException The parameters converter is null.
   export_ string ToString(const void* e);
-  
+
   /// @brief Generate a String for void*.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
   /// @exception System::ArgumentNullException The parameters converter is null.
   export_ string ToString(void* e);
-  
+
   /// @brief Generate a String for NullPtr.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
@@ -82,13 +82,13 @@ namespace Switch {
   /// @return string A string value that represent value.
   /// @exception System::ArgumentNullException The parameters converter is null.
   export_ string ToString(const int64& value);
-  
+
   /// @brief Generate a String for intptr.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
   /// @exception System::ArgumentNullException The parameters converter is null.
   export_ string ToString(const intptr& value);
- 
+
   /// @brief Generate a String for signed 8-bit integer.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
@@ -118,7 +118,7 @@ namespace Switch {
   /// @return string A string value that represent value.
   /// @exception System::ArgumentNullException The parameters converter is null.
   export_ string ToString(const uintptr& value);
-  
+
   /// @brief Generate a String for double-precision floating-point number.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
@@ -128,31 +128,31 @@ namespace Switch {
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
   export_ string ToString(const float& value);
-  
+
   /// @brief Generate a String for const char pointer.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
   /// @exception System::ArgumentNullException The parameters converter is null.
   export_ string ToString(const char* value);
-  
+
   /// @brief Generate a String for const char16 pointer.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
   /// @exception System::ArgumentNullException The parameters converter is null.
   export_ string ToString(const char16* value);
-  
+
   /// @brief Generate a String for const char32 pointer.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
   /// @exception System::ArgumentNullException The parameters converter is null.
   export_ string ToString(const char32* value);
-  
+
   /// @brief Generate a String for const wchar pointer.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
   /// @exception System::ArgumentNullException The parameters converter is null.
   export_ string ToString(const wchar* value);
-  
+
   /// @brief Generate a String for string.
   /// @param[in] value For which the hashcode is generated.
   /// @return string A string value that represent value.
@@ -200,7 +200,7 @@ namespace Switch {
     Stringer stringer;
     return stringer(value);
   }
-  
+
   /// @brief Generate a String for generic type T.
   /// @param[in] value For which the hashcode is generated.
   /// @return int32  An integer value being the generated hashcode.

@@ -10,7 +10,7 @@ namespace ManualTests {
   enum class Color {
     Black, White, Red, Blue
   };
-  
+
   class Program {
   public:
     // The main entry point for the application.

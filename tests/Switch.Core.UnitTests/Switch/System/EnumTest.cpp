@@ -413,7 +413,7 @@ namespace SwitchUnitTests {
     ASSERT_EQ("A", Enum<Letter>(Letter::A).ToString());
     ASSERT_EQ("B", Enum<Letter>(Letter::B).ToString());
     ASSERT_EQ("A, B", Enum<Letter>(Letter::A | Letter::B).ToString());
-    ASSERT_EQ("D, G, I", Enum<Letter>(Letter::D|Letter::G|Letter::I).ToString());
+    ASSERT_EQ("D, G, I", Enum<Letter>(Letter::D | Letter::G | Letter::I).ToString());
 
     ASSERT_EQ("0", Enum<RGBPixel>(RGBPixel::Red).ToString());
     ASSERT_EQ("1", Enum<RGBPixel>(RGBPixel::Green).ToString());

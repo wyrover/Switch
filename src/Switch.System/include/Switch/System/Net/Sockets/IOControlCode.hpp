@@ -95,7 +95,7 @@ namespace Switch {
 /// @cond
 template<>
 struct EnumRegister<System::Net::Sockets::IOControlCode> {
- void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::IOControlCode, string>& values, bool& flags) {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::IOControlCode, string>& values, bool& flags) {
     values[System::Net::Sockets::IOControlCode::EnableCircularQueuing] = "EnableCircularQueuing";
     values[System::Net::Sockets::IOControlCode::Flush] = "CodeFlush";
     values[System::Net::Sockets::IOControlCode::DataToRead] = "DataToRead";
