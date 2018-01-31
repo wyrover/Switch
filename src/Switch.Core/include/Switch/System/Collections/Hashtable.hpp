@@ -30,7 +30,7 @@ namespace Switch {
       ///   // ...
       /// }
       /// @endcode
-      /// @remarks sThe foreach statement is a wrapper around the enumerator, which only allows reading from, not writing to, the collection.
+      /// @remarks The foreach statement is a wrapper around the enumerator, which only allows reading from, not writing to, the collection.
       /// @remarks Because serializing and deserializing an enumerator for a Hashtable can cause the elements to become reordered, it is not possible to continue enumeration without calling the Reset method.
       /// @note Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the Equals method.
       /// @par Exemples
