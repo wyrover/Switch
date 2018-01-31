@@ -17,7 +17,28 @@ namespace Examples {
     Nine,
     Ten
   };
+}
 
+// Register enum class
+template<>
+class EnumRegister<Examples::Numbers> {
+public:
+  void operator()(System::Collections::Generic::IDictionary<Examples::Numbers, string>& values, bool& flags) {
+    values[Examples::Numbers::Zero] = "Zero";
+    values[Examples::Numbers::One] = "One";
+    values[Examples::Numbers::Two] = "Two";
+    values[Examples::Numbers::Three] = "Three";
+    values[Examples::Numbers::Four] = "Four";
+    values[Examples::Numbers::Five] = "Five";
+    values[Examples::Numbers::Six] = "Six";
+    values[Examples::Numbers::Seven] = "Seven";
+    values[Examples::Numbers::Eight] = "Eight";
+    values[Examples::Numbers::Nine] = "Nine";
+    values[Examples::Numbers::Ten] = "Ten";
+  }
+};
+
+namespace Examples {
   class Program {
   public:
     // The main entry point for the application.
@@ -40,30 +61,20 @@ namespace Examples {
       Console::WriteLine("number is equal to {0}.", number);
 
       // Parse a Numbers
-      number = Enum<Numbers>::Parse("Four");
+      number = Enum<>::Parse<Numbers>("Four");
       Console::WriteLine("number is equal to {0}.", number);
 
       // Give name of value Numbers
-      Console::WriteLine("The Numbers::Eight name is {0}.", Enum<Numbers>(Numbers::Eight).GetName());
+      Console::WriteLine("The Numbers::Eight name is {0}.", Enum<>::GetName(Numbers::Eight));
 
       // Give value of value Numbers
-      Console::WriteLine("The Numbers::Three value is {0}.", Enum<Numbers>(Numbers::Three).ToInt32());
+      Console::WriteLine("The Numbers::Three value is {0}.", (int)Numbers::Three);
 
       // Give Nimbers names list
-      Console::WriteLine("Numbers names list : {0}", string::Join(", ", Enum<Numbers>::GetNames()));
+      Console::WriteLine("Numbers names list : {0}", string::Join(", ", Enum<>::GetNames<Numbers>()));
     }
   };
 }
-
-// Associate enum values to strings
-template<>
-class EnumToStrings<Examples::Numbers> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)Examples::Numbers::Zero, "Zero"}, {(int64)Examples::Numbers::One, "One"}, {(int64)Examples::Numbers::Two, "Two"}, {(int64)Examples::Numbers::Three, "Three"}, {(int64)Examples::Numbers::Four, "Four"}, {(int64)Examples::Numbers::Five, "Five"}, {(int64)Examples::Numbers::Six, "Six"}, {(int64)Examples::Numbers::Seven, "Seven"}, {(int64)Examples::Numbers::Eight, "Eight"}, {(int64)Examples::Numbers::Nine, "Nine"}, {(int64)Examples::Numbers::Ten, "Ten"}};
-    flags = false;
-  }
-};
 
 startup_(Examples::Program);
 

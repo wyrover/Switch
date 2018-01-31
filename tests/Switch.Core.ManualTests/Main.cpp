@@ -11,20 +11,17 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      Console::WriteLine("Hello, World!");
+      Hashtable items;
+      items["Test"] = 42;
+      items[42] = "Test";
+      items[.5] = Guid::NewGuid();
 
-      Hashtable hash;
-      hash["Test"] = 42;
-      hash[42] = "Test";
-      hash[.5] = Guid::NewGuid();
-
-      for (auto item : hash)
-        Console::WriteLine(item);
+      for (auto item : items)
+        Console::WriteLine("[{0}, {1}]", item.Key, item.Value);
 
       Console::WriteLine();
-      Console::WriteLine(hash[.5]);
-      Console::WriteLine(hash["Test"]);
-
+      Console::WriteLine(items[.5]);
+      Console::WriteLine(items["Test"]);
     }
   };
 }

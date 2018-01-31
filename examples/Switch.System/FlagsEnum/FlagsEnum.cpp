@@ -34,14 +34,41 @@ namespace Examples {
   };
 }
 
+// Add flags operator (+, -, &, |, ^, ~, +=, -=, &=, |= and ^=) for enum class
 template <>
 class AddFlagOperators<Examples::Letters> : public TrueType {};
 
+// Register enum class
 template<>
-class EnumToStrings<Examples::Letters> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)Examples::Letters::None, "None"}, {(int64)Examples::Letters::A, "A"}, {(int64)Examples::Letters::B, "B"}, {(int64)Examples::Letters::C, "C"}, {(int64)Examples::Letters::D, "D"}, {(int64)Examples::Letters::E, "E"}, {(int64)Examples::Letters::F, "F"}, {(int64)Examples::Letters::G, "G"}, {(int64)Examples::Letters::H, "H"}, {(int64)Examples::Letters::I, "I"}, {(int64)Examples::Letters::J, "J"}, {(int64)Examples::Letters::K, "K"}, {(int64)Examples::Letters::L, "L"}, {(int64)Examples::Letters::M, "M"}, {(int64)Examples::Letters::N, "N"}, {(int64)Examples::Letters::O, "O"}, {(int64)Examples::Letters::P, "P"}, {(int64)Examples::Letters::Q, "Q"}, {(int64)Examples::Letters::R, "R"}, {(int64)Examples::Letters::S, "S"}, {(int64)Examples::Letters::T, "T"}, {(int64)Examples::Letters::U, "U"}, {(int64)Examples::Letters::V, "V"}, {(int64)Examples::Letters::W, "W"}, {(int64)Examples::Letters::X, "X"}, {(int64)Examples::Letters::Y, "Y"}, {(int64)Examples::Letters::Z, "Z"}};
+struct EnumRegister<Examples::Letters> {
+  void operator()(System::Collections::Generic::IDictionary<Examples::Letters, string>& values, bool& flags) {
+    values[Examples::Letters::None] = "None";
+    values[Examples::Letters::A] = "A";
+    values[Examples::Letters::B] = "B";
+    values[Examples::Letters::C] = "C";
+    values[Examples::Letters::D] = "D";
+    values[Examples::Letters::E] = "E";
+    values[Examples::Letters::F] = "F";
+    values[Examples::Letters::G] = "G";
+    values[Examples::Letters::H] = "H";
+    values[Examples::Letters::I] = "I";
+    values[Examples::Letters::J] = "J";
+    values[Examples::Letters::K] = "K";
+    values[Examples::Letters::L] = "L";
+    values[Examples::Letters::M] = "M";
+    values[Examples::Letters::N] = "N";
+    values[Examples::Letters::O] = "O";
+    values[Examples::Letters::P] = "P";
+    values[Examples::Letters::Q] = "Q";
+    values[Examples::Letters::R] = "R";
+    values[Examples::Letters::S] = "S";
+    values[Examples::Letters::T] = "T";
+    values[Examples::Letters::U] = "U";
+    values[Examples::Letters::V] = "V";
+    values[Examples::Letters::W] = "W";
+    values[Examples::Letters::X] = "X";
+    values[Examples::Letters::Y] = "Y";
+    values[Examples::Letters::Z] = "Z";
     flags = true;
   }
 };
@@ -69,17 +96,17 @@ namespace Examples {
       Console::WriteLine("letter is equal to {0}.", letter);
 
       // Parse a Numbers
-      letter = Enum<Letters>::Parse("A, F");
+      letter = Enum<>::Parse<Letters>("A, F");
       Console::WriteLine("letter is equal to {0}.", letter);
 
       // Give name of value Numbers
-      Console::WriteLine("The Letters::Q name is {0}.", Enum<Letters>(Letters::Q).GetName());
+      Console::WriteLine("The Letters::Q name is {0}.", Enum<>::GetName(Letters::Q));
 
       // Give value of value Numbers
-      Console::WriteLine("The Letters::G value is {0}.", Enum<Letters>(Letters::G).ToInt32());
+      Console::WriteLine("The Letters::G value is {0}.", (int)Letters::G);
 
       // Give Nimbers names list
-      Console::WriteLine("Letters names list : {0}", string::Join(", ", Enum<Letters>::GetNames()));
+      Console::WriteLine("Letters names list : {0}", string::Join(", ", Enum<>::GetNames<Letters>()));
     }
   };
 }
