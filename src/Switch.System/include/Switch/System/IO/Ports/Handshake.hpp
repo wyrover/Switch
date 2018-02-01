@@ -33,10 +33,12 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::IO::Ports::Handshake> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::Ports::Handshake::None, "None"}, {(int64)System::IO::Ports::Handshake::XOnXOff, "XOnXOff"}, {(int64)System::IO::Ports::Handshake::RequestToSend, "RequestToSend"}, {(int64)System::IO::Ports::Handshake::RequestToSendXOnXOff, "RequestToSendXOnXOff"}};
+struct EnumRegister<System::IO::Ports::Handshake> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::Ports::Handshake, string>& values, bool& flags) {
+    values[System::IO::Ports::Handshake::None] = "None";
+    values[System::IO::Ports::Handshake::XOnXOff] = "XOnXOff";
+    values[System::IO::Ports::Handshake::RequestToSend] = "RequestToSend";
+    values[System::IO::Ports::Handshake::RequestToSendXOnXOff] = "RequestToSendXOnXOff";
     flags = false;
   }
 };

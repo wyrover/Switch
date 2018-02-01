@@ -27,10 +27,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::IO::FileAccess> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::FileAccess::Read, "Read"}, {(int64)System::IO::FileAccess::Write, "Write"}, {(int64)System::IO::FileAccess::ReadWrite, "ReadWrite"}};
+struct EnumRegister<System::IO::FileAccess> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::FileAccess, string>& values, bool& flags) {
+    values[System::IO::FileAccess::Read] = "Read";
+    values[System::IO::FileAccess::Write] = "Write";
+    values[System::IO::FileAccess::ReadWrite] = "ReadWrite";
     flags = false;
   }
 };

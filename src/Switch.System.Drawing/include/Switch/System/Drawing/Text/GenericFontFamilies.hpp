@@ -31,10 +31,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Drawing::Text::GenericFontFamilies> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Drawing::Text::GenericFontFamilies::Serif, "Serif"}, {(int64)System::Drawing::Text::GenericFontFamilies::SansSerif, "SansSerif"}, {(int64)System::Drawing::Text::GenericFontFamilies::Monospace, "Monospace"},};
+struct EnumRegister<System::Drawing::Text::GenericFontFamilies> {
+  void operator()(System::Collections::Generic::IDictionary<System::Drawing::Text::GenericFontFamilies, string>& values, bool& flags) {
+    values[System::Drawing::Text::GenericFontFamilies::Serif] = "Serif";
+    values[System::Drawing::Text::GenericFontFamilies::SansSerif] = "SansSerif";
+    values[System::Drawing::Text::GenericFontFamilies::Monospace] = "Monospace";
     flags = false;
   }
 };

@@ -28,10 +28,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::AutoSizeMode> {
+struct EnumRegister<System::Windows::Forms::AutoSizeMode> {
 public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::AutoSizeMode::GrowAndShrink, "GrowAndShrink"}, {(int64)System::Windows::Forms::AutoSizeMode::GrowOnly, "GrowOnly"}};
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::AutoSizeMode, string>& values, bool& flags) {
+    values[System::Windows::Forms::AutoSizeMode::GrowAndShrink] = "GrowAndShrink";
+    values[System::Windows::Forms::AutoSizeMode::GrowOnly] = "GrowOnly";
     flags = false;
   }
 };

@@ -3,66 +3,54 @@ echo ""
 
 # ________________________________________________________________________________________
 #                                                             Detecting linux distribution
-
 OSTYPE=`uname -a`
-if [[ "$OSTYPE" != *"Darwin"* ]] && [[ "$OSTYPE" != *"MINGW64"* ]]; then
+if [[ "$OSTYPE" != *"MINGW64"* ]] && [[ "$OSTYPE" != *"Darwin"* ]]; then
   OSTYPE=`lsb_release -si`;
 fi
 
 # ________________________________________________________________________________________
 #                             install needed packages and libraries for known distribution
-
 case "$OSTYPE" in
-  *"CentOS"*) sudo yum update; sudo yum install clang cmake3 doxygen gtkmm30-devel uuid-devel -y;;
-  *"Darwin"*) sudo chown -R $(whoami) /usr/local/share; brew update; brew install astyle cmake cppcheck doxygen;;
-  *"Debian"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev libssl-dev uuid-dev -y;;
-  *"elementary"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev libssl-dev uuid-dev -y;;
-  *"Fedora"*) sudo yum update; sudo yum install clang cmake doxygen gtkmm30-devel libuuid-devel uuid-devel -y;;
-  *"LinuxMint"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev libssl-dev uuid-dev -y;;
-  *"MINGW64"*) ;;
-  *"RedHat"*) sudo yum update; sudo yum install clang cmake doxygen gtkmm30-devel libuuid-devel uuid-devel -y;;
-  *"Ubuntu"*) sudo apt update; sudo apt install clang cmake doxygen libgtkmm-3.0-dev libssl-dev uuid-dev -y;;
+  *"Darwin"*) brew update; brew install cmake -y;;
+  *"Debian"* | *"elementary"* | *"LinuxMint"* | *"Ubuntu"*) sudo apt update; sudo apt install clang cmake libgtkmm-3.0-dev libssl-dev uuid-dev -y;;
+  *"CentOS"* | *"Fedora"* | *"RedHat"*) sudo yum update; sudo yum install clang cmake3 gtkmm30-devel libuuid-devel uuid-devel -y;;
 esac
 
 # ________________________________________________________________________________________
 #                                                       generate, build and install Switch
-
 mkdir -p build/examples
 cd build
-if [[ "$OSTYPE" == *"Darwin"* ]]; then
-  cmake .. -G "Xcode" "$@"
-  cmake --build . --config Debug
-  sudo cmake --build . --target install --config Debug
-  cmake --build . --config Release
-  sudo cmake --build . --target install --config Release
-elif [[ "$OSTYPE" == *"MINGW64"* ]]; then
+if [[ "$OSTYPE" == *"MINGW64"* ]]; then
   cmake .. -DCMAKE_INSTALL_PREFIX=/c/usr/local "$@"
+  cmake --build . --target install --config Debug
+  cmake --build . --target install --config Release
+elif [[ "$OSTYPE" == *"Darwin"* ]]; then
+  cmake .. -G "Xcode" "$@"
   cmake --build . --target install --config Debug
   cmake --build . --target install --config Release
 else
   cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=clang++ "$@"
-  cmake --build . -- -j8
+  cmake --build . -- -j 8
   sudo cmake --build . --target install
   cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ "$@"
-  cmake --build . -- -j8
+  cmake --build . -- -j 8
   sudo cmake --build . --target install
 fi
 cd ..
 
 # ________________________________________________________________________________________
 #                                                             generate and launch examples
-
 cd build/examples
-if [[ "$OSTYPE" == *"Darwin"* ]]; then
-  cmake ../../examples -G "Xcode" "$@"
-  open Examples.xcodeproj
-elif [[ "$OSTYPE" == *"MINGW64"* ]]; then
+if [[ "$OSTYPE" == *"MINGW64"* ]]; then
   cmake ../../examples -DCMAKE_INSTALL_PREFIX=/c/usr/local "$@"
   start Examples.sln
+elif [[ "$OSTYPE" == *"Darwin"* ]]; then
+  cmake ../../examples -G "Xcode" "$@"
+  open Examples.xcodeproj
 else
-  cmake ../../examples -DCMAKE_BUILD_TYPE=Debug  "$@"
-  cd build/examples
-  echo 
+  cmake ../../examples -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=clang++ "$@"
+  echo ____________________________________________________________
+  echo
   echo You can now build and execute examples.
   echo 
   echo Type following commands to build and execute HelloWorld :
@@ -72,6 +60,10 @@ else
   echo 
   echo This example produces the following output:
   echo Hello, World!
+  echo
+  echo Remarks: Type following command to obtain the examples target list :
+  echo cd build/examples
+  echo cmake --build . --target help
   echo
 fi
 cd ../..

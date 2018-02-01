@@ -49,7 +49,7 @@ public:
 
           /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue> class that is empty and uses the specified System::Collections::Generic::IComparer<T> implementation to compare keys.
           /// @param comparer The System::Collections::Generic::IComparer<T> implementation to use when comparing keys, or null to use the default System::Collections::Generic::Comparer<T> for the type of the key.
-          SortedDictionary(refptr< IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {this->init(comparer);}
+          SortedDictionary(refptr<IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {this->init(comparer);}
 
           /// @brief Initializes a new instance of the System::Collections::Generic::SortedDictionary<TKey,TValue> class that contains elements copied from the specified System::Collections::Generic::IDictionary<TKey,TValue> and uses the default System::Collections::Generic::IComparer<T> implementation for the key type.
           /// @param dictionary The System::Collections::Generic::IDictionary<TKey,TValue> whose elements are  copied to the new System::Collections::Generic::SortedDictionary<TKey,TValue>.
@@ -76,7 +76,7 @@ public:
           /// @param comparer The System::Collections::Generic::IComparer<T> implementation to use when comparing keys, or null to use the default System::Collections::Generic::Comparer<T> for the type of the key.
           /// @exception System::ArgumentNullException dictionary is null.
           /// @exception System::ArgumentException dictionary contains one or more duplicate keys.
-          SortedDictionary(const IDictionary<TKey, TValue>& dictionary, refptr< IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {
+          SortedDictionary(const IDictionary<TKey, TValue>& dictionary, refptr<IComparer<TKey>>& comparer) : operationNumber(0), comparer(comparer), map(MapComparer(*this->comparer)) {
             for (auto p : dictionary)
               Add(p.Key(), p.Value());
           }
@@ -193,8 +193,8 @@ public:
 
           /// @brief Returns an enumerator that iterates through the System::Collections::Generic::SortedDictionary<TKey,TValue>.KeyCollection.
           /// @return A System::Collections::Generic::SortedDictionary<TKey,TValue>.KeyCollection.Enumerator structure for the System::Collections::Generic::SortedDictionary<TKey,TValue>.KeyCollection.
-          System::Collections::Generic::Enumerator< KeyValuePair<TKey, TValue>> GetEnumerator() const override {
-            return System::Collections::Generic::Enumerator< KeyValuePair<TKey, TValue>>(new SortedDictionary::Enumerator(*const_cast<SortedDictionary*>(this)));
+          System::Collections::Generic::Enumerator<KeyValuePair<TKey, TValue>> GetEnumerator() const override {
+            return System::Collections::Generic::Enumerator<KeyValuePair<TKey, TValue>>(new SortedDictionary::Enumerator(*const_cast<SortedDictionary*>(this)));
           }
 
           /// @brief Removes the element with the specified key from the System::Collections::Generic::SortedDictionary<TKey,TValue>.
@@ -275,10 +275,10 @@ private:
           /// @cond
           class MapComparer : public std::binary_function<TKey, TKey, bool> {
           private:
-            ref< IComparer<TKey>> comparer;
+            ref<IComparer<TKey>> comparer;
 
           public:
-            MapComparer(ref< IComparer<TKey>> c) : comparer(c) { }
+            MapComparer(ref<IComparer<TKey>> c) : comparer(c) { }
             MapComparer(const MapComparer& mc) { comparer = mc.comparer; }
             ~MapComparer() { }
 

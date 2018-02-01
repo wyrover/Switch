@@ -26,10 +26,12 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::TickStyle> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::TickStyle::None, "None"}, {(int64)System::Windows::Forms::TickStyle::TopLeft, "TopLeft"}, {(int64)System::Windows::Forms::TickStyle::BottomRight, "BottomRight"}, { (int64)System::Windows::Forms::TickStyle::Both, "Both" }};
+struct EnumRegister<System::Windows::Forms::TickStyle> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::TickStyle, string>& values, bool& flags) {
+    values[System::Windows::Forms::TickStyle::None] = "None";
+    values[System::Windows::Forms::TickStyle::TopLeft] = "TopLeft";
+    values[System::Windows::Forms::TickStyle::BottomRight] = "BottomRight";
+    values[System::Windows::Forms::TickStyle::Both] = "Both";
     flags = false;
   }
 };

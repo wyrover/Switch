@@ -8,7 +8,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       // Get an array with the values of ConsoleColor enumeration members.
-      Array<ConsoleColor> colors = Enum<ConsoleColor>::GetValues();
+      Array<ConsoleColor> colors = Enum<>::GetValues<ConsoleColor>();
       // Save the current background and foreground colors.
       ConsoleColor currentBackground = Console::BackgroundColor;
       ConsoleColor currentForeground = Console::ForegroundColor;

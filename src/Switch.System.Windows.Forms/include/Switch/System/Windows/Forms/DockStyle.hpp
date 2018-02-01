@@ -32,10 +32,15 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::DockStyle> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::DockStyle::None, "None"}, {(int64)System::Windows::Forms::DockStyle::None, "None"}, {(int64)System::Windows::Forms::DockStyle::Top, "Top"}, {(int64)System::Windows::Forms::DockStyle::Bottom, "Bottom"}, {(int64)System::Windows::Forms::DockStyle::Left, "Left"}, {(int64)System::Windows::Forms::DockStyle::Right, "Right"}, {(int64)System::Windows::Forms::DockStyle::Fill, "Fill"}};
+struct EnumRegister<System::Windows::Forms::DockStyle> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::DockStyle, string>& values, bool& flags) {
+    values[System::Windows::Forms::DockStyle::None] = "None";
+    values[System::Windows::Forms::DockStyle::None] = "None";
+    values[System::Windows::Forms::DockStyle::Top] = "Top";
+    values[System::Windows::Forms::DockStyle::Bottom] = "Bottom";
+    values[System::Windows::Forms::DockStyle::Left] = "Left";
+    values[System::Windows::Forms::DockStyle::Right] = "Right";
+    values[System::Windows::Forms::DockStyle::Fill] = "Fill";
     flags = false;
   }
 };

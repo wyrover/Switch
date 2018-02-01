@@ -24,10 +24,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::ProgressBarStyle> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::ProgressBarStyle::Blocks, "Blocks"}, {(int64)System::Windows::Forms::ProgressBarStyle::Continuous, "Continuous"}, {(int64)System::Windows::Forms::ProgressBarStyle::Marquee, "Marquee"}};
+struct EnumRegister<System::Windows::Forms::ProgressBarStyle> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::ProgressBarStyle, string>& values, bool& flags) {
+    values[System::Windows::Forms::ProgressBarStyle::Blocks] = "Blocks";
+    values[System::Windows::Forms::ProgressBarStyle::Continuous] = "Continuous";
+    values[System::Windows::Forms::ProgressBarStyle::Marquee] = "Marquee";
     flags = false;
   }
 };

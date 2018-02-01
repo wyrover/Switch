@@ -61,10 +61,50 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::AccessibleEvents> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::AccessibleEvents::SystemSound, "SystemSound"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemAlert, "SystemAlert"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemForeground, "SystemForeground"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemMenuStart, "SystemMenuStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemMenuEnd, "SystemMenuEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemMenuPopupStart, "SystemMenuPopupStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemMenuPopupEnd, "SystemMenuPopupEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemCaptureStart, "SystemCaptureStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemCaptureEnd, "SystemCaptureEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemMoveSizeStart, "SystemMoveSizeStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemMoveSizeEnd, "SystemMoveSizeEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemContextHelpStart, "SystemContextHelpStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemContextHelpEnd, "SystemContextHelpEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemDragDropStart, "SystemDragDropStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemDragDropEnd, "SystemDragDropEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemDialogStart, "SystemDialogStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemDialogEnd, "SystemDialogEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemScrollingStart, "SystemScrollingStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemScrollingEnd, "SystemScrollingEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemSwitchStart, "SystemSwitchStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemSwitchEnd, "SystemSwitchEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemMinimizeStart, "SystemMinimizeStart"}, {(int64)System::Windows::Forms::AccessibleEvents::SystemMinimizeEnd, "SystemMinimizeEnd"}, {(int64)System::Windows::Forms::AccessibleEvents::Create, "Create"}, {(int64)System::Windows::Forms::AccessibleEvents::Destroy, "Destroy"}, {(int64)System::Windows::Forms::AccessibleEvents::Show, "Show"}, {(int64)System::Windows::Forms::AccessibleEvents::Hide, "Hide"}, {(int64)System::Windows::Forms::AccessibleEvents::Reorder, "Reorder"}, {(int64)System::Windows::Forms::AccessibleEvents::Focus, "Focus"}, {(int64)System::Windows::Forms::AccessibleEvents::Selection, "Selection"}, {(int64)System::Windows::Forms::AccessibleEvents::SelectionAdd, "SelectionAdd"}, {(int64)System::Windows::Forms::AccessibleEvents::SelectionRemove, "SelectionRemove"}, {(int64)System::Windows::Forms::AccessibleEvents::SelectionWithin, "SelectionWithin"}, {(int64)System::Windows::Forms::AccessibleEvents::StateChange, "StateChange"}, {(int64)System::Windows::Forms::AccessibleEvents::LocationChange, "LocationChange"}, {(int64)System::Windows::Forms::AccessibleEvents::NameChange, "NameChange"}, {(int64)System::Windows::Forms::AccessibleEvents::DescriptionChange, "DescriptionChange"}, {(int64)System::Windows::Forms::AccessibleEvents::ValueChange, "ValueChange"}, {(int64)System::Windows::Forms::AccessibleEvents::ParentChange, "ParentChange"}, {(int64)System::Windows::Forms::AccessibleEvents::HelpChange, "HelpChange"}, {(int64)System::Windows::Forms::AccessibleEvents::DefaultActionChange, "DefaultActionChange"}, {(int64)System::Windows::Forms::AccessibleEvents::AcceleratorChange, "AcceleratorChange"}};
+struct EnumRegister<System::Windows::Forms::AccessibleEvents> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::AccessibleEvents, string>& values, bool& flags) {
+    values[System::Windows::Forms::AccessibleEvents::SystemSound] = "SystemSound";
+    values[System::Windows::Forms::AccessibleEvents::SystemAlert] = "SystemAlert";
+    values[System::Windows::Forms::AccessibleEvents::SystemForeground] = "SystemForeground";
+    values[System::Windows::Forms::AccessibleEvents::SystemMenuStart] = "SystemMenuStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemMenuEnd] = "SystemMenuEnd";
+    values[System::Windows::Forms::AccessibleEvents::SystemMenuPopupStart] = "SystemMenuPopupStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemMenuPopupEnd] = "SystemMenuPopupEnd";
+    values[System::Windows::Forms::AccessibleEvents::SystemCaptureStart] = "SystemCaptureStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemCaptureEnd] = "SystemCaptureEnd";
+    values[System::Windows::Forms::AccessibleEvents::SystemMoveSizeStart] = "SystemMoveSizeStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemMoveSizeEnd] = "SystemMoveSizeEnd";
+    values[System::Windows::Forms::AccessibleEvents::SystemContextHelpStart] = "SystemContextHelpStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemContextHelpEnd] = "SystemContextHelpEnd";
+    values[System::Windows::Forms::AccessibleEvents::SystemDragDropStart] = "SystemDragDropStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemDragDropEnd] = "SystemDragDropEnd";
+    values[System::Windows::Forms::AccessibleEvents::SystemDialogStart] = "SystemDialogStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemDialogEnd] = "SystemDialogEnd";
+    values[System::Windows::Forms::AccessibleEvents::SystemScrollingStart] = "SystemScrollingStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemScrollingEnd] = "SystemScrollingEnd";
+    values[System::Windows::Forms::AccessibleEvents::SystemSwitchStart] = "SystemSwitchStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemSwitchEnd] = "SystemSwitchEnd";
+    values[System::Windows::Forms::AccessibleEvents::SystemMinimizeStart] = "SystemMinimizeStart";
+    values[System::Windows::Forms::AccessibleEvents::SystemMinimizeEnd] = "SystemMinimizeEnd";
+    values[System::Windows::Forms::AccessibleEvents::Create] = "Create";
+    values[System::Windows::Forms::AccessibleEvents::Destroy] = "Destroy";
+    values[System::Windows::Forms::AccessibleEvents::Show] = "Show";
+    values[System::Windows::Forms::AccessibleEvents::Hide] = "Hide";
+    values[System::Windows::Forms::AccessibleEvents::Reorder] = "Reorder";
+    values[System::Windows::Forms::AccessibleEvents::Focus] = "Focus";
+    values[System::Windows::Forms::AccessibleEvents::Selection] = "Selection";
+    values[System::Windows::Forms::AccessibleEvents::SelectionAdd] = "SelectionAdd";
+    values[System::Windows::Forms::AccessibleEvents::SelectionRemove] = "SelectionRemove";
+    values[System::Windows::Forms::AccessibleEvents::SelectionWithin] = "SelectionWithin";
+    values[System::Windows::Forms::AccessibleEvents::StateChange] = "StateChange";
+    values[System::Windows::Forms::AccessibleEvents::LocationChange] = "LocationChange";
+    values[System::Windows::Forms::AccessibleEvents::NameChange] = "NameChange";
+    values[System::Windows::Forms::AccessibleEvents::DescriptionChange] = "DescriptionChange";
+    values[System::Windows::Forms::AccessibleEvents::ValueChange] = "ValueChange";
+    values[System::Windows::Forms::AccessibleEvents::ParentChange] = "ParentChange";
+    values[System::Windows::Forms::AccessibleEvents::HelpChange] = "HelpChange";
+    values[System::Windows::Forms::AccessibleEvents::DefaultActionChange] = "DefaultActionChange";
+    values[System::Windows::Forms::AccessibleEvents::AcceleratorChange] = "AcceleratorChange";
     flags = false;
   }
 };

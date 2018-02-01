@@ -128,9 +128,11 @@ namespace {
   }
 
   TEST_F(LinkedList, SpString) {
-    Generic::LinkedList< refptr<String>> list;
+    Generic::LinkedList<refptr<String>> list;
     EXPECT_EQ(0, list.Count);
-    list.Add(new String("1")); list.Add(new String("2")); list.Add(new String("3"));
+    list.Add(new String("1"));
+    list.Add(new String("2"));
+    list.Add(new String("3"));
     EXPECT_EQ(3, list.Count);
     int i = 0;
     for (refptr<string> item : list) {

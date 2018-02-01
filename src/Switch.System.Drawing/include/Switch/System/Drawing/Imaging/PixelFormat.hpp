@@ -73,10 +73,30 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Drawing::Imaging::PixelFormat> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Drawing::Imaging::PixelFormat::Alpha, "Alpha"}, {(int64)System::Drawing::Imaging::PixelFormat::Canonical, "Canonical"}, {(int64)System::Drawing::Imaging::PixelFormat::DontCare, "DontCare"}, {(int64)System::Drawing::Imaging::PixelFormat::Format16bppArgb1555, "Format16bppArgb1555"}, {(int64)System::Drawing::Imaging::PixelFormat::Format16bppGrayScale, "Format16bppGrayScale"}, {(int64)System::Drawing::Imaging::PixelFormat::Format16bppRgb555, "Format16bppRgb555"}, {(int64)System::Drawing::Imaging::PixelFormat::Format16bppRgb565, "Format16bppRgb565"}, {(int64)System::Drawing::Imaging::PixelFormat::Format1bppIndexed, "Format1bppIndexed"}, {(int64)System::Drawing::Imaging::PixelFormat::Format24bppRgb, "Format24bppRgb"}, {(int64)System::Drawing::Imaging::PixelFormat::Format32bppArgb, "Format32bppArgb"}, {(int64)System::Drawing::Imaging::PixelFormat::Format32bppPArgb, "Format32bppPArgb"}, {(int64)System::Drawing::Imaging::PixelFormat::Format32bppRgb, "Format32bppRgb"}, {(int64)System::Drawing::Imaging::PixelFormat::Format48bppRgb, "Format48bppRgb"}, {(int64)System::Drawing::Imaging::PixelFormat::Format4bppIndexed, "Format4bppIndexed"}, {(int64)System::Drawing::Imaging::PixelFormat::Format64bppArgb, "Format64bppArgb"}, {(int64)System::Drawing::Imaging::PixelFormat::Format64bppPArgb, "Format64bppPArgb"}, {(int64)System::Drawing::Imaging::PixelFormat::Format8bppIndexed, "Format8bppIndexed"}, {(int64)System::Drawing::Imaging::PixelFormat::Gdi, "Gdi"}, {(int64)System::Drawing::Imaging::PixelFormat::Indexed, "Indexed"}, {(int64)System::Drawing::Imaging::PixelFormat::Max, "Max"}, {(int64)System::Drawing::Imaging::PixelFormat::PAlpha, "PAlpha"}, {(int64)System::Drawing::Imaging::PixelFormat::Undefined, "Undefined"}};
+struct EnumRegister<System::Drawing::Imaging::PixelFormat> {
+  void operator()(System::Collections::Generic::IDictionary<System::Drawing::Imaging::PixelFormat, string>& values, bool& flags) {
+    values[System::Drawing::Imaging::PixelFormat::Alpha] = "Alpha";
+    values[System::Drawing::Imaging::PixelFormat::Canonical] = "Canonical";
+    values[System::Drawing::Imaging::PixelFormat::DontCare] = "DontCare";
+    values[System::Drawing::Imaging::PixelFormat::Format16bppArgb1555] = "Format16bppArgb1555";
+    values[System::Drawing::Imaging::PixelFormat::Format16bppGrayScale] = "Format16bppGrayScale";
+    values[System::Drawing::Imaging::PixelFormat::Format16bppRgb555] = "Format16bppRgb555";
+    values[System::Drawing::Imaging::PixelFormat::Format16bppRgb565] = "Format16bppRgb565";
+    values[System::Drawing::Imaging::PixelFormat::Format1bppIndexed] = "Format1bppIndexed";
+    values[System::Drawing::Imaging::PixelFormat::Format24bppRgb] = "Format24bppRgb";
+    values[System::Drawing::Imaging::PixelFormat::Format32bppArgb] = "Format32bppArgb";
+    values[System::Drawing::Imaging::PixelFormat::Format32bppPArgb] = "Format32bppPArgb";
+    values[System::Drawing::Imaging::PixelFormat::Format32bppRgb] = "Format32bppRgb";
+    values[System::Drawing::Imaging::PixelFormat::Format48bppRgb] = "Format48bppRgb";
+    values[System::Drawing::Imaging::PixelFormat::Format4bppIndexed] = "Format4bppIndexed";
+    values[System::Drawing::Imaging::PixelFormat::Format64bppArgb] = "Format64bppArgb";
+    values[System::Drawing::Imaging::PixelFormat::Format64bppPArgb] = "Format64bppPArgb";
+    values[System::Drawing::Imaging::PixelFormat::Format8bppIndexed] = "Format8bppIndexed";
+    values[System::Drawing::Imaging::PixelFormat::Gdi] = "Gdi";
+    values[System::Drawing::Imaging::PixelFormat::Indexed] = "Indexed";
+    values[System::Drawing::Imaging::PixelFormat::Max] = "Max";
+    values[System::Drawing::Imaging::PixelFormat::PAlpha] = "PAlpha";
+    values[System::Drawing::Imaging::PixelFormat::Undefined] = "Undefined";
     flags = false;
   }
 };

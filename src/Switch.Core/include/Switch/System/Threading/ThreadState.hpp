@@ -44,10 +44,18 @@ template <>
 class AddFlagOperators<System::Threading::ThreadState> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Threading::ThreadState> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Threading::ThreadState::Running, "Running"}, {(int64)System::Threading::ThreadState::StopRequested, "StopRequested"}, {(int64)System::Threading::ThreadState::SuspendRequested, "SuspendRequested"}, {(int64)System::Threading::ThreadState::Background, "Background"}, {(int64)System::Threading::ThreadState::Unstarted, "Unstarted"}, {(int64)System::Threading::ThreadState::Stopped, "Stopped"}, {(int64)System::Threading::ThreadState::WaitSleepJoin, "WaitSleepJoin"}, {(int64)System::Threading::ThreadState::Suspended, "Suspended"}, {(int64)System::Threading::ThreadState::AbortRequested, "AbortRequested"}, {(int64)System::Threading::ThreadState::Aborted, "Aborted"}};
+struct EnumRegister<System::Threading::ThreadState> {
+  void operator()(System::Collections::Generic::IDictionary<System::Threading::ThreadState, string>& values, bool& flags) {
+    values[System::Threading::ThreadState::Running] = "Running";
+    values[System::Threading::ThreadState::StopRequested] = "StopRequested";
+    values[System::Threading::ThreadState::SuspendRequested] = "SuspendRequested";
+    values[System::Threading::ThreadState::Background] = "Background";
+    values[System::Threading::ThreadState::Unstarted] = "Unstarted";
+    values[System::Threading::ThreadState::Stopped] = "Stopped";
+    values[System::Threading::ThreadState::WaitSleepJoin] = "WaitSleepJoin";
+    values[System::Threading::ThreadState::Suspended] = "Suspended";
+    values[System::Threading::ThreadState::AbortRequested] = "AbortRequested";
+    values[System::Threading::ThreadState::Aborted] = "Aborted";
     flags = true;
   }
 };

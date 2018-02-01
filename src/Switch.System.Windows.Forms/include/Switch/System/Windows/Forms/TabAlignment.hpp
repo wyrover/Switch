@@ -26,10 +26,12 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::TabAlignment> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::TabAlignment::Top, "Top"}, {(int64)System::Windows::Forms::TabAlignment::Bottom, "Bottom"}, {(int64)System::Windows::Forms::TabAlignment::Left, "Left"}, {(int64)System::Windows::Forms::TabAlignment::Right, "Right"}};
+struct EnumRegister<System::Windows::Forms::TabAlignment> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::TabAlignment, string>& values, bool& flags) {
+    values[System::Windows::Forms::TabAlignment::Top] = "Top";
+    values[System::Windows::Forms::TabAlignment::Bottom] = "Bottom";
+    values[System::Windows::Forms::TabAlignment::Left] = "Left";
+    values[System::Windows::Forms::TabAlignment::Right] = "Right";
     flags = false;
   }
 };

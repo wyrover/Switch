@@ -34,10 +34,13 @@ template <>
 class AddFlagOperators<System::Drawing::FontStyle> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Drawing::FontStyle> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Drawing::FontStyle::Regular, "Regular"}, {(int64)System::Drawing::FontStyle::Bold, "Bold"}, {(int64)System::Drawing::FontStyle::Italic, "Italic"}, {(int64)System::Drawing::FontStyle::Underline, "Underline"}, {(int64)System::Drawing::FontStyle::Strikeout, "Strikeout"}};
+struct EnumRegister<System::Drawing::FontStyle> {
+  void operator()(System::Collections::Generic::IDictionary<System::Drawing::FontStyle, string>& values, bool& flags) {
+    values[System::Drawing::FontStyle::Regular] = "Regular";
+    values[System::Drawing::FontStyle::Bold] = "Bold";
+    values[System::Drawing::FontStyle::Italic] = "Italic";
+    values[System::Drawing::FontStyle::Underline] = "Underline";
+    values[System::Drawing::FontStyle::Strikeout] = "Strikeout";
     flags = true;
   }
 };

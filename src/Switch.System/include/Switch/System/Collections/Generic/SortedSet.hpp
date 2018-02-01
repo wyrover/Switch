@@ -44,7 +44,7 @@ namespace Switch {
 
           /// @brief Initializes a new instance of the SortedSet<T> class that uses a specified comparer
           /// @param comparer an instance of IComparer<T> used to determine the sort order of the set.
-          SortedSet(const refptr< IComparer<T>>& comparer) : comparer(comparer), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {}
+          SortedSet(const refptr<IComparer<T>>& comparer) : comparer(comparer), set(new std::set<T, SetComparer, TAllocator>(SetComparer(this->comparer.ToPointer()))), operationNumber(0) {}
 
           /// @brief Initializes a new instance of the SortedSet<T> class that contains elements copied from a specified enumerable collection
           /// @param collection The elements to copy
@@ -259,7 +259,7 @@ namespace Switch {
           /// @return true if the element was removed, false otherwise.
           /// @exception ArgumentNullException item is null.
           bool Remove(const T& item) override {
-            typename std::set< T, SetComparer, TAllocator>::iterator it = this->set->find(item);
+            typename std::set<T, SetComparer, TAllocator>::iterator it = this->set->find(item);
 
             // if item is ! found, do ! alter the set and return false
             if (it == this->set->end())
@@ -403,7 +403,7 @@ namespace Switch {
             int64 operationNumber;
             bool beforeFirst;
             SortedSet& set;
-            typename std::set< T, SetComparer, TAllocator>::iterator iterator;
+            typename std::set<T, SetComparer, TAllocator>::iterator iterator;
           };
 
           class ReverseEnumerator : public object, public IEnumerator<T> {
@@ -445,7 +445,7 @@ namespace Switch {
             int64 operationNumber;
             bool beforeFirst;
             SortedSet& set;
-            typename std::set< T, SetComparer, TAllocator>::reverse_iterator iterator;
+            typename std::set<T, SetComparer, TAllocator>::reverse_iterator iterator;
           };
 
           /// @cond
@@ -461,8 +461,8 @@ namespace Switch {
           /// @endcond
 
         private:
-          refptr< IComparer<T>> comparer;
-          refptr< std::set<T, SetComparer, TAllocator>> set;
+          refptr<IComparer<T>> comparer;
+          refptr<std::set<T, SetComparer, TAllocator>> set;
           int64 operationNumber;
           /// @endcond
         };

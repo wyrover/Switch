@@ -37,10 +37,15 @@ template <>
 class AddFlagOperators<System::Windows::Forms::UICues> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Windows::Forms::UICues> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::UICues::None, "None"}, {(int64)System::Windows::Forms::UICues::ShowFocus, "ShowFocus"}, {(int64)System::Windows::Forms::UICues::ShowKeyboard, "ShowKeyboard"}, {(int64)System::Windows::Forms::UICues::Shown, "Shown"}, {(int64)System::Windows::Forms::UICues::ChangeFocus, "ChangeFocus"}, {(int64)System::Windows::Forms::UICues::ChangeKeyboard, "ChangeKeyboard"}, {(int64)System::Windows::Forms::UICues::Changed, "Changed"}};
+struct EnumRegister<System::Windows::Forms::UICues> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::UICues, string>& values, bool& flags) {
+    values[System::Windows::Forms::UICues::None] = "None";
+    values[System::Windows::Forms::UICues::ShowFocus] = "ShowFocus";
+    values[System::Windows::Forms::UICues::ShowKeyboard] = "ShowKeyboard";
+    values[System::Windows::Forms::UICues::Shown] = "Shown";
+    values[System::Windows::Forms::UICues::ChangeFocus] = "ChangeFocus";
+    values[System::Windows::Forms::UICues::ChangeKeyboard] = "ChangeKeyboard";
+    values[System::Windows::Forms::UICues::Changed] = "Changed";
     flags = true;
   }
 };

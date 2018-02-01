@@ -325,7 +325,7 @@ namespace Switch {
               toParse = toParse.Replace(System::Environment::NewLine, "");
               rkv.key = toParse.Remove(toParse.IndexOf("\"Kind=")).Substring(toParse.IndexOf("Key=\"") + 5);
               toParse = toParse.Remove(0, toParse.IndexOf("\"Kind=\"") + 1);
-              rkv.kind = (RegistryValueKind)System::Enum<RegistryValueKind>::Parse(toParse.Remove(toParse.IndexOf("\">")).Substring(toParse.IndexOf("Kind=\"") + 6));
+              rkv.kind = (RegistryValueKind)System::Enum<>::Parse<RegistryValueKind>(toParse.Remove(toParse.IndexOf("\">")).Substring(toParse.IndexOf("Kind=\"") + 6));
               toParse = toParse.Remove(0, toParse.IndexOf("\">"));
               toParse = toParse.Substring(toParse.IndexOf("\">") + 2);
 

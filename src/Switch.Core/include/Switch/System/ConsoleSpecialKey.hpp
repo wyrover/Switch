@@ -26,10 +26,12 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::ConsoleSpecialKey> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::ConsoleSpecialKey::ControlBreak, "ControlBreak"}, {(int64)System::ConsoleSpecialKey::ControlC, "ControlC"}, {(int64)System::ConsoleSpecialKey::ControlBackslash, "ControlBackslash"}, {(int64)System::ConsoleSpecialKey::ControlZ, "ControlZ"}};
+struct EnumRegister<System::ConsoleSpecialKey> {
+  void operator()(System::Collections::Generic::IDictionary<System::ConsoleSpecialKey, string>& values, bool& flags) {
+    values[System::ConsoleSpecialKey::ControlBreak] = "ControlBreak";
+    values[System::ConsoleSpecialKey::ControlC] = "ControlC";
+    values[System::ConsoleSpecialKey::ControlBackslash] = "ControlBackslash";
+    values[System::ConsoleSpecialKey::ControlZ] = "ControlZ";
     flags = false;
   }
 };

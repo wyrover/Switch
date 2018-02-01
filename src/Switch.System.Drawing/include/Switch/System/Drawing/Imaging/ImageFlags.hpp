@@ -55,10 +55,22 @@ template <>
 class AddFlagOperators<System::Drawing::Imaging::ImageFlags> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Drawing::Imaging::ImageFlags> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Drawing::Imaging::ImageFlags::None, "None"}, {(int64)System::Drawing::Imaging::ImageFlags::Scalable, "Scalable"}, {(int64)System::Drawing::Imaging::ImageFlags::HasAlpha, "HasAlpha"}, {(int64)System::Drawing::Imaging::ImageFlags::HasTranslucent, "HasTranslucent"}, {(int64)System::Drawing::Imaging::ImageFlags::PartiallyScalable, "PartiallyScalable"}, {(int64)System::Drawing::Imaging::ImageFlags::ColorSpaceRgb, "ColorSpaceRgb"}, {(int64)System::Drawing::Imaging::ImageFlags::ColorSpaceCmyk, "ColorSpaceCmyk"}, {(int64)System::Drawing::Imaging::ImageFlags::ColorSpaceGray, "ColorSpaceGray"}, {(int64)System::Drawing::Imaging::ImageFlags::ColorSpaceYcbcr, "ColorSpaceYcbcr"}, {(int64)System::Drawing::Imaging::ImageFlags::ColorSpaceYcck, "ColorSpaceYcck"}, {(int64)System::Drawing::Imaging::ImageFlags::HasRealDpi, "HasRealDpi"}, {(int64)System::Drawing::Imaging::ImageFlags::HasRealPixelSize, "HasRealPixelSize"}, {(int64)System::Drawing::Imaging::ImageFlags::ReadOnly, "ReadOnly"}, {(int64)System::Drawing::Imaging::ImageFlags::Caching, "Caching"}};
+struct EnumRegister<System::Drawing::Imaging::ImageFlags> {
+  void operator()(System::Collections::Generic::IDictionary<System::Drawing::Imaging::ImageFlags, string>& values, bool& flags) {
+    values[System::Drawing::Imaging::ImageFlags::None] = "None";
+    values[System::Drawing::Imaging::ImageFlags::Scalable] = "Scalable";
+    values[System::Drawing::Imaging::ImageFlags::HasAlpha] = "HasAlpha";
+    values[System::Drawing::Imaging::ImageFlags::HasTranslucent] = "HasTranslucent";
+    values[System::Drawing::Imaging::ImageFlags::PartiallyScalable] = "PartiallyScalable";
+    values[System::Drawing::Imaging::ImageFlags::ColorSpaceRgb] = "ColorSpaceRgb";
+    values[System::Drawing::Imaging::ImageFlags::ColorSpaceCmyk] = "ColorSpaceCmyk";
+    values[System::Drawing::Imaging::ImageFlags::ColorSpaceGray] = "ColorSpaceGray";
+    values[System::Drawing::Imaging::ImageFlags::ColorSpaceYcbcr] = "ColorSpaceYcbcr";
+    values[System::Drawing::Imaging::ImageFlags::ColorSpaceYcck] = "ColorSpaceYcck";
+    values[System::Drawing::Imaging::ImageFlags::HasRealDpi] = "HasRealDpi";
+    values[System::Drawing::Imaging::ImageFlags::HasRealPixelSize] = "HasRealPixelSize";
+    values[System::Drawing::Imaging::ImageFlags::ReadOnly] = "ReadOnly";
+    values[System::Drawing::Imaging::ImageFlags::Caching] = "Caching";
     flags = true;
   }
 };

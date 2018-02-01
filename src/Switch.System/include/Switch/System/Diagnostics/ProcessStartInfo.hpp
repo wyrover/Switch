@@ -281,7 +281,7 @@ namespace Switch {
         property_<ProcessWindowStyle> WindowStyle {
           get_ {return this->data->windowStyle;},
           set_ {
-            if (!Enum<ProcessWindowStyle>::IsDefined(value))
+            if (!Enum<>::IsDefined<ProcessWindowStyle>(value))
               throw System::ComponentModel::InvalidEnumArgumentException(caller_);
             this->data->windowStyle = value;
           }

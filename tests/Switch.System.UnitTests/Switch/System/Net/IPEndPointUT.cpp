@@ -18,8 +18,8 @@ namespace {
   }
 
   TEST(IPEndPoint, GetAddressFamily) {
-    ASSERT_EQ(Enum<Sockets::AddressFamily>::ToString(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).AddressFamily), "InterNetwork");
-    ASSERT_EQ(Enum<Sockets::AddressFamily>::ToString(IPEndPoint(IPAddress::IPv6Loopback, 8080).AddressFamily), "InterNetworkV6");
+    ASSERT_EQ(Enum<Sockets::AddressFamily>(IPEndPoint(IPAddress(172, 16, 10, 30), 11000).AddressFamily).ToString(), "InterNetwork");
+    ASSERT_EQ(Enum<Sockets::AddressFamily>(IPEndPoint(IPAddress::IPv6Loopback, 8080).AddressFamily).ToString(), "InterNetworkV6");
   }
 
   TEST(IPEndPoint, GetPort) {

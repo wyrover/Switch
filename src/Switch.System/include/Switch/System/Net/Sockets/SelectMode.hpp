@@ -32,10 +32,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Net::Sockets::SelectMode> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::Sockets::SelectMode::SelectRead, "SelectRead"}, {(int64)System::Net::Sockets::SelectMode::SelectWrite, "SelectWrite"}, {(int64)System::Net::Sockets::SelectMode::SelectError, "SelectError"}};
+struct EnumRegister<System::Net::Sockets::SelectMode> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::SelectMode, string>& values, bool& flags) {
+    values[System::Net::Sockets::SelectMode::SelectRead] = "SelectRead";
+    values[System::Net::Sockets::SelectMode::SelectWrite] = "SelectWrite";
+    values[System::Net::Sockets::SelectMode::SelectError] = "SelectError";
     flags = false;
   }
 };

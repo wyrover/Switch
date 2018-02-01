@@ -39,10 +39,15 @@ template <>
 class AddFlagOperators<System::Diagnostics::TraceOptions> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Diagnostics::TraceOptions> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Diagnostics::TraceOptions::None, "None"}, {(int64)System::Diagnostics::TraceOptions::LogicalOperationStack, "LogicalOperationStack"}, {(int64)System::Diagnostics::TraceOptions::DateTime, "DateTime"}, {(int64)System::Diagnostics::TraceOptions::Timestamp, "Timestamp"}, {(int64)System::Diagnostics::TraceOptions::ProcessId, "ProcessId"}, {(int64)System::Diagnostics::TraceOptions::ThreadId, "ThreadId"}, {(int64)System::Diagnostics::TraceOptions::Callstack, "Callstack"}};
+struct EnumRegister<System::Diagnostics::TraceOptions> {
+  void operator()(System::Collections::Generic::IDictionary<System::Diagnostics::TraceOptions, string>& values, bool& flags) {
+    values[System::Diagnostics::TraceOptions::None] = "None";
+    values[System::Diagnostics::TraceOptions::LogicalOperationStack] = "LogicalOperationStack";
+    values[System::Diagnostics::TraceOptions::DateTime] = "DateTime";
+    values[System::Diagnostics::TraceOptions::Timestamp] = "Timestamp";
+    values[System::Diagnostics::TraceOptions::ProcessId] = "ProcessId";
+    values[System::Diagnostics::TraceOptions::ThreadId] = "ThreadId";
+    values[System::Diagnostics::TraceOptions::Callstack] = "Callstack";
     flags = true;
   }
 };

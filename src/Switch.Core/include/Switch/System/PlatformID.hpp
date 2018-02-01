@@ -38,10 +38,18 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::PlatformID> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::PlatformID::Unknown, "Unknown"}, {(int64)System::PlatformID::Win32S, "Win32S"}, {(int64)System::PlatformID::Win32Windows, "Win32Windows"}, {(int64)System::PlatformID::Win32NT, "Win32NT"}, {(int64)System::PlatformID::WinCE, "WinCE"}, {(int64)System::PlatformID::Unix, "Unix"}, {(int64)System::PlatformID::Xbox, "Xbox"}, {(int64)System::PlatformID::MacOSX, "MacOSX"}, {(int64)System::PlatformID::IOs, "IOs"}, {(int64)System::PlatformID::Android, "Android"}};
+struct EnumRegister<System::PlatformID> {
+  void operator()(System::Collections::Generic::IDictionary<System::PlatformID, string>& values, bool& flags) {
+    values[System::PlatformID::Unknown] = "Unknown";
+    values[System::PlatformID::Win32S] = "Win32S";
+    values[System::PlatformID::Win32Windows] = "Win32Windows";
+    values[System::PlatformID::Win32NT] = "Win32NT";
+    values[System::PlatformID::WinCE] = "WinCE";
+    values[System::PlatformID::Unix] = "Unix";
+    values[System::PlatformID::Xbox] = "Xbox";
+    values[System::PlatformID::MacOSX] = "MacOSX";
+    values[System::PlatformID::IOs] = "IOs";
+    values[System::PlatformID::Android] = "Android";
     flags = false;
   }
 };

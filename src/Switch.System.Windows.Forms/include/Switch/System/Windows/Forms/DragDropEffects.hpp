@@ -27,10 +27,14 @@ template <>
 class AddFlagOperators<System::Windows::Forms::DragDropEffects> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Windows::Forms::DragDropEffects> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::DragDropEffects::None, "None"}, {(int64)System::Windows::Forms::DragDropEffects::Copy, "Copy"}, {(int64)System::Windows::Forms::DragDropEffects::Move, "Move"}, {(int64)System::Windows::Forms::DragDropEffects::Link, "Link"}, {(int64)System::Windows::Forms::DragDropEffects::Scroll, "Scroll"}, {(int64)System::Windows::Forms::DragDropEffects::All, "All"}};
+struct EnumRegister<System::Windows::Forms::DragDropEffects> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::DragDropEffects, string>& values, bool& flags) {
+    values[System::Windows::Forms::DragDropEffects::None] = "None";
+    values[System::Windows::Forms::DragDropEffects::Copy] = "Copy";
+    values[System::Windows::Forms::DragDropEffects::Move] = "Move";
+    values[System::Windows::Forms::DragDropEffects::Link] = "Link";
+    values[System::Windows::Forms::DragDropEffects::Scroll] = "Scroll";
+    values[System::Windows::Forms::DragDropEffects::All] = "All";
     flags = true;
   }
 };

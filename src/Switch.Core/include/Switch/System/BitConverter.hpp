@@ -21,7 +21,7 @@ namespace Switch {
     /// | Type     | To byte conversion                                | From byte conversion                                                  |
     /// |----------|---------------------------------------------------|-----------------------------------------------------------------------|
     /// | bool     | GetBytes(bool)                                    | ToBoolean(const Array< byte >&, int32)                                |
-    /// | char32   | GetBytes(char32)                                  | ToChar(const Array< byte >&, int32)                                  |
+    /// | char32   | GetBytes(char32)                                  | ToChar(const Array< byte >&, int32)                                   |
     /// | double   | GetBytes(double) - or - DoubleToInt64Bits(double) | ToDouble(const Array< byte >&, int32) - or - Int64BitsToDouble(int64) |
     /// | int16    | GetBytes(int16)                                   | ToInt16(const Array< byte >&, int32)                                  |
     /// | int32    | GetBytes(int32)                                   | ToInt32(const Array< byte >&, int32)                                  |

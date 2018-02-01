@@ -29,10 +29,13 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::UriHostNameType> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::UriHostNameType::Unknown, "Unknown"}, {(int64)System::UriHostNameType::Basic, "Basic"}, {(int64)System::UriHostNameType::Dns, "Dns"}, {(int64)System::UriHostNameType::IPv4, "IPv4"}, {(int64)System::UriHostNameType::IPv6, "IPv6"}};
+struct EnumRegister<System::UriHostNameType> {
+  void operator()(System::Collections::Generic::IDictionary<System::UriHostNameType, string>& values, bool& flags) {
+    values[System::UriHostNameType::Unknown] = "Unknown";
+    values[System::UriHostNameType::Basic] = "Basic";
+    values[System::UriHostNameType::Dns] = "Dns";
+    values[System::UriHostNameType::IPv4] = "IPv4";
+    values[System::UriHostNameType::IPv6] = "IPv6";
     flags = false;
   }
 };

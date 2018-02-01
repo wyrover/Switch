@@ -33,15 +33,12 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Diagnostics::ProcessWindowStyle> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {
-      {(int64)System::Diagnostics::ProcessWindowStyle::Normal, "Normal"},
-      {(int64)System::Diagnostics::ProcessWindowStyle::Hidden, "Hidden"},
-      {(int64)System::Diagnostics::ProcessWindowStyle::Minimized, "Minimized"},
-      {(int64)System::Diagnostics::ProcessWindowStyle::Maximized, "Maximized"},
-    };
+struct EnumRegister<System::Diagnostics::ProcessWindowStyle> {
+  void operator()(System::Collections::Generic::IDictionary<System::Diagnostics::ProcessWindowStyle, string>& values, bool& flags) {
+    values[System::Diagnostics::ProcessWindowStyle::Normal] = "Normal";
+    values[System::Diagnostics::ProcessWindowStyle::Hidden] = "Hidden";
+    values[System::Diagnostics::ProcessWindowStyle::Minimized] = "Minimized";
+    values[System::Diagnostics::ProcessWindowStyle::Maximized] = "Maximized";
     flags = false;
   }
 };

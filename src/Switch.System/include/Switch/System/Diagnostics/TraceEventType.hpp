@@ -42,10 +42,18 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Diagnostics::TraceEventType> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Diagnostics::TraceEventType::Critical, "Critical"}, {(int64)System::Diagnostics::TraceEventType::Error, "Error"}, {(int64)System::Diagnostics::TraceEventType::Information, "Information"}, {(int64)System::Diagnostics::TraceEventType::Resume, "Resume"}, {(int64)System::Diagnostics::TraceEventType::Start, "Start"}, {(int64)System::Diagnostics::TraceEventType::Stop, "Stop"}, {(int64)System::Diagnostics::TraceEventType::Suspend, "Suspend"}, {(int64)System::Diagnostics::TraceEventType::Transfer, "Transfer"}, {(int64)System::Diagnostics::TraceEventType::Verbose, "Verbose"}, {(int64)System::Diagnostics::TraceEventType::Warning, "Warning"}};
+struct EnumRegister<System::Diagnostics::TraceEventType> {
+  void operator()(System::Collections::Generic::IDictionary<System::Diagnostics::TraceEventType, string>& values, bool& flags) {
+    values[System::Diagnostics::TraceEventType::Critical] = "Critical";
+    values[System::Diagnostics::TraceEventType::Error] = "Error";
+    values[System::Diagnostics::TraceEventType::Information] = "Information";
+    values[System::Diagnostics::TraceEventType::Resume] = "Resume";
+    values[System::Diagnostics::TraceEventType::Start] = "Start";
+    values[System::Diagnostics::TraceEventType::Stop] = "Stop";
+    values[System::Diagnostics::TraceEventType::Suspend] = "Suspend";
+    values[System::Diagnostics::TraceEventType::Transfer] = "Transfer";
+    values[System::Diagnostics::TraceEventType::Verbose] = "Verbose";
+    values[System::Diagnostics::TraceEventType::Warning] = "Warning";
     flags = false;
   }
 };

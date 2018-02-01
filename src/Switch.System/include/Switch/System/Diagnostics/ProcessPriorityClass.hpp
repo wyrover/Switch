@@ -38,11 +38,16 @@ template <>
 class AddFlagOperators<System::Diagnostics::ProcessPriorityClass> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Diagnostics::ProcessPriorityClass> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Diagnostics::ProcessPriorityClass::Normal, "Normal"}, {(int64)System::Diagnostics::ProcessPriorityClass::Idle, "Idle"}, {(int64)System::Diagnostics::ProcessPriorityClass::High, "High"}, {(int64)System::Diagnostics::ProcessPriorityClass::BelowNormal, "BelowNormal"}, {(int64)System::Diagnostics::ProcessPriorityClass::AboveNormal, "AboveNormal"}, {(int64)System::Diagnostics::TraceOptions::ThreadId, "ThreadId"}, {(int64)System::Diagnostics::TraceOptions::Callstack, "Callstack"}};
-    flags = false;
+struct EnumRegister<System::Diagnostics::ProcessPriorityClass> {
+  void operator()(System::Collections::Generic::IDictionary<System::Diagnostics::ProcessPriorityClass, string>& values, bool& flags) {
+    values[System::Diagnostics::ProcessPriorityClass::Normal] = "Normal";
+    values[System::Diagnostics::ProcessPriorityClass::Idle] = "Idle";
+    values[System::Diagnostics::ProcessPriorityClass::High] = "High";
+    values[System::Diagnostics::ProcessPriorityClass::BelowNormal] = "BelowNormal";
+    values[System::Diagnostics::ProcessPriorityClass::AboveNormal] = "AboveNormal";
+    values[(int64)System::Diagnostics::TraceOptions::ThreadId] = "ThreadId";
+    values[(int64)System::Diagnostics::TraceOptions::Callstack] = "Callstack";
+    flags = true;
   }
 };
 /// @endcond

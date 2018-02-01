@@ -19,7 +19,7 @@ namespace Switch {
         /// @interface IDictionary
         /// @brief Represents a generic collection of key/value pairs.
         template<typename TKey, typename TValue>
-        class IDictionary : public ICollection< KeyValuePair<TKey, TValue>> {
+        class IDictionary : public ICollection<KeyValuePair<TKey, TValue>> {
         public:
           /// @brief Represents the collection of keys in a Dictionary<TKey, TValue>. This class cannot be inherited.
           using KeyCollection = List<TKey>;
@@ -64,7 +64,7 @@ namespace Switch {
           /// @exception ArgumentNullException key is null.
           virtual bool Remove(const TKey& key) = 0;
 
-          using ICollection< KeyValuePair<TKey, TValue>>::Remove;
+          using ICollection<KeyValuePair<TKey, TValue>>::Remove;
 
           /// @brief Gets the value associated with the specified key.
           /// @param key The key whose value to get

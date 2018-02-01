@@ -48,10 +48,18 @@ template <>
 class AddFlagOperators<System::Net::Sockets::SocketFlags> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Net::Sockets::SocketFlags> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::Sockets::SocketFlags::None, "None"}, {(int64)System::Net::Sockets::SocketFlags::OutOfBand, "OutOfBand"}, {(int64)System::Net::Sockets::SocketFlags::Peek, "Peek"}, {(int64)System::Net::Sockets::SocketFlags::DontRoute, "DontRoute"}, {(int64)System::Net::Sockets::SocketFlags::MaxIOVectorLength, "MaxIOVectorLength"}, {(int64)System::Net::Sockets::SocketFlags::Truncated, "Truncated"}, {(int64)System::Net::Sockets::SocketFlags::ControlDataTruncated, "ControlDataTruncated"}, {(int64)System::Net::Sockets::SocketFlags::Broadcast, "Broadcast"}, {(int64)System::Net::Sockets::SocketFlags::Multicast, "Multicast"}, {(int64)System::Net::Sockets::SocketFlags::Partial, "Partial"}};
+struct EnumRegister<System::Net::Sockets::SocketFlags> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::SocketFlags, string>& values, bool& flags) {
+    values[System::Net::Sockets::SocketFlags::None] = "None";
+    values[System::Net::Sockets::SocketFlags::OutOfBand] = "OutOfBand";
+    values[System::Net::Sockets::SocketFlags::Peek] = "Peek";
+    values[System::Net::Sockets::SocketFlags::DontRoute] = "DontRoute";
+    values[System::Net::Sockets::SocketFlags::MaxIOVectorLength] = "MaxIOVectorLength";
+    values[System::Net::Sockets::SocketFlags::Truncated] = "Truncated";
+    values[System::Net::Sockets::SocketFlags::ControlDataTruncated] = "ControlDataTruncated";
+    values[System::Net::Sockets::SocketFlags::Broadcast] = "Broadcast";
+    values[System::Net::Sockets::SocketFlags::Multicast] = "Multicast";
+    values[System::Net::Sockets::SocketFlags::Partial] = "Partial";
     flags = true;
   }
 };

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Boxing.hpp"
-#include "Hash.hpp"
+#include "GetHashCode.hpp"
 #include "RefPtr.hpp"
 #include "NullPtr.hpp"
 #include "Types.hpp"

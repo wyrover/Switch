@@ -7,7 +7,7 @@
 #include "TargetConditionals.h"
 #endif
 
-#if !defined(TARGET_OS_IPHONE) && !defined(__ANDROID__)
+#if TARGET_OS_IPHONE == 0 && !defined(__ANDROID__)
 #include <curl/curl.h>
 
 int32 Native::CurlApi::Cleanup(intptr request) {

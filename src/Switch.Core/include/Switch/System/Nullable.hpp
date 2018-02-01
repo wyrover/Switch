@@ -2,7 +2,7 @@
 /// @brief Contains Switch::System::Nullable struct.
 #pragma once
 
-#include "../Hash.hpp"
+#include "../GetHashCode.hpp"
 #include "../NullPtr.hpp"
 #include "../Property.hpp"
 #include "Convert.hpp"

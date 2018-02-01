@@ -108,10 +108,50 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Net::HttpStatusCode> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::HttpStatusCode::Undefined, "Undefined"}, {(int64)System::Net::HttpStatusCode::SwitchingProtocols, "SwitchingProtocols"}, {(int64)System::Net::HttpStatusCode::OK, "OK"}, {(int64)System::Net::HttpStatusCode::Created, "Created"}, {(int64)System::Net::HttpStatusCode::Accepted, "Accepted"}, {(int64)System::Net::HttpStatusCode::NonAuthoritativeInformation, "NonAuthoritativeInformation"}, {(int64)System::Net::HttpStatusCode::NoContent, "NoContent"}, {(int64)System::Net::HttpStatusCode::ResetContent, "ResetContent"}, {(int64)System::Net::HttpStatusCode::PartialContent, "PartialContent"}, {(int64)System::Net::HttpStatusCode::MultipleChoices, "MultipleChoices"}, {(int64)System::Net::HttpStatusCode::MovedPermanently, "MovedPermanently"}, {(int64)System::Net::HttpStatusCode::Redirect, "Redirect"}, {(int64)System::Net::HttpStatusCode::SeeOther, "SeeOther"}, {(int64)System::Net::HttpStatusCode::NotModified, "NotModified"}, {(int64)System::Net::HttpStatusCode::UseProxy, "UseProxy"}, {(int64)System::Net::HttpStatusCode::Unused, "Unused"}, {(int64)System::Net::HttpStatusCode::TemporaryRedirect, "TemporaryRedirect"}, {(int64)System::Net::HttpStatusCode::BadRequest, "BadRequest"}, {(int64)System::Net::HttpStatusCode::Unauthorized, "Unauthorized"}, {(int64)System::Net::HttpStatusCode::PaymentRequired, "PaymentRequired"}, {(int64)System::Net::HttpStatusCode::Forbidden, "Forbidden"}, {(int64)System::Net::HttpStatusCode::NotFound, "NotFound"}, {(int64)System::Net::HttpStatusCode::MethodNotAllowed, "MethodNotAllowed"}, {(int64)System::Net::HttpStatusCode::NotAcceptable, "NotAcceptable"}, {(int64)System::Net::HttpStatusCode::ProxyAuthenticationRequired, "ProxyAuthenticationRequired"}, {(int64)System::Net::HttpStatusCode::RequestTimeout, "RequestTimeout"}, {(int64)System::Net::HttpStatusCode::Conflict, "Conflict"}, {(int64)System::Net::HttpStatusCode::Gone, "Gone"}, {(int64)System::Net::HttpStatusCode::LengthRequired, "LengthRequired"}, {(int64)System::Net::HttpStatusCode::PreconditionFailed, "PreconditionFailed"}, {(int64)System::Net::HttpStatusCode::RequestEntityTooLarge, "RequestEntityTooLarge"}, {(int64)System::Net::HttpStatusCode::RequestUriTooLong, "RequestUriTooLong"}, {(int64)System::Net::HttpStatusCode::UnsupportedMediaType, "UnsupportedMediaType"}, {(int64)System::Net::HttpStatusCode::RequestedRangeNotSatisfiable, "RequestedRangeNotSatisfiable"}, {(int64)System::Net::HttpStatusCode::ExpectationFailed, "ExpectationFailed"}, {(int64)System::Net::HttpStatusCode::UpgradeRequired, "UpgradeRequired"}, {(int64)System::Net::HttpStatusCode::InternalServerError, "InternalServerError"}, {(int64)System::Net::HttpStatusCode::NotImplemented, "NotImplemented"}, {(int64)System::Net::HttpStatusCode::BadGateway, "BadGateway"}, {(int64)System::Net::HttpStatusCode::ServiceUnavailable, "ServiceUnavailable"}, {(int64)System::Net::HttpStatusCode::GatewayTimeout, "GatewayTimeout"}, {(int64)System::Net::HttpStatusCode::HttpVersionNotSupported, "HttpVersionNotSupported"}};
+struct EnumRegister<System::Net::HttpStatusCode> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::HttpStatusCode, string>& values, bool& flags) {
+    values[System::Net::HttpStatusCode::Undefined] = "Undefined";
+    values[System::Net::HttpStatusCode::SwitchingProtocols] = "SwitchingProtocols";
+    values[System::Net::HttpStatusCode::OK] = "OK";
+    values[System::Net::HttpStatusCode::Created] = "Created";
+    values[System::Net::HttpStatusCode::Accepted] = "Accepted";
+    values[System::Net::HttpStatusCode::NonAuthoritativeInformation] = "NonAuthoritativeInformation";
+    values[System::Net::HttpStatusCode::NoContent] = "NoContent";
+    values[System::Net::HttpStatusCode::ResetContent] = "ResetContent";
+    values[System::Net::HttpStatusCode::PartialContent] = "PartialContent";
+    values[System::Net::HttpStatusCode::MultipleChoices] = "MultipleChoices";
+    values[System::Net::HttpStatusCode::MovedPermanently] = "MovedPermanently";
+    values[System::Net::HttpStatusCode::Redirect] = "Redirect";
+    values[System::Net::HttpStatusCode::SeeOther] = "SeeOther";
+    values[System::Net::HttpStatusCode::NotModified] = "NotModified";
+    values[System::Net::HttpStatusCode::UseProxy] = "UseProxy";
+    values[System::Net::HttpStatusCode::Unused] = "Unused";
+    values[System::Net::HttpStatusCode::TemporaryRedirect] = "TemporaryRedirect";
+    values[System::Net::HttpStatusCode::BadRequest] = "BadRequest";
+    values[System::Net::HttpStatusCode::Unauthorized] = "Unauthorized";
+    values[System::Net::HttpStatusCode::PaymentRequired] = "PaymentRequired";
+    values[System::Net::HttpStatusCode::Forbidden] = "Forbidden";
+    values[System::Net::HttpStatusCode::NotFound] = "NotFound";
+    values[System::Net::HttpStatusCode::MethodNotAllowed] = "MethodNotAllowed";
+    values[System::Net::HttpStatusCode::NotAcceptable] = "NotAcceptable";
+    values[System::Net::HttpStatusCode::ProxyAuthenticationRequired] = "ProxyAuthenticationRequired";
+    values[System::Net::HttpStatusCode::RequestTimeout] = "RequestTimeout";
+    values[System::Net::HttpStatusCode::Conflict] = "Conflict";
+    values[System::Net::HttpStatusCode::Gone] = "Gone";
+    values[System::Net::HttpStatusCode::LengthRequired] = "LengthRequired";
+    values[System::Net::HttpStatusCode::PreconditionFailed] = "PreconditionFailed";
+    values[System::Net::HttpStatusCode::RequestEntityTooLarge] = "RequestEntityTooLarge";
+    values[System::Net::HttpStatusCode::RequestUriTooLong] = "RequestUriTooLong";
+    values[System::Net::HttpStatusCode::UnsupportedMediaType] = "UnsupportedMediaType";
+    values[System::Net::HttpStatusCode::RequestedRangeNotSatisfiable] = "RequestedRangeNotSatisfiable";
+    values[System::Net::HttpStatusCode::ExpectationFailed] = "ExpectationFailed";
+    values[System::Net::HttpStatusCode::UpgradeRequired] = "UpgradeRequired";
+    values[System::Net::HttpStatusCode::InternalServerError] = "InternalServerError";
+    values[System::Net::HttpStatusCode::NotImplemented] = "NotImplemented";
+    values[System::Net::HttpStatusCode::BadGateway] = "BadGateway";
+    values[System::Net::HttpStatusCode::ServiceUnavailable] = "ServiceUnavailable";
+    values[System::Net::HttpStatusCode::GatewayTimeout] = "GatewayTimeout";
+    values[System::Net::HttpStatusCode::HttpVersionNotSupported] = "HttpVersionNotSupported";
     flags = false;
   }
 };

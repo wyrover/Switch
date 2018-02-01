@@ -94,10 +94,41 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Net::Sockets::IOControlCode> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::Sockets::IOControlCode::EnableCircularQueuing, "EnableCircularQueuing"}, {(int64)System::Net::Sockets::IOControlCode::Flush, "CodeFlush"}, {(int64)System::Net::Sockets::IOControlCode::DataToRead, "DataToRead"}, {(int64)System::Net::Sockets::IOControlCode::OobDataRead, "OoDataRead"}, {(int64)System::Net::Sockets::IOControlCode::GetBroadcastAddress, "GetBroadcastAddress"}, {(int64)System::Net::Sockets::IOControlCode::AddressListQuery, "AddressListQuery"}, {(int64)System::Net::Sockets::IOControlCode::QueryTargetPnpHandle, "TargetPnpHandle"}, {(int64)System::Net::Sockets::IOControlCode::AsyncIO, "AsyncIO"}, {(int64)System::Net::Sockets::IOControlCode::NonBlockingIO, "NonBlockingIO"}, {(int64)System::Net::Sockets::IOControlCode::AssociateHandle, "AssociateHandle"}, {(int64)System::Net::Sockets::IOControlCode::MultipointLoopback, "MultipointLoopback"}, {(int64)System::Net::Sockets::IOControlCode::MulticastScope, "MulticastScope"}, {(int64)System::Net::Sockets::IOControlCode::SetQos, "SetQos"}, {(int64)System::Net::Sockets::IOControlCode::SetGroupQos, "SetGroupQos"}, {(int64)System::Net::Sockets::IOControlCode::RoutingInterfaceChange, "RoutingInterfaceChange"}, {(int64)System::Net::Sockets::IOControlCode::NamespaceChange, "NamespaceChange"}, {(int64)System::Net::Sockets::IOControlCode::ReceiveAll, "ReceiveAll"}, {(int64)System::Net::Sockets::IOControlCode::ReceiveAllMulticast, "ReceiveMulticast"}, {(int64)System::Net::Sockets::IOControlCode::ReceiveAllIgmpMulticast, "ReceiveAllIgmpMulticast"}, {(int64)System::Net::Sockets::IOControlCode::KeepAliveValues, "KeepAliveValues"}, {(int64)System::Net::Sockets::IOControlCode::AbsorbRouterAlert, "CodeAbsorbRouterAlert"}, {(int64)System::Net::Sockets::IOControlCode::UnicastInterface, "UnicastInterface"}, {(int64)System::Net::Sockets::IOControlCode::LimitBroadcasts, "LimitBroadcasts"}, {(int64)System::Net::Sockets::IOControlCode::BindToInterface, "BindToInterface"}, {(int64)System::Net::Sockets::IOControlCode::MulticastInterface, "MulticastInterface"}, {(int64)System::Net::Sockets::IOControlCode::AddMulticastGroupOnInterface, "AddMulticastGroupOnInterface"}, {(int64)System::Net::Sockets::IOControlCode::DeleteMulticastGroupFromInterface, "DeleteMulticastGroupFromInterface"}, {(int64)System::Net::Sockets::IOControlCode::GetExtensionFunctionPointer, "GetExtensionFunctionPointer"}, {(int64)System::Net::Sockets::IOControlCode::GetQos, "GetQos"}, {(int64)System::Net::Sockets::IOControlCode::GetGroupQos, "GetGroupQos"}, {(int64)System::Net::Sockets::IOControlCode::TranslateHandle, "TranslateHandle"}, {(int64)System::Net::Sockets::IOControlCode::RoutingInterfaceQuery, "RoutingInterfaceQuery"}, {(int64)System::Net::Sockets::IOControlCode::AddressListSort, "AddressListSort"}};
+struct EnumRegister<System::Net::Sockets::IOControlCode> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::IOControlCode, string>& values, bool& flags) {
+    values[System::Net::Sockets::IOControlCode::EnableCircularQueuing] = "EnableCircularQueuing";
+    values[System::Net::Sockets::IOControlCode::Flush] = "CodeFlush";
+    values[System::Net::Sockets::IOControlCode::DataToRead] = "DataToRead";
+    values[System::Net::Sockets::IOControlCode::OobDataRead] = "OoDataRead";
+    values[System::Net::Sockets::IOControlCode::GetBroadcastAddress] = "GetBroadcastAddress";
+    values[System::Net::Sockets::IOControlCode::AddressListQuery] = "AddressListQuery";
+    values[System::Net::Sockets::IOControlCode::QueryTargetPnpHandle] = "TargetPnpHandle";
+    values[System::Net::Sockets::IOControlCode::AsyncIO] = "AsyncIO";
+    values[System::Net::Sockets::IOControlCode::NonBlockingIO] = "NonBlockingIO";
+    values[System::Net::Sockets::IOControlCode::AssociateHandle] = "AssociateHandle";
+    values[System::Net::Sockets::IOControlCode::MultipointLoopback] = "MultipointLoopback";
+    values[System::Net::Sockets::IOControlCode::MulticastScope] = "MulticastScope";
+    values[System::Net::Sockets::IOControlCode::SetQos] = "SetQos";
+    values[System::Net::Sockets::IOControlCode::SetGroupQos] = "SetGroupQos";
+    values[System::Net::Sockets::IOControlCode::RoutingInterfaceChange] = "RoutingInterfaceChange";
+    values[System::Net::Sockets::IOControlCode::NamespaceChange] = "NamespaceChange";
+    values[System::Net::Sockets::IOControlCode::ReceiveAll] = "ReceiveAll";
+    values[System::Net::Sockets::IOControlCode::ReceiveAllMulticast] = "ReceiveMulticast";
+    values[System::Net::Sockets::IOControlCode::ReceiveAllIgmpMulticast] = "ReceiveAllIgmpMulticast";
+    values[System::Net::Sockets::IOControlCode::KeepAliveValues] = "KeepAliveValues";
+    values[System::Net::Sockets::IOControlCode::AbsorbRouterAlert] = "CodeAbsorbRouterAlert";
+    values[System::Net::Sockets::IOControlCode::UnicastInterface] = "UnicastInterface";
+    values[System::Net::Sockets::IOControlCode::LimitBroadcasts] = "LimitBroadcasts";
+    values[System::Net::Sockets::IOControlCode::BindToInterface] = "BindToInterface";
+    values[System::Net::Sockets::IOControlCode::MulticastInterface] = "MulticastInterface";
+    values[System::Net::Sockets::IOControlCode::AddMulticastGroupOnInterface] = "AddMulticastGroupOnInterface";
+    values[System::Net::Sockets::IOControlCode::DeleteMulticastGroupFromInterface] = "DeleteMulticastGroupFromInterface";
+    values[System::Net::Sockets::IOControlCode::GetExtensionFunctionPointer] = "GetExtensionFunctionPointer";
+    values[System::Net::Sockets::IOControlCode::GetQos] = "GetQos";
+    values[System::Net::Sockets::IOControlCode::GetGroupQos] = "GetGroupQos";
+    values[System::Net::Sockets::IOControlCode::TranslateHandle] = "TranslateHandle";
+    values[System::Net::Sockets::IOControlCode::RoutingInterfaceQuery] = "RoutingInterfaceQuery";
+    values[System::Net::Sockets::IOControlCode::AddressListSort] = "AddressListSort";
     flags = false;
   }
 };

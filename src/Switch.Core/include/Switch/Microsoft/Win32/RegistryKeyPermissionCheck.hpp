@@ -22,10 +22,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<Microsoft::Win32::RegistryKeyPermissionCheck> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)Microsoft::Win32::RegistryKeyPermissionCheck::Default, "Default"}, {(int64)Microsoft::Win32::RegistryKeyPermissionCheck::ReadSubTree, "ReadSubTree"}, {(int64)Microsoft::Win32::RegistryKeyPermissionCheck::ReadWriteSubTree, "ReadWriteSubTree"}};
+struct EnumRegister<Microsoft::Win32::RegistryKeyPermissionCheck> {
+  void operator()(System::Collections::Generic::IDictionary<Microsoft::Win32::RegistryKeyPermissionCheck, string>& values, bool& flags) {
+    values[Microsoft::Win32::RegistryKeyPermissionCheck::Default] = "Default";
+    values[Microsoft::Win32::RegistryKeyPermissionCheck::ReadSubTree] = "ReadSubTree";
+    values[Microsoft::Win32::RegistryKeyPermissionCheck::ReadWriteSubTree] = "ReadWriteSubTree";
     flags = false;
   }
 };

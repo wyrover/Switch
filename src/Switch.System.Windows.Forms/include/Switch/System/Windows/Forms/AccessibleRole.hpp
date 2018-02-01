@@ -84,10 +84,73 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::AccessibleRole> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::AccessibleRole::None, "None"}, {(int64)System::Windows::Forms::AccessibleRole::TitleBar, "TitleBar"}, {(int64)System::Windows::Forms::AccessibleRole::MenuBar, "MenuBar"}, {(int64)System::Windows::Forms::AccessibleRole::ScrollBar, "ScrollBar"}, {(int64)System::Windows::Forms::AccessibleRole::Grip, "Grip"}, {(int64)System::Windows::Forms::AccessibleRole::Sound, "Sound"}, {(int64)System::Windows::Forms::AccessibleRole::Cursor, "Cursor"}, {(int64)System::Windows::Forms::AccessibleRole::Caret, "Caret"}, {(int64)System::Windows::Forms::AccessibleRole::Alert, "Alert"}, {(int64)System::Windows::Forms::AccessibleRole::Window, "Window"}, {(int64)System::Windows::Forms::AccessibleRole::Client, "Client"}, {(int64)System::Windows::Forms::AccessibleRole::MenuPopup, "MenuPopup"}, {(int64)System::Windows::Forms::AccessibleRole::MenuItem, "MenuItem"}, {(int64)System::Windows::Forms::AccessibleRole::ToolTip, "ToolTip"}, {(int64)System::Windows::Forms::AccessibleRole::Application, "Application"}, {(int64)System::Windows::Forms::AccessibleRole::Document, "Document"}, {(int64)System::Windows::Forms::AccessibleRole::Pane, "Pane"}, {(int64)System::Windows::Forms::AccessibleRole::Chart, "Chart"}, {(int64)System::Windows::Forms::AccessibleRole::Dialog, "Dialog"}, {(int64)System::Windows::Forms::AccessibleRole::Border, "Border"}, {(int64)System::Windows::Forms::AccessibleRole::Grouping, "Grouping"}, {(int64)System::Windows::Forms::AccessibleRole::Separator, "Separator"}, {(int64)System::Windows::Forms::AccessibleRole::ToolBar, "ToolBar"}, {(int64)System::Windows::Forms::AccessibleRole::StatusBar, "StatusBar"}, {(int64)System::Windows::Forms::AccessibleRole::Table, "Table"}, {(int64)System::Windows::Forms::AccessibleRole::ColumnHeader, "ColumnHeader"}, {(int64)System::Windows::Forms::AccessibleRole::RowHeader, "RowHeader"}, {(int64)System::Windows::Forms::AccessibleRole::Column, "Column"}, {(int64)System::Windows::Forms::AccessibleRole::Row, "Row"}, {(int64)System::Windows::Forms::AccessibleRole::Cell, "Cell"}, {(int64)System::Windows::Forms::AccessibleRole::Link, "Link"}, {(int64)System::Windows::Forms::AccessibleRole::HelpBalloon, "HelpBalloon"}, {(int64)System::Windows::Forms::AccessibleRole::Character, "Character"}, {(int64)System::Windows::Forms::AccessibleRole::List, "List"}, {(int64)System::Windows::Forms::AccessibleRole::ListItem, "ListItem"}, {(int64)System::Windows::Forms::AccessibleRole::Outline, "Outline"}, {(int64)System::Windows::Forms::AccessibleRole::OutlineItem, "OutlineItem"}, {(int64)System::Windows::Forms::AccessibleRole::PageTab, "PageTab"}, {(int64)System::Windows::Forms::AccessibleRole::PropertyPage, "PropertyPage"}, {(int64)System::Windows::Forms::AccessibleRole::Indicator, "Indicator"}, {(int64)System::Windows::Forms::AccessibleRole::Graphic, "Graphic"}, {(int64)System::Windows::Forms::AccessibleRole::StaticText, "StaticText"}, {(int64)System::Windows::Forms::AccessibleRole::PushButton, "PushButton"}, {(int64)System::Windows::Forms::AccessibleRole::CheckButton, "CheckButton"}, {(int64)System::Windows::Forms::AccessibleRole::RadioButton, "RadioButton"}, {(int64)System::Windows::Forms::AccessibleRole::ComboBox, "ComboBox"}, {(int64)System::Windows::Forms::AccessibleRole::DropList, "DropList"}, {(int64)System::Windows::Forms::AccessibleRole::ProgressBar, "ProgressBar"}, {(int64)System::Windows::Forms::AccessibleRole::Dial, "Dial"}, {(int64)System::Windows::Forms::AccessibleRole::HotkeyField, "HotkeyField"}, {(int64)System::Windows::Forms::AccessibleRole::Slider, "Slider"}, {(int64)System::Windows::Forms::AccessibleRole::SpinButton, "SpinButton"}, {(int64)System::Windows::Forms::AccessibleRole::Diagram, "Diagram"}, {(int64)System::Windows::Forms::AccessibleRole::Animation, "Animation"}, {(int64)System::Windows::Forms::AccessibleRole::Equation, "Equation"}, {(int64)System::Windows::Forms::AccessibleRole::ButtonDropDown, "ButtonDropDown"}, {(int64)System::Windows::Forms::AccessibleRole::ButtonMenu, "ButtonMenu"}, {(int64)System::Windows::Forms::AccessibleRole::ButtonDropDownGrid, "ButtonDropDownGrid"}, {(int64)System::Windows::Forms::AccessibleRole::WhiteSpace, "WhiteSpace"}, {(int64)System::Windows::Forms::AccessibleRole::PageTabList, "PageTabList"}, {(int64)System::Windows::Forms::AccessibleRole::Clock, "Clock"}, {(int64)System::Windows::Forms::AccessibleRole::Default, "Default"}, {(int64)System::Windows::Forms::AccessibleRole::SplitButton, "SplitButton"}, {(int64)System::Windows::Forms::AccessibleRole::IpAddress, "IpAddress"}, {(int64)System::Windows::Forms::AccessibleRole::OutlineButton, "OutlineButton"}};
+struct EnumRegister<System::Windows::Forms::AccessibleRole> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::AccessibleRole, string>& values, bool& flags) {
+    values[System::Windows::Forms::AccessibleRole::None] = "None";
+    values[System::Windows::Forms::AccessibleRole::TitleBar] = "TitleBar";
+    values[System::Windows::Forms::AccessibleRole::MenuBar] = "MenuBar";
+    values[System::Windows::Forms::AccessibleRole::ScrollBar] = "ScrollBar";
+    values[System::Windows::Forms::AccessibleRole::Grip] = "Grip";
+    values[System::Windows::Forms::AccessibleRole::Sound] = "Sound";
+    values[System::Windows::Forms::AccessibleRole::Cursor] = "Cursor";
+    values[System::Windows::Forms::AccessibleRole::Caret] = "Caret";
+    values[System::Windows::Forms::AccessibleRole::Alert] = "Alert";
+    values[System::Windows::Forms::AccessibleRole::Window] = "Window";
+    values[System::Windows::Forms::AccessibleRole::Client] = "Client";
+    values[System::Windows::Forms::AccessibleRole::MenuPopup] = "MenuPopup";
+    values[System::Windows::Forms::AccessibleRole::MenuItem] = "MenuItem";
+    values[System::Windows::Forms::AccessibleRole::ToolTip] = "ToolTip";
+    values[System::Windows::Forms::AccessibleRole::Application] = "Application";
+    values[System::Windows::Forms::AccessibleRole::Document] = "Document";
+    values[System::Windows::Forms::AccessibleRole::Pane] = "Pane";
+    values[System::Windows::Forms::AccessibleRole::Chart] = "Chart";
+    values[System::Windows::Forms::AccessibleRole::Dialog] = "Dialog";
+    values[System::Windows::Forms::AccessibleRole::Border] = "Border";
+    values[System::Windows::Forms::AccessibleRole::Grouping] = "Grouping";
+    values[System::Windows::Forms::AccessibleRole::Separator] = "Separator";
+    values[System::Windows::Forms::AccessibleRole::ToolBar] = "ToolBar";
+    values[System::Windows::Forms::AccessibleRole::StatusBar] = "StatusBar";
+    values[System::Windows::Forms::AccessibleRole::Table] = "Table";
+    values[System::Windows::Forms::AccessibleRole::ColumnHeader] = "ColumnHeader";
+    values[System::Windows::Forms::AccessibleRole::RowHeader] = "RowHeader";
+    values[System::Windows::Forms::AccessibleRole::Column] = "Column";
+    values[System::Windows::Forms::AccessibleRole::Row] = "Row";
+    values[System::Windows::Forms::AccessibleRole::Cell] = "Cell";
+    values[System::Windows::Forms::AccessibleRole::Link] = "Link";
+    values[System::Windows::Forms::AccessibleRole::HelpBalloon] = "HelpBalloon";
+    values[System::Windows::Forms::AccessibleRole::Character] = "Character";
+    values[System::Windows::Forms::AccessibleRole::List] = "List";
+    values[System::Windows::Forms::AccessibleRole::ListItem] = "ListItem";
+    values[System::Windows::Forms::AccessibleRole::Outline] = "Outline";
+    values[System::Windows::Forms::AccessibleRole::OutlineItem] = "OutlineItem";
+    values[System::Windows::Forms::AccessibleRole::PageTab] = "PageTab";
+    values[System::Windows::Forms::AccessibleRole::PropertyPage] = "PropertyPage";
+    values[System::Windows::Forms::AccessibleRole::Indicator] = "Indicator";
+    values[System::Windows::Forms::AccessibleRole::Graphic] = "Graphic";
+    values[System::Windows::Forms::AccessibleRole::StaticText] = "StaticText";
+    values[System::Windows::Forms::AccessibleRole::PushButton] = "PushButton";
+    values[System::Windows::Forms::AccessibleRole::CheckButton] = "CheckButton";
+    values[System::Windows::Forms::AccessibleRole::RadioButton] = "RadioButton";
+    values[System::Windows::Forms::AccessibleRole::ComboBox] = "ComboBox";
+    values[System::Windows::Forms::AccessibleRole::DropList] = "DropList";
+    values[System::Windows::Forms::AccessibleRole::ProgressBar] = "ProgressBar";
+    values[System::Windows::Forms::AccessibleRole::Dial] = "Dial";
+    values[System::Windows::Forms::AccessibleRole::HotkeyField] = "HotkeyField";
+    values[System::Windows::Forms::AccessibleRole::Slider] = "Slider";
+    values[System::Windows::Forms::AccessibleRole::SpinButton] = "SpinButton";
+    values[System::Windows::Forms::AccessibleRole::Diagram] = "Diagram";
+    values[System::Windows::Forms::AccessibleRole::Animation] = "Animation";
+    values[System::Windows::Forms::AccessibleRole::Equation] = "Equation";
+    values[System::Windows::Forms::AccessibleRole::ButtonDropDown] = "ButtonDropDown";
+    values[System::Windows::Forms::AccessibleRole::ButtonMenu] = "ButtonMenu";
+    values[System::Windows::Forms::AccessibleRole::ButtonDropDownGrid] = "ButtonDropDownGrid";
+    values[System::Windows::Forms::AccessibleRole::WhiteSpace] = "WhiteSpace";
+    values[System::Windows::Forms::AccessibleRole::PageTabList] = "PageTabList";
+    values[System::Windows::Forms::AccessibleRole::Clock] = "Clock";
+    values[System::Windows::Forms::AccessibleRole::Default] = "Default";
+    values[System::Windows::Forms::AccessibleRole::SplitButton] = "SplitButton";
+    values[System::Windows::Forms::AccessibleRole::IpAddress] = "IpAddress";
+    values[System::Windows::Forms::AccessibleRole::OutlineButton] = "OutlineButton";
     flags = false;
   }
 };

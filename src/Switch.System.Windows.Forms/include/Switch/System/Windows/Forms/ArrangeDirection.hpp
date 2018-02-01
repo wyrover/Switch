@@ -29,10 +29,12 @@ template <>
 class AddFlagOperators<System::Windows::Forms::ArrangeDirection> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Windows::Forms::ArrangeDirection> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {/*{(int64)System::Windows::Forms::ArrangeDirection::Down, "Down"},*/ {(int64)System::Windows::Forms::ArrangeDirection::Left, "Left"}, /*{(int64)System::Windows::Forms::ArrangeDirection::Right, "Right"},*/ {(int64)System::Windows::Forms::ArrangeDirection::Up, "Up"},};
+struct EnumRegister<System::Windows::Forms::ArrangeDirection> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::ArrangeDirection, string>& values, bool& flags) {
+    // values[System::Windows::Forms::ArrangeDirection::Down] = "Down";
+    values[System::Windows::Forms::ArrangeDirection::Left] = "Left";
+    // values[System::Windows::Forms::ArrangeDirection::Right] = "Right";
+    values[System::Windows::Forms::ArrangeDirection::Up] = "Up";
     flags = true;
   }
 };

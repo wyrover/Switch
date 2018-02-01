@@ -51,10 +51,24 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::ConsoleColor> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::ConsoleColor::Black, "Black"}, {(int64)System::ConsoleColor::DarkBlue, "DarkBlue"}, {(int64)System::ConsoleColor::DarkGreen, "DarkGreen"}, {(int64)System::ConsoleColor::DarkCyan, "DarkCyan"}, {(int64)System::ConsoleColor::DarkRed, "DarkRed"}, {(int64)System::ConsoleColor::DarkMagenta, "DarkMagenta"}, {(int64)System::ConsoleColor::DarkYellow, "DarkYellow"}, {(int64)System::ConsoleColor::Gray, "Gray"}, {(int64)System::ConsoleColor::DarkGray, "DarkGray"}, {(int64)System::ConsoleColor::Blue, "Blue"}, {(int64)System::ConsoleColor::Green, "Green"}, {(int64)System::ConsoleColor::Cyan, "Cyan"}, {(int64)System::ConsoleColor::Red, "Red"}, {(int64)System::ConsoleColor::Magenta, "Magenta"}, {(int64)System::ConsoleColor::Yellow, "Yellow"}, {(int64)System::ConsoleColor::White, "White"}};
+struct EnumRegister<System::ConsoleColor> {
+  void operator()(System::Collections::Generic::IDictionary<System::ConsoleColor, string>& values, bool& flags) {
+    values[System::ConsoleColor::Black] = "Black";
+    values[System::ConsoleColor::DarkBlue] = "DarkBlue";
+    values[System::ConsoleColor::DarkGreen] = "DarkGreen";
+    values[System::ConsoleColor::DarkCyan] = "DarkCyan";
+    values[System::ConsoleColor::DarkRed] = "DarkRed";
+    values[System::ConsoleColor::DarkMagenta] = "DarkMagenta";
+    values[System::ConsoleColor::DarkYellow] = "DarkYellow";
+    values[System::ConsoleColor::Gray] = "Gray";
+    values[System::ConsoleColor::DarkGray] = "DarkGray";
+    values[System::ConsoleColor::Blue] = "Blue";
+    values[System::ConsoleColor::Green] = "Green";
+    values[System::ConsoleColor::Cyan] = "Cyan";
+    values[System::ConsoleColor::Red] = "Red";
+    values[System::ConsoleColor::Magenta] = "Magenta";
+    values[System::ConsoleColor::Yellow] = "Yellow";
+    values[System::ConsoleColor::White] = "White";
     flags = false;
   }
 };

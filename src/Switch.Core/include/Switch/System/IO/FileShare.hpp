@@ -32,10 +32,14 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::IO::FileShare> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::IO::FileShare::None, "None"}, {(int64)System::IO::FileShare::Read, "Read"}, {(int64)System::IO::FileShare::Write, "Write"}, {(int64)System::IO::FileShare::ReadWrite, "ReadWrite"}, {(int64)System::IO::FileShare::Delete, "Delete"}, {(int64)System::IO::FileShare::Inheritable, "Inheritable"}};
+struct EnumRegister<System::IO::FileShare> {
+  void operator()(System::Collections::Generic::IDictionary<System::IO::FileShare, string>& values, bool& flags) {
+    values[System::IO::FileShare::None] = "None";
+    values[System::IO::FileShare::Read] = "Read";
+    values[System::IO::FileShare::Write] = "Write";
+    values[System::IO::FileShare::ReadWrite] = "ReadWrite";
+    values[System::IO::FileShare::Delete] = "Delete";
+    values[System::IO::FileShare::Inheritable] = "Inheritable";
     flags = false;
   }
 };

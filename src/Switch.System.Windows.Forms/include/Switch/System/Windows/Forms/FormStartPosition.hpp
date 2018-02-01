@@ -32,10 +32,13 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::FormStartPosition> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::FormStartPosition::Manual, "Manual"}, {(int64)System::Windows::Forms::FormStartPosition::CenterScreen, "CenterScreen"}, {(int64)System::Windows::Forms::FormStartPosition::WindowsDefaultLocation, "WindowsDefaultLocation"}, {(int64)System::Windows::Forms::FormStartPosition::WindowsDefaultBounds, "WindowsDefaultBounds"}, {(int64)System::Windows::Forms::FormStartPosition::CenterParent, "CenterParent"}};
+struct EnumRegister<System::Windows::Forms::FormStartPosition> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::FormStartPosition, string>& values, bool& flags) {
+    values[System::Windows::Forms::FormStartPosition::Manual] = "Manual";
+    values[System::Windows::Forms::FormStartPosition::CenterScreen] = "CenterScreen";
+    values[System::Windows::Forms::FormStartPosition::WindowsDefaultLocation] = "WindowsDefaultLocation";
+    values[System::Windows::Forms::FormStartPosition::WindowsDefaultBounds] = "WindowsDefaultBounds";
+    values[System::Windows::Forms::FormStartPosition::CenterParent] = "CenterParent";
     flags = false;
   }
 };

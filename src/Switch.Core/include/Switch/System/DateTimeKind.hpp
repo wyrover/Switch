@@ -26,10 +26,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::DateTimeKind> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::DateTimeKind::Unspecified, "Unspecified"}, {(int64)System::DateTimeKind::Utc, "Utc"}, {(int64)System::DateTimeKind::Local, "Local"}};
+struct EnumRegister<System::DateTimeKind> {
+  void operator()(System::Collections::Generic::IDictionary<System::DateTimeKind, string>& values, bool& flags) {
+    values[System::DateTimeKind::Unspecified] = "Unspecified";
+    values[System::DateTimeKind::Utc] = "Utc";
+    values[System::DateTimeKind::Local] = "Local";
     flags = false;
   }
 };

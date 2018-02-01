@@ -577,13 +577,13 @@ string Color::GetName() const {
     return "0";
 
   if (this->knownColor != (KnownColor)0 || this->argb == 0)
-    return Enum<KnownColor>(this->knownColor).GetName();
+    return Enum<>::GetName<KnownColor>(this->knownColor);
 
   return string::Format("{0:X8}", this->argb);
 }
 
 Color Color::FromName(const string& name) {
-  return Color::FromKnownColor((KnownColor)Enum<KnownColor>::Parse(name));
+  return Color::FromKnownColor((KnownColor)Enum<>::Parse<KnownColor>(name));
 }
 
 Color Color::FromArgb(int32 alpha, const Color& baseColor) {

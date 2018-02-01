@@ -33,10 +33,12 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::MessageBoxOptions> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::MessageBoxOptions::DefaultDesktopOnly, "DefaultDesktopOnly"}, {(int64)System::Windows::Forms::MessageBoxOptions::RightAlign, "RightAlign"}, {(int64)System::Windows::Forms::MessageBoxOptions::RtlReading, "RtlReading"}, {(int64)System::Windows::Forms::MessageBoxOptions::ServiceNotification, "ServiceNotification"}};
+struct EnumRegister<System::Windows::Forms::MessageBoxOptions> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::MessageBoxOptions, string>& values, bool& flags) {
+    values[System::Windows::Forms::MessageBoxOptions::DefaultDesktopOnly] = "DefaultDesktopOnly";
+    values[System::Windows::Forms::MessageBoxOptions::RightAlign] = "RightAlign";
+    values[System::Windows::Forms::MessageBoxOptions::RtlReading] = "RtlReading";
+    values[System::Windows::Forms::MessageBoxOptions::ServiceNotification] = "ServiceNotification";
     flags = true;
   }
 };

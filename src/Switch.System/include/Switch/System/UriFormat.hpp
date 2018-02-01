@@ -24,10 +24,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::UriFormat> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::UriFormat::SafeUnescaped, "SafeUnescaped"}, {(int64)System::UriFormat::Unescaped, "Unescaped"}, {(int64)System::UriFormat::UriEscaped, "UriEscaped"}};
+struct EnumRegister<System::UriFormat> {
+  void operator()(System::Collections::Generic::IDictionary<System::UriFormat, string>& values, bool& flags) {
+    values[System::UriFormat::SafeUnescaped] = "SafeUnescaped";
+    values[System::UriFormat::Unescaped] = "Unescaped";
+    values[System::UriFormat::UriEscaped] = "UriEscaped";
     flags = false;
   }
 };

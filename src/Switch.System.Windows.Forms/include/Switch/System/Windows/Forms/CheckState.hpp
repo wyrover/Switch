@@ -24,10 +24,11 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::CheckState > {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::CheckState::Unchecked, "Unchecked"}, {(int64)System::Windows::Forms::CheckState::Checked, "Checked"}, {(int64)System::Windows::Forms::CheckState::Indeterminate, "Indeterminate"}};
+struct EnumRegister<System::Windows::Forms::CheckState> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::CheckState, string>& values, bool& flags) {
+    values[System::Windows::Forms::CheckState::Unchecked] = "Unchecked";
+    values[System::Windows::Forms::CheckState::Checked] = "Checked";
+    values[System::Windows::Forms::CheckState::Indeterminate] = "Indeterminate";
     flags = false;
   }
 };

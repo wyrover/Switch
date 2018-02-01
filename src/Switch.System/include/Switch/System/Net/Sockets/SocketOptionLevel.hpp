@@ -36,10 +36,13 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Net::Sockets::SocketOptionLevel> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Net::Sockets::SocketOptionLevel::Socket, "Socket"}, {(int64)System::Net::Sockets::SocketOptionLevel::IP, "IP"}, {(int64)System::Net::Sockets::SocketOptionLevel::IPv6, "IPv6"}, {(int64)System::Net::Sockets::SocketOptionLevel::Tcp, "Tcp"}, {(int64)System::Net::Sockets::SocketOptionLevel::Udp, "Udp"}};
+struct EnumRegister<System::Net::Sockets::SocketOptionLevel> {
+  void operator()(System::Collections::Generic::IDictionary<System::Net::Sockets::SocketOptionLevel, string>& values, bool& flags) {
+    values[System::Net::Sockets::SocketOptionLevel::Socket] = "Socket";
+    values[System::Net::Sockets::SocketOptionLevel::IP] = "IP";
+    values[System::Net::Sockets::SocketOptionLevel::IPv6] = "IPv6";
+    values[System::Net::Sockets::SocketOptionLevel::Tcp] = "Tcp";
+    values[System::Net::Sockets::SocketOptionLevel::Udp] = "Udp";
     flags = false;
   }
 };

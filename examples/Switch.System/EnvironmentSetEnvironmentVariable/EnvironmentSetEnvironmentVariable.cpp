@@ -27,7 +27,7 @@ namespace Examples {
       // Confirm that the value can only be retrieved from the process
       // environment block.
       Console::WriteLine("Attempting to retrieve Test1 from:");
-      for (EnvironmentVariableTarget enumValue : Enum<EnvironmentVariableTarget>::GetValues()) {
+      for (EnvironmentVariableTarget enumValue : Enum<>::GetValues<EnvironmentVariableTarget>()) {
         value = Environment::GetEnvironmentVariable("Test1", enumValue);
         Console::WriteLine("   {0}: {1}", enumValue, !string::IsNullOrEmpty(value) ? value : "not found");
       }

@@ -8,10 +8,10 @@
 
 /// @cond
 template<>
-class EnumToStrings<System::StringSplitOptions> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::StringSplitOptions::None, "None"}, {(int64)System::StringSplitOptions::RemoveEmptyEntries, "RemoveEmptyEntries"}};
+struct EnumRegister<System::StringSplitOptions> {
+  void operator()(System::Collections::Generic::IDictionary<System::StringSplitOptions, string>& values, bool& flags) {
+    values[System::StringSplitOptions::None] = "None";
+    values[System::StringSplitOptions::RemoveEmptyEntries] = "RemoveEmptyEntries";
     flags = false;
   }
 };

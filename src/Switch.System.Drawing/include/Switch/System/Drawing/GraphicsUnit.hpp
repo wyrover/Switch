@@ -35,10 +35,15 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Drawing::GraphicsUnit> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Drawing::GraphicsUnit::World, "World"}, {(int64)System::Drawing::GraphicsUnit::Display, "Display"}, {(int64)System::Drawing::GraphicsUnit::Pixel, "Pixel"}, {(int64)System::Drawing::GraphicsUnit::Point, "Point"}, { (int64)System::Drawing::GraphicsUnit::Inch, "Inch" }, { (int64)System::Drawing::GraphicsUnit::Document, "Document" }, { (int64)System::Drawing::GraphicsUnit::Millimeter, "Millimeter" },};
+struct EnumRegister<System::Drawing::GraphicsUnit> {
+  void operator()(System::Collections::Generic::IDictionary<System::Drawing::GraphicsUnit, string>& values, bool& flags) {
+    values[System::Drawing::GraphicsUnit::World] = "World";
+    values[System::Drawing::GraphicsUnit::Display] = "Display";
+    values[System::Drawing::GraphicsUnit::Pixel] = "Pixel";
+    values[System::Drawing::GraphicsUnit::Point] = "Point";
+    values[System::Drawing::GraphicsUnit::Inch] = "Inch";
+    values[System::Drawing::GraphicsUnit::Document] = "Document";
+    values[System::Drawing::GraphicsUnit::Millimeter] = "Millimeter";
     flags = false;
   }
 };

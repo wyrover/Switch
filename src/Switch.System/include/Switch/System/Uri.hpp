@@ -630,14 +630,14 @@ namespace Switch {
       /// @remarks Code that calls GetObjectData requires the SecurityPermission for providing serialization services. Associated enumeration: SecurityPermissionFlag.SerializationFormatter.
       /// @note It is ! guaranteed that this method will be called only once per object instance during serialization. Therefore, the method should be implemented in such a way that its behavior will be the same regardless of the number of times it is called.
       void GetObjectData(System::Runtime::Serialization::SerializationInfo& info) const override {
-        info.AddValue(Enum<UriComponents>::ToString(UriComponents::Scheme), this->scheme);
+        info.AddValue(Enum<UriComponents>(UriComponents::Scheme).ToString(), this->scheme);
         info.AddValue("SchemeDelimiter", this->schemeDelimiter);
-        info.AddValue(Enum<UriComponents>::ToString(UriComponents::UserInfo), this->userInfo);
-        info.AddValue(Enum<UriComponents>::ToString(UriComponents::Host), this->host);
-        info.AddValue(Enum<UriComponents>::ToString(UriComponents::Port), this->port);
-        info.AddValue(Enum<UriComponents>::ToString(UriComponents::Path), this->path);
-        info.AddValue(Enum<UriComponents>::ToString(UriComponents::Query), this->query);
-        info.AddValue(Enum<UriComponents>::ToString(UriComponents::Fragment), this->fragment);
+        info.AddValue(Enum<UriComponents>(UriComponents::UserInfo).ToString(), this->userInfo);
+        info.AddValue(Enum<UriComponents>(UriComponents::Host).ToString(), this->host);
+        info.AddValue(Enum<UriComponents>(UriComponents::Port).ToString(), this->port);
+        info.AddValue(Enum<UriComponents>(UriComponents::Path).ToString(), this->path);
+        info.AddValue(Enum<UriComponents>(UriComponents::Query).ToString(), this->query);
+        info.AddValue(Enum<UriComponents>(UriComponents::Fragment).ToString(), this->fragment);
         info.AddValue("UriKind", (int32)this->kind);
       }
 

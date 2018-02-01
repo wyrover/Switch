@@ -26,10 +26,16 @@ namespace Switch {
 
 /// @cond
 template<>
-class EnumToStrings<System::Windows::Forms::AccessibleNavigation> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::AccessibleNavigation::Up, "Up"}, {(int64)System::Windows::Forms::AccessibleNavigation::Down, "Down"}, {(int64)System::Windows::Forms::AccessibleNavigation::Left, "Left"}, {(int64)System::Windows::Forms::AccessibleNavigation::Right, "Right"}, {(int64)System::Windows::Forms::AccessibleNavigation::Next, "Next"}, {(int64)System::Windows::Forms::AccessibleNavigation::Previous, "Previous"}, {(int64)System::Windows::Forms::AccessibleNavigation::FirstChild, "FirstChild"}, {(int64)System::Windows::Forms::AccessibleNavigation::LastChild, "LastChild"}};
+struct EnumRegister<System::Windows::Forms::AccessibleNavigation> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::AccessibleNavigation, string>& values, bool& flags) {
+    values[System::Windows::Forms::AccessibleNavigation::Up] = "Up";
+    values[System::Windows::Forms::AccessibleNavigation::Down] = "Down";
+    values[System::Windows::Forms::AccessibleNavigation::Left] = "Left";
+    values[System::Windows::Forms::AccessibleNavigation::Right] = "Right";
+    values[System::Windows::Forms::AccessibleNavigation::Next] = "Next";
+    values[System::Windows::Forms::AccessibleNavigation::Previous] = "Previous";
+    values[System::Windows::Forms::AccessibleNavigation::FirstChild] = "FirstChild";
+    values[System::Windows::Forms::AccessibleNavigation::LastChild] = "LastChild";
     flags = false;
   }
 };

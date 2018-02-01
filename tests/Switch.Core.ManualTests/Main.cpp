@@ -1,21 +1,29 @@
 #include <Switch/Startup.hpp>
-#include <Switch/System/Collections/ArrayList.hpp>
 #include <Switch/System/Console.hpp>
-#include <Switch/System/Threading/Monitor.hpp>
 #include <Switch/System/Guid.hpp>
+#include <Switch/System/Collections/Hashtable.hpp>
+#include <Switch/System/Collections/Generic/Dictionary.hpp>
 
 using namespace System;
+using namespace System::Collections;
+using namespace System::Collections::Generic;
 
 namespace Examples {
   class Program {
   public:
     // The main entry point for the application.
     static void Main() {
-      System::Collections::ArrayList items = {"One", 2, TimeSpan::FromSeconds(3), Version(1, 2, 3), .5, Guid::NewGuid()};
-      for (auto item : items)
-        Console::WriteLine(item);
+      Hashtable items;
+      items["Test"] = 42;
+      items[42] = "Test";
+      items[.5] = Guid::NewGuid();
 
-      Console::WriteLine("Many args {0} {1}", 12, .5);
+      for (auto item : items)
+        Console::WriteLine("[{0}, {1}]", item.Key, item.Value);
+
+      Console::WriteLine();
+      Console::WriteLine(items[.5]);
+      Console::WriteLine(items["Test"]);
     }
   };
 }

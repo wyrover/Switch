@@ -31,10 +31,13 @@ template <>
 class AddFlagOperators<System::Windows::Forms::ArrangeStartingPosition> : public TrueType {};
 
 template<>
-class EnumToStrings<System::Windows::Forms::ArrangeStartingPosition> {
-public:
-  void operator()(System::Collections::Generic::Dictionary<int64, string>& values, bool& flags) {
-    values = {{(int64)System::Windows::Forms::ArrangeStartingPosition::BottomLeft, "BottomLeft"}, {(int64)System::Windows::Forms::ArrangeStartingPosition::BottomRight, "BottomRight"}, {(int64)System::Windows::Forms::ArrangeStartingPosition::TopLeft, "TopLeft"}, { (int64)System::Windows::Forms::ArrangeStartingPosition::TopRight, "TopRight" }, { (int64)System::Windows::Forms::ArrangeStartingPosition::Hide, "Hide" },};
+struct EnumRegister<System::Windows::Forms::ArrangeStartingPosition> {
+  void operator()(System::Collections::Generic::IDictionary<System::Windows::Forms::ArrangeStartingPosition, string>& values, bool& flags) {
+    values[System::Windows::Forms::ArrangeStartingPosition::BottomLeft] = "BottomLeft";
+    values[System::Windows::Forms::ArrangeStartingPosition::BottomRight] = "BottomRight";
+    values[System::Windows::Forms::ArrangeStartingPosition::TopLeft] = "TopLeft";
+    values[System::Windows::Forms::ArrangeStartingPosition::TopRight] = "TopRight";
+    values[System::Windows::Forms::ArrangeStartingPosition::Hide] = "Hide";
     flags = true;
   }
 };

@@ -3,7 +3,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-namespace CheckBoxExample {
+namespace GroupBoxAndCheckBoxExample {
   class Form1 : public Form {
   public:
     // The main entry point for the application.
@@ -65,4 +65,4 @@ namespace CheckBoxExample {
   };
 }
 
-startup_(CheckBoxExample::Form1);
+startup_(GroupBoxAndCheckBoxExample::Form1);
