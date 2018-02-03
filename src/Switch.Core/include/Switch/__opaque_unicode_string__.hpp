@@ -101,18 +101,18 @@ class export_ __opaque_unicode_string__ {
     bool operator==(const const_reverse_iterator& rhs) const;
     bool operator!=(const const_reverse_iterator& rhs) const;
     char32_t operator*() const;
-    
+
     int get_byte_index() const;
     int get_format() const;
     int get_logical_index() const;
-    
+
   private:
     friend class __opaque_unicode_string__;
     const std::string* string_pointer;
     int position;
     uint8_t format;
     int index;
-    
+
     const_reverse_iterator(const std::string* str, bool at_end = false);
   };
 

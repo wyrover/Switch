@@ -16,7 +16,7 @@ namespace ManualTests {
     // The main entry point for the application.
     static void Main() {
       Trace::Listeners().Add(TextWriterTraceListener(Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Desktop), "User.log")));
-      
+
       Trace::WriteLine("This is the first line");
       Trace::Flush();
     }
