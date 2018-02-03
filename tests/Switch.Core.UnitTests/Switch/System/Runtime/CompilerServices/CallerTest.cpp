@@ -1,4 +1,5 @@
 #include <Switch/Boxing.hpp>
+#include <Switch/System/Runtime/CompilerServices/Caller.hpp>
 #include <gtest/gtest.h>
 
 using namespace System;

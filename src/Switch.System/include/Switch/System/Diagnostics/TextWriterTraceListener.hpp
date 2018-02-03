@@ -2,8 +2,8 @@
 /// @brief Contains Switch::System::Diagnostics::TextWriterTraceListener class.
 #pragma once
 
-#include "../Console.hpp"
-#include "../IO/StreamWriter.hpp"
+#include <Switch/System/Console.hpp>
+#include <Switch/System/IO/StreamWriter.hpp>
 #include "TraceListener.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -64,6 +64,7 @@ namespace Switch {
         TextWriterTraceListener(const string& path) {this->textWriter = new System::IO::StreamWriter(path);}
 
         /// @cond
+        TextWriterTraceListener(const char* path) : TextWriterTraceListener(string(path)) {}
         TextWriterTraceListener(const TextWriterTraceListener& twtl) : TraceListener(twtl), textWriter(twtl.textWriter) {}
         TextWriterTraceListener& operator=(const TextWriterTraceListener& twtl) {
           this->TraceListener::operator=(twtl);

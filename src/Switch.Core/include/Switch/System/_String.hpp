@@ -6,6 +6,7 @@
 #include "../InitializerList.hpp"
 #include "../Move.hpp"
 #include "../Property.hpp"
+#include "../Ref.hpp"
 #include "Object.hpp"
 
 #include "Collections/Generic/IEnumerable.hpp"
