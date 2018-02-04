@@ -5,7 +5,6 @@
 #include <ostream>
 
 #include "../Types.hpp"
-#include "../As.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -106,6 +105,7 @@ namespace Switch {
 #include "_String.hpp"
 #include "Type.hpp"
 
+#include "../As.hpp"
 #include "../RefPtr.hpp"
 
 namespace Switch {

@@ -1,4 +1,7 @@
+#include <Switch/System/Array.hpp>
 #include <Switch/ExceptionPtr.hpp>
+#include <Switch/System/InvalidCastException.hpp>
+#include <Switch/System/InvalidOperationException.hpp>
 #include <gtest/gtest.h>
 
 using namespace System;

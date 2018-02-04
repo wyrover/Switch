@@ -2,9 +2,11 @@
 #include <Switch/System/Console.hpp>
 #include <Switch/System/Guid.hpp>
 #include <Switch/System/Collections/Hashtable.hpp>
+#include <Switch/System/Collections/Generic/Dictionary.hpp>
 
 using namespace System;
 using namespace System::Collections;
+using namespace System::Collections::Generic;
 
 namespace Examples {
   class Program {

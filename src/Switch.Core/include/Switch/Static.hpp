@@ -2,8 +2,7 @@
 /// @brief Contains Switch::Static class and #static_ keyword.
 #pragma once
 
-#include "Types.hpp"
-#include "Allocator.hpp"
+#include "Export.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

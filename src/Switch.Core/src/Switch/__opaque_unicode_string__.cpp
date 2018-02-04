@@ -6,6 +6,25 @@
 
 size_t __opaque_unicode_string__::npos = std::string::npos;
 
+__opaque_unicode_string__::__opaque_unicode_string__() {
+}
+
+__opaque_unicode_string__::__opaque_unicode_string__(const char32_t* str) {
+  int i = 0;
+  while (str[i] != 0)
+    this->append(str[i++]);
+  this->stringSize = i;
+}
+__opaque_unicode_string__::__opaque_unicode_string__(const __opaque_unicode_string__& str) : string(str.string), stringSize(str.stringSize) {
+}
+
+__opaque_unicode_string__::__opaque_unicode_string__(int length, char c) : stringSize(length) {
+  while (length--)
+    this->string.push_back(c);
+}
+__opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t startIndex) : __opaque_unicode_string__(str, startIndex, (int32_t)npos) {
+}
+
 __opaque_unicode_string__::__opaque_unicode_string__(const char* str) : string(str), stringSize(Native::UnicodeEncodingsApi::UTF8::GetLength(string)) {
 }
 
@@ -46,12 +65,35 @@ __opaque_unicode_string__::__opaque_unicode_string__(const char* str, int32_t st
   }
 }
 
+__opaque_unicode_string__::__opaque_unicode_string__(const char32_t* str, int32_t startIndex) : __opaque_unicode_string__(str, startIndex, (int32_t)npos) {
+}
+
 __opaque_unicode_string__::__opaque_unicode_string__(const char32_t* str, int32_t startIndex, int32_t length) {
   if (startIndex < 0 || length < 0)
     throw System::ArgumentOutOfRangeException(caller_);
   this->stringSize = 0;
   for (int i = 0; i < length; i++)
     append(str[i]);
+}
+
+__opaque_unicode_string__::__opaque_unicode_string__(__opaque_unicode_string__&& str) : string(std::move(str.string)), stringSize(str.stringSize) {
+  str.stringSize = 0;
+}
+
+bool __opaque_unicode_string__::operator==(const __opaque_unicode_string__& str) const {
+  return this->stringSize == str.stringSize && this->string == str.string;
+}
+
+__opaque_unicode_string__& __opaque_unicode_string__::operator=(const __opaque_unicode_string__& str) {
+  this->string = str.string;
+  this->stringSize = str.stringSize;
+  return *this;
+}
+
+__opaque_unicode_string__& __opaque_unicode_string__::operator+=(const __opaque_unicode_string__& s) {
+  this->string.append(s.string);
+  this->stringSize += s.stringSize;
+  return *this;
 }
 
 char32_t __opaque_unicode_string__::operator[](int i) const {
@@ -160,6 +202,37 @@ __opaque_unicode_string__& __opaque_unicode_string__::append(char32_t code) {
   return *this;
 }
 
+__opaque_unicode_string__::const_iterator __opaque_unicode_string__::begin() const {
+  return const_iterator(&this->string);
+}
+
+__opaque_unicode_string__::const_iterator __opaque_unicode_string__::end() const {
+  return const_iterator(&this->string, true);
+}
+
+__opaque_unicode_string__::iterator __opaque_unicode_string__::begin() {
+  return iterator(&this->string);
+}
+
+__opaque_unicode_string__::iterator __opaque_unicode_string__::end() {
+  return iterator(&this->string, true);
+}
+
+__opaque_unicode_string__::const_reverse_iterator __opaque_unicode_string__::rbegin() const {
+  return const_reverse_iterator(&this->string);
+}
+__opaque_unicode_string__::const_reverse_iterator __opaque_unicode_string__::rend() const {
+  return const_reverse_iterator(&this->string, true);
+}
+
+__opaque_unicode_string__::reverse_iterator __opaque_unicode_string__::rbegin() {
+  return reverse_iterator(&this->string);
+}
+
+__opaque_unicode_string__::reverse_iterator __opaque_unicode_string__::rend() {
+  return reverse_iterator(&this->string, true);
+}
+
 bool __opaque_unicode_string__::equals(__opaque_unicode_string__::const_iterator src, const __opaque_unicode_string__::const_iterator& src_end, __opaque_unicode_string__::const_iterator match, const __opaque_unicode_string__::const_iterator& match_end) {
   for (; match != match_end; match++, src++) {
     if (src == src_end)
@@ -263,11 +336,31 @@ size_t __opaque_unicode_string__::find_any(const std::vector<char32_t>& any, siz
   return npos;
 }
 
+size_t __opaque_unicode_string__::length() const {
+  return this->stringSize;
+}
+
 bool __opaque_unicode_string__::ends_with(const __opaque_unicode_string__& s) const {
   if (s.string.size() > this->string.size())
     return false;
 
   return this->string.substr(this->string.size() - s.string.size()) == s.string;
+}
+
+size_t __opaque_unicode_string__::size() const {
+  return length();
+}
+
+size_t __opaque_unicode_string__::nb_bytes() const {
+  return this->string.size();
+}
+
+const char* __opaque_unicode_string__::data() const {
+  return this->string.data();
+}
+
+const char* __opaque_unicode_string__::c_str() const {
+  return this->string.c_str();
 }
 
 __opaque_unicode_string__ __opaque_unicode_string__::to_lower() const {
@@ -363,6 +456,10 @@ __opaque_unicode_string__::const_iterator& __opaque_unicode_string__::const_iter
   return *this;
 }
 
+int __opaque_unicode_string__::const_iterator::get_byte_index() const { return this->position; }
+int __opaque_unicode_string__::const_iterator::get_format() const { return this->format; }
+int __opaque_unicode_string__::const_iterator::get_logical_index() const { return this->index; }
+
 __opaque_unicode_string__::iterator::iterator(std::string* str, bool at_end) {
   string_pointer = str;
   if (*str == "" || at_end) {
@@ -423,6 +520,10 @@ __opaque_unicode_string__::iterator& __opaque_unicode_string__::iterator::operat
   return *this;
 }
 
+int __opaque_unicode_string__::iterator::get_byte_index() const { return this->position; }
+int __opaque_unicode_string__::iterator::get_format() const { return this->format; }
+int __opaque_unicode_string__::iterator::get_logical_index() const { return this->index; }
+
 __opaque_unicode_string__::const_reverse_iterator::const_reverse_iterator(const const_reverse_iterator& it) {
   string_pointer = it.string_pointer;
   this->position = it.position;
@@ -479,6 +580,10 @@ __opaque_unicode_string__::const_reverse_iterator& __opaque_unicode_string__::co
   this->position = -1;
   return *this;
 }
+
+int __opaque_unicode_string__::const_reverse_iterator::get_byte_index() const { return this->position; }
+int __opaque_unicode_string__::const_reverse_iterator::get_format() const { return this->format; }
+int __opaque_unicode_string__::const_reverse_iterator::get_logical_index() const { return this->index; }
 
 __opaque_unicode_string__::reverse_iterator::reverse_iterator(const reverse_iterator& it) {
   string_pointer = it.string_pointer;
@@ -541,3 +646,7 @@ __opaque_unicode_string__::reverse_iterator& __opaque_unicode_string__::reverse_
   this->position = -1;
   return *this;
 }
+
+int __opaque_unicode_string__::reverse_iterator::get_byte_index() const { return this->position; }
+int __opaque_unicode_string__::reverse_iterator::get_format() const { return this->format; }
+int __opaque_unicode_string__::reverse_iterator::get_logical_index() const { return this->index; }

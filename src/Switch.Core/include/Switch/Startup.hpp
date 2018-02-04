@@ -2,7 +2,6 @@
 /// @brief Contains #startup_ keyword.
 #pragma once
 
-#include "System/Delegate.hpp"
 #include "System/Environment.hpp"
 
 namespace Switch {
@@ -24,10 +23,10 @@ namespace Switch {
 #define startup_(mainClass) \
   int main(int argc, char* argv[]) {\
     struct Startup {\
-      int operator()(System::Delegate<void>::FunctionPointer startup, const System::Array<System::String>& args) {startup(); return System::Environment::ExitCode;}\
-      int operator()(System::Delegate<int>::FunctionPointer startup, const System::Array<System::String>& args) {return startup();}\
-      int operator()(System::Delegate<void, const System::Array<System::String>&>::FunctionPointer startup, const System::Array<System::String>& args) {startup(args); return System::Environment::ExitCode;}\
-      int operator()(System::Delegate<int, const System::Array<System::String>&>::FunctionPointer startup, const System::Array<System::String>& args) {return startup(args);}\
+      int operator()(void (*startup)(), const System::Array<System::String>& args) {startup(); return System::Environment::ExitCode;}\
+      int operator()(int (*startup)(), const System::Array<System::String>& args) {return startup();}\
+      int operator()(void (*startup)(const System::Array<System::String>&), const System::Array<System::String>& args) {startup(args); return System::Environment::ExitCode;}\
+      int operator()(int (*startup)(const System::Array<System::String>&), const System::Array<System::String>& args) {return startup(args);}\
     };\
     return Startup()(mainClass::Main, System::Environment::SetCommandLineArgs(argv, argc));\
   } \

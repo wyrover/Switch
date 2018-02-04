@@ -5,8 +5,6 @@
 #include "Boxing.hpp"
 #include "GetHashCode.hpp"
 #include "RefPtr.hpp"
-#include "NullPtr.hpp"
-#include "Types.hpp"
 #include "System/Boolean.hpp"
 #include "System/Byte.hpp"
 #include "System/Char.hpp"
@@ -16,12 +14,12 @@
 #include "System/Int32.hpp"
 #include "System/Int64.hpp"
 #include "System/IntPtr.hpp"
-#include "System/InvalidCastException.hpp"
 #include "System/SByte.hpp"
 #include "System/Single.hpp"
 #include "System/UInt16.hpp"
 #include "System/UInt32.hpp"
 #include "System/UInt64.hpp"
+#include "System/UIntPtr.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -69,42 +67,42 @@ namespace Switch {
     Any(T value) : value(ObjectOrEnumOrOtherToAny<T>()(value)) {}
 
     /// @cond
-    Any() {}
-    Any(const Any& any) : value(any.value) {}
-    Any& operator=(const Any& any) {this->value = any.value; return *this;}
-    Any(NullPtr value) {}
-    Any(bool value) : value(new System::Boolean(value)) {}
-    Any(byte value) : value(new System::Byte(value)) {}
-    Any(char value) : value(new System::Char(value)) {}
-    Any(wchar value) : value(new System::Char(value)) {}
-    Any(char16 value) : value(new System::Char(value)) {}
-    Any(char32 value) : value(new System::Char(value)) {}
-    Any(double value) : value(new System::Double(value)) {}
-    Any(int16 value) : value(new System::Int16(value)) {}
-    Any(int32 value) : value(new System::Int32(value)) {}
-    Any(int64 value) : value(new System::Int64(value)) {}
-    Any(const char* value) : value(new System::String(value)) {}
-    Any(char* value) : value(new System::String(value)) {}
-    Any(const unsigned char* value) : value(new System::String((const char*)value)) {}
-    Any(unsigned char* value) : value(new System::String((const char*)value)) {}
-    Any(const wchar* value) : value(new System::String(value)) {}
-    Any(wchar* value) : value(new System::String(value)) {}
-    Any(const char16* value) : value(new System::String(value)) {}
-    Any(char16* value) : value(new System::String(value)) {}
-    Any(const char32* value) : value(new System::String(value)) {}
-    Any(char32* value) : value(new System::String(value)) {}
-    Any(const std::string& value) : value(new System::String(value)) {}
-    Any(const std::wstring& value) : value(new System::String(value)) {}
-    Any(const std::u16string& value) : value(new System::String(value)) {}
-    Any(const std::u32string& value) : value(new System::String(value)) {}
-    Any(sbyte value) : value(new System::SByte(value)) {}
-    Any(float value) : value(new System::Single(value)) {}
-    Any(uint16 value) : value(new System::UInt16(value)) {}
-    Any(uint32 value) : value(new System::UInt32(value)) {}
-    Any(uint64 value) : value(new System::UInt64(value)) {}
-    Any(void* value) : value(new System::IntPtr((intptr)value)) {}
-    Any(llong value) : value(sizeof(long) == 8 ? (object*)new System::Int64(value) : (object*)new System::Int32(value)) {}
-    Any(ullong value) : value(sizeof(long) == 8 ? (object*)new System::UInt64(value) : (object*)new System::UInt32(value)) {}
+    Any();
+    Any(const Any& any);
+    Any& operator=(const Any& any);
+    Any(NullPtr value);
+    Any(bool value);
+    Any(byte value);
+    Any(char value);
+    Any(wchar value);
+    Any(char16 value);
+    Any(char32 value);
+    Any(double value);
+    Any(int16 value);
+    Any(int32 value);
+    Any(int64 value);
+    Any(const char* value);
+    Any(char* value);
+    Any(const unsigned char* value);
+    Any(unsigned char* value);
+    Any(const wchar* value);
+    Any(wchar* value);
+    Any(const char16* value);
+    Any(char16* value);
+    Any(const char32* value);
+    Any(char32* value);
+    Any(const std::string& value);
+    Any(const std::wstring& value);
+    Any(const std::u16string& value);
+    Any(const std::u32string& value);
+    Any(sbyte value);
+    Any(float value);
+    Any(uint16 value);
+    Any(uint32 value);
+    Any(uint64 value);
+    Any(void* value);
+    Any(llong value);
+    Any(ullong value);
     template<typename T, typename Attribute>
     Any(const property_<T, Attribute>& value) : value(ObjectOrEnumOrOtherToAny<T>()(value())) {}
     template <typename T>
@@ -114,37 +112,37 @@ namespace Switch {
       return To<T>();
     }
 
-    bool operator==(NullPtr value) const {return !this->HasValue();}
-    bool operator==(bool value) const {return As<System::Boolean>() == value;}
-    bool operator==(byte value) const {return As<System::Byte>() == value;}
-    bool operator==(char value) const {return As<System::Char>() == char32(value);}
-    bool operator==(wchar value) const {return As<System::Char>() == char32(value);}
-    bool operator==(char16 value) const {return As<System::Char>() == value;}
-    bool operator==(char32 value) const {return As<System::Char>() == value;}
-    bool operator==(double value) const {return As<System::Double>() == value;}
-    bool operator==(int16 value) const {return As<System::Int16>() == value;}
-    bool operator==(int32 value) const {return As<System::Int32>() == value;}
-    bool operator==(int64 value) const {return As<System::Int64>() == value;}
-    bool operator==(const char* value) const {return As<System::String>() == value;}
-    bool operator==(char* value) const {return As<System::String>() == value;}
-    bool operator==(const wchar* value) const {return As<System::String>() == value;}
-    bool operator==(wchar* value) const {return As<System::String>() == value;}
-    bool operator==(const char16* value) const {return As<System::String>() == value;}
-    bool operator==(char16* value) const {return As<System::String>() == value;}
-    bool operator==(const char32* value) const {return As<System::String>() == value;}
-    bool operator==(char32* value) const {return As<System::String>() == value;}
-    bool operator==(const std::string& value) const {return As<System::String>() == value;}
-    bool operator==(const std::wstring& value) const {return As<System::String>() == value;}
-    bool operator==(const std::u16string& value) const {return As<System::String>() == value;}
-    bool operator==(const std::u32string& value) const {return As<System::String>() == value;}
-    bool operator==(sbyte value) const {return As<System::SByte>() == value;}
-    bool operator==(float value) const {return As<System::Single>() == value;}
-    bool operator==(uint16 value) const {return As<System::UInt16>() == value;}
-    bool operator==(uint32 value) const {return As<System::UInt32>() == value;}
-    bool operator==(uint64 value) const {return As<System::UInt64>() == value;}
-    bool operator==(void* value) const {return As<System::IntPtr>() == (intptr)value;}
-    bool operator==(llong value) const {return sizeof(long) == 8 ? As<System::Int64>() == value : As<System::Int32>() == value;}
-    bool operator==(ullong value) const {return sizeof(long) == 8 ? As<System::UInt64>() == value : As<System::UInt32>() == value;}
+    bool operator==(NullPtr value) const;
+    bool operator==(bool value) const;
+    bool operator==(byte value) const;
+    bool operator==(char value) const;
+    bool operator==(wchar value) const;
+    bool operator==(char16 value) const;
+    bool operator==(char32 value) const;
+    bool operator==(double value) const;
+    bool operator==(int16 value) const;
+    bool operator==(int32 value) const;
+    bool operator==(int64 value) const;
+    bool operator==(const char* value) const;
+    bool operator==(char* value) const;
+    bool operator==(const wchar* value) const;
+    bool operator==(wchar* value) const;
+    bool operator==(const char16* value) const;
+    bool operator==(char16* value) const;
+    bool operator==(const char32* value) const;
+    bool operator==(char32* value) const;
+    bool operator==(const std::string& value) const;
+    bool operator==(const std::wstring& value) const;
+    bool operator==(const std::u16string& value) const;
+    bool operator==(const std::u32string& value) const;
+    bool operator==(sbyte value) const;
+    bool operator==(float value) const;
+    bool operator==(uint16 value) const;
+    bool operator==(uint32 value) const;
+    bool operator==(uint64 value) const;
+    bool operator==(void* value) const;
+    bool operator==(llong value) const;
+    bool operator==(ullong value) const;
     template<typename T>
     bool operator==(const T& value) const {return As<T>() == value;}
     template<typename T>
@@ -213,10 +211,7 @@ namespace Switch {
     /// | Less than zero    | This instance is less than obj.    |
     /// | Zero              | This instance is equal to obj.     |
     /// | Greater than zero | This instance is greater than obj. |
-    int32 CompareTo(const IComparable& obj) const override {
-      if (!is<Any>(obj)) return -1;
-      return CompareTo(as<Any>(obj));
-    }
+    int32 CompareTo(const IComparable& obj) const override;
 
     /// @brief Compares the current instance with another object of the same type.
     /// @param obj An object to compare with this instance.
@@ -227,35 +222,21 @@ namespace Switch {
     /// | Less than zero    | This instance is less than obj.    |
     /// | Zero              | This instance is equal to obj.     |
     /// | Greater than zero | This instance is greater than obj. |
-    int32 CompareTo(const Any& obj) const {
-      if (this->value < obj.value) return -1;
-      if (this->value > obj.value) return 1;
-      return 0;
-    }
+    int32 CompareTo(const Any& obj) const;
 
     /// @brief Serves as a hash function for a particular type.
     /// @return Int32 A hash code for the current Object.
-    int32 GetHashCode() const override {
-      if (!this->HasValue) return 0;
-      return As<object>().GetHashCode();
-    }
+    int32 GetHashCode() const override;
 
     /// @brief Determines whether this instance of Any and a specified Object, which must also be a Any Object, have the same value.
     /// @param obj The Object to compare with the current Object.
     /// @return true if the specified Object is equal to the current Object. otherwise, false.
-    bool Equals(const object& obj) const override {
-      if (is<Any>(obj))
-        return Equals(as<Any>(obj));
-      return *this->value == obj;
-    }
+    bool Equals(const object& obj) const override;
 
     /// @brief Determines whether this instance of Any and a specified Object, which must also be an Any Object, have the same value.
     /// @param value The Any to compare with the current Object.
     /// @return true if the specified value is equal to the current Any. otherwise, false.
-    bool Equals(const Any& value) const {
-      if (!this->HasValue && !value.HasValue) return true;
-      return *this->value == *value.value;
-    }
+    bool Equals(const Any& value) const;
 
     /// @brief Determines whether this instance of Any and a specified Object, which must also be an Any Object, have the same value.
     /// @param value The Any to compare with the current Object.
