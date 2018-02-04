@@ -25,6 +25,12 @@ find_package(ZLIB REQUIRED)
 find_package(PNG REQUIRED)
 
 #_________________________________________________________________________________________
+#                                                                        add compile flags
+if (MSVC)
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /bigobj")
+endif()
+
+#_________________________________________________________________________________________
 #                                                                            set libraries
 set(SWITCH_LIBRARY Switch.TUnit.Core Switch.System.Windows.Forms
   Switch.System.Drawing Switch.System Switch.Core)
