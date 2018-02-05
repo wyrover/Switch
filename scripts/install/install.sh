@@ -4,7 +4,7 @@ echo ""
 # ________________________________________________________________________________________
 #                                                             Detecting linux distribution
 OSTYPE=`uname -a`
-if [[ "$OSTYPE" != *"MINGW64"* ]] && [[ "$OSTYPE" != *"Darwin"* ]]; then
+if [[ "$OSTYPE" != *"MSYS"* ]] &&[ "$OSTYPE" != *"MINGW64"* ]] && [[ "$OSTYPE" != *"Darwin"* ]]; then
   OSTYPE=`lsb_release -si`;
 fi
 
