@@ -13,17 +13,14 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      Hashtable items;
-      items["Test"] = 42;
-      items[42] = "Test";
-      items[.5] = Guid::NewGuid();
+      auto item = new_<Version>(1, 2, 3);
+      auto item2 = item;
+      $<Version> item3 = item2;
+      item = new_<Version>(4, 5, 6);
 
-      for (auto item : items)
-        Console::WriteLine("[{0}, {1}]", item.Key, item.Value);
-
-      Console::WriteLine();
-      Console::WriteLine(items[.5]);
-      Console::WriteLine(items["Test"]);
+      Console::WriteLine(item3.ToObject());
+      auto itemm = new_ < $<Version >> (new_<Version>(7, 8, 9));
+      Console::WriteLine(itemm.ToObject().ToObject());
     }
   };
 }
