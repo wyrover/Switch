@@ -23,9 +23,9 @@ macro(UpdateVersionNumber)
       "  - SWITCH_BUILD_WIN32: true\n"
       "  - SWITCH_BUILD_WIN64: true\n"
       "build_script:\n"
-      "- cmd: scripts\\appveyor\\build_vs2017.bat\n"
+      "- cmd: scripts\\appveyor\\build_vs2017.cmd\n"
       "test_script:\n"
-      "- cmd: scripts\\appveyor\\test.bat\n"
+      "- cmd: scripts\\appveyor\\test.cmd\n"
     )
     
     file(WRITE install.sh
@@ -33,9 +33,9 @@ macro(UpdateVersionNumber)
       "scripts/install/install.sh \"$@\"\n"
     )
     
-    file(WRITE install.bat
+    file(WRITE install.cmd
       "@set switch_version=${Switch_VERSION}\n"
-      "@call scripts\\install\\install.bat %*\n"
+      "@call scripts\\install\\install.cmd %*\n"
     )
   endif()
 endmacro()
