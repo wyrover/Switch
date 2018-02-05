@@ -20,7 +20,7 @@ esac
 #                                                       generate, build and install Switch
 mkdir -p build/examples
 cd build
-if [[ "$OSTYPE" == *"MSYS"* ] || [ "$OSTYPE" == *"MINGW64"* ]]; then
+if [[ "$OSTYPE" == *"MSYS"* ]] || [[ "$OSTYPE" == *"MINGW64"* ]]; then
   cmake .. -DCMAKE_INSTALL_PREFIX=/c/usr/local "$@"
   cmake --build . --target install --config Debug
   cmake --build . --target install --config Release
@@ -41,7 +41,7 @@ cd ..
 # ________________________________________________________________________________________
 #                                                             generate and launch examples
 cd build/examples
-if [[ "$OSTYPE" == *"MSYS"* ] || [ "$OSTYPE" == *"MINGW64"* ]]; then
+if [[ "$OSTYPE" == *"MSYS"* ]] || [[ "$OSTYPE" == *"MINGW64"* ]]; then
   cmake ../../examples -DCMAKE_INSTALL_PREFIX=/c/usr/local "$@"
   start Examples.sln
 elif [[ "$OSTYPE" == *"Darwin"* ]]; then
