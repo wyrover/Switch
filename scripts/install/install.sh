@@ -4,7 +4,7 @@ echo ""
 # ________________________________________________________________________________________
 #                                                             Detecting linux distribution
 OSTYPE=`uname -a`
-if [[ "$OSTYPE" != *"MSYS"* ]] &&[ "$OSTYPE" != *"MINGW64"* ]] && [[ "$OSTYPE" != *"Darwin"* ]]; then
+if [[ "$OSTYPE" == *"Linux"* ]]; then
   OSTYPE=`lsb_release -si`;
 fi
 
@@ -41,7 +41,7 @@ cd ..
 # ________________________________________________________________________________________
 #                                                             generate and launch examples
 cd build/examples
-if [[ "$OSTYPE" == *"MSYS"* ]] || [[ "$OSTYPE" == *"MINGW64"* ]]; then
+if [[ "$OSTYPE" == *"MSYS"* ]] || [[ "$OSTYPE" == *"MINGW"* ]]; then
   cmake ../../examples -DCMAKE_INSTALL_PREFIX=/c/usr/local "$@"
   start Examples.sln
 elif [[ "$OSTYPE" == *"Darwin"* ]]; then
