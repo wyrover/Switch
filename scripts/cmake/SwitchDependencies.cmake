@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #_________________________________________________________________________________________
 #                                                                    add external packages
-if(NOT APPLE AND NOT ANDROID AND UNIX)
+if(NOT APPLE AND NOT ANDROID AND NOT CMAKE_HOST_SOLARIS AND UNIX)
   find_package(PkgConfig REQUIRED)
   pkg_check_modules(GTKMM gtkmm-3.0)
   if(NOT GTKMM_FOUND)
