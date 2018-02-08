@@ -100,3 +100,4 @@
 #include "System/Windows/Forms/UICues.hpp"
 #include "System/Windows/Forms/UICuesEventArgs.hpp"
 #include "System/Windows/Forms/UICuesEventHandler.hpp"
+#include "SystemWindowsFormsExport.hpp"

@@ -266,6 +266,7 @@
 #include "Async.hpp"
 #include "Await.hpp"
 #include "Boxing.hpp"
+#include "CoreExport.hpp"
 #include "Event.hpp"
 #include "ExceptionPtr.hpp"
 #include "GetHashCode.hpp"

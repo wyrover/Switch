@@ -31,3 +31,4 @@
 #include "System/Drawing/SizeF.hpp"
 #include "System/Drawing/SolidBrush.hpp"
 #include "System/Drawing/SystemColors.hpp"
+#include "SystemDrawingExport.hpp"
