@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when a non-fatal application error occurs.
-    class export_ ApplicationException : public Exception {
+    class core_export_ ApplicationException : public Exception {
     public:
       /// @brief Create a new instance of class ApplicationException
       /// @remarks Message is set with the default message associate to the error.
@@ -41,7 +41,7 @@ namespace Switch {
       ApplicationException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : Exception(message, innerException, information) {}
 
       /// @cond
-      friend export_ std::ostream& operator<<(std::ostream& output, const ApplicationException& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const ApplicationException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

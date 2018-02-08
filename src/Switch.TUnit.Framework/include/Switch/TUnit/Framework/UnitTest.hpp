@@ -4,12 +4,13 @@
 
 #include "RegisteredTestFixture.hpp"
 #include <Switch/System/Array.hpp>
+#include "../../TUnitFrameworkExport.hpp"
 
 namespace Switch {
   namespace TUnit {
     namespace Framework {
       /// @brief UnitTest is...
-      class UnitTest {
+      class tunit_framework_export_ UnitTest {
       public:
         UnitTest() {}
 

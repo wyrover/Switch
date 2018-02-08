@@ -27,7 +27,7 @@ namespace Switch {
     /// * Creating a new time zone that is not already defined by the operating system.
     /// * Serializing a time zone for later retrieval.
     /// @note An instance of the TimeZoneInfo class is immutable. Once an object has been instantiated, its values cannot be modified.
-    class export_ TimeZoneInfo : public Object, public IComparable {
+    class core_export_ TimeZoneInfo : public Object, public IComparable {
     public:
       /// @cond
       TimeZoneInfo() {}

@@ -3,7 +3,7 @@
 #pragma once
 
 #include <Switch/System/EventArgs.hpp>
-
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "CloseReason.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -14,7 +14,7 @@ namespace Switch {
     namespace Windows {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
-        class export_ FormClosedEventArgs : public EventArgs {
+        class system_windows_forms_export_ FormClosedEventArgs : public EventArgs {
         public:
           FormClosedEventArgs(System::Windows::Forms::CloseReason closeReason) : closeReason(closeReason) {}
           FormClosedEventArgs(const FormClosedEventArgs& e) : closeReason(e.closeReason) {}

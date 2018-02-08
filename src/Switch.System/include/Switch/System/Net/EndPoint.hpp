@@ -6,6 +6,7 @@
 #include <Switch/RefPtr.hpp>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 #include "SocketAddress.hpp"
 #include "Sockets/AddressFamily.hpp"
 
@@ -19,7 +20,7 @@ namespace Switch {
       /// @brief Identifies a network address. This is an abstract class.
       /// @par Library
       /// Switch.System
-      class export_ EndPoint : public Object {
+      class system_export_ EndPoint : public Object {
       public:
         /// @cond
         EndPoint() {}

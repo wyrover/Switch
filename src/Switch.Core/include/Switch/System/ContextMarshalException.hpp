@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an attempt to marshal an object across a context boundary fails.
-    class export_ ContextMarshalException : public SystemException {
+    class core_export_ ContextMarshalException : public SystemException {
     public:
       /// @brief Create a new instance of class ContextMarshalException
       /// @remarks Message is set with the default message associate to the error.

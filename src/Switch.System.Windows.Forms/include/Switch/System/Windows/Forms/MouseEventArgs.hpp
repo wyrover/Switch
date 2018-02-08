@@ -4,7 +4,7 @@
 
 #include <Switch/System/EventArgs.hpp>
 #include <Switch/System/Drawing/Point.hpp>
-
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "MouseButtons.hpp"
 
 namespace Switch {
@@ -15,7 +15,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class export_ MouseEventArgs : public EventArgs {
+        class system_windows_forms_export_ MouseEventArgs : public EventArgs {
         public:
           MouseEventArgs() {}
 

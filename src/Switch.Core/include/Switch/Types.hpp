@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <typeinfo>
 
-#include "Export.hpp"
+#include "CoreExport.hpp"
 
 #if defined(NDEBUG)
 #  define RELEASE 1

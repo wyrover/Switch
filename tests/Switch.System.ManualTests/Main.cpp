@@ -1,23 +1,24 @@
 #define TRACE
 #include <Switch/Startup.hpp>
 #include <Switch/System/Console.hpp>
-#include <Switch/System/Collections/Generic/SortedDictionary.hpp>
+#include <Switch/System/Environment.hpp>
+#include <Switch/System/Diagnostics/TextWriterTraceListener.hpp>
+#include <Switch/System/Diagnostics/Trace.hpp>
+#include <Switch/System/IO/Directory.hpp>
 
 using namespace System;
-using namespace System::Threading;
+using namespace System::Diagnostics;
+using namespace System::IO;
 
 namespace ManualTests {
-  enum class Color {
-    Black, White, Red, Blue
-  };
-
   class Program {
   public:
     // The main entry point for the application.
     static void Main() {
-      System::Collections::Generic::SortedDictionary<Color, string> values {{Color::Black, "Black"}, {Color::White, "White"}, {Color::Red, "Red"}, {Color::Blue, "Blue"}};
-      for (auto value : values)
-        Console::WriteLine(value);
+      Trace::Listeners().Add(TextWriterTraceListener(Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::Desktop), "User.log")));
+
+      Trace::WriteLine("This is the first line");
+      Trace::Flush();
     }
   };
 }

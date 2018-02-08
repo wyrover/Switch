@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/Property.hpp>
+#include "../../../SystemExport.hpp"
 #include "../IPAddress.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -17,7 +18,7 @@ namespace Switch {
         /// @brief Contains option values for joining an IPv6 multicast group.
         /// @par Library
         /// Switch.System
-        class export_ IPv6MulticastOption : public Object {
+        class system_export_ IPv6MulticastOption : public Object {
         public:
           /// @brief Initializes a new version of the IPv6MulticastOption class for the specified IP multicast group.
           /// @param group The IPAddress of the multicast group.

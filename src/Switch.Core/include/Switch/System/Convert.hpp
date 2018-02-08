@@ -36,7 +36,7 @@ namespace Switch {
   namespace System {
     /// @brief Represents API to convert base TypeCode.
     /// This class cannot be inherited.
-    class export_ Convert final {
+    class core_export_ Convert final {
     public:
       /// @cond
       Convert() = delete;

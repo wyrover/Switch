@@ -17,7 +17,7 @@ namespace Switch {
       /// @par Examples
       /// The following example uses an instance of StreamReader to read text from a file.
       /// @include StreamReader.cpp
-      class export_ StreamReader: public TextReader {
+      class core_export_ StreamReader: public TextReader {
       public:
         static StreamReader& Null() {
           static StreamReader nullStreamReader;

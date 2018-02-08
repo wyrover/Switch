@@ -39,7 +39,7 @@ macro(BuildSwitchLibraries)
 
   #_______________________________________________________________________________________
   #                                                                  Switch.System.Drawing
-  if (NOT IOS AND BUILD_SWITCH_SYSTEM_DRAWING)
+  if (NOT IOS AND NOT ANDROID AND NOT CMAKE_HOST_SOLARIS AND BUILD_SWITCH_SYSTEM_DRAWING)
     print("  [X] Switch.System.Drawing")
     add_subdirectory("src/Switch.System.Drawing")
     file(APPEND src/Switch/include/Switch/Switch.hpp "#include \"Switch/Switch.System.Drawing\"\n")
@@ -59,7 +59,7 @@ macro(BuildSwitchLibraries)
 
   #_______________________________________________________________________________________
   #                                                            Switch.System.Windows.Forms
-  if (NOT IOS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
+  if (NOT IOS AND NOT ANDROID AND NOT CMAKE_HOST_SOLARIS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
     print("  [X] Switch.System.Windows.Forms")
     add_subdirectory("src/Switch.System.Windows.Forms")
     file(APPEND src/Switch/include/Switch/Switch.hpp "#include \"Switch/Switch.System.Windows.Forms\"\n")

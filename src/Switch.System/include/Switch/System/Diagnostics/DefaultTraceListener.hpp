@@ -5,6 +5,7 @@
 #include <Switch/Property.hpp>
 #include <Switch/Types.hpp>
 #include <Switch/System/IO/StreamWriter.hpp>
+#include "../../SystemExport.hpp"
 #include "TraceListener.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -16,7 +17,7 @@ namespace Switch {
       /// @brief Provides the default output methods and behavior for tracing.
       /// @par Library
       /// Switch.System
-      class export_ DefaultTraceListener : public TraceListener {
+      class system_export_ DefaultTraceListener : public TraceListener {
       public:
         DefaultTraceListener() {}
 

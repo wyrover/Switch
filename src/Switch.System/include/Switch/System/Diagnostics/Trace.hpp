@@ -8,6 +8,7 @@
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/IO/Path.hpp>
+#include "../../SystemExport.hpp"
 #include "TraceEventType.hpp"
 #include "TraceListener.hpp"
 #include "TraceListenerCollection.hpp"
@@ -37,7 +38,7 @@ namespace Switch {
       /// @par Examples
       /// The following example uses Trace to indicate the beginning and the end of a program's execution. The example also uses the Trace.Indent and Trace.Unindent methods to distinguish the tracing output.
       /// @include Trace.cpp
-      class export_ Trace static_ {
+      class system_export_ Trace static_ {
       public:
         /// @brief Gets or sets whether Flush should be called on the Listeners after every write.
         /// @return bool true if Flush is called on the Listeners after every write; otherwise, false.

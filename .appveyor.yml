@@ -5,6 +5,6 @@ environment:
   - SWITCH_BUILD_WIN32: true
   - SWITCH_BUILD_WIN64: true
 build_script:
-- cmd: scripts\appveyor\build_vs2017.bat
+- cmd: scripts\appveyor\build_vs2017.cmd
 test_script:
-- cmd: scripts\appveyor\test.bat
+- cmd: scripts\appveyor\test.cmd

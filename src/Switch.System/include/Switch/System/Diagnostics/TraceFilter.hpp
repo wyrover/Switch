@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/Abstract.hpp>
+#include "../../SystemExport.hpp"
 #include "TraceEventCache.hpp"
 #include "TraceEventType.hpp"
 
@@ -15,7 +16,7 @@ namespace Switch {
       /// @brief Provides the base class for trace filter implementations.
       /// @par Library
       /// Switch.System
-      class export_ TraceFilter abstract_ {
+      class system_export_ TraceFilter abstract_ {
       public:
         /// @brief Initializes a new instance of the TraceFilter class.
         TraceFilter() {}

@@ -6,6 +6,7 @@
 #include <Switch/Types.hpp>
 #include <Switch/System/Array.hpp>
 #include <Switch/System/Object.hpp>
+#include "../../../SystemExport.hpp"
 #include "SocketInformationOptions.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -21,7 +22,7 @@ namespace Switch {
         /// @remarks Socket::DuplicateAndClose creates a SocketInformation instance for use with the Socket::Socket(SocketInformation) constructor.
         /// @par Library
         /// Switch.System
-        class export_ SocketInformation : public Object {
+        class system_export_ SocketInformation : public Object {
         public:
           /// @brief Create a new instance of SocketInformation class.
           SocketInformation() {}

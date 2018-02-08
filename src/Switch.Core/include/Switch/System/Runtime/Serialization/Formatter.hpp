@@ -15,7 +15,7 @@ namespace Switch {
       /// Formatters that serialize and deserialize objects to and from a particular format can be found in the System::Runtime::Serialization::Formatters namespace.
       namespace Serialization {
         /// @brief Provides base functionality for the common language runtime serialization formatters.
-        class export_ Formatter : public Object, public IFormatter {
+        class core_export_ Formatter : public Object, public IFormatter {
         public:
           /// @brief Initializes a new instance of the IFormatter interface.
           Formatter() {}

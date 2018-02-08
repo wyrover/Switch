@@ -12,7 +12,7 @@ namespace Switch {
     /// @par Examples
     /// The following example demonstrates how to throw and catch an ArgumentException.
     /// @include ArgumentException.cpp
-    class export_ ArgumentException : public SystemException {
+    class core_export_ ArgumentException : public SystemException {
     public:
       /// @brief Create a new instance of class ArgumentException
       /// @remarks Message is set with the default message associate to the error.
@@ -44,7 +44,7 @@ namespace Switch {
       ArgumentException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       /// @cond
-      friend export_ std::ostream& operator<<(std::ostream& output, const ArgumentException& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const ArgumentException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

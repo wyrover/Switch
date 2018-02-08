@@ -5,6 +5,7 @@
 #include <Switch/Property.hpp>
 #include <Switch/Types.hpp>
 #include <Switch/System/Object.hpp>
+#include "../../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -20,7 +21,7 @@ namespace Switch {
         /// @remarks The IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a Socket when the LingerState property is not set and for a TcpClient when the LingerState property is not set.
         /// @par Library
         /// Switch.System
-        class export_ LingerOption : public Object {
+        class system_export_ LingerOption : public Object {
         public:
           /// @brief Initializes a new version of the LingerOption class.
           /// @remarks There may still be data available in the outgoing network buffer after you close the Socket. Use the enable parameter to specify whether you would like the Socket to continue transmitting unsent data after the close method is called. Use the seconds parameter to indicate how long you would like the Socket to attempt transferring unsent data before timing out. If you specify true for the enable parameter and 0 for the seconds parameter, the Socket will attempt to send data until there is no data left in the outgoing network buffer. If you specify false for the enable parameter, the Socket will close immediately and any unsent data will be lost.

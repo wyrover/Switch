@@ -6,6 +6,7 @@
 #include <Switch/RefPtr.hpp>
 #include <Switch/System/Array.hpp>
 #include <Switch/System/Collections/ArrayList.hpp>
+#include "../../SystemWindowsFormsExport.hpp"
 
 namespace Switch {
   namespace System {
@@ -13,7 +14,7 @@ namespace Switch {
       class IComponent;
 
       /// @brief Provides a read-only container for a collection of IComponent objects.
-      class export_ ComponentCollection : public object {
+      class system_windows_forms_export_ ComponentCollection : public object {
       public:
         /// @brief Initializes a new instance of the ComponentCollection class using the specified array of components.
         /// @param components An array of IComponent objects to initialize the collection with.

@@ -7,6 +7,7 @@
 #include <Switch/System/IO/FileAccess.hpp>
 #include <Switch/System/IO/Stream.hpp>
 #include <Switch/System/NotImplementedException.hpp>
+#include "../../../SystemExport.hpp"
 #include "Socket.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -25,7 +26,7 @@ namespace Switch {
         /// @remarks Read and write operations can be performed simultaneously on an instance of the NetworkStream class without the need for synchronization. As long as there is one unique thread for the write operations and one unique thread for the read operations, there will be no cross-interference between read and write threads and no synchronization is required.
         /// @par Library
         /// Switch.System
-        class export_ NetworkStream : public System::IO::Stream {
+        class system_export_ NetworkStream : public System::IO::Stream {
         public:
           /// @brief Creates a new instance of the NetworkStream class for the specified Socket.
           /// @param socket The Socket that the NetworkStream will use to send and receive data.

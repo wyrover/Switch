@@ -5,6 +5,7 @@
 #include <Switch/Types.hpp>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -16,7 +17,7 @@ namespace Switch {
       /// @brief Provides credentials for password-based authentication schemes such as basic, digest, NTLM, and Kerberos authentication.
       /// @par Library
       /// Switch.System
-      class export_ NetworkCredential : public Object {
+      class system_export_ NetworkCredential : public Object {
       public:
         NetworkCredential() {}
 

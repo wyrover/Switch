@@ -15,7 +15,7 @@ namespace Switch {
     namespace IO {
       /// @brief Performs operations on System::string instances that contain file or directory
       /// path information. These operations are performed in a cross-platform manner.
-      class export_ Path static_ {
+      class core_export_ Path static_ {
       public:
         /// @brief Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.
         /// @par Examples

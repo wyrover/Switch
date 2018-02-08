@@ -7,6 +7,7 @@
 #include <Switch/RefPtr.hpp>
 #include <Switch/System/ArgumentOutOfRangeException.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 #include "BarrierPostPhaseException.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -23,7 +24,7 @@ namespace Switch {
       /// @par Examples
       /// The following example shows how to use a barrier:
       /// @include Barrier.cpp
-      class export_ Barrier : public object {
+      class system_export_ Barrier : public object {
       public:
         /// @brief Initializes a new instance of the Barrier class.
         /// @param participantCount The number of participating threads.

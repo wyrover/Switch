@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Net::IPEndPoint class.
 #pragma once
 
+#include "../../SystemExport.hpp"
 #include "EndPoint.hpp"
 #include "IPAddress.hpp"
 
@@ -16,7 +17,7 @@ namespace Switch {
       /// @remarks The IPEndPoint class contains the host and local or remote port information needed by an application to connect to a service on a host. By combining the host's IP address and port number of a service, the IPEndPoint class forms a connection point to a service.
       /// @par Library
       /// Switch.System
-      class export_ IPEndPoint : public EndPoint {
+      class system_export_ IPEndPoint : public EndPoint {
       public:
         /// @brief Specifies the minimum value that can be assigned to the Port property. The MinPort value is set to 0x00000000. This field is read-only.
         static property_<int32, readonly_> MinPort;

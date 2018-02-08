@@ -18,7 +18,7 @@ namespace Switch {
         /// @par Examples
         /// The following example shows how to use the Caller
         /// @include Caller.cpp
-        class export_ Caller : public System::Object {
+        class core_export_ Caller : public System::Object {
         public:
           Caller() {}
           Caller(const System::String& filePath, int32 lineNumber) : filePath(filePath), lineNumber(lineNumber) {}

@@ -4,6 +4,7 @@
 
 #include <Switch/Abstract.hpp>
 #include <Switch/System/TimeSpan.hpp>
+#include "../../../SystemExport.hpp"
 #include "WebSocketCloseStatus.hpp"
 #include "WebSocketMessageType.hpp"
 #include "WebSocketState.hpp"
@@ -20,7 +21,7 @@ namespace Switch {
         /// @brief The WebSocket class allows applications to send and receive data after the WebSocket upgrade has completed.
         /// @par Library
         /// Switch.System
-        class export_ WebSocket abstract_ {
+        class system_export_ WebSocket abstract_ {
         protected:
           /// @brief Creates an instance of the WebSocket class.
           WebSocket() {}

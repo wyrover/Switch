@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when a null reference is passed to a method that does not accept it as a valid argument.
-    class export_ ArgumentNullException : public ArgumentException {
+    class core_export_ ArgumentNullException : public ArgumentException {
     public:
       /// @brief Create a new instance of class ArgumentNullException
       /// @remarks Message is set with the default message associate to the error.
@@ -41,7 +41,7 @@ namespace Switch {
       ArgumentNullException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : ArgumentException(message, innerException, information) {}
 
       /// @cond
-      friend export_ std::ostream& operator<<(std::ostream& output, const ArgumentNullException& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const ArgumentNullException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

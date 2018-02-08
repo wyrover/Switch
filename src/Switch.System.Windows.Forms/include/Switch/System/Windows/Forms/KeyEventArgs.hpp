@@ -3,7 +3,7 @@
 #pragma once
 
 #include <Switch/System/EventArgs.hpp>
-
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "Keys.hpp"
 
 namespace Switch {
@@ -19,7 +19,7 @@ namespace Switch {
         /// @remarks The KeyDown event occurs when the user presses any key. The KeyUp event occurs when the user releases the key. Duplicate KeyDown events occur each time the key repeats, if the key is held down, but only one KeyUp event is generated when the user releases the key.
         /// @remarks The KeyPress event also occurs when a key is pressed. A KeyPressEventArgs is passed with each KeyPress event, and specifies the character that was composed as a result of each key press.
         /// @remarks For information about the event model, see Handling and Raising Events.
-        class export_ KeyEventArgs : public EventArgs {
+        class system_windows_forms_export_ KeyEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the KeyEventArgs class.
           KeyEventArgs() {}

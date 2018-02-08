@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Windows::Forms::ScrollableControl class.
 #pragma once
 
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "Control.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -13,7 +14,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Defines a base class for controls that support auto-scrolling behavior.
-        class export_ ScrollableControl : public Control {
+        class system_windows_forms_export_ ScrollableControl : public Control {
         public:
           /// @brief Initializes a new instance of the ScrollableControl class with default settings.
           ScrollableControl() {}

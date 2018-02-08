@@ -19,7 +19,7 @@ namespace Switch {
         /// @remarks This class is used with the PinChanged event.|
         /// @par Library
         /// Switch.System
-        class export_ SerialPinChangedEventArgs : public System::EventArgs {
+        class system_export_ SerialPinChangedEventArgs : public System::EventArgs {
         public:
           SerialPinChangedEventArgs(SerialPinChange eventType) : eventType(eventType) {}
           SerialPinChangedEventArgs(const SerialPinChangedEventArgs& spcea) : eventType(spcea.eventType) {}

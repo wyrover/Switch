@@ -18,3 +18,4 @@
 #include "TUnit/Framework/TestHelpers.hpp"
 #include "TUnit/Framework/TestState.hpp"
 #include "TUnit/Framework/UnitTest.hpp"
+#include "TUnitFrameworkExport.hpp"

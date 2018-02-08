@@ -25,7 +25,7 @@ namespace Switch {
     /// The following example demonstrates how to read data from, and write data to, the standard input and output streams. Note that these streams can be redirected by using the SetIn and SetOut methods.
     /// @include Console.cpp
     /// @include ConsoleOut.cpp
-    class export_ Console static_ {
+    class core_export_ Console static_ {
     public:
       // @cond
       class StandardInput : public System::IO::TextReader {

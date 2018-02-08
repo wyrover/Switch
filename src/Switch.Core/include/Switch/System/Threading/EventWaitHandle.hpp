@@ -21,7 +21,7 @@ namespace Switch {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Represents a thread synchronization event.
-      class export_ EventWaitHandle: public WaitHandle {
+      class core_export_ EventWaitHandle: public WaitHandle {
       public:
         /// @brief Initializes a new instance of the System::Threading::EventWaitHandle class.
         /// @exception IO::IOException A Win32 error occurred.

@@ -6,6 +6,7 @@
 #include "AssertionResult.hpp"
 #include "Is.hpp"
 #include "TestFixture.hpp"
+#include "../TUnitCoreExport.hpp"
 #include <Switch/System/BitConverter.hpp>
 #include <Switch/System/Console.hpp>
 #include <Switch/System/Environment.hpp>
@@ -27,7 +28,7 @@ namespace Switch {
     /// @par Examples
     /// This example show how to used some methods :
     /// @include Expect.cpp
-    class export_ Expect : private object {
+    class tunit_core_export_ Expect : private object {
     public:
       /// @brief Verifies that two type are equal. If they are, then an error message is show.
       /// @param expected the expected value.

@@ -5,6 +5,7 @@
 #include <Switch/Property.hpp>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../../SystemExport.hpp"
 #include "Parity.hpp"
 #include "StopBits.hpp"
 
@@ -20,7 +21,7 @@ namespace Switch {
         /// @brief Represents a serial port resource.
         /// @par Library
         /// Switch.System
-        class export_ SerialPort : public Object {
+        class system_export_ SerialPort : public Object {
         public:
           SerialPort() {}
           /// @cond

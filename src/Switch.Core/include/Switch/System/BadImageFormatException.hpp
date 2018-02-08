@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when the file image of a dynamic link library (DLL) or an executable program is invalid.
-    class export_ BadImageFormatException : public SystemException {
+    class core_export_ BadImageFormatException : public SystemException {
     public:
       /// @brief Create a new instance of class BadImageFormatException
       /// @remarks Message is set with the default message associate to the error.
@@ -41,7 +41,7 @@ namespace Switch {
       BadImageFormatException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       /// @cond
-      friend export_ std::ostream& operator<<(std::ostream& output, const BadImageFormatException& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const BadImageFormatException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

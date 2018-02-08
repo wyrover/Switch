@@ -5,6 +5,7 @@
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/Guid.hpp>
+#include "../../../SystemDrawingExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -14,7 +15,7 @@ namespace Switch {
     namespace Drawing {
       /// @brief The System::Drawing::Imaging namespace provides advanced GDI+ imaging functionality. Basic graphics functionality is provided by the System::Drawing namespace.
       namespace Imaging {
-        class export_ FrameDimension : public object {
+        class system_drawing_export_ FrameDimension : public object {
         public:
           static property_<FrameDimension, readonly_> Page;
 

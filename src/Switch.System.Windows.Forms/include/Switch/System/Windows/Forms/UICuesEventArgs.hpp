@@ -3,7 +3,7 @@
 #pragma once
 
 #include <Switch/System/EventArgs.hpp>
-
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "UICues.hpp"
 
 namespace Switch {
@@ -13,7 +13,7 @@ namespace Switch {
         /// @brief Provides data for the Control::ChangeUICues event.
         /// @remarks A System::Windows::Forms::UICuesEventArgs specifies which user interface feature changed and its new value.
         /// @remarks The Control::ChangeUICues event occurs when the user interface changes by showing or hiding focus indicators or keyboard cues. This is usually when the user presses the TAB, ALT, or F10 keys.
-        class export_ UICuesEventArgs : public EventArgs {
+        class system_windows_forms_export_ UICuesEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the UICuesEventArgs class.
           UICuesEventArgs() {}

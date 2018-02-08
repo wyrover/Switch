@@ -4,6 +4,7 @@
 
 #include <Switch/Property.hpp>
 #include <Switch/System/EventArgs.hpp>
+#include "../../../SystemExport.hpp"
 #include "SerialError.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -19,7 +20,7 @@ namespace Switch {
         /// @remarks This class is used with the ErrorReceived event.
         /// @par Library
         /// Switch.System
-        class export_ SerialErrorReceivedEventArgs : public System::EventArgs {
+        class system_export_ SerialErrorReceivedEventArgs : public System::EventArgs {
         public:
           SerialErrorReceivedEventArgs(SerialError eventType) : eventType(eventType) {}
           SerialErrorReceivedEventArgs(const SerialErrorReceivedEventArgs& serea) : eventType(serea.eventType) {}

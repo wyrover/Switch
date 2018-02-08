@@ -2,8 +2,6 @@
 /// @brief Contains #lock_ keyword.
 #pragma once
 
-#include "System/Delegate.hpp"
-
 /// @cond
 template<typename TParent, typename TDelegate>
 class __event__ : public TDelegate {

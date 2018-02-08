@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/TimeoutException.hpp>
+#include "../../SystemExport.hpp"
 #include "WebRequest.hpp"
 #include "FtpWebResponse.hpp"
 
@@ -16,7 +17,7 @@ namespace Switch {
       /// @brief Implements a File Transfer Protocol (FTP) client.
       /// @par Library
       /// Switch.System
-      class export_ FtpWebRequest: public System::Net::WebRequest {
+      class system_export_ FtpWebRequest: public System::Net::WebRequest {
       public:
         property_<bool> UseBinary {
           get_ {return this->GetUseBinary();},

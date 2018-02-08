@@ -6,6 +6,7 @@
 #include <Switch/System/Array.hpp>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 #include "Sockets/SocketException.hpp"
 #include "Sockets/AddressFamily.hpp"
 
@@ -19,7 +20,7 @@ namespace Switch {
       /// @brief Provides an Internet Protocol (IP) address.
       /// @par Library
       /// Switch.System
-      class export_ IPAddress : public Object {
+      class system_export_ IPAddress : public Object {
       public:
         /// @brief Provides an IP address that indicates that the server must listen for client activity on all network interfaces. This field is constant.
         /// @remarks The cAny field is equivalent to 0.0.0.0 in dotted-quad notation

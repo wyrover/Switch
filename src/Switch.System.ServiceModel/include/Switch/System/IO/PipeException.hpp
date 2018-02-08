@@ -2,7 +2,8 @@
 /// @brief Contains Switch::System::IO::PipeException exception.
 #pragma once
 
-#include "IOException.hpp"
+#include <Switch/System/IO/IOException.hpp>
+#include "../../SystemServiceModelExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -13,7 +14,7 @@ namespace Switch {
       /// @brief Thrown when an error occurs within a named pipe.
       /// @par Library
       /// Switch.System.ServiceModel
-      class export_ PipeException : public IOException {
+      class system_servicemodel_export_ PipeException : public IOException {
       public:
         /// @brief Create a new instance of class PipeException
         /// @remarks Message is set with the default message associate to the error.

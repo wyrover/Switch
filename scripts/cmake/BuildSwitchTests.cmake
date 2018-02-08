@@ -53,7 +53,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                      Switch.System.Drawing.ManualTests
-  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_DRAWING)
+  if (NOT IOS AND NOT ANDROID AND NOT CMAKE_HOST_SOLARIS AND BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_DRAWING)
     print("  [X] Switch.System.Drawing.ManualTests")
     add_subdirectory("tests/Switch.System.Drawing.ManualTests")
   else()
@@ -62,7 +62,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                        Switch.System.Drawing.UnitTests
-  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_DRAWING)
+  if (NOT IOS AND NOT ANDROID AND NOT CMAKE_HOST_SOLARIS AND BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_DRAWING)
     print("  [X] Switch.System.Drawing.UnitTests")
     add_subdirectory("tests/Switch.System.Drawing.UnitTests")
   else()
@@ -71,7 +71,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                Switch.System.Windows.Forms.ManualTests
-  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
+  if (NOT IOS AND NOT ANDROID AND NOT CMAKE_HOST_SOLARIS AND BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
     print("  [X] Switch.System.Windows.Forms.ManualTests")
     add_subdirectory("tests/Switch.System.Windows.Forms.ManualTests")
   else()
@@ -80,7 +80,7 @@ macro(BuildSwitchTests)
 
   #_______________________________________________________________________________________
   #                                                  Switch.System.Windows.Forms.UnitTests
-  if (BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
+  if (NOT IOS AND NOT ANDROID AND NOT CMAKE_HOST_SOLARIS AND BUILD_SWITCH_TESTS AND BUILD_SWITCH_SYSTEM_WINDOWS_FORMS)
     print("  [X] Switch.System.Windows.Forms.UnitTests")
     add_subdirectory("tests/Switch.System.Windows.Forms.UnitTests")
   else()

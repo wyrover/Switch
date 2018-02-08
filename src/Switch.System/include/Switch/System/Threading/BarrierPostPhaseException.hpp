@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/SystemException.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -14,7 +15,7 @@ namespace Switch {
       /// @brief The exception that is thrown when the post-phase action of a Barrier fails
       /// @par Library
       /// Switch.System
-      class export_ BarrierPostPhaseException : public Exception {
+      class system_export_ BarrierPostPhaseException : public Exception {
       public:
         /// @brief Create a new instance of class BarrierPostPhaseException
         /// @remarks Message is set with the default message associate to the error.

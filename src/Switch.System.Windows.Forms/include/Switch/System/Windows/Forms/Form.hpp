@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Windows::Forms::Form class.
 #pragma once
 
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "ContainerControl.hpp"
 #include "FormBorderStyle.hpp"
 #include "FormClosedEventHandler.hpp"
@@ -17,7 +18,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Represents a window or dialog box that makes up an application's user interface.
-        class export_ Form : public ContainerControl {
+        class system_windows_forms_export_ Form : public ContainerControl {
         public:
           Form() : ContainerControl("", 0, 0, 300, 300) {
             this->visible = false;

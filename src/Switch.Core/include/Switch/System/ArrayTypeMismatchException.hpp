@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an attempt is made to store an element of the wrong type within an array.
-    class export_ ArrayTypeMismatchException : public SystemException {
+    class core_export_ ArrayTypeMismatchException : public SystemException {
     public:
       /// @brief Create a new instance of class ArrayTypeMismatchException
       /// @remarks Message is set with the default message associate to the error.
@@ -41,7 +41,7 @@ namespace Switch {
       ArrayTypeMismatchException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       /// @cond
-      friend export_ std::ostream& operator<<(std::ostream& output, const ArrayTypeMismatchException& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const ArrayTypeMismatchException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

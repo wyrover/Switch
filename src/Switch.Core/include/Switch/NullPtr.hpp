@@ -3,7 +3,6 @@
 #pragma once
 
 #include <cstddef>
-#include "Export.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {

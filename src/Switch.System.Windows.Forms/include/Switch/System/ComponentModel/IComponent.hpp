@@ -4,13 +4,14 @@
 
 #include <Switch/Interface.hpp>
 #include <Switch/System/EventHandler.hpp>
+#include "../../SystemWindowsFormsExport.hpp"
 
 namespace Switch {
   namespace System {
     namespace ComponentModel {
       /// @interface IComponent
       /// @brief Provides the base implementation for the IComponent interface and enables object sharing between applications.
-      class export_ IComponent interface_ {
+      class system_windows_forms_export_ IComponent interface_ {
       public:
         /// @brief Performs application-defined tasks associated with freeing, releasing, or resetting resources.
         virtual void Close() = 0;

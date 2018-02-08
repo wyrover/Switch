@@ -96,7 +96,7 @@ namespace Switch {
       /// @par Examples
       /// The following code example demonstrates simple threading functionality.
       /// @include Thread.cpp
-      class export_ Thread : public object {
+      class core_export_ Thread : public object {
       public:
         /// @brief Initializes a new instance of the Thread class.
         /// @param start A ThreadStart delegate that represents the methods to be invoked when this thread begins executing.

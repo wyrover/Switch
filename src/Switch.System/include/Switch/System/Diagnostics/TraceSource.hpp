@@ -5,6 +5,7 @@
 #include <Switch/Types.hpp>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 #include "TraceEventType.hpp"
 #include "Trace.hpp"
 
@@ -17,7 +18,7 @@ namespace Switch {
       /// @brief Provides a set of methods and properties that enable applications to trace the execution of code and associate trace messages with their source.
       /// @par Library
       /// Switch.System
-      class export_ TraceSource :  public Object {
+      class system_export_ TraceSource :  public Object {
       public:
         TraceSource() {}
 

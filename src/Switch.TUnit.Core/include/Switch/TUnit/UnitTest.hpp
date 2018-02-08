@@ -5,6 +5,7 @@
 #include <Switch/Export.hpp>
 #include <Switch/System/Array.hpp>
 #include <Switch/System/String.hpp>
+#include "../TUnitCoreExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -14,7 +15,7 @@ namespace Switch {
   /// @remarks This example how to use TestFixture class, Expect class and #AddTest_ method:
   /// @include Expect.cpp
   namespace TUnit {
-    class export_ UnitTest {
+    class tunit_core_export_ UnitTest {
     public:
       UnitTest(const System::Array<System::String>& args);
 

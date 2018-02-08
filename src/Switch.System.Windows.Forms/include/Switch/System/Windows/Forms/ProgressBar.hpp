@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/Environment.hpp>
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "Control.hpp"
 #include "ProgressBarStyle.hpp"
 
@@ -18,7 +19,7 @@ namespace Switch {
         /// @remarks Label controls are typically used to provide descriptive text for a control. For example, you can use a Label to add descriptive text for a TextBox control to inform the user about the type of data expected in the control. Label controls can also be used to add descriptive text to a Form to provide the user with helpful information. For example, you can add a Label to the top of a Form that provides instructions to the user on how to input data in the controls on the form. Label controls can be also used to display run time information on the status of an application. For example, you can add a Label control to a form to display the status of each file as a list of files is processed.
         /// @remarks A Label participates in the tab order of a form, but does not receive focus (the next control in the tab order receives focus). For example, if the UseMnemonic property is set to true, and a mnemonic character—the first character after an ampersand (&)—is specified in the Text property of the control, when a user presses ALT+ the mnemonic key, focus moves to the next control in the tab order. This feature provides keyboard navigation for a form. In addition to displaying text, the Label control can also display an image using the Image property, or a combination of the ImageIndex and ImageList properties.
         /// @note A Label can be made transparent by setting its BackColor property to Color.Transparent. When you use a transparent label, use only the current device coordinate system to draw on the container, or the Label background might paint improperly.
-        class export_ ProgressBar : public Control {
+        class system_windows_forms_export_ ProgressBar : public Control {
         public:
           ProgressBar() : Control("", 0, 0, 100, System::Environment::OSVersion().Platform == System::PlatformID::MacOSX ? 20 : 23) {
             this->SetStyle(ControlStyles::UserPaint, false);

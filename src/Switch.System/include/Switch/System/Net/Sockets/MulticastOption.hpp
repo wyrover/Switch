@@ -5,6 +5,7 @@
 #include <Switch/Property.hpp>
 #include <Switch/Types.hpp>
 #include <Switch/System/Object.hpp>
+#include "../../../SystemExport.hpp"
 #include "../IPAddress.hpp"
 #include "SocketException.hpp"
 
@@ -27,7 +28,7 @@ namespace Switch {
         /// @remarks Use DropMembership to drop a multicast group.
         /// @par Library
         /// Switch.System
-        class export_ MulticastOption : public Object {
+        class system_export_ MulticastOption : public Object {
         public:
           /// @brief Initializes a new version of the MulticastOption class for the specified IP multicast group.
           /// @param group The IPAddress of the multicast group.

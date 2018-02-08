@@ -3,6 +3,7 @@
 #pragma once
 
 #include "SystemSound.hpp"
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -13,7 +14,7 @@ namespace Switch {
       /// @brief Retrieves sounds associated with a set of Windows operating system sound-event types. This class cannot be inherited.
       /// @par Library
       /// Switch.System
-      class export_ SystemSounds {
+      class system_export_ SystemSounds {
       public:
         static property_<SystemSound, readonly_> Asterisk;
 

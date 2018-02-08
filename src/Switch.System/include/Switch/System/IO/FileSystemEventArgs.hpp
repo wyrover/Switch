@@ -4,6 +4,7 @@
 
 #include <Switch/As.hpp>
 #include <Switch/System/EventArgs.hpp>
+#include "../../SystemExport.hpp"
 #include "WatcherChangeTypes.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -15,7 +16,7 @@ namespace Switch {
       /// @brief Provides data for the directory events: Changed, Created, Deleted.
       /// @par Library
       /// Switch.System
-      class export_ FileSystemEventArgs : public EventArgs {
+      class system_export_ FileSystemEventArgs : public EventArgs {
       public:
         FileSystemEventArgs(WatcherChangeTypes changeType, const string directory, const string name) : changeType(changeType), directory(directory), name(name) {}
 

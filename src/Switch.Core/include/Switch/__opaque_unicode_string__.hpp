@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include "Export.hpp"
+#include "CoreExport.hpp"
 
 /// @cond
 namespace Switch {
@@ -16,39 +16,22 @@ namespace Switch {
   }
 }
 
-class export_ __opaque_unicode_string__ {
+class core_export_ __opaque_unicode_string__ {
   friend class Switch::System::String;
-  __opaque_unicode_string__() {}
+  __opaque_unicode_string__();
   explicit __opaque_unicode_string__(const char* str);
-  explicit __opaque_unicode_string__(const char32_t* str) {
-    int i = 0;
-    while (str[i] != 0)
-      this->append(str[i++]);
-    this->stringSize = i;
-  }
-  __opaque_unicode_string__(const __opaque_unicode_string__& str) : string(str.string), stringSize(str.stringSize) {}
-  __opaque_unicode_string__(int length, char c) : stringSize(length) {
-    while (length--)
-      this->string.push_back(c);
-  }
-  __opaque_unicode_string__(const char* str, int32_t startIndex) : __opaque_unicode_string__(str, startIndex, (int32_t)npos) {}
+  explicit __opaque_unicode_string__(const char32_t* str);
+  __opaque_unicode_string__(const __opaque_unicode_string__& str);
+  __opaque_unicode_string__(int length, char c);
+  __opaque_unicode_string__(const char* str, int32_t startIndex);
   __opaque_unicode_string__(const char* str, int32_t startIndex, int32_t length);
-  __opaque_unicode_string__(const char32_t* str, int32_t startIndex) : __opaque_unicode_string__(str, startIndex, (int32_t)npos) {}
+  __opaque_unicode_string__(const char32_t* str, int32_t startIndex);
   __opaque_unicode_string__(const char32_t* str, int32_t startIndex, int32_t length);
-  __opaque_unicode_string__(__opaque_unicode_string__&& str) : string(std::move(str.string)), stringSize(str.stringSize) {str.stringSize = 0;}
+  __opaque_unicode_string__(__opaque_unicode_string__&& str);
 
-  bool operator==(const __opaque_unicode_string__& str) const {return this->stringSize == str.stringSize && this->string == str.string;}
-  __opaque_unicode_string__& operator=(const __opaque_unicode_string__& str) {
-    this->string = str.string;
-    this->stringSize = str.stringSize;
-    return *this;
-  }
-
-  __opaque_unicode_string__& operator+=(const __opaque_unicode_string__& s) {
-    this->string.append(s.string);
-    this->stringSize += s.stringSize;
-    return *this;
-  }
+  bool operator==(const __opaque_unicode_string__& str) const;
+  __opaque_unicode_string__& operator=(const __opaque_unicode_string__& str);
+  __opaque_unicode_string__& operator+=(const __opaque_unicode_string__& s);
 
   char32_t operator[](int i) const;
   char32_t& operator[](int i);
@@ -61,13 +44,13 @@ class export_ __opaque_unicode_string__ {
   size_t find_any(const std::vector<char32_t>& any, size_t pos = npos, size_t count = npos) const;
   size_t rfind(const __opaque_unicode_string__& s, size_t pos = npos) const;
   size_t rfind(char32_t code, size_t pos = npos) const;
-  size_t length() const {return this->stringSize;}
+  size_t length() const;
   bool ends_with(const __opaque_unicode_string__& s) const;
-  size_t size() const {return length();}
-  size_t nb_bytes() const {return this->string.size();}
+  size_t size() const;
+  size_t nb_bytes() const;
 
-  const char* data() const {return this->string.data();}
-  const char* c_str() const {return this->string.c_str();}
+  const char* data() const;
+  const char* c_str() const;
 
   int compare(const __opaque_unicode_string__& str) const;
   int compare_ignore_case(const __opaque_unicode_string__& str) const;
@@ -96,9 +79,9 @@ class export_ __opaque_unicode_string__ {
     bool operator !=(const const_iterator& rhs) const;
     char32_t operator*() const;
 
-    int get_byte_index() const { return this->position; }
-    int get_format() const { return this->format; }
-    int get_logical_index() const { return this->index; }
+    int get_byte_index() const;
+    int get_format() const;
+    int get_logical_index() const;
 
   private:
     friend class __opaque_unicode_string__;
@@ -108,6 +91,29 @@ class export_ __opaque_unicode_string__ {
     int index;
 
     const_iterator(const std::string* str, bool at_end = false);
+  };
+
+  class const_reverse_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
+  public:
+    const_reverse_iterator(const const_reverse_iterator& it);
+    const_reverse_iterator& operator++();
+    const_reverse_iterator operator++(int);
+    bool operator==(const const_reverse_iterator& rhs) const;
+    bool operator!=(const const_reverse_iterator& rhs) const;
+    char32_t operator*() const;
+
+    int get_byte_index() const;
+    int get_format() const;
+    int get_logical_index() const;
+
+  private:
+    friend class __opaque_unicode_string__;
+    const std::string* string_pointer;
+    int position;
+    uint8_t format;
+    int index;
+
+    const_reverse_iterator(const std::string* str, bool at_end = false);
   };
 
   class iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
@@ -120,9 +126,9 @@ class export_ __opaque_unicode_string__ {
     char32_t operator*() const;
     char32_t& operator*();
 
-    int get_byte_index() const { return this->position; }
-    int get_format() const { return this->format; }
-    int get_logical_index() const { return this->index; }
+    int get_byte_index() const;
+    int get_format() const;
+    int get_logical_index() const;
 
   private:
     friend class __opaque_unicode_string__;
@@ -132,29 +138,6 @@ class export_ __opaque_unicode_string__ {
     int index;
 
     iterator(std::string* str, bool at_end = false);
-  };
-
-  class const_reverse_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
-  public:
-    const_reverse_iterator(const const_reverse_iterator& it);
-    const_reverse_iterator& operator++();
-    const_reverse_iterator operator++(int);
-    bool operator==(const const_reverse_iterator& rhs) const;
-    bool operator!=(const const_reverse_iterator& rhs) const;
-    char32_t operator*() const;
-
-    int get_byte_index() const { return this->position; }
-    int get_format() const { return this->format; }
-    int get_logical_index() const { return this->index; }
-
-  private:
-    friend class __opaque_unicode_string__;
-    const std::string* string_pointer;
-    int position;
-    uint8_t format;
-    int index;
-
-    const_reverse_iterator(const std::string* str, bool at_end = false);
   };
 
   class reverse_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
@@ -167,9 +150,9 @@ class export_ __opaque_unicode_string__ {
     char32_t operator*() const;
     char32_t& operator*();
 
-    int get_byte_index() const { return this->position; }
-    int get_format() const { return this->format; }
-    int get_logical_index() const { return this->index; }
+    int get_byte_index() const;
+    int get_format() const;
+    int get_logical_index() const;
 
   private:
     friend class __opaque_unicode_string__;
@@ -181,14 +164,14 @@ class export_ __opaque_unicode_string__ {
     reverse_iterator(std::string* str, bool at_end = false);
   };
 
-  const_iterator begin() const { return const_iterator(&this->string); }
-  const_iterator end() const { return const_iterator(&this->string, true); }
-  iterator begin() { return iterator(&this->string); }
-  iterator end() { return iterator(&this->string, true); }
-  const_reverse_iterator rbegin() const { return const_reverse_iterator(&this->string); }
-  const_reverse_iterator rend() const { return const_reverse_iterator(&this->string, true); }
-  reverse_iterator rbegin() { return reverse_iterator(&this->string); }
-  reverse_iterator rend() { return reverse_iterator(&this->string, true); }
+  const_iterator begin() const;
+  const_iterator end() const;
+  iterator begin();
+  iterator end();
+  const_reverse_iterator rbegin() const;
+  const_reverse_iterator rend() const;
+  reverse_iterator rbegin();
+  reverse_iterator rend();
 
   static size_t npos;
   static bool equals(__opaque_unicode_string__::const_iterator src, const __opaque_unicode_string__::const_iterator& src_end, __opaque_unicode_string__::const_iterator match, const __opaque_unicode_string__::const_iterator& match_end);

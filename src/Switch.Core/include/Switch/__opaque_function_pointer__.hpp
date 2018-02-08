@@ -14,7 +14,7 @@
 template<typename TResult = void, typename T1 = NullPtr, typename T2 = NullPtr, typename T3 = NullPtr, typename T4 = NullPtr, typename T5 = NullPtr, typename T6 = NullPtr, typename T7 = NullPtr, typename T8 = NullPtr, typename T9 = NullPtr, typename T10 = NullPtr, typename T11 = NullPtr, typename T12 = NullPtr, typename T13 = NullPtr, typename T14 = NullPtr, typename T15 = NullPtr, typename T16 = NullPtr>
 class __opaque_function_pointer__;
 
-class export_ __opaque_inner_function_ptr__ {
+class core_export_ __opaque_inner_function_ptr__ {
 private:
   template<typename TResult, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15, typename T16>
   friend class __opaque_function_pointer__;

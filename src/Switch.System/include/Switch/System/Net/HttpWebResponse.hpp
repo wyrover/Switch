@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Net::HttpWebResponse class.
 #pragma once
 
+#include "../../SystemExport.hpp"
 #include "HttpStatusCode.hpp"
 #include "WebResponse.hpp"
 
@@ -15,7 +16,7 @@ namespace Switch {
       /// @brief Provides an HTTP-specific implementation of the WebResponse class.
       /// @par Library
       /// Switch.System
-      class export_ HttpWebResponse : public System::Net::WebResponse {
+      class system_export_ HttpWebResponse : public System::Net::WebResponse {
       public:
         virtual ~HttpWebResponse();
 

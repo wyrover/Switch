@@ -3,7 +3,7 @@
 #pragma once
 
 #include <Switch/System/EventArgs.hpp>
-
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "Keys.hpp"
 
 namespace Switch {
@@ -14,7 +14,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class export_ KeyPressEventArgs : public EventArgs {
+        class system_windows_forms_export_ KeyPressEventArgs : public EventArgs {
         public:
           KeyPressEventArgs() {}
           KeyPressEventArgs(char32 keyChar) : keyChar(keyChar), handled(false) {}

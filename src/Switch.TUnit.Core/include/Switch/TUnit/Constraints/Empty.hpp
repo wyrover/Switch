@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Constraint.hpp"
+#include "../../TUnitCoreExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -16,7 +17,7 @@ namespace Switch {
   namespace TUnit {
     /// @brief The TUnit::Constrains conatains ConstraintValue that contain vaule to verify, the base class Contraints, the base class ConstraintExpression, all Constraint inherited classes and all ContraintExpression inherited classes.
     namespace Constraints {
-      class export_ Empty : public Constraint {
+      class tunit_core_export_ Empty : public Constraint {
       public:
         Empty() {}
 

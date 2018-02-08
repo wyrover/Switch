@@ -5,7 +5,7 @@
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/Convert.hpp>
-
+#include "../../SystemDrawingExport.hpp"
 #include "Brush.hpp"
 #include "Color.hpp"
 #include "Font.hpp"
@@ -40,7 +40,7 @@ namespace Switch {
         Far
       };
 
-      class export_ StringFormat {
+      class system_drawing_export_ StringFormat {
       public:
         StringFormat() {}
         StringFormat(const StringFormat& stringFormat) : alignment(stringFormat.alignment), lineAlignment(stringFormat.lineAlignment) {}
@@ -60,7 +60,7 @@ namespace Switch {
         StringAlignment lineAlignment = StringAlignment::Near;
       };
 
-      class export_ export_ Graphics : public Object {
+      class system_drawing_export_ system_drawing_export_ Graphics : public Object {
       public:
         /// @cond
         ~Graphics();

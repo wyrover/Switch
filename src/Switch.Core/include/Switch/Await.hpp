@@ -10,9 +10,9 @@ namespace Switch {
   /// @par Examples
   /// This example demontrate how to use async and await
   /// @include Async1.cpp
-  class export_ Await {
+  class core_export_ Await {
   public:
-    Await() {}
+    Await();
 
     /// @brief The await operator is applied to a task in an asynchronous method to suspend the execution of the method until the awaited task completes.
     /// @param async the asynchronous method to wait.
@@ -31,11 +31,11 @@ namespace Switch {
 
     /// @brief The await operator is applied to a task in an asynchronous method to suspend the execution of the method until the awaited task completes.
     /// @param async the asynchronous method to wait.
-    void operator<<(Async<System::Threading::Tasks::Task<>>& async) {async().Wait();}
+    void operator<<(Async<System::Threading::Tasks::Task<>>& async);
 
-    void operator<<(System::Threading::Tasks::Task<> task) {
-      task.Wait();
-    }
+    /// @brief The await operator is applied to a task in an asynchronous method to suspend the execution of the method until the awaited task completes.
+    /// @param async the asynchronous method to wait.
+    void operator<<(System::Threading::Tasks::Task<> task);
 
   private:
     Await(const Await&) = delete;

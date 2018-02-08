@@ -35,7 +35,7 @@ namespace Switch {
     ///      If several read or write operations have occurred through bad pointers, memory may be corrupted. This typically occurs when
     ///      reading or writing to addresses outside of a predefined buffer.
     /// </pre>
-    class export_ AccessViolationException : public SystemException {
+    class core_export_ AccessViolationException : public SystemException {
     public:
       /// @brief Create a new instance of class AccessViolationException
       /// @remarks Message is set with the default message associate to the error.
@@ -67,7 +67,7 @@ namespace Switch {
       AccessViolationException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       /// @cond
-      friend export_ std::ostream& operator<<(std::ostream& output, const AccessViolationException& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const AccessViolationException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

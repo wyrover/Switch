@@ -13,6 +13,7 @@
 #include <Switch/System/Threading/SemaphoreFullException.hpp>
 #include <Switch/System/Threading/WaitHandle.hpp>
 #include <Switch/System/Threading/WaitHandleCannotBeOpenedException.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -24,7 +25,7 @@ namespace Switch {
       /// @brief Limits the number of threads that can access a resource or pool of resources concurrently.
       /// @par Library
       /// Switch.System
-      class export_ Semaphore: public WaitHandle {
+      class system_export_ Semaphore: public WaitHandle {
       public:
         /// @brief Initializes a new instance of the System::Threading::Semaphore class
         /// @remarks The count is equals to 0 and the maximumCount is equal to Int32::MaxValue.

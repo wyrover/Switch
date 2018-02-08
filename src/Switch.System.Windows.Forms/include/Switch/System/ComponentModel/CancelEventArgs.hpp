@@ -3,11 +3,12 @@
 #pragma once
 
 #include <Switch/System/EventArgs.hpp>
+#include "../../SystemWindowsFormsExport.hpp"
 
 namespace Switch {
   namespace System {
     namespace ComponentModel {
-      class export_ CancelEventArgs : public EventArgs {
+      class system_windows_forms_export_ CancelEventArgs : public EventArgs {
       public:
         CancelEventArgs() {}
         CancelEventArgs(const CancelEventArgs& ce) : cancel(ce.cancel) {}

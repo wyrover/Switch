@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/ApplicationException.hpp>
+#include "../../../SystemExport.hpp"
 #include "../IPAddress.hpp"
 #include "../IPEndPoint.hpp"
 #include "Socket.hpp"
@@ -30,7 +31,7 @@ namespace Switch {
         /// @note The 0 for local port functionality is not available.
         /// @par Library
         /// Switch.System
-        class export_ TcpListener : public Object {
+        class system_export_ TcpListener : public Object {
         public:
           /// @brief Initializes a new instance of the TcpListener class with the specified local endpoint.
           /// @param ipEndPoint An IPEndPoint that represents the local endpoint to which to bind the listener Socket.

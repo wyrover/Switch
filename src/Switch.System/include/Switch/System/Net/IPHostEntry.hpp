@@ -5,6 +5,7 @@
 #include <Switch/System/Array.hpp>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 #include "IPAddress.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -17,7 +18,7 @@ namespace Switch {
       /// @brief Provides a container class for Internet host address information.
       /// @par Library
       /// Switch.System
-      class export_ IPHostEntry : public Object {
+      class system_export_ IPHostEntry : public Object {
       public:
         /// @brief Initializes a new instance of the IPHostEntry.
         IPHostEntry() {}

@@ -6,7 +6,7 @@
 #include <Switch/System/IComparable.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/Collections/Generic/Dictionary.hpp>
-
+#include "../../SystemDrawingExport.hpp"
 #include "KnownColor.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -18,7 +18,7 @@ namespace Switch {
       /// @brief Represents an ARGB (alpha, red, green, blue) color.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ Color : public object, public IComparable {
+      class system_drawing_export_ Color : public object, public IComparable {
       public:
         /// @brief Gets a system-defined color that has an ARGB value of 0x00FFFFFF. This field is constant.
         static property_<Color, readonly_> Transparent;

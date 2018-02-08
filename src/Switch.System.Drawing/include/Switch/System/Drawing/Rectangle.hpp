@@ -8,7 +8,7 @@
 #include <Switch/System/Math.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/SystemException.hpp>
-
+#include "../../SystemDrawingExport.hpp"
 #include "Point.hpp"
 #include "Size.hpp"
 #include "RectangleF.hpp"
@@ -26,7 +26,7 @@ namespace Switch {
       /// @remarks For more advanced shapes, use a Region object.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ Rectangle : public object {
+      class system_drawing_export_ Rectangle : public object {
       public:
         /// @brief Represents a Rectangle structure with its properties left uninitialized.
         static property_<Rectangle, readonly_> Empty;

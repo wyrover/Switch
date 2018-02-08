@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/SystemException.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -14,7 +15,7 @@ namespace Switch {
       /// @brief The exception that is thrown when an error is made adding a Cookie to a CookieContainer.
       /// @par Library
       /// Switch.System
-      class export_ CookieException : public FormatException {
+      class system_export_ CookieException : public FormatException {
       public:
         /// @brief Create a new instance of class CookieException
         /// @remarks Message is set with the default message associate to the error.

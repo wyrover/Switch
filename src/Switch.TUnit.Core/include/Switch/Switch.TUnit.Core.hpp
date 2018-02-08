@@ -17,3 +17,4 @@
 #include "TUnit/Is.hpp"
 #include "TUnit/TestFixture.hpp"
 #include "TUnit/UnitTest.hpp"
+#include "TUnitCoreExport.hpp"

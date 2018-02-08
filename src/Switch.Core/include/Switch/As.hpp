@@ -6,7 +6,7 @@
 #include "RefPtr.hpp"
 
 /// @cond
-export_ void __throw_cast_exception__();
+core_export_ void __throw_cast_exception__();
 /// @endcond
 
 namespace Switch {

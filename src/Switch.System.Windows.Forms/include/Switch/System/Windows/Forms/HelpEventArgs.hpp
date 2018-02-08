@@ -3,13 +3,14 @@
 #pragma once
 
 #include <Switch/System/EventArgs.hpp>
+#include "../../../SystemWindowsFormsExport.hpp"
 
 namespace Switch {
   namespace System {
     namespace Windows {
       namespace Forms {
         /// @brief Provides data for the HelpRequested event.
-        class export_ HelpEventArgs : public EventArgs {
+        class system_windows_forms_export_ HelpEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the HelpEventArgs class.
           HelpEventArgs() : handled(false) {}

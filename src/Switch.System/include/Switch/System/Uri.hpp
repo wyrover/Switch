@@ -19,6 +19,7 @@
 #include "UriKind.hpp"
 #include "UriHostNameType.hpp"
 #include "UriPartial.hpp"
+#include "../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -39,7 +40,7 @@ namespace Switch {
     /// @remarks As part of canonicalization in the constructor for some schemes, escaped representations are compacted. The schemes for which URI will compact escaped sequences include the following: file, http, https, net.pipe, and net.tcp. For all other schemes, escaped sequences are ! compacted. For example: if you percent encode the two dots ".." as "%2E%2E" then the URI constructor will compact this sequence for some schemes. For example, the following code sample shows a URI constructor for the http scheme.
     /// @par Library
     /// Switch.System
-    class export_ Uri : public Object, public System::Runtime::Serialization::ISerializable {
+    class system_export_ Uri : public Object, public System::Runtime::Serialization::ISerializable {
     public:
       /// @cond
       void SetUri(const String& uri, UriKind kind) {

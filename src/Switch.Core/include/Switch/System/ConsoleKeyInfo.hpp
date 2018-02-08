@@ -14,7 +14,7 @@ namespace Switch {
   namespace System {
     /// @brief Specifies the standard keys on a console.
     /// @see Console
-    struct export_ ConsoleKeyInfo : public Object {
+    struct core_export_ ConsoleKeyInfo : public Object {
     public:
       /// @brief Create a new instance of ConsoleKeyInfo class.
       /// @remarks This type is not intended to be created by users. Instead, it is returned to the user in response to calling the Console::ReadKey method.

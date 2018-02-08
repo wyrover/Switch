@@ -10,6 +10,7 @@
 #include <Switch/System/IO/Stream.hpp>
 #include <Switch/System/Threading/AutoResetEvent.hpp>
 #include <Switch/System/Threading/ManualResetEvent.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -25,7 +26,7 @@ namespace Switch {
       /// @brief Provides a response from a Uniform Resource Identifier (URI). This is an abstract class.
       /// @par Library
       /// Switch.System
-      class export_ WebResponse : public Object {
+      class system_export_ WebResponse : public Object {
       public:
         class WebResponseStream: public System::IO::Stream {
         public:

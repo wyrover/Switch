@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Net::Sockets::UdpClient class.
 #pragma once
 
+#include "../../../SystemExport.hpp"
 #include "Socket.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -21,7 +22,7 @@ namespace Switch {
         /// @include UdpClientListener.cpp
         /// This example show how to use UdpClient class as talker :
         /// @include UdpClientTalker.cpp
-        class export_ UdpClient : public Object {
+        class system_export_ UdpClient : public Object {
         public:
           /// @brief Initializes a new instance of the UdpClient class
           /// This constructor creates a new UdpClient and allows the underlying service
