@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Windows::Forms::ContainerControl class.
 #pragma once
 
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "../../ComponentModel/Component.hpp"
 #include "../../ComponentModel/IContainer.hpp"
 #include "ScrollableControl.hpp"
@@ -15,7 +16,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Provides focus-management functionality for controls that can function as a container for other controls.
-        class export_ ContainerControl: public ScrollableControl {
+        class system_windows_forms_export_ ContainerControl: public ScrollableControl {
         public:
           /// @brief Initializes a new instance of the ContainerControl class with default settings.
           ContainerControl() {}

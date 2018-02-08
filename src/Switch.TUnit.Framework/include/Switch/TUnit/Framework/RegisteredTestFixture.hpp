@@ -3,11 +3,12 @@
 #pragma once
 
 #include "TestFixture.hpp"
+#include "../../TUnitFrameworkExport.hpp"
 
 namespace Switch {
   namespace TUnit {
     namespace Framework {
-      struct RegisteredTestFixture : public object {
+      struct tunit_framework_export_ RegisteredTestFixture : public object {
         RegisteredTestFixture(const string& name, refptr<TUnit::Framework::TestFixture> testFixture) : name(name), testFixture(testFixture) {}
 
       private:

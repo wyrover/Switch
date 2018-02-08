@@ -8,6 +8,7 @@
 #include <Switch/System/Collections/Stack.hpp>
 #include <Switch/System/Threading/Thread.hpp>
 #include <Switch/System/Diagnostics/Stopwatch.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -18,7 +19,7 @@ namespace Switch {
       /// @brief Provides trace event data specific to a thread and a process.
       /// @par Library
       /// Switch.System
-      class export_ TraceEventCache : public Object {
+      class system_export_ TraceEventCache : public Object {
       public:
         /// @brief Initializes a new instance of the TraceEventCache class.
         TraceEventCache() {}

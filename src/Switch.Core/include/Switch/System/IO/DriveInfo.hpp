@@ -15,7 +15,7 @@ namespace Switch {
       /// @brief Provides instance methods for the creation, copying, deletion, moving, and
       /// opening of files, and aids in the creation of System::IO::FileStream objects.
       /// This class cannot be inherited.
-      class export_ DriveInfo final : public Object {
+      class core_export_ DriveInfo final : public Object {
       public:
         /// @brief Provides access to information on drive.
         DriveInfo() { }

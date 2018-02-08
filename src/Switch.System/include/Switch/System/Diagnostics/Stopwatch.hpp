@@ -4,6 +4,7 @@
 
 #include <Switch/Types.hpp>
 #include <Switch/System/TimeSpan.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -22,7 +23,7 @@ namespace Switch {
       /// @par Examples
       /// The following example demonstrates how to use the Stopwatch class to determine the execution time for an application.
       /// @include Stopwatch.cpp
-      class export_ Stopwatch : public Object {
+      class system_export_ Stopwatch : public Object {
       public:
         /// @brief Gets the frequency of the timer as the number of ticks per second. This field is read-only.
         /// @return The frequency of the timer as the number of ticks per second.

@@ -5,6 +5,7 @@
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/SystemException.hpp>
+#include "../../SystemDrawingExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -20,7 +21,7 @@ namespace Switch {
       /// @brief Stores an ordered pair of integers, which specify a X and Y.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ Point : public object {
+      class system_drawing_export_ Point : public object {
       public:
         /// @brief Gets a Point class that has a X and Y value of 0. This field is constant.
         static property_<Point, readonly_> Empty;

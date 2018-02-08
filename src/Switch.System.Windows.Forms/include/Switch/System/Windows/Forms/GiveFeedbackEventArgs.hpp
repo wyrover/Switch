@@ -3,7 +3,7 @@
 #pragma once
 
 #include <Switch/System/EventArgs.hpp>
-
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "DragDropEffects.hpp"
 
 namespace Switch {
@@ -11,7 +11,7 @@ namespace Switch {
     namespace Windows {
       namespace Forms {
         /// @brief Provides data for the GiveFeedback event, which occurs during a drag operation.
-        class export_ GiveFeedbackEventArgs : public EventArgs {
+        class system_windows_forms_export_ GiveFeedbackEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the GiveFeedbackEventArgs class.
           GiveFeedbackEventArgs() : useDefaultCursors(true) {}

@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Defines the base class for predefined exceptions in the System namespace.
-    class export_ SystemException : public Exception {
+    class core_export_ SystemException : public Exception {
     public:
       /// @brief Create a new instance of class SystemException
       /// @remarks Message is set with the default message associate to the error.

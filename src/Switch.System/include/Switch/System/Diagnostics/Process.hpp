@@ -8,6 +8,7 @@
 #include <Switch/System/ObjectDisposedException.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/IO/StreamReader.hpp>
+#include "../../SystemExport.hpp"
 #include "ProcessStartInfo.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -27,7 +28,7 @@ namespace Switch {
       /// @note This class contains a link demand and an inheritance demand at the class level that applies to all members. A SecurityException is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see Link Demands.
       /// @par Library
       /// Switch.System
-      class export_ Process : public Object {
+      class system_export_ Process : public Object {
         refptr<IO::Stream> GetStandardOutput() const;
       public:
         /// @cond

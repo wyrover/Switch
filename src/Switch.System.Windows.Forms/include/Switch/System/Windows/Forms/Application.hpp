@@ -4,7 +4,7 @@
 
 #include <Switch/Static.hpp>
 #include <Switch/System/EventHandler.hpp>
-
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "Form.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -16,7 +16,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Provides static methods and properties to manage an application, such as methods to start and stop an application, to process Windows messages, and properties to get information about an application. This class cannot be inherited.
-        class export_ Application static_ {
+        class system_windows_forms_export_ Application static_ {
         public:
           static void EnableVisualStyles();
 

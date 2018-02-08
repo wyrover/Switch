@@ -46,6 +46,7 @@ namespace Switch {
     class ArrayObject : public object {
       template<typename T, typename TAllocator>
       friend class GenericArrayObject;
+    public:
       ArrayObject() = default;
     };
 
@@ -70,7 +71,7 @@ namespace Switch {
         return *this;
       }
 
-      friend export_ std::ostream& operator<<(std::ostream& output, const GenericArrayObject& value) {
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const GenericArrayObject& value) {
         if (value.Length == 0)
           return output << "{empty}";
 
@@ -467,7 +468,7 @@ namespace Switch {
         return *this;
       }
 
-      friend export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
 
@@ -603,7 +604,7 @@ namespace Switch {
         return *this;
       }
 
-      friend export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
 
@@ -764,7 +765,7 @@ namespace Switch {
         return *this;
       }
 
-      friend export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
 
@@ -885,7 +886,7 @@ namespace Switch {
         return *this;
       }
 
-      friend export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const Array& value) {
         if (value.Length == 0)
           return output << "{empty}";
 

@@ -4,6 +4,7 @@
 
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemDrawingExport.hpp"
 #include "FontStyle.hpp"
 #include "Text/GenericFontFamilies.hpp"
 
@@ -16,7 +17,7 @@ namespace Switch {
       /// @brief Defines a group of type faces having a similar basic design and certain variations in styles. This class cannot be inherited.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ FontFamily final : public object {
+      class system_drawing_export_ FontFamily final : public object {
       public:
         FontFamily(const string& name);
         FontFamily(System::Drawing::Text::GenericFontFamilies genericFamily);

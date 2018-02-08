@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/SystemException.hpp>
+#include "../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -11,7 +12,7 @@ namespace Switch {
     /// @brief Represents an error when matching a Uri to a UriTemplateTable.
     /// @par Library
     /// Switch.System
-    class export_ UriTemplateMatchException : public SystemException {
+    class system_export_ UriTemplateMatchException : public SystemException {
     public:
       /// @brief Create a new instance of class UriTemplateMatchException
       /// @remarks Message is set with the default message associate to the error.

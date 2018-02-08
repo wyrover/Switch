@@ -5,7 +5,7 @@
 #include <Switch/System/EventArgs.hpp>
 #include <Switch/System/Drawing/Graphics.hpp>
 #include <Switch/System/Drawing/Rectangle.hpp>
-
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "Keys.hpp"
 
 namespace Switch {
@@ -16,7 +16,7 @@ namespace Switch {
         class Control;
         /// @endcond
 
-        class export_ PaintEventArgs : public EventArgs {
+        class system_windows_forms_export_ PaintEventArgs : public EventArgs {
         public:
           PaintEventArgs() {}
           PaintEventArgs(const System::Drawing::Rectangle& clipRectangle, System::Drawing::Graphics& graphics) : clipRectangle(clipRectangle), graphics(&graphics) {}

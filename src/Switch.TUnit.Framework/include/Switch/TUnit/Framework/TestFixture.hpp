@@ -7,11 +7,12 @@
 #include "SetUpAttribute.hpp"
 #include "TearDownAttribute.hpp"
 #include "TestAttribute.hpp"
+#include "../../TUnitFrameworkExport.hpp"
 
 namespace Switch {
   namespace TUnit {
     namespace Framework {
-      struct TestFixture : public object {
+      struct tunit_framework_export_ TestFixture : public object {
       protected:
         void AddOneTimeTearDown(const RegisteredMethod& registeredMethod) {this->oneTimeTearDowns.Insert(0, registeredMethod);}
         void AddSetUp(const RegisteredMethod& registeredMethod) {this->setUps.Add(registeredMethod);}

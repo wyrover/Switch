@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief The exception that is thrown when part of a file or directory cannot be found.
-      class export_ DirectoryNotFoundException : public IOException {
+      class core_export_ DirectoryNotFoundException : public IOException {
       public:
         /// @brief Create a new instance of class DirectoryNotFoundException
         /// @remarks Message is set with the default message associate to the error.

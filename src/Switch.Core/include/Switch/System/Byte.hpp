@@ -23,7 +23,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents a 8-bit unsigned integer.
-    struct export_ Byte final : public ValueType, public IComparable, public IConvertible, public IFormattable {
+    struct core_export_ Byte final : public ValueType, public IComparable, public IConvertible, public IFormattable {
     public:
       /// @brief Create a new instance of struct Byte
       /// @remarks Byte is initialized by default to 0.
@@ -58,7 +58,7 @@ namespace Switch {
       Byte& operator--() {--this->value; return *this;}
       const Byte operator--(int) {return this->value--;}
 
-      friend export_ std::ostream& operator<<(std::ostream& output, const Byte& value);
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const Byte& value);
       /// @endcond
 
       /// @brief Represents the largest possible value of an Byte 255 (0xFF). This field is constant.

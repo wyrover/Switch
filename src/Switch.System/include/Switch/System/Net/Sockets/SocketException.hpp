@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/SystemException.hpp>
+#include "../../../SystemExport.hpp"
 #include "SocketError.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -17,7 +18,7 @@ namespace Switch {
         /// @brief The exception that is thrown when a socket error occurs.
         /// @par Library
         /// Switch.System
-        class export_ SocketException : public SystemException {
+        class system_export_ SocketException : public SystemException {
         public:
           /// @brief Create a new instance of class SocketException
           /// @remarks Message is set with the default message associate to the error.

@@ -88,7 +88,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);                     // console output : ready = 1
   /// Console::WriteLine("ready = {0}", TypeBoxer::Boxing(ready));  // console output : ready = true
   /// @endcode
-  class export_ TypeBoxer static_ {
+  class core_export_ TypeBoxer static_ {
   public:
     /// @brief Boxing a bool to a Boolean
     /// @param value bool to Boxing.
@@ -209,7 +209,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);                         // console output : ready = true
   /// Console::WriteLine("ready = {0}", TypeUnboxer::Unboxing(ready));  // console output : ready = 1
   /// @endcode
-  class export_ TypeUnboxer static_ {
+  class core_export_ TypeUnboxer static_ {
   public:
     /// @brief Unboxing a Boolean type to a bool Type
     /// @param value Boolean to Unboxing.
@@ -311,7 +311,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Boolean Box(bool value);
+  System::Boolean core_export_ Box(bool value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -322,7 +322,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Byte Box(byte value);
+  System::Byte core_export_ Box(byte value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -333,7 +333,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Double Box(double value);
+  System::Double core_export_ Box(double value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -344,7 +344,7 @@ namespace Switch {
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Int16 Box(int16 value);
+  System::Int16 core_export_ Box(int16 value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -355,7 +355,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Int32 Box(int32 value);
+  System::Int32 core_export_ Box(int32 value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -366,7 +366,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Int64 Box(int64 value);
+  System::Int64 core_export_ Box(int64 value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -377,7 +377,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::SByte Box(sbyte value);
+  System::SByte core_export_ Box(sbyte value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -388,7 +388,7 @@ namespace Switch {
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// @remarks Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Single Box(float value);
+  System::Single core_export_ Box(float value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -399,7 +399,7 @@ namespace Switch {
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::String Box(const char* value);
+  System::String core_export_ Box(const char* value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -410,7 +410,7 @@ namespace Switch {
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::String Box(const wchar* value);
+  System::String core_export_ Box(const wchar* value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -421,7 +421,7 @@ namespace Switch {
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::String Box(const char16* value);
+  System::String core_export_ Box(const char16* value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -432,7 +432,7 @@ namespace Switch {
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::String Box(const char32* value);
+  System::String core_export_ Box(const char32* value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -443,7 +443,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Char Box(char value);
+  System::Char core_export_ Box(char value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -454,7 +454,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Char Box(wchar value);
+  System::Char core_export_ Box(wchar value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -465,7 +465,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Char Box(char16 value);
+  System::Char core_export_ Box(char16 value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -476,7 +476,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::Char Box(char32 value);
+  System::Char core_export_ Box(char32 value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -487,7 +487,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::UInt16 Box(uint16 value);
+  System::UInt16 core_export_ Box(uint16 value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -498,7 +498,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::UInt32 Box(uint32 value);
+  System::UInt32 core_export_ Box(uint32 value);
 
   /// @brief Support boxing of type.
   /// You can use this when you want convert an unboxed type to a boxed type (e.g. int32 to Int32)
@@ -509,11 +509,11 @@ namespace Switch {
   /// Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::UInt64 Box(uint64 value);
+  System::UInt64 core_export_ Box(uint64 value);
 
   /// @cond
-  System::Int64 Box(llong value);
-  System::UInt64 Box(ullong value);
+  System::Int64 core_export_ Box(llong value);
+  System::UInt64 core_export_ Box(ullong value);
   /// @endcond
 
   /// @brief Support boxing of type.
@@ -525,7 +525,7 @@ namespace Switch {
   /// @remarks Console::WriteLine("ready = {0]", ready);       // console output : ready = 1
   /// Console::WriteLine("ready = {0}", Box(ready));  // console output : ready = true
   /// @endcode
-  System::IntPtr Box(void* value);
+  System::IntPtr core_export_ Box(void* value);
 
   /// @cond
   template<typename T>
@@ -544,7 +544,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  bool Unbox(const System::Boolean& value);
+  bool core_export_ Unbox(const System::Boolean& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -555,7 +555,7 @@ namespace Switch {
   /// @remarks Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// @remarks Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  byte Unbox(const System::Byte& value);
+  byte core_export_ Unbox(const System::Byte& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -566,7 +566,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  double Unbox(const System::Double& value);
+  double core_export_ Unbox(const System::Double& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -577,7 +577,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  System::DateTime Unbox(const System::DateTime& value);
+  System::DateTime core_export_ Unbox(const System::DateTime& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -588,7 +588,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  int16 Unbox(const System::Int16& value);
+  int16 core_export_ Unbox(const System::Int16& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -599,7 +599,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  int32 Unbox(System::Int32& value);
+  int32 core_export_ Unbox(System::Int32& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -610,7 +610,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  int32 Unbox(const System::Int32& value);
+  int32 core_export_ Unbox(const System::Int32& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -621,7 +621,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  int64 Unbox(const System::Int64& value);
+  int64 core_export_ Unbox(const System::Int64& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -632,7 +632,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  intptr Unbox(const System::IntPtr& value);
+  intptr core_export_ Unbox(const System::IntPtr& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -643,7 +643,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  sbyte Unbox(const System::SByte& value);
+  sbyte core_export_ Unbox(const System::SByte& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -654,7 +654,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  float Unbox(const System::Single& value);
+  float core_export_ Unbox(const System::Single& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -665,7 +665,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  const char* Unbox(const System::String& value);
+  const char* core_export_ Unbox(const System::String& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -676,7 +676,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  char32 Unbox(const System::Char& value);
+  char32 core_export_ Unbox(const System::Char& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -687,7 +687,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  uint16 Unbox(const System::UInt16& value);
+  uint16 core_export_ Unbox(const System::UInt16& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -698,7 +698,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  uint32 Unbox(const System::UInt32& value);
+  uint32 core_export_ Unbox(const System::UInt32& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -709,7 +709,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  uint64 Unbox(const System::UInt64& value);
+  uint64 core_export_ Unbox(const System::UInt64& value);
 
   /// @brief Support unboxing of type
   /// You can use this when you want convert a boxed type to an unboxed type (e.g. Int32 to int32)
@@ -720,7 +720,7 @@ namespace Switch {
   /// Console::WriteLine("ready = {0}", ready);         // console output : ready = true
   /// Console::WriteLine("ready = {0}", Unbox(ready));  // console output : ready = 1
   /// @endcode
-  uintptr Unbox(const System::UIntPtr& value);
+  uintptr core_export_ Unbox(const System::UIntPtr& value);
 
   /// @cond
   template<typename T>

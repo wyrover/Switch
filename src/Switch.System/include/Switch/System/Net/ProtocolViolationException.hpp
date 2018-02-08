@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/SystemException.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -14,7 +15,7 @@ namespace Switch {
       /// @brief The exception that is thrown when an error is made while using a network protocol.
       /// @par Library
       /// Switch.System
-      class export_ ProtocolViolationException : public InvalidOperationException {
+      class system_export_ ProtocolViolationException : public InvalidOperationException {
       public:
         /// @brief Create a new instance of class ProtocolViolationException
         /// @remarks Message is set with the default message associate to the error.

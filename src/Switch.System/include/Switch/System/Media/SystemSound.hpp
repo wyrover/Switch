@@ -5,6 +5,7 @@
 #include <Switch/Is.hpp>
 #include <Switch/Types.hpp>
 #include <Switch/System/Object.hpp>
+#include "../../SystemExport.hpp"
 
 /// @cond
 struct __opaque_sound_access__;
@@ -19,7 +20,7 @@ namespace Switch {
       /// @brief Provides a collection of Cursor objects for use by a Windows Forms application.
       /// @par Library
       /// Switch.System
-      class export_ SystemSound : public object {
+      class system_export_ SystemSound : public object {
       public:
         SystemSound() {}
 

@@ -16,7 +16,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Exposes instance methods for creating, moving, and enumerating through directories and subdirectories. This class cannot be inherited.
-      class export_ DirectoryInfo final : public FileSystemInfo {
+      class core_export_ DirectoryInfo final : public FileSystemInfo {
       public:
         /// @brief Represents the uninitialized directory object. This field is constant.
         static const DirectoryInfo Empty;

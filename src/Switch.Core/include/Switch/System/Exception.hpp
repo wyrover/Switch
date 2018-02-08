@@ -18,7 +18,7 @@ namespace Switch {
     /// @section ErrorsAndExceptionsSection Errors and exceptions
     /// Run-time errors can occur for a variety of reasons. However, not all errors should be handled as exceptions in your code. Here are some categories of errors that can occur at run time and the appropriate ways to respond to them.
     /// * <b>Usage errors</b>. A usage error represents an error in program logic that can result in an exception. However, the error should be addressed not through exception handling but by modifying the faulty code. For example, the override of the Object.Equals(Object) method in the following example assumes that the obj argument must always be non-null.
-    class export_ Exception: public Object, public std::exception {
+    class core_export_ Exception: public Object, public std::exception {
     public:
       /// @brief Create a new instance of class Exception
       /// @remarks Message is set with the default message associate to the error.

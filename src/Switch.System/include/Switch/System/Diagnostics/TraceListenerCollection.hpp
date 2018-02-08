@@ -4,6 +4,7 @@
 
 #include <Switch/RefPtr.hpp>
 #include <Switch/System/Collections/Generic/List.hpp>
+#include "../../SystemExport.hpp"
 #include "DefaultTraceListener.hpp"
 #include "NullTraceListener.hpp"
 
@@ -21,7 +22,7 @@ namespace Switch {
       /// @brief Provides a thread-safe list of TraceListener objects.
       /// @par Library
       /// Switch.System
-      class export_ TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
+      class system_export_ TraceListenerCollection : public System::Collections::Generic::IList<TraceListener>, public object {
         friend class Trace;
         friend class TraceSource;
         TraceListenerCollection() = default;

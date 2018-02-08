@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown for invalid casting or explicit conversion.
-    class export_ InvalidCastException : public SystemException {
+    class core_export_ InvalidCastException : public SystemException {
     public:
       /// @brief Create a new instance of class InvalidCastException
       /// @remarks Message is set with the default message associate to the error.

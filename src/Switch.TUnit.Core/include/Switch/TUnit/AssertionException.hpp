@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/SystemException.hpp>
+#include "../TUnitCoreExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -15,7 +16,7 @@ namespace Switch {
   /// @include Expect.cpp
   namespace TUnit {
     /// @brief Thrown when an assertion failed.
-    class export_ AssertionException : public System::Exception {
+    class tunit_core_export_ AssertionException : public System::Exception {
     public:
       /// @brief Create a new instance of class AssertionException
       /// @remarks Message is set with the default message associate to the error.

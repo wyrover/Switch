@@ -6,6 +6,7 @@
 #include <Switch/System/Array.hpp>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 #include "Sockets/AddressFamily.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -30,7 +31,7 @@ namespace Switch {
       /// @remarks use the ToString method.
       /// @par Library
       /// Switch.System
-      class export_ SocketAddress : public Object {
+      class system_export_ SocketAddress : public Object {
       public:
         /// @brief Creates a new instance of the SocketAddress class for the given address family.
         SocketAddress(Sockets::AddressFamily addressFamily) : SocketAddress(addressFamily, 32) {}

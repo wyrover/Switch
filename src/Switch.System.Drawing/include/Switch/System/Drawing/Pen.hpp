@@ -3,7 +3,7 @@
 #pragma once
 
 #include <Switch/System/Object.hpp>
-
+#include "../../SystemDrawingExport.hpp"
 #include "Drawing2D/DashStyle.hpp"
 #include "Brush.hpp"
 #include "SolidBrush.hpp"
@@ -31,7 +31,7 @@ namespace Switch {
     /// @par Library
     /// Switch.System.Drawing
     namespace Drawing {
-      class export_ Pen : public object {
+      class system_drawing_export_ Pen : public object {
       public:
         Pen() {}
 

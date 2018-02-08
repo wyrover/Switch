@@ -14,7 +14,7 @@ namespace Switch {
       namespace Tasks {
         /// @brief Represents an asynchronous operation.
         template <>
-        class export_ Task<void> : public object, public ITask {
+        class core_export_ Task<void> : public object, public ITask {
         public:
           using TaskResult = void;
           /// @brief Initializes a new Task with the specified action.

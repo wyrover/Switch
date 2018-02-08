@@ -9,7 +9,7 @@
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
   /// @brief Represent an interface class.
-  struct export_ Interface {
+  struct core_export_ Interface {
     /// @cond
     virtual ~Interface() {}
     /// @endcond

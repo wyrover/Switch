@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Drawing::FontFamily class.
 #pragma once
 
+#include "../../../SystemDrawingExport.hpp"
 #include "FontCollection.hpp"
 
 /// @cond
@@ -23,7 +24,7 @@ namespace Switch {
         /// @remarks Do not use the InstalledFontCollection class to install a font to Windows. Instead use the GDI AddFontResource function. An InstalledFontCollection object sees only fonts that are installed in Windows before the object is created.
         /// @par Library
         /// Switch.System.Drawing
-        class export_ InstalledFontCollection final : public FontCollection {
+        class system_drawing_export_ InstalledFontCollection final : public FontCollection {
         public:
           /// @brief Initializes a new instance of the InstalledFontCollection class.
           InstalledFontCollection();

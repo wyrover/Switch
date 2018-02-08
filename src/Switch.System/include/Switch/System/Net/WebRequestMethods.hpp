@@ -6,6 +6,7 @@
 #include <Switch/Types.hpp>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -17,7 +18,7 @@ namespace Switch {
       /// @brief Container class for WebRequestMethods.Ftp, WebRequestMethods.File, and WebRequestMethods.Http classes. This class cannot be inherited
       /// @par Library
       /// Switch.System
-      class export_ WebRequestMethods static_ {
+      class system_export_ WebRequestMethods static_ {
       public:
         class File static_ {
         public:

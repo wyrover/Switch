@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System::Text namespace contains classes that represent ASCII and Unicode character encodings; abstract base classes for converting blocks of characters to and from blocks of bytes; and a helper class that manipulates and formats string objects without creating intermediate instances of string.
     namespace Text {
       /// @brief Represents an ANSI character encoding of Unicode characters (This is a generic class representing various code pages).
-      class export_ ANSIEncoding : public Encoding {
+      class core_export_ ANSIEncoding : public Encoding {
       public:
         /// @brief Initializes a new instance of the System::Text::ANSIEncoding class.
         /// @param codePage The code page of the desired Unicode code page.
@@ -66,7 +66,7 @@ namespace Switch {
         /// @return The code point corresponding to the byte.
         uint32 GetCodePoint(byte b) const;
 
-        class export_ Decoder : public Encoding::Decoder {
+        class core_export_ Decoder : public Encoding::Decoder {
         public:
           Decoder(int32 cp) : Encoding::Decoder(), codePage(cp) { }
           Decoder(const Decoder& b);
@@ -106,7 +106,7 @@ namespace Switch {
         /// @endcond
       };
 
-      class export_ CodePage437Encoding : public ANSIEncoding {
+      class core_export_ CodePage437Encoding : public ANSIEncoding {
       public:
         CodePage437Encoding();
         refptr<Encoding::Decoder> CreateDecoder() const override;
@@ -127,7 +127,7 @@ namespace Switch {
         };
       };
 
-      class export_ CodePage28591Encoding : public ANSIEncoding {
+      class core_export_ CodePage28591Encoding : public ANSIEncoding {
       public:
         CodePage28591Encoding();
         refptr<Encoding::Decoder> CreateDecoder() const override;
@@ -148,7 +148,7 @@ namespace Switch {
         };
       };
 
-      class export_ CodePage28592Encoding : public ANSIEncoding {
+      class core_export_ CodePage28592Encoding : public ANSIEncoding {
       public:
         CodePage28592Encoding();
         refptr<Encoding::Decoder> CreateDecoder() const override;

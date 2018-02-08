@@ -21,7 +21,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief Represents the version number of an assembly, operating system, or the common language runtime. This class cannot be inherited.
-    class export_ Version final : public Object, public ICloneable, public IComparable, public Runtime::Serialization::ISerializable {
+    class core_export_ Version final : public Object, public ICloneable, public IComparable, public Runtime::Serialization::ISerializable {
     public:
       /// @brief Initializes a new instance of the Version class.
       /// @remarks Version is initialized with default values :
@@ -81,7 +81,7 @@ namespace Switch {
         return *this;
       }
 
-      friend export_ std::ostream& operator<<(std::ostream& output, const Version& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const Version& value) {return output << value.ToString();}
       /// @endcond
 
       /// @brief Gets the value of the build component of the version number for the current Version object.

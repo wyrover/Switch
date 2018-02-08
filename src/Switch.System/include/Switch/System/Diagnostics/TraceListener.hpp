@@ -8,6 +8,7 @@
 #include <Switch/System/Guid.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/Collections/ArrayList.hpp>
+#include "../../SystemExport.hpp"
 #include "../Collections/Specialized/StringDictionary.hpp"
 #include "TraceEventCache.hpp"
 #include "TraceEventType.hpp"
@@ -28,7 +29,7 @@ namespace Switch {
       /// @note <b>to Inheritors:</b> Inherit from this class to implement a custom listener for the Debug and Trace classes. At a minimum, you must implement the Write and WriteLine methods. Additionally, you can implement the Fail, Close and Flush methods.
       /// @par Library
       /// Switch.System
-      class export_ TraceListener abstract_ {
+      class system_export_ TraceListener abstract_ {
       public:
         /// @brief Initializes a new instance of the TraceListener class.
         /// @remarks The following table shows initial property values for an instance of TraceListener.

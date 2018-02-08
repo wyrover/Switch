@@ -10,6 +10,7 @@
 #include <Switch/System/ObjectDisposedException.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/Collections/Generic/IList.hpp>
+#include "../../../SystemExport.hpp"
 #include "../EndPoint.hpp"
 #include "../IPEndPoint.hpp"
 #include "../IPAddress.hpp"
@@ -49,7 +50,7 @@ namespace Switch {
         /// @note If you are writing a relatively simple application and do not require maximum performance, consider using TcpClient, TcpListener, and UdpClient. These classes provide a simpler and more user-friendly interface to Socket communications.
         /// @par Library
         /// Switch.System
-        class export_ Socket : public Object {
+        class system_export_ Socket : public Object {
         public:
           /// @brief Initializes a new instance of the Socket class using the specified address family, socket type and protocol.
           /// @param addressFamily One of the AddressFamily values.

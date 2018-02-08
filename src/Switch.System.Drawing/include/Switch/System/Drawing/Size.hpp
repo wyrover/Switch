@@ -5,6 +5,7 @@
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/SystemException.hpp>
+#include "../../SystemDrawingExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -19,7 +20,7 @@ namespace Switch {
       /// @brief Stores an ordered pair of integers, which specify a Height and Width.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ Size : public object {
+      class system_drawing_export_ Size : public object {
       public:
         /// @brief Gets a Size class that has a Height and Width value of 0. This field is constant.
         static property_<Size, readonly_> Empty;

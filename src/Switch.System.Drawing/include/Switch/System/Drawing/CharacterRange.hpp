@@ -4,6 +4,7 @@
 
 #include <Switch/System/Object.hpp>
 #include <Switch/Property.hpp>
+#include "../../SystemDrawingExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -14,7 +15,7 @@ namespace Switch {
       /// @brief Specifies a range of character positions within a string.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ CharacterRange : public object {
+      class system_drawing_export_ CharacterRange : public object {
       public:
         /// @brief Initializes a new instance of the CharacterRange structure, with default value (0, 0).
         CharacterRange() {}

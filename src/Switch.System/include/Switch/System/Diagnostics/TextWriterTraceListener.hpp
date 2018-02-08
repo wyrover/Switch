@@ -4,6 +4,7 @@
 
 #include <Switch/System/Console.hpp>
 #include <Switch/System/IO/StreamWriter.hpp>
+#include "../../SystemExport.hpp"
 #include "TraceListener.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -26,7 +27,7 @@ namespace Switch {
       ///
       /// After running this sample, you can open the TestFile.txt file to see the output.
       /// @include TextWriterTraceListener.cpp
-      class export_ TextWriterTraceListener : public TraceListener {
+      class system_export_ TextWriterTraceListener : public TraceListener {
         struct InitTextWriter {
           template<typename TTextWriter>
           void operator()(const TTextWriter& textWriter, TextWriterTraceListener& twtl) {

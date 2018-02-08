@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an attempt to access a class member fails.
-    class export_ MemberAccessException : public SystemException {
+    class core_export_ MemberAccessException : public SystemException {
     public:
       /// @brief Create a new instance of class MemberAccessException
       /// @remarks Message is set with the default message associate to the error.

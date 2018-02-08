@@ -5,6 +5,7 @@
 #include <Switch/System/ArraySegment.hpp>
 #include <Switch/System/Threading/Thread.hpp>
 #include <Switch/System/Collections/Concurrent/ConcurrentQueue.hpp>
+#include "../../../SystemExport.hpp"
 #include "../../Threading/Semaphore.hpp"
 #include "WebSocket.hpp"
 
@@ -27,7 +28,7 @@ namespace Switch {
         /// @par Examples
         /// This example show how to receive and send with ClientWebSocket :
         /// @include ClientWebSocket.cpp
-        class export_ ClientWebSocket : public WebSocket {
+        class system_export_ ClientWebSocket : public WebSocket {
         public:
           /// @brief Creates an instance of the ClientWebSocket class.
           ClientWebSocket();

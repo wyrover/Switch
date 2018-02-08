@@ -21,7 +21,7 @@ namespace Switch {
       /// @par Examples
       /// This example show how to use Timer class
       /// @include Timer.cpp
-      class export_ Timer : public Object {
+      class core_export_ Timer : public Object {
       public:
         /// @brief Initializes a new instance of the Timer class with an infinite period and an infinite due time, using the newly created Timer object as the state object.
         /// @param callback the address of a method to be executed

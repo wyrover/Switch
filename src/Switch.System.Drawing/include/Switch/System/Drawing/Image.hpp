@@ -8,7 +8,7 @@
 #include <Switch/System/Array.hpp>
 #include <Switch/System/IComparable.hpp>
 #include <Switch/System/IO/Stream.hpp>
-
+#include "../../SystemDrawingExport.hpp"
 #include "Imaging/ColorPalette.hpp"
 #include "Imaging/ImageFlags.hpp"
 #include "Imaging/ImageFormat.hpp"
@@ -40,7 +40,7 @@ namespace Switch {
       /// @remarks To draw an System::Drawing::Image on a Windows Form, you should use one of the Graphics::DrawImage(Image, Point) methods.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ Image : public object, public IComparable {
+      class system_drawing_export_ Image : public object, public IComparable {
       public:
         /// @cond
         Image();

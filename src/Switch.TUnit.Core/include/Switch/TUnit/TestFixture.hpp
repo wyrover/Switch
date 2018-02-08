@@ -6,6 +6,7 @@
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/SystemException.hpp>
+#include "../TUnitCoreExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -20,7 +21,7 @@ namespace Switch {
     /// @brief The base class that all unit tests inherit from.
     /// This example code shows how to use TestFixture class:
     /// @include TestFixture.cpp
-    class export_ TestFixture : public testing::Test {
+    class tunit_core_export_ TestFixture : public testing::Test {
     protected:
       /// @cond
       TestFixture() {}

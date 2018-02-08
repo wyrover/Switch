@@ -9,6 +9,7 @@
 #include <Switch/System/Drawing/SystemColors.hpp>
 #include <Switch/System/Drawing/Font.hpp>
 #include <Switch/System/Nullable.hpp>
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "../../ComponentModel/Component.hpp"
 #include "../../ComponentModel/EventHandlerList.hpp"
 #include "ControlStyles.hpp"
@@ -34,7 +35,7 @@ namespace Switch {
         /// @note The majority of the controls in the System::Windows::Forms namespace use the underlying Windows common control as a base to build on. For more information about the Windows common controls, see General Control Reference.
         /// @note To identify Windows Forms controls from a separate process, use a standard SendMessage call to pass the WM_GETCONTROLNAME message. WM_GETCONTROLNAME is independent of the language and Windows hierarchy. For more information, see the "Recommended Solution for Windows Forms" topic in Automating Windows Forms::
         /// @note Use the InvokeRequired property to synchronize access to the control from multiple threads. For more information about multithreaded Windows Forms controls, see How to: Make Thread-Safe Calls to Windows Forms Controls
-        class export_ Control : public System::ComponentModel::Component {
+        class system_windows_forms_export_ Control : public System::ComponentModel::Component {
           enum class State;
         public:
           /// @brief Represents a collection of Control objects.

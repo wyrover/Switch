@@ -46,7 +46,7 @@ namespace Switch {
     /// @par Example
     /// The following code example illustrates the use of several BitConverter class methods.
     /// @include BitConverter.cpp
-    class export_ BitConverter static_ {
+    class core_export_ BitConverter static_ {
     public:
       /// @brief Indicates the byte order ("endianness") in which data is stored in this computer architecture.
       /// @return Returns true if the architecture is little-endian; false if it is big-endian.

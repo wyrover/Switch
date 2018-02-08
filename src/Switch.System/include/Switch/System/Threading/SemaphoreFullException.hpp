@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/SystemException.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -14,7 +15,7 @@ namespace Switch {
       /// @brief The exception that is thrown when the Semaphore.Release method is called on a semaphore whose count is already at the maximum.
       /// @par Library
       /// Switch.System
-      class export_ SemaphoreFullException : public SystemException {
+      class system_export_ SemaphoreFullException : public SystemException {
       public:
         /// @brief Create a new instance of class SemaphoreFullException
         /// @remarks Message is set with the default message associate to the error.

@@ -39,7 +39,7 @@ namespace Switch {
     /// @include String3.cpp
     /// @remarks By retrieving a property or calling a method that returns a String. The following example uses the methods of the String class to extract a substring from a larger String.
     /// @include String4.cpp
-    class export_ String final : public ValueType, public ICloneable, public IComparable, public IConvertible, public Collections::Generic::IEnumerable<char32> {
+    class core_export_ String final : public ValueType, public ICloneable, public IComparable, public IConvertible, public Collections::Generic::IEnumerable<char32> {
       friend class Convert;
     public:
       using StringType = __opaque_unicode_string__;
@@ -173,7 +173,7 @@ namespace Switch {
           this->string.append(c);
       }
 
-      friend export_ std::ostream& operator<<(std::ostream& output, const String& value) {return output << value.c_str();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const String& value) {return output << value.c_str();}
       /// @endcond
 
       /// @brief Return the length of String
@@ -1095,27 +1095,27 @@ namespace Switch {
     inline bool operator==(const char16* valueA, const String& valueB) {return valueB == valueA;}
     inline bool operator==(const char32* valueA, const String& valueB) {return valueB == valueA;}
 
-    export_ String operator+(const char str[], const Object& obj);
-    export_ String operator+(const Object& obj, const char str[]);
+    core_export_ String operator+(const char str[], const Object& obj);
+    core_export_ String operator+(const Object& obj, const char str[]);
 
-    export_ String operator+(const String& str, const char value[]);
-    export_ String operator+(const String& str, bool value);
-    export_ String operator+(const String& str, byte value);
-    export_ String operator+(const String& str, char value);
-    export_ String operator+(const String& str, char16 value);
-    export_ String operator+(const String& str, char32 value);
-    export_ String operator+(const String& str, wchar value);
-    export_ String operator+(const String& str, double value);
-    export_ String operator+(const String& str, int16 value);
-    export_ String operator+(const String& str, int32 value);
-    export_ String operator+(const String& str, int64 value);
-    export_ String operator+(const String& str, sbyte value);
-    export_ String operator+(const String& str, float value);
-    export_ String operator+(const String& str, uint16 value);
-    export_ String operator+(const String& str, uint32 value);
-    export_ String operator+(const String& str, uint64 value);
-    export_ String operator+(const String& str, llong value);
-    export_ String operator+(const String& str, ullong value);
+    core_export_ String operator+(const String& str, const char value[]);
+    core_export_ String operator+(const String& str, bool value);
+    core_export_ String operator+(const String& str, byte value);
+    core_export_ String operator+(const String& str, char value);
+    core_export_ String operator+(const String& str, char16 value);
+    core_export_ String operator+(const String& str, char32 value);
+    core_export_ String operator+(const String& str, wchar value);
+    core_export_ String operator+(const String& str, double value);
+    core_export_ String operator+(const String& str, int16 value);
+    core_export_ String operator+(const String& str, int32 value);
+    core_export_ String operator+(const String& str, int64 value);
+    core_export_ String operator+(const String& str, sbyte value);
+    core_export_ String operator+(const String& str, float value);
+    core_export_ String operator+(const String& str, uint16 value);
+    core_export_ String operator+(const String& str, uint32 value);
+    core_export_ String operator+(const String& str, uint64 value);
+    core_export_ String operator+(const String& str, llong value);
+    core_export_ String operator+(const String& str, ullong value);
 
     template<typename T, typename Attribute>
     String operator+(const char str[], const property_<T, Attribute>& value) { return String(str) + value(); }

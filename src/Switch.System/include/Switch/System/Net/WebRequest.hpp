@@ -12,6 +12,7 @@
 #include <Switch/System/Threading/Thread.hpp>
 #include <Switch/System/Threading/Timeout.hpp>
 #include "NetworkCredential.hpp"
+#include "../../SystemExport.hpp"
 #include "../Uri.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -28,7 +29,7 @@ namespace Switch {
       ///@brief Makes a request to a Uniform Resource Identifier (URI). This is an abstract class.
       /// @par Library
       /// Switch.System
-      class export_ WebRequest abstract_ {
+      class system_export_ WebRequest abstract_ {
         /// @cond
         friend class System::Net::WebResponse;
         /// @endcond

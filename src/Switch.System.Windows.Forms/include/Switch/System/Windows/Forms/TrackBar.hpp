@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/Environment.hpp>
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "Control.hpp"
 #include "Orientation.hpp"
 #include "TickStyle.hpp"
@@ -19,7 +20,7 @@ namespace Switch {
         /// @remarks The TrackBar is a scrollable control similar to the ScrollBar control. You can configure ranges through which the value of the Value property of a track bar scrolls by setting the Minimum property to specify the lower end of the range and the Maximum property to specify the upper end of the range.
         /// @remarks The LargeChange property defines the increment to add or subtract from the Value property when clicks occur on either side of the scroll box. The track bar can be displayed horizontally or vertically.
         /// @remarks You can use this control to input numeric data obtained through the Value property. You can display this numeric data in a control or use it in code.
-        class export_ TrackBar : public Control {
+        class system_windows_forms_export_ TrackBar : public Control {
         public:
           TrackBar() : Control("", 0, 0, 104, 45) {
             this->SetStyle(ControlStyles::UserPaint, false);

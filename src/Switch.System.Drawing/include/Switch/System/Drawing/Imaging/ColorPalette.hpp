@@ -4,6 +4,7 @@
 
 #include <Switch/System/Object.hpp>
 #include <Switch/System/Array.hpp>
+#include "../../../SystemDrawingExport.hpp"
 #include "../Color.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -21,7 +22,7 @@ namespace Switch {
       /// @par Library
       /// Switch.System.Drawing
       namespace Imaging {
-        class export_ ColorPalette : public object {
+        class system_drawing_export_ ColorPalette : public object {
         public:
           /// @cond
           ColorPalette(const ColorPalette& colorPalette) : entries(colorPalette.entries), flags(colorPalette.flags) {}

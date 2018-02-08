@@ -11,7 +11,7 @@ namespace Switch {
     /// @brief The System.Security namespaces contain classes that represent the Switch Framework security system and permissions. Child namespaces provide types that control access to and audit securable objects, allow authentication, provide crytographic services, control access to operations and resources based on policy, and support rights management of application-created content.
     namespace Security {
       /// @brief The exception that is thrown when there is a syntax error in XML parsing. This class cannot be inherited.
-      class export_ XmlSyntaxException : public SystemException {
+      class core_export_ XmlSyntaxException : public SystemException {
       public:
         /// @brief Create a new instance of class XmlSyntaxException
         /// @remarks Message is set with the default message associate to the error.

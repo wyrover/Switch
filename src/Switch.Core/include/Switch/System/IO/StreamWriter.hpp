@@ -13,7 +13,7 @@ namespace Switch {
     /// @brief The System::IO namespace contains types that allow reading and writing to files and data streams, and types that provide basic file and directory support.
     namespace IO {
       /// @brief Implements a System::IO::TextWriter for writing characters to a stream in a particular encoding.
-      class export_ StreamWriter : public TextWriter {
+      class core_export_ StreamWriter : public TextWriter {
       public:
         static StreamWriter& Null() {
           static StreamWriter nullStreamWriter;

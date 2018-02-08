@@ -4,7 +4,7 @@
 
 #include <Switch/System/Object.hpp>
 #include <Switch/System/Drawing/Size.hpp>
-
+#include "../../SystemWindowsFormsExport.hpp"
 #include "IComponent.hpp"
 
 namespace Switch {
@@ -18,7 +18,7 @@ namespace Switch {
     /// * Type converters. See the TypeConverter class.
     namespace ComponentModel {
       /// @brief Provides the base implementation for the IComponent interface and enables object sharing between applications.
-      class export_ Component : public object, public IComponent {
+      class system_windows_forms_export_ Component : public object, public IComponent {
       public:
         /// @brief Initializes a new instance of the Component class.
         Component() {}

@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Windows::Forms::MessageBox class.
 #pragma once
 
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "DialogResult.hpp"
 #include "Form.hpp"
 #include "MessageBoxButtons.hpp"
@@ -18,7 +19,7 @@ namespace Switch {
       /// @brief The Switch::System::Windows::Forms namespace contains classes for creating Windows-based applications that take full advantage of the rich user interface features available in the Microsoft Windows operating system, Apple macOS and Linux like Ubuntu operating system.
       namespace Forms {
         /// @brief Represents a window or dialog box that makes up an application's user interface.
-        class export_ MessageBox : public Form {
+        class system_windows_forms_export_ MessageBox : public Form {
         public:
           static DialogResult Show(const string& message) {return MessageBox::Show(message, "", MessageBoxButtons::OK, MessageBoxIcon::None, MessageBoxDefaultButton::Button1, (MessageBoxOptions)0, false);}
 

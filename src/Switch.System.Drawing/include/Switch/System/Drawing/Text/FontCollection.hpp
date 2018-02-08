@@ -4,6 +4,7 @@
 
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../../SystemDrawingExport.hpp"
 #include "../FontFamily.hpp"
 
 /// @cond
@@ -24,7 +25,7 @@ namespace Switch {
         /// @remarks The FontCollection allows you to get a list of the font families contained in the collection with its Families property. For additional information on fonts and text, including example code, see Using Fonts and Text.
         /// @par Library
         /// Switch.System.Drawing
-        class export_ FontCollection : public object {
+        class system_drawing_export_ FontCollection : public object {
         public:
           /// @brief Gets the array of FontFamily objects associated with this FontCollection.
           /// @return Array<FontFamily> An array of FontFamily objects.

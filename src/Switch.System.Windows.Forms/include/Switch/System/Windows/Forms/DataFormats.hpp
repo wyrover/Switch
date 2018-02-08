@@ -4,6 +4,7 @@
 
 #include <Switch/System/Object.hpp>
 #include <Switch/System/Collections/Generic/List.hpp>
+#include "../../../SystemWindowsFormsExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -19,7 +20,7 @@ namespace Switch {
         /// * Get a predefined DataFormats.Format object for a format name or ID number.
         /// * Add a new format name/ID number pair to the static list in this class, and to register the format with the Windows registry as a Clipboard format when you pass it the format name.
         /// @remarks You can get the Id number or format Name from the appropriate property in the DataFormats.Format instance.
-        class export_ DataFormats : public object {
+        class system_windows_forms_export_ DataFormats : public object {
         public:
           /// @brief Represents a Clipboard format type.
           /// @remarks A format type consists of a text-based format name and an ID number. The format name/ID number pair can define a system Clipboard or other format.

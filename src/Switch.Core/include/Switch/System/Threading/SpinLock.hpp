@@ -18,7 +18,7 @@ namespace Switch {
       /// @par Examples
       /// This example show how to use Timer class
       /// @include Timer.cpp
-      struct export_ SpinLock : public Object {
+      struct core_export_ SpinLock : public Object {
       public:
         void Enter(bool lockTaken) {
           while (this->lock.test_and_set(std::memory_order_acquire));

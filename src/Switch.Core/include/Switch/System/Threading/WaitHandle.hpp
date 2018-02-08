@@ -22,7 +22,7 @@ namespace Switch {
     /// In addition to classes for synchronizing thread activities and access to data ( Mutex, Monitor, Interlocked, AutoResetEvent, and so on), this namespace includes a ThreadPool class that allows you to use a pool of system-supplied threads, and a Timer class that executes callback methods on thread pool threads.
     namespace Threading {
       /// @brief Encapsulates operating system specific objects that wait for exclusive access to shared resources.
-      class export_ WaitHandle abstract_ {
+      class core_export_ WaitHandle abstract_ {
         /// @cond
         friend class RegisteredWaitHandle;
         friend class Thread;

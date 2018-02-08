@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Net::HttpWebRequest class.
 #pragma once
 
+#include "../../SystemExport.hpp"
 #include "WebRequest.hpp"
 #include "HttpWebResponse.hpp"
 
@@ -15,7 +16,7 @@ namespace Switch {
       /// @brief Provides an HTTP-specific implementation of the WebRequest class.
       /// @par Library
       /// Switch.System
-      class export_ HttpWebRequest: public System::Net::WebRequest {
+      class system_export_ HttpWebRequest: public System::Net::WebRequest {
       public:
         ~HttpWebRequest();
 

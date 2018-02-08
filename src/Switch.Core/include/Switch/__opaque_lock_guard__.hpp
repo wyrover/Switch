@@ -2,7 +2,7 @@
 /// @brief Contains __opaque_lock_guard__ class.
 #pragma once
 
-#include "Export.hpp"
+#include "CoreExport.hpp"
 
 /// @cond
 namespace Switch {
@@ -11,7 +11,7 @@ namespace Switch {
   }
 }
 
-class export_ __opaque_lock_guard__ final {
+class core_export_ __opaque_lock_guard__ final {
 public:
   explicit __opaque_lock_guard__(const Switch::System::Object& lock);
   ~__opaque_lock_guard__();

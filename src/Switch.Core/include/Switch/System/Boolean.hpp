@@ -44,7 +44,7 @@ namespace Switch {
     /// and
     /// @include Boolean8.cpp
     /// are equivalent, but the second is more compact. However, both techniques offer comparable performance.
-    struct export_ Boolean final : public ValueType, public IComparable, public IConvertible {
+    struct core_export_ Boolean final : public ValueType, public IComparable, public IConvertible {
     public:
       /// @brief Create a new instance of struct Boolean
       /// @remarks Boolean is initialized by default to false.
@@ -60,7 +60,7 @@ namespace Switch {
       virtual Boolean& operator =(int32 value) {this->value = value != 0; return *this;}
       operator bool() const { return this->value; }
 
-      friend export_ std::ostream& operator<<(std::ostream& output, const Boolean& value);
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const Boolean& value);
       /// @endcond
 
       /// @brief Represent false bool value

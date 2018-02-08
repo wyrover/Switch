@@ -4,6 +4,7 @@
 
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 #include "EndPoint.hpp"
 #include "Sockets/AddressFamily.hpp"
 
@@ -18,7 +19,7 @@ namespace Switch {
       /// @remarks The DnsEndPoint class contains a host name or an IP address and remote port information needed by an application to connect to a service on a host. By combining the host name or IP address and port number of a service, the DnsEndPoint class forms a connection point to a service.
       /// @par Library
       /// Switch.System
-      class export_ DnsEndPoint : public EndPoint {
+      class system_export_ DnsEndPoint : public EndPoint {
       public:
         /// @brief Initializes a new instance of the DnsEndPoint class with the host name or string representation of an IP address and a port number.
         /// @param host The host name or a string representation of the IP address.

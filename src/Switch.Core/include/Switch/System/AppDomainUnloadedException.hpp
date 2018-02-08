@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when an attempt is made to access an unloaded application domain.
-    class export_ AppDomainUnloadedException : public SystemException {
+    class core_export_ AppDomainUnloadedException : public SystemException {
     public:
       /// @brief Create a new instance of class AppDomainUnloadedException
       /// @remarks Message is set with the default message associate to the error.
@@ -41,7 +41,7 @@ namespace Switch {
       AppDomainUnloadedException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : SystemException(message, innerException, information) {}
 
       /// @cond
-      friend export_ std::ostream& operator<<(std::ostream& output, const AppDomainUnloadedException& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const AppDomainUnloadedException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

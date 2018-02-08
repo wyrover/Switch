@@ -78,7 +78,7 @@ namespace Switch {
     /// @par Examples
     /// The following example catches the AggregateException exception and calls the Handle method to handle each exception it contains. Compiling and running the example with the first task1 variable should result in an AggregateException object that contains an UnauthorizedAccessException exception. Commenting out that line, uncommenting the second task1 variable, and compiling and running the example produces an AggregateException object that contains an IndexOutOfRangeException exception.
     /// @include AggregateException.cpp
-    class export_ AggregateException : public Exception {
+    class core_export_ AggregateException : public Exception {
     public:
       /// @brief Gets a read-only collection of the Exception instances that caused the current exception.
       /// @return Returns a read-only collection of the Exception instances that caused the current exception.
@@ -222,7 +222,7 @@ namespace Switch {
       }
 
       /// @cond
-      friend export_ std::ostream& operator<<(std::ostream& output, const AggregateException& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const AggregateException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

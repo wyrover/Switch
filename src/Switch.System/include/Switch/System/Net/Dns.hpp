@@ -6,6 +6,7 @@
 #include <Switch/Types.hpp>
 #include <Switch/System/Object.hpp>
 #include <Switch/System/String.hpp>
+#include "../../SystemExport.hpp"
 #include "IPAddress.hpp"
 #include "IPHostEntry.hpp"
 
@@ -19,7 +20,7 @@ namespace Switch {
       /// @brief Provides simple domain name resolution functionality.
       /// @par Library
       /// Switch.System
-      class export_ Dns static_ {
+      class system_export_ Dns static_ {
       public:
         /// @brief Returns the Internet Protocol (IP) addresses for the specified host.
         /// @param hostNameOrAddress The host name or IP address to resolve.

@@ -3,7 +3,7 @@
 #pragma once
 
 #include <Switch/System/String.hpp>
-
+#include "../../SystemDrawingExport.hpp"
 #include "FontFamily.hpp"
 #include "FontStyle.hpp"
 #include "GraphicsUnit.hpp"
@@ -17,7 +17,7 @@ namespace Switch {
       /// @brief Defines a particular format for text, including font face, size, and style attributes. This class cannot be inherited.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ Font : public object {
+      class system_drawing_export_ Font : public object {
       public:
         Font(const string& name) {this->FromName(name, this->data().size, this->data().fontStyle);}
 

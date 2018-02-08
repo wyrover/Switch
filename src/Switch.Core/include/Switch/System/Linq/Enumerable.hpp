@@ -27,7 +27,7 @@ namespace Switch {
       using IOrderedEnumerable = System::Collections::Generic::IEnumerable<T>;
 
       /// @brief Provides a set of static methods for querying objects that implement IEnumerable<T>.
-      class export_ Enumerable static_ {
+      class core_export_ Enumerable static_ {
       public:
         /// @brief Applies an accumulator function over a sequence.
         /// @param source An IEnumerable<T> to aggregate over.

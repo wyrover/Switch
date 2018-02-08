@@ -5,7 +5,7 @@
 #include <Switch/RefPtr.hpp>
 #include <Switch/System/String.hpp>
 #include <Switch/System/IO/Stream.hpp>
-
+#include "../../SystemDrawingExport.hpp"
 #include "Image.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -18,7 +18,7 @@ namespace Switch {
       /// @remarks To draw an System::Drawing::Image on a Windows Form, you should use one of the Graphics::DrawImage(Image, Point) methods.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ Bitmap : public Image {
+      class system_drawing_export_ Bitmap : public Image {
       public:
         Bitmap(const Image& image) : Image(image) {}
 

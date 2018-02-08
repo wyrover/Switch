@@ -15,7 +15,7 @@ namespace Switch {
       /// Formatters that serialize and deserialize objects to and from a particular format can be found in the System::Runtime::Serialization::Formatters namespace.
       namespace Serialization {
         /// @brief The exception thrown when an error occurs during serialization or deserialization.
-        class export_ SerializationException : public SystemException {
+        class core_export_ SerializationException : public SystemException {
         public:
           /// @brief Create a new instance of class SerializationException
           /// @remarks Message is set with the default message associate to the error.

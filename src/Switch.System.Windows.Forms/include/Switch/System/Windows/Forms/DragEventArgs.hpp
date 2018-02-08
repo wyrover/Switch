@@ -4,6 +4,7 @@
 
 #include <Switch/System/EventArgs.hpp>
 
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "DragDropEffects.hpp"
 
 namespace Switch {
@@ -61,7 +62,7 @@ namespace Switch {
         ///   }
         /// }
         /// @endcode
-        class export_ DragEventArgs : public EventArgs {
+        class system_windows_forms_export_ DragEventArgs : public EventArgs {
         public:
           /// @brief Initializes a new instance of the DragEventArgs class.
           DragEventArgs() {}

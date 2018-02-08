@@ -16,7 +16,7 @@ namespace Switch {
   template<typename T>
   class $;
 }
-class export_ __opaque_sub_object__ {
+class core_export_ __opaque_sub_object__ {
   template<typename T>
   friend class Switch::$;
   __opaque_sub_object__() : UseCount(0) {}

@@ -5,6 +5,7 @@
 #include <Switch/As.hpp>
 #include <Switch/System/EventArgs.hpp>
 #include <Switch/System/Exception.hpp>
+#include "../../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -16,7 +17,7 @@ namespace Switch {
       /// @remarks ErrorEventArgs contains the Exception that caused the FileSystemWatcher.Error event. This class provides the GetException method to retrieve the exception.
       /// @par Library
       /// Switch.System
-      class export_ ErrorEventArgs : public EventArgs {
+      class system_export_ ErrorEventArgs : public EventArgs {
       public:
         /// @brief Initializes a new instance of the ErrorEventArgs class.
         template<typename T>

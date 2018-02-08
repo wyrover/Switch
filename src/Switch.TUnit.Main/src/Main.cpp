@@ -1,5 +1,6 @@
 #include <Switch/TUnit/UnitTest.hpp>
 #include <Switch/Startup.hpp>
+#include "../include/Switch/TUnitMainExport.hpp"
 
 namespace {
   class MainTest {
@@ -10,4 +11,4 @@ namespace {
   };
 }
 
-export_ startup_(MainTest);
+tunit_main_export_ startup_(MainTest);

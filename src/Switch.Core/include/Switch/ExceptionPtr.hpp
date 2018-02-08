@@ -3,7 +3,7 @@
 #pragma once
 
 #include <exception>
-#include "Export.hpp"
+#include "CoreExport.hpp"
 #include "NullPtr.hpp"
 
 /// @cond
@@ -29,7 +29,7 @@ namespace Switch {
   /// @par Examples
   /// This example show how to use ExceptionPtr, ExceptionPtr::CurrentExeption and Rethrow() :
   /// @include ExceptionPtr.Cpp
-  class export_ ExceptionPtr {
+  class core_export_ ExceptionPtr {
   public:
     /// @cond
     ExceptionPtr();

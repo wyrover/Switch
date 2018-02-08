@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/Delegate.hpp>
+#include "../../SystemWindowsFormsExport.hpp"
 
 namespace Switch {
   namespace System {
@@ -16,7 +17,7 @@ namespace Switch {
     namespace ComponentModel {
       /// @brief Provides a simple list of delegates. This class cannot be inherited.
       template<typename Result, typename... Arguments>
-      class export_ EventHandlerList final : public object {
+      class system_windows_forms_export_ EventHandlerList final : public object {
       public:
         /// @brief Initializes a new instance of the EventHandlerList class.
         EventHandlerList() {}

@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/System/FormatException.hpp>
+#include "../SystemExport.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
 namespace Switch {
@@ -11,7 +12,7 @@ namespace Switch {
     /// @brief The exception that is thrown when an invalid Uniform Resource Identifier (URI) is detected.
     /// @par Library
     /// Switch.System
-    class export_ UriFormatException : public FormatException {
+    class system_export_ UriFormatException : public FormatException {
     public:
       /// @brief Create a new instance of class UriFormatException
       /// @remarks Message is set with the default message associate to the error.

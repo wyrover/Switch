@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Switch/Static.hpp>
+#include "../../SystemDrawingExport.hpp"
 #include "Color.hpp"
 
 /// @brief The Switch namespace contains all fundamental classes to access Hardware, Os, System, and more.
@@ -15,7 +16,7 @@ namespace Switch {
       /// @remarks Better performance is achieved by using the properties of the System::Drawing::SystemPens or System::Drawing::SystemBrushes classes rather than creating a new pen or brush based on a value from System::Drawing::SystemColors. For example, if you wanted to get a brush for the face color of a 3-D element, use the SystemBrushes.Control property because it gets a brush that already exists, whereas calling the SolidBrush.#ctor(Color) constructor with a parameter value of SystemColors::Control will create a new brush.
       /// @par Library
       /// Switch.System.Drawing
-      class export_ SystemColors static_ {
+      class system_drawing_export_ SystemColors static_ {
       public:
         /// @brief Gets a system-defined color that has an ARGB value of 0xFFD4D0C8. This field is constant.
         static property_<Color, readonly_> ActiveBorder;

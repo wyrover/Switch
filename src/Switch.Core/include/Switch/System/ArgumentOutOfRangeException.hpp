@@ -9,7 +9,7 @@ namespace Switch {
   /// @brief The System namespace contains fundamental classes and base classes that define commonly-used value and reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
   namespace System {
     /// @brief The exception that is thrown when the value of an argument is outside the allowable range of values as defined by the invoked method.
-    class export_ ArgumentOutOfRangeException : public ArgumentException {
+    class core_export_ ArgumentOutOfRangeException : public ArgumentException {
     public:
       /// @brief Create a new instance of class ArgumentOutOfRangeException
       /// @remarks Message is set with the default message associate to the error.
@@ -41,7 +41,7 @@ namespace Switch {
       ArgumentOutOfRangeException(const System::String& message, const System::Exception& innerException, const System::Runtime::CompilerServices::Caller& information) : ArgumentException(message, innerException, information) {}
 
       /// @cond
-      friend export_ std::ostream& operator<<(std::ostream& output, const ArgumentOutOfRangeException& value) {return output << value.ToString();}
+      friend core_export_ std::ostream& operator<<(std::ostream& output, const ArgumentOutOfRangeException& value) {return output << value.ToString();}
       /// @endcond
 
     private:

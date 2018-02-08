@@ -2,6 +2,7 @@
 /// @brief Contains Switch::System::Net::FtpWebResponse class.
 #pragma once
 
+#include "../../SystemExport.hpp"
 #include "FtpStatusCode.hpp"
 #include "WebResponse.hpp"
 
@@ -15,7 +16,7 @@ namespace Switch {
       /// @brief Encapsulates a File Transfer Protocol (FTP) server's response to a request.
       /// @par Library
       /// Switch.System
-      class export_ FtpWebResponse : public System::Net::WebResponse {
+      class system_export_ FtpWebResponse : public System::Net::WebResponse {
       public:
         property_<System::Net::FtpStatusCode, readonly_> StatusCode {
           get_ {return this->GetStatusCode();}

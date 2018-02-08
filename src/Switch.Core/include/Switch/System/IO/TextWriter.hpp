@@ -35,7 +35,7 @@ namespace Switch {
       /// @endcond
 
       /// @brief Represents a writer that can write a sequential series of characters.
-      class export_ TextWriter: public Object {
+      class core_export_ TextWriter: public Object {
       public:
         /// @brief Provides a TextWriter with no backing store that can be written to, but not read from.
         /// @remarks Use cNull to redirect output to a stream that will not consume any operating system resources.

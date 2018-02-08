@@ -8,7 +8,7 @@
 namespace Switch {
   /// @brief Represent an abstract class.
   /// @ingroup SwitchCore
-  struct export_ Abstract : public System::Object {
+  struct core_export_ Abstract : public System::Object {
     ~Abstract() override = 0;
   };
 

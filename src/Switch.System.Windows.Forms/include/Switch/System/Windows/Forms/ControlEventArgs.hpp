@@ -4,6 +4,7 @@
 
 #include <Switch/System/EventArgs.hpp>
 
+#include "../../../SystemWindowsFormsExport.hpp"
 #include "UICues.hpp"
 
 namespace Switch {
@@ -61,7 +62,7 @@ namespace Switch {
         ///   }
         /// }
         /// @endcode
-        class export_ ControlEventArgs : public EventArgs {
+        class system_windows_forms_export_ ControlEventArgs : public EventArgs {
         public:
           /// @brief nitializes a new instance of the ControlEventArgs class.
           ControlEventArgs() {}
