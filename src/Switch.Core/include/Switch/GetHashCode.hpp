@@ -14,7 +14,7 @@ namespace Switch {
   /// @return int32  An integer value being the generated hashcode.
   /// @exception System::ArgumentNullException The parameters converter is null.
   template<typename T>
-  core_export_ int32 GetHashCode(const refptr<T>& value) {
+  int32 GetHashCode(const refptr<T>& value) {
     return int32(int64(value.ToPointer()) & 0x00000000FFFFFFFF) ^ int32((int64(value.ToPointer()) >> 32) & 0x00000000FFFFFFFF);
   }
 
@@ -154,7 +154,7 @@ namespace Switch {
   /// @return int32 An integer value being the generated hashcode.
   /// @exception System::ArgumentNullException The parameters converter is null.
   template<typename TValue>
-  core_export_ int32 GetHashCode(const TValue* value) {
+  int32 GetHashCode(const TValue* value) {
     using Hasher = typename std::conditional<std::is_base_of<object, TValue>::value, HasherFromObject, typename std::conditional<std::is_enum<TValue>::value, HasherFromEnum, HasherFromOther>::type>::type;
     Hasher hasher;
     return hasher(*value);
@@ -165,7 +165,7 @@ namespace Switch {
   /// @return int32 An integer value being the generated hashcode.
   /// @exception System::ArgumentNullException The parameters converter is null.
   template<typename TValue>
-  core_export_ int32 GetHashCode(const TValue& value) {
+  int32 GetHashCode(const TValue& value) {
     using Hasher = typename std::conditional<std::is_base_of<object, TValue>::value, HasherFromObject, typename std::conditional<std::is_enum<TValue>::value, HasherFromEnum, HasherFromOther>::type>::type;
     Hasher hasher;
     return hasher(value);
