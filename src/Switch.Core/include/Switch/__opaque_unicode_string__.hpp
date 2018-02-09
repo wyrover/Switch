@@ -70,7 +70,7 @@ class core_export_ __opaque_unicode_string__ {
   __opaque_unicode_string__& replace(size_t pos,  size_t len,  const __opaque_unicode_string__& str);
   void reserve(size_t value) {this->string.reserve(value);}
 
-  class const_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
+  class core_export_ const_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
   public:
     const_iterator(const const_iterator& it);
     const_iterator& operator++();
@@ -93,7 +93,7 @@ class core_export_ __opaque_unicode_string__ {
     const_iterator(const std::string* str, bool at_end = false);
   };
 
-  class const_reverse_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
+  class core_export_ const_reverse_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
   public:
     const_reverse_iterator(const const_reverse_iterator& it);
     const_reverse_iterator& operator++();
@@ -116,7 +116,7 @@ class core_export_ __opaque_unicode_string__ {
     const_reverse_iterator(const std::string* str, bool at_end = false);
   };
 
-  class iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
+  class core_export_ iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
   public:
     iterator(const iterator& it);
     iterator& operator++();
@@ -140,7 +140,7 @@ class core_export_ __opaque_unicode_string__ {
     iterator(std::string* str, bool at_end = false);
   };
 
-  class reverse_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
+  class core_export_ reverse_iterator : public std::iterator<std::forward_iterator_tag, char32_t> {
   public:
     reverse_iterator(const reverse_iterator& it);
     reverse_iterator& operator++();
