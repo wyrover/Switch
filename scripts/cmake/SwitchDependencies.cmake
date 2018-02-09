@@ -4,6 +4,12 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #_________________________________________________________________________________________
+#                                                                        add compile flags
+if (MSVC)
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /bigobj")
+endif()
+
+#_________________________________________________________________________________________
 #                                                                    add external packages
 if(NOT APPLE AND NOT ANDROID AND NOT CMAKE_HOST_SOLARIS AND UNIX)
   find_package(PkgConfig REQUIRED)
