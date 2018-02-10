@@ -60,7 +60,7 @@ namespace Switch {
         StringAlignment lineAlignment = StringAlignment::Near;
       };
 
-      class system_drawing_export_ system_drawing_export_ Graphics : public Object {
+      class system_drawing_export_ Graphics : public Object {
       public:
         /// @cond
         ~Graphics();

@@ -12,7 +12,7 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace Native;
 
-extern HINSTANCE __instance;
+core_export_ extern HINSTANCE __instance;
 
 intptr Native::GroupBoxApi::Create(const System::Windows::Forms::GroupBox& groupBox) {
   HWND handle = CreateWindowEx(WS_EX_CONTROLPARENT, WC_BUTTON, groupBox.Text().w_str().c_str(), WS_CHILD | WS_VISIBLE | BS_GROUPBOX, groupBox.Left, groupBox.Top, groupBox.Width, groupBox.Height, (HWND)groupBox.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);

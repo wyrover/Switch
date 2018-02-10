@@ -11,6 +11,10 @@ using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 
+int32 Native::SystemInformationApi::GetActiveWindowTrackingDelay() {
+  return 0;
+}
+
 ArrangeDirection Native::SystemInformationApi::GetArrangeDirection() {
   return (ArrangeDirection)(GetSystemMetrics(SM_ARRANGE) & int32(ArrangeDirection::Down | ArrangeDirection::Left | ArrangeDirection::Right | ArrangeDirection::Up));
 }

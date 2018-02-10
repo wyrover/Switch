@@ -11,7 +11,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-extern HINSTANCE __instance;
+core_export_ extern HINSTANCE __instance;
 
 intptr Native::TrackBarApi::Create(const System::Windows::Forms::TrackBar& trackBar) {
   static INITCOMMONCONTROLSEX icc;

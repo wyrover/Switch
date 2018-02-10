@@ -11,7 +11,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-extern HINSTANCE __instance;
+core_export_ extern HINSTANCE __instance;
 
 intptr Native::CheckBoxApi::Create(const System::Windows::Forms::CheckBox& checkBox) {
   HWND handle = CreateWindowEx(0, WC_BUTTON, checkBox.Text().w_str().c_str(), WS_CHILD | BS_3STATE, checkBox.Left, checkBox.Top, checkBox.Width, checkBox.Height, (HWND)checkBox.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);

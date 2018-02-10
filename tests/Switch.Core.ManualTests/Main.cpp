@@ -8,7 +8,7 @@ namespace Examples {
   public:
     // The main entry point for the application.
     static void Main() {
-      Console::WriteLine("HEllo, World!");
+      Console::WriteLine("Hello, World!");
     }
   };
 }

@@ -11,7 +11,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-extern HINSTANCE __instance;
+core_export_ extern HINSTANCE __instance;
 
 intptr Native::RadioButtonApi::Create(const System::Windows::Forms::RadioButton& radioButton) {
   HWND handle = CreateWindowEx(0, WC_BUTTON, radioButton.Text().w_str().c_str(), WS_CHILD | BS_RADIOBUTTON, radioButton.Left, radioButton.Top, radioButton.Width, radioButton.Height, (HWND)radioButton.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);

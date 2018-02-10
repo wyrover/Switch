@@ -12,7 +12,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-extern HINSTANCE __instance;
+core_export_ extern HINSTANCE __instance;
 
 void Native::FormApi::Close(System::Windows::Forms::Form& form) {
   CloseWindow((HWND)form.Handle());

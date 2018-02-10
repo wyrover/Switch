@@ -13,7 +13,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-extern HINSTANCE __instance;
+core_export_ extern HINSTANCE __instance;
 
 bool Native::ApplicationApi::visualStylesEnabled = false;
 

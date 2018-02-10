@@ -11,7 +11,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-extern HINSTANCE __instance;
+core_export_ extern HINSTANCE __instance;
 
 intptr Native::TabPageApi::Create(const System::Windows::Forms::TabPage& tabPage) {
   HWND handle = CreateWindowEx(WS_EX_CONTROLPARENT, WC_DIALOG, tabPage.Text().w_str().c_str(), WS_CHILD, tabPage.Left, tabPage.Top, tabPage.Width, tabPage.Height, (HWND)tabPage.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);

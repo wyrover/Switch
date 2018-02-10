@@ -1,5 +1,5 @@
 Project(Switch)
-set(LINK_LIBRARIES Switch.System.Windows.Forms Switch.System.Drawing Switch.TUnit.Core Switch.System.Core Switch.System Switch.Core)
+set(LINK_LIBRARIES Switch.System.Windows.Forms)
 set(SWITCH_EXPORT SWITCH_EXPORT)
 MakeLibraryProject()
 

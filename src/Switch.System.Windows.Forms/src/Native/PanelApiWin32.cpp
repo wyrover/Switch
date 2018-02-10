@@ -11,7 +11,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-extern HINSTANCE __instance;
+core_export_ extern HINSTANCE __instance;
 
 intptr Native::PanelApi::Create(const System::Windows::Forms::Panel& panel) {
   HWND handle = CreateWindowEx(WS_EX_CONTROLPARENT, WC_DIALOG, panel.Text().w_str().c_str(), WS_CHILD, panel.Left, panel.Top, panel.Width, panel.Height, (HWND)panel.Parent()().Handle(), (HMENU)0, __instance, (LPVOID)NULL);

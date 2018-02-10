@@ -2,7 +2,17 @@
 /// @brief Contains #startup_ keyword.
 #pragma once
 
+#include "CoreExport.hpp"
 #include "System/Environment.hpp"
+
+/// @cond
+#if defined(_WIN32)
+#include<cstdlib>
+#else
+core_export_ extern int __argc;
+core_export_ extern char** __argv;
+#endif
+/// @endcond
 
 namespace Switch {
   /// @brief Defines the entry point to be called when the application loads. Generally this is set either to the main form in your application or to the Main procedure that should run when the application starts.
@@ -30,5 +40,15 @@ namespace Switch {
     };\
     return Startup()(mainClass::Main, System::Environment::SetCommandLineArgs(argv, argc));\
   } \
+  \
+  using HINSTANCE = struct HINSTANCE__ {int unused;}*;\
+  core_export_ extern HINSTANCE __instance;\
+  core_export_ extern int __commandShow;\
+  \
+  int WinMain(HINSTANCE instance, HINSTANCE previousInstance, char* commandLine, int commandShow) {\
+    __instance = instance;\
+    __commandShow = commandShow;\
+    return main(__argc, __argv);\
+  }\
   int __unused_main_argc__
 }
