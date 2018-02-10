@@ -114,6 +114,10 @@ list(APPEND CPPCHECK_ARGS
 #--enable=warning,style,performance,portability,unusedFunction
 
 #_________________________________________________________________________________________
+#                                 enable CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE variable 
+set(CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE ON)
+
+#_________________________________________________________________________________________
 #                                                              enable USE_FOLDERS property
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
