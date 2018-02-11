@@ -5,6 +5,10 @@
 #include "CoreExport.hpp"
 #include "System/Environment.hpp"
 
+using HINSTANCE = struct HINSTANCE__ { int unused; }*;
+core_export_ extern HINSTANCE __instance;
+core_export_ extern int __commandShow;
+
 /// @cond
 #if defined(_WIN32)
 #include<cstdlib>
@@ -40,10 +44,6 @@ namespace Switch {
     };\
     return Startup()(mainClass::Main, System::Environment::SetCommandLineArgs(argv, argc));\
   } \
-  \
-  using HINSTANCE = struct HINSTANCE__ {int unused;}*;\
-  core_export_ extern HINSTANCE __instance;\
-  core_export_ extern int __commandShow;\
   \
   int WinMain(HINSTANCE instance, HINSTANCE previousInstance, char* commandLine, int commandShow) {\
     __instance = instance;\
