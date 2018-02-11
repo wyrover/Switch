@@ -142,6 +142,17 @@ namespace Switch {
         /// @remarks The AsEnumerable<TSource>(IEnumerable<TSource>) method has no effect other than to change the compile-time type of source from a type that implements IEnumerable<T> to IEnumerable<T> itself.
         /// @remarks AsEnumerable<TSource>(IEnumerable<TSource>) can be used to choose between query implementations when a sequence implements IEnumerable<T> but also has a different set of public query methods available. For example, given a generic class Table that implements IEnumerable<T> and has its own methods such as Where, Select, and SelectMany, a call to Where would invoke the public Where method of Table. A Table type that represents a database table could have a Wheremethod that takes the predicate argument as an expression tree and converts the tree to SQL for remote execution. If remote execution is not desired, for example because the predicate invokes a local method, the AsEnumerable<TSource> method can be used to hide the custom methods and instead make the standard query operators available.
         /// @par Examples
+        /// The following code example demonstrates how to use AsEnumerable<TSource>(IEnumerable<TSource>) to hide a type's custom Where method when the standard query operator implementation is desired.
+        /// @include EnumerableAsEnumerable.cpp
+        template<typename TSource>
+        static refptr<EnumerableCollection<TSource>> AsEnumerable(const InitializerList<TSource>& source) {return ref_new<EnumerableCollection<TSource>>(source);}
+
+        /// @brief Returns the input typed as IEnumerable<T>.
+        /// @param source The sequence to type as IEnumerable<T>.
+        /// @return The input sequence typed as IEnumerable<T>.
+        /// @remarks The AsEnumerable<TSource>(IEnumerable<TSource>) method has no effect other than to change the compile-time type of source from a type that implements IEnumerable<T> to IEnumerable<T> itself.
+        /// @remarks AsEnumerable<TSource>(IEnumerable<TSource>) can be used to choose between query implementations when a sequence implements IEnumerable<T> but also has a different set of public query methods available. For example, given a generic class Table that implements IEnumerable<T> and has its own methods such as Where, Select, and SelectMany, a call to Where would invoke the public Where method of Table. A Table type that represents a database table could have a Wheremethod that takes the predicate argument as an expression tree and converts the tree to SQL for remote execution. If remote execution is not desired, for example because the predicate invokes a local method, the AsEnumerable<TSource> method can be used to hide the custom methods and instead make the standard query operators available.
+        /// @par Examples
         /// The following code example demonstrates how to use AsEnumerable<TSource>(IEnumerable<TSource>) with native c++ array.
         /// @include EnumerableAsEnumerable2.cpp
         template<typename TSource, int32 len>
@@ -259,6 +270,23 @@ namespace Switch {
         /// @par Examples
         /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
         /// @include EnumerableConcat.cpp
+        template<typename TSource>
+        static refptr<EnumerableCollection<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const InitializerList<TSource>& second) {
+          refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
+          for (TSource item : first)
+            list->Add(item);
+          for (TSource item : second)
+            list->Add(item);
+          return list;
+        }
+
+        /// @brief Concatenates two sequences.
+        /// @param first The first sequence to concatenate.
+        /// @param second The sequence to concatenate to the first sequence.
+        /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+        /// @par Examples
+        /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
+        /// @include EnumerableConcat.cpp
         template<typename TSource, int32 len>
         static refptr<EnumerableCollection<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& first, const TSource(&second)[len]) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
@@ -280,7 +308,22 @@ namespace Switch {
         static refptr<EnumerableCollection<TSource>> Intersect(const Collections::Generic::IEnumerable<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
           refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
           for (TSource item : first)
+            if (second.Contains(item))
+              list->Add(item);
+          return list;
+        }
 
+        /// @brief Concatenates two sequences.
+        /// @param first The first sequence to concatenate.
+        /// @param second The sequence to concatenate to the first sequence.
+        /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+        /// @par Examples
+        /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
+        /// @include EnumerableIntersect.cpp
+        template<typename TSource>
+        static refptr<EnumerableCollection<TSource>> Intersect(const InitializerList<TSource>& first, const Collections::Generic::IEnumerable<TSource>& second) {
+          refptr<EnumerableCollection<TSource>> list = ref_new<EnumerableCollection<TSource>>();
+          for (TSource item : first)
             if (second.Contains(item))
               list->Add(item);
           return list;
@@ -507,6 +550,14 @@ namespace Switch {
           /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
           /// @include EnumerableConcat.cpp
           refptr<System::Linq::EnumerableCollection<TSource>> Concat(const Collections::Generic::IEnumerable<TSource>& second) const {return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);}
+
+          /// @brief Concatenates two sequences.
+          /// @param second The sequence to concatenate to this sequence.
+          /// @return refptr<Collections::Generic::IEnumerable<TSource>> An IEnumerable<T> that contains the concatenated elements of the two input sequences.
+          /// @par Examples
+          /// The following code example demonstrates how to use Cast<TResult>(IEnumerable) to enable the use of the standard query operators on an ArrayList.
+          /// @include EnumerableConcat.cpp
+          refptr<System::Linq::EnumerableCollection<TSource>> Concat(const InitializerList<TSource>& second) const {return System::Linq::Enumerable::Concat<TSource>(static_cast<const T&>(*this), second);}
 
           /// @brief Concatenates two sequences.
           /// @param second The sequence to concatenate to this sequence.

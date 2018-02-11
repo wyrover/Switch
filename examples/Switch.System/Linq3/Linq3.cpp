@@ -9,12 +9,12 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       int x[] = { 42, 24, 84, 21, 48, 12 };
-      int y[] = { 5, 1, 71, 80 };
+      auto y = { 5, 1, 71, 80 };
 
-      auto query = from<int>(x)
-        | concat<int>(y)
-      | where<int>([](int i) {return i != 21;})
-      | orderby<descending, int>([](int i) {return i;});
+      auto query = from_(x)
+        concat_(y)
+        where_([](int i) {return i != 21;})
+        orderby_<descending>([](int i) {return i;});
 
       Console::WriteLine("query = {{{0}}}", string::Join(", ", *query));
     }
