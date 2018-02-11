@@ -1,28 +1,16 @@
 #if defined(_WIN32)
 
+#define UNICODE
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <rpc.h>
 #include <windows.h>
 #include "../../include/Switch/Undef.hpp"
 
 #include "Api.hpp"
-
-static string CreateProcess(const string& command) {
-  FILE* fs = _popen(command.Data(), "r");
-  string result;
-  while (!feof(fs)) {
-    char buf[512];
-    int32 bufLength = static_cast<int>(fread(buf, 1, 512, fs));
-    buf[bufLength] = 0;
-    result += buf;
-  }
-  _pclose(fs);
-  return result;
-}
 
 System::PlatformID Native::EnvironmentApi::GetOsPlatformID() {
   return System::PlatformID::Win32NT;
@@ -33,16 +21,15 @@ string Native::EnvironmentApi::NewLine() {
 }
 
 int32 Native::EnvironmentApi::GetOsVersion(int32& major, int32& minor, int32& build, int32& revision) {
-  string result = CreateProcess("ver");
-  System::Array<string> numbers = result.Substring(result.LastIndexOf(" ")).Replace("]", "").Split({ '.', '\n' });
-  if (numbers.Length() < 1 || !System::Int32::TryParse(numbers[0], major))
-    major = 0;
-  if (numbers.Length() < 2 || !System::Int32::TryParse(numbers[1], minor))
-    minor = 0;
-  if (numbers.Length() < 3 || !System::Int32::TryParse(numbers[2], build))
-    build = 0;
-  if (numbers.Length() < 4 || !System::Int32::TryParse(numbers[3], revision))
-    revision = 0;
+#pragma warning(push)
+#pragma warning(disable : 4996)
+  OSVERSIONINFO version;
+  if (GetVersionEx(&version)) {
+    major = version.dwMajorVersion;
+    minor = version.dwMinorVersion;
+    build = version.dwBuildNumber;
+  }
+#pragma warning(pop)
   return 0;
 }
 
