@@ -38,10 +38,11 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       Array<string> names = { "Burke", "Connor", "Frank", "Everett", "Albert", "George", "Harris", "David" };
-      refptr<IEnumerable<string>> query = from<string>(names)
-                                          | where<string>(delegate_(string s) {return s.Length == 5;})
-                                          | orderby<string>(delegate_(string s) {return s;})
-                                          | select<string>(delegate_(string s) {return s.ToUpper();});
+      
+      refptr<IEnumerable<string>> query = from_(names)
+        where_(delegate_(string s) {return s.Length == 5;})
+        orderby_(delegate_(string s) {return s;})
+        select_(delegate_(string s) {return s.ToUpper();});
 ​
       for (string item : *query)
         Console::WriteLine(item);
@@ -63,10 +64,10 @@ FRANK
 To understand how language-integrated query works, we need to dissect the
 first statement of our program.
  
-  refptr<IEnumerable<string>> query = from<string>(names)
-                                      | where<string>(delegate_(string s) {return s.Length == 5;})
-                                      | orderby<string>(delegate_(string s) {return s;})
-                                      | select<string>(delegate_(string s) {return s.ToUpper();});
+  refptr<IEnumerable<string>> query = from_(names)
+    where_(delegate_(string s) {return s.Length == 5;})
+    orderby_(delegate_(string s) {return s;})
+    select_(delegate_(string s) {return s.ToUpper();});
 ```
 
 The local variable query is initialized with a query expression. A query expression operates on one or more information sources by applying one or more query operators from either the standard query operators or domain-specific operators. This expression uses three of the standard query operators: Where, OrderBy, and Select.
@@ -75,8 +76,8 @@ C++ statements shown here use query expressions. Like the foreach statement, que
 
 ```c++
 refptr<IEnumerable<string>> query = names.Where(delegate_(string s) {return s.Length == 5;})
-                                    ->OrderBy<string>(delegate_(string s) {return s;})
-                                    ->Select<string>(delegate_(string s) {return s.ToUpper();});
+  ->OrderBy<string>(delegate_(string s) {return s;})
+  ->Select<string>(delegate_(string s) {return s.ToUpper();});
 ```
 
 This form of query is called a method-based query. The arguments to the Where, OrderBy, and Select operators are called lambda expressions, which are fragments of code much like delegates. They allow the standard query operators to be defined individually as methods and strung together using dot notation. Together, these methods form the basis for an extensible query language.
@@ -103,8 +104,8 @@ Func<string, string> project = delegate_(string s) {
 };
  
 refptr<IEnumerable<string>> query = names.Where(filter)
-                                    ->OrderBy<string>(extract)
-                                    ->Select<string>(project);
+  ->OrderBy<string>(extract)
+  ->Select<string>(project);
 ```
 
 Delegates are function pointer evolution. For example, we could have written the previous example using function pointer like this:
@@ -123,8 +124,8 @@ string Project(string s) {
 }
 ​
 refptr<IEnumerable<string>> query = names.Where(&Filter)
-                                    ->OrderBy<string>(&Extract)
-                                    ->Select<string>(&Project);
+  ->OrderBy<string>(&Extract)
+  ->Select<string>(&Project);
 ```
 
 In general, the developer is free to use named methods, anonymous methods, or lambda expressions with query operators. Lambda expressions have the advantage of providing the most direct and compact syntax for authoring. More importantly, lambda expressions can be compiled as either code or data, which allows lambda expressions to be processed at runtime by
