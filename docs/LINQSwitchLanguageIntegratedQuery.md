@@ -38,6 +38,7 @@ namespace Examples {
     // The main entry point for the application.
     static void Main() {
       Array<string> names = { "Burke", "Connor", "Frank", "Everett", "Albert", "George", "Harris", "David" };
+      
       refptr<IEnumerable<string>> query = from_(names)
         where_(delegate_(string s) {return s.Length == 5;})
         orderby_(delegate_(string s) {return s;})
