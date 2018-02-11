@@ -23,11 +23,14 @@ string Native::EnvironmentApi::NewLine() {
 int32 Native::EnvironmentApi::GetOsVersion(int32& major, int32& minor, int32& build, int32& revision) {
 #pragma warning(push)
 #pragma warning(disable : 4996)
-  OSVERSIONINFO version;
-  if (GetVersionEx(&version)) {
-    major = version.dwMajorVersion;
-    minor = version.dwMinorVersion;
-    build = version.dwBuildNumber;
+  OSVERSIONINFOEX versionInfo;
+  ZeroMemory(&versionInfo, sizeof(OSVERSIONINFOEX));
+  versionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+  if (GetVersionEx((LPOSVERSIONINFO)&versionInfo)) {
+    major = versionInfo.dwMajorVersion;
+    minor = versionInfo.dwMinorVersion;
+    build = versionInfo.dwBuildNumber;
+    revision = versionInfo.wServicePackMajor << 16;
   }
 #pragma warning(pop)
   return 0;
