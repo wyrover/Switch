@@ -18,30 +18,30 @@ namespace Switch {
   };
 
   template<typename F, typename Ret, typename A, typename... Rest>
-  A __linq_helper__(Ret (F::*)(A, Rest...));
-  
+  A __linq_helper__(Ret(F::*)(A, Rest...));
+
   template<typename F, typename Ret, typename A, typename... Rest>
-  A __linq_helper__(Ret (F::*)(A, Rest...) const);
-  
+  A __linq_helper__(Ret(F::*)(A, Rest...) const);
+
   template<typename F>
   struct __linq_first_argument__ {
-    typedef decltype( __linq_helper__(&F::operator()) ) type;
+    typedef decltype(__linq_helper__(&F::operator())) type;
   };
   /// @endcond
 
-  #define agregate_ | agregate
-  
-  #define concat_ | concat
+#define agregate_ | agregate
 
-  #define from_ from
-  
-  #define intersect_ | intersect
-  
-  #define orderby_ | orderby
-  
-  #define select_ | select
-  
-  #define where_ | where
+#define concat_ | concat
+
+#define from_ from
+
+#define intersect_ | intersect
+
+#define orderby_ | orderby
+
+#define select_ | select
+
+#define where_ | where
 
   /// @brief Applies an accumulator function over a sequence.
   /// @param func An accumulator function to be invoked on each element.
@@ -115,7 +115,7 @@ namespace Switch {
   auto concat(const InitializerList<TSource>& second) {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Concat(second);
   }
-  
+
   template<typename TSource, int32 len>
   auto concat(const TSource(&second)[len]) {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Concat(second);
@@ -127,14 +127,14 @@ namespace Switch {
     __enumerable__.Value = System::Linq::Enumerable::AsEnumerable(source);
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value());
   }
-  
+
   /// @cond
   template<typename TSource>
   auto from(const InitializerList<TSource>& source) {
     __enumerable__.Value = System::Linq::Enumerable::AsEnumerable(source);
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value());
   }
-  
+
   template<typename TSource, int32 len>
   auto from(const TSource(&source)[len]) {
     __enumerable__.Value = System::Linq::Enumerable::AsEnumerable(source);
@@ -152,7 +152,7 @@ namespace Switch {
   auto intersect(const InitializerList<TSource>& second) {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Intersect(second);
   }
-  
+
   template<typename TSource, int32 len>
   auto intersect(const TSource(&second)[len]) {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->Intersect(second);
@@ -170,7 +170,7 @@ namespace Switch {
     return orderby<typename std::remove_reference<typename std::remove_cv<typename __linq_first_argument__<Function>::type>::type>::type>(System::Func<typename __linq_first_argument__<Function>::type, typename std::remove_reference<typename std::remove_cv<typename __linq_first_argument__<Function>::type>::type>::type>(selector));
   }
   /// @endcond
-  
+
   template<typename TSource, typename TKey>
   auto orderby(System::Func<const TSource&, TKey> keySelector) {
     return as<refptr<System::Linq::EnumerableCollection<TSource>>>(__enumerable__.Value())->OrderBy(keySelector);
@@ -179,7 +179,7 @@ namespace Switch {
   /// @cond
   template<typename Function, typename TKey>
   auto orderby(Function selector) {
-    return orderby<typename std::remove_reference<typename std::remove_cv<typename __linq_first_argument__<Function>::type>::type>::type, TKey>(System::Func<typename __linq_first_argument__<Function>::type, TKey>::type>(selector));
+    return orderby<typename std::remove_reference<typename std::remove_cv<typename __linq_first_argument__<Function>::type>::type>::type, TKey>(System::Func<typename __linq_first_argument__<Function>::type, TKey>::type > (selector));
   }
   /// @endcond
 
@@ -207,7 +207,7 @@ namespace Switch {
   /// @cond
   template<__linq_order__ order, typename Function, typename TKey>
   auto orderby(Function selector) {
-    return orderby<order, typename std::remove_reference<typename std::remove_cv<typename __linq_first_argument__<Function>::type>::type>::type, TKey>(System::Func<typename __linq_first_argument__<Function>::type, TKey>::type>(selector));
+    return orderby<order, typename std::remove_reference<typename std::remove_cv<typename __linq_first_argument__<Function>::type>::type>::type, TKey>(System::Func<typename __linq_first_argument__<Function>::type, TKey>::type > (selector));
   }
   /// @endcond
 

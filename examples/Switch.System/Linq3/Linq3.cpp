@@ -13,8 +13,8 @@ namespace Examples {
 
       auto query = from_(x)
         concat_(y)
-        where_([](int i) {return i != 21;})
-        orderby_<descending>([](int i) {return i;});
+      where_([](int i) {return i != 21;})
+      orderby_<descending>([](int i) {return i;});
 
       Console::WriteLine("query = {{{0}}}", string::Join(", ", *query));
     }
