@@ -214,7 +214,7 @@ property_<String, readonly_> Environment::SystemDirectory {
 };
 
 property_<int32, readonly_> Environment::SystemPageSize {
-  [] {return 4096;}
+  [] {return Native::EnvironmentApi::GetSystemPageSize();}
 };
 
 property_<int32, readonly_> Environment::TickCount {

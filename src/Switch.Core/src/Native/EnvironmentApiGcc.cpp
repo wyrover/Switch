@@ -74,6 +74,14 @@ string Native::EnvironmentApi::GetMachineName() {
   return CreateProcess("uname -n");
 }
 
+int32 Native::EnvironmentApi::GetProcessorCount() {
+  return as<int32>(std::thread::hardware_concurrency());
+}
+
+int32 Native::EnvironmentApi::GetSystemPageSize() {
+  return 4096;
+}
+
 int32 Native::EnvironmentApi::GetTickCount() {
   #if defined (__APPLE__)
   // https://stackoverflow.com/questions/3269321/osx-programmatically-get-uptime

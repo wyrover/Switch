@@ -1,13 +1,13 @@
 #if defined(_WIN32)
 
 #define UNICODE
-
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <windows.h>
+#include <Lmcons.h>
 #include "../../include/Switch/Undef.hpp"
 
 #include "Api.hpp"
@@ -37,13 +37,29 @@ int32 Native::EnvironmentApi::GetOsVersion(int32& major, int32& minor, int32& bu
 }
 
 bool Native::EnvironmentApi::IsOs64Bit() {
-  return string(getenv("PROCESSOR_ARCHITECTURE")).EndsWith("64");
+  SYSTEM_INFO systemInfo;
+  GetNativeSystemInfo(&systemInfo);
+  return (systemInfo.wProcessorArchitecture & (PROCESSOR_ARCHITECTURE_AMD64 | PROCESSOR_ARCHITECTURE_ARM64 | PROCESSOR_ARCHITECTURE_IA64)) != 0;
 }
 
 string Native::EnvironmentApi::GetMachineName() {
-  char name[512];
-  strcpy_s(name, 512, getenv("COMPUTERNAME"));
-  return name;
+  wchar machineName[MAX_COMPUTERNAME_LENGTH + 1];
+  DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
+  if (!GetComputerName(machineName, &size))
+    return "";
+  return machineName;
+}
+
+int32 Native::EnvironmentApi::GetProcessorCount() {
+  SYSTEM_INFO systemInfo;
+  GetNativeSystemInfo(&systemInfo);
+  return systemInfo.dwNumberOfProcessors;
+}
+
+int32 Native::EnvironmentApi::GetSystemPageSize() {
+  SYSTEM_INFO systemInfo;
+  GetNativeSystemInfo(&systemInfo);
+  return systemInfo.dwPageSize;
 }
 
 int32 Native::EnvironmentApi::GetTickCount() {
@@ -54,12 +70,23 @@ string Native::EnvironmentApi::GetUserDomainName() {
   char name[512];
   strcpy_s(name, 512, getenv("USERDOMAIN"));
   return name;
+
+  /*
+  DWORD size = 0;
+  GetComputerNameEx(ComputerNameDnsHostname, null, &size);
+  System::Array<wchar> userDomainName(size);
+  if (!GetComputerNameEx(ComputerNameDnsHostname, (wchar*)userDomainName.Data(), &size))
+    return "";
+  return userDomainName.Data();
+  */
 }
 
 string Native::EnvironmentApi::GetUserName() {
-  char name[512];
-  strcpy(name, getenv("USERNAME"));
-  return name;
+  wchar userName[UNLEN + 1];
+  DWORD size = UNLEN + 1;
+  if (!GetUserNameW(userName, &size))
+    return "";
+  return userName;
 }
 
 int64 Native::EnvironmentApi::GetWorkingSet() {

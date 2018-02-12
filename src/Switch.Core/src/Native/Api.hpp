@@ -112,6 +112,8 @@ namespace Native {
     static int32 GetOsVersion(int32& major, int32& minor, int32& build, int32& revision);
     static bool IsOs64Bit();
     static string GetMachineName();
+    static int32 GetProcessorCount();
+    static int32 GetSystemPageSize();
     static int32 GetTickCount();
     static string GetUserDomainName();
     static string GetUserName();

@@ -2,17 +2,18 @@
 /// @brief Contains #startup_ keyword.
 #pragma once
 
+#include<cstdlib>
 #include "CoreExport.hpp"
 #include "System/Environment.hpp"
 
+/// @cond
+#if !(defined(WIN32) && defined(DECLARE_HANDLE))
 using HINSTANCE = struct HINSTANCE__ { int unused; }*;
+#endif
 core_export_ extern HINSTANCE __instance;
 core_export_ extern int __commandShow;
 
-/// @cond
-#if defined(_WIN32)
-#include<cstdlib>
-#else
+#if !defined(_WIN32)
 core_export_ extern int __argc;
 core_export_ extern char** __argv;
 #endif
